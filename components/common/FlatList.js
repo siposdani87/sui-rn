@@ -1,7 +1,19 @@
 import React from 'react';
-import config from '../../config';
+import { Platform } from 'react-native';
 import NoContent from '../common/NoContent';
 import { FlatList as ReactNativeFlatList } from 'react-native';
+
+const config = {
+    progressViewOffset: -1000,
+    ...Platform.select({
+        android: {
+            onEndReachedThreshold: 0.5,
+        },
+        ios: {
+            onEndReachedThreshold: 0,
+        },
+    }),
+};
 
 export default class FlatList extends React.PureComponent {
     constructor(props) {

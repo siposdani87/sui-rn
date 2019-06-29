@@ -1,5 +1,4 @@
 import React from 'react';
-import i18n from '../../config/i18n';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Colors } from '../../constants';
 
@@ -8,7 +7,7 @@ export default class NoContent extends React.PureComponent {
         return (
             <View style={styles.noContentContainer}>
                 <Image style={styles.noContentImage} source={require('../../assets/images/others/no-content.png')} />
-                <Text style={styles.noContentText}>{this.props.text || i18n.t('text.no_content')}</Text>
+                <Text style={styles.noContentText}>{this.props.text}</Text>
             </View>
         );
     }
