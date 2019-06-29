@@ -6,7 +6,7 @@ export default class NoContent extends React.PureComponent {
     render() {
         return (
             <View style={styles.noContentContainer}>
-                <Image style={styles.noContentImage} source={require('../../assets/images/others/no-content.png')} />
+                <Image style={styles.noContentImage} source={this.props.source} />
                 <Text style={styles.noContentText}>{this.props.text}</Text>
             </View>
         );

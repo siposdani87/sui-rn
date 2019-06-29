@@ -58,7 +58,7 @@ export default class FlatList extends React.PureComponent {
 
     render() {
         return (
-            <ReactNativeFlatList {...this.props} removeClippedSubviews ref={ref => this.listRef = ref} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={NoContent} refreshing={this.props.refreshing} onRefresh={this.onRefresh} onEndReached={this.onEndReached} onScrollEndDrag={this.onScrollEndDrag} />
+            <ReactNativeFlatList {...this.props} removeClippedSubviews ref={ref => this.listRef = ref} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={<NoContent source={this.props.noContentCource} text={this.props.noContentText} />} refreshing={this.props.refreshing} onRefresh={this.onRefresh} onEndReached={this.onEndReached} onScrollEndDrag={this.onScrollEndDrag} />
         );
     }
 }
