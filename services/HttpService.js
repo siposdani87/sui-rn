@@ -1,15 +1,15 @@
 import BaseService from './BaseService';
-import config from '../config';
-import i18n from '../config/i18n';
 import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401 } from '../constants';
 import { Fetch } from 'sui-rn/utils';
 
 
 export default class HttpService extends BaseService {
-    constructor(dispatch, factories) {
+    constructor(dispatch, factories, backend, language, secret) {
         super(dispatch, factories);
         this.inprogress = 0;
-        this.fetch = new Fetch(config.backend);
+        this.language = language;
+        this.secret = secret;
+        this.fetch = new Fetch(backend);
     }
 
     isInprogress() {
@@ -20,8 +20,8 @@ export default class HttpService extends BaseService {
         const token = await this.factories.securityFactory.getToken();
         return {
             'Authorization': `Bearer ${token}`,
-            'Accept-Language': i18n.language,
-            'X-Client': config.secret,
+            'Accept-Language': this.language,
+            'X-Client': this.secret,
             ...opt_headers,
         }
     }
