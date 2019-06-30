@@ -125,6 +125,6 @@ export function setThemeColors(primaryBright, primary, primaryDark, accentBright
   colors.accentDark = accentDark;
 };
 
-setThemeColors(colors.indigoBright, color.indigo, color.indigoDark, color.pinkBright, color.pink, color.pinkDark);
+setThemeColors(colors.indigoBright, colors.indigo, colors.indigoDark, colors.pinkBright, colors.pink, colors.pinkDark);
 
 export default colors;
