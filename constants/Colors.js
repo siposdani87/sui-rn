@@ -1,4 +1,4 @@
-var colors = {
+let colors = {
   // Black & White
 
   whiteBright: '#FFFFFF',

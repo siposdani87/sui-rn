@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, View } from 'react-native';
 import Colors from './Colors';
 
-export default {
+let styles = {
     fontFamilyApp: 'ChangelingNeo',
     fontFamilyHeading: 'Quicksand',
     fontFamilyBody: 'Muli',
@@ -153,4 +153,6 @@ export default {
     sectionContent: {
         color: Colors.greyDark,
     },
-}
+};
+
+export default styles;
