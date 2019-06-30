@@ -5,7 +5,7 @@ import { Colors, Styles } from '../../constants';
 
 export default class IconButton extends React.PureComponent {
     render() {
-        const backgroundColor = this.props.color || Colors.primary;
+        const backgroundColor = this.props.color;
         return (
             <View style={this.props.style}>
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={this.props.onPress}>

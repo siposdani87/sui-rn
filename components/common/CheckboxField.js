@@ -39,7 +39,7 @@ export default class CheckboxField extends BaseField {
     } else if (this.props.required && !this.state.value){
       return Colors.red;
     } else if (this.state.value) {
-      return Colors.primary;
+      return this.props.color;
     }
     return Colors.grey;
   }

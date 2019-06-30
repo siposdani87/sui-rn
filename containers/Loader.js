@@ -7,8 +7,8 @@ export default class Loader extends React.Component {
     render() {
         return this.props.screenProps.services.httpService.isInprogress() && (
             <View style={styles.baseContainer}>
-                <View style={styles.loader}>
-                    <ActivityIndicator animating color={Colors.accent} />
+                <View style={[styles.loader, {backgroundColor: this.props.backgroundColor}]}>
+                    <ActivityIndicator animating color={this.props.color} />
                 </View>
             </View>
         );
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
     },
     loader: {
-        backgroundColor: Colors.primary,
         padding: 10,
         margin: 15,
         borderRadius: 50,

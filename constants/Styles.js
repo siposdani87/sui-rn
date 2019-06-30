@@ -3,9 +3,6 @@ import { Platform, View } from 'react-native';
 import Colors from './Colors';
 
 let styles = {
-    fontFamilyApp: 'ChangelingNeo',
-    fontFamilyHeading: 'Quicksand',
-    fontFamilyBody: 'Muli',
     fullscreenContainer: {
         flex: 1,
         backgroundColor: Colors.primary,
@@ -154,5 +151,13 @@ let styles = {
         color: Colors.greyDark,
     },
 };
+
+export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
+    styles.fontFamilyApp= fontFamilyApp;
+    styles.fontFamilyHeading= fontFamilyHeading;
+    styles.fontFamilyBody= fontFamilyBody;
+};
+
+setThemeStyles('ChangelingNeo', 'Quicksand', 'Muli');
 
 export default styles;
