@@ -19,7 +19,7 @@ export default class PickerField extends BaseField {
             ))}
           </Picker>
         )}
-        <RNPickerSelect placeholder={{ label: this.props.label, value: null }} items={this.props.items} onValueChange={this.onValueChange} style={{ ...pickerSelectStyles }} value={this.props.value} />
+        <RNPickerSelect placeholder={{ label: this.props.label, value: null }} items={this.props.items} onValueChange={this.onValueChange} style={[{ ...pickerSelectStyles }, { done: { color: this.props.color } }]} value={this.props.value} />
         <ErrorField error={this.state.error} />
       </View>
     );
@@ -52,7 +52,6 @@ const pickerSelectStyles = StyleSheet.create({
     bottom: 5,
   },
   done: {
-    color: Colors.primary,
     fontWeight: '400',
   },
   modalViewTop: {
