@@ -1,14 +1,4 @@
-export default {
-  // Theme
-
-  primaryBright: '#A1887F',
-  primary: '#795548',
-  primaryDark: '#5D4037',
-
-  accentBright: '#FFB74D',
-  accent: '#FF9800',
-  accentDark: '#F57C00',
-
+var colors = {
   // Black & White
 
   whiteBright: '#FFFFFF',
@@ -123,4 +113,18 @@ export default {
   windowsColor: '#68217a',
   androidColor: '#a4c639',
   microsoftColor: '#2f2f2f',
-}
+};
+
+export function setThemeColors(primaryBright, primary, primaryDark, accentBright, accent, accentDark) {
+  colors.primaryBright = primaryBright;
+  colors.primary = primary;
+  colors.primaryDark = primaryDark;
+
+  colors.accentBright = accentBright;
+  colors.accent = accent;
+  colors.accentDark = accentDark;
+};
+
+setThemeColors(colors.indigoBright, color.indigo, color.indigoDark, color.pinkBright, color.pink, color.pinkDark);
+
+export default colors;
