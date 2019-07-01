@@ -1,6 +1,6 @@
 import BaseFactory from './BaseFactory';
 import SUI from 'sui-js';
-import { NOTIFICATION } from '../constants';
+import { NOTIFICATION } from '../constants/ActionTypes';
 
 export default class NotificationFactory extends BaseFactory {
     constructor(dispatch) {

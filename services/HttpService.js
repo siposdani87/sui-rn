@@ -1,6 +1,6 @@
 import BaseService from './BaseService';
-import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401 } from '../constants';
-import { Fetch } from 'sui-rn/utils';
+import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401 } from '../constants/ActionTypes';
+import { Fetch } from '../utils';
 
 
 export default class HttpService extends BaseService {
