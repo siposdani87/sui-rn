@@ -2,7 +2,7 @@ import React from 'react';
 import { Platform, View } from 'react-native';
 import Colors from './Colors';
 
-let styles = {
+const styles = {
     fontFamilyApp: '',
     fontFamilyHeading: '',
     fontFamilyBody: '',
@@ -161,7 +161,7 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody)
     styles.fontFamilyBody = fontFamilyBody;
 
     styles.sectionHeader.fontFamily = fontFamilyHeading;
-};
+}
 
 setThemeStyles('Verdana', 'Helvetica', 'Arial');
 
