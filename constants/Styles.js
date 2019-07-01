@@ -155,12 +155,13 @@ const styles = {
     },
 };
 
-export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
+export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody, colors) {
     styles.fontFamilyApp = fontFamilyApp;
     styles.fontFamilyHeading = fontFamilyHeading;
     styles.fontFamilyBody = fontFamilyBody;
 
     styles.sectionHeader.fontFamily = fontFamilyHeading;
+    styles.sectionHeader.color = colors.primary;
 }
 
 setThemeStyles('Verdana', 'Helvetica', 'Arial');
