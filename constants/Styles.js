@@ -145,7 +145,7 @@ let styles = {
         marginVertical: 10,
     },
     sectionHeader: {
-        fontFamily: 'Quicksand',
+        fontFamily: '',
         fontSize: 24,
         color: Colors.primary,
         marginBottom: 10,
@@ -156,11 +156,13 @@ let styles = {
 };
 
 export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
-    styles.fontFamilyApp= fontFamilyApp;
-    styles.fontFamilyHeading= fontFamilyHeading;
-    styles.fontFamilyBody= fontFamilyBody;
+    styles.fontFamilyApp = fontFamilyApp;
+    styles.fontFamilyHeading = fontFamilyHeading;
+    styles.fontFamilyBody = fontFamilyBody;
+
+    styles.sectionHeader.fontFamily = fontFamilyHeading;
 };
 
-setThemeStyles('ChangelingNeo', 'Quicksand', 'Muli');
+setThemeStyles('Verdana', 'Helvetica', 'Arial');
 
 export default styles;
