@@ -123,16 +123,16 @@ const styles = {
         headerForceInset: { top: 'never', bottom: 'never' },
     },
     contentOptions: {
-        activeTintColor: Colors.brownDark,
-        inactiveTintColor: Colors.brown,
+        activeTintColor: Colors.primaryDark,
+        inactiveTintColor: Colors.primary,
         activeBackgroundColor: Colors.lightGrey,
         labelStyle: {
             fontWeight: '400',
-            color: Colors.brown,
+            color: Colors.primary,
         },
         activeLabelStyle: {
             fontWeight: '500',
-            color: Colors.brownDark,
+            color: Colors.primaryDark,
         },
     },
     floatingButton: {
@@ -159,6 +159,18 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody,
     styles.fontFamilyApp = fontFamilyApp;
     styles.fontFamilyHeading = fontFamilyHeading;
     styles.fontFamilyBody = fontFamilyBody;
+
+    styles.fullscreenContainer.backgroundColor = colors.primary;
+
+    styles.tabBarOptions.activeTintColor = colors.primaryDark;
+    styles.tabBarOptions.inactiveTintColor = colors.primary;
+
+    styles.navigationOptions.headerStyle.backgroundColor = colors.primaryDark;
+
+    styles.contentOptions.activeTintColor = colors.primaryDark;
+    styles.contentOptions.inactiveTintColor = colors.primary;
+    styles.contentOptions.labelStyle.color = colors.primary;
+    styles.contentOptions.activeLabelStyle.color = colors.primaryDark;
 
     styles.sectionHeader.fontFamily = fontFamilyHeading;
     styles.sectionHeader.color = colors.primary;
