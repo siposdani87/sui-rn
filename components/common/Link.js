@@ -14,6 +14,7 @@ export default class Link extends React.PureComponent {
 
 const styles = StyleSheet.create({
     linkText: {
+        color: Colors.primary,
         fontSize: 14,
     },
 });

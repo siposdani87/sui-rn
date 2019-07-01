@@ -1,4 +1,16 @@
 let colors = {
+  // Theme
+
+  primaryBright: '',
+  primary: '',
+  primaryDark: '',
+  primaryText: '',
+
+  accentBright: '',
+  accent: '',
+  accentDark: '',
+  accentText: '',
+
   // Black & White
 
   whiteBright: '#FFFFFF',
@@ -15,7 +27,19 @@ let colors = {
   lightGrey: '#E5E5E5',
   lightGreyDark: '#D0D0D0',
 
+  deepGreyBright: '#3B3B3B',
+  deepGrey: '#303030',
+  deepGreyDark: '#1B1B1B',
+
   // Material Design Palette
+
+  greyBright: '#E0E0E0',
+  grey: '#9E9E9E',
+  greyDark: '#616161',
+
+  blueGreyBright: '#90A4AE',
+  blueGrey: '#607D8B',
+  blueGreyDark: '#455A64',
 
   redBright: '#e57373',
   red: '#F44336',
@@ -85,14 +109,6 @@ let colors = {
   brown: '#795548',
   brownDark: '#5D4037',
 
-  greyBright: '#E0E0E0',
-  grey: '#9E9E9E',
-  greyDark: '#616161',
-
-  blueGreyBright: '#90A4AE',
-  blueGrey: '#607D8B',
-  blueGreyDark: '#455A64',
-
   // Social/Brand Colors
 
   facebookColor: '#1877f2', // '#3b5999',
@@ -115,16 +131,18 @@ let colors = {
   microsoftColor: '#2f2f2f',
 };
 
-export function setThemeColors(primaryBright, primary, primaryDark, accentBright, accent, accentDark) {
+export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
   colors.primaryBright = primaryBright;
   colors.primary = primary;
   colors.primaryDark = primaryDark;
+  colors.primaryText = primaryText;
 
   colors.accentBright = accentBright;
   colors.accent = accent;
   colors.accentDark = accentDark;
+  colors.accentText = accentText;
 };
 
-setThemeColors(colors.indigoBright, colors.indigo, colors.indigoDark, colors.pinkBright, colors.pink, colors.pinkDark);
+setThemeColors(colors.indigoBright, colors.indigo, colors.indigoDark, colors.white, colors.pinkBright, colors.pink, colors.pinkDark, colors.white);
 
 export default colors;
