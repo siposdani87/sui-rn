@@ -52,6 +52,7 @@ const pickerSelectStyles = StyleSheet.create({
     bottom: 5,
   },
   done: {
+    color: Colors.primary,
     fontWeight: '400',
   },
   modalViewTop: {

@@ -3,6 +3,9 @@ import { Platform, View } from 'react-native';
 import Colors from './Colors';
 
 let styles = {
+    fontFamilyApp: '',
+    fontFamilyHeading: '',
+    fontFamilyBody: '',
     fullscreenContainer: {
         flex: 1,
         backgroundColor: Colors.primary,

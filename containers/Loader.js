@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
     },
     loader: {
+        backgroundColor: Colors.primary,
         padding: 10,
         margin: 15,
         borderRadius: 50,
