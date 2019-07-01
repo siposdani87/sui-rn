@@ -4,13 +4,12 @@
   "description": "",
   "author": "Dániel Sipos",
   "license": "UNLICENSED",
-  "homepage": "https://trophymap.org",
+  "homepage": "",
   "private": true,
   "keywords": [
     "sui-rn"
   ],
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "@expo/samples": "3.0.3",
     "@expo/vector-icons": "10.0.2",

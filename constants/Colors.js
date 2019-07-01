@@ -1,4 +1,4 @@
-let colors = {
+const colors = {
   // Theme
 
   primaryBright: '',
@@ -141,7 +141,7 @@ export function setThemeColors(primaryBright, primary, primaryDark, primaryText,
   colors.accent = accent;
   colors.accentDark = accentDark;
   colors.accentText = accentText;
-};
+}
 
 setThemeColors(colors.indigoBright, colors.indigo, colors.indigoDark, colors.white, colors.pinkBright, colors.pink, colors.pinkDark, colors.white);
 
