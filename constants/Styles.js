@@ -175,6 +175,8 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody,
 
     styles.sectionHeader.fontFamily = fontFamilyHeading;
     styles.sectionHeader.color = colors.primary;
+
+    return styles;
 }
 
 setThemeStyles('Verdana', 'Helvetica', 'Arial', Colors);
