@@ -164,6 +164,7 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody,
 
     styles.tabBarOptions.activeTintColor = colors.primaryDark;
     styles.tabBarOptions.inactiveTintColor = colors.primary;
+    styles.tabBarOptions.indicatorStyle.backgroundColor = colors.accent;
 
     styles.navigationOptions.headerStyle.backgroundColor = colors.primaryDark;
 
