@@ -1,0 +1,45 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-native"
+  ],
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "no-undef": "off",
+    "no-invalid-this": "off",
+    "no-use-before-define": "off",
+    "import/named": "off",
+    "import/no-namespace": "off",
+    "import/no-commonjs": "off",
+    "import/prefer-default-export": "off",
+    "arrow-body-style": "off",
+    "class-methods-use-this": "off",
+    "no-console": "off",
+    "react/jsx-no-bind": "off",
+    "react/jsx-handler-names": "off",
+    "react/sort-comp": "off",
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/prefer-stateless-function": "off",
+    "react-native/no-inline-styles": "off",
+    "react-native/no-color-literals": "off"
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.8"
+    }
+  }
+}
