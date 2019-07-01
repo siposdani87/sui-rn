@@ -7,7 +7,7 @@
   "homepage": "https://trophymap.org",
   "private": true,
   "keywords": [
-    "Sui-rn",
+    "sui-rn"
   ],
   "scripts": {
   },
@@ -44,7 +44,7 @@
     "react-redux": "7.1.0",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
-    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
+    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
     "eslint": "6.0.1",
