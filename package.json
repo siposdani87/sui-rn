@@ -2,14 +2,24 @@
   "name": "sui-rn",
   "version": "0.0.0",
   "description": "",
-  "author": "Dániel Sipos",
+  "main": "",
+  "scripts": {},
   "license": "UNLICENSED",
-  "homepage": "",
   "private": true,
   "keywords": [
     "sui-rn"
   ],
-  "scripts": {},
+  "author": "Dániel Sipos",
+  "homepage": "https://trophymap.org",
+  "files": [
+    "components/*",
+    "constants/*",
+    "containers/*",
+    "factories/*",
+    "reducers/*",
+    "services/*",
+    "utils/*"
+  ],
   "dependencies": {
     "@expo/samples": "3.0.3",
     "@expo/vector-icons": "10.0.2",
