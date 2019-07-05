@@ -108,27 +108,6 @@ const colors = {
   brownBright: '#A1887F',
   brown: '#795548',
   brownDark: '#5D4037',
-
-  // Social/Brand Colors
-
-  facebookColor: '#1877f2', // '#3b5999',
-  messengerColor: '#0084ff',
-  googlePlusColor: '#dd4b39',
-  googleColor: '#f1f1f1',
-  twitterColor: '#55acee',
-  youtubeColor: '#cd201f',
-  yahooColor: '#410093',
-  linkedInColor: '#0077B5',
-  skypeColor: '#00AFF0',
-  dropboxColor: '#007ee5',
-  slackColor: '#3aaf85',
-  tumblrColor: '#34465d',
-  instagramColor: '#e4405f',
-  flickrColor: '#ff0084',
-  iosColor: '#8e8e93',
-  windowsColor: '#68217a',
-  androidColor: '#a4c639',
-  microsoftColor: '#2f2f2f',
 };
 
 export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
