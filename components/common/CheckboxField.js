@@ -35,7 +35,7 @@ export default class CheckboxField extends BaseField {
 
   getColor = () => {
     if (this.props.disabled) {
-      return Colors.lightGreyDark;
+      return Colors.greyBright;
     } else if (this.props.required && !this.state.value){
       return Colors.red;
     } else if (this.state.value) {
