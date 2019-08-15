@@ -16,7 +16,7 @@ export function cacheFonts(fonts) {
         return Font.loadAsync(font)
     });*/
     const assets = {};
-    fonts.map((font) => {
+    fonts.each((font) => {
         for (const key in font){
             assets[key] = font[key];
         }
