@@ -23,6 +23,8 @@ export default class Fetch {
         return {
             'X-Requested-With': 'XMLHttpRequest',
             'Content-Type': this.mimeTypes[extension] || this.mimeTypes.json,
+            // 'Accept-Encoding': 'gzip, deflate, br',
+            // 'Accept': 'application/json',
         }
     }
 
@@ -87,6 +89,10 @@ export default class Fetch {
             method,
             headers: Object.assign(this._getHeaders(url), opt_headers),
             body: this._getRequestBody(opt_data),
+            // mode: 'cors',
+            // credentials: 'same-origin',
+            // cache: 'no-cache',
+            // referrer: 'no-referrer',
         }
         // console.log('_handleRequest', this.getUrl(url, opt_params), options);
         const response = await fetch(this.getUrl(url, opt_params), options);
