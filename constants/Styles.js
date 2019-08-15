@@ -111,7 +111,7 @@ const styles = {
         headerBackTitle: null,
         headerTintColor: Colors.white,
         headerTitleStyle: {
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: '400',
             color: Colors.white,
             textAlign: 'center',
