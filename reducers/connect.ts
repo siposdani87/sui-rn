@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
 function mapStateToProps() {
-    return {}
+    return {};
 }
 
 function mapDispatchToProps() {
-    return {}
+    return {};
 }
 
 export default (screenComponent) => {
