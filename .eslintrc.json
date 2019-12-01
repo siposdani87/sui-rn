@@ -12,6 +12,9 @@
     "plugin:react/recommended",
     "react-native"
   ],
+  "plugins": [
+    "react-hooks"
+  ],
   "rules": {
     "comma-dangle": [
       "error",
@@ -34,12 +37,13 @@
     "react/display-name": "off",
     "react/prefer-stateless-function": "off",
     "react-native/no-inline-styles": "off",
-    "react-native/no-color-literals": "off"
+    "react-native/no-color-literals": "off",
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   },
   "settings": {
     "react": {
-      "pragma": "React",
-      "version": "16.8"
+      "version": "detect"
     }
   }
 }

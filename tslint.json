@@ -1,0 +1,33 @@
+{
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ],
+    "extends": [
+        "tslint:recommended",
+        "tslint-react"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**/*"
+        ]
+    },
+    "rules": {
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "object-literal-sort-keys": false,
+        "no-console": false,
+        "ordered-imports": false,
+        "variable-name": {
+            "options": [
+                "ban-keywords",
+                "check-format",
+                "allow-leading-underscore",
+                "allow-pascal-case"
+            ]
+        },
+        "max-line-length": false,
+        "jsx-no-multiline-js": false
+    }
+}
