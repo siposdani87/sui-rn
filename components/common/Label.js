@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   labelText: {
     fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
-    color: Colors.black,
+    color: Colors.greyDark,
     fontWeight: '400',
   },
 });

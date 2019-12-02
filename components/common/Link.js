@@ -16,5 +16,8 @@ const styles = StyleSheet.create({
     linkText: {
         color: Colors.primary,
         fontSize: 14,
+        textDecorationColor: Colors.primary,
+        textDecorationLine: 'underline',
+        textDecorationStyle: 'dotted',
     },
 });
