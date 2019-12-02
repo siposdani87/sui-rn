@@ -12,14 +12,7 @@ export function cacheImages(images) {
 }
 
 export function cacheFonts(fonts) {
-    /*return fonts.map((font) => {
-        return Font.loadAsync(font)
-    });*/
-    const assets = {};
-    fonts.each((font) => {
-        for (const key in font){
-            assets[key] = font[key];
-        }
+    return fonts.map((font) => {
+        return Font.loadAsync(font);
     });
-    return [Font.loadAsync(assets)];
 }
