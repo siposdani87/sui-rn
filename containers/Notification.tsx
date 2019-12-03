@@ -4,19 +4,19 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default class Notification extends React.Component {
-    close(index) {
+export default function Notification(props) {
+    function close(index) {
         return () => {
-            this.props.screenProps.factories.notificationFactory.close(index);
-        }
+            props.screenProps.factories.notificationFactory.close(index);
+        };
     }
 
-    closable(notification) {
-        return this.props.screenProps.factories.notificationFactory.isClosable(notification.type, notification.opt_closeCallback) && !SUI.eq(notification.opt_duration, Infinity);
+    function closable(notification) {
+        return props.screenProps.factories.notificationFactory.isClosable(notification.type, notification.opt_closeCallback) && !SUI.eq(notification.opt_duration, Infinity);
     }
 
-    getContainerStyle(notification) {
-        const containerStyles = [styles.notificationContainer];
+    function getContainerStyle(notification) {
+        const containerStyles: any[] = [styles.notificationContainer];
         switch (notification.type.toLowerCase()) {
             case 'success':
                 containerStyles.push(styles.successContainer);
@@ -34,8 +34,8 @@ export default class Notification extends React.Component {
         return containerStyles;
     }
 
-    getTextStyle(notification) {
-        const textStyles = [styles.notificationText];
+    function getTextStyle(notification) {
+        const textStyles: any[] = [styles.notificationText];
         switch (notification.type.toLowerCase()) {
             case 'success':
                 textStyles.push(styles.successText);
@@ -53,24 +53,22 @@ export default class Notification extends React.Component {
         return textStyles;
     }
 
-    render() {
-        return (
-            <View style={styles.baseContainer}>
-                {this.props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
-                    <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={this.close(index)}>
-                        <View style={this.getContainerStyle(notification)}>
-                            <Text style={this.getTextStyle(notification)}>{notification.message}</Text>
-                            {this.closable(notification) && (
-                                <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={this.close(index)}>
-                                    <MaterialIcons name="close" size={18} color={Colors.black} />
-                                </TouchableOpacity>
-                            )}
-                        </View>
-                    </TouchableOpacity >
-                ))}
-            </View>
-        );
-    }
+    return (
+        <View style={styles.baseContainer}>
+            {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
+                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(index)}>
+                    <View style={getContainerStyle(notification)}>
+                        <Text style={getTextStyle(notification)}>{notification.message}</Text>
+                        {closable(notification) && (
+                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close(index)}>
+                                <MaterialIcons name='close' size={18} color={Colors.black} />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                </TouchableOpacity>
+            ))}
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,17 @@
 export default class Base {
 
+    public static reducer = (state = {}, action) => {
+        if (action.type) {
+            return {
+                ...state,
+                ...action,
+            };
+        }
+        return state;
+    }
+
+    protected dispatch: (state: object) => void;
+
     constructor(dispatch) {
         this.dispatch = dispatch;
     }
@@ -13,15 +25,5 @@ export default class Base {
             }
         }
         return Object.assign(this, methods);
-    }
-
-    static reducer = (state = {}, action) => {
-        if (action.type) {
-            return {
-                ...state,
-                ...action,
-            }
-        }
-        return state;
     }
 }
