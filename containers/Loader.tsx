@@ -2,17 +2,14 @@ import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 
-export default class Loader extends React.Component {
-
-    render() {
-        return this.props.screenProps.services.httpService.isInprogress() && (
-            <View style={styles.baseContainer}>
-                <View style={[styles.loader, {backgroundColor: this.props.backgroundColor}]}>
-                    <ActivityIndicator animating color={this.props.color} />
-                </View>
+export default function Loader(props) {
+    return props.screenProps.services.httpService.isInprogress() && (
+        <View style={styles.baseContainer}>
+            <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
+                <ActivityIndicator animating={true} color={props.color} />
             </View>
-        );
-    }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
