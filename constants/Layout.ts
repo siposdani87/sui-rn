@@ -7,5 +7,5 @@ export default {
   window: {
     width,
     height,
-  }
-}
+  },
+};
