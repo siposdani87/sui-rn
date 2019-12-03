@@ -2,15 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Colors } from '../../constants';
 
-export default class NoContent extends React.PureComponent {
-    render() {
-        return (
-            <View style={styles.noContentContainer}>
-                <Image style={styles.noContentImage} source={this.props.source} />
-                <Text style={styles.noContentText}>{this.props.text}</Text>
-            </View>
-        );
-    }
+export default function NoContent(props) {
+    return (
+        <View style={styles.noContentContainer}>
+            <Image style={styles.noContentImage} source={props.source} />
+            <Text style={styles.noContentText}>{props.text}</Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

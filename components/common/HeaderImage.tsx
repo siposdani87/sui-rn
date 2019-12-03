@@ -2,15 +2,13 @@ import React from 'react';
 import { Styles } from '../../constants';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-export default class HeaderImage extends React.PureComponent {
-  render() {
-    return (
+export default function HeaderImage(props) {
+  return (
       <View style={styles.baseContainer}>
-        <Image {...this.props} style={[this.props.style, styles.image]} />
-        <Text style={styles.text}>{this.props.title}</Text>
+        <Image {...props} style={[props.style, styles.image]} />
+        <Text style={styles.text}>{props.title}</Text>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({

@@ -3,14 +3,12 @@ import SUI from 'sui-js';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../../constants';
 
-export default class ErrorField extends React.PureComponent {
-  render() {
+export default function ErrorField(props) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText} numberOfLines={1}>{this.props.error ? SUI.capitalize(this.props.error.join('; ')) : null}</Text>
+        <Text style={styles.errorText} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
