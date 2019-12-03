@@ -23,23 +23,23 @@ export default class HttpService extends BaseService {
         return this.inprogress > 0;
     }
 
-    public async get(url, opt_params, opt_headers) {
+    public async get(url: string, opt_params?: {}, opt_headers?: {}) {
         return this._handleResponse(this.fetch.get(url, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async post(url, opt_data, opt_params, opt_headers) {
+    public async post(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
         return this._handleResponse(this.fetch.post(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async put(url, opt_data, opt_params, opt_headers) {
+    public async put(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
         return this._handleResponse(this.fetch.put(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async patch(url, opt_data, opt_params, opt_headers) {
+    public async patch(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
         return this._handleResponse(this.fetch.patch(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async delete(url, opt_data, opt_params, opt_headers) {
+    public async delete(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
         return this._handleResponse(this.fetch.delete(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
