@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ErrorField from '../common/ErrorField';
 import Label from '../common/Label';
 import { View, TextInput, StyleSheet } from 'react-native';
@@ -7,12 +7,19 @@ import useBaseField from '../common/BaseField';
 
 export default function TextInputField(props) {
   // const {label, value, required, style} = props;
-  const [error, onChange] = useBaseField(props);
+  const [value, setValue] = useState(props.value);
+  const [error, onErrorChange] = useBaseField(props);
+
+  function onValueChange(v) {
+    onErrorChange();
+    props.onChangeText(v);
+    setValue(v);
+  }
 
   return (
       <View style={styles.baseContainer}>
         <Label label={props.label} required={props.required} />
-        <TextInput {...this.props} style={[props.style, styles.textInput, error || (props.required && (!props.value || props.value && props.value.length === 0)) ? styles.hasError : styles.noError]} onChange={onChange} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
+        <TextInput {...this.props} value={value} style={[props.style, styles.textInput, error || (props.required && (!value || value && value.length === 0)) ? styles.hasError : styles.noError]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
         <ErrorField error={error} />
       </View>
     );
