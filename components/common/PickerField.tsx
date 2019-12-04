@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import ErrorField from '../common/ErrorField';
 import Label from '../common/Label';
@@ -7,19 +7,26 @@ import { Colors } from '../../constants';
 import useBaseField from '../common/BaseField';
 
 export default function PickerField(props) {
-  const [error, onChange, onValueChange] = useBaseField(props);
+  const [value, setValue] = useState(props.value);
+  const [error, onErrorChange] = useBaseField(props);
+
+  function onValueChange(v) {
+    onErrorChange();
+    props.onValueChange(v);
+    setValue(v);
+  }
 
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} />
       {false && (
-        <Picker {...props} selectedValue={props.value} onValueChange={onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
+        <Picker {...props} selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
           {props.items.map((item, index) => (
             <Picker.Item key={index} label={item.label} value={item.value} />
           ))}
         </Picker>
       )}
-      <RNPickerSelect placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={onValueChange} style={{ done: { color: props.color }, ...pickerSelectStyles }} value={props.value} />
+      <RNPickerSelect placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={onValueChange} style={{ done: { color: props.color }, ...pickerSelectStyles }} value={value} />
       <ErrorField error={error} />
     </View>
   );

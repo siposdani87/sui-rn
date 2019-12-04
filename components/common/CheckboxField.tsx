@@ -7,13 +7,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useBaseField from '../common/BaseField';
 
 export default function CheckboxField(props) {
-  const [value, setValue] = useState(false);
-  const [error, onChange, onValueChange] = useBaseField(props);
+  const [value, setValue] = useState(props.value);
+  const [error, onErrorChange] = useBaseField(props);
 
-  function changeValue() {
-    const newValue = !value;
-    onValueChange(newValue);
-    setValue(newValue);
+  function onValueChange(v) {
+    onErrorChange();
+    props.onValueChange(v);
+    setValue(v);
+  }
+
+  function onPress() {
+    onValueChange(!value);
   }
 
   function getColor() {
@@ -29,7 +33,7 @@ export default function CheckboxField(props) {
 
   return (
     <View style={styles.baseContainer}>
-      <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={changeValue} style={[props.style, styles.checkbox]}>
+      <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[props.style, styles.checkbox]}>
         <MaterialIcons name={value ? 'check-box' : 'check-box-outline-blank'} size={26} color={getColor()} />
       </TouchableOpacity>
       <Label style={styles.label} label={props.label} required={props.required}>{props.text}</Label>

@@ -9,17 +9,12 @@ export default function useBaseField(props) {
     setError(newError);
   }
 
-  function onChange() {
+  function onErrorChange() {
     if (error) {
       setClearError(error);
     }
     setError(null);
   }
 
-  function onValueChange(value) {
-    onChange();
-    props.onValueChange(value);
-  }
-
-  return [error, onChange, onValueChange];
+  return [error, onErrorChange];
 }
