@@ -51,14 +51,16 @@ export default class Fetch {
 
     private _getQuery(opt_params) {
         const queries = [];
-        for (const key of Object.keys(opt_params)) {
-            const param = opt_params[key];
-            if (param instanceof Array) {
-                for (const value of param) {
-                    queries.push(key + '[]=' + value);
+        if (opt_params) {
+            for (const key of Object.keys(opt_params)) {
+                const param = opt_params[key];
+                if (param instanceof Array) {
+                    for (const value of param) {
+                        queries.push(key + '[]=' + value);
+                    }
+                } else {
+                    queries.push(key + '=' + param);
                 }
-            } else {
-                queries.push(key + '=' + param);
             }
         }
         return queries.length === 0 ? '' : '?' + queries.join('&');
@@ -102,7 +104,7 @@ export default class Fetch {
         });
     }
 
-    private async _handleRequest(method, url, opt_data, opt_params, opt_headers) {
+    private async _handleRequest(method, url, opt_data, opt_params = {}, opt_headers = {}) {
         const options = {
             method,
             headers: Object.assign(this._getHeaders(url), opt_headers),
