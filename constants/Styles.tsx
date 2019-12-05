@@ -120,7 +120,7 @@ const styles = {
         headerStyle: {
             backgroundColor: Colors.primaryDark,
         },
-        headerForceInset: { top: 'never', bottom: 'never' },
+        safeAreaInsets: { top: 0, bottom: 0 },
     },
     contentOptions: {
         activeTintColor: Colors.primaryDark,
