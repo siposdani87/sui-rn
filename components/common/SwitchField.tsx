@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ErrorField from '../common/ErrorField';
 import Label from '../common/Label';
 import { View, Switch, StyleSheet } from 'react-native';
@@ -8,6 +8,10 @@ import useBaseField from '../common/BaseField';
 export default function SwitchField(props) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
 
   function onValueChange(v) {
     onErrorChange();
