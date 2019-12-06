@@ -124,15 +124,11 @@ const styles = {
     },
     contentOptions: {
         activeTintColor: Colors.primaryDark,
-        inactiveTintColor: Colors.primary,
         activeBackgroundColor: Colors.lightGrey,
+        inactiveTintColor: Colors.primary,
+        inactiveBackgroundColor: Colors.lightGrey,
         labelStyle: {
             fontWeight: '400',
-            color: Colors.primary,
-        },
-        activeLabelStyle: {
-            fontWeight: '500',
-            color: Colors.primaryDark,
         },
     },
     floatingButton: {
@@ -170,8 +166,6 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody,
 
     styles.contentOptions.activeTintColor = colors.primaryDark;
     styles.contentOptions.inactiveTintColor = colors.primary;
-    styles.contentOptions.labelStyle.color = colors.primary;
-    styles.contentOptions.activeLabelStyle.color = colors.primaryDark;
 
     styles.sectionHeader.fontFamily = fontFamilyHeading;
     styles.sectionHeader.color = colors.primary;
