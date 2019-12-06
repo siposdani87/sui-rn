@@ -19,7 +19,7 @@ export default function TextInputField(props) {
   return (
       <View style={styles.baseContainer}>
         <Label label={props.label} required={props.required} />
-        <TextInput {...this.props} value={value} style={[props.style, styles.textInput, error || (props.required && (!value || value && value.length === 0)) ? styles.hasError : styles.noError]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
+        <TextInput {...props} value={value} style={[props.style, styles.textInput, error || (props.required && (!value || value && value.length === 0)) ? styles.hasError : styles.noError]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
         <ErrorField error={error} />
       </View>
     );
