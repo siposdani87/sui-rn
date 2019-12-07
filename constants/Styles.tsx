@@ -92,7 +92,7 @@ const styles = {
         showLabel: true,
         allowFontScaling: true,
         style: {
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.primaryText,
         },
         labelStyle: {
             fontSize: 12,
@@ -106,21 +106,26 @@ const styles = {
             backgroundColor: Colors.accent,
         },
     },
-    navigationOptions: {
-        headerRight: <View />,
+    stackNavigatorOptions: {
+        headerRight: () => (
+            <View />
+        ),
         headerBackTitle: null,
-        headerTintColor: Colors.white,
+        headerBackTitleVisible: false,
+        headerTintColor: Colors.primaryText,
         headerTitleStyle: {
+            fontFamily: '',
             fontSize: 14,
-            fontWeight: '400',
-            color: Colors.white,
-            textAlign: 'center',
-            flex: 1,
+            color: Colors.primaryText,
         },
         headerStyle: {
             backgroundColor: Colors.primaryDark,
         },
-        safeAreaInsets: { top: 0, bottom: 0 },
+        contentStyle: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center'
+        } 
     },
     contentOptions: {
         activeTintColor: Colors.primaryDark,
@@ -162,7 +167,10 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody,
     styles.tabBarOptions.inactiveTintColor = colors.primary;
     styles.tabBarOptions.indicatorStyle.backgroundColor = colors.accent;
 
-    styles.navigationOptions.headerStyle.backgroundColor = colors.primaryDark;
+    styles.stackNavigatorOptions.headerTintColor = colors.primaryText;
+    styles.stackNavigatorOptions.headerTitleStyle.fontFamily = fontFamilyHeading;
+    styles.stackNavigatorOptions.headerTitleStyle.color = colors.primaryText;
+    styles.stackNavigatorOptions.headerStyle.backgroundColor = colors.primaryDark;
 
     styles.contentOptions.activeTintColor = colors.primaryDark;
     styles.contentOptions.inactiveTintColor = colors.primary;
