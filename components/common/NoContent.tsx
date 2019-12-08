@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
 import { Colors } from '../../constants';
 
-export default function NoContent(props) {
+export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
     return (
         <View style={styles.noContentContainer}>
-            <Image style={styles.noContentImage} source={props.source} />
+            <Image style={styles.noContentImage} source={props.imageSource} />
             <Text style={styles.noContentText}>{props.text}</Text>
         </View>
     );
