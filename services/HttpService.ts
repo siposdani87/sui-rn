@@ -53,7 +53,7 @@ export default class HttpService extends BaseService {
         };
     }
 
-    private _handleResponse(fetchPromise) {
+    private _handleResponse(fetchPromise): Promise<any> {
         this._setInprogress(true);
         return new Promise((resolve, reject) => {
             fetchPromise.then(({ data }) => {
