@@ -1,9 +1,12 @@
 {
   "name": "sui-rn",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "",
   "main": "",
-  "scripts": {},
+  "scripts": {
+    "tslint": "tslint --project .",
+    "tsc-test": "tsc --project . --noEmit"
+  },
   "license": "UNLICENSED",
   "private": true,
   "keywords": [
@@ -23,26 +26,25 @@
   ],
   "dependencies": {
     "@expo/vector-icons": "10.0.6",
-    "expo": "35.0.1",
-    "expo-asset": "7.0.0",
-    "expo-font": "7.0.0",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "react-native": "github:expo/react-native#sdk-35.0.0",
+    "expo": "36.0.0",
+    "expo-asset": "8.0.0",
+    "expo-font": "8.0.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "github:expo/react-native#sdk-36.0.0",
     "react-native-picker-select": "6.3.3",
     "react-redux": "7.1.0",
     "redux": "4.0.4",
-    "redux-thunk": "2.3.0",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
     "@types/expo__vector-icons": "9.0.1",
-    "@types/node": "12.12.14",
-    "@types/react": "16.8.3",
-    "@types/react-native": "0.57.65",
-    "@unimodules/core": "4.0.0",
+    "@types/node": "12.12.17",
+    "@types/react": "16.9.0",
+    "@types/react-native": "0.60.25",
+    "@unimodules/core": "5.0.0",
     "eslint": "6.7.2",
-    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-import": "2.19.1",
     "eslint-plugin-react": "7.17.0",
     "eslint-plugin-react-hooks": "2.3.0",
     "eslint-plugin-react-native": "3.8.1",
@@ -52,7 +54,6 @@
     "tslint": "5.20.1",
     "tslint-eslint-rules": "5.4.0",
     "tslint-react": "4.1.0",
-    "typescript": "3.6.3",
-    "yarn": "1.19.2"
+    "typescript": "3.6.3"
   }
 }
