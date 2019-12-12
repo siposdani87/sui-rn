@@ -1,7 +1,7 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { Colors, Styles } from '../constants';
 
 export default function TextButton(props) {
     return (

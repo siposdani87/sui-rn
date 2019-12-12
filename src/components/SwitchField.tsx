@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from '../common/ErrorField';
-import Label from '../common/Label';
+import ErrorField from './ErrorField';
+import Label from './Label';
 import { View, Switch, StyleSheet } from 'react-native';
-import { Colors } from '../../constants';
-import useBaseField from '../common/BaseField';
+import { Colors } from '../constants';
+import useBaseField from './BaseField';
 
 export default function SwitchField(props) {
   const [value, setValue] = useState(props.value);

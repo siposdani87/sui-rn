@@ -1,9 +1,9 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { Colors, Styles } from '../constants';
 
-export default function IconButton(props) {
+export default function Button(props) {
     const backgroundColor = props.color || Colors.primary;
     return (
         <View style={props.style}>
@@ -17,6 +17,9 @@ export default function IconButton(props) {
                     )}
                     {props.iconName && props.iconType === 'Community' && (
                         <MaterialCommunityIcons style={[styles.icon, { color: props.textColor || Colors.white }]} name={props.iconName} />
+                    )}
+                    {props.title && (
+                        <Text style={[styles.text, { color: props.textColor || Colors.white }]}>{props.title.toUpperCase()}</Text>
                     )}
                 </View>
             </TouchableOpacity>
@@ -34,7 +37,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         minWidth: 36,
         margin: 5,
+        paddingHorizontal: 15,
         ...Styles.lightShadow,
+    },
+    text: {
+        fontSize: 16,
+        textAlign: 'center',
     },
     image: {
         width: 20,

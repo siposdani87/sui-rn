@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
-import ErrorField from '../common/ErrorField';
-import Label from '../common/Label';
+import ErrorField from './ErrorField';
+import Label from './Label';
 import { View, StyleSheet, Picker } from 'react-native';
-import { Colors } from '../../constants';
-import useBaseField from '../common/BaseField';
+import { Colors } from '../constants';
+import useBaseField from './BaseField';
 
 export default function PickerField(props) {
   const [value, setValue] = useState(props.value);

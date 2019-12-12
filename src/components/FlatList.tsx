@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NoContent from '../common/NoContent';
+import NoContent from './NoContent';
 import { FlatList as ReactNativeFlatList, Platform, ImageSourcePropType, ListRenderItem } from 'react-native';
 
 const config = {

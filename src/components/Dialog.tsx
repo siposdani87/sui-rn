@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TextButton from '../common/TextButton';
-import Button from '../common/Button';
+import TextButton from './TextButton';
+import Button from './Button';
 import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { Colors, Styles } from '../constants';
 
 export default function Dialog(props) {
     const [visible, setVisible] = useState(false);
