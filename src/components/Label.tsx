@@ -1,7 +1,7 @@
 import React from 'react';
 import SUI from 'sui-js';
 import { Text, View, StyleSheet } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { Colors, Styles } from '../constants';
 
 export default function Label(props) {
   return (

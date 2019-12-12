@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from '../common/ErrorField';
-import Label from '../common/Label';
+import ErrorField from './ErrorField';
+import Label from './Label';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import useBaseField from '../common/BaseField';
+import useBaseField from './BaseField';
 
 export default function CheckboxField(props) {
   const [value, setValue] = useState(props.value);

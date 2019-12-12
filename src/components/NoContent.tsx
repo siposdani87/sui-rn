@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
-import { Colors } from '../../constants';
+import { Colors } from '../constants';
 
 export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
     return (

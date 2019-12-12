@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Colors, Styles } from '../../constants';
+import { Colors, Styles } from '../constants';
 
 export default function Link(props) {
     return (

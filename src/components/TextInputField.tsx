@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from '../common/ErrorField';
-import Label from '../common/Label';
+import ErrorField from './ErrorField';
+import Label from './Label';
 import { View, TextInput, StyleSheet } from 'react-native';
-import { Colors, Styles } from '../../constants';
-import useBaseField from '../common/BaseField';
+import { Colors, Styles } from '../constants';
+import useBaseField from './BaseField';
 
 export default function TextInputField(props) {
   // const {label, value, required, style} = props;
