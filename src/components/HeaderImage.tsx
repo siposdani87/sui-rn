@@ -1,14 +1,17 @@
 import React from 'react';
-import { Styles } from '../constants';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { Styles, Colors } from '../constants';
+import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
+import { useColorScheme } from 'react-native-appearance';
 
-export default function HeaderImage(props) {
+export default function HeaderImage(props: { title: string, imageSource: ImageSourcePropType }) {
+  const isDarkTheme = true; // = useColorScheme() === 'dark';
+
   return (
-      <View style={styles.baseContainer}>
-        <Image {...props} style={[props.style, styles.image]} />
-        <Text style={styles.text}>{props.title}</Text>
-      </View>
-    );
+    <View style={styles.baseContainer}>
+      <Image source={props.imageSource} style={[styles.image]} />
+      <Text style={[styles.titleText, isDarkTheme ? styles.titleDarkText : styles.titleLightText]}>{props.title}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -23,9 +26,15 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginRight: 10,
   },
-  text: {
+  titleText: {
     fontFamily: Styles.fontFamilyHeading,
     fontSize: 24,
     fontWeight: '400',
+  },
+  titleLightText: {
+    color: Colors.black,
+  },
+  titleDarkText: {
+    color: Colors.white,
   },
 });
