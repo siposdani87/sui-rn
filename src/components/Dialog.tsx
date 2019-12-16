@@ -3,9 +3,11 @@ import TextButton from './TextButton';
 import Button from './Button';
 import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
+import { useColorScheme } from 'react-native-appearance';
 
 export default function Dialog(props) {
     const [visible, setVisible] = useState(false);
+    const isDarkTheme = true; // = useColorScheme() === 'dark';
 
     if (props.visible !== visible) {
         setVisible(props.visible);
@@ -39,10 +41,10 @@ export default function Dialog(props) {
     return (
         <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onCancel}>
             <View style={styles.dropContainer}>
-                <View style={styles.dialogContainer}>
+                <View style={[styles.dialogContainer, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     {props.title && (
                         <View style={styles.headerContainer}>
-                            <Text style={styles.headerText}>{props.title}</Text>
+                            <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
                             {props.onClose && (
                                 <TextButton iconName='close' onPress={onClose} style={styles.closeButton} />
                             )}
@@ -56,7 +58,7 @@ export default function Dialog(props) {
                     </View>
                     <View style={styles.footerContainer}>
                         {props.onCancel && (
-                            <TextButton title={props.cancelText} textColor={Colors.black} onPress={onCancel} style={styles.button} />
+                            <TextButton title={props.cancelText} onPress={onCancel} style={styles.button} />
                         )}
                         {props.onSubmit && (
                             <Button title={props.submitText} onPress={onSubmit} style={styles.button} />
@@ -74,7 +76,7 @@ export default function Dialog(props) {
 const styles = StyleSheet.create({
     dropContainer: {
         ...Styles.fullscreenContainer as ViewStyle,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
     },
     dialogContainer: {
         ...Styles.dialogContainer as ViewStyle,
@@ -83,6 +85,12 @@ const styles = StyleSheet.create({
         marginRight: 30,
         marginTop: 30,
     },
+    dialogLightContainer: {
+        backgroundColor: Colors.white,
+    },
+    dialogDarkContainer: {
+        backgroundColor: Colors.black,
+    },
     headerContainer: {
         marginTop: -5,
         marginBottom: 20,
@@ -90,6 +98,13 @@ const styles = StyleSheet.create({
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
         fontSize: 20,
+        color: Colors.black,
+    },
+    headerLightText: {
+        color: Colors.black,
+    },
+    headerDarkText: {
+        color: Colors.white,
     },
     bodyContainer: {
         marginBottom: 20,
