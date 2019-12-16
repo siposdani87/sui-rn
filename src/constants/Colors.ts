@@ -1,4 +1,4 @@
-const colors = {
+const baseColors = {
   // Theme
 
   primaryBright: '',
@@ -110,6 +110,52 @@ const colors = {
   brownDark: '#5D4037',
 };
 
+const widgetColors = {
+  labelDefaultLight: baseColors.greyDark,
+  labelDisabledLight: baseColors.lightGreyDark,
+
+  labelDefaultDark: baseColors.grey,
+  labelDisabledDark: baseColors.deepGreyBright,
+
+  inputDefaultLight: baseColors.greyBright,
+  inputDisabledLight: baseColors.lightGreyDark,
+
+  inputDefaultDark: baseColors.blackBright,
+  inputDisabledDark: baseColors.deepGreyBright,
+
+  contentDefaultLight: baseColors.black,
+  contentDisabledLight: baseColors.grey,
+
+  contentDefaultDark: baseColors.white,
+  contentDisabledDark: baseColors.greyDark,
+
+  checkboxDefaultLight: baseColors.greyDark,
+  checkboxDisabledLight: baseColors.greyBright,
+
+  checkboxDefaultDark: baseColors.lightGrey,
+  checkboxDisabledDark: baseColors.deepGrey,
+
+  primaryDefaultLight: baseColors.primary,
+  primaryDisabledLight: baseColors.grey,
+
+  primaryDefaultDark: baseColors.primaryBright,
+  primaryDisabledDark: baseColors.greyDark,
+
+  accentDefaultLight: baseColors.accent,
+  accentDisabledLight: baseColors.grey,
+
+  accentDefaultDark: baseColors.accentBright,
+  accentDisabledDark: baseColors.greyDark,
+
+  errorDefaultLight: baseColors.red,
+  errorDisabledLight: baseColors.redDark,
+
+  errorDefaultDark: baseColors.redBright,
+  errorDisabledDark: baseColors.redDark,
+};
+
+const colors = Object.assign(baseColors, widgetColors);
+
 export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
   colors.primaryBright = primaryBright;
   colors.primary = primary;
@@ -120,6 +166,11 @@ export function setThemeColors(primaryBright, primary, primaryDark, primaryText,
   colors.accent = accent;
   colors.accentDark = accentDark;
   colors.accentText = accentText;
+
+  colors.primaryDefaultLight = primary;
+  colors.primaryDefaultDark = primaryBright;
+  colors.accentDefaultLight = accent;
+  colors.accentDefaultDark = accentBright;
 
   return colors;
 }

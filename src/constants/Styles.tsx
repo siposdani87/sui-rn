@@ -37,7 +37,6 @@ const styles = {
         marginTop: 10,
         marginBottom: 30,
         padding: 20,
-        backgroundColor: Colors.white,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',

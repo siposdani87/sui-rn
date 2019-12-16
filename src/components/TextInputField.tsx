@@ -4,29 +4,52 @@ import Label from './Label';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useBaseField from './BaseField';
+import { useColorScheme } from 'react-native-appearance';
 
 export default function TextInputField(props) {
   // const {label, value, required, style} = props;
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
+  const hasError = error || (props.required && (!value || value && value.length === 0));
+  const isDarkTheme = true; // = useColorScheme() === 'dark';
 
   useEffect(() => {
     setValue(props.value);
   }, [props.value]);
 
-  function onValueChange(v) {
+  function _onChangeText(v) {
     onErrorChange();
     props.onChangeText(v);
     setValue(v);
   }
 
+  function _getTextInputErrorStyle() {
+    if (hasError) {
+      if (props.disabled) {
+        return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
+      }
+      return isDarkTheme ? styles.hasErrorDefaultDark : styles.hasErrorDefaultLight;
+    }
+    if (props.disabled) {
+      return isDarkTheme ? styles.noErrorDisabledDark : styles.noErrorDisabledLight;
+    }
+    return isDarkTheme ? styles.noErrorDefaultDark : styles.noErrorDefaultLight;
+  }
+
+  function _getTextInputStyle() {
+    if (props.disabled) {
+      return isDarkTheme ? styles.disabledDarkTextInput : styles.disabledLightTextInput;
+    }
+    return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
+  }
+
   return (
-      <View style={styles.baseContainer}>
-        <Label label={props.label} required={props.required} />
-        <TextInput {...props} value={value} style={[props.style, styles.textInput, error || (props.required && (!value || value && value.length === 0)) ? styles.hasError : styles.noError]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
-        <ErrorField error={error} />
-      </View>
-    );
+    <View style={styles.baseContainer}>
+      <Label label={props.label} required={props.required} disabled={props.disabled} />
+      <TextInput {...props} value={value} style={[props.style, styles.textInput, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={_onChangeText} underlineColorAndroid='transparent' selectionColor={Colors.grey} />
+      <ErrorField error={error} disabled={props.disabled} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -39,13 +62,43 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: Colors.greyBright,
     paddingHorizontal: 10,
+
   },
-  hasError: {
-    borderColor: Colors.red,
+  defaultLightTextInput: {
+    color: Colors.contentDefaultLight,
   },
-  noError: {
-    borderColor: Colors.greyBright,
+  defaultDarkTextInput: {
+    color: Colors.contentDefaultDark,
+  },
+  disabledLightTextInput: {
+    color: Colors.contentDisabledLight,
+  },
+  disabledDarkTextInput: {
+    color: Colors.contentDisabledDark,
+  },
+  hasErrorDefaultLight: {
+    borderColor: Colors.errorDefaultLight,
+  },
+  hasErrorDefaultDark: {
+    borderColor: Colors.errorDefaultDark,
+  },
+  hasErrorDisabledLight: {
+    borderColor: Colors.errorDisabledLight,
+  },
+  hasErrorDisabledDark: {
+    borderColor: Colors.errorDisabledDark,
+  },
+  noErrorDefaultLight: {
+    borderColor: Colors.inputDefaultLight,
+  },
+  noErrorDefaultDark: {
+    borderColor: Colors.inputDefaultDark,
+  },
+  noErrorDisabledLight: {
+    borderColor: Colors.inputDisabledLight,
+  },
+  noErrorDisabledDark: {
+    borderColor: Colors.inputDisabledDark,
   },
 });
