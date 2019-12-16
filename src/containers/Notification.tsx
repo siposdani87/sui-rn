@@ -3,8 +3,11 @@ import SUI from 'sui-js';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useColorScheme } from 'react-native-appearance';
 
 export default function Notification(props) {
+    const isDarkTheme = true; // = useColorScheme() === 'dark';
+
     function close(index) {
         return () => {
             props.screenProps.factories.notificationFactory.close(index);
@@ -16,7 +19,7 @@ export default function Notification(props) {
     }
 
     function getContainerStyle(notification) {
-        const containerStyles: any[] = [styles.notificationContainer];
+        const containerStyles: any[] = [styles.notificationContainer, isDarkTheme ? styles.notificationDarkContainer : styles.notificationLightContainer];
         switch (notification.type.toLowerCase()) {
             case 'success':
                 containerStyles.push(styles.successContainer);
@@ -35,7 +38,7 @@ export default function Notification(props) {
     }
 
     function getTextStyle(notification) {
-        const textStyles: any[] = [styles.notificationText];
+        const textStyles: any[] = [isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
         switch (notification.type.toLowerCase()) {
             case 'success':
                 textStyles.push(styles.successText);
@@ -87,14 +90,22 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 40,
         marginRight: 40,
-        backgroundColor: Colors.lightGreyBright,
         borderRadius: 3,
         borderStyle: 'solid',
         borderTopWidth: 5,
         ...Styles.shadow,
     },
-    notificationText: {
+    notificationLightContainer: {
+        backgroundColor: Colors.lightGreyBright,
+    },
+    notificationDarkContainer: {
+        backgroundColor: Colors.blackDark,
+    },
+    notificationLightText: {
         color: Colors.black,
+    },
+    notificationDarkText: {
+        color: Colors.white,
     },
     notificationClose: {
         position: 'absolute',

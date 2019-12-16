@@ -1,31 +1,46 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
 import { Colors } from '../constants';
+import { useColorScheme } from 'react-native-appearance';
 
 export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
+    const isDarkTheme = true; // = useColorScheme() === 'dark';
+
     return (
-        <View style={styles.noContentContainer}>
-            <Image style={styles.noContentImage} source={props.imageSource} />
-            <Text style={styles.noContentText}>{props.text}</Text>
+        <View style={styles.container}>
+            <Image style={[styles.image, isDarkTheme ? styles.imageDark : styles.imageLight]} source={props.imageSource} />
+            <Text style={[styles.text, isDarkTheme ? styles.textDark : styles.textLight]}>{props.text}</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    noContentContainer: {
+    container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 30,
     },
-    noContentImage: {
+    image: {
         width: 150,
         height: 100,
         marginBottom: 15,
+        tintColor: Colors.grey,
     },
-    noContentText: {
-        color: Colors.grey,
+    imageLight: {
+        tintColor: Colors.grey,
+    },
+    imageDark: {
+        tintColor: Colors.blackBright,
+    },
+    text: {
         fontSize: 18,
         marginHorizontal: 20,
+    },
+    textLight: {
+        color: Colors.grey,
+    },
+    textDark: {
+        color: Colors.blackBright,
     },
 });
