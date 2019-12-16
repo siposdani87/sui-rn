@@ -22,14 +22,13 @@ const styles = {
     },
     columnContainer: {
         flex: 1,
-        backgroundColor: Colors.lightGrey,
         justifyContent: 'flex-start',
         flexDirection: 'column',
         alignItems: 'stretch',
     },
     pageContainer: {
         padding: 20,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
     },
     dialogContainer: {
         marginLeft: 10,
@@ -85,14 +84,9 @@ const styles = {
         },
     }),
     tabBarOptions: {
-        activeTintColor: Colors.primaryDark,
-        inactiveTintColor: Colors.primary,
         showIcon: false,
         showLabel: true,
         allowFontScaling: true,
-        style: {
-            backgroundColor: Colors.primaryText,
-        },
         labelStyle: {
             fontSize: 12,
         },
@@ -101,8 +95,25 @@ const styles = {
             alignItems: 'center',
             justifyContent: 'center',
         },
+    },
+    tabBarLightOptions: {
+        activeTintColor: Colors.primaryDark,
+        inactiveTintColor: Colors.primary,
+        style: {
+            backgroundColor: Colors.white,
+        },
         indicatorStyle: {
             backgroundColor: Colors.accent,
+        },
+    },
+    tabBarDarkOptions: {
+        activeTintColor: Colors.primaryBright,
+        inactiveTintColor: Colors.primary,
+        style: {
+            backgroundColor: Colors.black,
+        },
+        indicatorStyle: {
+            backgroundColor: Colors.accentDark,
         },
     },
     stackNavigatorOptions: {
@@ -141,45 +152,18 @@ const styles = {
         right: 15,
         zIndex: 1,
     },
-    sectionContainer: {
-        marginVertical: 10,
-    },
-    sectionHeader: {
-        fontFamily: '',
-        fontSize: 24,
-        color: Colors.primary,
-        marginBottom: 10,
-    },
-    sectionContent: {
-        color: Colors.greyDark,
-    },
 };
 
-export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody, colors) {
+export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
     styles.fontFamilyApp = fontFamilyApp;
     styles.fontFamilyHeading = fontFamilyHeading;
     styles.fontFamilyBody = fontFamilyBody;
 
-    styles.fullscreenContainer.backgroundColor = colors.primary;
-
-    styles.tabBarOptions.activeTintColor = colors.primaryDark;
-    styles.tabBarOptions.inactiveTintColor = colors.primary;
-    styles.tabBarOptions.indicatorStyle.backgroundColor = colors.accent;
-
-    styles.stackNavigatorOptions.headerTintColor = colors.primaryText;
     styles.stackNavigatorOptions.headerTitleStyle.fontFamily = fontFamilyHeading;
-    styles.stackNavigatorOptions.headerTitleStyle.color = colors.primaryText;
-    styles.stackNavigatorOptions.headerStyle.backgroundColor = colors.primaryDark;
-
-    styles.contentOptions.activeTintColor = colors.primaryDark;
-    styles.contentOptions.inactiveTintColor = colors.primary;
-
-    styles.sectionHeader.fontFamily = fontFamilyHeading;
-    styles.sectionHeader.color = colors.primary;
 
     return styles;
 }
 
-setThemeStyles('Verdana', 'Helvetica', 'Arial', Colors);
+setThemeStyles('Verdana', 'Helvetica', 'Arial');
 
 export default styles;
