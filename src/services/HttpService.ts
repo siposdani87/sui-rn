@@ -5,7 +5,6 @@ import { Fetch } from '../utils';
 export default class HttpService extends BaseService {
     protected factories: { [key: string]: any; };
     protected dispatch: (state: object) => void;
-
     private inprogress: number;
     private language: string;
     private secret: string;
@@ -18,6 +17,11 @@ export default class HttpService extends BaseService {
         this.secret = secret;
         this.fetch = new Fetch(backend);
     }
+
+    public getUrl(url, opt_params){
+        return this.fetch.getUrl(url, opt_params);
+    }
+
 
     public isInprogress() {
         return this.inprogress > 0;
