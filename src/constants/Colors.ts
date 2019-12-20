@@ -11,25 +11,23 @@ const baseColors = {
   accentDark: '',
   accentText: '',
 
-  // Black & White
+  // Black & White & Grey
 
   whiteBright: '#FFFFFF',
-  white: '#FEFEFE',
-  whiteDark: '#F9F9F9',
+  white: '#FAFAFA',
+  whiteDark: '#F5F5F5',
 
-  blackBright: '#404040',
-  black: '#252525',
+  lightGreyBright: '#EEEEEE',
+  lightGrey: '#E0E0E0',
+  lightGreyDark: '#BDBDBD',
+
+  deepGreyBright: '#9E9E9E',
+  deepGrey: '#757575',
+  deepGreyDark: '#616161',
+
+  blackBright: '#424242',
+  black: '#212121',
   blackDark: '#000000',
-
-  // Additional Palette
-
-  lightGreyBright: '#F0F0F0',
-  lightGrey: '#E5E5E5',
-  lightGreyDark: '#D0D0D0',
-
-  deepGreyBright: '#3B3B3B',
-  deepGrey: '#303030',
-  deepGreyDark: '#1B1B1B',
 
   // Material Design Palette
 
@@ -111,41 +109,41 @@ const baseColors = {
 };
 
 const widgetColors = {
-  labelDefaultLight: baseColors.greyDark,
+  labelDefaultLight: baseColors.deepGrey,
   labelDisabledLight: baseColors.lightGreyDark,
 
-  labelDefaultDark: baseColors.grey,
-  labelDisabledDark: baseColors.deepGreyBright,
+  labelDefaultDark: baseColors.lightGreyDark,
+  labelDisabledDark: baseColors.deepGrey,
 
-  inputDefaultLight: baseColors.greyBright,
-  inputDisabledLight: baseColors.lightGreyDark,
+  inputDefaultLight: baseColors.lightGreyDark,
+  inputDisabledLight: baseColors.lightGrey,
 
-  inputDefaultDark: baseColors.blackBright,
-  inputDisabledDark: baseColors.deepGreyBright,
+  inputDefaultDark: baseColors.deepGrey,
+  inputDisabledDark: baseColors.deepGreyDark,
 
   contentDefaultLight: baseColors.black,
-  contentDisabledLight: baseColors.grey,
+  contentDisabledLight: baseColors.deepGreyBright,
 
   contentDefaultDark: baseColors.white,
-  contentDisabledDark: baseColors.greyDark,
+  contentDisabledDark: baseColors.lightGreyDark,
 
-  checkboxDefaultLight: baseColors.greyDark,
-  checkboxDisabledLight: baseColors.greyBright,
+  checkboxDefaultLight: baseColors.deepGrey,
+  checkboxDisabledLight: baseColors.lightGrey,
 
   checkboxDefaultDark: baseColors.lightGrey,
   checkboxDisabledDark: baseColors.deepGrey,
 
   primaryDefaultLight: baseColors.primary,
-  primaryDisabledLight: baseColors.grey,
+  primaryDisabledLight: baseColors.lightGreyDark,
 
   primaryDefaultDark: baseColors.primaryBright,
-  primaryDisabledDark: baseColors.greyDark,
+  primaryDisabledDark: baseColors.deepGrey,
 
   accentDefaultLight: baseColors.accent,
-  accentDisabledLight: baseColors.grey,
+  accentDisabledLight: baseColors.lightGreyDark,
 
   accentDefaultDark: baseColors.accentBright,
-  accentDisabledDark: baseColors.greyDark,
+  accentDisabledDark: baseColors.deepGrey,
 
   errorDefaultLight: baseColors.red,
   errorDisabledLight: baseColors.redDark,
