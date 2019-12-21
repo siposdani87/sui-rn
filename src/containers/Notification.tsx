@@ -93,13 +93,14 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         borderStyle: 'solid',
         borderTopWidth: 5,
+        borderTopColor: Colors.blackDark,
         ...Styles.shadow,
     },
     notificationLightContainer: {
         backgroundColor: Colors.lightGreyBright,
     },
     notificationDarkContainer: {
-        backgroundColor: Colors.blackDark,
+        backgroundColor: Colors.black,
     },
     notificationLightText: {
         color: Colors.black,

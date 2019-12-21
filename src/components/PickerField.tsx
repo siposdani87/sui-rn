@@ -105,13 +105,13 @@ const pickerSelectDarkStyles = StyleSheet.create({
     height: 36,
     borderBottomWidth: 1,
     borderColor: Colors.grey,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.blackDark,
     color: Colors.inputDefaultDark,
   },
   inputAndroid: {
     fontSize: 16,
     height: 36,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.blackDark,
     color: Colors.inputDefaultDark,
   },
   chevron: {
