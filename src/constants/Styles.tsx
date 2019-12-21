@@ -28,7 +28,6 @@ const styles = {
     },
     pageContainer: {
         padding: 20,
-        // backgroundColor: Colors.white,
     },
     dialogContainer: {
         marginLeft: 10,
@@ -48,13 +47,13 @@ const styles = {
                 elevation: 10,
             },
             ios: {
-                shadowColor: Colors.black,
+                shadowColor: Colors.blackDark,
                 shadowOffset: {
                     width: 0,
-                    height: 8,
+                    height: 5,
                 },
-                shadowOpacity: 0.3,
-                shadowRadius: 8,
+                shadowOpacity: 0.34,
+                shadowRadius: 6.27,
             },
         }),
     },
@@ -67,10 +66,10 @@ const styles = {
                 shadowColor: Colors.blackDark,
                 shadowOffset: {
                     width: 0,
-                    height: 2,
+                    height: 1,
                 },
-                shadowOpacity: 0.2,
-                shadowRadius: 2,
+                shadowOpacity: 0.22,
+                shadowRadius: 2.22,
             },
         }),
     },
