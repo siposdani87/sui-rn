@@ -28,13 +28,13 @@ export default function CheckboxField(props: { value: boolean, onValueChange: (v
 
   function _getColor() {
     if (props.disabled) {
-      return isDarkTheme ? Colors.deepGrey : Colors.greyBright;
+      return isDarkTheme ? Colors.checkboxDisabledDark : Colors.checkboxDisabledLight;
     } else if (props.required && !value) {
       return isDarkTheme ? Colors.errorDefaultDark : Colors.errorDefaultLight;
     } else if (value) {
       return isDarkTheme ? Colors.primaryBright : Colors.primary;
     }
-    return isDarkTheme ? Colors.lightGrey : Colors.greyDark;
+    return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
   }
 
   return (

@@ -26,6 +26,7 @@
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "github:expo/react-native#sdk-35.0.0",
+    "react-native-appearance": "~0.1.0",
     "react-native-picker-select": "6.3.3",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
