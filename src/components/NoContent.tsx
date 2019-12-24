@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
         width: 150,
         height: 100,
         marginBottom: 15,
-        tintColor: Colors.grey,
+        tintColor: Colors.deepGreyBright,
     },
     imageLight: {
-        tintColor: Colors.grey,
+        tintColor: Colors.deepGreyBright,
     },
     imageDark: {
         tintColor: Colors.blackBright,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     textLight: {
-        color: Colors.grey,
+        color: Colors.deepGreyBright,
     },
     textDark: {
         color: Colors.blackBright,

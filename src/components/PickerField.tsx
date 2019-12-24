@@ -22,12 +22,12 @@ export default function PickerField(props) {
     setValue(v);
   }
 
-  function _getPickerSelectStyles(){
-    return { 
-      done: { 
-        color: props.color || Colors.primary 
+  function _getPickerSelectStyles() {
+    return {
+      done: {
+        color: props.color || Colors.primary,
       },
-      ...(isDarkTheme ?  pickerSelectDarkStyles : pickerSelectLightStyles),
+      ...(isDarkTheme ? pickerSelectDarkStyles : pickerSelectLightStyles),
     };
   }
 
@@ -61,7 +61,7 @@ const pickerSelectLightStyles = StyleSheet.create({
     fontSize: 16,
     height: 36,
     borderBottomWidth: 1,
-    borderColor: Colors.grey,
+    borderColor: Colors.deepGreyBright,
     backgroundColor: Colors.white,
     color: Colors.inputDefaultLight,
   },
@@ -92,10 +92,10 @@ const pickerSelectLightStyles = StyleSheet.create({
     backgroundColor: Colors.whiteDark,
   },
   underline: {
-    backgroundColor: Colors.grey,
+    backgroundColor: Colors.deepGreyBright,
   },
   placeholderColor: {
-    color: Colors.grey,
+    color: Colors.deepGreyBright,
   },
 });
 
@@ -104,7 +104,7 @@ const pickerSelectDarkStyles = StyleSheet.create({
     fontSize: 16,
     height: 36,
     borderBottomWidth: 1,
-    borderColor: Colors.grey,
+    borderColor: Colors.deepGreyBright,
     backgroundColor: Colors.blackDark,
     color: Colors.inputDefaultDark,
   },
@@ -135,9 +135,9 @@ const pickerSelectDarkStyles = StyleSheet.create({
     backgroundColor: Colors.whiteDark,
   },
   underline: {
-    backgroundColor: Colors.grey,
+    backgroundColor: Colors.deepGreyBright,
   },
   placeholderColor: {
-    color: Colors.grey,
+    color: Colors.deepGreyBright,
   },
 });
