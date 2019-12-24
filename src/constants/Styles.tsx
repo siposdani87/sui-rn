@@ -30,10 +30,7 @@ const styles = {
         padding: 20,
     },
     dialogContainer: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 10,
-        marginBottom: 30,
+        margin: 10,
         padding: 20,
         flex: 1,
         flexDirection: 'column',
