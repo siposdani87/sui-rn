@@ -21,22 +21,18 @@
   ],
   "dependencies": {
     "@expo/vector-icons": "~10.0.0",
-    "expo": "~35.0.0",
     "expo-asset": "~7.0.0",
     "expo-font": "~7.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "github:expo/react-native#sdk-35.0.0",
     "react-native-picker-select": "6.3.3",
-    "react-redux": "7.1.0",
-    "redux": "4.0.4",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
     "@types/expo__vector-icons": "9.0.1",
     "@types/node": "12.12.17",
     "@types/react": "16.8.3",
-    "@types/react-dom": "16.8.3",
     "@types/react-native": "0.57.0",
     "@unimodules/core": "5.0.0",
     "eslint": "6.7.2",
