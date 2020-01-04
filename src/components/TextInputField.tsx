@@ -3,7 +3,7 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useBaseField from './BaseField';
+import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 
 export default function TextInputField(props) {

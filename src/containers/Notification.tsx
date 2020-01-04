@@ -22,37 +22,23 @@ export default function Notification(props) {
         const containerStyles: any[] = [styles.notificationContainer, isDarkTheme ? styles.notificationDarkContainer : styles.notificationLightContainer];
         switch (notification.type.toLowerCase()) {
             case 'success':
-                containerStyles.push(styles.successContainer);
+                containerStyles.push(isDarkTheme ? styles.successDarkContainer : styles.successLightContainer);
                 break;
             case 'info':
-                containerStyles.push(styles.infoContainer);
+                containerStyles.push(isDarkTheme ? styles.infoDarkContainer : styles.infoLightContainer);
                 break;
             case 'warning':
-                containerStyles.push(styles.warningContainer);
+                containerStyles.push(isDarkTheme ? styles.warningDarkContainer : styles.warningLightContainer);
                 break;
             case 'error':
-                containerStyles.push(styles.errorContainer);
+                containerStyles.push(isDarkTheme ? styles.errorDarkContainer : styles.errorLightContainer);
                 break;
         }
         return containerStyles;
     }
 
-    function getTextStyle(notification) {
+    function getTextStyle() {
         const textStyles: any[] = [isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
-        switch (notification.type.toLowerCase()) {
-            case 'success':
-                textStyles.push(styles.successText);
-                break;
-            case 'info':
-                textStyles.push(styles.infoText);
-                break;
-            case 'warning':
-                textStyles.push(styles.warningText);
-                break;
-            case 'error':
-                textStyles.push(styles.errorText);
-                break;
-        }
         return textStyles;
     }
 
@@ -61,7 +47,7 @@ export default function Notification(props) {
             {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(index)}>
                     <View style={getContainerStyle(notification)}>
-                        <Text style={getTextStyle(notification)}>{notification.message}</Text>
+                        <Text style={getTextStyle()}>{notification.message}</Text>
                         {closable(notification) && (
                             <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close(index)}>
                                 <MaterialIcons name='close' size={18} color={Colors.black} />
@@ -113,28 +99,28 @@ const styles = StyleSheet.create({
         right: 2,
         top: 2,
     },
-    successContainer: {
+    successLightContainer: {
         borderTopColor: Colors.green,
     },
-    successText: {
-
+    successDarkContainer: {
+        borderTopColor: Colors.greenBright,
     },
-    infoContainer: {
+    infoLightContainer: {
         borderTopColor: Colors.blue,
     },
-    infoText: {
-
+    infoDarkContainer: {
+        borderTopColor: Colors.blueBright,
     },
-    warningContainer: {
+    warningLightContainer: {
         borderTopColor: Colors.amber,
     },
-    warningText: {
-
+    warningDarkContainer: {
+        borderTopColor: Colors.amberBright,
     },
-    errorContainer: {
+    errorLightContainer: {
         borderTopColor: Colors.red,
     },
-    errorText: {
-
+    errorDarkContainer: {
+        borderTopColor: Colors.redBright,
     },
 });

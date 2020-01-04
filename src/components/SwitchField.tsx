@@ -3,7 +3,7 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, Switch, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
-import useBaseField from './BaseField';
+import useBaseField from './useBaseField';
 
 export default function SwitchField(props) {
   const [value, setValue] = useState(props.value);

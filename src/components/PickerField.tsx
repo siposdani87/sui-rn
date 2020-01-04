@@ -4,7 +4,7 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet, Picker } from 'react-native';
 import { Colors } from '../constants';
-import useBaseField from './BaseField';
+import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 
 export default function PickerField(props) {

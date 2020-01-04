@@ -4,7 +4,7 @@ import Label from './Label';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import useBaseField from './BaseField';
+import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 
 export default function CheckboxField(props: { value: boolean, onValueChange: (v: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, text?: any, style?: any }) {

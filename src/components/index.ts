@@ -1,4 +1,3 @@
-export { default as BaseField } from './BaseField';
 export { default as BaseView } from './BaseView';
 export { default as Button } from './Button';
 export { default as CheckboxField } from './CheckboxField';
