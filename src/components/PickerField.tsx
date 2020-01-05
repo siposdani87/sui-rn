@@ -6,6 +6,8 @@ import { View, StyleSheet, Picker } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Styles } from '../../../../constants';
 
 export default function PickerField(props) {
   const [value, setValue] = useState(props.value);
@@ -24,12 +26,14 @@ export default function PickerField(props) {
 
   function _getPickerSelectStyles() {
     return {
+      ...(isDarkTheme ? pickerSelectDarkStyles : pickerSelectLightStyles),
       done: {
         color: props.color || Colors.primary,
       },
-      ...(isDarkTheme ? pickerSelectDarkStyles : pickerSelectLightStyles),
     };
   }
+
+  const pickerStyle = _getPickerSelectStyles();
 
   return (
     <View style={styles.baseContainer}>
@@ -41,7 +45,9 @@ export default function PickerField(props) {
           ))}
         </Picker>
       )}
-      <RNPickerSelect placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={_getPickerSelectStyles()} value={value} />
+      <RNPickerSelect Icon={() => {
+        return <MaterialIcons name="expand-more" size={24} color={pickerStyle.inputAndroid.color} />;
+      }} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle} value={value} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -58,86 +64,64 @@ const styles = StyleSheet.create({
 
 const pickerSelectLightStyles = StyleSheet.create({
   inputIOS: {
+    fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
     height: 36,
-    borderBottomWidth: 1,
-    borderColor: Colors.deepGreyBright,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderColor: Colors.inputDefaultLight,
     backgroundColor: Colors.white,
-    color: Colors.inputDefaultLight,
+    color: Colors.contentDefaultLight,
   },
   inputAndroid: {
+    fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
     height: 36,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderColor: Colors.inputDefaultLight,
     backgroundColor: Colors.white,
-    color: Colors.inputDefaultLight,
+    color: Colors.contentDefaultLight,
   },
-  chevron: {
-    display: 'none',
-  },
-  icon: {
-    right: 0,
-    bottom: 5,
-  },
-  done: {
-    color: Colors.primary,
-    fontWeight: '400',
-  },
-  modalViewTop: {
-    backgroundColor: 'transparent',
-  },
-  modalViewMiddle: {
-    backgroundColor: Colors.lightGreyBright,
-  },
-  modalViewBottom: {
-    backgroundColor: Colors.whiteDark,
-  },
-  underline: {
-    backgroundColor: Colors.deepGreyBright,
+  iconContainer: {
+    top: 5,
+    right: 5,
   },
   placeholderColor: {
-    color: Colors.deepGreyBright,
+    color: Colors.labelDefaultLight,
   },
 });
 
 const pickerSelectDarkStyles = StyleSheet.create({
   inputIOS: {
+    fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
     height: 36,
-    borderBottomWidth: 1,
-    borderColor: Colors.deepGreyBright,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderColor: Colors.inputDefaultDark,
     backgroundColor: Colors.blackDark,
-    color: Colors.inputDefaultDark,
+    color: Colors.contentDefaultDark,
   },
   inputAndroid: {
+    fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
     height: 36,
+    borderRadius: 6,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderColor: Colors.inputDefaultDark,
     backgroundColor: Colors.blackDark,
-    color: Colors.inputDefaultDark,
+    color: Colors.contentDefaultDark,
   },
-  chevron: {
-    display: 'none',
-  },
-  icon: {
-    right: 0,
-    bottom: 5,
-  },
-  done: {
-    color: Colors.primary,
-    fontWeight: '400',
-  },
-  modalViewTop: {
-    backgroundColor: 'transparent',
-  },
-  modalViewMiddle: {
-    backgroundColor: Colors.lightGreyBright,
-  },
-  modalViewBottom: {
-    backgroundColor: Colors.whiteDark,
-  },
-  underline: {
-    backgroundColor: Colors.deepGreyBright,
+  iconContainer: {
+    top: 5,
+    right: 5,
   },
   placeholderColor: {
-    color: Colors.deepGreyBright,
+    color: Colors.labelDefaultDark,
   },
 });
