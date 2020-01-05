@@ -26,9 +26,6 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'stretch',
     },
-    pageContainer: {
-        padding: 20,
-    },
     dialogContainer: {
         margin: 10,
         padding: 20,
