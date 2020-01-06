@@ -106,7 +106,7 @@ const styles = {
             backgroundColor: Colors.black,
         },
         indicatorStyle: {
-            backgroundColor: Colors.accentDark,
+            backgroundColor: Colors.accentBright,
         },
     },
     stackNavigatorOptions: {
