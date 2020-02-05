@@ -4,10 +4,11 @@ import Button from './Button';
 import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function Dialog(props) {
     const [visible, setVisible] = useState(false);
-    const isDarkTheme = true; // = useColorScheme() === 'dark';
+    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
     if (props.visible !== visible) {
         setVisible(props.visible);

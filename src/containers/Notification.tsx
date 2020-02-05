@@ -4,9 +4,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function Notification(props) {
-    const isDarkTheme = true; // = useColorScheme() === 'dark';
+    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
     function close(index) {
         return () => {

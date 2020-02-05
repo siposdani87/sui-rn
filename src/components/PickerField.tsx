@@ -7,12 +7,13 @@ import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Styles } from '../../../../constants';
+import { Styles } from '../constants';
+import environment from '../config/environment';
 
 export default function PickerField(props) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
-  const isDarkTheme = true; // = useColorScheme() === 'dark';
+  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
     setValue(props.value);
@@ -45,9 +46,7 @@ export default function PickerField(props) {
           ))}
         </Picker>
       )}
-      <RNPickerSelect Icon={() => {
-        return <MaterialIcons name="expand-more" size={24} color={pickerStyle.inputAndroid.color} />;
-      }} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle} value={value} />
+      <RNPickerSelect Icon={() => (<MaterialIcons name="expand-more" size={24} color={pickerStyle.inputAndroid.color} />)} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle} value={value} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

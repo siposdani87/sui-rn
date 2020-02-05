@@ -3,9 +3,10 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function TextButton(props) {
-    const isDarkTheme = true; // = useColorScheme() === 'dark';
+    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
     function _getTextColor(){
         const defaultColor = isDarkTheme ? Colors.white : Colors.black;
