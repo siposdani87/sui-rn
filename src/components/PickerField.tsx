@@ -70,7 +70,7 @@ const pickerSelectLightStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderColor: Colors.inputDefaultLight,
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     color: Colors.contentDefaultLight,
   },
   inputAndroid: {
@@ -81,7 +81,7 @@ const pickerSelectLightStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderColor: Colors.inputDefaultLight,
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     color: Colors.contentDefaultLight,
   },
   iconContainer: {
@@ -102,7 +102,7 @@ const pickerSelectDarkStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderColor: Colors.inputDefaultDark,
-    backgroundColor: Colors.blackDark,
+    // backgroundColor: Colors.blackDark,
     color: Colors.contentDefaultDark,
   },
   inputAndroid: {
@@ -113,7 +113,7 @@ const pickerSelectDarkStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderColor: Colors.inputDefaultDark,
-    backgroundColor: Colors.blackDark,
+    // backgroundColor: Colors.blackDark,
     color: Colors.contentDefaultDark,
   },
   iconContainer: {
