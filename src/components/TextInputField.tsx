@@ -5,13 +5,14 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function TextInputField(props) {
   // const {label, value, required, style} = props;
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
-  const isDarkTheme = true; // = useColorScheme() === 'dark';
+  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
     setValue(props.value);

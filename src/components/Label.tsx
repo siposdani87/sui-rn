@@ -3,9 +3,10 @@ import SUI from 'sui-js';
 import { Text, View, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function Label(props: { children?: any, label?: string, required?: boolean, disabled?: boolean, style?: any }) {
-  const isDarkTheme = true; // = useColorScheme() === 'dark';
+  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   function _getTextStyle() {
     if (props.disabled) {
