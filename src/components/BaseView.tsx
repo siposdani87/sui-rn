@@ -1,20 +1,23 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, Platform, StatusBar, StatusBarStyle, View } from 'react-native';
 import { Colors } from '../constants';
 
-export default function BaseView(props) {
+export default function BaseView(props: {barStyle: StatusBarStyle, backgroundColor?: any, children: any}) {
+    const backgroundColor = props.backgroundColor || 'transparent';
+    const translucent = backgroundColor === 'transparent';
     return (
-        <SafeAreaView style={styles.areaView}>
+        <View style={[styles.areaView, {backgroundColor: backgroundColor }]}>
+            <StatusBar barStyle={props.barStyle} backgroundColor={backgroundColor} translucent={translucent} />
+            
             <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? 'padding' : null} style={{ flex: 1, backgroundColor: Colors.white }}>
                 {props.children}
             </KeyboardAvoidingView>
-        </SafeAreaView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     areaView: {
         flex: 1,
-        backgroundColor: Colors.primary,
     },
 });
