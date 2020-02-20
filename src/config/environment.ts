@@ -1,5 +1,5 @@
 const environment = {
-    dark_theme: 'auto',
+    dark_theme: null,
 };
 
 export function setEnvironment(darkTheme) {
@@ -8,6 +8,6 @@ export function setEnvironment(darkTheme) {
     return environment;
 }
 
-setEnvironment('auto');
+setEnvironment(null);
 
 export default environment;
