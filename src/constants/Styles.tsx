@@ -93,7 +93,7 @@ const styles = {
         activeTintColor: Colors.primaryDark,
         inactiveTintColor: Colors.primary,
         style: {
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.lightGreyBright,
         },
         indicatorStyle: {
             backgroundColor: Colors.accent,
