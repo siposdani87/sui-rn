@@ -118,7 +118,7 @@ const styles = {
         headerTintColor: Colors.primaryText,
         headerTitleStyle: {
             fontFamily: '',
-            fontSize: 14,
+            //fontSize: 14,
             color: Colors.primaryText,
         },
         headerStyle: {
