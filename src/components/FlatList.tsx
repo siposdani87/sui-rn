@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NoContent from './NoContent';
-import { FlatList as ReactNativeFlatList, Platform, ImageSourcePropType, ListRenderItem } from 'react-native';
+import { FlatList as ReactNativeFlatList, Platform, ImageSourcePropType, ListRenderItem, RefreshControl } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 const config = {
     progressViewOffset: -1000,
@@ -16,6 +17,7 @@ const config = {
 
 export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, noContentText: string, noContentImageSource: ImageSourcePropType }) {
     const [flatListReady, setFlatListReady] = useState(false);
+    const { t } = useTranslation();
 
     function onRefresh() {
         // console.log('onRefresh->refreshing', props.refreshing);
@@ -48,7 +50,13 @@ export default function FlatList(props: { data: any[], keyExtractor?: (item: any
         );
     }
 
+    function getRefreshControl() {
+        return (
+            <RefreshControl refreshing={false} onRefresh={onRefresh} title={t('text.pull_to_refresh')} tintColor='transparent' />
+        );
+    }
+
     return (
-        <ReactNativeFlatList {...props} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} />
+        <ReactNativeFlatList {...props} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={getRefreshControl()} />
     );
 }
