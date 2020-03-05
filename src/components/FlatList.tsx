@@ -57,6 +57,6 @@ export default function FlatList(props: { data: any[], keyExtractor?: (item: any
     }
 
     return (
-        <ReactNativeFlatList {...props} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={getRefreshControl()} />
+        <ReactNativeFlatList {...props} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={Platform.OS === 'ios' ? getRefreshControl() : null} />
     );
 }
