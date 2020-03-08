@@ -87,11 +87,13 @@ const styles = {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
+            borderTopWidth: 2,
+            borderTopColor: Colors.accent,
         },
     },
     tabBarLightOptions: {
         activeTintColor: Colors.primaryDark,
-        inactiveTintColor: Colors.primary,
+        inactiveTintColor: Colors.grey,
         style: {
             backgroundColor: Colors.lightGreyBright,
         },
@@ -101,7 +103,7 @@ const styles = {
     },
     tabBarDarkOptions: {
         activeTintColor: Colors.primaryBright,
-        inactiveTintColor: Colors.primary,
+        inactiveTintColor: Colors.grey,
         style: {
             backgroundColor: Colors.black,
         },
