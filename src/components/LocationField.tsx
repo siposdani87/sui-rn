@@ -8,15 +8,19 @@ import { View, StyleSheet } from 'react-native';
 import TextField from './TextField';
 
 export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean, color?: string}) {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useState(props.value || {
+    address: '',
+    latitude: null,
+    longitude: null,
+  });
 
   useEffect(() => {
     setValue(props.value);
   }, [props.value]);
 
-  function _onValueChange(value) {
-    props.onValueChange(value);
-    setValue(value);
+  function _onValueChange(v) {
+    props.onValueChange(v);
+    setValue(v);
   }
 
   function _onAddressChange(address) {

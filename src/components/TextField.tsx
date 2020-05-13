@@ -7,7 +7,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, keyboardType?: KeyboardTypeOptions, secureTextEntry?: boolean, multiline?: boolean, numberOfLines?: number}) {
+export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, keyboardType?: KeyboardTypeOptions, secureTextEntry?: boolean, multiline?: boolean, numberOfLines?: number, autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'}) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
