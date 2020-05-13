@@ -3,7 +3,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function Button(props) {
+export default function Button(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title?: string, source?: any, iconName?: string, iconType?: string, style?: any}) {
     const backgroundColor = props.color || Colors.primary;
     return (
         <View style={props.style}>
