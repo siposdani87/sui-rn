@@ -60,7 +60,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
     return props.mimeType.indexOf('videos/') !== -1;
   }
 
-  function isOther(): boolean {
+  function isDocument(): boolean {
     return !isImage() && !isVideo();
   }
 
@@ -102,16 +102,16 @@ export default function FileField(props: { value: any, mimeType: string, label: 
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {isOther() && (
-          <IconButton iconName='file' color={Colors.accent} textColor={Colors.black} onPress={openDocumentLibrary} />
+        {isDocument() && (
+          <IconButton iconName='note_add' color={Colors.accent} textColor={Colors.black} onPress={openDocumentLibrary} />
         )}
-        {!isOther() && (
-          <IconButton iconName='add_a_photo' color={Colors.accent} textColor={Colors.black} onPress={openCamera} />
+        {!isDocument() && (
+          <IconButton iconName='add-a-photo' color={Colors.accent} textColor={Colors.black} onPress={openCamera} />
         )}
-        {!isOther() && (
-          <IconButton iconName='add_photo_alternate' color={Colors.accent} textColor={Colors.black} onPress={openImageLibrary} />
+        {!isDocument() && (
+          <IconButton iconName='add-photo-alternate' color={Colors.accent} textColor={Colors.black} onPress={openImageLibrary} />
         )}
-        {value && (
+        {!isDocument() && value && (
           <Image source={{ uri: value }} style={{ width: 200, height: 200 }} />
         )}
       </View>

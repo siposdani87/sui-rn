@@ -4,6 +4,6 @@ import { TextInputProps } from 'react-native';
 
 export default function NumberField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any} & TextInputProps) {
   return (
-    <TextField {...props} keyboardType='numeric' />
+    <TextField {...props} value={(props.value || '').toString()} keyboardType='numeric' />
   );
 }

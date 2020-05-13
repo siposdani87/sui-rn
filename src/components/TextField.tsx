@@ -46,7 +46,7 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[props.style, styles.textInput, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

@@ -88,7 +88,7 @@ const styles = {
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 2,
-            borderTopColor: Colors.accent,
+            borderTopColor: Colors.greyDark,
         },
     },
     tabBarLightOptions: {
