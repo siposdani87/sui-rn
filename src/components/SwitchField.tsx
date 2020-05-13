@@ -5,7 +5,7 @@ import { View, Switch, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 
-export default function SwitchField(props) {
+export default function SwitchField(props: { value: boolean, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, text?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
 

@@ -6,7 +6,7 @@ import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function Dialog(props) {
+export default function Dialog(props: { title?: string, children?: any, text?: string, cancelText?: string, submitText?: string, buttons?: any, visible: boolean, onSubmit?: () => void, onCancel?: () => void, onClose?: () => void }) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 

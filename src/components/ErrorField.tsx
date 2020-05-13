@@ -43,5 +43,5 @@ const styles = StyleSheet.create({
   },
   errorDisabledDarkText: {
     color: Colors.errorDisabledDark,
-  }
+  },
 });

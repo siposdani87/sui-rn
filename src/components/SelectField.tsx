@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
 import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet, Picker } from 'react-native';
@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Styles } from '../constants';
 import environment from '../config/environment';
 
-export default function PickerField(props) {
+export default function SelectField(props: { value: boolean, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -36,6 +36,10 @@ export default function PickerField(props) {
 
   const pickerStyle = _getPickerSelectStyles();
 
+  function getIcon() {
+    return (<MaterialIcons name='expand-more' size={24} color={pickerStyle.inputAndroid.color} />);
+  }
+
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
@@ -46,7 +50,7 @@ export default function PickerField(props) {
           ))}
         </Picker>
       )}
-      <RNPickerSelect Icon={() => (<MaterialIcons name="expand-more" size={24} color={pickerStyle.inputAndroid.color} />)} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle} value={value} />
+      <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

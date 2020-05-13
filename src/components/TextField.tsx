@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, KeyboardTypeOptions } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextInputField(props) {
-  // const {label, value, required, style} = props;
+export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, keyboardType?: KeyboardTypeOptions, secureTextEntry?: boolean, multiline?: boolean, numberOfLines?: number}) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
@@ -18,9 +17,9 @@ export default function TextInputField(props) {
     setValue(props.value);
   }, [props.value]);
 
-  function _onChangeText(v) {
+  function onValueChange(v) {
     onErrorChange();
-    props.onChangeText(v);
+    props.onValueChange(v);
     setValue(v);
   }
 
@@ -47,7 +46,7 @@ export default function TextInputField(props) {
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[props.style, styles.textInput, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={_onChangeText} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+      <TextInput {...props} value={value} style={[props.style, styles.textInput, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

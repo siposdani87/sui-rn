@@ -15,14 +15,22 @@ export default function Label(props: { children?: any, label?: string, required?
     return isDarkTheme ? styles.labelDefaultDarkText : styles.labelDefaultLightText;
   }
 
+  if (!props.label) {
+    return null;
+  }
+
   return (
     <View style={[styles.labelContainer, props.style]}>
-      <View style={styles.childrenContainer}>
-        {props.children}
-      </View>
-      <Text style={[styles.labelText, _getTextStyle()]} numberOfLines={1}>
-        {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
-      </Text>
+      {props.children && (
+        <View style={styles.childrenContainer}>
+          {props.children}
+        </View>
+      )}
+      {props.label && (
+        <Text style={[styles.labelText, _getTextStyle()]} numberOfLines={1}>
+          {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
+        </Text>
+      )}
     </View>
   );
 }
@@ -50,5 +58,5 @@ const styles = StyleSheet.create({
   },
   labelDisabledDarkText: {
     color: Colors.labelDisabledDark,
-  }
+  },
 });
