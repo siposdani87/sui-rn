@@ -53,15 +53,15 @@ export default function FileField(props: { value: any, mimeType: string, label: 
   }
 
   function isImage(): boolean {
-    return props.mimeType.indexOf('images/') !== -1;
+    return props.mimeType.indexOf('image') === 0;
   }
 
   function isVideo(): boolean {
-    return props.mimeType.indexOf('videos/') !== -1;
+    return props.mimeType.indexOf('video') === 0;
   }
 
   function isDocument(): boolean {
-    return !isImage() && !isVideo();
+    return !(isImage() || isVideo());
   }
 
   async function openImageLibrary() {
@@ -101,18 +101,18 @@ export default function FileField(props: { value: any, mimeType: string, label: 
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      {!isDocument() && value && (
+          <Image source={{ uri: value }} style={styles.image} />
+      )}
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
         {isDocument() && (
-          <IconButton iconName='note_add' color={Colors.accent} textColor={Colors.black} onPress={openDocumentLibrary} />
+          <IconButton iconName='note-add' color={Colors.accent} textColor={Colors.black} onPress={openDocumentLibrary} />
         )}
         {!isDocument() && (
           <IconButton iconName='add-a-photo' color={Colors.accent} textColor={Colors.black} onPress={openCamera} />
         )}
         {!isDocument() && (
-          <IconButton iconName='add-photo-alternate' color={Colors.accent} textColor={Colors.black} onPress={openImageLibrary} />
-        )}
-        {!isDocument() && value && (
-          <Image source={{ uri: value }} style={{ width: 200, height: 200 }} />
+          <IconButton iconName='library-add' color={Colors.accent} textColor={Colors.black} onPress={openImageLibrary} />
         )}
       </View>
       <ErrorField error={error} disabled={props.disabled} />
@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
   baseContainer: {
     marginBottom: 10,
   },
-  picker: {
-    height: 36,
+  image: {
+    width: 100,
+    height: 100,
   },
 });
