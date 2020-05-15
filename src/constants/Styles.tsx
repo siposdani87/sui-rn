@@ -81,14 +81,14 @@ const styles = {
         showLabel: true,
         allowFontScaling: true,
         labelStyle: {
-            fontSize: 12,
+            fontSize: 14,
         },
         tabStyle: {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            borderTopWidth: 2,
-            borderTopColor: Colors.greyDark,
+            borderTopWidth: 1,
+            borderTopColor: Colors.primaryDark,
         },
     },
     tabBarLightOptions: {
@@ -120,7 +120,7 @@ const styles = {
         headerTintColor: Colors.primaryText,
         headerTitleStyle: {
             fontFamily: '',
-            //fontSize: 14,
+            // fontSize: 14,
             color: Colors.primaryText,
         },
         headerStyle: {
