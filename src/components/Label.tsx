@@ -15,7 +15,7 @@ export default function Label(props: { children?: any, label?: string, required?
     return isDarkTheme ? styles.labelDefaultDarkText : styles.labelDefaultLightText;
   }
 
-  if (!props.label) {
+  if (!props.label && !props.children) {
     return null;
   }
 
