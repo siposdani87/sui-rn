@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Alert } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
 // import { useColorScheme } from 'react-native-appearance';
@@ -9,8 +9,10 @@ import IconButton from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Colors } from '../constants';
+import { useTranslation } from 'react-i18next';
 
 export default function FileField(props: { value: any, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, color?: string }) {
+  const { t } = useTranslation();
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const [hasCameraPermission, setCameraPermission] = useState(false);
@@ -74,7 +76,14 @@ export default function FileField(props: { value: any, mimeType: string, label: 
         _onValueChange('data:image/jpeg;base64,' + result.base64);
       }
     } catch (e) {
-      console.log(e);
+      Alert.alert(
+        t('errors.info'),
+        e.message,
+        [
+          { text: t('buttons.ok'), onPress: () => {} },
+        ],
+        { cancelable: true },
+      );
     }
   }
 
@@ -88,7 +97,14 @@ export default function FileField(props: { value: any, mimeType: string, label: 
         _onValueChange('data:image/jpeg;base64,' + result.base64);
       }
     } catch (e) {
-      console.log(e);
+      Alert.alert(
+        t('errors.info'),
+        e.message,
+        [
+          { text: t('buttons.ok'), onPress: () => {} },
+        ],
+        { cancelable: true },
+      );
     }
   }
 
