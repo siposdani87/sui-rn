@@ -88,7 +88,6 @@ const styles = {
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 1,
-            borderTopColor: Colors.primaryDark,
         },
     },
     tabBarLightOptions: {
@@ -100,6 +99,9 @@ const styles = {
         indicatorStyle: {
             backgroundColor: Colors.accent,
         },
+        tabStyle: {
+            borderTopColor: Colors.lightGrey,
+        },
     },
     tabBarDarkOptions: {
         activeTintColor: Colors.primaryBright,
@@ -109,6 +111,9 @@ const styles = {
         },
         indicatorStyle: {
             backgroundColor: Colors.accentBright,
+        },
+        tabStyle: {
+            borderTopColor: Colors.blackBright,
         },
     },
     stackNavigatorOptions: {
