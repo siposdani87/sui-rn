@@ -9,21 +9,21 @@ const styles = {
     fullscreenContainer: {
         flex: 1,
         backgroundColor: Colors.primary,
-        justifyContent: 'center',
         flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     rowContainer: {
         flex: 1,
         backgroundColor: Colors.lightGrey,
-        justifyContent: 'center',
         flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'flex-start',
     },
     columnContainer: {
         flex: 1,
-        justifyContent: 'flex-start',
         flexDirection: 'column',
+        justifyContent: 'flex-start',
         alignItems: 'stretch',
     },
     dialogContainer: {
@@ -125,7 +125,7 @@ const styles = {
         headerTintColor: Colors.primaryText,
         headerTitleStyle: {
             fontFamily: '',
-            // fontSize: 14,
+            fontSize: 14,
             color: Colors.primaryText,
         },
         headerStyle: {
@@ -146,11 +146,15 @@ const styles = {
             fontWeight: '400',
         },
     },
-    floatingButton: {
+    floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,
         right: 15,
         zIndex: 1,
+    },
+    navigationIconButton: {
+        minHeight: 20,
+        padding: 1,
     },
 };
 
