@@ -15,10 +15,10 @@ export default function HeaderImage(props: { title: string, imageSource: ImageSo
       <Text style={[styles.titleText, isDarkTheme ? styles.titleDarkText : styles.titleLightText]}>{props.title}</Text>
       {props.onClose && (
         <View style={styles.buttonContainer}>
-        <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onClose}>
+          <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onClose}>
             <MaterialIcons style={[styles.icon, isDarkTheme ? styles.titleDarkText : styles.titleLightText]} name='close' />
-            </TouchableOpacity>
-            </View>
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );
