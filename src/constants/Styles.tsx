@@ -83,12 +83,6 @@ const styles = {
         labelStyle: {
             fontSize: 14,
         },
-        tabStyle: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTopWidth: 1,
-        },
     },
     tabBarLightOptions: {
         activeTintColor: Colors.primaryDark,
@@ -100,6 +94,11 @@ const styles = {
             backgroundColor: Colors.accent,
         },
         tabStyle: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopWidth: 1,
             borderTopColor: Colors.lightGrey,
         },
     },
@@ -113,6 +112,11 @@ const styles = {
             backgroundColor: Colors.accentBright,
         },
         tabStyle: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderTopWidth: 1,
             borderTopColor: Colors.blackBright,
         },
     },
@@ -137,7 +141,7 @@ const styles = {
             justifyContent: 'center',
         },
     },
-    contentOptions: {
+    drawerContentOptions: {
         activeTintColor: Colors.primaryDark,
         activeBackgroundColor: Colors.lightGrey,
         inactiveTintColor: Colors.primary,
