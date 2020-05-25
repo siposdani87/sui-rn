@@ -5,9 +5,11 @@ import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 export default function Notification(props) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const insets = useSafeArea();
 
     function close(index) {
         return () => {
@@ -44,7 +46,7 @@ export default function Notification(props) {
     }
 
     return (
-        <View style={styles.baseContainer}>
+        <View style={[styles.baseContainer, { top: insets.top + 20, }]}>
             {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(index)}>
                     <View style={getContainerStyle(notification)}>
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
     baseContainer: {
         position: 'absolute',
         zIndex: 1,
-        top: 40,
         flexDirection: 'column',
         justifyContent: 'center',
         width: Layout.window.width,
