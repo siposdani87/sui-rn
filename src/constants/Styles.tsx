@@ -127,6 +127,7 @@ const styles = {
         headerBackTitle: null,
         headerBackTitleVisible: false,
         headerTintColor: Colors.primaryText,
+        headerTitleAlign: 'left',
         headerTitleStyle: {
             fontFamily: '',
             fontSize: 14,
@@ -159,6 +160,7 @@ const styles = {
     navigationIconButton: {
         minHeight: 20,
         padding: 1,
+        marginRight: 10,
     },
 };
 
