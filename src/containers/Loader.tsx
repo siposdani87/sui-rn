@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
+import { useSafeArea } from 'react-native-safe-area-context';
 
 export default function Loader(props) {
+    const insets = useSafeArea();
+
     return props.screenProps.services.httpService.isInprogress() && (
-        <View style={styles.baseContainer}>
+        <View style={[styles.baseContainer, { top: insets.top + 15, }]}>
             <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
                 <ActivityIndicator animating={true} color={props.color} />
             </View>
@@ -16,7 +19,6 @@ const styles = StyleSheet.create({
     baseContainer: {
         position: 'absolute',
         zIndex: 1,
-        top: 45,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
