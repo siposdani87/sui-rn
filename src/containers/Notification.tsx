@@ -1,6 +1,6 @@
 import React from 'react';
 import SUI from 'sui-js';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ViewStyle } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
@@ -41,8 +41,7 @@ export default function Notification(props) {
     }
 
     function getTextStyle() {
-        const textStyles: any[] = [isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
-        return textStyles;
+        return [isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
     }
 
     return (
@@ -53,7 +52,7 @@ export default function Notification(props) {
                         <Text style={getTextStyle()}>{notification.message}</Text>
                         {closable(notification) && (
                             <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close(index)}>
-                                <MaterialIcons name='close' size={18} color={Colors.black} />
+                                <MaterialIcons name='close' size={18} color={isDarkTheme ? Colors.white : Colors.black} />
                             </TouchableOpacity>
                         )}
                     </View>
