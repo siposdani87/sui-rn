@@ -3,19 +3,22 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function IconButton(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title?: string, source?: any, iconName?: string, iconType?: string, style?: any }) {
+export default function IconButton(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title?: string, source?: any, iconName?: string, iconType?: string, iconSize?: number, style?: any }) {
     const backgroundColor = props.color || Colors.primary;
+    const textColor = props.textColor || Colors.white;
+    const iconSize = props.iconSize || 26;
+    const borderColor = props.borderColor || backgroundColor;
     return (
         <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
-            <View style={[styles.buttonContainer, { backgroundColor, borderColor: props.borderColor || backgroundColor }, props.style]}>
+            <View style={[styles.buttonContainer, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 {props.source && (
-                    <Image style={styles.image} source={props.source} />
+                    <Image style={[styles.image, { width: iconSize, height: iconSize }]} source={props.source} />
                 )}
                 {props.iconName && !props.iconType && (
-                    <MaterialIcons style={[styles.icon, { color: props.textColor || Colors.white }]} name={props.iconName} />
+                    <MaterialIcons style={[styles.icon, { color: textColor, fontSize: iconSize }]} name={props.iconName} />
                 )}
                 {props.iconName && props.iconType === 'Community' && (
-                    <MaterialCommunityIcons style={[styles.icon, { color: props.textColor || Colors.white }]} name={props.iconName} />
+                    <MaterialCommunityIcons style={[styles.icon, { color: textColor, fontSize: iconSize }]} name={props.iconName} />
                 )}
             </View>
         </TouchableOpacity>
@@ -31,13 +34,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         margin: 5,
         padding: 8,
-        ...Styles.lightShadow,
     },
-    image: {
-        width: 20,
-        height: 20,
-    },
-    icon: {
-        fontSize: 26,
-    },
+    image: {},
+    icon: {},
 });

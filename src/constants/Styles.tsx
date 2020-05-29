@@ -159,7 +159,7 @@ const styles = {
     },
     navigationIconButton: {
         minHeight: 20,
-        padding: 1,
+        padding: 4,
         marginRight: 10,
     },
 };
