@@ -1,6 +1,6 @@
 import React from 'react';
 import SUI from 'sui-js';
-import { StyleSheet, View, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';

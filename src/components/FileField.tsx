@@ -55,7 +55,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
     if (cameraRollPermission.status === 'granted') {
       try {
         const result = await ImagePicker.launchImageLibraryAsync(options);
-        if (!result.cancelled) {
+        if (result.cancelled === false) {
           setFileName(result.uri.split('/').pop());
           _onValueChange('data:image/jpeg;base64,' + result.base64);
         }
@@ -71,7 +71,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
     if (cameraRollPermission.status === 'granted' && cameraPermission.status === 'granted') {
       try {
         const result = await ImagePicker.launchCameraAsync(options);
-        if (!result.cancelled) {
+        if (result.cancelled === false) {
           setFileName(result.uri.split('/').pop());
           _onValueChange('data:image/jpeg;base64,' + result.base64);
         }
