@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, Image, Alert, ImageSourcePropType, Text } from 'react-native';
+import { View, StyleSheet, Image, Alert, Text } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
 // import { useColorScheme } from 'react-native-appearance';
@@ -12,10 +12,13 @@ import { Colors, Styles } from '../constants';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function FileField(props: { value: any, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, imageSource?: ImageSourcePropType, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: any, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
   const { t } = useTranslation();
   const [value, setValue] = useState(props.value);
-  const [fileName, setFileName] = useState('');
+  const [state, setState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { fileName: '', fileData: null }
+  );
   const [error, onErrorChange] = useBaseField(props);
   // const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
@@ -29,13 +32,15 @@ export default function FileField(props: { value: any, mimeType: string, label: 
   };
 
   useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
+    if (props.value.uri){
+      setValue(props.value);
+    }
+  }, [props.value.uri]);
 
-  function _onValueChange(v) {
+  function _onFileDataChange(fileName, fileData) {
     onErrorChange();
-    props.onValueChange(v);
-    setValue(v);
+    props.onValueChange(fileData);
+    setState({ fileName, fileData });
   }
 
   function isImage(): boolean {
@@ -56,8 +61,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
       try {
         const result = await ImagePicker.launchImageLibraryAsync(options);
         if (result.cancelled === false) {
-          setFileName(result.uri.split('/').pop());
-          _onValueChange('data:image/jpeg;base64,' + result.base64);
+          _onFileDataChange(result.uri.split('/').pop(), 'data:image/jpeg;base64,' + result.base64);
         }
       } catch (e) {
         showAlert(e);
@@ -72,8 +76,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
       try {
         const result = await ImagePicker.launchCameraAsync(options);
         if (result.cancelled === false) {
-          setFileName(result.uri.split('/').pop());
-          _onValueChange('data:image/jpeg;base64,' + result.base64);
+          _onFileDataChange(result.uri.split('/').pop(), 'data:image/jpeg;base64,' + result.base64);
         }
       } catch (e) {
         showAlert(e);
@@ -87,8 +90,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
         type: props.mimeType || '*/*',
       });
       if (result.type !== 'cancel') {
-        setFileName(result.name);
-        _onValueChange(result.uri);
+        _onFileDataChange(result.name, result.uri);
       }
     } catch (e) {
       showAlert(e);
@@ -107,25 +109,29 @@ export default function FileField(props: { value: any, mimeType: string, label: 
   }
 
   function removeImage() {
-    setFileName('');
-    _onValueChange(null);
+    _onFileDataChange('', null);
   }
+
+  console.log(state.fileName, value)
 
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <View style={styles.uploaderContainer}>
         <View style={styles.imageContainer}>
-          {!isDocument() && value && (
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
-              <Image source={{ uri: value }} style={styles.image} />
-            </TouchableOpacity>
+          {!isDocument() && state.fileData && (
+            <View style={styles.imageBox}>
+              <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='delete' color={Colors.accent} textColor={Colors.black} onPress={removeImage}></IconButton>
+              <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
+                <Image source={{ uri: state.fileData }} style={styles.image} />
+              </TouchableOpacity>
+            </View>
           )}
-          {!isDocument() && !value && props.imageSource && (
-            <Image source={props.imageSource} style={styles.image} />
+          {!isDocument() && !state.fileData && value && (
+            <Image source={value} style={styles.image} />
           )}
-          {!!fileName && (
-            <Text style={styles.text}>{fileName}</Text>
+          {!!state.fileName && (
+            <Text style={styles.text}>{state.fileName}</Text>
           )}
         </View>
         <View style={styles.actionContainer}>
@@ -176,4 +182,17 @@ const styles = StyleSheet.create({
   text: {
 
   },
+  imageBox: {
+    position: 'relative',
+  },
+  removeIconButtonContainer: {
+    position: 'absolute',
+    top: -15,
+    right: -15,
+    zIndex: 1,
+  },
+  removeIconButton: {
+    padding: 1,
+
+  }
 });
