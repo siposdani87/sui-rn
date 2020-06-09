@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, Image, Alert, Text } from 'react-native';
+import { View, StyleSheet, Image, Alert, Text, ImageURISource } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
 // import { useColorScheme } from 'react-native-appearance';
@@ -12,7 +12,7 @@ import { Colors, Styles } from '../constants';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function FileField(props: { value: any, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
   const { t } = useTranslation();
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
@@ -32,9 +32,7 @@ export default function FileField(props: { value: any, mimeType: string, label: 
   };
 
   useEffect(() => {
-    if (props.value.uri){
-      setValue(props.value);
-    }
+    setValue(props.value);
   }, [props.value.uri]);
 
   function _onFileDataChange(fileName, fileData) {
@@ -112,14 +110,12 @@ export default function FileField(props: { value: any, mimeType: string, label: 
     _onFileDataChange('', null);
   }
 
-  console.log(state.fileName, value)
-
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <View style={styles.uploaderContainer}>
         <View style={styles.imageContainer}>
-          {!isDocument() && state.fileData && (
+          {!isDocument() && !!state.fileData && (
             <View style={styles.imageBox}>
               <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='delete' color={Colors.accent} textColor={Colors.black} onPress={removeImage}></IconButton>
               <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
