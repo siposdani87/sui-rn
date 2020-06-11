@@ -19,37 +19,38 @@ export default class NotificationFactory extends BaseFactory {
     }
 
     public addSuccess(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        this._add('success', message, opt_duration, opt_closeCallback, opt_id);
+        return this._add('success', message, opt_duration, opt_closeCallback, opt_id);
     }
 
     public addInfo(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        this._add('info', message, opt_duration, opt_closeCallback, opt_id);
+        return this._add('info', message, opt_duration, opt_closeCallback, opt_id);
     }
 
     public addWarning(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        this._add('warning', message, opt_duration, opt_closeCallback, opt_id);
+        return this._add('warning', message, opt_duration, opt_closeCallback, opt_id);
     }
 
     public addError(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        this._add('error', message, opt_duration, opt_closeCallback, opt_id);
+        return this._add('error', message, opt_duration, opt_closeCallback, opt_id);
     }
 
     public addMessage(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
         if (SUI.isObject(message) && !SUI.isNull(message)) {
             const closeCallback = message.closable ? SUI.noop : opt_closeCallback;
-            this._add(message.type, message.content, opt_duration, closeCallback, opt_id);
+            return this._add(message.type, message.content, opt_duration, closeCallback, opt_id);
         }
+        return null;
     }
 
     public isClosable(type, opt_closeCallback = null) {
         return this.options.closable.indexOf(type) !== -1 || SUI.isFunction(opt_closeCallback);
     }
 
-    public close(index) {
-        const notification = this.notifications[index];
-        if (notification && !SUI.eq(notification.opt_duration, Infinity)) {
-            if (notification.opt_closeCallback) {
-                notification.opt_closeCallback();
+    public close(notification) {
+        const index = this.notifications.findIndex((item) => item.id === notification.id);
+        if (index !== -1 && !SUI.eq(notification.duration, Infinity)) {
+            if (notification.closeCallback) {
+                notification.closeCallback();
             }
             this.notifications.splice(index, 1);
             this.dispatch({
@@ -58,21 +59,33 @@ export default class NotificationFactory extends BaseFactory {
         }
     }
 
-    private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        this.notifications.push({
+    private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
+        this.removeNotification(opt_id);
+        const notification = {
             type,
             message,
-            opt_id,
-            opt_duration,
-            opt_closeCallback,
-        });
+            id: opt_id,
+            duration: opt_duration,
+            closeCallback: opt_closeCallback,
+        };
+        this.notifications.push(notification);
         if (!this.isClosable(type, opt_closeCallback) && !SUI.eq(opt_duration, Infinity)) {
             setTimeout(() => {
-                this.close(this.notifications.length - 1);
+                this.close(notification);
             }, opt_duration || this.options.duration);
         }
         this.dispatch({
             type: NOTIFICATION,
         });
+        return notification;
     }
+
+    private removeNotification(opt_id = '') {
+        if (opt_id) {
+            const notification = this.notifications.find((item) => item.id === opt_id);
+            if (notification){
+                this.close(notification);
+            }
+        }
+      };
 }
