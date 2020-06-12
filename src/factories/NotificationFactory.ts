@@ -46,9 +46,9 @@ export default class NotificationFactory extends BaseFactory {
         return this.options.closable.indexOf(type) !== -1 || SUI.isFunction(opt_closeCallback);
     }
 
-    public close(notification) {
+    public close(notification, opt_force = false) {
         const index = this.notifications.findIndex((item) => item.id === notification.id);
-        if (index !== -1 && !SUI.eq(notification.duration, Infinity)) {
+        if (index !== -1 && (opt_force || !SUI.eq(notification.duration, Infinity))) {
             if (notification.closeCallback) {
                 notification.closeCallback();
             }
@@ -57,6 +57,10 @@ export default class NotificationFactory extends BaseFactory {
                 type: NOTIFICATION,
             });
         }
+    }
+
+    public remove(notification){
+        this.close(notification, true)
     }
 
     private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
@@ -83,9 +87,9 @@ export default class NotificationFactory extends BaseFactory {
     private removeNotification(opt_id = '') {
         if (opt_id) {
             const notification = this.notifications.find((item) => item.id === opt_id);
-            if (notification){
-                this.close(notification);
+            if (notification) {
+                this.close(notification, true);
             }
         }
-      };
+    };
 }

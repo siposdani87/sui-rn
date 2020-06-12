@@ -11,16 +11,20 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Colors, Styles } from '../constants';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import TextField from './TextField';
+import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
-export default function FileField(props: { value: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: ImageURISource, source: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
   const { t } = useTranslation();
-  const [value, setValue] = useState(props.value);
+  const [_value, setValue] = useState(props.value);
+  const [source, setSource] = useState(props.source);
   const [state, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
-    { fileName: '', fileData: null }
+    { fileName: '', fileData: '' }
   );
   const [error, onErrorChange] = useBaseField(props);
-  // const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: isImage() ? ImagePicker.MediaTypeOptions.Images : (isVideo() ? ImagePicker.MediaTypeOptions.Videos : ImagePicker.MediaTypeOptions.All),
@@ -34,6 +38,13 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   useEffect(() => {
     setValue(props.value);
   }, [props.value.uri]);
+
+  useEffect(() => {
+    if (props.source.uri) {
+      setSource(props.source);
+      removeImage();
+    }
+  }, [props.source.uri]);
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
@@ -107,76 +118,69 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   }
 
   function removeImage() {
-    _onFileDataChange('', null);
+    _onFileDataChange('', '');
   }
 
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <View style={styles.uploaderContainer}>
-        <View style={styles.imageContainer}>
-          {!isDocument() && !!state.fileData && (
-            <View style={styles.imageBox}>
-              <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='delete' color={Colors.accent} textColor={Colors.black} onPress={removeImage}></IconButton>
-              <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
-                <Image source={{ uri: state.fileData }} style={styles.image} />
-              </TouchableOpacity>
-            </View>
-          )}
-          {!isDocument() && !state.fileData && value && (
-            <Image source={value} style={styles.image} />
-          )}
-          {!!state.fileName && (
-            <Text style={styles.text}>{state.fileName}</Text>
-          )}
-        </View>
-        <View style={styles.actionContainer}>
-          {isDocument() && (
-            <IconButton iconName='note-add' color={Colors.accent} textColor={Colors.black} onPress={openDocumentLibrary} />
-          )}
-          {!isDocument() && (
-            <IconButton iconName='add-a-photo' color={Colors.accent} textColor={Colors.black} onPress={openCamera} />
-          )}
-          {!isDocument() && (
-            <IconButton iconName='library-add' color={Colors.accent} textColor={Colors.black} onPress={openImageLibrary} />
-          )}
-        </View>
+      <View style={styles.imageContainer}>
+        {!isDocument() && !!state.fileData && (
+          <View style={styles.imageBox}>
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} textColor={Colors.black} onPress={removeImage}></IconButton>
+            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
+              <Image source={{ uri: state.fileData }} style={styles.image} />
+            </TouchableOpacity>
+          </View>
+        )}
+        {!isDocument() && !state.fileData && source && (
+          <Image source={source} style={styles.image} />
+        )}
       </View>
-      <ErrorField error={error} disabled={props.disabled} />
+      <TextField style={styles.input} label='' value={state.fileName || ''} onValueChange={() => { }} required={props.required} error={error} disabled={props.disabled} />
+      <View style={styles.actionsContainer}>
+        {isDocument() && (
+          <IconButton style={styles.iconButton} iconName='description' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
+        )}
+        {!isDocument() && (
+          <IconButton style={styles.iconButton} iconName='photo-camera' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
+        )}
+        {!isDocument() && (
+          <IconButton style={styles.iconButton} iconName='collections' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   baseContainer: {
-    marginBottom: 10,
-  },
-  uploaderContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    height: 100,
   },
   imageContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    height: 100,
+    marginBottom: 5,
   },
-  actionContainer: {
+  actionsContainer: {
     position: 'absolute',
-    top: 0,
+    top: 130,
     right: 0,
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+  },
+  iconButton: {
+    padding: 1,
+    margin: 2,
+  },
+  input: {
+    paddingRight: 60,
   },
   image: {
     width: 100,
     height: 100,
-  },
-  text: {
-
   },
   imageBox: {
     position: 'relative',
@@ -189,6 +193,5 @@ const styles = StyleSheet.create({
   },
   removeIconButton: {
     padding: 1,
-
   }
 });
