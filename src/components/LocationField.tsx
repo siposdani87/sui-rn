@@ -9,7 +9,7 @@ import TextField from './TextField';
 import NumberField from './NumberField';
 import Dialog from './Dialog';
 import { useTranslation } from 'react-i18next';
-import { Colors, Styles } from '../constants';
+import { Colors } from '../constants';
 import Button from './Button';
 import TextButton from './TextButton';
 import IconButton from './IconButton';

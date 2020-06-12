@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, Image, Alert, Text, ImageURISource } from 'react-native';
+import { View, StyleSheet, Image, Alert, ImageURISource } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
 // import { useColorScheme } from 'react-native-appearance';
@@ -15,10 +14,9 @@ import TextField from './TextField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function FileField(props: { value: ImageURISource, source: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
   const { t } = useTranslation();
-  const [_value, setValue] = useState(props.value);
-  const [source, setSource] = useState(props.source);
+  const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { fileName: '', fileData: '' }
@@ -36,15 +34,11 @@ export default function FileField(props: { value: ImageURISource, source: ImageU
   };
 
   useEffect(() => {
-    setValue(props.value);
-  }, [props.value.uri]);
-
-  useEffect(() => {
-    if (props.source.uri) {
-      setSource(props.source);
+    if (props.value.uri) {
+      setValue(props.value);
       removeImage();
     }
-  }, [props.source.uri]);
+  }, [props.value.uri]);
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
@@ -133,8 +127,8 @@ export default function FileField(props: { value: ImageURISource, source: ImageU
             </TouchableOpacity>
           </View>
         )}
-        {!isDocument() && !state.fileData && source && (
-          <Image source={source} style={styles.image} />
+        {!isDocument() && !state.fileData && value && (
+          <Image source={value} style={styles.image} />
         )}
       </View>
       <TextField style={styles.input} label='' value={state.fileName || ''} onValueChange={() => { }} required={props.required} error={error} disabled={props.disabled} />
