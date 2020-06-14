@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from 'react';
 // import ErrorField from './ErrorField';
 // import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageURISource } from 'react-native';
 // import useBaseField from './useBaseField';
 // import { useColorScheme } from 'react-native-appearance';
 // import environment from '../config/environment';
 import TextField from './TextField';
 import NumberField from './NumberField';
-import Dialog from './Dialog';
-import { useTranslation } from 'react-i18next';
 import { Colors } from '../constants';
-import Button from './Button';
-import TextButton from './TextButton';
 import IconButton from './IconButton';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
+import MapView, { Marker, LatLng, MapEvent } from 'react-native-maps';
+import { Layout } from '../constants';
 
-export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean, color?: string}) {
+export default function LocationField(props: { markerImage: ImageURISource, region: any, value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean, color?: string }) {
   const defaultValue = {
     address: '',
     latitude: null,
     longitude: null,
   };
-  const { t } = useTranslation(); 
   const [value, setValue] = useState(props.value || defaultValue);
   const [visibleCoords, setVisibleCoords] = useState(false);
-  const [visibleMap, setVisibleMap] = useState(false);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
-
   useEffect(() => {
-    setValue(props.value || defaultValue);
+    const coords = props.value || defaultValue;
+    setValue(coords);
   }, [props.value]);
 
   function _onValueChange(v) {
@@ -53,39 +49,46 @@ export default function LocationField(props: { value: any, label: string, error:
     _onValueChange(value);
   }
 
-  function closeMapDialog() {
-    setVisibleMap(false);
-  }
-
-  function setMapDialog() {
-    setVisibleMap(false);
-  }
-
-  function openMapDialog() {
-    setVisibleMap(true);
-  }
-
   function toggleSettings() {
     setVisibleCoords(!visibleCoords);
   }
 
+  function onSearch() {
+    if (props.onSearch) {
+      props.onSearch(value);
+    }
+  }
+
+  function getLocationProps() {
+    return {
+      style: { height: 100, width: 100 },
+      image: props.markerImage,
+    };
+  }
+
+  function onDragEnd(event: MapEvent){
+    console.log(event)
+  }
+
   return (
     <View style={styles.baseContainer}>
-      <Dialog visible={!!visibleMap} title={t('captions.site.info')} onClose={closeMapDialog} buttons={[<TextButton key={0} title={t('buttons.cancel')} style={{ marginLeft: 10 }} onPress={closeMapDialog} />, <Button key={1} title={t('buttons.ok')} style={{ marginLeft: 10 }} onPress={setMapDialog} />]}>
-        
-      </Dialog>
       <TextField style={styles.input} label={props.label} value={value.address} onValueChange={_onAddressChange} required={props.required} error={props.error} disabled={props.disabled} />
       <View style={styles.actionsContainer}>
-        <IconButton iconName='map' style={styles.iconButton} color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openMapDialog} />
+        {/* <IconButton iconName='pin-drop' style={styles.iconButton} color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} /> */}
         <IconButton iconName='settings' style={styles.iconButton} color='transparent' textColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
       </View>
       {visibleCoords && (
         <View style={styles.coordsContainer}>
-          <NumberField label={props.latitudeText} value={value.latitude} onValueChange={_onLatitudeChange} required={props.required} error={null} disabled={props.disabled} />
-          <NumberField label={props.longitudeText} value={value.longitude} onValueChange={_onLongitudeChange} required={props.required} error={null} disabled={props.disabled} />
+          <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={_onLatitudeChange} required={props.required} error={null} disabled={props.disabled} />
+          <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={_onLongitudeChange} required={props.required} error={null} disabled={props.disabled} />
         </View>
       )}
-      </View>
+      <MapView style={styles.mapContainer} region={props.region} scrollEnabled={true}>
+          {value.latitude && value.longitude && (
+            <Marker draggable={true} onDragEnd={onDragEnd} key={'marker'} {...getLocationProps()} identifier={'marker'} coordinate={value} title={value.address} description='' />
+          )}
+        </MapView>
+    </View>
   );
 }
 
@@ -94,6 +97,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   coordsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
   },
   actionsContainer: {
     position: 'absolute',
@@ -108,5 +113,10 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingRight: 60,
+  },
+  mapContainer: {
+    borderRadius: 5,
+    width: Layout.window.width - 40,
+    height: 200,
   },
 });

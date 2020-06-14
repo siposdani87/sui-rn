@@ -7,7 +7,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any} & TextInputProps) {
+export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any} & TextInputProps) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
@@ -44,7 +44,7 @@ export default function TextField(props: { value: any, label: string, error: any
   }
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
       <ErrorField error={error} disabled={props.disabled} />
@@ -53,7 +53,7 @@ export default function TextField(props: { value: any, label: string, error: any
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     marginBottom: 10,
   },
   textInput: {
