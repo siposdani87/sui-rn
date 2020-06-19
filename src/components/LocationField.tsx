@@ -11,7 +11,7 @@ import { Colors } from '../constants';
 import IconButton from './IconButton';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
-import MapView, { Marker, LatLng, MapEvent } from 'react-native-maps';
+import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
 
 export default function LocationField(props: { markerImage: ImageURISource, region: any, value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean, color?: string }) {
@@ -53,11 +53,11 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
     setVisibleCoords(!visibleCoords);
   }
 
-  function onSearch() {
+  /* function onSearch() {
     if (props.onSearch) {
       props.onSearch(value);
     }
-  }
+  } */
 
   function getLocationProps() {
     return {
