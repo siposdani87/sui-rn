@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     fontFamily: Styles.fontFamilyBody,
     fontSize: 16,
     height: 36,
-    borderRadius: 6,
+    borderRadius: 3,
     borderWidth: 1,
     paddingHorizontal: 10,
   },
