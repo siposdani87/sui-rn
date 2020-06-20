@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     paddingRight: 60,
   },
   mapContainer: {
-    borderRadius: 5,
+    borderRadius: 3,
     width: Layout.window.width - 40,
     height: 200,
   },
