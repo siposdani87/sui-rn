@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, TextInput, StyleSheet, TextInputProps } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { View, StyleSheet } from 'react-native';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
+import { Colors, Styles } from '../constants';
+// import { TextInput } from 'react-native-gesture-handler';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
+export default function DatetimeField(props: { mode: any, value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
@@ -46,11 +48,13 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+      {/* <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} /> */}
+      <DateTimePicker value={value} mode={props.mode} is24Hour={true} display='default' onChange={onValueChange} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

@@ -97,9 +97,9 @@ export default class Fetch {
         return new Promise((resolve, reject) => {
             // console.log('_handleResponse', contentType, response.status, result);
             if (response.status >= 200 && response.status < 300) {
-                resolve({data: result, status: response.status});
+                resolve({ data: result, status: response.status });
             } else {
-                reject({data: result, status: response.status});
+                reject({ data: result, status: response.status });
             }
         });
     }

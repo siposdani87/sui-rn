@@ -1,6 +1,7 @@
 export { default as BaseView } from './BaseView';
 export { default as Button } from './Button';
 export { default as CheckboxField } from './CheckboxField';
+export { default as DatetimeField } from './DatetimeField';
 export { default as Dialog } from './Dialog';
 export { default as EmailField } from './EmailField';
 export { default as ErrorField } from './ErrorField';

@@ -20,12 +20,12 @@ export default function SwitchField(props: { value: boolean, onValueChange: (val
   }
 
   return (
-      <View style={styles.baseContainer}>
-        <Switch {...props} value={value} onValueChange={onValueChange} style={[props.style, styles.switch]} disabled={props.disabled} onTintColor={Colors.primaryBright} thumbTintColor={props.disabled ? Colors.lightGreyDark : (!value ? Colors.whiteDark : Colors.primary)} tintColor={Colors.lightGreyDark} />
-        <Label style={styles.label} label={props.label} required={props.required}>{props.text}</Label>
-        <ErrorField error={error} />
-      </View>
-    );
+    <View style={styles.baseContainer}>
+      <Switch {...props} value={value} onValueChange={onValueChange} style={[props.style, styles.switch]} disabled={props.disabled} onTintColor={Colors.primaryBright} thumbTintColor={props.disabled ? Colors.lightGreyDark : (!value ? Colors.whiteDark : Colors.primary)} tintColor={Colors.lightGreyDark} />
+      <Label style={styles.label} label={props.label} required={props.required}>{props.text}</Label>
+      <ErrorField error={error} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

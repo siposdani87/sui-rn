@@ -59,7 +59,7 @@ export default class NotificationFactory extends BaseFactory {
         }
     }
 
-    public remove(notification){
+    public remove(notification) {
         this.close(notification, true)
     }
 
