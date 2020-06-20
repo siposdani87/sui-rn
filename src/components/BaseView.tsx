@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView, Platform, StatusBar, StatusBarStyle, View } from 'react-native';
 import { Colors } from '../constants';
 
-export default function BaseView(props: {barStyle?: StatusBarStyle, backgroundColor?: any, children: any}) {
+export default function BaseView(props: { barStyle?: StatusBarStyle, backgroundColor?: any, children: any }) {
     const backgroundColor = props.backgroundColor || 'transparent';
     const translucent = backgroundColor === 'transparent';
     return (

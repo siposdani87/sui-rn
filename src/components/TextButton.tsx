@@ -5,7 +5,7 @@ import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextButton(props: { onPress: () => void, textColor?: string, title?: string, source?: any, iconName?: string, iconType?: string, style?: any}) {
+export default function TextButton(props: { onPress: () => void, textColor?: string, title?: string, source?: any, iconName?: string, iconType?: string, style?: any }) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
     function _getTextColor() {

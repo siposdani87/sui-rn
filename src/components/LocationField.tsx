@@ -14,7 +14,7 @@ import environment from '../config/environment';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
 
-export default function LocationField(props: { markerImage: ImageURISource, region: any, value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean, color?: string }) {
+export default function LocationField(props: { markerImage: ImageURISource, region: any, value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean }) {
   const defaultValue = {
     address: '',
     latitude: null,
@@ -66,8 +66,8 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
     };
   }
 
-  function onDragEnd(event: MapEvent){
-    console.log(event)
+  function onDragEnd(event: MapEvent) {
+    console.log(event);
   }
 
   return (
@@ -84,10 +84,10 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
         </View>
       )}
       <MapView style={styles.mapContainer} region={props.region} scrollEnabled={true}>
-          {value.latitude && value.longitude && (
-            <Marker draggable={true} onDragEnd={onDragEnd} key={'marker'} {...getLocationProps()} identifier={'marker'} coordinate={value} title={value.address} description='' />
-          )}
-        </MapView>
+        {value.latitude && value.longitude && (
+          <Marker draggable={true} onDragEnd={onDragEnd} key={'marker'} {...getLocationProps()} identifier={'marker'} coordinate={value} title={value.address} description='' />
+        )}
+      </MapView>
     </View>
   );
 }

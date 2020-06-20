@@ -18,7 +18,7 @@ export default class HttpService extends BaseService {
         this.fetch = new Fetch(backend);
     }
 
-    public getUrl(url, opt_params){
+    public getUrl(url, opt_params) {
         return this.fetch.getUrl(url, opt_params);
     }
 
