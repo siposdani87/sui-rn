@@ -82,6 +82,7 @@ const styles = {
         allowFontScaling: true,
         labelStyle: {
             fontSize: 14,
+            fontFamily: '',
         },
     },
     tabBarLightOptions: {
@@ -162,6 +163,10 @@ const styles = {
         padding: 4,
         marginRight: 10,
     },
+    navigationIconContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
 };
 
 export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
@@ -170,10 +175,14 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody)
     styles.fontFamilyBody = fontFamilyBody;
 
     styles.stackNavigatorOptions.headerTitleStyle.fontFamily = fontFamilyHeading;
+    styles.tabBarOptions.labelStyle.fontFamily = fontFamilyBody;
 
     return styles;
 }
 
-setThemeStyles('Verdana', 'Helvetica', 'Arial');
+Platform.select({
+    ios: () => setThemeStyles('Verdana', 'Helvetica', 'Arial'),
+    android: () => setThemeStyles('monospace', 'sans-serif', 'Roboto'),
+})();
 
 export default styles;

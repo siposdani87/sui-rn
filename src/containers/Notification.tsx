@@ -89,9 +89,11 @@ const styles = StyleSheet.create({
     },
     notificationLightText: {
         color: Colors.black,
+        fontFamily: Styles.fontFamilyBody,
     },
     notificationDarkText: {
         color: Colors.white,
+        fontFamily: Styles.fontFamilyBody,
     },
     notificationClose: {
         position: 'absolute',

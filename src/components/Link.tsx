@@ -18,9 +18,10 @@ export default function Link(props: { color?: string, style?: any, children: any
 
 const styles = StyleSheet.create({
     linkText: {
-        fontSize: 14,
+        fontSize: 16,
         textDecorationLine: 'underline',
         textDecorationStyle: 'dotted',
+        fontFamily: Styles.fontFamilyBody,
     },
     linkLightText: {
         color: Colors.primary,

@@ -26,7 +26,7 @@ export default function Label(props: { children?: any, label?: string, required?
           {props.children}
         </View>
       )}
-      <Text style={[styles.labelText, _getTextStyle()]} numberOfLines={1}>
+      <Text style={[styles.labelText, _getTextStyle()]} numberOfLines={2}>
         {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
       </Text>
     </View>

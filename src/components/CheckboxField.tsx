@@ -8,7 +8,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function CheckboxField(props: { value: boolean, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, text?: any, style?: any }) {
+export default function CheckboxField(props: { value: boolean, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, children?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -43,7 +43,7 @@ export default function CheckboxField(props: { value: boolean, onValueChange: (v
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={_onPress} style={[props.style, styles.checkbox]}>
         <MaterialIcons name={value ? 'check-box' : 'check-box-outline-blank'} size={26} color={_getColor()} />
       </TouchableOpacity>
-      <Label style={styles.label} label={props.label} required={props.required} disabled={props.disabled}>{props.text}</Label>
+      <Label style={styles.label} label={props.label} required={props.required} disabled={props.disabled}>{props.children}</Label>
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
