@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Styles } from '../constants';
 import environment from '../config/environment';
 
-export default function SelectField(props: { value: boolean, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, style?: any }) {
+export default function SelectField(props: { value: boolean, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -50,7 +50,7 @@ export default function SelectField(props: { value: boolean, items: any, onValue
           ))}
         </Picker>
       )}
-      <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.label, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
+      <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
