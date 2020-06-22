@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         textAlign: 'center',
+        fontFamily: Styles.fontFamilyBody,
     },
     image: {
         width: 20,

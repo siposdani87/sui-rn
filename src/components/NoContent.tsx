@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
-import { Colors } from '../constants';
+import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         marginHorizontal: 20,
+        fontFamily: Styles.fontFamilyBody,
     },
     textLight: {
         color: Colors.deepGreyBright,
