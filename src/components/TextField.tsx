@@ -23,20 +23,13 @@ export default function TextField(props: { value: any, label: string, error: any
     setValue(v);
   }
 
-  function _getTextInputErrorStyle() {
+  function _getTextInputStyle() {
     if (hasError) {
       if (props.disabled) {
         return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
       }
       return isDarkTheme ? styles.hasErrorDefaultDark : styles.hasErrorDefaultLight;
     }
-    if (props.disabled) {
-      return isDarkTheme ? styles.noErrorDisabledDark : styles.noErrorDisabledLight;
-    }
-    return isDarkTheme ? styles.noErrorDefaultDark : styles.noErrorDefaultLight;
-  }
-
-  function _getTextInputStyle() {
     if (props.disabled) {
       return isDarkTheme ? styles.disabledDarkTextInput : styles.disabledLightTextInput;
     }
@@ -46,7 +39,7 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -66,38 +59,34 @@ const styles = StyleSheet.create({
   },
   defaultLightTextInput: {
     color: Colors.contentDefaultLight,
+    borderColor: Colors.inputDefaultLight,
   },
   defaultDarkTextInput: {
     color: Colors.contentDefaultDark,
+    borderColor: Colors.inputDefaultDark,
   },
   disabledLightTextInput: {
     color: Colors.contentDisabledLight,
+    borderColor: Colors.inputDisabledLight,
   },
   disabledDarkTextInput: {
     color: Colors.contentDisabledDark,
+    borderColor: Colors.inputDisabledDark,
   },
   hasErrorDefaultLight: {
+    color: Colors.contentDefaultLight,
     borderColor: Colors.errorDefaultLight,
   },
   hasErrorDefaultDark: {
+    color: Colors.contentDefaultDark,
     borderColor: Colors.errorDefaultDark,
   },
   hasErrorDisabledLight: {
+    color: Colors.contentDisabledLight,
     borderColor: Colors.errorDisabledLight,
   },
   hasErrorDisabledDark: {
+    color: Colors.contentDisabledDark,
     borderColor: Colors.errorDisabledDark,
-  },
-  noErrorDefaultLight: {
-    borderColor: Colors.inputDefaultLight,
-  },
-  noErrorDefaultDark: {
-    borderColor: Colors.inputDefaultDark,
-  },
-  noErrorDisabledLight: {
-    borderColor: Colors.inputDisabledLight,
-  },
-  noErrorDisabledDark: {
-    borderColor: Colors.inputDisabledDark,
   },
 });
