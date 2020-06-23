@@ -15,28 +15,24 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
     }
 
     function onSubmit() {
-        _close();
+        setVisible(false);
         if (props.onSubmit) {
             props.onSubmit();
         }
     }
 
     function onCancel() {
-        _close();
+        setVisible(false);
         if (props.onCancel) {
             props.onCancel();
         }
     }
 
     function onClose() {
-        _close();
+        setVisible(false);
         if (props.onClose) {
             props.onClose();
         }
-    }
-
-    function _close() {
-        setVisible(false);
     }
 
     return (
@@ -98,8 +94,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
-        fontSize: 20,
-        color: Colors.black,
+        fontSize: 22,
     },
     headerLightText: {
         color: Colors.black,
@@ -125,6 +120,6 @@ const styles = StyleSheet.create({
     closeButton: {
         position: 'absolute',
         top: -10,
-        right: -10,
+        right: -15,
     },
 });

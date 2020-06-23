@@ -6,9 +6,10 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import { Colors, Styles } from '../constants';
-// import { TextInput } from 'react-native-gesture-handler';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import SelectField from 'sui-rn/src/components/SelectField';
+import TextField from './TextField';
 
 export default function DatetimeField(props: { mode: any, value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const [value, setValue] = useState(props.value);
@@ -16,21 +17,83 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const [years, setYears] = useState([]);
+
+  useEffect(() => {
+    function generateYears(minYear) {
+      return Array.from(Array(new Date().getFullYear() + 10 - minYear), (_, i) => {
+        const v = i + minYear + 1;
+        return {
+          label: v.toString(),
+          value: v,
+        }
+      });
+    }
+
+    if (props.mode === 'year') {
+      setYears(generateYears(1900));
+    }
+  }, [props.mode]);
 
   useEffect(() => {
     setValue(props.value);
     setDate(getDate(props.value));
   }, [props.value]);
 
-  function onValueChange(_event, v) {
+  function onChange(_event, v) {
     onErrorChange();
     props.onValueChange(v);
     setValue(v);
     setDate(getDate(v));
   }
 
-  function getDate(v){
-    return moment(v).toDate();
+  function onValueChange(v) {
+    onErrorChange();
+    props.onValueChange(v);
+    setValue(v);
+    setDate(getDate(v));
+  }
+
+  function getDate(v) {
+    const modes = {
+      'datetime-local': {
+        format: 'YYYY-MM-DDTHH:mm:ss', // 2016-05-26T11:25:00 (UTC)
+        calendar_type: 'date',
+        clock_type: 'hour',
+      },
+      'datetime': {
+        format: '', // 2016-05-26T13:25:00+02:00 (ISO 8601, Hungary)
+        calendar_type: 'date',
+        clock_type: 'hour',
+      },
+      'date': {
+        format: 'YYYY-MM-DD', // 2016-05-26
+        calendar_type: 'date',
+        clock_type: '',
+      },
+      'time': {
+        format: 'HH:mm:ss', // 13:25:00
+        calendar_type: '',
+        clock_type: 'hour',
+      },
+      'month': {
+        format: 'YYYY-MM', // 2016-05
+        calendar_type: 'month',
+        clock_type: '',
+      },
+      'week': {
+        format: 'YYYY-\\Www', // 2016-W22
+        calendar_type: 'week',
+        clock_type: '',
+      },
+      'year': {
+        format: 'YYYY', // 2016
+        calendar_type: 'year',
+        clock_type: '',
+      },
+    };
+    const config = modes[props.mode];
+    return moment(v, config.format).toDate();
   }
 
   function _getTextInputErrorStyle() {
@@ -55,15 +118,20 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Label label={props.label} required={props.required} disabled={props.disabled} />
-      {/* <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} /> */}
-      {/* <DateTimePicker value={date} mode={props.mode} is24Hour={true} display='default' onChange={onValueChange} />
-       */}
-       <ErrorField error={error} disabled={props.disabled} />
+      {props.mode === 'date' && (
+        <View>
+          <Label label={props.label} required={props.required} disabled={props.disabled} />
+          <TextField {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle(), _getTextInputErrorStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+          <DateTimePicker value={date} mode={props.mode} is24Hour={true} display='default' onChange={onChange} />
+          <ErrorField error={error} disabled={props.disabled} />
+        </View>
+      )}
+      {props.mode === 'year' && (
+        <SelectField label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} required={props.required} disabled={props.disabled} />
+      )}
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

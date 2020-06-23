@@ -10,14 +10,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Styles } from '../constants';
 import environment from '../config/environment';
 
-export default function SelectField(props: { value: boolean, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, style?: any }) {
+export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, labelKey?: string, valueKey?: string, style?: any }) {
   const [value, setValue] = useState(props.value);
+  const [items, setItems] = useState(convert(props.items));
   const [error, onErrorChange] = useBaseField(props);
+  const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
     setValue(props.value);
   }, [props.value]);
+
+  useEffect(() => {
+    setItems(convert(props.items));
+  }, [props.items]);
 
   function _onValueChange(v) {
     onErrorChange();
@@ -25,13 +31,46 @@ export default function SelectField(props: { value: boolean, items: any, onValue
     setValue(v);
   }
 
+  function convert(options) {
+    const results = options.map((option) => {
+      return {
+        label: option[props.labelKey || 'label'],
+        value: option[props.valueKey || 'value'],
+      };
+    });
+    return results;
+  }
+
+  function _getTextInputStyle() {
+    if (hasError) {
+      if (props.disabled) {
+        return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
+      }
+      return isDarkTheme ? styles.hasErrorDefaultDark : styles.hasErrorDefaultLight;
+    }
+    if (props.disabled) {
+      return isDarkTheme ? styles.disabledDarkTextInput : styles.disabledLightTextInput;
+    }
+    return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
+  }
+
   function _getPickerSelectStyles() {
-    return {
+    const selectStyle = {
       ...(isDarkTheme ? pickerSelectDarkStyles : pickerSelectLightStyles),
       done: {
         color: props.color || Colors.primary,
       },
+      inputIOS: {
+        ...styles.input,
+        ..._getTextInputStyle(),
+      },
+      inputAndroid: {
+        ...styles.input,
+        ..._getTextInputStyle(),
+      },
     };
+
+    return selectStyle;
   }
 
   const pickerStyle = _getPickerSelectStyles();
@@ -45,12 +84,14 @@ export default function SelectField(props: { value: boolean, items: any, onValue
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       {false && (
         <Picker {...props} selectedValue={value} onValueChange={_onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
-          {props.items.map((item, index) => (
+          {items.map((item, index) => (
             <Picker.Item key={index} label={item.label} value={item.value} />
           ))}
         </Picker>
       )}
-      <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder, value: null }} items={props.items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
+      {items.length > 0 && (
+        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
+      )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -63,31 +104,49 @@ const styles = StyleSheet.create({
   picker: {
     height: 36,
   },
+  input: {
+    fontFamily: Styles.fontFamilyBody,
+    fontSize: 16,
+    height: 36,
+    borderRadius: 3,
+    borderWidth: 1,
+    paddingHorizontal: 10,
+  },
+  defaultLightTextInput: {
+    color: Colors.contentDefaultLight,
+    borderColor: Colors.inputDefaultLight,
+  },
+  defaultDarkTextInput: {
+    color: Colors.contentDefaultDark,
+    borderColor: Colors.inputDefaultDark,
+  },
+  disabledLightTextInput: {
+    color: Colors.contentDisabledLight,
+    borderColor: Colors.inputDisabledLight,
+  },
+  disabledDarkTextInput: {
+    color: Colors.contentDisabledDark,
+    borderColor: Colors.inputDisabledDark,
+  },
+  hasErrorDefaultLight: {
+    color: Colors.contentDefaultLight,
+    borderColor: Colors.errorDefaultLight,
+  },
+  hasErrorDefaultDark: {
+    color: Colors.contentDefaultDark,
+    borderColor: Colors.errorDefaultDark,
+  },
+  hasErrorDisabledLight: {
+    color: Colors.contentDisabledLight,
+    borderColor: Colors.errorDisabledLight,
+  },
+  hasErrorDisabledDark: {
+    color: Colors.contentDisabledDark,
+    borderColor: Colors.errorDisabledDark,
+  },
 });
 
 const pickerSelectLightStyles = StyleSheet.create({
-  inputIOS: {
-    fontFamily: Styles.fontFamilyBody,
-    fontSize: 16,
-    height: 36,
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    borderColor: Colors.inputDefaultLight,
-    // backgroundColor: Colors.white,
-    color: Colors.contentDefaultLight,
-  },
-  inputAndroid: {
-    fontFamily: Styles.fontFamilyBody,
-    fontSize: 16,
-    height: 36,
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    borderColor: Colors.inputDefaultLight,
-    // backgroundColor: Colors.white,
-    color: Colors.contentDefaultLight,
-  },
   iconContainer: {
     top: 5,
     right: 5,
@@ -98,28 +157,6 @@ const pickerSelectLightStyles = StyleSheet.create({
 });
 
 const pickerSelectDarkStyles = StyleSheet.create({
-  inputIOS: {
-    fontFamily: Styles.fontFamilyBody,
-    fontSize: 16,
-    height: 36,
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    borderColor: Colors.inputDefaultDark,
-    // backgroundColor: Colors.blackDark,
-    color: Colors.contentDefaultDark,
-  },
-  inputAndroid: {
-    fontFamily: Styles.fontFamilyBody,
-    fontSize: 16,
-    height: 36,
-    borderRadius: 3,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    borderColor: Colors.inputDefaultDark,
-    // backgroundColor: Colors.blackDark,
-    color: Colors.contentDefaultDark,
-  },
   iconContainer: {
     top: 5,
     right: 5,
