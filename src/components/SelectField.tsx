@@ -90,7 +90,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         </Picker>
       )}
       {items.length > 0 && (
-        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} />
+        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} disabled={props.disabled} />
       )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
@@ -123,10 +123,12 @@ const styles = StyleSheet.create({
   disabledLightTextInput: {
     color: Colors.contentDisabledLight,
     borderColor: Colors.inputDisabledLight,
+    borderStyle: 'dotted',
   },
   disabledDarkTextInput: {
     color: Colors.contentDisabledDark,
     borderColor: Colors.inputDisabledDark,
+    borderStyle: 'dotted',
   },
   hasErrorDefaultLight: {
     color: Colors.contentDefaultLight,

@@ -39,7 +39,7 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} />
+      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} editable={!props.disabled} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -68,10 +68,12 @@ const styles = StyleSheet.create({
   disabledLightTextInput: {
     color: Colors.contentDisabledLight,
     borderColor: Colors.inputDisabledLight,
+    borderStyle: 'dotted',
   },
   disabledDarkTextInput: {
     color: Colors.contentDisabledDark,
     borderColor: Colors.inputDisabledDark,
+    borderStyle: 'dotted',
   },
   hasErrorDefaultLight: {
     color: Colors.contentDefaultLight,
