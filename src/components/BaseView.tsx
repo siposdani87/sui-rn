@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView, Platform, StatusBar, StatusBarStyle, View } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { Colors } from '../constants';
+import { StatusBar, StatusBarStyle } from 'expo-status-bar';
 
 export default function BaseView(props: { barStyle?: StatusBarStyle, backgroundColor?: any, children: any }) {
     const backgroundColor = props.backgroundColor || 'transparent';
     const translucent = backgroundColor === 'transparent';
     return (
         <View style={[styles.areaView, { backgroundColor }]}>
-            <StatusBar barStyle={props.barStyle || 'light-content'} backgroundColor={backgroundColor} translucent={translucent} />
+            <StatusBar style={props.barStyle || 'light'} backgroundColor={backgroundColor} translucent={translucent} />
             <KeyboardAvoidingView behavior={(Platform.OS === 'ios') ? 'padding' : null} style={{ flex: 1, backgroundColor: Colors.white }}>
                 {props.children}
             </KeyboardAvoidingView>
