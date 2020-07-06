@@ -22,7 +22,6 @@ export default class HttpService extends BaseService {
         return this.fetch.getUrl(url, opt_params);
     }
 
-
     public isInprogress() {
         return this.inprogress > 0;
     }
@@ -58,14 +57,13 @@ export default class HttpService extends BaseService {
     }
 
     private _handleResponse(fetchPromise): Promise<any> {
-        this._setInprogress(true);
+        this._setInprogress(HTTP_REQUEST, true);
         return new Promise((resolve, reject) => {
-            fetchPromise.then(({ data }) => {
-                this._setInprogress(false);
+            fetchPromise.then(({ data, status }) => {
+                this._statusHandler(status, false);
                 resolve(data);
             }, ({ data, status }) => {
-                this._setInprogress(false);
-                this._statusHandler(status);
+                this._statusHandler(status, false);
                 reject(data);
             }).catch(() => {
                 reject({});
@@ -73,22 +71,19 @@ export default class HttpService extends BaseService {
         });
     }
 
-    private _statusHandler(status) {
-        if (status === 401) {
-            this.dispatch({
-                type: HTTP_401,
-            });
-        }
+    private _statusHandler(status, value) {
+        const type = status === 401 ? HTTP_401 : HTTP_RESPONSE;
+        this._setInprogress(type, value);
     }
 
-    private _setInprogress(value) {
+    private _setInprogress(type, value) {
         if (value) {
             this.inprogress++;
         } else {
             this.inprogress--;
         }
         this.dispatch({
-            type: value ? HTTP_REQUEST : HTTP_RESPONSE,
+            type,
         });
     }
 }
