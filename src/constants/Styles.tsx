@@ -95,8 +95,6 @@ const styles = {
             backgroundColor: Colors.accent,
         },
         tabStyle: {
-            flex: 1,
-            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 1,
@@ -113,8 +111,6 @@ const styles = {
             backgroundColor: Colors.accentBright,
         },
         tabStyle: {
-            flex: 1,
-            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 1,
