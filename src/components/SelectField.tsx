@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, Picker } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
@@ -25,7 +25,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     setItems(convert(props.items));
   }, [props.items]);
 
-  function _onValueChange(v) {
+  function onValueChange(v) {
     onErrorChange();
     props.onValueChange(v);
     setValue(v);
@@ -33,9 +33,11 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   function convert(options) {
     const results = options.map((option) => {
+      const optionValue = option[props.valueKey || 'value'];
       return {
+        key: optionValue,
+        value: optionValue,
         label: option[props.labelKey || 'label'],
-        value: option[props.valueKey || 'value'],
       };
     });
     return results;
@@ -61,13 +63,13 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         color: props.color || Colors.primary,
       },
       inputIOS: {
-        ...styles.input,
-        ..._getTextInputStyle(),
+        ...styles.input as any,
+        ..._getTextInputStyle() as any,
       },
       inputAndroid: {
-        ...styles.input,
-        ..._getTextInputStyle(),
-      },
+        ...styles.input as any,
+        ..._getTextInputStyle() as any,
+      }
     };
 
     return selectStyle;
@@ -82,15 +84,15 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      {false && (
-        <Picker {...props} selectedValue={value} onValueChange={_onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
+      {/* {false && (
+        <Picker {...props} selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
           {items.map((item, index) => (
             <Picker.Item key={index} label={item.label} value={item.value} />
           ))}
         </Picker>
-      )}
+      )} */}
       {items.length > 0 && (
-        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} onValueChange={_onValueChange} style={pickerStyle as PickerStyle} value={value} disabled={props.disabled} />
+        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} value={value} key={value} onValueChange={onValueChange} style={pickerStyle as PickerStyle} disabled={props.disabled} />
       )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
