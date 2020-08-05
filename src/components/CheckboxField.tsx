@@ -17,14 +17,14 @@ export default function CheckboxField(props: { value: boolean, onValueChange: (v
     setValue(props.value);
   }, [props.value]);
 
-  function _onValueChange(v) {
+  function onValueChange(v) {
     onErrorChange();
     props.onValueChange(v);
     setValue(v);
   }
 
   function _onPress() {
-    _onValueChange(!value);
+    onValueChange(!value);
   }
 
   function _getColor() {

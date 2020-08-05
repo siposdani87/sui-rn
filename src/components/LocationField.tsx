@@ -29,24 +29,24 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
     setValue(coords);
   }, [props.value]);
 
-  function _onValueChange(v) {
+  function onValueChange(v) {
     props.onValueChange(v);
     setValue(v);
   }
 
   function _onAddressChange(address) {
     value.address = address;
-    _onValueChange(value);
+    onValueChange(value);
   }
 
   function _onLatitudeChange(latitude) {
     value.latitude = latitude;
-    _onValueChange(value);
+    onValueChange(value);
   }
 
   function _onLongitudeChange(longitude) {
     value.longitude = longitude;
-    _onValueChange(value);
+    onValueChange(value);
   }
 
   function toggleSettings() {
