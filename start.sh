@@ -5,4 +5,4 @@ rm -rf package-lock.json
 npm install
 npm outdated
 eslint . --fix
-npm run-script tsc-test 
+npm run tsc-test 

@@ -69,7 +69,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       inputAndroid: {
         ...styles.input as any,
         ..._getTextInputStyle() as any,
-      }
+      },
     };
 
     return selectStyle;
