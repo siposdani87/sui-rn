@@ -8,7 +8,7 @@ import environment from '../config/environment';
 import { Colors, Styles } from '../constants';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import SelectField from 'sui-rn/src/components/SelectField';
+import SelectField from './SelectField';
 import TextField from './TextField';
 
 export default function DatetimeField(props: { mode: any, value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {

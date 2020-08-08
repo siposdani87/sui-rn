@@ -36,6 +36,7 @@
     "react-native-appearance": ">=0.1.0",
     "react-native-gesture-handler": ">=1.5.0",
     "react-native-picker-select": ">=6.5.0",
+    "react-native-maps": ">=0.27.1",
     "react-native-safe-area-context": ">=0.7.3",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
