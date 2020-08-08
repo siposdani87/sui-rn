@@ -7,7 +7,7 @@ export default function Loader(props) {
     const insets = useSafeArea();
 
     return props.screenProps.services.httpService.isInprogress() && (
-        <View style={[styles.baseContainer, { top: insets.top + 15, }]}>
+        <View style={[styles.baseContainer, { top: insets.top + 15 }]}>
             <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
                 <ActivityIndicator animating={true} color={props.color} />
             </View>

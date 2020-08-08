@@ -26,7 +26,7 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
         return {
           label: v.toString(),
           value: v,
-        }
+        };
       });
     }
 

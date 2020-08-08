@@ -18,8 +18,8 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   const { t } = useTranslation();
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    { fileName: '', fileData: '' }
+    (oldState, newState) => ({ ...oldState, ...newState }),
+    { fileName: '', fileData: '' },
   );
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -105,7 +105,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
       t('errors.info'),
       e.message,
       [
-        { text: t('buttons.ok'), onPress: () => { } },
+        { text: t('buttons.ok'), onPress: () => null },
       ],
       { cancelable: true },
     );
@@ -115,13 +115,17 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
     _onFileDataChange('', '');
   }
 
+  function onFilenameChange(v) {
+    setState({ fileName: v });
+  }
+
   return (
     <View style={styles.baseContainer}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} textColor={Colors.black} onPress={removeImage}></IconButton>
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} textColor={Colors.black} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>
@@ -131,7 +135,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
           <Image source={value} style={styles.image} />
         )}
       </View>
-      <TextField style={styles.input} label='' value={state.fileName || ''} onValueChange={() => { }} required={props.required} error={error} disabled={props.disabled} />
+      <TextField style={styles.input} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled} />
       <View style={styles.actionsContainer}>
         {isDocument() && (
           <IconButton style={styles.iconButton} iconName='description' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
@@ -187,5 +191,5 @@ const styles = StyleSheet.create({
   },
   removeIconButton: {
     padding: 1,
-  }
+  },
 });
