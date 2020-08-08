@@ -43,13 +43,13 @@ export default function Notification(props) {
     }
 
     return (
-        <View style={[styles.baseContainer, { top: insets.top + 20, }]}>
+        <View style={[styles.baseContainer, { top: insets.top + 20 }]}>
             {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
-                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={() => close(notification)}>
+                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close.call(this, notification)}>
                     <View style={getContainerStyle(notification)}>
                         <Text style={getTextStyle()}>{notification.message}</Text>
                         {closable(notification) && (
-                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={() => close(notification)}>
+                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close.call(this, notification)}>
                                 <MaterialIcons name='close' size={18} color={isDarkTheme ? Colors.white : Colors.black} />
                             </TouchableOpacity>
                         )}

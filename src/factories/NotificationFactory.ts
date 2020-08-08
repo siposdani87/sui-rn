@@ -60,7 +60,7 @@ export default class NotificationFactory extends BaseFactory {
     }
 
     public remove(notification) {
-        this.close(notification, true)
+        this.close(notification, true);
     }
 
     private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
@@ -91,5 +91,5 @@ export default class NotificationFactory extends BaseFactory {
                 this.close(notification, true);
             }
         }
-    };
+    }
 }
