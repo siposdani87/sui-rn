@@ -2,45 +2,58 @@ import React, { useState, useEffect } from 'react';
 import TextField from './TextField';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { TextInputProps, View, StyleSheet } from 'react-native';
+import { TextInputProps, View, StyleSheet, Text } from 'react-native';
 import { RichToolbar, RichEditor } from 'react-native-pell-rich-editor';
-import { Colors } from '../constants';
+import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles } from 'react-native-cn-richtext-editor';
+import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
 export default function TextAreaField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, richText?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useState(convertToObject(props.value));
+  const [selectedTag, setSelectedTag] = useState('body');
+  const [selectedStyles, setSelectedStyles] = useState([]);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-  const [richtext, setRichtext] = useState(null);
-  const numberOfLines = props.numberOfLines || 4;
+  const [editor, setEditor] = useState(null);
+  const numberOfLines = props.numberOfLines || 5;
   const style = {
     height: 20 * numberOfLines + (props.richText ? 65 : 16),
     textAlignVertical: 'top',
     ...props.style,
   };
-
+  const defaultStyles = getDefaultStyles();
+  
   useEffect(() => {
-    setValue(props.value);
+    setValue(convertToObject(props.value));
   }, [props.value]);
 
-  async function onValueChange() {
-    // console.log('_v', _v)
-    const v = await richtext.getContentHtml();
-    // console.log('v', v)
+  async function onValueChange(o) {
+    // console.log('_v', _v);
+    // const v = await editor.getContentHtml();
+    // console.log('v', v);
+    const v = convertToHtmlString(o);
     onErrorChange();
     props.onValueChange(v);
-    setValue(v);
+    setValue(o);
+  }
+
+  function onStyleKeyPress(toolType) {
+    editor.applyToolbar(toolType);
+  }
+
+  function onSelectedTagChanged(tag) {
+    setSelectedTag(tag);
+  }
+
+  function onSelectedStyleChanged(s) {
+    setSelectedStyles(s);
   }
 
   function onHeightChange() {
     // console.log('height', h)
-  }
-
-  function getEditor() {
-    return richtext;
   }
 
   function _getTextInputStyle() {
@@ -64,11 +77,81 @@ export default function TextAreaField(props: { value: any, label: string, error:
       <View style={[styles.container, props.containerStyle]}>
         <Label label={props.label} required={props.required} disabled={props.disabled} />
         <View style={[styles.textInput, style, _getTextInputStyle()]}>
-          {!!richtext && (
-          <RichToolbar getEditor={getEditor} actions={['bold', 'italic', 'unorderedList', 'orderedList']} disabled={props.disabled} />
+          {!!editor && (
+            <CNToolbar
+              style={{
+                height: 35,
+              }}
+              iconSetContainerStyle={{
+                flexGrow: 1,
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+              size={30}
+              iconSet={[
+                {
+                  type: 'tool',
+                  iconArray: [{
+                    toolTypeText: 'italic',
+                    buttonTypes: 'style',
+                    iconComponent: <Text style={styles.toolbarButton}>italic</Text>,
+                  }],
+                },
+                {
+                  type: 'tool',
+                  iconArray: [{
+                    toolTypeText: 'bold',
+                    buttonTypes: 'style',
+                    iconComponent: <Text style={styles.toolbarButton}>bold</Text>,
+                  }],
+                },
+                {
+                  type: 'seperator',
+                },
+                {
+                  type: 'tool',
+                  iconArray: [
+                    {
+                      toolTypeText: 'body',
+                      buttonTypes: 'tag',
+                      iconComponent: <Text style={styles.toolbarButton}>body</Text>,
+                    },
+                  ],
+                },
+                {
+                  type: 'tool',
+                  iconArray: [
+                    {
+                      toolTypeText: 'ul',
+                      buttonTypes: 'tag',
+                      iconComponent: <Text style={styles.toolbarButton}>ul</Text>,
+                    },
+                  ],
+                },
+                {
+                  type: 'tool',
+                  iconArray: [
+                    {
+                      toolTypeText: 'ol',
+                      buttonTypes: 'tag',
+                      iconComponent: <Text style={styles.toolbarButton}>ol</Text>,
+                    },
+                  ],
+                },
+              ]}
+              selectedTag={selectedTag}
+              selectedStyles={selectedStyles}
+              onStyleKeyPress={onStyleKeyPress}
+            />
           )}
-          <RichEditor ref={(r) => setRichtext(r)} initialContentHTML={props.value} onHeightChange={onHeightChange} onChange={onValueChange} editorStyle={{backgroundColor, color}} />
+          <CNRichTextEditor ref={(r) => setEditor(r)} placeholder='' textInputStyle={[styles.textInput, style, _getTextInputStyle()]} onSelectedTagChanged={onSelectedTagChanged} onSelectedStyleChanged={onSelectedStyleChanged} value={value} style={{ backgroundColor }} styleList={defaultStyles} onValueChanged={onValueChange} />
         </View>
+        {/* <View style={[styles.textInput, style, _getTextInputStyle()]}>
+          {!!editor && (
+          <RichToolbar getEditor={() => editor} actions={['bold', 'italic', 'unorderedList', 'orderedList']} disabled={props.disabled} />
+          )}
+          <RichEditor ref={(r) => setEditor(r)} initialContentHTML={props.value} editorInitializedCallback={() => null} onHeightChange={onHeightChange} onChange={onValueChange} editorStyle={{backgroundColor, color}} />
+        </View> */}
         <ErrorField error={error} disabled={props.disabled} />
       </View>
     );
@@ -124,5 +207,28 @@ const styles = StyleSheet.create({
   hasErrorDisabledDark: {
     color: Colors.contentDisabledDark,
     borderColor: Colors.errorDisabledDark,
+  },
+  main: {
+    flex: 1,
+    marginTop: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 1,
+    alignItems: 'stretch',
+  },
+  toolbarButton: {
+    fontSize: 20,
+    width: 28,
+    height: 28,
+    textAlign: 'center',
+  },
+  boldButton: {
+    fontWeight: 'bold',
+  },
+  underlineButton: {
+    textDecorationLine: 'underline',
+  },
+  lineThroughButton: {
+    textDecorationLine: 'line-through',
   },
 });
