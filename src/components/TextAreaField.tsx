@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import TextField from './TextField';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { TextInputProps, View, StyleSheet, Text } from 'react-native';
+import { TextInputProps, View, StyleSheet } from 'react-native';
 import { RichToolbar, RichEditor } from 'react-native-pell-rich-editor';
 // import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles, getInitialObject } from 'react-native-cn-richtext-editor';
-import { Colors, Styles } from '../constants';
+import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
@@ -42,8 +42,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
     return getInitialObject();
   } */
 
-  async function onValueChange(o) {
-    console.log('_o', o);
+  async function onValueChange() {
     const v = await editor.getContentHtml();
     console.log('v', v);
     // const v = convertToHtmlString(o);
