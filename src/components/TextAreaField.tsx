@@ -4,7 +4,7 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { TextInputProps, View, StyleSheet, Text } from 'react-native';
 import { RichToolbar, RichEditor } from 'react-native-pell-rich-editor';
-import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles, getInitialObject } from 'react-native-cn-richtext-editor';
+// import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles, getInitialObject } from 'react-native-cn-richtext-editor';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
@@ -12,9 +12,9 @@ import environment from '../config/environment';
 
 export default function TextAreaField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, richText?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
-  const [initValue, setInitValue] = useState(convert(value));
-  const [selectedTag, setSelectedTag] = useState('body');
-  const [selectedStyles, setSelectedStyles] = useState([]);
+  // const [initValue, setInitValue] = useState(convert(value));
+  // const [selectedTag, setSelectedTag] = useState('body');
+  // const [selectedStyles, setSelectedStyles] = useState([]);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -25,36 +25,35 @@ export default function TextAreaField(props: { value: any, label: string, error:
     textAlignVertical: 'top',
     ...props.style,
   };
-  const defaultStyles = getDefaultStyles();
-  
+  // const defaultStyles = getDefaultStyles();
+
   useEffect(() => {
     setValue(props.value);
   }, [props.value]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     setInitValue(convert(value));
   }, [value]);
 
   function convert(v){
-    console.log('convert', v);
     if (v){
       //return convertToObject((v || '').replace('br', 'br /'));
     }
     return getInitialObject();
-  }
+  } */
 
   async function onValueChange(o) {
     console.log('_o', o);
-    // const v = await editor.getContentHtml();
-    // console.log('v', v);
-    //const v = convertToHtmlString(o);
+    const v = await editor.getContentHtml();
+    console.log('v', v);
+    // const v = convertToHtmlString(o);
     onErrorChange();
-    // props.onValueChange(v);
+    props.onValueChange(v);
     // setInitValue(o);
     // setValue(v);
   }
 
-  function onStyleKeyPress(toolType) {
+  /* function onStyleKeyPress(toolType) {
     editor.applyToolbar(toolType);
   }
 
@@ -64,7 +63,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   function onSelectedStyleChanged(s) {
     setSelectedStyles(s);
-  }
+  } */
 
   function onHeightChange() {
     // console.log('height', h)
@@ -90,7 +89,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
     return (
       <View style={[styles.container, props.containerStyle]}>
         <Label label={props.label} required={props.required} disabled={props.disabled} />
-        <View style={[styles.textInput, style, _getTextInputStyle()]}>
+        {/* <View style={[styles.textInput, style, _getTextInputStyle()]}>
           {!!editor && (
             <CNToolbar
               style={{
@@ -159,13 +158,13 @@ export default function TextAreaField(props: { value: any, label: string, error:
             />
           )}
           <CNRichTextEditor ref={(r) => setEditor(r)} placeholder='' textInputStyle={[styles.textInput, style, _getTextInputStyle(), {borderWidth: 0}]} onSelectedTagChanged={onSelectedTagChanged} onSelectedStyleChanged={onSelectedStyleChanged} value={initValue} style={{ backgroundColor }} styleList={defaultStyles} onValueChanged={onValueChange} />
-        </View>
-        {/* <View style={[styles.textInput, style, _getTextInputStyle()]}>
+        </View> */}
+        <View style={[styles.textInput, style, _getTextInputStyle()]}>
           {!!editor && (
           <RichToolbar getEditor={() => editor} actions={['bold', 'italic', 'unorderedList', 'orderedList']} disabled={props.disabled} />
           )}
           <RichEditor ref={(r) => setEditor(r)} initialContentHTML={props.value} editorInitializedCallback={() => null} onHeightChange={onHeightChange} onChange={onValueChange} editorStyle={{backgroundColor, color}} />
-        </View> */}
+        </View>
         <ErrorField error={error} disabled={props.disabled} />
       </View>
     );
