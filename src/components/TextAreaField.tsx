@@ -4,14 +4,15 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { TextInputProps, View, StyleSheet, Text } from 'react-native';
 import { RichToolbar, RichEditor } from 'react-native-pell-rich-editor';
-import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles } from 'react-native-cn-richtext-editor';
+import CNRichTextEditor, { CNToolbar, convertToHtmlString, convertToObject, getDefaultStyles, getInitialObject } from 'react-native-cn-richtext-editor';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
 export default function TextAreaField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, richText?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
-  const [value, setValue] = useState(convertToObject(props.value));
+  const [value, setValue] = useState(props.value);
+  const [initValue, setInitValue] = useState(convert(value));
   const [selectedTag, setSelectedTag] = useState('body');
   const [selectedStyles, setSelectedStyles] = useState([]);
   const [error, onErrorChange] = useBaseField(props);
@@ -27,17 +28,30 @@ export default function TextAreaField(props: { value: any, label: string, error:
   const defaultStyles = getDefaultStyles();
   
   useEffect(() => {
-    setValue(convertToObject(props.value));
+    setValue(props.value);
   }, [props.value]);
 
+  useEffect(() => {
+    setInitValue(convert(value));
+  }, [value]);
+
+  function convert(v){
+    console.log('convert', v);
+    if (v){
+      //return convertToObject((v || '').replace('br', 'br /'));
+    }
+    return getInitialObject();
+  }
+
   async function onValueChange(o) {
-    // console.log('_v', _v);
+    console.log('_o', o);
     // const v = await editor.getContentHtml();
     // console.log('v', v);
-    const v = convertToHtmlString(o);
+    //const v = convertToHtmlString(o);
     onErrorChange();
-    props.onValueChange(v);
-    setValue(o);
+    // props.onValueChange(v);
+    // setInitValue(o);
+    // setValue(v);
   }
 
   function onStyleKeyPress(toolType) {
@@ -144,7 +158,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
               onStyleKeyPress={onStyleKeyPress}
             />
           )}
-          <CNRichTextEditor ref={(r) => setEditor(r)} placeholder='' textInputStyle={[styles.textInput, style, _getTextInputStyle()]} onSelectedTagChanged={onSelectedTagChanged} onSelectedStyleChanged={onSelectedStyleChanged} value={value} style={{ backgroundColor }} styleList={defaultStyles} onValueChanged={onValueChange} />
+          <CNRichTextEditor ref={(r) => setEditor(r)} placeholder='' textInputStyle={[styles.textInput, style, _getTextInputStyle(), {borderWidth: 0}]} onSelectedTagChanged={onSelectedTagChanged} onSelectedStyleChanged={onSelectedStyleChanged} value={initValue} style={{ backgroundColor }} styleList={defaultStyles} onValueChanged={onValueChange} />
         </View>
         {/* <View style={[styles.textInput, style, _getTextInputStyle()]}>
           {!!editor && (
