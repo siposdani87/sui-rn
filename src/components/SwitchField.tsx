@@ -4,10 +4,13 @@ import Label from './Label';
 import { View, Switch, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
+import { useColorScheme } from 'react-native-appearance';
+import environment from '../config/environment';
 
 export default function SwitchField(props: { value: boolean, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, text?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
+  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
     setValue(props.value);
@@ -19,9 +22,27 @@ export default function SwitchField(props: { value: boolean, onValueChange: (val
     setValue(v);
   }
 
+  function getTrackColor() {
+    return {
+      false: isDarkTheme ? Colors.contentDefaultDark : Colors.contentDefaultLight,
+      true: isDarkTheme ? Colors.primaryDefaultDark : Colors.primaryDefaultLight,
+    };
+  }
+
+  function getThumbColor() {
+    if (props.disabled) {
+      return isDarkTheme ? Colors.checkboxDisabledDark : Colors.checkboxDisabledLight;
+    } else if (props.required && !value) {
+      return isDarkTheme ? Colors.errorDefaultDark : Colors.errorDefaultLight;
+    } else if (value) {
+      return isDarkTheme ? Colors.primaryBright : Colors.primary;
+    }
+    return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
+  }
+
   return (
     <View style={styles.baseContainer}>
-      <Switch {...props} value={value} onValueChange={onValueChange} style={[props.style, styles.switch]} disabled={props.disabled} trackColor={{ false: Colors.lightGreyDark, true: Colors.primaryBright }} thumbColor={props.disabled ? Colors.lightGreyDark : (!value ? Colors.whiteDark : Colors.primary)} />
+      <Switch {...props} value={value} onValueChange={onValueChange} style={[props.style, styles.switch]} disabled={props.disabled} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
       <Label style={styles.label} label={props.label} required={props.required}>{props.text}</Label>
       <ErrorField error={error} />
     </View>
