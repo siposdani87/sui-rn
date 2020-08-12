@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    marginLeft: 55,
+    marginLeft: 60,
   },
   switch: {
     position: 'absolute',
