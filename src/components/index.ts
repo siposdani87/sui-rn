@@ -9,6 +9,7 @@ export { default as FileField } from './FileField';
 export { default as FlatList } from './FlatList';
 export { default as HeaderImage } from './HeaderImage';
 export { default as IconButton } from './IconButton';
+export { default as IconToggleField } from './IconToggleField';
 export { default as Label } from './Label';
 export { default as Link } from './Link';
 export { default as LocationField } from './LocationField';
