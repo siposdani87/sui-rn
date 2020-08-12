@@ -30,10 +30,12 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   async function onValueChange() {
     const v = await editor.getContentHtml();
+    console.log('onValueChange', v);
     onErrorChange();
     props.onValueChange(v);
     // setValue(v);
   }
+  console.log('value', value);
 
   function onHeightChange() {
     // console.log('onHeightChange', h);
@@ -88,7 +90,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
           <RichToolbar getEditor={getEditor} style={styles.toolbar} actions={['bold', 'italic', 'underline', 'unorderedList', 'orderedList']} iconMap={iconMap()} disabled={props.disabled} />
         )}
         <View style={[styles.textInput, style, _getTextInputStyle()]}>
-          <RichEditor ref={(r) => setEditor(r)} initialContentHTML={props.value} editorInitializedCallback={editorInitializedCallback} onHeightChange={onHeightChange} onChange={onValueChange} editorStyle={{backgroundColor, color}} />
+          <RichEditor ref={(r) => setEditor(r)} initialContentHTML={value} editorInitializedCallback={editorInitializedCallback} onHeightChange={onHeightChange} onChange={onValueChange} editorStyle={{backgroundColor, color}} />
         </View>
         <ErrorField error={error} disabled={props.disabled} />
       </View>
