@@ -1,5 +1,5 @@
 import BaseService from './BaseService';
-import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401 } from '../constants/ActionTypes';
+import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401, HTTP_403 } from '../constants/ActionTypes';
 import { Fetch } from '../utils';
 
 export default class HttpService extends BaseService {
@@ -72,7 +72,18 @@ export default class HttpService extends BaseService {
     }
 
     private _statusHandler(status, value) {
-        const type = status === 401 ? HTTP_401 : HTTP_RESPONSE;
+        let type = HTTP_RESPONSE;
+        switch (status) {
+            case 401:
+                type = HTTP_401;
+                break;
+            case 403:
+                type = HTTP_403;
+                break;
+            default:
+                type = HTTP_RESPONSE;
+                break;
+        }
         this._setInprogress(type, value);
     }
 
