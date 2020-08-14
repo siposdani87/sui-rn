@@ -30,12 +30,12 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   async function onValueChange() {
     const v = await editor.getContentHtml();
-    console.log('onValueChange', v);
+    // console.log('onValueChange', v);
     onErrorChange();
     props.onValueChange(v);
     // setValue(v);
   }
-  console.log('value', value);
+  // console.log('value', value);
 
   function onHeightChange() {
     // console.log('onHeightChange', h);
