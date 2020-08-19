@@ -12,7 +12,9 @@ export default function Notification(props) {
     const insets = useSafeArea();
 
     function close(notification) {
-        props.screenProps.factories.notificationFactory.close(notification);
+        return () => {
+            props.screenProps.factories.notificationFactory.close(notification);
+        }
     }
 
     function closable(notification) {
@@ -45,11 +47,11 @@ export default function Notification(props) {
     return (
         <View style={[styles.baseContainer, { top: insets.top + 20 }]}>
             {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
-                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close.call(this, notification)}>
+                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(notification)}>
                     <View style={getContainerStyle(notification)}>
                         <Text style={getTextStyle()}>{notification.message}</Text>
                         {closable(notification) && (
-                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close.call(this, notification)}>
+                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close(notification)}>
                                 <MaterialIcons name='close' size={18} color={isDarkTheme ? Colors.white : Colors.black} />
                             </TouchableOpacity>
                         )}
