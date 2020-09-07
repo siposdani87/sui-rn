@@ -3,7 +3,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function Button(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title: string, source?: any, iconName?: string, iconType?: string, style?: any }) {
+export default function Button(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title: string, source?: any, iconName?: string, iconType?: string, style?: any, titleFormat?: boolean }) {
     const backgroundColor = props.color || Colors.primary;
     return (
         <View style={props.style}>
@@ -19,7 +19,7 @@ export default function Button(props: { onPress: () => void, textColor?: string,
                         <MaterialCommunityIcons style={[styles.icon, { color: props.textColor || Colors.primaryText }]} name={props.iconName} />
                     )}
                     {props.title && (
-                        <Text style={[styles.text, { color: props.textColor || Colors.primaryText }]}>{props.title.toUpperCase()}</Text>
+                        <Text style={[styles.text, { color: props.textColor || Colors.primaryText }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
                     )}
                 </View>
             </TouchableOpacity>
