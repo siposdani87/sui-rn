@@ -67,6 +67,22 @@ const styles = {
             },
         }),
     },
+    noShadow: {
+        ...Platform.select({
+            android: {
+                elevation: 0,
+            },
+            ios: {
+                shadowColor: 'transparent',
+                shadowOffset: {
+                    width: 0,
+                    height: 0,
+                },
+                shadowOpacity: 1,
+                shadowRadius: 0,
+            },
+        }),
+    },
     activeOpacity: 0.6,
     ...Platform.select({
         android: {

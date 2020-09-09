@@ -43,7 +43,7 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
                         <View style={styles.headerContainer}>
                             <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
                             {props.onClose && (
-                                <TextButton iconName='close' onPress={onClose} style={styles.closeButton} />
+                                <TextButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
                             )}
                         </View>
                     )}
@@ -55,10 +55,10 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
                     </View>
                     <View style={styles.footerContainer}>
                         {props.onCancel && (
-                            <TextButton title={props.cancelText} onPress={onCancel} style={styles.button} />
+                            <TextButton title={props.cancelText} onPress={onCancel} containerStyle={styles.button} />
                         )}
                         {props.onSubmit && (
-                            <Button title={props.submitText} onPress={onSubmit} style={styles.button} />
+                            <Button title={props.submitText} onPress={onSubmit} containerStyle={styles.button} />
                         )}
                         {props.buttons && props.buttons.map((button, key) => (
                             <View key={key}>{button}</View>
