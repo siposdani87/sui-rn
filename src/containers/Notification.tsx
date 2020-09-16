@@ -5,11 +5,11 @@ import { Colors, Layout, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Notification(props) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-    const insets = useSafeArea();
+    const insets = useSafeAreaInsets();
 
     function close(notification) {
         return () => {

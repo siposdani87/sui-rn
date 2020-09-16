@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
-import { useSafeArea } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Loader(props) {
-    const insets = useSafeArea();
+    const insets = useSafeAreaInsets();
 
     return props.screenProps.services.httpService.isInprogress() && (
         <View style={[styles.baseContainer, { top: insets.top + 15 }]}>
