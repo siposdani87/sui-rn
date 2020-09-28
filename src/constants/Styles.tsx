@@ -13,13 +13,6 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    rowContainer: {
-        flex: 1,
-        backgroundColor: Colors.lightGrey,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-    },
     columnContainer: {
         flex: 1,
         flexDirection: 'column',
