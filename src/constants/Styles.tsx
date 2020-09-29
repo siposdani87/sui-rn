@@ -66,13 +66,7 @@ const styles = {
                 elevation: 0,
             },
             ios: {
-                shadowColor: 'transparent',
-                shadowOffset: {
-                    width: 0,
-                    height: 0,
-                },
-                shadowOpacity: 1,
-                shadowRadius: 0,
+                shadowOpacity: 0,
             },
         }),
     },
@@ -141,6 +135,14 @@ const styles = {
         },
         headerStyle: {
             backgroundColor: Colors.primaryDark,
+            ...Platform.select({
+                android: {
+                    elevation: 0,
+                },
+                ios: {
+                    shadowOpacity: 0,
+                },
+            }),
         },
         contentStyle: {
             flex: 1,
