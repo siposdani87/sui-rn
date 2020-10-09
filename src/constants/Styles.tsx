@@ -86,7 +86,6 @@ const styles = {
         labelStyle: {
             fontSize: 14,
             fontFamily: '',
-            textTransform: 'uppercase',
         },
     },
     tabBarLightOptions: {
