@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontFamily: Styles.fontFamilyHeading,
-    fontSize: 24,
     fontWeight: '400',
+    fontSize: 24,
   },
   titleLightText: {
     color: Colors.black,

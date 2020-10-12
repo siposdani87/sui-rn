@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   },
   labelText: {
     fontFamily: Styles.fontFamilyBody,
-    fontSize: 16,
     fontWeight: '400',
+    fontSize: 16,
   },
   labelDefaultLightText: {
     color: Colors.labelDefaultLight,

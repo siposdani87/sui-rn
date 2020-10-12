@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginHorizontal: 20,
         fontFamily: Styles.fontFamilyBody,
+        fontWeight: '400',
     },
     textLight: {
         color: Colors.deepGreyBright,

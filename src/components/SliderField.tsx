@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: Styles.fontFamilyBody,
+    fontWeight: '400',
     fontSize: 16,
     height: 36,
     borderRadius: 3,

@@ -41,7 +41,7 @@ export default function Notification(props) {
     }
 
     function getTextStyle() {
-        return [isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
+        return [styles.notificationText, isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
     }
 
     return (
@@ -89,13 +89,15 @@ const styles = StyleSheet.create({
     notificationDarkContainer: {
         backgroundColor: Colors.black,
     },
+    notificationText: {
+        fontFamily: Styles.fontFamilyBody,
+        fontWeight: '400',
+    },
     notificationLightText: {
         color: Colors.black,
-        fontFamily: Styles.fontFamilyBody,
     },
     notificationDarkText: {
         color: Colors.white,
-        fontFamily: Styles.fontFamilyBody,
     },
     notificationClose: {
         position: 'absolute',
