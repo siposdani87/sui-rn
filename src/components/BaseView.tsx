@@ -6,6 +6,7 @@ import { StatusBar, StatusBarStyle } from 'expo-status-bar';
 export default function BaseView(props: { barStyle?: StatusBarStyle, backgroundColor?: any, children: any }) {
     const backgroundColor = props.backgroundColor || 'transparent';
     const translucent = backgroundColor === 'transparent';
+    
     return (
         <View style={[styles.areaView, { backgroundColor }]}>
             <StatusBar style={props.barStyle || 'light'} backgroundColor={backgroundColor} translucent={translucent} />
