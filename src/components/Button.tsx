@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         fontFamily: Styles.fontFamilyBody,
+        fontWeight: '400',
     },
     image: {
         width: 20,

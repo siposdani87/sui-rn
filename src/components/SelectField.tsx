@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RNPickerSelect, { PickerStyle } from 'react-native-picker-select';
+import RNPickerSelect from 'react-native-picker-select';
 import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet } from 'react-native';
@@ -92,7 +92,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         </Picker>
       )} */}
       {items.length > 0 && (
-        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} value={value} key={value} onValueChange={onValueChange} style={pickerStyle as PickerStyle} disabled={props.disabled} />
+        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} value={value} key={value} onValueChange={onValueChange} style={pickerStyle as any} disabled={props.disabled} />
       )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontFamily: Styles.fontFamilyBody,
+    fontWeight: '400',
     fontSize: 16,
     height: 36,
     borderRadius: 3,

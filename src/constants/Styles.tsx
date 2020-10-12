@@ -86,6 +86,7 @@ const styles = {
         labelStyle: {
             fontSize: 14,
             fontFamily: '',
+            fontWeight: '400',
             textTransform: 'uppercase',
         },
     },
@@ -131,6 +132,7 @@ const styles = {
         headerTitleAlign: 'left',
         headerTitleStyle: {
             fontFamily: '',
+            fontWeight: '400',
             fontSize: 14,
             color: Colors.primaryText,
         },

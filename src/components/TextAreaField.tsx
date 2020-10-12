@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: Styles.fontFamilyBody,
+    fontWeight: '400',
     fontSize: 16,
     borderRadius: 3,
     borderWidth: 1,

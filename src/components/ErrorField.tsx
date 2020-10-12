@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontFamily: Styles.fontFamilyBody,
+    fontWeight: '400',
     fontSize: 12,
     lineHeight: 14,
   },

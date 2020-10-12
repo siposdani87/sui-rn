@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
+        fontWeight: '400',
         fontSize: 22,
     },
     headerLightText: {
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
     },
     bodyText: {
         fontFamily: Styles.fontFamilyBody,
+        fontWeight: '400',
         color: Colors.black,
     },
     footerContainer: {

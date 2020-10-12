@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
         textDecorationStyle: 'dotted',
         fontFamily: Styles.fontFamilyBody,
+        fontWeight: '400',
     },
     linkLightText: {
         color: Colors.primary,
