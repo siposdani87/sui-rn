@@ -38,10 +38,10 @@
     "react-native-color-picker": ">=0.6.0",
     "react-native-gesture-handler": ">=1.5.0",
     "react-native-maps": ">=0.27.1",
-    "react-native-pell-rich-editor": ">=1.3.0",
     "react-native-picker-select": ">=6.5.0",
     "react-native-safe-area-context": ">=0.7.3",
-    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
+    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
+    "expo-rich-text-editor": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/expo-rich-text-editor.git#develop"
   },
   "devDependencies": {
     "@types/expo__vector-icons": ">=9.0.1",
