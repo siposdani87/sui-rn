@@ -16,7 +16,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
   const numberOfLines = props.numberOfLines || 5;
-  const style = {
+  const defaultStyle = {
     height: 20 * numberOfLines + 16,
     maxHeight: 300,
     textAlignVertical: 'top',
@@ -29,26 +29,28 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   function onValueChange(v) {
     console.log('onValueChange', v);
-    // onErrorChange();
-    //props.onValueChange(v);
-    // setValue(v);
+    onErrorChange();
+    props.onValueChange(v);
+    setValue(v);
   }
 
-
   function getActionMap() {
+    const size = 24;
+
     function getColor(_selected) {
-      if (true) {
-        return isDarkTheme ? Colors.primaryBright : Colors.primary;
-      }
-      // return isDarkTheme ? Colors.white : Colors.black;
+      return isDarkTheme ? Colors.primaryBright : Colors.primary;
     }
 
     return {
-      bold: ({selected}) => (<MaterialIcons name='format-bold' size={22} color={getColor(selected)} />),
-      italic: ({selected}) => (<MaterialIcons name='format-italic' size={22} color={getColor(selected)} />),
-      underline: ({selected}) => (<MaterialIcons name='format-underlined' size={22} color={getColor(selected)} />),
-      unorderedList: ({selected}) => (<MaterialIcons name='format-list-bulleted' size={22} color={getColor(selected)} />),
-      orderedList: ({selected}) => (<MaterialIcons name='format-list-numbered' size={22} color={getColor(selected)} />),
+      undo: ({ selected }) => (<MaterialIcons name='undo' size={size} color={getColor(selected)} />),
+      redo: ({ selected }) => (<MaterialIcons name='redo' size={size} color={getColor(selected)} />),
+      bold: ({ selected }) => (<MaterialIcons name='format-bold' size={size} color={getColor(selected)} />),
+      italic: ({ selected }) => (<MaterialIcons name='format-italic' size={size} color={getColor(selected)} />),
+      underline: ({ selected }) => (<MaterialIcons name='format-underlined' size={size} color={getColor(selected)} />),
+      unorderedList: ({ selected }) => (<MaterialIcons name='format-list-bulleted' size={size} color={getColor(selected)} />),
+      orderedList: ({ selected }) => (<MaterialIcons name='format-list-numbered' size={size} color={getColor(selected)} />),
+      clear: ({ selected }) => (<MaterialIcons name='format-clear' size={size} color={getColor(selected)} />),
+      code: ({ selected }) => (<MaterialIcons name='code' size={size} color={getColor(selected)} />),
     };
   }
 
@@ -67,20 +69,20 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   const backgroundColor = isDarkTheme ? Colors.black : Colors.white;
   const color = isDarkTheme ? Colors.white : Colors.black;
-  const editorStyle = [styles.textInput, style, _getTextInputStyle(), {backgroundColor, color}];
+  const editorStyle = [styles.textInput, defaultStyle, _getTextInputStyle(), {backgroundColor, color}];
 
   if (props.richText) {
     return (
       <View style={[styles.container, props.containerStyle]}>
         <Label label={props.label} required={props.required} disabled={props.disabled} />
-        <RichTextEditor minHeight={style.height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={{}} />
+        <RichTextEditor minHeight={defaultStyle.height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} />
         <ErrorField error={error} disabled={props.disabled} />
       </View>
     );
   }
 
   return (
-    <TextField numberOfLines={numberOfLines} {...props} style={style} multiline={true} />
+    <TextField numberOfLines={numberOfLines} {...props} style={defaultStyle} multiline={true} />
   );
 }
 
@@ -131,6 +133,6 @@ const styles = StyleSheet.create({
     color: Colors.contentDisabledDark,
     borderColor: Colors.errorDisabledDark,
   },
-  toolbar: {
-  },
+  editor: {},
+  toolbar: {},
 });
