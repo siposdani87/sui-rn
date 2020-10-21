@@ -2,8 +2,10 @@ import React from 'react';
 import TextField from './TextField';
 import { TextInputProps } from 'react-native';
 
-export default function EmailField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any } & TextInputProps) {
+export default function EmailField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, children?: any } & TextInputProps) {
   return (
-    <TextField autoCapitalize='none' {...props} keyboardType='email-address' />
+    <TextField {...props} autoCapitalize='none' keyboardType='email-address'>
+      {props.children}
+    </TextField>
   );
 }

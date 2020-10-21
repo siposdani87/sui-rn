@@ -41,14 +41,15 @@ const styles = StyleSheet.create({
         ...Styles.lightShadow,
     },
     text: {
-        fontSize: 16,
-        textAlign: 'center',
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
+        fontSize: 16,
+        textAlign: 'center',
     },
     image: {
         width: 20,
         height: 20,
+        resizeMode: 'contain',
         marginRight: 10,
     },
     icon: {

@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
+import IconButton from './IconButton';
 
 export default function Dialog(props: { title?: string, children?: any, text?: string, cancelText?: string, submitText?: string, buttons?: any, visible: boolean, onSubmit?: () => void, onCancel?: () => void, onClose?: () => void }) {
     const [visible, setVisible] = useState(false);
@@ -43,7 +44,7 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
                         <View style={styles.headerContainer}>
                             <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
                             {props.onClose && (
-                                <TextButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
+                                <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
                             )}
                         </View>
                     )}
@@ -123,5 +124,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -10,
         right: -15,
+        zIndex: 1,
     },
 });

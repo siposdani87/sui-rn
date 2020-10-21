@@ -1,10 +1,9 @@
 import React from 'react';
 import { Styles, Colors } from '../constants';
-import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
+import { View, Text, Image, StyleSheet, ImageSourcePropType, TouchableOpacity } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import { MaterialIcons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function HeaderImage(props: { title: string, imageSource: ImageSourcePropType, onClose?: () => void }) {
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;

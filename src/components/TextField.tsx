@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, TextInput, StyleSheet, TextInputProps } from 'react-native';
+import { View, TextInput, StyleSheet, TextInputProps, Platform } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
+export default function TextField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, readonly?: boolean, style?: any, containerStyle?: any, children?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
@@ -19,8 +19,8 @@ export default function TextField(props: { value: any, label: string, error: any
 
   function onValueChange(v) {
     onErrorChange();
-    props.onValueChange(v);
     setValue(v);
+    props.onValueChange(v);
   }
 
   function _getTextInputStyle() {
@@ -39,7 +39,22 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput {...props} value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} editable={!props.disabled} />
+      <TextInput value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} editable={!props.disabled && !props.readonly} />
+      {props.children && (
+        <View style={[styles.actionsContainer, Platform.select({
+          android: {
+            top: props.label ? 26 : 2,
+          },
+          ios: {
+            top: props.label ? 22 : 2,
+          },
+          web: {
+            top: props.label ? 22 : 2,
+          }
+        })]}>
+          {props.children}
+        </View>
+      )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -48,6 +63,13 @@ export default function TextField(props: { value: any, label: string, error: any
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
+  },
+  actionsContainer: {
+    position: 'absolute',
+    right: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    zIndex: 1,
   },
   textInput: {
     fontFamily: Styles.fontFamilyBody,

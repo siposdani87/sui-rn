@@ -1,17 +1,133 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
+import { Colors } from './src/constants';
+import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
+import { useFonts } from 'expo-font';
+import { AppLoading } from 'expo';
+import { setThemeStyles, setThemeColors } from './src/constants';
+
+setThemeStyles('Inter_700Bold', 'Inter_500Medium', 'Inter_400Regular');
+setThemeColors(Colors.greenBright, Colors.green, Colors.greenDark, Colors.white, Colors.amberBright, Colors.amber, Colors.amberDark, Colors.white);
 
 export default function App() {
+
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_700Bold
+  });
+
+  const [data, setData] = useState({
+    profilePicture: null,
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    gender: null,
+    height: 0,
+    weight: 0,
+    birthYear: null,
+    currentTime: null,
+    location: null,
+    about: '',
+    bio: '',
+    isPrivate: false,
+    favouriteColor: '#673AB7'
+  });
+  const genders = [
+    { label: 'Male', value: 'MALE' },
+    { label: 'Female', value: 'FEMALE' },
+    { label: 'Other', value: 'OTHER' },
+  ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setData({
+        profilePicture: {
+          uri: 'https://www.gravatar.com/avatar/0?s=200&d=robohash&f=y'
+        },
+        name: 'Sipos Dániel',
+        email: 'siposdani87@hotmail.com',
+        password: '',
+        phone: '+36 20 952 0471',
+        gender: 'MALE',
+        height: 178,
+        weight: 92,
+        birthYear: 1987,
+        currentTime: new Date().toISOString(),
+        location: {
+          address: 'Öttevény',
+          latitude: 47.12,
+          longitude: 17.43,
+        },
+        about: 'About me it is not a long text!',
+        bio: '<p>Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
+        isPrivate: true,
+        favouriteColor: '#673AB7',
+      });
+    }, 2000);
+  }, []);
+
+  function onValueChange(v) {
+    console.log('onValueChange', v);
+  }
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        <View style={styles.container}>
+        <View style={styles.baseContainer}>
           <StatusBar style='dark' />
           <ScrollView>
-            
+            <View style={styles.container}>
+              <Link onPress={() => { }} title='Open new link' />
+
+              <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }} />
+
+              <FileField label='Profile picture' value={data.profilePicture} mimeType='image/*' error={null} onValueChange={onValueChange} />
+              
+              <TextField label='Name' value={data.name} error={null} onValueChange={onValueChange} />
+
+              <EmailField label='Email' value={data.email} error={null} onValueChange={onValueChange} />
+
+              <PasswordField label='Password' value={data.password} error={null} onValueChange={onValueChange} required={true} />
+
+              <PhoneField label='Phone' value={data.phone} error={null} onValueChange={onValueChange} />
+
+              <SelectField label='Gender' items={genders} value={data.gender} error={null} onValueChange={onValueChange} required={true} />
+
+              <TextAreaField label='About' value={data.about} error={null} onValueChange={onValueChange} />
+
+              <TextAreaField label='Bio' value={data.bio} error={null} onValueChange={onValueChange} richText={true} />
+
+              <NumberField label='Height' value={data.height} error={null} onValueChange={onValueChange} />
+
+              <SliderField label='Weight' value={data.weight} error={null} onValueChange={onValueChange} minimumValue={0} maximumValue={150} step={1} />
+
+              <LocationField label='Location' value={data.location} error={null} onValueChange={onValueChange} onSearch={onValueChange} longitudeText='Longitude' latitudeText='Latitude' />
+
+              <DatetimeField label='Birth year' mode='year' value={data.birthYear} okText='OK' error={null} onValueChange={onValueChange} />
+
+              <DatetimeField label='Current datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.currentTime} error={null} onValueChange={onValueChange} />
+
+              <CheckboxField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} />
+
+              <SwitchField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} />
+
+              <IconToggleField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
+
+              <ColorField label='Favourite color' value={data.favouriteColor} error={null} onValueChange={onValueChange} />
+              
+              <Button onPress={() => { }} title='Save' />
+              <IconButton onPress={() => { }} iconName='save' />
+              <TextButton onPress={() => { }} title='Save' />
+            </View>
           </ScrollView>
         </View>
       </SafeAreaView>
@@ -20,7 +136,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  baseContainer: {
+    backgroundColor: Colors.white,
+  },
   container: {
-    backgroundColor: 'lightgrey',
+    padding: 20,
   },
 });

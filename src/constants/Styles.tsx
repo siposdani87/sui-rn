@@ -177,6 +177,10 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
     },
+    fieldIconButton: {
+        padding: 1,
+        margin: 2,
+    },
 };
 
 export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
@@ -193,6 +197,7 @@ export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody)
 Platform.select({
     ios: () => setThemeStyles('Verdana', 'Helvetica', 'Arial'),
     android: () => setThemeStyles('monospace', 'sans-serif', 'Roboto'),
+    web: () => setThemeStyles('Verdana', 'sans-serif', 'Arial'),
 })();
 
 export default styles;

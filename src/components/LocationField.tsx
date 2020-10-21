@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react';
-// import ErrorField from './ErrorField';
-// import Label from './Label';
 import { View, StyleSheet, ImageURISource } from 'react-native';
-// import useBaseField from './useBaseField';
-// import { useColorScheme } from 'react-native-appearance';
-// import environment from '../config/environment';
 import TextField from './TextField';
 import NumberField from './NumberField';
-import { Colors } from '../constants';
+import { Colors, Styles } from '../constants';
 import IconButton from './IconButton';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
 
-export default function LocationField(props: { markerImage: ImageURISource, region: any, value: any, label: string, error: any, onValueChange: (value: any) => void, onSearch?: (value: any) => void, latitudeText: string, longitudeText: string, required?: boolean, disabled?: boolean }) {
+export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, region?: any, onSearch?: (value: any) => void, required?: boolean, disabled?: boolean }) {
   const defaultValue = {
     address: '',
     latitude: null,
@@ -30,8 +25,8 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
   }, [props.value]);
 
   function onValueChange(v) {
-    props.onValueChange(v);
     setValue(v);
+    props.onValueChange(v);
   }
 
   function _onAddressChange(address) {
@@ -53,11 +48,11 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
     setVisibleCoords(!visibleCoords);
   }
 
-  /* function onSearch() {
+  function onSearch() {
     if (props.onSearch) {
       props.onSearch(value);
     }
-  } */
+  }
 
   function getLocationProps() {
     return {
@@ -72,18 +67,19 @@ export default function LocationField(props: { markerImage: ImageURISource, regi
 
   return (
     <View style={styles.baseContainer}>
-      <TextField style={styles.input} label={props.label} value={value.address} onValueChange={_onAddressChange} required={props.required} error={props.error} disabled={props.disabled} />
-      <View style={styles.actionsContainer}>
-        {/* <IconButton iconName='pin-drop' style={styles.iconButton} color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} /> */}
-        <IconButton iconName='settings' style={styles.iconButton} color='transparent' textColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
-      </View>
+      <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={_onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
+        {props.onSearch && (
+          <IconButton iconName='pin-drop' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
+        )}
+        <IconButton iconName='settings' style={Styles.fieldIconButton} color='transparent' iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
+      </TextField>
       {visibleCoords && (
         <View style={styles.coordsContainer}>
           <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={_onLatitudeChange} required={props.required} error={null} disabled={props.disabled} />
           <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={_onLongitudeChange} required={props.required} error={null} disabled={props.disabled} />
         </View>
       )}
-      <MapView style={styles.mapContainer} region={props.region} scrollEnabled={true}>
+      <MapView style={styles.mapContainer} initialRegion={props.region} scrollEnabled={true}>
         {value.latitude && value.longitude && (
           <Marker draggable={true} onDragEnd={onDragEnd} key={'marker'} {...getLocationProps()} identifier={'marker'} coordinate={value} title={value.address} description='' />
         )}
@@ -100,18 +96,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
   },
-  actionsContainer: {
-    position: 'absolute',
-    top: 25,
-    right: 0,
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  iconButton: {
-    padding: 1,
-    margin: 2,
-  },
-  input: {
+  addressInput: {
     paddingRight: 60,
   },
   mapContainer: {

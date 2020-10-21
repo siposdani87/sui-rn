@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Styles } from '../constants';
 import environment from '../config/environment';
 
-export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, labelKey?: string, valueKey?: string, style?: any }) {
+export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, labelKey?: string, valueKey?: string, style?: any, containerStyle?: any }) {
   const [value, setValue] = useState(props.value);
   const [items, setItems] = useState(convert(props.items));
   const [error, onErrorChange] = useBaseField(props);
@@ -27,8 +27,8 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   function onValueChange(v) {
     onErrorChange();
-    props.onValueChange(v);
     setValue(v);
+    props.onValueChange(v);
   }
 
   function convert(options) {
@@ -82,7 +82,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   }
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={[styles.baseContainer, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       {/* {false && (
         <Picker {...props} selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>

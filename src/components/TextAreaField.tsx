@@ -28,10 +28,9 @@ export default function TextAreaField(props: { value: any, label: string, error:
   }, [props.value]);
 
   function onValueChange(v) {
-    console.log('onValueChange', v);
     onErrorChange();
-    props.onValueChange(v);
     setValue(v);
+    props.onValueChange(v);
   }
 
   function getActionMap() {
@@ -69,7 +68,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
 
   const backgroundColor = isDarkTheme ? Colors.black : Colors.white;
   const color = isDarkTheme ? Colors.white : Colors.black;
-  const editorStyle = [styles.textInput, defaultStyle, _getTextInputStyle(), {backgroundColor, color}];
+  const editorStyle = [styles.textInput, defaultStyle, _getTextInputStyle(), { backgroundColor, color }];
 
   if (props.richText) {
     return (
@@ -82,7 +81,7 @@ export default function TextAreaField(props: { value: any, label: string, error:
   }
 
   return (
-    <TextField numberOfLines={numberOfLines} {...props} style={defaultStyle} multiline={true} />
+    <TextField {...props} numberOfLines={numberOfLines} style={defaultStyle} multiline={true} />
   );
 }
 
