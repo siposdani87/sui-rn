@@ -39,7 +39,7 @@ export default function TextField(props: { value: any, label: string, error: any
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} editable={!props.disabled && !props.readonly} />
+      <TextInput value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
       {props.children && (
         <View style={[styles.actionsContainer, Platform.select({
           android: {
