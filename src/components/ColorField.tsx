@@ -29,7 +29,7 @@ export default function ColorField(props: { value: any, label: string, error: an
     props.onValueChange(v);
   }
 
-  function _getTextInputStyle() {
+  function getTextInputStyle() {
     if (hasError) {
       if (props.disabled) {
         return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
@@ -47,7 +47,7 @@ export default function ColorField(props: { value: any, label: string, error: an
   }
 
   function hideColorPicker(){
-    // setShow(false);
+    setShow(false);
   }
 
   return (
@@ -55,11 +55,11 @@ export default function ColorField(props: { value: any, label: string, error: an
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <Dialog visible={show} onClose={hideColorPicker}>
         <View style={{flex: 1, backgroundColor: '#212021'}}>
-         {/*  <ColorPicker style={{ flex: 1 }} oldColor='purple' color={color} onColorSelected={onValueChange} /> */}
+          <ColorPicker style={{ flex: 1 }} oldColor='purple' color={color} onColorSelected={onValueChange} />
         </View>
       </Dialog>
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker}>
-        <View style={[styles.colorDot, {backgroundColor: value}]}></View>
+        <View style={[styles.colorDot, { backgroundColor: value }, getTextInputStyle()]}></View>
       </TouchableOpacity>
       <ErrorField error={error} disabled={props.disabled} />
     </View>
