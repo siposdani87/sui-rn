@@ -24,7 +24,6 @@ export default function IconToggleField(props: { value: boolean, checkedIcon: st
   }
 
   function onPress() {
-    console.log(value);
     onValueChange(!value);
   }
 
