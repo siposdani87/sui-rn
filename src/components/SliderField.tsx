@@ -8,12 +8,11 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import Slider from '@react-native-community/slider';
 
-export default function SliderField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any, minimumValue?: number, maximumValue?: number, step?: number }) {
+export default function SliderField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-
 
   useEffect(() => {
     setValue(props.value);
@@ -22,7 +21,6 @@ export default function SliderField(props: { value: any, label: string, error: a
   function onValueChange(v) {
     onErrorChange();
     props.onValueChange(v);
-    setValue(v);
   }
 
   function _getTextInputStyle() {
@@ -41,7 +39,7 @@ export default function SliderField(props: { value: any, label: string, error: a
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <Slider style={[{flex: 1, height: 40}, props.style, _getTextInputStyle()]} value={props.value} onValueChange={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.minimumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} disabled={props.disabled} />
+      <Slider style={[{flex: 1, height: 40}, props.style, _getTextInputStyle()]} value={value} onValueChange={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

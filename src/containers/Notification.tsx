@@ -65,7 +65,7 @@ export default function Notification(props) {
 const styles = StyleSheet.create({
     baseContainer: {
         position: 'absolute',
-        zIndex: 1,
+        zIndex: 3,
         flexDirection: 'column',
         justifyContent: 'center',
         width: Layout.window.width,
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 2,
         top: 2,
+        zIndex: 1,
     },
     successLightContainer: {
         borderTopColor: Colors.green,

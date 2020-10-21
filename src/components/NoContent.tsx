@@ -24,15 +24,16 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 150,
-        height: 100,
+        height: 150,
+        resizeMode: 'contain',
         marginBottom: 15,
-        tintColor: Colors.deepGreyBright,
+        // tintColor: Colors.deepGreyBright,
     },
     imageLight: {
-        tintColor: Colors.deepGreyBright,
+        // tintColor: Colors.deepGreyBright,
     },
     imageDark: {
-        tintColor: Colors.blackBright,
+        // tintColor: Colors.blackBright,
     },
     text: {
         fontSize: 18,

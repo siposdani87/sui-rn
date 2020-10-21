@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NoContent from './NoContent';
 import { FlatList as ReactNativeFlatList, Platform, ImageSourcePropType, ListRenderItem, RefreshControl } from 'react-native';
-import { useTranslation } from 'react-i18next';
 
 const config = {
     progressViewOffset: -1000,
@@ -12,12 +11,14 @@ const config = {
         ios: {
             onEndReachedThreshold: 0,
         },
+        web: {
+            onEndReachedThreshold: 0,
+        }
     }),
 };
 
-export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, noContentText: string, noContentImageSource: ImageSourcePropType }) {
+export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
     const [flatListReady, setFlatListReady] = useState(false);
-    const { t } = useTranslation();
 
     function onRefresh() {
         // console.log('onRefresh->refreshing', props.refreshing);
@@ -52,7 +53,7 @@ export default function FlatList(props: { data: any[], keyExtractor?: (item: any
 
     function getRefreshControl() {
         return (
-            <RefreshControl refreshing={false} onRefresh={onRefresh} title={t('text.pull_to_refresh')} tintColor='transparent' />
+            <RefreshControl refreshing={false} onRefresh={onRefresh} title={props.refreshText} tintColor='transparent' />
         );
     }
 

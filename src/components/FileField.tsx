@@ -1,21 +1,16 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Label from './Label';
-import { View, StyleSheet, Image, Alert, ImageURISource } from 'react-native';
+import { View, StyleSheet, Image, Alert, ImageURISource, TouchableOpacity } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
-// import { useColorScheme } from 'react-native-appearance';
-// import environment from '../config/environment';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Colors, Styles } from '../constants';
-import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import TextField from './TextField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
 export default function FileField(props: { value: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
-  const { t } = useTranslation();
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
@@ -34,11 +29,11 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   };
 
   useEffect(() => {
-    if (props.value.uri) {
+    if (props.value) {
       setValue(props.value);
       removeImage();
     }
-  }, [props.value.uri]);
+  }, [props.value]);
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
@@ -102,10 +97,10 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
 
   function showAlert(e) {
     Alert.alert(
-      t('errors.info'),
+      'ERROR',
       e.message,
       [
-        { text: t('buttons.ok'), onPress: () => null },
+        { text: 'OK', onPress: () => null },
       ],
       { cancelable: true },
     );
@@ -125,7 +120,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} textColor={Colors.black} onPress={removeImage} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} iconColor={Colors.black} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>
@@ -135,18 +130,17 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
           <Image source={value} style={styles.image} />
         )}
       </View>
-      <TextField style={styles.input} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled} />
-      <View style={styles.actionsContainer}>
+      <TextField style={styles.fileInput} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
         {isDocument() && (
-          <IconButton style={styles.iconButton} iconName='description' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
+          <IconButton style={Styles.fieldIconButton} iconName='description' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
         )}
         {!isDocument() && (
-          <IconButton style={styles.iconButton} iconName='photo-camera' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
+          <IconButton style={Styles.fieldIconButton} iconName='photo-camera' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
         )}
         {!isDocument() && (
-          <IconButton style={styles.iconButton} iconName='collections' color='transparent' textColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
+          <IconButton style={Styles.fieldIconButton} iconName='collections' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
         )}
-      </View>
+      </TextField>
     </View>
   );
 }
@@ -162,23 +156,13 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 5,
   },
-  actionsContainer: {
-    position: 'absolute',
-    top: 130,
-    right: 0,
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  iconButton: {
-    padding: 1,
-    margin: 2,
-  },
-  input: {
+  fileInput: {
     paddingRight: 60,
   },
   image: {
     width: 100,
     height: 100,
+    resizeMode: 'contain',
   },
   imageBox: {
     position: 'relative',

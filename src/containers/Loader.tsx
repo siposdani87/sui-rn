@@ -18,7 +18,7 @@ export default function Loader(props) {
 const styles = StyleSheet.create({
     baseContainer: {
         position: 'absolute',
-        zIndex: 1,
+        zIndex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

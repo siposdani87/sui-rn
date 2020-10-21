@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
-import { TriangleColorPicker } from 'react-native-color-picker';
+import { ColorPicker, toHsv } from 'react-native-color-picker';
+import Dialog from './Dialog';
 
 export default function ColorField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const [value, setValue] = useState(props.value);
+  const [color, setColor] = useState(toHsv(props.value));
   const [error, onErrorChange] = useBaseField(props);
+  const [show, setShow] = useState(false);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
     setValue(props.value);
+    setColor(toHsv(props.value));
   }, [props.value]);
 
   function onValueChange(v) {
     onErrorChange();
-    props.onValueChange(v);
     setValue(v);
+    setColor(toHsv(v));
+    props.onValueChange(v);
   }
 
   function _getTextInputStyle() {
@@ -37,10 +42,25 @@ export default function ColorField(props: { value: any, label: string, error: an
     return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
   }
 
+  function showColorPicker(){
+    // setShow(true);
+  }
+
+  function hideColorPicker(){
+    // setShow(false);
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TriangleColorPicker style={[{flex: 1}, props.style, _getTextInputStyle()]} oldColor={props.value} onColorSelected={onValueChange} />
+      <Dialog visible={show} onClose={hideColorPicker}>
+        <View style={{flex: 1, backgroundColor: '#212021'}}>
+         {/*  <ColorPicker style={{ flex: 1 }} oldColor='purple' color={color} onColorSelected={onValueChange} /> */}
+        </View>
+      </Dialog>
+      <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker}>
+        <View style={[styles.colorDot, {backgroundColor: value}]}></View>
+      </TouchableOpacity>
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -49,6 +69,13 @@ export default function ColorField(props: { value: any, label: string, error: an
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
+  },
+  colorDot: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderColor: Colors.black,
+    borderWidth: 1,
   },
   textInput: {
     fontFamily: Styles.fontFamilyBody,

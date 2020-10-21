@@ -5,7 +5,7 @@ import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function Label(props: { children?: any, label?: string, required?: boolean, disabled?: boolean, style?: any }) {
+export default function Label(props: { children?: any, label?: string, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   function _getTextStyle() {
@@ -20,13 +20,9 @@ export default function Label(props: { children?: any, label?: string, required?
   }
 
   return (
-    <View style={[styles.labelContainer, props.style]}>
-      {props.children && (
-        <View style={styles.childrenContainer}>
-          {props.children}
-        </View>
-      )}
-      <Text style={[styles.labelText, _getTextStyle()]} numberOfLines={2}>
+    <View style={[styles.labelContainer, props.containerStyle]}>
+      {props.children}
+      <Text style={[styles.labelText, props.style, _getTextStyle()]} numberOfLines={2}>
         {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
       </Text>
     </View>
@@ -37,8 +33,6 @@ const styles = StyleSheet.create({
   labelContainer: {
     flexDirection: 'row',
     marginBottom: 3,
-  },
-  childrenContainer: {
   },
   labelText: {
     fontFamily: Styles.fontFamilyBody,

@@ -8,7 +8,7 @@ import environment from '../config/environment';
 export default function ErrorField(props: { error?: any, disabled?: boolean }) {
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
-  function _getTextStyle() {
+  function getTextStyle() {
     if (props.disabled) {
       return isDarkTheme ? styles.errorDisabledDarkText : styles.errorDisabledLightText;
     }
@@ -17,7 +17,7 @@ export default function ErrorField(props: { error?: any, disabled?: boolean }) {
 
   return (
     <View style={styles.errorContainer}>
-      <Text style={[styles.errorText, _getTextStyle()]} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
+      <Text style={[styles.errorText, getTextStyle()]} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
     </View>
   );
 }
