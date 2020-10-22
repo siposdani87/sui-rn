@@ -40,11 +40,13 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
         <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onCancel}>
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
-                    {props.title && (
+                    {(props.title || props.onClose) && (
                         <View style={styles.headerContainer}>
-                            <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
+                            {props.title && (
+                                <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
+                            )}
                             {props.onClose && (
-                                <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
+                                <IconButton iconName='close' iconColor={isDarkTheme ? Colors.white : Colors.black} color='transparent' borderColor='transparent' onPress={onClose} containerStyle={styles.closeButton} />
                             )}
                         </View>
                     )}

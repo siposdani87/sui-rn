@@ -6,7 +6,7 @@ import environment from '../config/environment';
 
 export default function Link(props: { title: string, onPress: () => void, color?: string, style?: any }) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-    const colorStyle = props.color ? { color: props.color, textDecorationColor: props.color } : {};
+    const colorStyle = props.color ? { color: props.color, textDecorationColor: props.color } : null;
 
     return (
         <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
@@ -18,7 +18,7 @@ export default function Link(props: { title: string, onPress: () => void, color?
 const styles = StyleSheet.create({
     linkText: {
         textDecorationLine: 'underline',
-        textDecorationStyle: 'dotted',
+        textDecorationStyle: 'solid',
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
         fontSize: 16,

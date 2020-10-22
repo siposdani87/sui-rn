@@ -41,14 +41,13 @@
     "react-native-appearance": "~0.3.3",
     "react-native-color-picker": "0.6.0",
     "react-native-maps": "0.27.1",
-    "react-native-picker-select": "8.0.2",
     "react-native-safe-area-context": "3.1.4",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
     "@types/expo__vector-icons": "9.0.1",
-    "@types/node": "14.14.0",
+    "@types/node": "14.14.2",
     "@types/react": "~16.9.35",
     "@types/react-dom": "^16.9.0",
     "@types/react-native": "~0.63.2",

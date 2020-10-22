@@ -20,6 +20,7 @@ export default function SliderField(props: { value: any, label: string, error: a
 
   function onValueChange(v) {
     onErrorChange();
+    setValue(v);
     props.onValueChange(v);
   }
 
@@ -39,7 +40,7 @@ export default function SliderField(props: { value: any, label: string, error: a
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <Slider style={[{flex: 1, height: 40}, props.style, _getTextInputStyle()]} value={value} onValueChange={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
+      <Slider style={[{flex: 1, height: 40}, props.style, _getTextInputStyle()]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

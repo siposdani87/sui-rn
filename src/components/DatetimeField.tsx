@@ -90,16 +90,18 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
   function onChange(_event, selectedDate) {
     if (Platform.OS === 'android'){
       hide();
+      onValueChange(selectedDate);
+    } else if (Platform.OS === 'ios'){
+      setDate(selectedDate);
     }
-    const d = moment(selectedDate);
-    const v = d.format(config.format);
-    setValue(v);
-    setFormattedValue(d.format(props.format));
-    props.onValueChange(v);
   }
 
-  function onValueChange() {
-
+  function onValueChange(v) {
+    const d = moment(v);
+    const formatD = d.format(config.format);
+    setValue(formatD);
+    setFormattedValue(d.format(props.format));
+    props.onValueChange(formatD);
   }
 
   function showCalendar() {
@@ -119,6 +121,12 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
     setShow(false);
   }
 
+
+  function selectDate(){
+    hide();
+    onValueChange(date);
+  }
+
   function renderDateTimePicker() {
     if (date && show) {
       return (
@@ -132,7 +140,7 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
     <View style={[styles.container, props.containerStyle]}>
       {(config.calendarType === 'date' || config.clockType === 'time') && (
         <>
-          <TextField label={props.label} value={formattedValue} error={props.error} onValueChange={onValueChange} readonly={true}>
+          <TextField label={props.label} value={formattedValue} error={props.error} onValueChange={() => null} readonly={true}>
             {config.calendarType === 'date' && (
               <IconButton iconName='event' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showCalendar} />
             )}
@@ -142,7 +150,7 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
           </TextField>
           {Platform.OS === 'ios' && (
             <Dialog visible={show} onClose={hide} buttons={[
-              <Button key={1} title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={hide} color={Colors.primary} textColor={Colors.white} />
+              <Button key={1} title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectDate} color={Colors.primary} textColor={Colors.white} />
             ]}>
               {renderDateTimePicker()}
             </Dialog>

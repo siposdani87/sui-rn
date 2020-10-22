@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, Switch, StyleSheet } from 'react-native';
+import { View, Switch, StyleSheet, Platform } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
@@ -54,12 +54,26 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    marginLeft: 60,
+    ...Platform.select({
+      android: {
+        marginLeft: 50,
+      },
+      ios: {
+        marginLeft: 60,
+      }
+    }),
   },
   switch: {
     position: 'absolute',
-    top: -3,
     left: 0,
     zIndex: 1,
+    ...Platform.select({
+      android: {
+        top: -1,
+      },
+      ios: {
+        top: -6,
+      }
+    }),
   },
 });
