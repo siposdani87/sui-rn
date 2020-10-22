@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Label from './Label';
-import { View, StyleSheet, Image, Alert, ImageURISource, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Alert, ImageURISource, ImageRequireSource, TouchableOpacity } from 'react-native';
 import useBaseField from './useBaseField';
 import IconButton from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,7 +10,7 @@ import TextField from './TextField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function FileField(props: { value: ImageURISource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
@@ -29,7 +29,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   };
 
   useEffect(() => {
-    if ((props.value && !props.value?.uri) || props.value?.uri) {
+    if ((typeof props.value === 'number' || !!(props.value as ImageURISource)?.uri) && !state.fileData) {
       setValue(props.value);
       removeImage();
     }
@@ -37,8 +37,8 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
-    props.onValueChange(fileData);
     setState({ fileName, fileData });
+    props.onValueChange(fileData);
   }
 
   function isImage(): boolean {
@@ -120,7 +120,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} iconColor={Colors.black} onPress={removeImage} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>

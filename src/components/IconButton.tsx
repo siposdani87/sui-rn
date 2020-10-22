@@ -8,7 +8,6 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
     const borderColor = props.borderColor || backgroundColor;
     const color = props.iconColor || Colors.primaryText;
     const iconSize = props.iconSize || 26;
-    
 
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
