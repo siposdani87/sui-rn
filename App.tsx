@@ -35,6 +35,8 @@ export default function App() {
     about: '',
     bio: '',
     isPrivate: false,
+    isBanned: false,
+    isDeleted: false,
     favouriteColor: '#673AB7'
   });
   const genders = [
@@ -60,19 +62,29 @@ export default function App() {
         currentTime: new Date().toISOString(),
         location: {
           address: 'Öttevény',
-          latitude: 47.12,
+          latitude: 47.74,
           longitude: 17.43,
         },
         about: 'About me it is not a long text!',
         bio: '<p>Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
         isPrivate: true,
+        isBanned: true,
+        isDeleted: true,
         favouriteColor: '#673AB7',
       });
     }, 2000);
   }, []);
 
-  function onValueChange(v) {
-    console.log('onValueChange', v);
+  function updateData(key, value) {
+    console.log('updateData', key, value);
+    setData({
+      ...data,
+      [key]: value,
+    });
+  }
+
+  function onSearch(v){
+    console.log('onSerach', v);
   }
 
   if (!fontsLoaded) {
@@ -90,39 +102,39 @@ export default function App() {
 
               <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }} />
 
-              <FileField label='Profile picture' value={data.profilePicture} mimeType='image/*' error={null} onValueChange={onValueChange} />
+              <FileField label='Profile picture' value={data.profilePicture} mimeType='image/*' error={null} onValueChange={(v) => updateData('profilePicture', v)} />
               
-              <TextField label='Name' value={data.name} error={null} onValueChange={onValueChange} />
+              <TextField label='Name' value={data.name} error={null} onValueChange={(v) => updateData('name', v)} />
 
-              <EmailField label='Email' value={data.email} error={null} onValueChange={onValueChange} />
+              <EmailField label='Email' value={data.email} error={null} onValueChange={(v) => updateData('email', v)} />
 
-              <PasswordField label='Password' value={data.password} error={null} onValueChange={onValueChange} required={true} />
+              <PasswordField label='Password' value={data.password} error={null} onValueChange={(v) => updateData('password', v)} required={true} />
 
-              <PhoneField label='Phone' value={data.phone} error={null} onValueChange={onValueChange} />
+              <PhoneField label='Phone' value={data.phone} error={null} onValueChange={(v) => updateData('phone', v)} />
 
-              <SelectField label='Gender' items={genders} value={data.gender} error={null} onValueChange={onValueChange} required={true} />
+              <SelectField label='Gender' items={genders} value={data.gender} error={null} onValueChange={(v) => updateData('genders', v)} required={true} />
 
-              <TextAreaField label='About' value={data.about} error={null} onValueChange={onValueChange} />
+              <TextAreaField label='About' value={data.about} error={null} onValueChange={(v) => updateData('about', v)} />
 
-              <TextAreaField label='Bio' value={data.bio} error={null} onValueChange={onValueChange} richText={true} />
+              <TextAreaField label='Bio' value={data.bio} error={null} onValueChange={(v) => updateData('bio', v)} richText={true} />
 
-              <NumberField label='Height' value={data.height} error={null} onValueChange={onValueChange} />
+              <NumberField label='Height' value={data.height} error={null} onValueChange={(v) => updateData('height', v)} />
 
-              <SliderField label='Weight' value={data.weight} error={null} onValueChange={onValueChange} minimumValue={0} maximumValue={150} step={1} />
+              <SliderField label='Weight' value={data.weight} error={null} onValueChange={(v) => updateData('weight', v)} minimumValue={0} maximumValue={150} step={1} />
 
-              <LocationField label='Location' value={data.location} error={null} onValueChange={onValueChange} onSearch={onValueChange} longitudeText='Longitude' latitudeText='Latitude' />
+              <LocationField label='Location' value={data.location} error={null} onValueChange={(v) => updateData('location', v)} onSearch={onSearch} longitudeText='Longitude' latitudeText='Latitude' />
 
-              <DatetimeField label='Birth year' mode='year' value={data.birthYear} okText='OK' error={null} onValueChange={onValueChange} />
+              <DatetimeField label='Birth year' mode='year' value={data.birthYear} okText='OK' error={null} onValueChange={(v) => updateData('year', v)} />
 
-              <DatetimeField label='Current datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.currentTime} error={null} onValueChange={onValueChange} />
+              <DatetimeField label='Current datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.currentTime} error={null} onValueChange={(v) => updateData('currentTime', v)} />
 
-              <CheckboxField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} />
+              <CheckboxField label='Private profile' value={data.isPrivate} error={null} onValueChange={(v) => updateData('isPrivate', v)} />
 
-              <SwitchField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} />
+              <SwitchField label='Banned profile' value={data.isBanned} error={null} onValueChange={(v) => updateData('isBanned', v)} />
 
-              <IconToggleField label='Private profile' value={data.isPrivate} error={null} onValueChange={onValueChange} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
+              <IconToggleField label='Deleted profile' value={data.isDeleted} error={null} onValueChange={(v) => updateData('isDeleted', v)} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
 
-              <ColorField label='Favourite color' value={data.favouriteColor} error={null} onValueChange={onValueChange} />
+              <ColorField label='Favourite color' value={data.favouriteColor} error={null} onValueChange={(v) => updateData('favouriteColor', v)} />
               
               <Button onPress={() => { }} title='Save' />
               <IconButton onPress={() => { }} iconName='save' />

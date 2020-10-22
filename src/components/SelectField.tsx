@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import RNPickerSelect from 'react-native-picker-select';
 import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Styles } from '../constants';
+import { Picker } from '@react-native-community/picker';
 import environment from '../config/environment';
 
 export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, labelKey?: string, valueKey?: string, style?: any, containerStyle?: any }) {
@@ -56,43 +55,15 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
   }
 
-  function _getPickerSelectStyles() {
-    const selectStyle = {
-      ...(isDarkTheme ? pickerSelectDarkStyles : pickerSelectLightStyles),
-      done: {
-        color: props.color || Colors.primary,
-      },
-      inputIOS: {
-        ...styles.input as any,
-        ..._getTextInputStyle() as any,
-      },
-      inputAndroid: {
-        ...styles.input as any,
-        ..._getTextInputStyle() as any,
-      },
-    };
-
-    return selectStyle;
-  }
-
-  const pickerStyle = _getPickerSelectStyles();
-
-  function getIcon() {
-    return (<MaterialIcons name='expand-more' size={24} color={pickerStyle.inputAndroid.color} />);
-  }
-
   return (
     <View style={[styles.baseContainer, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      {/* {false && (
-        <Picker {...props} selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker]} itemStyle={{ height: 52 }}>
+      {items.length > 0 && (
+        <Picker selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker, _getTextInputStyle()]} itemStyle={styles.itemStyle} enabled={!props.disabled} mode='dropdown'>
           {items.map((item, index) => (
             <Picker.Item key={index} label={item.label} value={item.value} />
           ))}
         </Picker>
-      )} */}
-      {items.length > 0 && (
-        <RNPickerSelect Icon={getIcon} useNativeAndroidPickerStyle={false} placeholder={{ label: props.placeholder || '', value: null }} items={items} value={value} key={value} onValueChange={onValueChange} style={pickerStyle as any} disabled={props.disabled} />
       )}
       <ErrorField error={error} disabled={props.disabled} />
     </View>
@@ -105,6 +76,12 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: 36,
+  },
+  itemStyle: {
+    height: 36,
+    fontFamily: Styles.fontFamilyBody,
+    fontWeight: '400',
+    fontSize: 16,
   },
   input: {
     fontFamily: Styles.fontFamilyBody,
@@ -148,25 +125,5 @@ const styles = StyleSheet.create({
   hasErrorDisabledDark: {
     color: Colors.contentDisabledDark,
     borderColor: Colors.errorDisabledDark,
-  },
-});
-
-const pickerSelectLightStyles = StyleSheet.create({
-  iconContainer: {
-    top: 5,
-    right: 5,
-  },
-  placeholderColor: {
-    color: Colors.labelDefaultLight,
-  },
-});
-
-const pickerSelectDarkStyles = StyleSheet.create({
-  iconContainer: {
-    top: 5,
-    right: 5,
-  },
-  placeholderColor: {
-    color: Colors.labelDefaultDark,
   },
 });
