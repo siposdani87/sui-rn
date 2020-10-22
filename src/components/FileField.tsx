@@ -29,7 +29,7 @@ export default function FileField(props: { value: ImageURISource, mimeType: stri
   };
 
   useEffect(() => {
-    if (props.value) {
+    if ((props.value && !props.value?.uri) || props.value?.uri) {
       setValue(props.value);
       removeImage();
     }

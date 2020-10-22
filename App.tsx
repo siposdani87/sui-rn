@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
 import { Colors } from './src/constants';
@@ -21,7 +21,9 @@ export default function App() {
   });
 
   const [data, setData] = useState({
-    profilePicture: null,
+    profilePicture: { 
+      uri: null 
+    }, // profilePicture: require('./assets/icon.png'),
     name: '',
     email: '',
     password: '',
@@ -45,7 +47,11 @@ export default function App() {
     { name: 'Other', id: 'OTHER' },
   ];
 
-  useEffect(() => {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+
     setTimeout(() => {
       setData({
         profilePicture: {
@@ -72,7 +78,12 @@ export default function App() {
         isDeleted: true,
         favouriteColor: '#673AB7',
       });
+      setRefreshing(false);
     }, 2000);
+  }, []);
+
+  useEffect(() => {
+    onRefresh();
   }, []);
 
   function updateData(key, value) {
@@ -96,7 +107,9 @@ export default function App() {
       <SafeAreaView>
         <View style={styles.baseContainer}>
           <StatusBar style='dark' />
-          <ScrollView>
+          <ScrollView refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
             <View style={styles.container}>
               <Link onPress={() => { }} title='Open new link' />
 
