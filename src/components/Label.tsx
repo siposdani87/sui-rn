@@ -8,7 +8,7 @@ import environment from '../config/environment';
 export default function Label(props: { children?: any, label?: string, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
-  function _getTextStyle() {
+  function getTextStyle() {
     if (props.disabled) {
       return isDarkTheme ? styles.labelDisabledDarkText : styles.labelDisabledLightText;
     }
@@ -20,9 +20,9 @@ export default function Label(props: { children?: any, label?: string, required?
   }
 
   return (
-    <View style={[styles.labelContainer, props.containerStyle]}>
+    <View style={[styles.container, props.containerStyle]}>
       {props.children}
-      <Text style={[styles.labelText, props.style, _getTextStyle()]} numberOfLines={2}>
+      <Text style={[styles.text, props.style, getTextStyle()]} numberOfLines={2}>
         {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
       </Text>
     </View>
@@ -30,11 +30,11 @@ export default function Label(props: { children?: any, label?: string, required?
 }
 
 const styles = StyleSheet.create({
-  labelContainer: {
+  container: {
     flexDirection: 'row',
     marginBottom: 3,
   },
-  labelText: {
+  text: {
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 16,

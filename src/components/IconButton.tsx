@@ -5,20 +5,22 @@ import { Colors, Styles } from '../constants';
 
 export default function IconButton(props: { onPress: () => void, iconColor?: string, color?: string, borderColor?: string, source?: any, iconName?: string, iconType?: string, iconSize?: number, style?: any, containerStyle?: any }) {
     const backgroundColor = props.color || Colors.primary;
-    const iconColor = props.iconColor || Colors.white;
-    const iconSize = props.iconSize || 26;
     const borderColor = props.borderColor || backgroundColor;
+    const color = props.iconColor || Colors.primaryText;
+    const iconSize = props.iconSize || 26;
+    
+
     return (
-        <TouchableOpacity style={[styles.buttonContainer, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 {props.source && (
                     <Image style={[styles.image, { width: iconSize, height: iconSize }]} source={props.source} />
                 )}
                 {props.iconName && !props.iconType && (
-                    <MaterialIcons style={[styles.icon, { color: iconColor, fontSize: iconSize }]} name={props.iconName} />
+                    <MaterialIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
                 )}
                 {props.iconName && props.iconType === 'Community' && (
-                    <MaterialCommunityIcons style={[styles.icon, { color: iconColor, fontSize: iconSize }]} name={props.iconName} />
+                    <MaterialCommunityIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
                 )}
             </View>
         </TouchableOpacity>
@@ -26,7 +28,7 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {},
+    container: {},
     button: {
         borderRadius: 50,
         flexDirection: 'row',

@@ -5,30 +5,32 @@ import { Colors, Styles } from '../constants';
 
 export default function Button(props: { onPress: () => void, textColor?: string, color?: string, borderColor?: string, title: string, source?: any, iconName?: string, iconType?: string, containerStyle?: any, style?: any, titleFormat?: boolean }) {
     const backgroundColor = props.color || Colors.primary;
+    const borderColor = props.borderColor || backgroundColor;
+    const color = props.textColor || Colors.primaryText;
+
     return (
-        <View style={props.containerStyle}>
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
-                <View style={[styles.buttonContainer, props.style, { backgroundColor, borderColor: props.borderColor || backgroundColor }]}>
-                    {props.source && (
-                        <Image style={styles.image} source={props.source} />
-                    )}
-                    {props.iconName && !props.iconType && (
-                        <MaterialIcons style={[styles.icon, { color: props.textColor || Colors.primaryText }]} name={props.iconName} />
-                    )}
-                    {props.iconName && props.iconType === 'Community' && (
-                        <MaterialCommunityIcons style={[styles.icon, { color: props.textColor || Colors.primaryText }]} name={props.iconName} />
-                    )}
-                    {props.title && (
-                        <Text style={[styles.text, { color: props.textColor || Colors.primaryText }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
-                    )}
-                </View>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+            <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
+                {props.source && (
+                    <Image style={styles.image} source={props.source} />
+                )}
+                {props.iconName && !props.iconType && (
+                    <MaterialIcons style={[styles.icon, { color }]} name={props.iconName} />
+                )}
+                {props.iconName && props.iconType === 'Community' && (
+                    <MaterialCommunityIcons style={[styles.icon, { color }]} name={props.iconName} />
+                )}
+                {props.title && (
+                    <Text style={[styles.text, { color }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
+                )}
+            </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {
+    container: {},
+    button: {
         minHeight: 36,
         borderRadius: 50,
         flexDirection: 'row',

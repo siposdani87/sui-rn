@@ -16,18 +16,18 @@ export default function ErrorField(props: { error?: any, disabled?: boolean }) {
   }
 
   return (
-    <View style={styles.errorContainer}>
-      <Text style={[styles.errorText, getTextStyle()]} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
+    <View style={styles.container}>
+      <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  errorContainer: {
+  container: {
     height: 12,
     marginTop: 5,
   },
-  errorText: {
+  text: {
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 12,
