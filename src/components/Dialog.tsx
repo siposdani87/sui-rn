@@ -1,32 +1,16 @@
 import React, { useState } from 'react';
-import TextButton from './TextButton';
-import Button from './Button';
 import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import IconButton from './IconButton';
 
-export default function Dialog(props: { title?: string, children?: any, text?: string, cancelText?: string, submitText?: string, buttons?: any, visible: boolean, onSubmit?: () => void, onCancel?: () => void, onClose?: () => void }) {
+export default function Dialog(props: { title?: string, children?: any, buttons?: any, visible: boolean, onClose?: () => void }) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
     if (props.visible !== visible) {
         setVisible(props.visible);
-    }
-
-    function onSubmit() {
-        setVisible(false);
-        if (props.onSubmit) {
-            props.onSubmit();
-        }
-    }
-
-    function onCancel() {
-        setVisible(false);
-        if (props.onCancel) {
-            props.onCancel();
-        }
     }
 
     function onClose() {
@@ -37,7 +21,7 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
     }
 
     return (
-        <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onCancel}>
+        <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     {(props.title || props.onClose) && (
@@ -52,19 +36,10 @@ export default function Dialog(props: { title?: string, children?: any, text?: s
                     )}
                     <View style={styles.bodyContainer}>
                         {props.children}
-                        {props.text && (
-                            <Text style={styles.bodyText}>{props.text}</Text>
-                        )}
                     </View>
                     <View style={styles.footerContainer}>
-                        {props.onCancel && (
-                            <TextButton title={props.cancelText} onPress={onCancel} containerStyle={styles.button} />
-                        )}
-                        {props.onSubmit && (
-                            <Button title={props.submitText} onPress={onSubmit} containerStyle={styles.button} />
-                        )}
                         {props.buttons && props.buttons.map((button, key) => (
-                            <View key={key}>{button}</View>
+                            <View key={key} style={styles.button}>{button}</View>
                         ))}
                     </View>
                 </View>
@@ -108,11 +83,6 @@ const styles = StyleSheet.create({
     },
     bodyContainer: {
         marginBottom: 20,
-    },
-    bodyText: {
-        fontFamily: Styles.fontFamilyBody,
-        fontWeight: '400',
-        color: Colors.black,
     },
     footerContainer: {
         flexDirection: 'row',
