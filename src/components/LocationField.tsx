@@ -7,7 +7,7 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
-import { NumberField } from '.';
+import NumberField from './NumberField';
 
 export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, region?: any, onSearch?: (value: any) => void, required?: boolean, disabled?: boolean }) {
   const defaultValue = {

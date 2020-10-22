@@ -40,9 +40,9 @@ export default function App() {
     favouriteColor: '#673AB7'
   });
   const genders = [
-    { label: 'Male', value: 'MALE' },
-    { label: 'Female', value: 'FEMALE' },
-    { label: 'Other', value: 'OTHER' },
+    { name: 'Male', id: 'MALE' },
+    { name: 'Female', id: 'FEMALE' },
+    { name: 'Other', id: 'OTHER' },
   ];
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function App() {
 
               <PhoneField label='Phone' value={data.phone} error={null} onValueChange={(v) => updateData('phone', v)} />
 
-              <SelectField label='Gender' items={genders} value={data.gender} error={null} onValueChange={(v) => updateData('genders', v)} required={true} />
+              <SelectField label='Gender' items={genders} value={data.gender} valueKey='id' labelKey='name' error={null} onValueChange={(v) => updateData('genders', v)} required={true} />
 
               <TextAreaField label='About' value={data.about} error={null} onValueChange={(v) => updateData('about', v)} />
 
