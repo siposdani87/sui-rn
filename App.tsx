@@ -54,7 +54,7 @@ export default function App() {
     setTimeout(() => {
       setData({
         profilePicture: 'https://www.gravatar.com/avatar/0?s=200&d=robohash&f=y',
-        logoPicture: { 
+        logoPicture: {
           uri: null
         },
         name: 'Sipos Dániel',
@@ -87,7 +87,7 @@ export default function App() {
   }, []);
 
   function updateData(key, value) {
-    // console.log('updateData', key, value);
+    console.log('updateData', key, value);
     setData({
       ...data,
       [key]: value,
@@ -115,10 +115,10 @@ export default function App() {
 
               <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }} />
 
-              <FileField label='Logo picture' value={data.logoPicture} mimeType='image/*' error={null} onValueChange={(v) => updateData('logoPicture', v)} />
-
+            {/*   <FileField label='Logo picture' value={data.logoPicture} mimeType='image/*' error={null} onValueChange={(v) => updateData('logoPicture', v)} />
+ */}
               <FileField label='Profile picture' value={{ uri: data.profilePicture }} mimeType='image/*' error={null} onValueChange={(v) => updateData('profilePicture', v)} />
-
+  
               <TextField label='Name' value={data.name} error={null} onValueChange={(v) => updateData('name', v)} />
 
               <EmailField label='Email' value={data.email} error={null} onValueChange={(v) => updateData('email', v)} />

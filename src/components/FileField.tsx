@@ -28,12 +28,19 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     exif: true,
   };
 
-  useEffect(() => {
-    if ((typeof props.value === 'number' || !!(props.value as ImageURISource)?.uri) && !state.fileData) {
+  /* useEffect(() => {
+    if ((typeof props.value === 'number' || (props.value as ImageURISource)?.uri) && !state.fileData) {
       setValue(props.value);
       removeImage();
     }
-  }, [props.value]);
+  }, [props.value]); */
+
+  useEffect(() => {
+    if (((props.value as ImageURISource)?.uri) && !state.fileData) {
+      setValue(props.value);
+      removeImage();
+    }
+  }, [(props.value as ImageURISource)?.uri]);
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
