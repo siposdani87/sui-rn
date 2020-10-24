@@ -108,7 +108,7 @@ export default function LocationField(props: { value: any, label: string, error:
       )}
       <MapView style={styles.mapContainer} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
         {!!value.latitude && !!value.longitude && (
-          <Marker draggable={true} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
+          <Marker draggable={false} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
         )}
       </MapView>
     </View>
