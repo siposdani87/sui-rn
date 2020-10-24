@@ -11,16 +11,16 @@ export default function Button(props: { onPress: () => void, textColor?: string,
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
-                {props.source && (
+                {!!props.source && (
                     <Image style={styles.image} source={props.source} />
                 )}
-                {props.iconName && !props.iconType && (
+                {!!props.iconName && !props.iconType && (
                     <MaterialIcons style={[styles.icon, { color }]} name={props.iconName} />
                 )}
-                {props.iconName && props.iconType === 'Community' && (
+                {!!props.iconName && props.iconType === 'Community' && (
                     <MaterialCommunityIcons style={[styles.icon, { color }]} name={props.iconName} />
                 )}
-                {props.title && (
+                {!!props.title && (
                     <Text style={[styles.text, { color }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
                 )}
             </View>

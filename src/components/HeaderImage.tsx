@@ -12,7 +12,7 @@ export default function HeaderImage(props: { title: string, imageSource: ImageSo
     <View style={styles.baseContainer}>
       <Image source={props.imageSource} style={[styles.image]} />
       <Text style={[styles.titleText, isDarkTheme ? styles.titleDarkText : styles.titleLightText]}>{props.title}</Text>
-      {props.onClose && (
+      {!!props.onClose && (
         <View style={styles.buttonContainer}>
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onClose}>
             <MaterialIcons style={[styles.icon, isDarkTheme ? styles.titleDarkText : styles.titleLightText]} name='close' />

@@ -12,13 +12,13 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
-                {props.source && (
+                {!!props.source && (
                     <Image style={[styles.image, { width: iconSize, height: iconSize }]} source={props.source} />
                 )}
-                {props.iconName && !props.iconType && (
+                {!!props.iconName && !props.iconType && (
                     <MaterialIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
                 )}
-                {props.iconName && props.iconType === 'Community' && (
+                {!!props.iconName && props.iconType === 'Community' && (
                     <MaterialCommunityIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
                 )}
             </View>
