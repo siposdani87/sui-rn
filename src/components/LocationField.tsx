@@ -75,7 +75,7 @@ export default function LocationField(props: { value: any, label: string, error:
   function regionFrom(coords: { latitude: number, longitude: number, accuracy?: number }) {
     const lat = coords?.latitude || 0;
     const lon = coords?.longitude || 0;
-    const accuracy = coords.accuracy || 10;
+    const accuracy = coords?.accuracy || 10;
     // const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
     // const latitudeDelta = accuracy / oneDegreeOfLatitudeInMeters;
     // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
