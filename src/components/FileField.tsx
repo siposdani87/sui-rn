@@ -36,7 +36,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
   }, [props.value]); */
 
   useEffect(() => {
-    if (((props.value as ImageURISource)?.uri) && !state.fileData) {
+    if ((props.value as ImageURISource)?.uri && !state.fileData) {
       setValue(props.value);
       removeImage();
     }
@@ -133,7 +133,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
             </TouchableOpacity>
           </View>
         )}
-        {!isDocument() && !state.fileData && value && (
+        {!isDocument() && !state.fileData && !!value && (
           <Image source={value} style={styles.image} />
         )}
       </View>

@@ -9,11 +9,11 @@ import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
 import NumberField from './NumberField';
 
-export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, region?: any, onSearch?: (value: any) => void, required?: boolean, disabled?: boolean }) {
+export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, required?: boolean, disabled?: boolean }) {
   const defaultValue = {
     address: '',
-    latitude: null,
-    longitude: null,
+    latitude: 0,
+    longitude: 0,
   };
   const [value, setValue] = useState(props.value || defaultValue);
   const [visibleCoords, setVisibleCoords] = useState(false);
@@ -72,10 +72,30 @@ export default function LocationField(props: { value: any, label: string, error:
     }
   }
 
+  function regionFrom(coords: { latitude: number, longitude: number, accuracy?: number }) {
+    const lat = coords.latitude;
+    const lon = coords.longitude;
+    const accuracy = coords.accuracy || 10;
+    // const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
+    // const latitudeDelta = accuracy / oneDegreeOfLatitudeInMeters;
+    // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
+
+    const latitudeDelta = 0.0922;
+    const longitudeDelta = (Layout.window.width / Layout.window.height) * latitudeDelta;
+
+    return {
+      latitude: lat,
+      longitude: lon,
+      latitudeDelta,
+      longitudeDelta,
+      accuracy,
+    }
+  }
+
   return (
     <View style={styles.baseContainer}>
       <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
-        {props.onSearch && (
+        {!!props.onSearch && (
           <IconButton iconName='pin-drop' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
         )}
         <IconButton iconName='settings' style={Styles.fieldIconButton} color='transparent' iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
@@ -86,9 +106,9 @@ export default function LocationField(props: { value: any, label: string, error:
           <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={onLongitudeChange} required={props.required} error={null} disabled={props.disabled} />
         </View>
       )}
-      <MapView style={styles.mapContainer} initialRegion={props.region} scrollEnabled={true}>
-        {value.latitude && value.longitude && (
-          <Marker draggable={false} onDragEnd={onDragEnd} key={'marker'} {...getLocationProps()} identifier={'marker'} coordinate={getCoordinates(value)} title={value.address} description='' />
+      <MapView style={styles.mapContainer} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
+        {!!value.latitude && !!value.longitude && (
+          <Marker draggable={true} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
         )}
       </MapView>
     </View>
