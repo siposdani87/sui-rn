@@ -157,7 +157,7 @@ export default function App() {
 
               <IconToggleField label='Deleted profile' value={data.isDeleted} onValueChange={(v) => updateData('isDeleted', v)} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
 
-              <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} />
+              <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} okText='OK' />
 
               <Button onPress={() => { }} title='Save' />
               <IconButton onPress={() => { }} iconName='save' />
