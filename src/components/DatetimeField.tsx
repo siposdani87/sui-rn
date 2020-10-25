@@ -157,7 +157,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
           </TextField>
           {Platform.OS === 'ios' && (
             <Dialog visible={show} onClose={hide} buttons={[
-              <Button title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectDate} color={Colors.primary} textColor={Colors.primaryText} />
+              <Button title={props.okText} onPress={selectDate} />
             ]}>
               {renderDateTimePicker()}
             </Dialog>
