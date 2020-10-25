@@ -81,7 +81,7 @@ export default function LocationField(props: { value: any, label: string, error:
     // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
 
     const latitudeDelta = 0.0922;
-    const longitudeDelta = (Layout.window.width / Layout.window.height) * latitudeDelta;
+    const longitudeDelta = (styles.mapContainer.width / styles.mapContainer.height) * latitudeDelta;
 
     return {
       latitude: lat,
