@@ -9,7 +9,7 @@ import environment from '../config/environment';
 import { ColorPicker, toHsv } from 'react-native-color-picker';
 import Dialog from './Dialog';
 
-export default function ColorField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
+export default function ColorField(props: { value: any, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [color, setColor] = useState(toHsv(props.value));
   const [error, onErrorChange] = useBaseField(props);

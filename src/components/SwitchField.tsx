@@ -7,7 +7,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function SwitchField(props: { value: boolean, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, text?: any, style?: any, containerStyle?: any }) {
+export default function SwitchField(props: { value: boolean, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -41,16 +41,16 @@ export default function SwitchField(props: { value: boolean, onValueChange: (val
   }
 
   return (
-    <View style={[styles.baseContainer, props.containerStyle]}>
+    <View style={[styles.container, props.containerStyle]}>
       <Switch value={value} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
-      <Label containerStyle={styles.label} label={props.label} required={props.required}>{props.text}</Label>
+      <Label containerStyle={styles.label} label={props.label} required={props.required} />
       <ErrorField error={error} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     marginBottom: 10,
   },
   label: {

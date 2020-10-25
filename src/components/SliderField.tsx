@@ -8,7 +8,7 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import Slider from '@react-native-community/slider';
 
-export default function SliderField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
+export default function SliderField(props: { value: any, onValueChange: (value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));

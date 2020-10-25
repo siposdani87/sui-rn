@@ -5,7 +5,7 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import IconButton from './IconButton';
 
-export default function Dialog(props: { title?: string, children?: any, buttons?: any, visible: boolean, onClose?: () => void }) {
+export default function Dialog(props: { title?: string, buttons?: any, visible: boolean, onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 

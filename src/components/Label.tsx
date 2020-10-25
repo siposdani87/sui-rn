@@ -5,7 +5,7 @@ import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function Label(props: { children?: any, label?: string, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
+export default function Label(props: { label?: string, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   function getTextStyle() {

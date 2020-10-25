@@ -1,23 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import { Styles } from '../constants';
 import { Picker } from '@react-native-community/picker';
 import environment from '../config/environment';
+import TextField from './TextField';
+import IconButton from './IconButton';
+import Dialog from './Dialog';
+import Button from './Button';
 
-export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, error: any, color?: string, disabled?: boolean, required?: boolean, label?: string, placeholder?: string, labelKey?: string, valueKey?: string, style?: any, containerStyle?: any }) {
+export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, okText: string, multiple?: boolean, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [items, setItems] = useState(convert(props.items));
+  const [visible, setVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const valueKey = 'value';
+  const labelKey = 'label';
 
   useEffect(() => {
     setValue(props.value);
+    setSelectedValue(props.value);
   }, [props.value]);
 
   useEffect(() => {
@@ -35,8 +44,8 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       const optionValue = option[props.valueKey || 'value'];
       return {
         key: optionValue,
-        value: optionValue,
-        label: option[props.labelKey || 'label'],
+        [valueKey]: optionValue,
+        [labelKey]: option[props.labelKey || 'label'],
       };
     });
     return results;
@@ -55,30 +64,96 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
   }
 
+  function getIndex(v) {
+    return items.findIndex((item) => {
+      return item[valueKey] === v;
+    });
+  }
+
+  function getValue(v){
+    const index = getIndex(v);
+    if (index >= 0){
+      return items[index][labelKey];
+    }
+    return '';
+  }
+
+  function renderPicker(){
+    if (items.length > 0) { 
+      return (<Picker selectedValue={selectedValue} onValueChange={onChange} style={[props.style, styles.picker, _getTextInputStyle()]} itemStyle={styles.itemStyle} enabled={!props.disabled} mode='dialog'>
+        {items.map((item, index) => (
+          <Picker.Item key={index} label={item.label} value={item.value} />
+        ))}
+      </Picker>);
+    }
+    return null;
+  }
+
+  function onChange(selectedValue) {
+    if (Platform.OS === 'android') {
+      hideDialog();
+      onValueChange(selectedValue);
+    } else if (Platform.OS === 'ios') {
+      setSelectedValue(selectedValue);
+    }
+  }
+
+  function selectValue() {
+    hideDialog();
+    onValueChange(selectedValue);
+  }
+
+  function showDialog() {
+    setSelectedValue(value);
+    setVisible(true);
+  }
+
+  function hideDialog(){
+    setVisible(false);
+  }
+
   return (
-    <View style={[styles.baseContainer, props.containerStyle]}>
-      <Label label={props.label} required={props.required} disabled={props.disabled} />
-      {items.length > 0 && (
-        <Picker selectedValue={value} onValueChange={onValueChange} style={[props.style, styles.picker, _getTextInputStyle()]} itemStyle={styles.itemStyle} enabled={!props.disabled} mode='dropdown'>
-          {items.map((item, index) => (
-            <Picker.Item key={index} label={item.label} value={item.value} />
-          ))}
-        </Picker>
+    <View style={[styles.container, props.containerStyle]}>
+      {Platform.OS === 'android' && (
+        <Fragment>
+          <Label label={props.label} required={props.required} disabled={props.disabled} />
+          {renderPicker()}
+          <ErrorField error={error} disabled={props.disabled} />
+        </Fragment>
       )}
-      <ErrorField error={error} disabled={props.disabled} />
+      {Platform.OS === 'ios' && (
+        <Fragment>
+          <Label label={props.label} required={props.required} disabled={props.disabled} />
+          <TextField style={styles.selectInput} value={getValue(value)} onValueChange={() => {}} required={props.required} error={error} readonly={true}>
+            <IconButton iconName='expand-more' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.white : Colors.black} onPress={showDialog} />
+          </TextField>
+          <Dialog visible={visible} onClose={hideDialog} buttons={[
+              <Button title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectValue} color={Colors.primary} textColor={Colors.primaryText} />
+            ]}>
+            {renderPicker()}
+          </Dialog>
+        </Fragment>
+      )}
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     marginBottom: 10,
   },
+  selectInput: {
+    paddingRight: 40,
+  },
   picker: {
-    height: 36,
+    ...Platform.select({
+      android: {
+        height: 36,
+      }
+    })
   },
   itemStyle: {
-    height: 36,
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 16,
@@ -87,7 +162,6 @@ const styles = StyleSheet.create({
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 16,
-    height: 36,
     borderRadius: 3,
     borderWidth: 1,
     paddingHorizontal: 10,
