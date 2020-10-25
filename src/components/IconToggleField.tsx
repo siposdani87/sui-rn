@@ -8,7 +8,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function IconToggleField(props: { value: boolean, checkedIcon: string, uncheckedIcon: string, onValueChange: (value: any) => void, error: any, disabled?: boolean, required?: boolean, label?: string, children?: any, style?: any }) {
+export default function IconToggleField(props: { value: boolean, checkedIcon: string, uncheckedIcon: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -43,7 +43,7 @@ export default function IconToggleField(props: { value: boolean, checkedIcon: st
   }
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={[styles.container, props.containerStyle]}>
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
         <MaterialIcons name={getIcon(value)} size={26} color={getColor()} />
       </TouchableOpacity>
@@ -54,7 +54,7 @@ export default function IconToggleField(props: { value: boolean, checkedIcon: st
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     marginBottom: 10,
   },
   label: {

@@ -10,7 +10,7 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function TextAreaField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, richText?: boolean, style?: any, containerStyle?: any } & TextInputProps) {
+export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));

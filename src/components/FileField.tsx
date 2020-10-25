@@ -10,7 +10,7 @@ import TextField from './TextField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, label: string, error: any, onValueChange: (value: any) => void, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number }) {
+export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
@@ -122,7 +122,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
   }
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
@@ -153,8 +153,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
-  },
+  container: {},
   imageContainer: {
     flex: 1,
     flexDirection: 'column',

@@ -7,7 +7,7 @@ export default function Loader(props) {
     const insets = useSafeAreaInsets();
 
     return props.screenProps.services.httpService.isInprogress() && (
-        <View style={[styles.baseContainer, { top: insets.top + 15 }]}>
+        <View style={[styles.container, { top: insets.top + 15 }]}>
             <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
                 <ActivityIndicator animating={true} color={props.color} />
             </View>
@@ -16,7 +16,7 @@ export default function Loader(props) {
 }
 
 const styles = StyleSheet.create({
-    baseContainer: {
+    container: {
         position: 'absolute',
         zIndex: 2,
         flexDirection: 'row',

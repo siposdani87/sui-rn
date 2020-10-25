@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { View, StyleSheet, useColorScheme, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -48,7 +48,7 @@ const MODES = {
   },
 };
 
-export default function DatetimeField(props: { mode: any, value: any, label: string, error: any, onValueChange: (value: any) => void, okText: string, format?: string, required?: boolean, disabled?: boolean, style?: any, containerStyle?: any }) {
+export default function DatetimeField(props: { mode: any, value: any, onValueChange: (value: any) => void, okText: string, format?: string, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [formattedValue, setFormattedValue] = useState('');
   const [date, setDate] = useState(null);
@@ -81,17 +81,24 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
 
   useEffect(() => {
     if (config && value) {
-      const d = moment(value, config.format);
-      setDate(d.toDate());
-      setFormattedValue(d.format(props.format));
+      setDate(getDate(value, config));
+      setFormattedValue(getFormattedDate(value, config));
     }
   }, [config, value]);
 
+  function getDate(v, c) {
+    return moment(v, c.format).toDate();
+  }
+
+  function getFormattedDate(v, c) {
+    return moment(v, c.format).format(props.format);
+  }
+
   function onChange(_event, selectedDate) {
-    if (Platform.OS === 'android'){
+    if (Platform.OS === 'android') {
       hide();
       onValueChange(selectedDate);
-    } else if (Platform.OS === 'ios'){
+    } else if (Platform.OS === 'ios') {
       setDate(selectedDate);
     }
   }
@@ -113,16 +120,16 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
   }
 
   function showMode(currentMode) {
+    setDate(getDate(value, config));
     setShow(true);
     setMode(currentMode);
   };
 
-  function hide(){
+  function hide() {
     setShow(false);
   }
 
-
-  function selectDate(){
+  function selectDate() {
     hide();
     onValueChange(date);
   }
@@ -139,29 +146,29 @@ export default function DatetimeField(props: { mode: any, value: any, label: str
   return (
     <View style={[styles.container, props.containerStyle]}>
       {(config.calendarType === 'date' || config.clockType === 'time') && (
-        <>
+        <Fragment>
           <TextField label={props.label} value={formattedValue} error={props.error} onValueChange={() => null} readonly={true}>
             {config.calendarType === 'date' && (
               <IconButton iconName='event' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showCalendar} />
             )}
             {config.clockType === 'time' && (
-            <IconButton iconName='schedule' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showClock} />
+              <IconButton iconName='schedule' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showClock} />
             )}
           </TextField>
           {Platform.OS === 'ios' && (
             <Dialog visible={show} onClose={hide} buttons={[
-              <Button key={1} title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectDate} color={Colors.primary} textColor={Colors.white} />
+              <Button title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectDate} color={Colors.primary} textColor={Colors.primaryText} />
             ]}>
               {renderDateTimePicker()}
             </Dialog>
           )}
-          {Platform.OS === 'android' && 
+          {Platform.OS === 'android' &&
             renderDateTimePicker()
           }
-        </>
+        </Fragment>
       )}
       {config.calendarType === 'year' && (
-        <SelectField label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} required={props.required} disabled={props.disabled} />
+        <SelectField label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} okText={props.okText} required={props.required} disabled={props.disabled} />
       )}
     </View>
   );

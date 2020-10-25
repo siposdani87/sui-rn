@@ -9,7 +9,7 @@ import MapView, { Marker, MapEvent } from 'react-native-maps';
 import { Layout } from '../constants';
 import NumberField from './NumberField';
 
-export default function LocationField(props: { value: any, label: string, error: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, required?: boolean, disabled?: boolean }) {
+export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const defaultValue = {
     address: '',
     latitude: 0,
@@ -80,7 +80,7 @@ export default function LocationField(props: { value: any, label: string, error:
     // const latitudeDelta = accuracy / oneDegreeOfLatitudeInMeters;
     // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
 
-    const latitudeDelta = 0.0922;
+    const latitudeDelta = 0.02;
     const longitudeDelta = (styles.mapContainer.width / styles.mapContainer.height) * latitudeDelta;
 
     return {
@@ -93,7 +93,7 @@ export default function LocationField(props: { value: any, label: string, error:
   }
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={[styles.container, props.containerStyle]}>
       <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
         {!!props.onSearch && (
           <IconButton iconName='pin-drop' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
@@ -102,8 +102,8 @@ export default function LocationField(props: { value: any, label: string, error:
       </TextField>
       {visibleCoords && (
         <View style={styles.coordsContainer}>
-          <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={onLatitudeChange} required={props.required} error={null} disabled={props.disabled} />
-          <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={onLongitudeChange} required={props.required} error={null} disabled={props.disabled} />
+          <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={onLatitudeChange} required={props.required} disabled={props.disabled} />
+          <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={onLongitudeChange} required={props.required} disabled={props.disabled} />
         </View>
       )}
       <MapView style={styles.mapContainer} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
@@ -116,7 +116,7 @@ export default function LocationField(props: { value: any, label: string, error:
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     marginBottom: 10,
   },
   coordsContainer: {

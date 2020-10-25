@@ -45,7 +45,7 @@ export default function Notification(props) {
     }
 
     return (
-        <View style={[styles.baseContainer, { top: insets.top + 20 }]}>
+        <View style={[styles.container, { top: insets.top + 20 }]}>
             {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(notification)}>
                     <View style={getContainerStyle(notification)}>
@@ -63,7 +63,7 @@ export default function Notification(props) {
 }
 
 const styles = StyleSheet.create({
-    baseContainer: {
+    container: {
         position: 'absolute',
         zIndex: 3,
         flexDirection: 'column',

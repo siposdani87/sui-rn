@@ -9,7 +9,7 @@ export default function HeaderImage(props: { title: string, imageSource: ImageSo
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   return (
-    <View style={styles.baseContainer}>
+    <View style={styles.container}>
       <Image source={props.imageSource} style={[styles.image]} />
       <Text style={[styles.titleText, isDarkTheme ? styles.titleDarkText : styles.titleLightText]}>{props.title}</Text>
       {!!props.onClose && (
@@ -24,7 +24,7 @@ export default function HeaderImage(props: { title: string, imageSource: ImageSo
 }
 
 const styles = StyleSheet.create({
-  baseContainer: {
+  container: {
     flexDirection: 'row',
     marginBottom: 20,
     alignItems: 'center',
