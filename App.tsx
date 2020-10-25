@@ -28,6 +28,7 @@ export default function App() {
     password: '',
     phone: '',
     gender: null,
+    body: null,
     height: 0,
     weight: 0,
     birthYear: null,
@@ -44,6 +45,10 @@ export default function App() {
     { name: 'Male', id: 'MALE' },
     { name: 'Female', id: 'FEMALE' },
     { name: 'Other', id: 'OTHER' },
+  ];
+  const bodyTypes = [
+    { name: 'Avarage', id: 'AVARAGE' },
+    { name: 'Sportic', id: 'SPORTLIC' },
   ];
 
   const [refreshing, setRefreshing] = useState(false);
@@ -62,6 +67,7 @@ export default function App() {
         password: '',
         phone: '+36 20 952 0471',
         gender: 'MALE',
+        body: 'AVARAGE',
         height: 178,
         weight: 92,
         birthYear: 1987,
@@ -127,7 +133,9 @@ export default function App() {
 
               <PhoneField label='Phone' value={data.phone} onValueChange={(v) => updateData('phone', v)} />
 
-              <SelectField label='Gender' items={genders} value={data.gender} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('genders', v)} required={true} />
+              <SelectField label='Gender' items={genders} value={data.gender} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('gender', v)} required={true} />
+
+              <SelectField label='Body type' items={bodyTypes} value={data.body} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('body', v)} placeholder='Please select' />
 
               <TextAreaField label='About' value={data.about} onValueChange={(v) => updateData('about', v)} />
 

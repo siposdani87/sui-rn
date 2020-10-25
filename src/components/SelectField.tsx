@@ -31,7 +31,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   useEffect(() => {
     setItems(convert(props.items));
-  }, [props.items]);
+  }, [props.items, props.required, props.placeholder]);
 
   function onValueChange(v) {
     onErrorChange();
@@ -48,6 +48,13 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         [labelKey]: option[props.labelKey || 'label'],
       };
     });
+    if (!props.required) {
+      results.unshift({
+        key: null,
+        [valueKey]: null,
+        [labelKey]: props.placeholder,
+      });
+    }
     return results;
   }
 
@@ -70,16 +77,19 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     });
   }
 
-  function getValue(v){
+  function getValue(v) {
     const index = getIndex(v);
-    if (index >= 0){
+    if (index >= 0) {
       return items[index][labelKey];
+    }
+    if (props.required){
+      return items[0][labelKey];
     }
     return '';
   }
 
-  function renderPicker(){
-    if (items.length > 0) { 
+  function renderPicker() {
+    if (items.length > 0) {
       return (<Picker selectedValue={selectedValue} onValueChange={onChange} style={[props.style, styles.picker, _getTextInputStyle()]} itemStyle={styles.itemStyle} enabled={!props.disabled} mode='dialog'>
         {items.map((item, index) => (
           <Picker.Item key={index} label={item.label} value={item.value} />
@@ -108,7 +118,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     setVisible(true);
   }
 
-  function hideDialog(){
+  function hideDialog() {
     setVisible(false);
   }
 
@@ -124,17 +134,17 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       {Platform.OS === 'ios' && (
         <Fragment>
           <Label label={props.label} required={props.required} disabled={props.disabled} />
-          <TextField style={styles.selectInput} value={getValue(value)} onValueChange={() => {}} required={props.required} error={error} readonly={true}>
+          <TextField style={styles.selectInput} value={getValue(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
             <IconButton iconName='expand-more' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.white : Colors.black} onPress={showDialog} />
           </TextField>
           <Dialog visible={visible} onClose={hideDialog} buttons={[
-              <Button title={props.okText} containerStyle={{ marginLeft: 10 }} onPress={selectValue} color={Colors.primary} textColor={Colors.primaryText} />
-            ]}>
+            <Button title={props.okText} onPress={selectValue} />
+          ]}>
             {renderPicker()}
           </Dialog>
         </Fragment>
       )}
-      
+
     </View>
   );
 }
