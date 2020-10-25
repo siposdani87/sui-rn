@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
         // tintColor: Colors.blackBright,
     },
     text: {
-        fontSize: 18,
         marginHorizontal: 20,
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
+        fontSize: 18,
     },
     textLight: {
         color: Colors.deepGreyBright,
