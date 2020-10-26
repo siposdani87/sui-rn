@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: Styles.fontFamilyBody,
-        fontWeight: '400',
+        fontWeight: '500',
         fontSize: 16,
         textAlign: 'center',
     },
