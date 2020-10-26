@@ -151,7 +151,11 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    ...Platform.select({
+      android: {
+        marginBottom: 10,
+      }
+    })
   },
   selectInput: {
     paddingRight: 40,
