@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     container: {},
     text: {
         fontFamily: Styles.fontFamilyBody,
-        fontWeight: '400',
+        fontWeight: '500',
         fontSize: 16,
         textAlign: 'center',
         paddingHorizontal: 15,
