@@ -42,7 +42,6 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   function convert(options) {
     const results = options.map((option) => {
       const optionValue = option[props.valueKey || 'value'];
-
       return {
         key: optionValue,
         [valueKey]: optionValue,
@@ -83,7 +82,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     if (index >= 0) {
       return items[index][labelKey];
     }
-    if (items.length >= 0 && props.required){
+    if (items.length > 0 && props.required){
       return items[0][labelKey];
     }
     return '';
@@ -145,7 +144,6 @@ export default function SelectField(props: { value: any, items: any, onValueChan
           </Dialog>
         </Fragment>
       )}
-
     </View>
   );
 }
