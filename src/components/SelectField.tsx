@@ -42,6 +42,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   function convert(options) {
     const results = options.map((option) => {
       const optionValue = option[props.valueKey || 'value'];
+
       return {
         key: optionValue,
         [valueKey]: optionValue,
@@ -52,7 +53,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       results.unshift({
         key: null,
         [valueKey]: null,
-        [labelKey]: props.placeholder,
+        [labelKey]: props.placeholder || '',
       });
     }
     return results;
