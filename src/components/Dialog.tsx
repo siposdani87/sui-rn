@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
     },
     dialogContainer: {
-        margin: 10,
         padding: 20,
         flex: 1,
         flexDirection: 'column',
@@ -66,7 +65,8 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         marginLeft: 30,
         marginRight: 30,
-        marginTop: 30,
+        marginTop: 20,
+        marginBottom: 10,
         ...Styles.shadow as ViewStyle,
     },
     dialogLightContainer: {
@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     headerContainer: {
-        marginTop: -5,
         marginBottom: 20,
     },
     headerText: {
