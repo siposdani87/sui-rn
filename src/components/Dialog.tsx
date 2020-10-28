@@ -50,15 +50,24 @@ export default function Dialog(props: { title?: string, buttons?: any, visible: 
 
 const styles = StyleSheet.create({
     dropContainer: {
-        ...Styles.fullscreenContainer as ViewStyle,
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
     },
     dialogContainer: {
-        ...Styles.dialogContainer as ViewStyle,
-        ...Styles.shadow as ViewStyle,
+        margin: 10,
+        padding: 20,
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        borderRadius: 3,
         marginLeft: 30,
         marginRight: 30,
         marginTop: 30,
+        ...Styles.shadow as ViewStyle,
     },
     dialogLightContainer: {
         backgroundColor: Colors.white,
