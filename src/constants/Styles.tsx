@@ -6,28 +6,6 @@ const styles = {
     fontFamilyApp: '',
     fontFamilyHeading: '',
     fontFamilyBody: '',
-    fullscreenContainer: {
-        flex: 1,
-        backgroundColor: Colors.primary,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    columnContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-    },
-    dialogContainer: {
-        margin: 10,
-        padding: 20,
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-        borderRadius: 3,
-    },
     shadow: {
         ...Platform.select({
             android: {
