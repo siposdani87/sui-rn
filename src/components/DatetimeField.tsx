@@ -149,10 +149,10 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
         <Fragment>
           <TextField label={props.label} value={formattedValue} error={props.error} onValueChange={() => null} readonly={true}>
             {config.calendarType === 'date' && (
-              <IconButton iconName='event' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showCalendar} />
+              <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showCalendar} />
             )}
             {config.clockType === 'time' && (
-              <IconButton iconName='schedule' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showClock} />
+              <IconButton iconName='schedule' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showClock} />
             )}
           </TextField>
           {Platform.OS === 'ios' && (

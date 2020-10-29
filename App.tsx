@@ -159,9 +159,20 @@ export default function App() {
 
               <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} okText='OK' />
 
-              <Button onPress={() => { }} title='Save' />
-              <IconButton onPress={() => { }} iconName='save' />
-              <TextButton onPress={() => { }} title='Save' />
+              <View style={{ flexDirection: 'row' }}>
+                <Button onPress={() => { }} title='Save' />
+                <Button onPress={() => { }} iconName='save' />
+                <Button onPress={() => { }} title='Save' imageSource={require('./assets/favicon.png')} />
+                <Button onPress={() => { }} iconName='save' title='Save' />
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <IconButton onPress={() => { }} iconName='save' />
+                <IconButton onPress={() => { }} iconName='save' iconColor={Colors.primary} borderColor={Colors.primary} />
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <TextButton onPress={() => { }} title='Save' />
+                <TextButton onPress={() => { }} title='Save' textColor={Colors.accent} />
+              </View>
             </View>
           </ScrollView>
         </View>

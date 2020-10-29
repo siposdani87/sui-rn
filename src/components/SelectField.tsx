@@ -135,7 +135,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         <Fragment>
           <Label label={props.label} required={props.required} disabled={props.disabled} />
           <TextField style={styles.selectInput} value={getValue(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
-            <IconButton iconName='expand-more' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.white : Colors.black} onPress={showDialog} />
+            <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} onPress={showDialog} />
           </TextField>
           <Dialog visible={visible} onClose={hideDialog} buttons={[
             <Button title={props.okText} onPress={selectValue} />
