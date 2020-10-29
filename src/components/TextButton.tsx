@@ -18,7 +18,6 @@ export default function TextButton(props: { onPress: () => void, textColor?: str
 
 const styles = StyleSheet.create({
     container: {
-        minHeight: 36,
         minWidth: 36,
         margin: 5,
     },
