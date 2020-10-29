@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import NoContent from './NoContent';
-import { FlatList as ReactNativeFlatList, Platform, ImageSourcePropType, ListRenderItem, RefreshControl } from 'react-native';
+import { FlatList as ReactNativeFlatList, ImageSourcePropType, ListRenderItem, RefreshControl, View } from 'react-native';
 
 const config = {
-    progressViewOffset: -1000,
-    ...Platform.select({
-        android: {
-            onEndReachedThreshold: 0.5,
-        },
-        ios: {
-            onEndReachedThreshold: 0,
-        },
-        web: {
-            onEndReachedThreshold: 0,
-        }
-    }),
+    progressViewOffset: 10,
+    onEndReachedThreshold: 1,
 };
 
 export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
@@ -58,6 +48,8 @@ export default function FlatList(props: { data: any[], keyExtractor?: (item: any
     }
 
     return (
-        <ReactNativeFlatList {...props} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={Platform.OS === 'ios' ? getRefreshControl() : null} />
+        <View style={{ marginTop: -10 }}>
+            <ReactNativeFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={1} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={getRefreshControl()} />
+        </View>
     );
 }
