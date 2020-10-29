@@ -17,12 +17,15 @@ export default function TextButton(props: { onPress: () => void, textColor?: str
 }
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+        minHeight: 36,
+        minWidth: 36,
+        margin: 5,
+    },
     text: {
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '500',
         fontSize: 16,
-        textAlign: 'center',
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
     },
 });

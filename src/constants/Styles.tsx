@@ -156,8 +156,7 @@ const styles = {
         justifyContent: 'center',
     },
     fieldIconButton: {
-        padding: 1,
-        margin: 2,
+        margin: 0,
     },
 };
 

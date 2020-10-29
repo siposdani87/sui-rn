@@ -30,7 +30,7 @@ export default function Dialog(props: { title?: string, buttons?: any, visible: 
                                 <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
                             )}
                             {!!props.onClose && (
-                                <IconButton iconName='close' iconColor={isDarkTheme ? Colors.white : Colors.black} color='transparent' borderColor='transparent' onPress={onClose} containerStyle={styles.closeButton} />
+                                <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
                             )}
                         </View>
                     )}

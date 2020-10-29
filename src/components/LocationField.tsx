@@ -96,9 +96,9 @@ export default function LocationField(props: { value: any, onValueChange: (value
     <View style={[styles.container, props.containerStyle]}>
       <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
         {!!props.onSearch && (
-          <IconButton iconName='pin-drop' style={Styles.fieldIconButton} color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
+          <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
         )}
-        <IconButton iconName='settings' style={Styles.fieldIconButton} color='transparent' iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
+        <IconButton iconName='settings' containerStyle={Styles.fieldIconButton} iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
       </TextField>
       {visibleCoords && (
         <View style={styles.coordsContainer}>

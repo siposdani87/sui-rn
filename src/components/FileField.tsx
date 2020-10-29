@@ -127,7 +127,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={styles.removeIconButton} iconName='close' iconSize={20} color={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>
@@ -139,13 +139,13 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       </View>
       <TextField style={styles.fileInput} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
         {isDocument() && (
-          <IconButton style={Styles.fieldIconButton} iconName='description' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
         )}
         {!isDocument() && (
-          <IconButton style={Styles.fieldIconButton} iconName='photo-camera' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
         )}
         {!isDocument() && (
-          <IconButton style={Styles.fieldIconButton} iconName='collections' color='transparent' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='collections' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
         )}
       </TextField>
     </View>
@@ -175,11 +175,8 @@ const styles = StyleSheet.create({
   },
   removeIconButtonContainer: {
     position: 'absolute',
-    top: -15,
-    right: -15,
+    top: -10,
+    right: -20,
     zIndex: 1,
-  },
-  removeIconButton: {
-    padding: 1,
   },
 });
