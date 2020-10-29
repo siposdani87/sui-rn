@@ -147,8 +147,7 @@ const styles = {
         zIndex: 1,
     },
     navigationIconButton: {
-        minHeight: 20,
-        padding: 4,
+        marginLeft: 0,
         marginRight: 10,
     },
     navigationIconContainer: {
