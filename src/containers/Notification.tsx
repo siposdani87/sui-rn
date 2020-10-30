@@ -7,18 +7,18 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function Notification(props) {
+export default function Notification(props: { factories: any }) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
     const insets = useSafeAreaInsets();
 
     function close(notification) {
         return () => {
-            props.screenProps.factories.notificationFactory.close(notification);
+            props.factories.notificationFactory.close(notification);
         }
     }
 
     function closable(notification) {
-        return props.screenProps.factories.notificationFactory.isClosable(notification.type, notification.opt_closeCallback) && !SUI.eq(notification.opt_duration, Infinity);
+        return props.factories.notificationFactory.isClosable(notification.type, notification.opt_closeCallback) && !SUI.eq(notification.opt_duration, Infinity);
     }
 
     function getContainerStyle(notification) {
@@ -46,7 +46,7 @@ export default function Notification(props) {
 
     return (
         <View style={[styles.container, { top: insets.top + 20 }]}>
-            {props.screenProps.factories.notificationFactory.notifications.map((notification, index) => (
+            {props.factories.notificationFactory.notifications.map((notification, index) => (
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(notification)}>
                     <View style={getContainerStyle(notification)}>
                         <Text style={getTextStyle()}>{notification.message}</Text>
