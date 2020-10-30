@@ -7,12 +7,12 @@ import { Styles, Colors } from '../constants';
 export default function Confirm(props: { factories: any }) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
-    const title = props.factories.confirmfactory.getTitle();
-    const message = props.factories.confirmfactory.getMessage();
-    const hasMessage = props.factories.confirmfactory.hasMessage();
+    const title = props.factories.confirmFactory.getTitle();
+    const message = props.factories.confirmFactory.getMessage();
+    const hasMessage = props.factories.confirmFactory.hasMessage();
 
     function onClose() {
-        props.factories.confirmfactory.onClose();
+        props.factories.confirmFactory.onClose();
     }
 
     function onPress(alertButton) {
@@ -23,7 +23,7 @@ export default function Confirm(props: { factories: any }) {
     }
 
     function getButtons(): any[] {
-        const alertButtons = props.factories.confirmfactory.getButtons();
+        const alertButtons = props.factories.confirmFactory.getButtons();
 
         return alertButtons.map((alertButton) => {
             switch (alertButton.style) {
@@ -40,7 +40,7 @@ export default function Confirm(props: { factories: any }) {
     }
 
     return (
-        <Dialog title={title} visible={props.factories.confirmfactory.isVisible()} buttons={getButtons()}>
+        <Dialog title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
             {hasMessage && (
                 <Text style={[styles.text, isDarkTheme ? styles.darkText : styles.lightText]}>{message}</Text>
             )}
