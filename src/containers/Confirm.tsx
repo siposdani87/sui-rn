@@ -10,15 +10,18 @@ export default function Confirm(props: { factories: any }) {
     const title = props.factories.confirmFactory.getTitle();
     const message = props.factories.confirmFactory.getMessage();
     const hasMessage = props.factories.confirmFactory.hasMessage();
+    const isClosable = props.factories.confirmFactory.isClosable();
 
-    function onClose() {
-        props.factories.confirmFactory.onClose();
+    function close() {
+        props.factories.confirmFactory.close();
     }
 
     function onPress(alertButton) {
         return (value?: string) => {
-            alertButton.onPress(value);
-            onClose();
+            if (!!alertButton.onPress){
+                alertButton.onPress(value);
+            }
+            close();
         };
     }
 
@@ -40,7 +43,7 @@ export default function Confirm(props: { factories: any }) {
     }
 
     return (
-        <Dialog title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
+        <Dialog title={title} visible={props.factories.confirmFactory.isVisible()} onClose={isClosable ? close : null} buttons={getButtons()}>
             {hasMessage && (
                 <Text style={[styles.text, isDarkTheme ? styles.darkText : styles.lightText]}>{message}</Text>
             )}
