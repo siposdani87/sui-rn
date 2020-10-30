@@ -48,11 +48,11 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         [labelKey]: option[props.labelKey || 'label'],
       };
     });
-    if (!props.required) {
+    if (props.placeholder) {
       results.unshift({
         key: null,
         [valueKey]: null,
-        [labelKey]: props.placeholder || '',
+        [labelKey]: props.placeholder,
       });
     }
     return results;
@@ -77,7 +77,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     });
   }
 
-  function getValue(v) {
+  function getLabel(v) {
     const index = getIndex(v);
     if (index >= 0) {
       return items[index][labelKey];
@@ -134,7 +134,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       {Platform.OS === 'ios' && (
         <Fragment>
           <Label label={props.label} required={props.required} disabled={props.disabled} />
-          <TextField style={styles.selectInput} value={getValue(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
+          <TextField style={styles.selectInput} value={getLabel(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
             <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} onPress={showDialog} />
           </TextField>
           <Dialog visible={visible} onClose={hideDialog} buttons={[

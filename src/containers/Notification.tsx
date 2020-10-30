@@ -106,27 +106,27 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     successLightContainer: {
-        borderTopColor: Colors.green,
+        borderTopColor: Colors.success,
     },
     successDarkContainer: {
-        borderTopColor: Colors.greenBright,
+        borderTopColor: Colors.successBright,
     },
     infoLightContainer: {
-        borderTopColor: Colors.blue,
+        borderTopColor: Colors.info,
     },
     infoDarkContainer: {
-        borderTopColor: Colors.blueBright,
+        borderTopColor: Colors.infoBright,
     },
     warningLightContainer: {
-        borderTopColor: Colors.amber,
+        borderTopColor: Colors.warning,
     },
     warningDarkContainer: {
-        borderTopColor: Colors.amberBright,
+        borderTopColor: Colors.warningBright,
     },
     errorLightContainer: {
-        borderTopColor: Colors.red,
+        borderTopColor: Colors.error,
     },
     errorDarkContainer: {
-        borderTopColor: Colors.redBright,
+        borderTopColor: Colors.errorBright,
     },
 });

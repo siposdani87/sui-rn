@@ -5,7 +5,7 @@ import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import IconButton from './IconButton';
 
-export default function Dialog(props: { title?: string, buttons?: any, visible: boolean, onClose?: () => void, children?: any }) {
+export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any, onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
@@ -23,7 +23,7 @@ export default function Dialog(props: { title?: string, buttons?: any, visible: 
     return (
         <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
-                <View style={[styles.dialogContainer, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
+                <View style={[styles.dialogContainer, props.type ? styles[props.type] : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     {(!!props.title || !!props.onClose) && (
                         <View style={styles.headerContainer}>
                             {!!props.title && (
@@ -68,6 +68,14 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 10,
         ...Styles.shadow as ViewStyle,
+    },
+    info: {
+        borderTopWidth: 3,
+        borderTopColor: Colors.info,
+    },
+    warning: {
+        borderTopWidth: 3,
+        borderTopColor: Colors.amber,
     },
     dialogLightContainer: {
         backgroundColor: Colors.white,

@@ -1,36 +1,44 @@
 import BaseFactory from './BaseFactory';
 import { CONFIRM } from '../constants/ActionTypes';
-import { AlertButton, AlertOptions } from 'react-native';
+import { AlertButton } from 'react-native';
 
 export default class ConfirmFactory extends BaseFactory {
     private visible: boolean;
+    private type: string;
     private title: string;
     private message: string;
     private buttons: AlertButton[];
-    private options: AlertOptions;
     
     constructor(dispatch) {
         super(dispatch);
         this.visible = false;
+        this.type = 'info';
         this.title = '';
         this.message = '';
         this.buttons = [];
-        this.options = {};
     }
 
-    public open(title: string, message?: string, buttons?: AlertButton[], options?: AlertOptions) {
-        this.title = title;
+    public warning(message: string, buttons?: AlertButton[], title?: string){
+        this.open('warning', message, buttons, title);
+    }
+
+    public info(message: string, buttons?: AlertButton[], title?: string){
+        this.open('info', message, buttons, title);
+    }
+
+    private open(type, message: string, buttons?: AlertButton[], title?: string) {
+        this.type = type;
+        this.title = title || '';
         this.message = message || '';
         this.buttons = buttons || [];
-        this.options = options || {};
         this.visible = true;
         this.dispatch({
             type: CONFIRM,
         });
     }
 
-    public hasMessage(): boolean {
-        return !!this.message;
+    public getType(): string {
+        return this.type;
     }
 
     public getTitle(): string {
@@ -45,16 +53,8 @@ export default class ConfirmFactory extends BaseFactory {
         return this.buttons;
     }
 
-    public getOptions(): AlertOptions {
-        return this.options;
-    }
-
     public isVisible(): boolean {
         return this.visible;
-    }
-
-    public isClosable(): boolean {
-        return this.options.cancelable;
     }
 
     public close() {
