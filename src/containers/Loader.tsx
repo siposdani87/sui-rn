@@ -3,16 +3,19 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function Loader(props) {
+export default function Loader(props: { services: any, backgroundColor: string, color: string }) {
     const insets = useSafeAreaInsets();
 
-    return props.screenProps.services.httpService.isInprogress() && (
-        <View style={[styles.container, { top: insets.top + 15 }]}>
-            <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
-                <ActivityIndicator animating={true} color={props.color} />
+    if (props.services.httpService.isInprogress()) {
+        return (
+            <View style={[styles.container, { top: insets.top + 15 }]}>
+                <View style={[styles.loader, { backgroundColor: props.backgroundColor }]}>
+                    <ActivityIndicator animating={true} color={props.color} />
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
+    return null;
 }
 
 const styles = StyleSheet.create({

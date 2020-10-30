@@ -1,4 +1,5 @@
 export const NOTIFICATION = 'Notification/NOTIFICATION';
+export const CONFIRM = 'Confirm/CONFIRM';
 
 export const HTTP_REQUEST = 'Http/REQUEST';
 export const HTTP_RESPONSE = 'Http/RESPONSE';
