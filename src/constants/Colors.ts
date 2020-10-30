@@ -1,3 +1,5 @@
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 const baseColors = {
   // Theme
 
@@ -108,7 +110,27 @@ const baseColors = {
   brownDark: '#5D4037',
 };
 
-const widgetColors = {
+const additionalColors = {
+  successBright: Colors.greenBright,
+  success: Colors.green,
+  successDark: Colors.greenDark,
+  successText: Colors.white,
+
+  infoBright: Colors.blueBright,
+  info: Colors.blue,
+  infoDark: Colors.blueDark,
+  infoText: Colors.white,
+
+  warningBright: Colors.amberBright,
+  warning: Colors.amber,
+  warningDark: Colors.amberDark,
+  warningText: Colors.white,
+
+  errorBright: Colors.redBright,
+  error: Colors.red,
+  errorDark: Colors.redDark,
+  errorText: Colors.white,
+
   labelDefaultLight: baseColors.deepGrey,
   labelDisabledLight: baseColors.lightGreyDark,
 
@@ -152,7 +174,7 @@ const widgetColors = {
   errorDisabledDark: baseColors.redDark,
 };
 
-const colors = Object.assign(baseColors, widgetColors);
+const colors = Object.assign(baseColors, additionalColors);
 
 export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
   colors.primaryBright = primaryBright;
