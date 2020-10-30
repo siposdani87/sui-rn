@@ -53,6 +53,10 @@ export default class ConfirmFactory extends BaseFactory {
         return this.visible;
     }
 
+    public isClosable(): boolean {
+        return this.options.cancelable;
+    }
+
     public close() {
         this.visible = false;
         this.dispatch({
