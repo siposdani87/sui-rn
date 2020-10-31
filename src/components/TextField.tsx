@@ -43,13 +43,13 @@ export default function TextField(props: { value: any, onValueChange: (value: an
       {props.children && (
         <View style={[styles.actionsContainer, Platform.select({
           android: {
-            top: props.label ? 26 : 2,
+            top: props.label ? 24 : -2,
           },
           ios: {
-            top: props.label ? 20 : 2,
+            top: props.label ? 18 : -2,
           },
           web: {
-            top: props.label ? 26 : 2,
+            top: props.label ? 24 : -2,
           }
         })]}>
           {props.children}

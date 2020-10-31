@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     },
     warning: {
         borderTopWidth: 3,
-        borderTopColor: Colors.amber,
+        borderTopColor: Colors.warning,
     },
     dialogLightContainer: {
         backgroundColor: Colors.white,
