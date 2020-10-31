@@ -1,12 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import ErrorField from './ErrorField';
+import React, { useState, useEffect } from 'react';
 import Label from './Label';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Colors } from '../constants';
 import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import { Styles } from '../constants';
-import { Picker } from '@react-native-community/picker';
 import environment from '../config/environment';
 import TextField from './TextField';
 import IconButton from './IconButton';
@@ -14,19 +12,18 @@ import Dialog from './Dialog';
 import Button from './Button';
 
 export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, okText: string, multiple?: boolean, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
+  const valueKey = 'value';
+  const labelKey = 'label';
+
   const [value, setValue] = useState(props.value);
   const [items, setItems] = useState(convert(props.items));
   const [visible, setVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
-  const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-  const valueKey = 'value';
-  const labelKey = 'label';
 
   useEffect(() => {
     setValue(props.value);
-    setSelectedValue(props.value);
   }, [props.value]);
 
   useEffect(() => {
@@ -41,16 +38,13 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   function convert(options) {
     const results = options.map((option) => {
-      const optionValue = option[props.valueKey || 'value'];
       return {
-        key: optionValue,
-        [valueKey]: optionValue,
+        [valueKey]: option[props.valueKey || 'value'],
         [labelKey]: option[props.labelKey || 'label'],
       };
     });
     if (props.placeholder) {
       results.unshift({
-        key: null,
         [valueKey]: null,
         [labelKey]: props.placeholder,
       });
@@ -58,22 +52,9 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     return results;
   }
 
-  function _getTextInputStyle() {
-    if (hasError) {
-      if (props.disabled) {
-        return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
-      }
-      return isDarkTheme ? styles.hasErrorDefaultDark : styles.hasErrorDefaultLight;
-    }
-    if (props.disabled) {
-      return isDarkTheme ? styles.disabledDarkTextInput : styles.disabledLightTextInput;
-    }
-    return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
-  }
-
   function getIndex(v) {
     return items.findIndex((item) => {
-      return item[valueKey] === v;
+      return (item[valueKey] || '').toString() === (v || '').toString();
     });
   }
 
@@ -82,30 +63,22 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     if (index >= 0) {
       return items[index][labelKey];
     }
-    if (items.length > 0 && props.required){
+    if (items.length > 0 && props.required) {
       return items[0][labelKey];
     }
     return '';
   }
 
-  function renderPicker() {
-    if (items.length > 0) {
-      return (<Picker selectedValue={selectedValue} onValueChange={onChange} style={[props.style, styles.picker, _getTextInputStyle()]} itemStyle={styles.itemStyle} enabled={!props.disabled} mode='dialog'>
-        {items.map((item, index) => (
-          <Picker.Item key={index} label={item.label} value={item.value} />
-        ))}
-      </Picker>);
-    }
-    return null;
+  function keyExtractor(item) {
+    return (item[valueKey] || '').toString();
   }
 
-  function onChange(selectedValue) {
-    if (Platform.OS === 'android') {
-      hideDialog();
-      onValueChange(selectedValue);
-    } else if (Platform.OS === 'ios') {
-      setSelectedValue(selectedValue);
-    }
+  function isSelected(v) {
+    return (selectedValue || '').toString() === (v || '').toString();
+  }
+
+  function onPress(v) {
+    setSelectedValue(v);
   }
 
   function selectValue() {
@@ -124,93 +97,36 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      {Platform.OS === 'android' && (
-        <Fragment>
-          <Label label={props.label} required={props.required} disabled={props.disabled} />
-          {renderPicker()}
-          <ErrorField error={error} disabled={props.disabled} />
-        </Fragment>
-      )}
-      {Platform.OS === 'ios' && (
-        <Fragment>
-          <Label label={props.label} required={props.required} disabled={props.disabled} />
-          <TextField style={styles.selectInput} value={getLabel(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
-            <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} onPress={showDialog} />
-          </TextField>
-          <Dialog visible={visible} onClose={hideDialog} buttons={[
-            <Button title={props.okText} onPress={selectValue} />
-          ]}>
-            {renderPicker()}
-          </Dialog>
-        </Fragment>
-      )}
+      <Label label={props.label} required={props.required} disabled={props.disabled} />
+      <TextField style={styles.selectInput} value={getLabel(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
+        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} onPress={showDialog} />
+      </TextField>
+      <Dialog visible={visible} onClose={hideDialog} buttons={[
+        <Button title={props.okText} onPress={selectValue} />
+      ]}>
+        <FlatList style={{ maxHeight: 300 }} keyExtractor={keyExtractor} data={items} renderItem={({ item }) => (
+          <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => onPress(item[valueKey])}>
+            <Text style={[styles.item, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
+          </TouchableOpacity>
+        )} />
+      </Dialog>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    ...Platform.select({
-      android: {
-        marginBottom: 10,
-      }
-    })
-  },
+  container: {},
   selectInput: {
     paddingRight: 40,
   },
-  picker: {
-    ...Platform.select({
-      android: {
-        height: 36,
-      }
-    })
-  },
-  itemStyle: {
-    fontFamily: Styles.fontFamilyBody,
-    fontWeight: '400',
-    fontSize: 16,
-  },
-  input: {
-    fontFamily: Styles.fontFamilyBody,
-    fontWeight: '400',
-    fontSize: 16,
-    borderRadius: 3,
-    borderWidth: 1,
+  item: {
     paddingHorizontal: 10,
+    paddingVertical: 5,
   },
-  defaultLightTextInput: {
-    color: Colors.contentDefaultLight,
-    borderColor: Colors.inputDefaultLight,
+  selectedItemLight: {
+    backgroundColor: Colors.inputDefaultLight,
   },
-  defaultDarkTextInput: {
-    color: Colors.contentDefaultDark,
-    borderColor: Colors.inputDefaultDark,
-  },
-  disabledLightTextInput: {
-    color: Colors.contentDisabledLight,
-    borderColor: Colors.inputDisabledLight,
-    borderStyle: 'dotted',
-  },
-  disabledDarkTextInput: {
-    color: Colors.contentDisabledDark,
-    borderColor: Colors.inputDisabledDark,
-    borderStyle: 'dotted',
-  },
-  hasErrorDefaultLight: {
-    color: Colors.contentDefaultLight,
-    borderColor: Colors.errorDefaultLight,
-  },
-  hasErrorDefaultDark: {
-    color: Colors.contentDefaultDark,
-    borderColor: Colors.errorDefaultDark,
-  },
-  hasErrorDisabledLight: {
-    color: Colors.contentDisabledLight,
-    borderColor: Colors.errorDisabledLight,
-  },
-  hasErrorDisabledDark: {
-    color: Colors.contentDisabledDark,
-    borderColor: Colors.errorDisabledDark,
-  },
+  selectedItemDark: {
+    backgroundColor: Colors.inputDefaultDark,
+  }
 });
