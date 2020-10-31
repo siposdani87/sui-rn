@@ -104,7 +104,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function onValueChange(v) {
-    const d = moment(v);
+    const d = moment(v, config.format);
     const formatD = d.format(config.format);
     setValue(formatD);
     setFormattedValue(d.format(props.format));
