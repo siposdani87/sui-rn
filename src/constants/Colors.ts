@@ -111,25 +111,25 @@ const baseColors = {
 };
 
 const additionalColors = {
-  successBright: Colors.greenBright,
-  success: Colors.green,
-  successDark: Colors.greenDark,
-  successText: Colors.white,
+  successBright: baseColors.greenBright,
+  success: baseColors.green,
+  successDark: baseColors.greenDark,
+  successText: baseColors.white,
 
-  infoBright: Colors.blueBright,
-  info: Colors.blue,
-  infoDark: Colors.blueDark,
-  infoText: Colors.white,
+  infoBright: baseColors.blueBright,
+  info: baseColors.blue,
+  infoDark: baseColors.blueDark,
+  infoText: baseColors.white,
 
-  warningBright: Colors.amberBright,
-  warning: Colors.amber,
-  warningDark: Colors.amberDark,
-  warningText: Colors.white,
+  warningBright: baseColors.amberBright,
+  warning: baseColors.amber,
+  warningDark: baseColors.amberDark,
+  warningText: baseColors.white,
 
-  errorBright: Colors.redBright,
-  error: Colors.red,
-  errorDark: Colors.redDark,
-  errorText: Colors.white,
+  errorBright: baseColors.redBright,
+  error: baseColors.red,
+  errorDark: baseColors.redDark,
+  errorText: baseColors.white,
 
   labelDefaultLight: baseColors.deepGrey,
   labelDisabledLight: baseColors.lightGreyDark,
