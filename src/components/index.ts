@@ -18,6 +18,7 @@ export { default as NoContent } from './NoContent';
 export { default as NumberField } from './NumberField';
 export { default as PasswordField } from './PasswordField';
 export { default as PhoneField } from './PhoneField';
+export { default as SearchField } from './SearchField';
 export { default as SelectField } from './SelectField';
 export { default as SliderField } from './SliderField';
 export { default as SwitchField } from './SwitchField';

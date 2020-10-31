@@ -69,13 +69,25 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         ...Styles.shadow as ViewStyle,
     },
+    success: {
+        borderTopWidth: 5,
+        borderTopColor: Colors.success,
+    },
     info: {
-        borderTopWidth: 3,
+        borderTopWidth: 5,
         borderTopColor: Colors.info,
     },
     warning: {
-        borderTopWidth: 3,
+        borderTopWidth: 5,
         borderTopColor: Colors.warning,
+    },
+    error: {
+        borderTopWidth: 5,
+        borderTopColor: Colors.error,
+    },
+    choice: {
+        borderTopWidth: 5,
+        borderTopColor: Colors.accent,
     },
     dialogLightContainer: {
         backgroundColor: Colors.white,
