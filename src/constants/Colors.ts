@@ -1,5 +1,3 @@
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
 const baseColors = {
   // Theme
 
