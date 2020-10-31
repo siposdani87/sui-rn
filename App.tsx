@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
+import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, SearchField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
 import { Colors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
@@ -39,7 +39,8 @@ export default function App() {
     isPrivate: false,
     isBanned: false,
     isDeleted: false,
-    favouriteColor: '#673AB7'
+    favouriteColor: '#673AB7',
+    query: '',
   });
   const genders = [
     { name: 'Male', id: 'MALE' },
@@ -83,6 +84,7 @@ export default function App() {
         isBanned: true,
         isDeleted: true,
         favouriteColor: '#673AB7',
+        query: 'Keyword',
       });
       setRefreshing(false);
     }, 2000);
@@ -159,6 +161,11 @@ export default function App() {
 
               <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} okText='OK' />
 
+              <SearchField label='Search' value={data.query} onValueChange={(v) => updateData('query', v)} />
+
+              <View>
+                <Button onPress={() => { }} iconName='save' title='long title with save icon and more text' iconColor={Colors.black} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
+              </View>
               <View style={{ flexDirection: 'row' }}>
                 <Button onPress={() => { }} title='Save' />
                 <Button onPress={() => { }} iconName='save' />
