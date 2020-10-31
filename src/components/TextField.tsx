@@ -48,9 +48,6 @@ export default function TextField(props: { value: any, onValueChange: (value: an
           ios: {
             top: props.label ? 18 : -2,
           },
-          web: {
-            top: props.label ? 24 : -2,
-          }
         })]}>
           {props.children}
         </View>
