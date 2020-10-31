@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     image: {
-        width: 20,
-        height: 20,
+        width: 22,
+        height: 22,
         resizeMode: 'contain',
         margin: 5,
     },

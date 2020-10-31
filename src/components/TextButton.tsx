@@ -11,7 +11,7 @@ export default function TextButton(props: { onPress: () => void, textColor?: str
 
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
-            <Text style={[styles.text, { color }, props.style]}>{props.title.toUpperCase()}</Text>
+            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { color }, props.style]}>{props.title.toUpperCase()}</Text>
         </TouchableOpacity>
     );
 }
@@ -25,6 +25,6 @@ const styles = StyleSheet.create({
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '500',
         fontSize: 16,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
     },
 });

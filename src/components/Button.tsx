@@ -9,24 +9,28 @@ export default function Button(props: { onPress: () => void, iconColor?: string,
     const textColor = props.textColor || Colors.primaryText;
     const iconColor = props.iconColor || textColor;
 
-    function hasIcon(){
+    function hasIcon() {
         return !!props.imageSource || !!props.iconName;
+    }
+
+    function hasTitle() {
+        return !!props.title;
     }
 
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 {!!props.imageSource && (
-                    <Image style={styles.image} source={props.imageSource} />
+                    <Image style={[styles.image, { marginLeft: hasTitle() ? 10 : null }]} source={props.imageSource} />
                 )}
                 {!!props.iconName && !props.iconType && (
-                    <MaterialIcons style={[styles.icon, { color: iconColor }]} name={props.iconName} />
+                    <MaterialIcons style={[styles.icon, { marginLeft: hasTitle() ? 10 : null, color: iconColor }]} name={props.iconName} />
                 )}
                 {!!props.iconName && props.iconType === 'Community' && (
-                    <MaterialCommunityIcons style={[styles.icon, { color: iconColor }]} name={props.iconName} />
+                    <MaterialCommunityIcons style={[styles.icon, { marginLeft: hasTitle() ? 10 : null, color: iconColor }]} name={props.iconName} />
                 )}
-                {!!props.title && (
-                    <Text style={[styles.text, { color: textColor, paddingLeft: hasIcon()? 0 : null }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
+                {hasTitle() && (
+                    <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { color: textColor, paddingLeft: hasIcon() ? 0 : null }]}>{props.titleFormat ? props.title : props.title.toUpperCase()}</Text>
                 )}
             </View>
         </TouchableOpacity>
@@ -51,11 +55,11 @@ const styles = StyleSheet.create({
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '500',
         fontSize: 16,
-        paddingHorizontal: 10,
+        paddingHorizontal: 15,
     },
     image: {
-        width: 20,
-        height: 20,
+        width: 22,
+        height: 22,
         resizeMode: 'contain',
         marginHorizontal: 5,
     },
