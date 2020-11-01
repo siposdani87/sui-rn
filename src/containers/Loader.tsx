@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function Loader(props: { services: any, backgroundColor: string, color: string }) {
@@ -20,12 +20,12 @@ export default function Loader(props: { services: any, backgroundColor: string, 
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         position: 'absolute',
         zIndex: 2,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        width: Layout.window.width,
     },
     loader: {
         backgroundColor: Colors.primary,

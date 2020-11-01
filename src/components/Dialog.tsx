@@ -103,7 +103,8 @@ const styles = StyleSheet.create({
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
         fontWeight: '400',
-        fontSize: 20,
+        fontSize: 22,
+        textTransform: 'uppercase',
     },
     bodyContainer: {
         padding: 15,

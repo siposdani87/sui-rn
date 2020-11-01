@@ -58,7 +58,6 @@ export default function Notification(props: { factories: any }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         position: 'absolute',
         zIndex: 3,
         flexDirection: 'column',
