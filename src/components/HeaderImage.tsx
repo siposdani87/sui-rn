@@ -32,11 +32,12 @@ const styles = StyleSheet.create({
     fontFamily: Styles.fontFamilyHeading,
     fontWeight: '400',
     fontSize: 22,
+    textTransform: 'uppercase',
   },
   closeButton: {
     position: 'absolute',
-    top: -5,
-    right: -5,
+    top: -10,
+    right: -10,
     zIndex: 1,
   },
 });
