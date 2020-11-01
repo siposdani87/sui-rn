@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NoContent from './NoContent';
-import { FlatList as ReactNativeFlatList, ImageSourcePropType, ListRenderItem, RefreshControl, View } from 'react-native';
+import { FlatList as RNFlatList, ImageSourcePropType, ListRenderItem, RefreshControl, View } from 'react-native';
 
 const config = {
     progressViewOffset: 10,
@@ -49,7 +49,7 @@ export default function FlatList(props: { data: any[], keyExtractor?: (item: any
 
     return (
         <View style={{ marginTop: -10 }}>
-            <ReactNativeFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={1} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={getRefreshControl()} />
+            <RNFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={1} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={getRefreshControl()} />
         </View>
     );
 }
