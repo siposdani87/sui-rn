@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function useBaseField(props: { error?: any }) {
-  const [clearError, setClearError] = useState(false);
+  const [clearError, setClearError] = useState(null);
   const [error, setError] = useState(null);
 
   const newError = clearError !== props.error ? props.error : null;

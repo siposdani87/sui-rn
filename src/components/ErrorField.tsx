@@ -15,6 +15,9 @@ export default function ErrorField(props: { error?: any, disabled?: boolean }) {
     return isDarkTheme ? styles.errorDefaultDarkText : styles.errorDefaultLightText;
   }
 
+  if (props.error === false){
+    return null;
+  }
   return (
     <View style={styles.container}>
       <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>{props.error ? SUI.capitalize(props.error.join('; ')) : null}</Text>
@@ -31,7 +34,6 @@ const styles = StyleSheet.create({
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 12,
-    lineHeight: 14,
   },
   errorDefaultLightText: {
     color: Colors.errorDefaultLight,

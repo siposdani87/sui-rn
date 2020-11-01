@@ -18,7 +18,7 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
   const [sat, setSat] = useState(0);
   const [val, setVal] = useState(1);
   const [error, onErrorChange] = useBaseField(props);
-  const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false);
   const colorPickerRef = useRef(null);
   const hasError = error || (props.required && (!value || value && value.length === 0));
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -53,11 +53,11 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
     setHue(h);
     setSat(s);
     setVal(v);
-    setShow(true);
+    setVisible(true);
   }
 
   function hideColorPicker() {
-    setShow(false);
+    setVisible(false);
   }
 
   function onSatValPickerChange(c) {
@@ -78,7 +78,7 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <Dialog visible={show} onClose={hideColorPicker} buttons={[
+      <Dialog visible={visible} title={props.label} onClose={hideColorPicker} buttons={[
             <Button title={props.okText} onPress={selectColor} />
           ]}>
         <HsvColorPicker ref={colorPickerRef}

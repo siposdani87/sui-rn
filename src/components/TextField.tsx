@@ -7,7 +7,7 @@ import useBaseField from './useBaseField';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 
-export default function TextField(props: { value: any, onValueChange: (value: any) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any } & TextInputProps) {
+export default function TextField(props: { value: any, onValueChange: (value: any) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, containerStyle?: any, style?: any, children?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
   const hasError = error || (props.required && (!value || value && value.length === 0));
@@ -23,7 +23,7 @@ export default function TextField(props: { value: any, onValueChange: (value: an
     props.onValueChange(v);
   }
 
-  function _getTextInputStyle() {
+  function getTextInputStyle() {
     if (hasError) {
       if (props.disabled) {
         return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
@@ -36,10 +36,15 @@ export default function TextField(props: { value: any, onValueChange: (value: an
     return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
   }
 
+
+  function getPlaceholderTextColor(){
+    return Colors.grey;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
-      <TextInput value={value} style={[styles.textInput, props.style, _getTextInputStyle()]} onChangeText={onValueChange} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
+      <TextInput value={value} style={[styles.textInput, props.style, getTextInputStyle()]} onChangeText={onValueChange} placeholderTextColor={getPlaceholderTextColor()} placeholder={props.placeholder} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
       {props.children && (
         <View style={[styles.actionsContainer, Platform.select({
           android: {

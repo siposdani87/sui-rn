@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Modal, ViewStyle } from 'react-native';
+import React, { Fragment, useState } from 'react';
+import { StyleSheet, View, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import IconButton from './IconButton';
+import Text from './Text';
+
 
 export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any, onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
@@ -27,7 +29,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
                     {(!!props.title || !!props.onClose) && (
                         <View style={styles.headerContainer}>
                             {!!props.title && (
-                                <Text style={[styles.headerText, isDarkTheme ? styles.headerDarkText : styles.headerLightText]}>{props.title}</Text>
+                                <Text style={styles.headerText}>{props.title}</Text>
                             )}
                             {!!props.onClose && (
                                 <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
@@ -39,7 +41,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
                     </View>
                     <View style={styles.footerContainer}>
                         {props.buttons && props.buttons.map((button, key) => (
-                            <View key={key} style={styles.button}>{button}</View>
+                            <Fragment key={key}>{button}</Fragment>
                         ))}
                     </View>
                 </View>
@@ -57,7 +59,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
     },
     dialogContainer: {
-        padding: 20,
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -96,34 +97,29 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     headerContainer: {
-        marginBottom: 20,
+        padding: 10,
+        minHeight: 40,
     },
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
         fontWeight: '400',
-        fontSize: 22,
-    },
-    headerLightText: {
-        color: Colors.black,
-    },
-    headerDarkText: {
-        color: Colors.white,
+        fontSize: 20,
     },
     bodyContainer: {
-        marginBottom: 20,
+        padding: 15,
+        marginBottom: 10,
     },
     footerContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
-    },
-    button: {
-        marginLeft: 10,
+        paddingBottom: 10,
+        paddingHorizontal: 10,
     },
     closeButton: {
         position: 'absolute',
-        top: -15,
-        right: -15,
+        top: -5,
+        right: -5,
         zIndex: 1,
     },
 });

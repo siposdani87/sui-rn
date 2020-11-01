@@ -22,6 +22,7 @@ export { default as SearchField } from './SearchField';
 export { default as SelectField } from './SelectField';
 export { default as SliderField } from './SliderField';
 export { default as SwitchField } from './SwitchField';
+export { default as Text } from './Text';
 export { default as TextAreaField } from './TextAreaField';
 export { default as TextButton } from './TextButton';
 export { default as TextField } from './TextField';
