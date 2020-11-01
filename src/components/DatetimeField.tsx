@@ -55,7 +55,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   const [config, setConfig] = useState(MODES[props.mode]);
   const [years, setYears] = useState([]);
   const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
   useEffect(() => {
@@ -121,12 +121,12 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
 
   function showMode(currentMode) {
     setDate(getDate(value, config));
-    setShow(true);
+    setVisible(true);
     setMode(currentMode);
   };
 
   function hide() {
-    setShow(false);
+    setVisible(false);
   }
 
   function selectDate() {
@@ -135,7 +135,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function renderDateTimePicker() {
-    if (date && show) {
+    if (date && visible) {
       return (
         <DateTimePicker value={date} mode={mode as any} is24Hour={true} display='default' onChange={onChange} />
       );
@@ -156,7 +156,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
             )}
           </TextField>
           {Platform.OS === 'ios' && (
-            <Dialog visible={show} onClose={hide} buttons={[
+            <Dialog visible={visible} title={props.label} onClose={hide} buttons={[
               <Button title={props.okText} onPress={selectDate} />
             ]}>
               {renderDateTimePicker()}

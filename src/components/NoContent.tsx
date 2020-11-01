@@ -9,7 +9,9 @@ export default function NoContent(props: { text: string, imageSource: ImageSourc
 
     return (
         <View style={styles.container}>
-            <Image style={[styles.image, isDarkTheme ? styles.imageDark : styles.imageLight]} source={props.imageSource} />
+            <View style={[styles.imageContainer, isDarkTheme ? styles.imageContainerDark : styles.imageContainerLight]}>
+                <Image style={styles.image} source={props.imageSource} />
+            </View>
             <Text style={[styles.text, isDarkTheme ? styles.textDark : styles.textLight]}>{props.text}</Text>
         </View>
     );
@@ -20,26 +22,32 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 30,
+        marginTop: 20,
+    },
+    imageContainer: {
+        borderWidth: 2,
+        borderStyle: 'dotted',
+        borderColor: 'red',
+        padding: 15,
+        marginBottom: 5,
+        borderRadius: 15,
     },
     image: {
         width: 150,
         height: 150,
         resizeMode: 'contain',
-        marginBottom: 15,
-        // tintColor: Colors.deepGreyBright,
     },
-    imageLight: {
-        // tintColor: Colors.deepGreyBright,
+    imageContainerLight: {
+        borderColor: Colors.deepGreyBright,
     },
-    imageDark: {
-        // tintColor: Colors.blackBright,
+    imageContainerDark: {
+        borderColor: Colors.blackBright,
     },
     text: {
         marginHorizontal: 20,
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
-        fontSize: 18,
+        fontSize: 16,
     },
     textLight: {
         color: Colors.deepGreyBright,

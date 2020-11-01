@@ -1,12 +1,8 @@
 import React from 'react';
-import { Text, useColorScheme, StyleSheet } from 'react-native';
-import { Dialog, TextButton } from '../components';
-import environment from '../config/environment';
-import { Styles, Colors } from '../constants';
+import { Dialog, TextButton, Text } from '../components';
+import { Colors } from '../constants';
 
 export default function Confirm(props: { factories: any }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
-
     const type = props.factories.confirmFactory.getType();
     const title = props.factories.confirmFactory.getTitle();
     const message = props.factories.confirmFactory.getMessage();
@@ -43,20 +39,7 @@ export default function Confirm(props: { factories: any }) {
 
     return (
         <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
-            <Text style={[styles.text, isDarkTheme ? styles.darkText : styles.lightText]}>{message}</Text>
+            <Text>{message}</Text>
         </Dialog>
     );
 }
-const styles = StyleSheet.create({
-    text: {
-        fontFamily: Styles.fontFamilyBody,
-        fontWeight: '400',
-        fontSize: 16,
-    },
-    lightText: {
-        color: Colors.black,
-    },
-    darkText: {
-        color: Colors.white,
-    },
-});

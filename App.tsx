@@ -83,8 +83,8 @@ export default function App() {
         isPrivate: true,
         isBanned: true,
         isDeleted: true,
-        favouriteColor: '#673AB7',
-        query: 'Keyword',
+        favouriteColor: Colors.lightBlue,
+        query: '',
       });
       setRefreshing(false);
     }, 2000);
@@ -137,7 +137,7 @@ export default function App() {
 
               <SelectField label='Gender' items={genders} value={data.gender} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('gender', v)} required={true} />
 
-              <SelectField label='Body type' items={bodyTypes} value={data.body} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('body', v)} placeholder='Please select' />
+              <SelectField label='Body type' items={bodyTypes} value={data.body} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('body', v)} placeholder='Please select...' />
 
               <TextAreaField label='About' value={data.about} onValueChange={(v) => updateData('about', v)} />
 
@@ -161,10 +161,10 @@ export default function App() {
 
               <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} okText='OK' />
 
-              <SearchField label='Search' value={data.query} onValueChange={(v) => updateData('query', v)} />
+              <SearchField label='Search' value={data.query} placeholder='keywords...' onValueChange={(v) => updateData('query', v)} />
 
               <View>
-                <Button onPress={() => { }} iconName='save' title='long title with save icon and more text' iconColor={Colors.black} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
+                <Button onPress={() => { }} iconName='save' title='long title with save icon and more text' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <Button onPress={() => { }} title='Save' />

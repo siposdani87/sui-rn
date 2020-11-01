@@ -81,7 +81,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
   }
 
   return (
-    <TextField {...props} numberOfLines={numberOfLines} style={defaultStyle} multiline={true} />
+    <TextField {...props} numberOfLines={numberOfLines} style={[defaultStyle, { paddingTop: 5 }]} multiline={true} />
   );
 }
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import SUI from 'sui-js';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
-import { MaterialIcons } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { IconButton, Text } from '../components';
 
 export default function Notification(props: { factories: any }) {
     const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
@@ -40,20 +40,14 @@ export default function Notification(props: { factories: any }) {
         return containerStyles;
     }
 
-    function getTextStyle() {
-        return [styles.notificationText, isDarkTheme ? styles.notificationDarkText : styles.notificationLightText];
-    }
-
     return (
         <View style={[styles.container, { top: insets.top + 20 }]}>
             {props.factories.notificationFactory.notifications.map((notification, index) => (
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(notification)}>
                     <View style={getContainerStyle(notification)}>
-                        <Text style={getTextStyle()}>{notification.message}</Text>
+                        <Text style={styles.notificationText}>{notification.message}</Text>
                         {closable(notification) && (
-                            <TouchableOpacity style={styles.notificationClose} activeOpacity={Styles.activeOpacity} onPress={close(notification)}>
-                                <MaterialIcons name='close' size={18} color={isDarkTheme ? Colors.white : Colors.black} />
-                            </TouchableOpacity>
+                            <IconButton containerStyle={styles.notificationClose} iconName='close' iconSize={18} onPress={close(notification)} />
                         )}
                     </View>
                 </TouchableOpacity>
@@ -64,6 +58,7 @@ export default function Notification(props: { factories: any }) {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         position: 'absolute',
         zIndex: 3,
         flexDirection: 'column',
@@ -92,12 +87,7 @@ const styles = StyleSheet.create({
     notificationText: {
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
-    },
-    notificationLightText: {
-        color: Colors.black,
-    },
-    notificationDarkText: {
-        color: Colors.white,
+        fontSize: 14,
     },
     notificationClose: {
         position: 'absolute',

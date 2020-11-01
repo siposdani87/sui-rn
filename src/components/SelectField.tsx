@@ -10,13 +10,16 @@ import TextField from './TextField';
 import IconButton from './IconButton';
 import Dialog from './Dialog';
 import Button from './Button';
+import SearchField from './SearchField';
 
 export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, okText: string, multiple?: boolean, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
   const valueKey = 'value';
   const labelKey = 'label';
 
+  const [query, setQuery] = useState('');
   const [value, setValue] = useState(props.value);
   const [items, setItems] = useState(convert(props.items));
+  const [filteredItems, setFilteredItems] = useState(convert(props.items, query));
   const [visible, setVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState(props.value);
   const [error, onErrorChange] = useBaseField(props);
@@ -28,6 +31,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   useEffect(() => {
     setItems(convert(props.items));
+    setFilteredItems(convert(props.items, query));
   }, [props.items, props.required, props.placeholder]);
 
   function onValueChange(v) {
@@ -36,12 +40,17 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     props.onValueChange(v);
   }
 
-  function convert(options) {
-    const results = options.map((option) => {
-      return {
-        [valueKey]: option[props.valueKey || 'value'],
-        [labelKey]: option[props.labelKey || 'label'],
-      };
+  function convert(options: any[], query?: string) {
+    const results = [];
+    options.forEach((option) => {
+      const value = option[props.valueKey || valueKey];
+      const label = option[props.labelKey || labelKey];
+      if (!query || label.indexOf(query) !== -1) {
+        results.push({
+          [valueKey]: value,
+          [labelKey]: label,
+        });
+      }
     });
     if (props.placeholder) {
       results.unshift({
@@ -88,6 +97,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   function showDialog() {
     setSelectedValue(value);
+    setFilteredItems(convert(props.items, query));
     setVisible(true);
   }
 
@@ -95,16 +105,22 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     setVisible(false);
   }
 
+  function searchInItems(q) {
+    setQuery(q);
+    setFilteredItems(convert(props.items, q));
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label label={props.label} required={props.required} disabled={props.disabled} />
       <TextField style={styles.selectInput} value={getLabel(value)} onValueChange={() => { }} required={props.required} error={error} readonly={true}>
-        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} onPress={showDialog} />
+        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showDialog}  />
       </TextField>
-      <Dialog visible={visible} onClose={hideDialog} buttons={[
+      <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button title={props.okText} onPress={selectValue} />
       ]}>
-        <FlatList style={{ maxHeight: 300 }} keyExtractor={keyExtractor} data={items} renderItem={({ item }) => (
+        <SearchField value={query} onValueChange={searchInItems} error={false} />
+        <FlatList style={{ maxHeight: 175 }} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => onPress(item[valueKey])}>
             <Text style={[styles.item, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
           </TouchableOpacity>

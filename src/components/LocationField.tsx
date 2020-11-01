@@ -6,7 +6,6 @@ import IconButton from './IconButton';
 import { useColorScheme } from 'react-native-appearance';
 import environment from '../config/environment';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
-import { Layout } from '../constants';
 import NumberField from './NumberField';
 
 export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
@@ -16,6 +15,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
     longitude: 0,
   };
   const [value, setValue] = useState(props.value || defaultValue);
+  const [dimensions, setDimensions] = useState(null);
   const [visibleCoords, setVisibleCoords] = useState(false);
   const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
 
@@ -65,7 +65,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
     console.log(event);
   }
 
-  function getCoordinates(v){
+  function getCoordinates(v) {
     return {
       latitude: v.latitude,
       longitude: v.longitude,
@@ -81,7 +81,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
     // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
 
     const latitudeDelta = 0.02;
-    const longitudeDelta = (styles.mapContainer.width / styles.mapContainer.height) * latitudeDelta;
+    const longitudeDelta = (dimensions.width / dimensions.height) * latitudeDelta;
 
     return {
       latitude: lat,
@@ -92,8 +92,17 @@ export default function LocationField(props: { value: any, onValueChange: (value
     }
   }
 
+  function onLayout(event) {
+    if (dimensions) {
+      return;
+    }
+    let { width, height } = event.nativeEvent.layout;
+    height = (width / 16) * 9;
+    setDimensions({ width, height });
+  }
+
   return (
-    <View style={[styles.container, props.containerStyle]}>
+    <View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
       <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
         {!!props.onSearch && (
           <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
@@ -106,11 +115,13 @@ export default function LocationField(props: { value: any, onValueChange: (value
           <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={onLongitudeChange} required={props.required} disabled={props.disabled} />
         </View>
       )}
-      <MapView style={styles.mapContainer} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
-        {!!value.latitude && !!value.longitude && (
-          <Marker draggable={false} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
-        )}
-      </MapView>
+      {dimensions && (
+        <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
+          {!!value.latitude && !!value.longitude && (
+            <Marker draggable={false} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
+          )}
+        </MapView>
+      )}
     </View>
   );
 }
@@ -128,7 +139,6 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     borderRadius: 3,
-    width: Layout.window.width - 40,
-    height: 200,
+    // ...StyleSheet.absoluteFillObject,
   },
 });
