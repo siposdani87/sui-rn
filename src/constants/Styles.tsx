@@ -131,15 +131,6 @@ const styles = {
             justifyContent: 'center',
         },
     },
-    drawerContentOptions: {
-        activeTintColor: Colors.primaryDark,
-        activeBackgroundColor: Colors.lightGrey,
-        inactiveTintColor: Colors.primary,
-        inactiveBackgroundColor: Colors.lightGrey,
-        labelStyle: {
-            fontWeight: '400',
-        },
-    },
     floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,
