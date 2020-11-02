@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     headerContainer: {
-        padding: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
         minHeight: 40,
     },
     headerText: {
