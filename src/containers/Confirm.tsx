@@ -39,7 +39,7 @@ export default function Confirm(props: { factories: any }) {
 
     return (
         <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
-            <Text>{message}</Text>
+            <Text style={{ marginBottom: 10 }}>{message}</Text>
         </Dialog>
     );
 }
