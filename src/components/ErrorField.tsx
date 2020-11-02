@@ -27,8 +27,8 @@ export default function ErrorField(props: { error?: any, disabled?: boolean }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 12,
-    marginTop: 5,
+    marginTop: 3,
+    height: 17,
   },
   text: {
     fontFamily: Styles.fontFamilyBody,

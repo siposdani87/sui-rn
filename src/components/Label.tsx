@@ -18,7 +18,6 @@ export default function Label(props: { label?: string, required?: boolean, disab
   if (!props.label && !props.children) {
     return null;
   }
-
   return (
     <View style={[styles.container, props.containerStyle]}>
       {props.children}
@@ -32,7 +31,6 @@ export default function Label(props: { label?: string, required?: boolean, disab
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: 3,
   },
   text: {
     fontFamily: Styles.fontFamilyBody,

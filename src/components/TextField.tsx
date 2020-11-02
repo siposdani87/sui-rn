@@ -64,7 +64,7 @@ export default function TextField(props: { value: any, onValueChange: (value: an
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
   actionsContainer: {
     position: 'absolute',
