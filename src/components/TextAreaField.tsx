@@ -5,16 +5,16 @@ import Label from './Label';
 import { TextInputProps, View, StyleSheet } from 'react-native';
 import RichTextEditor from 'expo-rich-text-editor/src/RichTextEditor';
 import { Colors, Styles } from '../constants';
-import useBaseField from './useBaseField';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useErrorField from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
+import useInputStyle from '../hooks/useInputStyle';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
-  const [error, onErrorChange] = useBaseField(props);
-  const hasError = error || (props.required && (!value || value && value.length === 0));
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const [error, onErrorChange] = useErrorField(props.error);
+  const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
+  const isDarkTheme = useDarkTheme();
   const numberOfLines = props.numberOfLines || 5;
   const defaultStyle = {
     height: 20 * numberOfLines + 16,
@@ -53,27 +53,14 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
     };
   }
 
-  function _getTextInputStyle() {
-    if (hasError) {
-      if (props.disabled) {
-        return isDarkTheme ? styles.hasErrorDisabledDark : styles.hasErrorDisabledLight;
-      }
-      return isDarkTheme ? styles.hasErrorDefaultDark : styles.hasErrorDefaultLight;
-    }
-    if (props.disabled) {
-      return isDarkTheme ? styles.disabledDarkTextInput : styles.disabledLightTextInput;
-    }
-    return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
-  }
-
   const backgroundColor = isDarkTheme ? Colors.black : Colors.white;
   const color = isDarkTheme ? Colors.white : Colors.black;
-  const editorStyle = [styles.textInput, defaultStyle, _getTextInputStyle(), { backgroundColor, color }];
+  const editorStyle = [styles.textInput, defaultStyle, getInputStyle(), { backgroundColor, color }];
 
   if (props.richText) {
     return (
       <View style={[styles.container, props.containerStyle]}>
-        <Label label={props.label} required={props.required} disabled={props.disabled} />
+        <Label text={props.label} required={props.required} disabled={props.disabled} />
         <RichTextEditor minHeight={defaultStyle.height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} />
         <ErrorField error={error} disabled={props.disabled} />
       </View>
@@ -97,40 +84,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 0,
     marginVertical: 0,
-  },
-  defaultLightTextInput: {
-    color: Colors.contentDefaultLight,
-    borderColor: Colors.inputDefaultLight,
-  },
-  defaultDarkTextInput: {
-    color: Colors.contentDefaultDark,
-    borderColor: Colors.inputDefaultDark,
-  },
-  disabledLightTextInput: {
-    color: Colors.contentDisabledLight,
-    borderColor: Colors.inputDisabledLight,
-    borderStyle: 'dotted',
-  },
-  disabledDarkTextInput: {
-    color: Colors.contentDisabledDark,
-    borderColor: Colors.inputDisabledDark,
-    borderStyle: 'dotted',
-  },
-  hasErrorDefaultLight: {
-    color: Colors.contentDefaultLight,
-    borderColor: Colors.errorDefaultLight,
-  },
-  hasErrorDefaultDark: {
-    color: Colors.contentDefaultDark,
-    borderColor: Colors.errorDefaultDark,
-  },
-  hasErrorDisabledLight: {
-    color: Colors.contentDisabledLight,
-    borderColor: Colors.errorDisabledLight,
-  },
-  hasErrorDisabledDark: {
-    color: Colors.contentDisabledDark,
-    borderColor: Colors.errorDisabledDark,
   },
   editor: {},
   toolbar: {},

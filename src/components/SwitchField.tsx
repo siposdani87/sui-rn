@@ -3,20 +3,22 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, Switch, StyleSheet, Platform } from 'react-native';
 import { Colors } from '../constants';
-import useBaseField from './useBaseField';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useErrorField from '../hooks/useErrorField';
+import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function SwitchField(props: { value: boolean, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function SwitchField(props: { value: any, onValueChange: (value: any) => void, trueValue?: any, falseValue?: any, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+  const trueValue = props.trueValue || true;
+  const falseValue = props.falseValue || false;
   const [value, setValue] = useState(props.value);
-  const [error, onErrorChange] = useBaseField(props);
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const [error, onErrorChange] = useErrorField(props.error);
+  const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
     setValue(props.value);
   }, [props.value]);
 
-  function onValueChange(v) {
+  function onValueChange(boolV) {
+    const v = boolV ? trueValue : falseValue;
     onErrorChange();
     setValue(v);
     props.onValueChange(v);
@@ -40,10 +42,14 @@ export default function SwitchField(props: { value: boolean, onValueChange: (val
     return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
   }
 
+  function getValue(): boolean{
+    return value === trueValue;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Switch value={value} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
-      <Label containerStyle={styles.label} label={props.label} required={props.required} />
+      <Switch value={getValue()} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
+      <Label containerStyle={styles.label} text={props.label} required={props.required} />
       <ErrorField error={error} />
     </View>
   );

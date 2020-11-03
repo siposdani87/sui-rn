@@ -1,30 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function TextButton(props: { onPress: () => void, textColor?: string, title: string, containerStyle?: any, style?: any }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+export default function TextButton(props: { onPress: () => void, textColor?: string, backgroundColor?: string, borderColor?: string, title: string, containerStyle?: any, style?: any }) {
+    const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
+    const backgroundColor = props.backgroundColor || 'transparent';
+    const borderColor = props.borderColor || backgroundColor;
     const color = props.textColor || defaultColor;
 
     return (
         <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
-            <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { color }, props.style]}>{props.title.toUpperCase()}</Text>
+            <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
+                <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { color }, props.style]}>{props.title.toUpperCase()}</Text>
+            </View>
         </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        minWidth: 36,
         margin: 5,
+    },
+    button: {
+        minHeight: 38,
+        borderRadius: 19,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        padding: 5,
     },
     text: {
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '500',
         fontSize: 16,
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
     },
 });

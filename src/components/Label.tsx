@@ -2,11 +2,10 @@ import React from 'react';
 import SUI from 'sui-js';
 import { Text, View, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function Label(props: { label?: string, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+export default function Label(props: { text?: string, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
+  const isDarkTheme = useDarkTheme();
 
   function getTextStyle() {
     if (props.disabled) {
@@ -15,14 +14,14 @@ export default function Label(props: { label?: string, required?: boolean, disab
     return isDarkTheme ? styles.labelDefaultDarkText : styles.labelDefaultLightText;
   }
 
-  if (!props.label && !props.children) {
+  if (!props.text && !props.children) {
     return null;
   }
   return (
     <View style={[styles.container, props.containerStyle]}>
       {props.children}
       <Text style={[styles.text, props.style, getTextStyle()]} numberOfLines={2}>
-        {props.label ? SUI.capitalize(props.label) : ''} {props.required ? '*' : ''}
+        {props.text ? SUI.capitalize(props.text) : ''} {props.required ? '*' : ''}
       </Text>
     </View>
   );
@@ -31,6 +30,7 @@ export default function Label(props: { label?: string, required?: boolean, disab
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    marginBottom: 3,
   },
   text: {
     fontFamily: Styles.fontFamilyBody,

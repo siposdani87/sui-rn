@@ -1,15 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { StyleSheet, View, Modal, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
 import IconButton from './IconButton';
 import Text from './Text';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 
 export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any, onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const isDarkTheme = useDarkTheme();
 
     if (props.visible !== visible) {
         setVisible(props.visible);

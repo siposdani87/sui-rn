@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useColorScheme } from 'react-native';
-import environment from '../config/environment';
 import { Styles, Colors } from '../constants';
+import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import TextField from './TextField';
 
 export default function SearchField(props: { value: any, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, containerStyle?: any, style?: any, children?: any }) {
   const [value, setValue] = useState(props.value);
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
     setValue(props.value);
