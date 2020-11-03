@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const isDarkTheme = useDarkTheme();
 
     return (
         <View style={styles.container}>
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 150,
-        height: 150,
+        height: 85,
         resizeMode: 'contain',
     },
     imageContainerLight: {

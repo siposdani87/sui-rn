@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, SearchField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
+import { Button, CheckboxField, ColorField, DatetimeField, EmailField, FileField, IconButton, IconToggleField, Label, Link, LocationField, NoContent, NumberField, PasswordField, PhoneField, RadioButtonField, SearchField, SelectField, SliderField, SwitchField, TextAreaField, TextButton, TextField } from './src/components';
 import { Colors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
@@ -28,7 +28,8 @@ export default function App() {
     password: '',
     phone: '',
     gender: null,
-    body: null,
+    bodyType: null,
+    hobbies: [],
     height: 0,
     weight: 0,
     birthYear: null,
@@ -41,6 +42,7 @@ export default function App() {
     isDeleted: false,
     favouriteColor: '#673AB7',
     query: '',
+    haveFreeTime: null,
   });
   const genders = [
     { name: 'Male', id: 'MALE' },
@@ -50,6 +52,12 @@ export default function App() {
   const bodyTypes = [
     { name: 'Avarage', id: 'AVARAGE' },
     { name: 'Sportic', id: 'SPORTLIC' },
+  ];
+  const hobbies = [
+    { name: 'Hunting', id: 'HUNTING' },
+    { name: 'Sport', id: 'SPORT' },
+    { name: 'Gardening', id: 'GARDENING' },
+    { name: 'Play games', id: 'PLAY_GAMES' },
   ];
 
   const [refreshing, setRefreshing] = useState(false);
@@ -68,7 +76,8 @@ export default function App() {
         password: '',
         phone: '+36 20 952 0471',
         gender: 'MALE',
-        body: 'AVARAGE',
+        bodyType: null,
+        hobbies: [],
         height: 178,
         weight: 92,
         birthYear: 1987,
@@ -85,6 +94,7 @@ export default function App() {
         isDeleted: true,
         favouriteColor: Colors.lightBlue,
         query: '',
+        haveFreeTime: 'yes',
       });
       setRefreshing(false);
     }, 2000);
@@ -137,7 +147,9 @@ export default function App() {
 
               <SelectField label='Gender' items={genders} value={data.gender} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('gender', v)} required={true} />
 
-              <SelectField label='Body type' items={bodyTypes} value={data.body} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('body', v)} placeholder='Please select...' />
+              <SelectField label='Body type' items={bodyTypes} value={data.bodyType} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyType', v)} placeholder='Please select...' />
+
+              <SelectField multiple={true} label='Hobbies' items={hobbies} value={data.hobbies} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('hobbies', v)} required={true} placeholder='Please select...' />
 
               <TextAreaField label='About' value={data.about} onValueChange={(v) => updateData('about', v)} />
 
@@ -149,9 +161,13 @@ export default function App() {
 
               <LocationField label='Location' value={data.location} onValueChange={(v) => updateData('location', v)} onSearch={onSearch} longitudeText='Longitude' latitudeText='Latitude' />
 
-              <DatetimeField label='Birth year' mode='year' value={data.birthYear} okText='OK' onValueChange={(v) => updateData('year', v)} />
+              <DatetimeField label='Birth year' mode='year' format='YYYY.' value={data.birthYear} okText='OK' onValueChange={(v) => updateData('year', v)} />
 
               <DatetimeField label='Current datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.currentTime} onValueChange={(v) => updateData('currentTime', v)} />
+
+              <Label text='Do you have free time?' />
+              <RadioButtonField label='Yes' value={data.haveFreeTime} trueValue='yes' onValueChange={(v) => updateData('haveFreeTime', v)} />
+              <RadioButtonField label='No' value={data.haveFreeTime} trueValue='no' onValueChange={(v) => updateData('haveFreeTime', v)} />
 
               <CheckboxField label='Private profile' value={data.isPrivate} onValueChange={(v) => updateData('isPrivate', v)} />
 
@@ -174,11 +190,13 @@ export default function App() {
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <IconButton onPress={() => { }} iconName='save' />
+                <IconButton onPress={() => { }} imageSource={require('./assets/favicon.png')} borderColor={Colors.primary} />
                 <IconButton onPress={() => { }} iconName='save' iconColor={Colors.primary} borderColor={Colors.primary} />
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <TextButton onPress={() => { }} title='Save' />
                 <TextButton onPress={() => { }} title='Save' textColor={Colors.accent} />
+                <TextButton onPress={() => { }} title='Save' textColor={Colors.primary} borderColor={Colors.primary} />
               </View>
             </View>
           </ScrollView>

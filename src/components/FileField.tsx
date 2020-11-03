@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Label from './Label';
 import { View, StyleSheet, Image, Alert, ImageURISource, ImageRequireSource, TouchableOpacity } from 'react-native';
-import useBaseField from './useBaseField';
+import useErrorField from '../hooks/useErrorField';
 import IconButton from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Colors, Styles } from '../constants';
 import TextField from './TextField';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
@@ -16,8 +15,8 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     (oldState, newState) => ({ ...oldState, ...newState }),
     { fileName: '', fileData: '' },
   );
-  const [error, onErrorChange] = useBaseField(props);
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const [error, onErrorChange] = useErrorField(props.error);
+  const isDarkTheme = useDarkTheme();
 
   const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: isImage() ? ImagePicker.MediaTypeOptions.Images : (isVideo() ? ImagePicker.MediaTypeOptions.Videos : ImagePicker.MediaTypeOptions.All),
@@ -123,11 +122,11 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Label label={props.label} required={props.required} disabled={props.disabled} />
+      <Label text={props.label} required={props.required} disabled={props.disabled} />
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 0 }} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>
@@ -178,5 +177,6 @@ const styles = StyleSheet.create({
     top: -10,
     right: -20,
     zIndex: 1,
+    margin: 5,
   },
 });

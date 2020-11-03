@@ -2,13 +2,12 @@ import React from 'react';
 import SUI from 'sui-js';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function Notification(props: { factories: any }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();
 
     function close(notification) {

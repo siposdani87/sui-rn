@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function Link(props: { title: string, onPress: () => void, color?: string, style?: any }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const isDarkTheme = useDarkTheme();
     const colorStyle = props.color ? { color: props.color, textDecorationColor: props.color } : null;
 
     return (

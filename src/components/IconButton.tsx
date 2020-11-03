@@ -1,11 +1,11 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { View, StyleSheet, TouchableOpacity, Image, useColorScheme } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
-import environment from '../config/environment';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function IconButton(props: { onPress: () => void, iconColor?: string, backgroundColor?: string, borderColor?: string, imageSource?: any, iconName?: string, iconType?: string, iconSize?: number, containerStyle?: any, style?: any }) {
-    const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+    const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
     const borderColor = props.borderColor || backgroundColor;
@@ -34,21 +34,19 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     button: {
-        minHeight: 36,
-        minWidth: 36,
-        borderRadius: 50,
+        borderRadius: 19,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
+        padding: 5,
     },
     image: {
         width: 22,
         height: 22,
         resizeMode: 'contain',
-        margin: 5,
     },
     icon: {
-        margin: 5,
+        fontSize: 26,
     },
 });

@@ -3,10 +3,9 @@ import { View, StyleSheet, ImageURISource } from 'react-native';
 import TextField from './TextField';
 import { Colors, Styles } from '../constants';
 import IconButton from './IconButton';
-import { useColorScheme } from 'react-native-appearance';
-import environment from '../config/environment';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
 import NumberField from './NumberField';
+import useDarkTheme from '../hooks/useDarkTheme';
 
 export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const defaultValue = {
@@ -17,7 +16,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
   const [value, setValue] = useState(props.value || defaultValue);
   const [dimensions, setDimensions] = useState(null);
   const [visibleCoords, setVisibleCoords] = useState(false);
-  const isDarkTheme = environment.dark_theme === null ? useColorScheme() === 'dark' : environment.dark_theme;
+  const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
     const coords = props.value || defaultValue;
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   coordsContainer: {
-    display: 'flex',
     flexDirection: 'row',
   },
   addressInput: {
