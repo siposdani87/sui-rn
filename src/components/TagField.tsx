@@ -33,15 +33,29 @@ export default function TagField(props: { values: any[], onValuesChange: (value:
     }
   }
 
+  function getTextColor() {
+    if (props.disabled){
+      return isDarkTheme ? Colors.contentDisabledDark : Colors.contentDisabledLight;
+    }
+    return isDarkTheme ? Colors.contentDefaultDark : Colors.contentDefaultLight;
+  }
+
+  function getBackgroundColor() {
+    if (props.disabled){
+      return isDarkTheme ? Colors.inputDisabledDark : Colors.inputDisabledLight;
+    }
+    return isDarkTheme ? Colors.inputDefaultDark : Colors.inputDefaultLight;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} />
       <View style={[styles.textInput, props.style, getInputStyle()]}>
         {values.map((value, index) => (
-          <View key={index} style={[styles.tagContainer, isDarkTheme ? styles.tagContainerDark : styles.tagContainerLight, { paddingRight: props.readonly ? null : 25 }]}>
-            <Text style={[styles.tagText, isDarkTheme ? styles.tagTextDark : styles.tagTextLight]}>{value}</Text>
+          <View key={index} style={[styles.tagContainer, { backgroundColor: getBackgroundColor(), paddingRight: (props.readonly || props.disabled) ? null : 25 }]}>
+            <Text style={[styles.tagText, { color: getTextColor() }]}>{value}</Text>
             {!props.readonly && !props.disabled && (
-              <IconButton containerStyle={styles.actionButtonContainer} style={styles.actionButton} iconName='close' iconColor={isDarkTheme ? styles.tagTextDark.color : styles.tagTextLight.color} iconSize={20} onPress={removeTag(value)} />
+              <IconButton containerStyle={styles.actionButtonContainer} style={styles.actionButton} iconName='close' iconColor={getTextColor()} iconSize={20} onPress={removeTag(value)} />
             )}
           </View>
         ))}
@@ -70,6 +84,7 @@ const styles = StyleSheet.create({
   actionsContainer: {
     position: 'absolute',
     right: 0,
+    top: 0,
     flexDirection: 'row',
     zIndex: 1,
   },
@@ -90,22 +105,10 @@ const styles = StyleSheet.create({
     marginRight: 3,
     marginBottom: 3,
   },
-  tagContainerDark: {
-    backgroundColor: Colors.inputDefaultDark,
-  },
-  tagContainerLight: {
-    backgroundColor: Colors.inputDefaultLight,
-  },
   tagText: {
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 16,
-  },
-  tagTextDark: {
-    color: Colors.contentDefaultDark,
-  },
-  tagTextLight: {
-    color: Colors.contentDefaultLight,
   },
   actionButtonContainer: {
     margin: 0,

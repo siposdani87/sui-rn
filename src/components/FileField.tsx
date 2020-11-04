@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Colors, Styles } from '../constants';
 import TextField from './TextField';
-import useDarkTheme from '../hooks/useDarkTheme';
+import useActionColor from '../hooks/useActionColor';
 
 export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
@@ -16,7 +16,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     { fileName: '', fileData: '' },
   );
   const [error, onErrorChange] = useErrorField(props.error);
-  const isDarkTheme = useDarkTheme();
+  const getActionColor = useActionColor(props.disabled);
 
   const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: isImage() ? ImagePicker.MediaTypeOptions.Images : (isVideo() ? ImagePicker.MediaTypeOptions.Videos : ImagePicker.MediaTypeOptions.All),
@@ -138,13 +138,13 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       </View>
       <TextField style={styles.fileInput} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
         {isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openDocumentLibrary} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={getActionColor()} onPress={openDocumentLibrary} />
         )}
         {!isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openCamera} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={getActionColor()} onPress={openCamera} />
         )}
         {!isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='collections' iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={openImageLibrary} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='collections' iconColor={getActionColor()} onPress={openImageLibrary} />
         )}
       </TextField>
     </View>

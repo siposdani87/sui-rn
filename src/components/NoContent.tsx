@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ImageSourcePropType } from 'react-native';
+import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
+import Text from '../components/Text';
 
 export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
     const isDarkTheme = useDarkTheme();
@@ -11,7 +12,7 @@ export default function NoContent(props: { text: string, imageSource: ImageSourc
             <View style={[styles.imageContainer, isDarkTheme ? styles.imageContainerDark : styles.imageContainerLight]}>
                 <Image style={styles.image} source={props.imageSource} />
             </View>
-            <Text style={[styles.text, isDarkTheme ? styles.textDark : styles.textLight]}>{props.text}</Text>
+            <Text style={styles.text} muted={true}>{props.text}</Text>
         </View>
     );
 }
@@ -47,11 +48,5 @@ const styles = StyleSheet.create({
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
         fontSize: 16,
-    },
-    textLight: {
-        color: Colors.deepGreyBright,
-    },
-    textDark: {
-        color: Colors.blackBright,
     },
 });

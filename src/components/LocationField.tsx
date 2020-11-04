@@ -6,6 +6,7 @@ import IconButton from './IconButton';
 import MapView, { Marker, MapEvent } from 'react-native-maps';
 import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
+import useActionColor from '../hooks/useActionColor';
 
 export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
   const defaultValue = {
@@ -17,6 +18,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
   const [dimensions, setDimensions] = useState(null);
   const [visibleCoords, setVisibleCoords] = useState(false);
   const isDarkTheme = useDarkTheme();
+  const getActionColor = useActionColor(props.disabled);
 
   useEffect(() => {
     const coords = props.value || defaultValue;
@@ -104,7 +106,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
     <View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
       <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
         {!!props.onSearch && (
-          <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onSearch} />
+          <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={onSearch} />
         )}
         <IconButton iconName='settings' containerStyle={Styles.fieldIconButton} iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
       </TextField>

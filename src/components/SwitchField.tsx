@@ -46,10 +46,15 @@ export default function SwitchField(props: { value: any, onValueChange: (value: 
     return value === trueValue;
   }
 
+  function onPress() {
+    const v = value === trueValue ? falseValue : trueValue;
+    setValue(v);
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Switch value={getValue()} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
-      <Label containerStyle={styles.label} text={props.label} required={props.required} />
+      <Label onPress={onPress} containerStyle={styles.label} text={props.label} required={props.required} />
       <ErrorField error={error} />
     </View>
   );

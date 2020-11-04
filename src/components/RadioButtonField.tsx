@@ -11,7 +11,7 @@ export default function RadioButtonField(props: { value: any, trueValue?: any, o
   }, [props.value]);
 
   function onValueChange(v) {
-    if (v) {
+    if (v === props.trueValue) {
       onErrorChange();
       setValue(v);
       props.onValueChange(v);
