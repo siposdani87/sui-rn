@@ -9,6 +9,7 @@ import Button from './Button';
 import SearchField from './SearchField';
 import TagField from './TagField';
 import useDarkTheme from '../hooks/useDarkTheme';
+import useActionColor from '../hooks/useActionColor';
 
 export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, okText: string, multiple?: boolean, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
   const valueKey = 'value';
@@ -21,6 +22,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   const [visible, setVisible] = useState(false);
   const [selectedValues, setSelectedValues] = useState([]);
   const [error, onErrorChange] = useErrorField(props.error);
+  const getActionColor = useActionColor(props.disabled);
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
@@ -121,13 +123,15 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   }
 
   function showDialog() {
-    if (props.multiple) {
-      setSelectedValues(value);
-    } else {
-      setSelectedValues([value]);
+    if (!props.disabled) {
+      if (props.multiple) {
+        setSelectedValues(value);
+      } else {
+        setSelectedValues([value]);
+      }
+      setFilteredItems(convert(props.items, query));
+      setVisible(true);
     }
-    setFilteredItems(convert(props.items, query));
-    setVisible(true);
   }
 
   function hideDialog() {
@@ -172,7 +176,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} />
       <TagField style={styles.selectInput} values={getValues()} onValuesChange={onValuesChange} error={error} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
-        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showDialog} />
+        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />
       </TagField>
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button title={props.okText} onPress={selectValue} />

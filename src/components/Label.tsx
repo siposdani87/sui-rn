@@ -3,8 +3,9 @@ import SUI from 'sui-js';
 import { Text, View, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function Label(props: { text?: string, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
+export default function Label(props: { text?: string, onPress?: () => void, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
   const isDarkTheme = useDarkTheme();
 
   function getTextStyle() {
@@ -20,9 +21,11 @@ export default function Label(props: { text?: string, required?: boolean, disabl
   return (
     <View style={[styles.container, props.containerStyle]}>
       {props.children}
-      <Text style={[styles.text, props.style, getTextStyle()]} numberOfLines={2}>
-        {props.text ? SUI.capitalize(props.text) : ''} {props.required ? '*' : ''}
-      </Text>
+      <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+        <Text style={[styles.text, props.style, getTextStyle()]} numberOfLines={2}>
+          {props.text ? SUI.capitalize(props.text) : ''} {props.required ? '*' : ''}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

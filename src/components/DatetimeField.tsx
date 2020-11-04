@@ -4,11 +4,11 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import SelectField from './SelectField';
 import IconButton from './IconButton';
-import { Styles, Colors } from '../constants';
+import { Styles } from '../constants';
 import Dialog from './Dialog';
 import Button from './Button';
-import useDarkTheme from '../hooks/useDarkTheme';
 import TagField from './TagField';
+import useActionColor from '../hooks/useActionColor';
 
 const MODES = {
   'datetime-local': {
@@ -56,7 +56,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   const [years, setYears] = useState([]);
   const [mode, setMode] = useState('date');
   const [visible, setVisible] = useState(false);
-  const isDarkTheme = useDarkTheme();
+  const getActionColor = useActionColor(props.disabled);
 
   useEffect(() => {
     function generateYears(minYear) {
@@ -177,10 +177,10 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
         <Fragment>
           <TagField label={props.label} values={getValues()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} readonly={true}>
             {config.calendarType === 'date' && (
-              <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showCalendar} />
+              <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar} />
             )}
             {config.clockType === 'time' && (
-              <IconButton iconName='schedule' containerStyle={Styles.fieldIconButton} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={showClock} />
+              <IconButton iconName='schedule' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showClock} />
             )}
           </TagField>
           {Platform.OS === 'ios' && (
