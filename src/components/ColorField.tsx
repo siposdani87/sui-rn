@@ -11,8 +11,8 @@ import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
 
 export default function ColorField(props: { value: any, onValueChange: (value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+  const defaultColor = Colors.black;
   const [value, setValue] = useState(props.value);
-  const [color, setColor] = useState(SUI.HEXToHSV(props.value));
   const [hue, setHue] = useState(0);
   const [sat, setSat] = useState(0);
   const [val, setVal] = useState(1);
@@ -22,23 +22,27 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
 
   useEffect(() => {
-    setValue(props.value);
-    setColor(SUI.HEXToHSV(props.value));
+    if (props.value) {
+      setValue(props.value);
+    } else {
+      setValue(defaultColor);
+    }
   }, [props.value]);
 
   function onValueChange(v) {
     onErrorChange();
     setValue(v);
-    setColor(SUI.HEXToHSV(v));
     props.onValueChange(v);
   }
 
   function showColorPicker() {
-    const [h, s, v] = color;
-    setHue(h);
-    setSat(s);
-    setVal(v);
-    setVisible(true);
+    if (!props.disabled) {
+      const [h, s, v] = SUI.HEXToHSV(value);
+      setHue(h);
+      setSat(s);
+      setVal(v);
+      setVisible(true);
+    }
   }
 
   function hideColorPicker() {
@@ -63,8 +67,8 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Dialog visible={visible} title={props.label} onClose={hideColorPicker} buttons={[
-            <Button title={props.okText} onPress={selectColor} />
-          ]}>
+        <Button title={props.okText} onPress={selectColor} />
+      ]}>
         <HsvColorPicker ref={colorPickerRef}
           huePickerHue={hue}
           onHuePickerDragEnd={onHuePickerChange}
@@ -79,7 +83,7 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
         <View style={[styles.colorDot, { backgroundColor: value }, getInputStyle()]}></View>
       </TouchableOpacity>
-      <Label containerStyle={styles.label} text={props.label} required={props.required} disabled={props.disabled} />
+      <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} containerStyle={styles.label} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

@@ -68,7 +68,6 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
         };
       });
     }
-
     if (props.mode === 'year') {
       setYears(generateYears(1900));
     }
@@ -111,7 +110,6 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function onValueChange(d) {
-    console.log('DatetimeField.onValueChange', d);
     if (d) {
       const v = getValue(d, config);
       setValue(v);
@@ -133,9 +131,12 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function showMode(currentMode) {
-    setDate(getDate(value, config));
-    setVisible(true);
-    setMode(currentMode);
+    if (!props.disabled) {
+      const dateValue = value ? getDate(value, config) : moment().toDate();
+      setDate(dateValue);
+      setVisible(true);
+      setMode(currentMode);
+    }
   };
 
   function hide() {
@@ -148,7 +149,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function renderDateTimePicker() {
-    if (date && visible) {
+    if (visible) {
       return (
         <DateTimePicker value={date} mode={mode as any} is24Hour={true} display='default' onChange={onChange} />
       );
@@ -175,7 +176,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
     <View style={[styles.container, props.containerStyle]}>
       {(config.calendarType === 'date' || config.clockType === 'time') && (
         <Fragment>
-          <TagField label={props.label} values={getValues()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} readonly={true}>
+          <TagField label={props.label} values={getValues()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled}>
             {config.calendarType === 'date' && (
               <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar} />
             )}
