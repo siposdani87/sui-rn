@@ -6,9 +6,14 @@ import { StatusBar } from 'expo-status-bar';
 export default function DatetimesScreen() {
   const [data, setData] = useState({
     year: null,
+
+    datetime: null,
+    datetimeDisabled: null,
+    datetimeRequired: null,
+    datetimeRequiredDisabled: null,
+
     date: null,
     time: null,
-    datetime: null,
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -19,9 +24,15 @@ export default function DatetimesScreen() {
     setTimeout(() => {
       setData({
         year: 1987,
+
+        datetime: new Date().toISOString(),
+        datetimeDisabled: new Date().toISOString(),
+        datetimeRequired: null,
+        datetimeRequiredDisabled: null,
+
         date: new Date().toISOString(),
         time: new Date().toISOString(),
-        datetime: new Date().toISOString(),
+
       });
       setRefreshing(false);
     }, 2000);
@@ -46,10 +57,15 @@ export default function DatetimesScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          <DatetimeField label='Year' mode='year' format='YYYY.' value={data.year} okText='OK' onValueChange={(v) => updateData('year', v)} />
+          <DatetimeField label='Datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.datetime} onValueChange={(v) => updateData('datetime', v)} />
+          <DatetimeField label='Datetime disabled' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.datetimeDisabled} onValueChange={(v) => updateData('datetimeDisabled', v)} disabled={true} />
+          <DatetimeField label='Datetime required' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.datetimeRequired} onValueChange={(v) => updateData('datetimeRequired', v)} required={true} />
+          <DatetimeField label='Datetime required disabled' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.datetimeRequiredDisabled} onValueChange={(v) => updateData('datetimeRequiredDisabled', v)} required={true} disabled={true} />
+          
           <DatetimeField label='Date' mode='date' format='YYYY. MM. DD.' okText='OK' value={data.date} onValueChange={(v) => updateData('date', v)} />
           <DatetimeField label='Time' mode='time' format='HH:mm' okText='OK' value={data.time} onValueChange={(v) => updateData('time', v)} />
-          <DatetimeField label='Datetime' mode='datetime' format='YYYY. MM. DD., HH:mm' okText='OK' value={data.datetime} onValueChange={(v) => updateData('datetime', v)} />
+          
+          <DatetimeField label='Year' mode='year' format='YYYY.' value={data.year} okText='OK' onValueChange={(v) => updateData('year', v)} />
         </View>
       </ScrollView>
     </Fragment>

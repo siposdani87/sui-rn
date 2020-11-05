@@ -6,7 +6,10 @@ import { Colors } from '../constants';
 
 export default function ColorsScreen() {
   const [data, setData] = useState({
-    favouriteColor: '#673AB7',
+    favouriteColor: '',
+    favouriteColorDisabled: '',
+    favouriteColorRequired: '#673AB7',
+    favouriteColorRequiredDisabled: '#673AB7',
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -17,6 +20,9 @@ export default function ColorsScreen() {
     setTimeout(() => {
       setData({
         favouriteColor: Colors.lightBlue,
+        favouriteColorDisabled: Colors.primary,
+        favouriteColorRequired: '',
+        favouriteColorRequiredDisabled: '',
       });
       setRefreshing(false);
     }, 2000);
@@ -42,6 +48,9 @@ export default function ColorsScreen() {
       }>
         <View style={styles.container}>
           <ColorField label='Favourite color' value={data.favouriteColor} onValueChange={(v) => updateData('favouriteColor', v)} okText='OK' />
+          <ColorField label='Favourite color disabled' value={data.favouriteColorDisabled} onValueChange={(v) => updateData('favouriteColorDisabled', v)} okText='OK' disabled={true} />
+          <ColorField label='Favourite color required' value={data.favouriteColorRequired} onValueChange={(v) => updateData('favouriteColorRequired', v)} okText='OK' required={true} />
+          <ColorField label='Favourite color required disabled' value={data.favouriteColorRequiredDisabled} onValueChange={(v) => updateData('favouriteColorRequiredDisabled', v)} okText='OK' required={true} disabled={true} />
         </View>
       </ScrollView>
     </Fragment>

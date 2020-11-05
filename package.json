@@ -23,14 +23,9 @@
     "tsc-test": "tsc --project . --noEmit"
   },
   "dependencies": {
-    "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^10.0.0",
-    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "3.0.0",
-    "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/slider": "3.0.3",
-    "@react-navigation/native": "^5.8.4",
-    "@react-navigation/stack": "^5.12.1",
     "expo": "~39.0.2",
     "expo-asset": "~8.2.0",
     "expo-document-picker": "~8.4.0",
@@ -47,10 +42,17 @@
     "react-native-maps": "0.27.1",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
-    "react-native-screens": "~2.10.1",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
+    "@expo-google-fonts/inter": "^0.1.0",
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/datetimepicker": "3.0.0",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/slider": "3.0.3",
+    "@react-navigation/native": "5.8.6",
+    "@react-navigation/stack": "5.12.3",
+    "react-native-screens": "~2.10.1",
     "@types/expo__vector-icons": "9.0.1",
     "@types/react": "~16.9.35",
     "@types/react-dom": "^16.9.0",
