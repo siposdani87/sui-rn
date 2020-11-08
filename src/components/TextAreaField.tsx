@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     marginVertical: 0,
   },
-  editor: {},
+  editor: {
+    padding: 10,
+  },
   toolbar: {},
 });
