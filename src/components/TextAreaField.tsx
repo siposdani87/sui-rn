@@ -49,7 +49,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
     };
   }
 
-  const editorStyle = [styles.textInput, defaultStyle, getInputStyle()];
+  const editorStyle = [styles.editor, defaultStyle, getInputStyle()];
 
   if (props.richText) {
     return (
@@ -70,16 +70,12 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
   },
-  textInput: {
+  editor: {
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',
     fontSize: 16,
     borderRadius: 3,
     borderWidth: 1,
-    paddingHorizontal: 0,
-    marginVertical: 0,
-  },
-  editor: {
     padding: 10,
   },
   toolbar: {},
