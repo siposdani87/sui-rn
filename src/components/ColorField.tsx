@@ -90,9 +90,7 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   label: {
     marginLeft: 40,
   },

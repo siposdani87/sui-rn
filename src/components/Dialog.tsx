@@ -63,10 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'stretch',
         borderRadius: 3,
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 20,
-        marginBottom: 10,
+        margin: 20,
         ...Styles.shadow as ViewStyle,
     },
     success: {

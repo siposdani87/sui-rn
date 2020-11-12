@@ -1,5 +1,4 @@
 export default class Base {
-
     public static reducer = (state = {}, action) => {
         if (action.type) {
             return {

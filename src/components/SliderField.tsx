@@ -34,9 +34,7 @@ export default function SliderField(props: { value: any, onValueChange: (value: 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   textInput: {
     fontFamily: Styles.fontFamilyBody,
     fontWeight: '400',

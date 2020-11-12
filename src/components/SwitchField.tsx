@@ -61,9 +61,7 @@ export default function SwitchField(props: { value: any, onValueChange: (value: 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   label: {
     ...Platform.select({
       android: {

@@ -18,12 +18,24 @@ export default class ConfirmFactory extends BaseFactory {
         this.buttons = [];
     }
 
-    public warning(message: string, buttons?: AlertButton[], title?: string){
-        this.open('warning', message, buttons, title);
+    public success(message: string, buttons?: AlertButton[], title?: string){
+        this.open('success', message, buttons, title);
     }
 
     public info(message: string, buttons?: AlertButton[], title?: string){
         this.open('info', message, buttons, title);
+    }
+
+    public warning(message: string, buttons?: AlertButton[], title?: string){
+        this.open('warning', message, buttons, title);
+    }
+
+    public error(message: string, buttons?: AlertButton[], title?: string){
+        this.open('error', message, buttons, title);
+    }
+
+    public choice(message: string, buttons?: AlertButton[], title?: string){
+        this.open('choice', message, buttons, title);
     }
 
     private open(type, message: string, buttons?: AlertButton[], title?: string) {
