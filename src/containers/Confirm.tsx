@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Confirm(props: { factories: any }) {
     const type = props.factories.confirmFactory.getType();
@@ -13,7 +14,7 @@ export default function Confirm(props: { factories: any }) {
 
     function onPress(alertButton) {
         return (value?: string) => {
-            if (!!alertButton.onPress){
+            if (!!alertButton.onPress) {
                 alertButton.onPress(value);
             }
             close();
@@ -37,8 +38,24 @@ export default function Confirm(props: { factories: any }) {
         });
     }
 
+    function getIcon(): any {
+        switch (type) {
+            case 'success':
+                return (<MaterialIcons name='done' size={24} color={Colors.success} />);
+            case 'info':
+                return (<MaterialIcons name='info' size={24} color={Colors.info} />);
+            case 'warning':
+                return (<MaterialIcons name='warning' size={24} color={Colors.warning} />);
+            case 'error':
+                return (<MaterialIcons name='error' size={24} color={Colors.error} />);
+            default:
+                return null;
+        }
+    }
+
     return (
         <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
+            {getIcon()}
             <Text style={{ marginBottom: 10 }}>{message}</Text>
         </Dialog>
     );

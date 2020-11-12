@@ -128,9 +128,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   coordsContainer: {
     flexDirection: 'row',
   },

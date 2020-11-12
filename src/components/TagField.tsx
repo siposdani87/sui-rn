@@ -78,9 +78,7 @@ export default function TagField(props: { values: any[], onValuesChange: (value:
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   actionsContainer: {
     position: 'absolute',
     right: 0,

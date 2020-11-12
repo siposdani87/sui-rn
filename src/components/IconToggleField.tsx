@@ -56,9 +56,7 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 10,
-  },
+  container: {},
   label: {
     marginLeft: 30,
   },
