@@ -10,7 +10,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
 
-export default function ColorField(props: { value: any, onValueChange: (value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function ColorField(props: { value: any, onValueChange: (value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const defaultColor = Colors.black;
   const [value, setValue] = useState(props.value);
   const [hue, setHue] = useState(0);
@@ -83,7 +83,7 @@ export default function ColorField(props: { value: any, onValueChange: (value: a
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
         <View style={[styles.colorDot, { backgroundColor: value }, getInputStyle()]}></View>
       </TouchableOpacity>
-      <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} containerStyle={styles.label} />
+      <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={styles.label} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

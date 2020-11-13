@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import SUI from 'sui-js';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import IconButton from './IconButton';
+import Text from './Text';
+import { Dialog } from '.';
 
-export default function Label(props: { text?: string, onPress?: () => void, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
+export default function Label(props: { text?: string, onPress?: () => void, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const isDarkTheme = useDarkTheme();
+  const [visible, setVisible] = useState(false);
 
   function getTextStyle() {
     if (props.disabled) {
@@ -15,9 +19,18 @@ export default function Label(props: { text?: string, onPress?: () => void, requ
     return isDarkTheme ? styles.labelDefaultDarkText : styles.labelDefaultLightText;
   }
 
+  function onPressDesc() {
+    if (props.onPressDesc) {
+      props.onPressDesc();
+    } else {
+      setVisible(true);
+    }
+  }
+
   if (!props.text && !props.children) {
     return null;
   }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       {props.children}
@@ -26,6 +39,14 @@ export default function Label(props: { text?: string, onPress?: () => void, requ
           {props.text ? SUI.capitalize(props.text) : ''} {props.required ? '*' : ''}
         </Text>
       </TouchableOpacity>
+      {(props.desc || props.onPressDesc) && (
+        <Fragment>
+          <Dialog visible={visible} onClose={() => { setVisible(false) }}>
+            <Text>{props.desc}</Text>
+          </Dialog>
+          <IconButton containerStyle={styles.infoContainer} iconName='info' iconSize={22} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onPressDesc} />
+        </Fragment>
+      )}
     </View>
   );
 }
@@ -52,4 +73,10 @@ const styles = StyleSheet.create({
   labelDisabledDarkText: {
     color: Colors.labelDisabledDark,
   },
+  infoContainer: {
+    position: 'absolute',
+    right: -5,
+    top: -5,
+    margin: 0,
+  }
 });

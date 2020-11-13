@@ -8,7 +8,7 @@ import useInputStyle from '../hooks/useInputStyle';
 import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 
-export default function TagField(props: { values: any[], onValuesChange: (value: any[]) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
+export default function TagField(props: { values: any[], onValuesChange: (value: any[]) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const [values, setValues] = useState(props.values);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(values.length, error, props.required, props.disabled);
@@ -49,7 +49,7 @@ export default function TagField(props: { values: any[], onValuesChange: (value:
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Label text={props.label} required={props.required} disabled={props.disabled} />
+      <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       <View style={[styles.textInput, props.style, getInputStyle()]}>
         {values.map((value, index) => (
           <View key={index} style={[styles.tagContainer, { backgroundColor: getBackgroundColor(), paddingRight: (props.readonly || props.disabled) ? null : 25 }]}>

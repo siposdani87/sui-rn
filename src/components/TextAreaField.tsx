@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useInputStyle from '../hooks/useInputStyle';
 import useActionColor from '../hooks/useActionColor';
 
-export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const style = StyleSheet.flatten(props.style);
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useErrorField(props.error);
@@ -55,7 +55,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
   if (props.richText) {
     return (
       <View style={[styles.container, props.containerStyle]}>
-        <Label text={props.label} required={props.required} disabled={props.disabled} />
+        <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
         <RichTextEditor minHeight={defaultStyle.height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} />
         <ErrorField error={error} disabled={props.disabled} />
       </View>
@@ -63,7 +63,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
   }
 
   return (
-    <TextField value={props.value} error={props.error} onValueChange={props.onValueChange} label={props.label} required={props.required} disabled={props.disabled} containerStyle={props.containerStyle} style={[defaultStyle, { paddingTop: 5 }]} multiline={true} numberOfLines={numberOfLines} />
+    <TextField value={props.value} error={props.error} onValueChange={props.onValueChange} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={[defaultStyle, { paddingTop: 5 }]} multiline={true} numberOfLines={numberOfLines} />
   );
 }
 

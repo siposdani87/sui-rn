@@ -6,7 +6,7 @@ import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function SwitchField(props: { value: any, onValueChange: (value: any) => void, trueValue?: any, falseValue?: any, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function SwitchField(props: { value: any, onValueChange: (value: any) => void, trueValue?: any, falseValue?: any, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const trueValue = props.trueValue || true;
   const falseValue = props.falseValue || false;
   const [value, setValue] = useState(props.value);
@@ -54,7 +54,7 @@ export default function SwitchField(props: { value: any, onValueChange: (value: 
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Switch value={getValue()} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
-      <Label onPress={onPress} containerStyle={styles.label} text={props.label} required={props.required} />
+      <Label onPress={onPress} containerStyle={styles.label} text={props.label} required={props.required} desc={props.desc} onPressDesc={props.onPressDesc} />
       <ErrorField error={error} />
     </View>
   );
