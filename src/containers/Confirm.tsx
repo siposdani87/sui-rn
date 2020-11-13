@@ -1,4 +1,5 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native'; 
 import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -41,13 +42,13 @@ export default function Confirm(props: { factories: any }) {
     function getIcon(): any {
         switch (type) {
             case 'success':
-                return (<MaterialIcons name='done' size={24} color={Colors.success} />);
+                return (<MaterialIcons name='done' size={24} color={Colors.success} style={styles.icon} />);
             case 'info':
-                return (<MaterialIcons name='info' size={24} color={Colors.info} />);
+                return (<MaterialIcons name='info' size={24} color={Colors.info} style={styles.icon} />);
             case 'warning':
-                return (<MaterialIcons name='warning' size={24} color={Colors.warning} />);
+                return (<MaterialIcons name='warning' size={24} color={Colors.warning} style={styles.icon} />);
             case 'error':
-                return (<MaterialIcons name='error' size={24} color={Colors.error} />);
+                return (<MaterialIcons name='error' size={24} color={Colors.error} style={styles.icon} />);
             default:
                 return null;
         }
@@ -55,8 +56,21 @@ export default function Confirm(props: { factories: any }) {
 
     return (
         <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
-            {getIcon()}
-            <Text style={{ marginBottom: 10 }}>{message}</Text>
+            <View style={styles.container}>
+                {getIcon()}
+                <Text>{message}</Text>
+            </View>
         </Dialog>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    icon: {
+        marginRight: 5,
+    }
+  });
