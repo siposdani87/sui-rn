@@ -181,7 +181,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button title={props.okText} onPress={selectValue} />
       ]}>
-        <SearchField value={query} onValueChange={searchInItems} error={null} />
+        <SearchField value={query} onValueChange={searchInItems} />
         <FlatList style={{ maxHeight: 175 }} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => toggleSelection(item[valueKey])}>
             <Text style={[styles.itemText, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
