@@ -11,6 +11,7 @@ import useInputStyle from '../hooks/useInputStyle';
 import useActionColor from '../hooks/useActionColor';
 
 export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+  const style = StyleSheet.flatten(props.style);
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
@@ -20,7 +21,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
     height: 20 * numberOfLines + 16,
     maxHeight: 300,
     textAlignVertical: 'top',
-    ...props.style,
+    ...style,
   };
 
   useEffect(() => {
