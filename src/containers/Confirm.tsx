@@ -66,7 +66,6 @@ export default function Confirm(props: { factories: any }) {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'center',
     },
