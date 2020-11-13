@@ -14,7 +14,7 @@ export default function Text(props: { children?: any, muted?: boolean } & TextPr
   }
 
   return (
-    <RNText style={[styles.text, getTextStyle(), props.style]}>{props.children}</RNText>
+    <RNText {...props} style={[styles.text, getTextStyle(), props.style]}>{props.children}</RNText>
   );
 }
 
