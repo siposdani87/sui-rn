@@ -49,6 +49,10 @@ export default function TextsScreen() {
     });
   }
 
+  function onPressDesc(){
+    console.log('onPressDesc');
+  }
+
   return (
     <Fragment>
       <StatusBar style='dark' />
@@ -56,8 +60,8 @@ export default function TextsScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          <TextField label='Name' value={data.name} onValueChange={(v) => updateData('name', v)} />
-          <TextField label='Name disabled' value={data.nameDisabled} onValueChange={(v) => updateData('nameDisabled', v)} disabled={true} />
+          <TextField label='Name' value={data.name} onValueChange={(v) => updateData('name', v)} desc='Description of name' />
+          <TextField label='Name disabled' value={data.nameDisabled} onValueChange={(v) => updateData('nameDisabled', v)} disabled={true} onPressDesc={onPressDesc} />
           <TextField label='Name required' value={data.nameRequired} onValueChange={(v) => updateData('nameRequired', v)} required={true} />
           <TextField label='Name required disabled' value={data.nameRequiredDisabled} onValueChange={(v) => updateData('nameRequiredDisabled', v)} required={true} disabled={true} />
 

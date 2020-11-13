@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function IconToggleField(props: { value: any, checkedIcon: string, uncheckedIcon: string, trueValue?: any, falseValue?: any, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any, children?: any }) {
+export default function IconToggleField(props: { value: any, checkedIcon: string, uncheckedIcon: string, trueValue?: any, falseValue?: any, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const trueValue = props.trueValue || true;
   const falseValue = props.falseValue || false;
   const [value, setValue] = useState(props.value);
@@ -49,7 +49,7 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
         <MaterialIcons name={getIcon()} size={26} color={getColor()} />
       </TouchableOpacity>
-      <Label containerStyle={styles.label} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled}>{props.children}</Label>
+      <Label containerStyle={styles.label} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>{props.children}</Label>
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

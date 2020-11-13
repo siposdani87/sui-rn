@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Dialog, Button, Text, TextButton } from '../../src/components';
+import { Dialog, Button, Text, TextButton, TextField } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
 
 export default function DialogsScreen() {
@@ -35,6 +35,7 @@ export default function DialogsScreen() {
             <Button title='done' onPress={closeDialog} />
           ]}>
             <Text>Dialog 2 text</Text>
+            <TextField label='Name' value='' onValueChange={() => null} desc='Description of name' />
           </Dialog>
           <Button onPress={openDialog('dialog2')} title='dialog2' />
 

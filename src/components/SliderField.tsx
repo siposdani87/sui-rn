@@ -8,7 +8,7 @@ import Slider from '@react-native-community/slider';
 import useInputStyle from '../hooks/useInputStyle';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function SliderField(props: { value: any, onValueChange: (value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function SliderField(props: { value: any, onValueChange: (value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
@@ -26,7 +26,7 @@ export default function SliderField(props: { value: any, onValueChange: (value: 
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Label text={props.label} required={props.required} disabled={props.disabled} />
+      <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       <Slider style={[{flex: 1, height: 40}, props.style, getInputStyle()]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>

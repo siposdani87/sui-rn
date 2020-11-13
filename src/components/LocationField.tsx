@@ -8,7 +8,7 @@ import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
+export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const defaultValue = {
     address: '',
     latitude: 0,
@@ -104,7 +104,7 @@ export default function LocationField(props: { value: any, onValueChange: (value
 
   return (
     <View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
-      <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled}>
+      <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>
         {!!props.onSearch && (
           <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={onSearch} />
         )}

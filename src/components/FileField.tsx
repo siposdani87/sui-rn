@@ -9,7 +9,7 @@ import { Colors, Styles } from '../constants';
 import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
 
-export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
+export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
@@ -122,7 +122,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
 
   return (
     <View style={[styles.container, props.containerStyle]}>
-      <Label text={props.label} required={props.required} disabled={props.disabled} />
+      <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
