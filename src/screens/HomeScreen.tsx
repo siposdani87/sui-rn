@@ -1,22 +1,29 @@
-import React from 'react';
-import { View, Button } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { Fragment } from 'react';
+import { View, ScrollView } from 'react-native';
+import { TextButton } from '../components';
 
-export default function HomeScreen({ navigation }){
+export default function HomeScreen({ navigation }) {
     return (
-        <View>
-            <Button title='Buttons' onPress={() => navigation.navigate('Buttons')} />
-            <Button title='Checkboxes' onPress={() => navigation.navigate('Checkboxes')} />
-            <Button title='Colors' onPress={() => navigation.navigate('Colors')} />
-            <Button title='Datetimes' onPress={() => navigation.navigate('Datetimes')} />
-            <Button title='Files' onPress={() => navigation.navigate('Files')} />
-            <Button title='Locations' onPress={() => navigation.navigate('Locations')} />
-            <Button title='Others' onPress={() => navigation.navigate('Others')} />
-            <Button title='RichEditors' onPress={() => navigation.navigate('RichEditors')} />
-            <Button title='Selects' onPress={() => navigation.navigate('Selects')} />
-            <Button title='Sliders' onPress={() => navigation.navigate('Sliders')} />
-            <Button title='Textareas' onPress={() => navigation.navigate('Textareas')} />
-            <Button title='Texts' onPress={() => navigation.navigate('Texts')} />
-            <Button title='Dialogs' onPress={() => navigation.navigate('Dialogs')} />
-        </View>
+        <Fragment>
+            <StatusBar style='dark' />
+            <ScrollView>
+                <View>
+                    <TextButton title='Buttons' onPress={() => navigation.navigate('Buttons')} />
+                    <TextButton title='Checkboxes' onPress={() => navigation.navigate('Checkboxes')} />
+                    <TextButton title='Colors' onPress={() => navigation.navigate('Colors')} />
+                    <TextButton title='Datetimes' onPress={() => navigation.navigate('Datetimes')} />
+                    <TextButton title='Files' onPress={() => navigation.navigate('Files')} />
+                    <TextButton title='Locations' onPress={() => navigation.navigate('Locations')} />
+                    <TextButton title='Others' onPress={() => navigation.navigate('Others')} />
+                    <TextButton title='RichEditors' onPress={() => navigation.navigate('RichEditors')} />
+                    <TextButton title='Selects' onPress={() => navigation.navigate('Selects')} />
+                    <TextButton title='Sliders' onPress={() => navigation.navigate('Sliders')} />
+                    <TextButton title='Textareas' onPress={() => navigation.navigate('Textareas')} />
+                    <TextButton title='Texts' onPress={() => navigation.navigate('Texts')} />
+                    <TextButton title='Dialogs' onPress={() => navigation.navigate('Dialogs')} />
+                </View>
+            </ScrollView>
+        </Fragment>
     );
 }

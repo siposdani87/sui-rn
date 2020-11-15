@@ -6,7 +6,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconButton from './IconButton';
 import Text from './Text';
-import { Dialog } from '.';
+import Dialog from './Dialog';
 
 export default function Label(props: { text?: string, onPress?: () => void, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const isDarkTheme = useDarkTheme();
