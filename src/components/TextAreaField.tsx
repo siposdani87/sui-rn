@@ -3,7 +3,7 @@ import TextField from './TextField';
 import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet } from 'react-native';
-import RichTextEditor from 'expo-rich-text-editor/src/RichTextEditor';
+import { RichTextEditor } from 'expo-rich-text-editor/src';
 import { Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';

@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     headerContainer: {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        minHeight: 40,
+        minHeight: 30,
     },
     headerText: {
         fontFamily: Styles.fontFamilyHeading,
