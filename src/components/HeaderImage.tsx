@@ -19,7 +19,8 @@ export default function HeaderImage(props: { title: string, imageSource: ImageSo
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginHorizontal: 15,
+    marginTop: 10,
     alignItems: 'center',
   },
   image: {
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    top: -20,
+    top: -15,
     right: -20,
     zIndex: 1,
   },
