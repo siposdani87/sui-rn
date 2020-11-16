@@ -203,6 +203,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    marginBottom: 2,
+    borderRadius: 3,
   },
   selectedItemLight: {
     backgroundColor: Colors.inputDefaultLight,
