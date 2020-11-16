@@ -4,7 +4,7 @@ import { FlatList as RNFlatList, ImageSourcePropType, ListRenderItem, Platform, 
 
 const config = {
     progressViewOffset: -1000,
-    onEndReachedThreshold: 1,
+    onEndReachedThreshold: 0.5,
 };
 
 export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
