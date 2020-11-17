@@ -40,15 +40,16 @@ export default function Confirm(props: { factories: any }) {
     }
 
     function getIcon(): any {
+        const iconSize = 26;
         switch (type) {
             case 'success':
-                return (<MaterialIcons name='done' size={24} color={Colors.success} style={styles.icon} />);
+                return (<MaterialIcons name='done' size={iconSize} color={Colors.success} style={styles.icon} />);
             case 'info':
-                return (<MaterialIcons name='info' size={24} color={Colors.info} style={styles.icon} />);
+                return (<MaterialIcons name='info' size={iconSize} color={Colors.info} style={styles.icon} />);
             case 'warning':
-                return (<MaterialIcons name='warning' size={24} color={Colors.warning} style={styles.icon} />);
+                return (<MaterialIcons name='warning' size={iconSize} color={Colors.warning} style={styles.icon} />);
             case 'error':
-                return (<MaterialIcons name='error' size={24} color={Colors.error} style={styles.icon} />);
+                return (<MaterialIcons name='error' size={iconSize} color={Colors.error} style={styles.icon} />);
             default:
                 return null;
         }
@@ -67,7 +68,6 @@ export default function Confirm(props: { factories: any }) {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
     icon: {
         marginRight: 5,
