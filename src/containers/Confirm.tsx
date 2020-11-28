@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native'; 
+import { View, StyleSheet } from 'react-native';
 import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -59,7 +59,7 @@ export default function Confirm(props: { factories: any }) {
         <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
             <View style={styles.container}>
                 {getIcon()}
-                <Text>{message}</Text>
+                <Text style={styles.text}>{message}</Text>
             </View>
         </Dialog>
     );
@@ -71,5 +71,8 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 5,
+    },
+    text: {
+        flex: 1,
     }
-  });
+});
