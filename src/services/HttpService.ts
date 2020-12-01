@@ -1,17 +1,17 @@
-import BaseService from './BaseService';
 import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401, HTTP_403 } from '../constants/ActionTypes';
-import { Fetch } from '../utils';
+import { Base, Fetch } from '../utils';
 
-export default class HttpService extends BaseService {
-    protected factories: { [key: string]: any; };
+export default class HttpService extends Base {
     protected dispatch: (state: object) => void;
+    private getTokenAsync: () => Promise<string>;
     private inprogress: number;
     private language: string;
     private secret: string;
     private fetch: Fetch;
 
-    constructor(dispatch, factories, backend, language, secret) {
-        super(dispatch, factories);
+    constructor(dispatch, getTokenAsync: () => Promise<string>, backend, language, secret) {
+        super(dispatch);
+        this.getTokenAsync = getTokenAsync;
         this.inprogress = 0;
         this.language = language;
         this.secret = secret;
@@ -47,7 +47,7 @@ export default class HttpService extends BaseService {
     }
 
     private async _getHeaders(opt_headers) {
-        const token = await this.factories.securityFactory.getToken();
+        const token = await this.getTokenAsync();
         return {
             'Authorization': `Bearer ${token}`,
             'Accept-Language': this.language,

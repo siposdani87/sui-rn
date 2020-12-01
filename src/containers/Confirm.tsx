@@ -4,13 +4,13 @@ import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function Confirm(props: { factories: any }) {
-    const type = props.factories.confirmFactory.getType();
-    const title = props.factories.confirmFactory.getTitle();
-    const message = props.factories.confirmFactory.getMessage();
+export default function Confirm(props: { services: any }) {
+    const type = props.services.confirmService.getType();
+    const title = props.services.confirmService.getTitle();
+    const message = props.services.confirmService.getMessage();
 
     function close() {
-        props.factories.confirmFactory.close();
+        props.services.confirmService.close();
     }
 
     function onPress(alertButton) {
@@ -23,7 +23,7 @@ export default function Confirm(props: { factories: any }) {
     }
 
     function getButtons(): any[] {
-        const alertButtons = props.factories.confirmFactory.getButtons();
+        const alertButtons = props.services.confirmService.getButtons();
 
         return alertButtons.map((alertButton) => {
             switch (alertButton.style) {
@@ -56,7 +56,7 @@ export default function Confirm(props: { factories: any }) {
     }
 
     return (
-        <Dialog type={type} title={title} visible={props.factories.confirmFactory.isVisible()} buttons={getButtons()}>
+        <Dialog type={type} title={title} visible={props.services.confirmService.isVisible()} buttons={getButtons()}>
             <View style={styles.container}>
                 {getIcon()}
                 <Text style={styles.text}>{message}</Text>

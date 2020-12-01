@@ -1,8 +1,8 @@
-import BaseFactory from './BaseFactory';
 import { CONFIRM } from '../constants/ActionTypes';
 import { AlertButton } from 'react-native';
+import { Base } from '../utils';
 
-export default class ConfirmFactory extends BaseFactory {
+export default class ConfirmService extends Base {
     private visible: boolean;
     private type: string;
     private title: string;

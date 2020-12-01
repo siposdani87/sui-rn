@@ -6,23 +6,23 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function Notification(props: { factories: any }) {
+export default function Flash(props: { services: any }) {
     const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();
 
-    function close(notification) {
+    function close(flash) {
         return () => {
-            props.factories.notificationFactory.close(notification);
+            props.services.flashService.close(flash);
         }
     }
 
-    function closable(notification) {
-        return props.factories.notificationFactory.isClosable(notification.type, notification.opt_closeCallback) && !SUI.eq(notification.opt_duration, Infinity);
+    function closable(flash) {
+        return props.services.flashService.isClosable(flash.type, flash.opt_closeCallback) && !SUI.eq(flash.opt_duration, Infinity);
     }
 
-    function getContainerStyle(notification) {
-        const containerStyles: any[] = [styles.notificationContainer, isDarkTheme ? styles.notificationDarkContainer : styles.notificationLightContainer];
-        switch (notification.type.toLowerCase()) {
+    function getContainerStyle(flash) {
+        const containerStyles: any[] = [styles.flashContainer, isDarkTheme ? styles.flashDarkContainer : styles.flashLightContainer];
+        switch (flash.type.toLowerCase()) {
             case 'success':
                 containerStyles.push(isDarkTheme ? styles.successDarkContainer : styles.successLightContainer);
                 break;
@@ -41,12 +41,12 @@ export default function Notification(props: { factories: any }) {
 
     return (
         <View style={[styles.container, { top: insets.top + 20 }]}>
-            {props.factories.notificationFactory.notifications.map((notification, index) => (
-                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(notification)}>
-                    <View style={getContainerStyle(notification)}>
-                        <Text style={styles.notificationText}>{notification.message}</Text>
-                        {closable(notification) && (
-                            <IconButton containerStyle={styles.notificationClose} iconName='close' iconSize={18} onPress={close(notification)} />
+            {props.services.flashService.flashes.map((flash, index) => (
+                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(flash)}>
+                    <View style={getContainerStyle(flash)}>
+                        <Text style={styles.flashText}>{flash.message}</Text>
+                        {closable(flash) && (
+                            <IconButton containerStyle={styles.flashClose} iconName='close' iconSize={18} onPress={close(flash)} />
                         )}
                     </View>
                 </TouchableOpacity>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: Layout.window.width,
     },
-    notificationContainer: {
+    flashContainer: {
         padding: 15,
         paddingLeft: 20,
         paddingRight: 20,
@@ -76,18 +76,18 @@ const styles = StyleSheet.create({
         borderTopColor: Colors.blackDark,
         ...Styles.shadow,
     },
-    notificationLightContainer: {
+    flashLightContainer: {
         backgroundColor: Colors.lightGreyBright,
     },
-    notificationDarkContainer: {
+    flashDarkContainer: {
         backgroundColor: Colors.black,
     },
-    notificationText: {
+    flashText: {
         fontFamily: Styles.fontFamilyBody,
         fontWeight: '400',
         fontSize: 14,
     },
-    notificationClose: {
+    flashClose: {
         position: 'absolute',
         right: 2,
         top: 2,

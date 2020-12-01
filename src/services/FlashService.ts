@@ -1,9 +1,9 @@
-import BaseFactory from './BaseFactory';
+import { Base } from '../utils';
 import SUI from 'sui-js';
-import { NOTIFICATION } from '../constants/ActionTypes';
+import { FLASH } from '../constants/ActionTypes';
 
-export default class NotificationFactory extends BaseFactory {
-    private notifications: any[];
+export default class FlashService extends Base {
+    private flashes: any[];
     private options: {
         closable: string[];
         duration: number;
@@ -11,7 +11,7 @@ export default class NotificationFactory extends BaseFactory {
 
     constructor(dispatch) {
         super(dispatch);
-        this.notifications = [];
+        this.flashes = [];
         this.options = {
             closable: ['error'],
             duration: 4000,
@@ -46,49 +46,49 @@ export default class NotificationFactory extends BaseFactory {
         return this.options.closable.indexOf(type) !== -1 || SUI.isFunction(opt_closeCallback);
     }
 
-    public close(notification, opt_force = false) {
-        const index = this.notifications.findIndex((item) => item.id === notification.id);
-        if (index !== -1 && (opt_force || !SUI.eq(notification.duration, Infinity))) {
-            if (notification.closeCallback) {
-                notification.closeCallback();
+    public close(flash, opt_force = false) {
+        const index = this.flashes.findIndex((item) => item.id === flash.id);
+        if (index !== -1 && (opt_force || !SUI.eq(flash.duration, Infinity))) {
+            if (flash.closeCallback) {
+                flash.closeCallback();
             }
-            this.notifications.splice(index, 1);
+            this.flashes.splice(index, 1);
             this.dispatch({
-                type: NOTIFICATION,
+                type: FLASH,
             });
         }
     }
 
-    public remove(notification) {
-        this.close(notification, true);
+    public remove(flash) {
+        this.close(flash, true);
     }
 
     private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
-        this.removeNotification(opt_id);
-        const notification = {
+        this.removeFlash(opt_id);
+        const flash = {
             type,
             message,
             id: opt_id,
             duration: opt_duration,
             closeCallback: opt_closeCallback,
         };
-        this.notifications.push(notification);
+        this.flashes.push(flash);
         if (!this.isClosable(type, opt_closeCallback) && !SUI.eq(opt_duration, Infinity)) {
             setTimeout(() => {
-                this.close(notification);
+                this.close(flash);
             }, opt_duration || this.options.duration);
         }
         this.dispatch({
-            type: NOTIFICATION,
+            type: FLASH,
         });
-        return notification;
+        return flash;
     }
 
-    private removeNotification(opt_id = '') {
+    private removeFlash(opt_id = '') {
         if (opt_id) {
-            const notification = this.notifications.find((item) => item.id === opt_id);
-            if (notification) {
-                this.close(notification, true);
+            const flash = this.flashes.find((item) => item.id === opt_id);
+            if (flash) {
+                this.close(flash, true);
             }
         }
     }

@@ -1,4 +1,4 @@
-export const NOTIFICATION = 'Notification/NOTIFICATION';
+export const FLASH = 'Flash/FLASH';
 export const CONFIRM = 'Confirm/CONFIRM';
 
 export const HTTP_REQUEST = 'Http/REQUEST';
