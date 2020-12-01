@@ -3,13 +3,13 @@ import { Base, Fetch } from '../utils';
 
 export default class HttpService extends Base {
     protected dispatch: (state: object) => void;
-    private getTokenAsync: () => Promise<string>;
+    private getTokenAsync: () => Promise<any>;
     private inprogress: number;
     private language: string;
     private secret: string;
     private fetch: Fetch;
 
-    constructor(dispatch, getTokenAsync: () => Promise<string>, backend, language, secret) {
+    constructor(dispatch, getTokenAsync: () => Promise<any>, backend, language, secret) {
         super(dispatch);
         this.getTokenAsync = getTokenAsync;
         this.inprogress = 0;
