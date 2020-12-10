@@ -40,7 +40,7 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
     return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
   }
 
-  function getIcon(): string {
+  function getIcon(): any {
     return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
   }
 
