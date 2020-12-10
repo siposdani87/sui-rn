@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function IconButton(props: { onPress: () => void, iconColor?: string, backgroundColor?: string, borderColor?: string, imageSource?: any, iconName?: string, iconType?: string, iconSize?: number, containerStyle?: any, style?: any }) {
+export default function IconButton(props: { onPress: () => void, iconColor?: string, backgroundColor?: string, borderColor?: string, imageSource?: any, iconName?: any, iconType?: string, iconSize?: number, containerStyle?: any, style?: any }) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';

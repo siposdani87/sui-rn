@@ -3,7 +3,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function Button(props: { onPress: () => void, iconColor?: string, textColor?: string, backgroundColor?: string, borderColor?: string, title?: string, imageSource?: any, iconName?: string, iconType?: string, keepFormat?: boolean, containerStyle?: any, style?: any }) {
+export default function Button(props: { onPress: () => void, iconColor?: string, textColor?: string, backgroundColor?: string, borderColor?: string, title?: string, imageSource?: any, iconName?: any, iconType?: string, keepFormat?: boolean, containerStyle?: any, style?: any }) {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;
     const textColor = props.textColor || Colors.primaryText;
