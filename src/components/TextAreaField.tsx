@@ -17,12 +17,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
   const getActionColor = useActionColor(props.disabled);
   const numberOfLines = props.numberOfLines || 5;
-  const defaultStyle = {
-    height: 20 * numberOfLines + 16,
-    maxHeight: 300,
-    textAlignVertical: 'top',
-    ...style,
-  };
+  const height = 20 * numberOfLines + 16;
 
   useEffect(() => {
     setValue(props.value);
@@ -50,20 +45,27 @@ export default function TextAreaField(props: { value: any, onValueChange: (value
     };
   }
 
-  const editorStyle = [styles.editor, defaultStyle, getInputStyle()];
-
   if (props.richText) {
+    const editorStyle = [styles.editor, style, getInputStyle()];
+
     return (
       <View style={[styles.container, props.containerStyle]}>
         <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-        <RichTextEditor minHeight={defaultStyle.height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} />
+        <RichTextEditor minHeight={height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} />
         <ErrorField error={error} disabled={props.disabled} />
       </View>
     );
   }
 
+  const textareaStyle = {
+    height,
+    textAlignVertical: 'top',
+    paddingTop: 5,
+    ...style,
+  };
+
   return (
-    <TextField value={props.value} error={props.error} onValueChange={props.onValueChange} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={[defaultStyle, { paddingTop: 5 }]} multiline={true} numberOfLines={numberOfLines} />
+    <TextField value={props.value} error={props.error} onValueChange={props.onValueChange} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={textareaStyle} multiline={true} numberOfLines={numberOfLines} />
   );
 }
 
