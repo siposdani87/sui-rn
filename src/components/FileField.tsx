@@ -144,7 +144,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
           <IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={getActionColor()} onPress={openCamera} />
         )}
         {!isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='collections' iconColor={getActionColor()} onPress={openImageLibrary} />
+          <IconButton containerStyle={Styles.fieldIconButton} iconName='image' iconColor={getActionColor()} onPress={openImageLibrary} />
         )}
       </TextField>
     </View>
