@@ -6,7 +6,7 @@ import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function SwitchField(props: { value: any, onValueChange: (value: any) => void, trueValue?: any, falseValue?: any, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
+export default function SwitchField(props: { value: any, onValueChange: (_value: any) => void, trueValue?: any, falseValue?: any, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const trueValue = props.trueValue || true;
   const falseValue = props.falseValue || false;
   const [value, setValue] = useState(props.value);
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
       },
       ios: {
         marginLeft: 60,
-      }
+      },
     }),
   },
   switch: {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
       },
       ios: {
         top: -6,
-      }
+      },
     }),
   },
 });

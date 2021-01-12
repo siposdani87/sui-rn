@@ -8,7 +8,7 @@ import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function LocationField(props: { value: any, onValueChange: (value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
+export default function LocationField(props: { value: any, onValueChange: (_value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const defaultValue = {
     address: '',
     latitude: 0,
@@ -97,8 +97,8 @@ export default function LocationField(props: { value: any, onValueChange: (value
     if (dimensions) {
       return;
     }
-    let { width, height } = event.nativeEvent.layout;
-    height = (width / 16) * 9;
+    const { width } = event.nativeEvent.layout;
+    const height = (width / 16) * 9;
     setDimensions({ width, height });
   }
 

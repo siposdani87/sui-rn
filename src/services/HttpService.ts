@@ -2,7 +2,7 @@ import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401, HTTP_403 } from '../constants/Ac
 import { Base, Fetch } from '../utils';
 
 export default class HttpService extends Base {
-    protected dispatch: (state: object) => void;
+    protected dispatch: (_state: any) => void;
     private getTokenAsync: () => Promise<any>;
     private inprogress: number;
     private language: string;
@@ -26,23 +26,23 @@ export default class HttpService extends Base {
         return this.inprogress > 0;
     }
 
-    public async get(url: string, opt_params?: {}, opt_headers?: {}) {
+    public async get(url: string, opt_params?: any, opt_headers?: any) {
         return this._handleResponse(this.fetch.get(url, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async post(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
+    public async post(url: string, opt_data?: any, opt_params?: any, opt_headers?: any) {
         return this._handleResponse(this.fetch.post(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async put(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
+    public async put(url: string, opt_data?: any, opt_params?: any, opt_headers?: any) {
         return this._handleResponse(this.fetch.put(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async patch(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
+    public async patch(url: string, opt_data?: any, opt_params?: any, opt_headers?: any) {
         return this._handleResponse(this.fetch.patch(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    public async delete(url: string, opt_data?: {}, opt_params?: {}, opt_headers?: {}) {
+    public async delete(url: string, opt_data?: any, opt_params?: any, opt_headers?: any) {
         return this._handleResponse(this.fetch.delete(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 

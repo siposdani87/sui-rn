@@ -7,7 +7,7 @@ const config = {
     onEndReachedThreshold: 0.5,
 };
 
-export default function FlatList(props: { data: any[], keyExtractor?: (item: any, index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
+export default function FlatList(props: { data: any[], keyExtractor?: (_item: any, _index: number) => string, renderItem: ListRenderItem<any>, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
     const [flatListReady, setFlatListReady] = useState(false);
 
     function onRefresh() {

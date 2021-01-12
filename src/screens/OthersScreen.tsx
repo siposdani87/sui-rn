@@ -13,7 +13,7 @@ export default function OthersScreen() {
 
           <Text>Simple themed text</Text>
 
-          <Link onPress={() => { }} title='Open new link' />
+          <Link onPress={() => null} title='Open new link' />
         </View>
       </ScrollView>
     </Fragment>

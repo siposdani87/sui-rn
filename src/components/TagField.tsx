@@ -8,7 +8,7 @@ import useInputStyle from '../hooks/useInputStyle';
 import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 
-export default function TagField(props: { values: any[], onValuesChange: (value: any[]) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
+export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const [values, setValues] = useState(props.values);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(values.length, error, props.required, props.disabled);
@@ -117,5 +117,5 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     padding: 0,
-  }
+  },
 });

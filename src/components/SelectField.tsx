@@ -11,7 +11,7 @@ import TagField from './TagField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function SelectField(props: { value: any, items: any, onValueChange: (value: any) => void, okText: string, multiple?: boolean, onSearch?: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
+export default function SelectField(props: { value: any, items: any, onValueChange: (_value: any) => void, okText: string, multiple?: boolean, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
   const valueKey = 'value';
   const labelKey = 'label';
 
@@ -139,6 +139,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   }
 
   function searchInItems(q) {
+    props.onSearch(q);
     setQuery(q);
     setFilteredItems(convert(props.items, q));
   }
@@ -175,11 +176,11 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <TagField style={styles.selectInput} values={getValues()} onValuesChange={onValuesChange} error={error} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
+      <TagField style={[props.style, styles.selectInput]} values={getValues()} onValuesChange={onValuesChange} error={error} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
         <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />
       </TagField>
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
-        <Button title={props.okText} onPress={selectValue} />
+        <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>
         <SearchField value={query} onValueChange={searchInItems} />
         <FlatList style={{ maxHeight: 175 }} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
@@ -211,5 +212,5 @@ const styles = StyleSheet.create({
   },
   selectedItemDark: {
     backgroundColor: Colors.inputDefaultDark,
-  }
+  },
 });

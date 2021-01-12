@@ -78,5 +78,5 @@ const styles = StyleSheet.create({
     right: -5,
     top: -5,
     margin: 0,
-  }
+  },
 });

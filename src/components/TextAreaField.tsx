@@ -10,7 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useInputStyle from '../hooks/useInputStyle';
 import useActionColor from '../hooks/useActionColor';
 
-export default function TextAreaField(props: { value: any, onValueChange: (value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
+export default function TextAreaField(props: { value: any, onValueChange: (_value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const style = StyleSheet.flatten(props.style);
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useErrorField(props.error);

@@ -9,7 +9,7 @@ export default class Base {
         return state;
     }
 
-    protected dispatch: (state: object) => void;
+    protected dispatch: (_state: any) => void;
 
     constructor(dispatch) {
         this.dispatch = dispatch;

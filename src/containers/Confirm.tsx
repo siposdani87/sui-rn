@@ -15,7 +15,7 @@ export default function Confirm(props: { services: any }) {
 
     function onPress(alertButton) {
         return (value?: string) => {
-            if (!!alertButton.onPress) {
+            if (alertButton.onPress) {
                 alertButton.onPress(value);
             }
             close();
@@ -74,5 +74,5 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-    }
+    },
 });

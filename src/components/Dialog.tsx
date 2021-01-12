@@ -21,10 +21,27 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
         }
     }
 
+    function getStyle(type) {
+        switch (type) {
+            case 'success':
+                return styles.success;
+            case 'info':
+                return styles.info;
+            case 'warning':
+                return styles.warning;
+            case 'error':
+                return styles.error;
+            case 'choice':
+                return styles.choice;
+            default:
+                return null;
+        }
+    }
+
     return (
         <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
-                <View style={[styles.dialogContainer, props.type ? styles[props.type] : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
+                <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     {(!!props.title || !!props.onClose) && (
                         <View style={styles.headerContainer}>
                             {!!props.title && (
