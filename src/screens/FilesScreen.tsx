@@ -18,7 +18,7 @@ export default function FilesScreen() {
       setData({
         profilePicture: 'https://www.gravatar.com/avatar/0?s=200&d=robohash&f=y',
         logoPicture: {
-          uri: null
+          uri: null,
         },
       });
       setRefreshing(false);

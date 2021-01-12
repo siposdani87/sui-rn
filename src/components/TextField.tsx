@@ -6,7 +6,7 @@ import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useInputStyle from '../hooks/useInputStyle';
 
-export default function TextField(props: { value: any, onValueChange: (value: any) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any } & TextInputProps) {
+export default function TextField(props: { value: any, onValueChange: (_value: any) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, placeholder?: string, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any } & TextInputProps) {
   const [value, setValue] = useState(props.value);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);

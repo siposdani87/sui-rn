@@ -8,8 +8,9 @@ import * as DocumentPicker from 'expo-document-picker';
 import { Colors, Styles } from '../constants';
 import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
+import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
 
-export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
+export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
@@ -17,6 +18,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
   );
   const [error, onErrorChange] = useErrorField(props.error);
   const getActionColor = useActionColor(props.disabled);
+  const searchStr = ';base64,';
 
   const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: isImage() ? ImagePicker.MediaTypeOptions.Images : (isVideo() ? ImagePicker.MediaTypeOptions.Videos : ImagePicker.MediaTypeOptions.All),
@@ -59,13 +61,20 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     return !(isImage() || isVideo());
   }
 
+  function handleDataUri(result: ImageInfo){
+    const filename = result.uri.split('/').pop();
+    const uri = 'data:image/jpeg;base64,' + result.base64;
+    const dataUri = uri.replace(searchStr, ';filename=' + filename + searchStr);
+    _onFileDataChange(filename, dataUri);
+  }
+
   async function openImageLibrary() {
     const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
     if (cameraRollPermission.status === 'granted') {
       try {
         const result = await ImagePicker.launchImageLibraryAsync(options);
         if (result.cancelled === false) {
-          _onFileDataChange(result.uri.split('/').pop(), 'data:image/jpeg;base64,' + result.base64);
+          handleDataUri(result);
         }
       } catch (e) {
         showAlert(e);
@@ -80,7 +89,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       try {
         const result = await ImagePicker.launchCameraAsync(options);
         if (result.cancelled === false) {
-          _onFileDataChange(result.uri.split('/').pop(), 'data:image/jpeg;base64,' + result.base64);
+          handleDataUri(result);
         }
       } catch (e) {
         showAlert(e);
@@ -94,7 +103,8 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
         type: props.mimeType || '*/*',
       });
       if (result.type !== 'cancel') {
-        _onFileDataChange(result.name, result.uri);
+        const dataUri = result.uri.replace(searchStr, ';filename=' + result.name + searchStr);
+        _onFileDataChange(result.name, dataUri);
       }
     } catch (e) {
       showAlert(e);
@@ -136,7 +146,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
           <Image source={value} style={styles.image} />
         )}
       </View>
-      <TextField style={styles.fileInput} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
+      <TextField style={[props.style, styles.fileInput]} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
         {isDocument() && (
           <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={getActionColor()} onPress={openDocumentLibrary} />
         )}

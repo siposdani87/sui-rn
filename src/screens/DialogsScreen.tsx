@@ -31,8 +31,8 @@ export default function DialogsScreen() {
           <Button onPress={openDialog('dialog1')} title='dialog1' />
 
           <Dialog visible={isVisible('dialog2')} title='Dialog 2' onClose={closeDialog} buttons={[
-            <TextButton title='cancel' onPress={closeDialog} />,
-            <Button title='done' onPress={closeDialog} />
+            <TextButton key={0} title='cancel' onPress={closeDialog} />,
+            <Button key={1} title='done' onPress={closeDialog} />,
           ]}>
             <Text>Dialog 2 text</Text>
             <TextField label='Name' value='' onValueChange={() => null} desc='Description of name' />

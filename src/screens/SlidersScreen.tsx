@@ -8,7 +8,7 @@ export default function SlidersScreen() {
     weight: 0,
     weightDisabled: 0,
     weightRequired: 0,
-    weightRequiredDisabled: 0
+    weightRequiredDisabled: 0,
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -21,7 +21,7 @@ export default function SlidersScreen() {
         weight: 92,
         weightDisabled: 10,
         weightRequired: 0,
-        weightRequiredDisabled: 46
+        weightRequiredDisabled: 46,
       });
       setRefreshing(false);
     }, 2000);
