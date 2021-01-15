@@ -7,6 +7,7 @@ export default function FilesScreen() {
   const [data, setData] = useState({
     profilePicture: null,
     logoPicture: require('../../assets/icon.png'),
+    document: null,
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -20,6 +21,7 @@ export default function FilesScreen() {
         logoPicture: {
           uri: null,
         },
+        document: null,
       });
       setRefreshing(false);
     }, 2000);
@@ -44,9 +46,11 @@ export default function FilesScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          {/*   <FileField label='Logo picture' value={data.logoPicture} mimeType='image/*' onValueChange={(v) => updateData('logoPicture', v)} />
- */}
+          <FileField label='Logo picture' value={data.logoPicture} mimeType='image/*' onValueChange={(v) => updateData('logoPicture', v)} />
+
           <FileField label='Profile picture' value={{ uri: data.profilePicture }} mimeType='image/*' onValueChange={(v) => updateData('profilePicture', v)} />
+
+          <FileField label='Document' value={{ uri: data.document }} mimeType='application/pdf' onValueChange={(v) => updateData('document', v)} />
 
         </View>
       </ScrollView>
