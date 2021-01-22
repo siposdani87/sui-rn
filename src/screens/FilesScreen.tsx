@@ -51,7 +51,6 @@ export default function FilesScreen() {
           <FileField label='Profile picture' value={{ uri: data.profilePicture }} mimeType='image/*' onValueChange={(v) => updateData('profilePicture', v)} />
 
           <FileField label='Document' value={{ uri: data.document }} mimeType='application/pdf' onValueChange={(v) => updateData('document', v)} />
-
         </View>
       </ScrollView>
     </Fragment>

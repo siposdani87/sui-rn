@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Label from './Label';
+import SUI from 'sui-js';
 import { View, StyleSheet, Image, Alert, ImageURISource, ImageRequireSource, TouchableOpacity } from 'react-native';
 import useErrorField from '../hooks/useErrorField';
 import IconButton from './IconButton';
@@ -9,9 +10,27 @@ import { Colors, Styles } from '../constants';
 import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
 import { ImageInfo } from 'expo-image-picker/build/ImagePicker.types';
+import { SvgCss } from 'react-native-svg';
+
+const fileTypes = {
+  'docx': 'blue',
+  'xlsx': 'green',
+  'pdf': 'red',
+};
+
+const fileTypeSVG = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
+  '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
+  '<path style="fill:#E2E5E7;" d="M128,0c-17.6,0-32,14.4-32,32v448c0,17.6,14.4,32,32,32h320c17.6,0,32-14.4,32-32V128L352,0H128z"/>' +
+  '<path style="fill:#B0B7BD;" d="M384,128h96L352,0v96C352,113.6,366.4,128,384,128z"/>' +
+  '<polygon style="fill:#CAD1D8;" points="480,224 384,128 480,128 "/>' +
+  '<path style="fill:#CAD1D8;" d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z"/>' +
+  '<path style="fill:#000000;" d="M416,416c0,8.8-7.2,16-16,16H48c-8.8,0-16-7.2-16-16V256c0-8.8,7.2-16,16-16h352c8.8,0,16,7.2,16,16V416z"/>' +
+  '<text x="220" y="380" text-anchor="middle" style="fill:#FFF;font-weight:700;font-family:Arial;font-size:120px;">TYPE</text>' +
+  '</svg>';
 
 export default function FileField(props: { value: ImageURISource | ImageRequireSource, mimeType: string, onValueChange: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, aspect?: [number, number], quality?: number, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
+  const [svgXml, setSvgXml] = useState(null);
   const [state, setState] = useReducer(
     (oldState, newState) => ({ ...oldState, ...newState }),
     { fileName: '', fileData: '' },
@@ -29,12 +48,11 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     exif: true,
   };
 
-  /* useEffect(() => {
-    if ((typeof props.value === 'number' || (props.value as ImageURISource)?.uri) && !state.fileData) {
-      setValue(props.value);
-      removeImage();
+  useEffect(() => {
+    if (isDocument()) {
+      _setDefaultSvg();
     }
-  }, [props.value]); */
+  }, []);
 
   useEffect(() => {
     if ((props.value as ImageURISource)?.uri && !state.fileData) {
@@ -42,6 +60,12 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       removeImage();
     }
   }, [(props.value as ImageURISource)?.uri]);
+
+  function _setDefaultSvg(){
+    const color = props.required ? 'grey;stroke:red;stroke-width:10;stroke-dasharray:15,10' : 'grey';
+    const defaultSrc = _getFileIconSrc('N/A', color);
+    setSvgXml(defaultSrc);
+  }
 
   function _onFileDataChange(fileName, fileData) {
     onErrorChange();
@@ -61,7 +85,11 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     return !(isImage() || isVideo());
   }
 
-  function handleDataUri(result: ImageInfo){
+  function _getFileIconSrc(type, color) {
+    return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
+  }
+
+  function handleDataUri(result: ImageInfo) {
     const filename = result.uri.split('/').pop();
     const uri = 'data:image/jpeg;base64,' + result.base64;
     const dataUri = uri.replace(searchStr, ';filename=' + filename + searchStr);
@@ -69,8 +97,8 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
   }
 
   async function openImageLibrary() {
-    const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
-    if (cameraRollPermission.status === 'granted') {
+    const mediaLibraryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (mediaLibraryPermission.status === 'granted') {
       try {
         const result = await ImagePicker.launchImageLibraryAsync(options);
         if (result.cancelled === false) {
@@ -83,9 +111,9 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
   }
 
   async function openCamera() {
-    const cameraRollPermission = await ImagePicker.requestCameraRollPermissionsAsync();
+    const mediaLibraryPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     const cameraPermission = await ImagePicker.requestCameraPermissionsAsync();
-    if (cameraRollPermission.status === 'granted' && cameraPermission.status === 'granted') {
+    if (mediaLibraryPermission.status === 'granted' && cameraPermission.status === 'granted') {
       try {
         const result = await ImagePicker.launchCameraAsync(options);
         if (result.cancelled === false) {
@@ -103,6 +131,10 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
         type: props.mimeType || '*/*',
       });
       if (result.type !== 'cancel') {
+        const type = SUI.getExtensionName(result.name);
+        const color = fileTypes[type];
+        const fileIconSrc = _getFileIconSrc(type, color);
+        setSvgXml(fileIconSrc);
         const dataUri = result.uri.replace(searchStr, ';filename=' + result.name + searchStr);
         _onFileDataChange(result.name, dataUri);
       }
@@ -126,6 +158,11 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     _onFileDataChange('', '');
   }
 
+  function removeDocument() {
+    _setDefaultSvg();
+    _onFileDataChange('', '');
+  }
+
   function onFilenameChange(v) {
     setState({ fileName: v });
   }
@@ -144,6 +181,17 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
         )}
         {!isDocument() && !state.fileData && !!value && (
           <Image source={value} style={styles.image} />
+        )}
+        {isDocument() && !!state.fileData && !!svgXml && (
+          <View style={styles.imageBox}>
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 0 }} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeDocument} />
+            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeDocument}>
+              <SvgCss xml={svgXml} width="100" height="100" />
+            </TouchableOpacity>
+          </View>
+        )}
+        {isDocument() && !state.fileData && !!svgXml && (
+          <SvgCss xml={svgXml} width="100" height="100" />
         )}
       </View>
       <TextField style={[props.style, styles.fileInput]} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>

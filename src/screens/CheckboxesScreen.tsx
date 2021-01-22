@@ -8,7 +8,7 @@ export default function CheckboxesScreen() {
     isPrivate: false,
     isBanned: false,
     isDeleted: false,
-    radioButtons: null,
+    radioButton: null,
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -21,7 +21,7 @@ export default function CheckboxesScreen() {
         isPrivate: true,
         isBanned: true,
         isDeleted: true,
-        radioButtons: 'yes',
+        radioButton: 'yes',
       });
       setRefreshing(false);
     }, 2000);
@@ -48,8 +48,8 @@ export default function CheckboxesScreen() {
         <View style={styles.container}>
           <Label text='Do you use radio buttons?' />
           <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-          <RadioButtonField label='Yes' value={data.radioButtons} trueValue='yes' onValueChange={(v) => updateData('radioButtons', v)} />
-          <RadioButtonField label='No' value={data.radioButtons} trueValue='no' onValueChange={(v) => updateData('radioButtons', v)} />
+            <RadioButtonField label='Yes' value={data.radioButton} trueValue='yes' onValueChange={(v) => updateData('radioButton', v)} />
+            <RadioButtonField label='No' value={data.radioButton} trueValue='no' onValueChange={(v) => updateData('radioButton', v)} />
           </View>
           <CheckboxField label='Private profile' value={data.isPrivate} onValueChange={(v) => updateData('isPrivate', v)} />
 
