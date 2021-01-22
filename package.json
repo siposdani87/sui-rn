@@ -44,13 +44,14 @@
     "react-native-maps": "0.27.1",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
+    "react-native-svg": "12.1.0",
     "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop"
   },
   "devDependencies": {
     "@expo-google-fonts/inter": "^0.1.0",
     "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/native": "5.9.0",
-    "@react-navigation/stack": "5.13.0",
+    "@react-navigation/native": "5.9.2",
+    "@react-navigation/stack": "5.14.1",
     "@types/expo__vector-icons": "9.0.1",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
