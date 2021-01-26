@@ -49,7 +49,7 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
         <MaterialIcons name={getIcon()} size={26} color={getColor()} />
       </TouchableOpacity>
-      <Label containerStyle={styles.label} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>{props.children}</Label>
+      <Label containerStyle={styles.labelContainer} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>{props.children}</Label>
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );
@@ -57,7 +57,7 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
 
 const styles = StyleSheet.create({
   container: {},
-  label: {
+  labelContainer: {
     marginLeft: 30,
   },
   iconToggle: {

@@ -54,7 +54,7 @@ export default function SwitchField(props: { value: any, onValueChange: (_value:
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Switch value={getValue()} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()} />
-      <Label onPress={onPress} containerStyle={styles.label} text={props.label} required={props.required} desc={props.desc} onPressDesc={props.onPressDesc} />
+      <Label onPress={onPress} containerStyle={styles.labelContainer} text={props.label} required={props.required} desc={props.desc} onPressDesc={props.onPressDesc} />
       <ErrorField error={error} />
     </View>
   );
@@ -62,7 +62,7 @@ export default function SwitchField(props: { value: any, onValueChange: (_value:
 
 const styles = StyleSheet.create({
   container: {},
-  label: {
+  labelContainer: {
     ...Platform.select({
       android: {
         marginLeft: 50,
