@@ -60,7 +60,6 @@ const styles = {
     tabBarOptions: {
         showIcon: false,
         showLabel: true,
-        allowFontScaling: true,
         labelStyle: {
             fontSize: 14,
             fontFamily: '',
