@@ -16,7 +16,7 @@ export default function Link(props: { title: string, onPress: () => void, color?
 
 const styles = StyleSheet.create({
     text: {
-        fontFamily: Styles.fontFamilyBody,
+        fontFamily: Styles.fontFamilyBodyRegular,
         fontWeight: '400',
         fontSize: 16,
         textDecorationLine: 'underline',

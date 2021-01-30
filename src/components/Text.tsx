@@ -20,7 +20,7 @@ export default function Text(props: { children?: any, muted?: boolean } & TextPr
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: Styles.fontFamilyBody,
+    fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
     fontSize: 16,
   },

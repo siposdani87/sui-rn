@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         minHeight: 30,
     },
     headerText: {
-        fontFamily: Styles.fontFamilyHeading,
+        fontFamily: Styles.fontFamilyHeadingRegular,
         fontWeight: '400',
         fontSize: 22,
         textTransform: 'uppercase',

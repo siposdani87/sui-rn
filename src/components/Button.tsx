@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         ...Styles.lightShadow,
     },
     text: {
-        fontFamily: Styles.fontFamilyBody,
+        fontFamily: Styles.fontFamilyBodyMedium,
         fontWeight: '500',
         fontSize: 16,
         marginHorizontal: 10,

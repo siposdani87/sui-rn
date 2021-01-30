@@ -72,7 +72,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (_valu
 const styles = StyleSheet.create({
   container: {},
   editor: {
-    fontFamily: Styles.fontFamilyBody,
+    fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
     fontSize: 16,
     borderRadius: 3,

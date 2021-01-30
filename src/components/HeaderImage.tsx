@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   titleText: {
-    fontFamily: Styles.fontFamilyHeading,
+    fontFamily: Styles.fontFamilyHeadingRegular,
     fontWeight: '400',
     fontSize: 22,
     textTransform: 'uppercase',

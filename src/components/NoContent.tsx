@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     text: {
         marginHorizontal: 20,
-        fontFamily: Styles.fontFamilyBody,
+        fontFamily: Styles.fontFamilyBodyRegular,
         fontWeight: '400',
         fontSize: 16,
     },

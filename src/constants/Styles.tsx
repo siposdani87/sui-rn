@@ -4,8 +4,12 @@ import Colors from './Colors';
 
 const styles = {
     fontFamilyApp: '',
-    fontFamilyHeading: '',
-    fontFamilyBody: '',
+    fontFamilyHeadingRegular: '',
+    fontFamilyHeadingMedium: '',
+    fontFamilyHeadingBold: '',
+    fontFamilyBodyRegular: '',
+    fontFamilyBodyMedium: '',
+    fontFamilyBodyBold: '',
     shadow: {
         ...Platform.select({
             android: {
@@ -149,21 +153,21 @@ const styles = {
     },
 };
 
-export function setThemeStyles(fontFamilyApp, fontFamilyHeading, fontFamilyBody) {
+export function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]) {
     styles.fontFamilyApp = fontFamilyApp;
-    styles.fontFamilyHeading = fontFamilyHeading;
-    styles.fontFamilyBody = fontFamilyBody;
+    [styles.fontFamilyHeadingRegular, styles.fontFamilyHeadingMedium, styles.fontFamilyHeadingBold] = fontFamilyHeadings;
+    [styles.fontFamilyBodyRegular, styles.fontFamilyBodyMedium, styles.fontFamilyBodyBold] = fontFamilyBodies;
 
-    styles.stackNavigatorOptions.headerTitleStyle.fontFamily = fontFamilyHeading;
-    styles.tabBarOptions.labelStyle.fontFamily = fontFamilyBody;
+    styles.stackNavigatorOptions.headerTitleStyle.fontFamily = styles.fontFamilyHeadingRegular;
+    styles.tabBarOptions.labelStyle.fontFamily = styles.fontFamilyBodyRegular;
 
     return styles;
 }
 
 Platform.select({
-    ios: () => setThemeStyles('Verdana', 'Helvetica', 'Arial'),
-    android: () => setThemeStyles('monospace', 'sans-serif', 'Roboto'),
-    default: () => setThemeStyles('Verdana', 'sans-serif', 'Arial'),
+    ios: () => setThemeStyles('Verdana', ['Helvetica', 'Helvetica', 'Helvetica'], ['Arial', 'Arial', 'Arial']),
+    android: () => setThemeStyles('monospace', ['sans-serif', 'sans-serif', 'sans-serif'], ['Roboto', 'Roboto', 'Roboto']),
+    default: () => setThemeStyles('Verdana', ['sans-serif', 'sans-serif', 'sans-serif'], ['Arial', 'Arial', 'Arial']),
 })();
 
 export default styles;

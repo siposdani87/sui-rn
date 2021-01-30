@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     paddingRight: 40,
   },
   itemText: {
-    fontFamily: Styles.fontFamilyBody,
+    fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
     fontSize: 16,
     paddingHorizontal: 10,

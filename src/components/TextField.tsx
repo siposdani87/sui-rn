@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   textInput: {
-    fontFamily: Styles.fontFamilyBody,
+    fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
     fontSize: 16,
     height: 36,
