@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     text: {
-        fontFamily: Styles.fontFamilyBody,
+        fontFamily: Styles.fontFamilyBodyMedium,
         fontWeight: '500',
         fontSize: 16,
         paddingHorizontal: 10,

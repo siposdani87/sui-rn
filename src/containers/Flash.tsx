@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     flashText: {
-        fontFamily: Styles.fontFamilyBody,
+        fontFamily: Styles.fontFamilyBodyRegular,
         fontWeight: '400',
         fontSize: 14,
     },

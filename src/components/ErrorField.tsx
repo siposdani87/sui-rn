@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     height: 17,
   },
   text: {
-    fontFamily: Styles.fontFamilyBody,
+    fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
     fontSize: 12,
   },
