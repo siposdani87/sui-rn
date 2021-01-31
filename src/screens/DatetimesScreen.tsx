@@ -5,8 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 
 export default function DatetimesScreen() {
   const [data, setData] = useState({
-    year: null,
-
     datetime: null,
     datetimeDisabled: null,
     datetimeRequired: null,
@@ -14,6 +12,7 @@ export default function DatetimesScreen() {
 
     date: null,
     time: null,
+    year: null,
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -22,21 +21,21 @@ export default function DatetimesScreen() {
     setRefreshing(true);
 
     setTimeout(() => {
+      const regex = /\.[0-9]{3}/g;
       setData({
-        year: 1987,
-
-        datetime: new Date().toISOString(),
-        datetimeDisabled: new Date().toISOString(),
+        datetime: new Date().toISOString().replace(regex, '').replace('Z', '+00:00'),
+        datetimeDisabled: new Date().toISOString().replace(regex, '').replace('Z', '+00:00'),
         datetimeRequired: null,
         datetimeRequiredDisabled: null,
 
-        date: new Date().toISOString(),
-        time: new Date().toISOString(),
-
+        date: new Date().toISOString().split('T', 2)[0],
+        time: new Date().toISOString().split('T', 2)[1].split('.', 2)[0],
+        year: 1987,
       });
       setRefreshing(false);
     }, 2000);
   }, []);
+  console.log(data);
 
   useEffect(() => {
     onRefresh();
@@ -64,7 +63,6 @@ export default function DatetimesScreen() {
           
           <DatetimeField label='Date' mode='date' format='YYYY. MM. DD.' okText='OK' value={data.date} onValueChange={(v) => updateData('date', v)} />
           <DatetimeField label='Time' mode='time' format='HH:mm' okText='OK' value={data.time} onValueChange={(v) => updateData('time', v)} />
-          
           <DatetimeField label='Year' mode='year' format='YYYY.' value={data.year} okText='OK' onValueChange={(v) => updateData('year', v)} />
         </View>
       </ScrollView>

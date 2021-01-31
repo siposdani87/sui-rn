@@ -13,7 +13,7 @@ import { Linking, Platform } from 'react-native';
 
 enableScreens();
 
-setThemeStyles('Inter_700Bold', 'Inter_500Medium', 'Inter_400Regular');
+setThemeStyles('Inter_700Bold', ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
 setThemeColors(Colors.greenBright, Colors.green, Colors.greenDark, Colors.white, Colors.amberBright, Colors.amber, Colors.amberDark, Colors.white);
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
