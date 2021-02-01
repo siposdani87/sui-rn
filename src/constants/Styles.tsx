@@ -114,7 +114,7 @@ const styles = {
         headerTitleStyle: {
             fontFamily: '',
             fontWeight: '400',
-            fontSize: 14,
+            fontSize: 16,
             color: Colors.primaryText,
         },
         headerStyle: {
