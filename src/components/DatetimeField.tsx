@@ -87,7 +87,6 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
 
   useEffect(() => {
     dateio.formats[props.format] = props.format;
-    console.log('props.format:', props.format);
   }, [props.format]);
 
   useEffect(() => {
@@ -109,12 +108,10 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function getFormattedValue(v, c): string {
-    console.log('getFormattedValue:', c.format, props.format);
     return dateio.format(dateio.parse(v, c.format), props.format as any);
   }
 
   function getValue(v, c): string {
-    console.log('getValue:', c.format);
     return dateio.format(dateio.parse(v, c.format), c.format);
   }
 
