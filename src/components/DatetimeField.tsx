@@ -65,8 +65,8 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   const [years, setYears] = useState([]);
   const [mode, setMode] = useState('date');
   const [visible, setVisible] = useState(false);
+  const [format, setFormat] = useState(props.format);
   const getActionColor = useActionColor(props.disabled);
-  dateio.formats[props.format] = props.format;
 
   useEffect(() => {
     function generateYears(minYear, maxYear) {
@@ -86,7 +86,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }, [props.mode]);
 
   useEffect(() => {
-    dateio.formats[props.format] = props.format;
+    setFormat(props.format);
   }, [props.format]);
 
   useEffect(() => {
@@ -108,7 +108,8 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }
 
   function getFormattedValue(v, c): string {
-    return dateio.format(dateio.parse(v, c.format), props.format as any);
+    dateio.formats[format] = format;
+    return dateio.format(dateio.parse(v, c.format), format as any);
   }
 
   function getValue(v, c): string {
