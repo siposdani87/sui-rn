@@ -61,12 +61,12 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
         ))}
       </View>
       {props.children && (
-        <View style={[styles.actionsContainer, Platform.select({
+        <View style={[Styles.actionsContainer as any, Platform.select({
           android: {
             top: props.label ? 26 : -2,
           },
           ios: {
-            top: props.label ? 22 : -2,
+            top: props.label ? 24 : -2,
           },
         })]}>
           {props.children}
@@ -79,13 +79,6 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
 
 const styles = StyleSheet.create({
   container: {},
-  actionsContainer: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    flexDirection: 'row',
-    zIndex: 1,
-  },
   textInput: {
     minHeight: 36,
     borderRadius: 3,
