@@ -151,6 +151,12 @@ const styles = {
     fieldIconButton: {
         margin: 0,
     },
+    actionsContainer: {
+        position: 'absolute',
+        right: 0,
+        flexDirection: 'row',
+        zIndex: 1,
+    },
 };
 
 export function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]) {

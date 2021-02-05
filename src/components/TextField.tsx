@@ -30,12 +30,12 @@ export default function TextField(props: { value: any, onValueChange: (_value: a
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       <TextInput value={value} style={[styles.textInput, props.style, getInputStyle()]} onChangeText={onValueChange} placeholderTextColor={getPlaceholderTextColor()} placeholder={props.placeholder} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
       {props.children && (
-        <View style={[styles.actionsContainer, Platform.select({
+        <View style={[Styles.actionsContainer as any, Platform.select({
           android: {
             top: props.label ? 26 : -2,
           },
           ios: {
-            top: props.label ? 22 : -2,
+            top: props.label ? 24 : -2,
           },
         })]}>
           {props.children}
@@ -48,12 +48,6 @@ export default function TextField(props: { value: any, onValueChange: (_value: a
 
 const styles = StyleSheet.create({
   container: {},
-  actionsContainer: {
-    position: 'absolute',
-    right: 0,
-    flexDirection: 'row',
-    zIndex: 1,
-  },
   textInput: {
     fontFamily: Styles.fontFamilyBodyRegular,
     fontWeight: '400',
