@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import DateioAdapter from '@date-io/moment';
-import * as Localization from 'expo-localization';
+import moment from 'moment';
+// import * as Localization from 'expo-localization';
 import SelectField from './SelectField';
 import IconButton from './IconButton';
 import { Styles } from '../constants';
@@ -18,7 +18,7 @@ const MODES = {
     clockType: 'time',
   },
   'datetime': {
-    format: 'YYYY-MM-DDTHH:mm:ssZ', // 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
+    format: '', // YYYY-MM-DDTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
     calendarType: 'date',
     clockType: 'time',
   },
@@ -49,13 +49,13 @@ const MODES = {
   },
 };
 
-const dateio = new DateioAdapter({ locale: Localization.locale });
+/* const dateio = new DateioAdapter({ locale: Localization.locale });
 for (const key in MODES) {
   if (Object.prototype.hasOwnProperty.call(MODES, key)) {
     const mode = MODES[key];
     dateio.formats[mode.format] = mode.format;
   }
-}
+} */
 
 export default function DatetimeField(props: { mode: any, value: any, onValueChange: (_value: any) => void, okText: string, format: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
@@ -65,7 +65,6 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   const [years, setYears] = useState([]);
   const [mode, setMode] = useState('date');
   const [visible, setVisible] = useState(false);
-  const [format, setFormat] = useState(props.format);
   const getActionColor = useActionColor(props.disabled);
 
   useEffect(() => {
@@ -79,15 +78,12 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
       });
     }
     if (props.mode === 'year') {
+      const minYear = 1900;
       const maxYear = new Date().getFullYear() + 10;
-      setYears(generateYears(1900, maxYear));
+      setYears(generateYears(minYear, maxYear));
     }
     setConfig(MODES[props.mode]);
   }, [props.mode]);
-
-  useEffect(() => {
-    setFormat(props.format);
-  }, [props.format]);
 
   useEffect(() => {
     setValue(props.value);
@@ -104,16 +100,24 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
   }, [config, value]);
 
   function getDate(v, c): Date {
-    return dateio.toJsDate(dateio.parse(v, c.format));
+    // return dateio.toJsDate(dateio.parse(v, c.format));
+    return moment(v, c.format).toDate();
   }
 
   function getFormattedValue(v, c): string {
-    dateio.formats[format] = format;
-    return dateio.format(dateio.parse(v, c.format), format as any);
+    // dateio.formats[props.format] = props.format;
+    // return dateio.format(dateio.parse(v, c.format), props.format as any);
+    return moment(v, c.format).format(props.format);
   }
 
   function getValue(v, c): string {
-    return dateio.format(dateio.parse(v, c.format), c.format);
+    // return dateio.format(dateio.parse(v, c.format), c.format);
+    return moment(v, c.format).format(c.format);
+  }
+
+  function getNow(): Date {
+    // return dateio.toJsDate(dateio.date());
+    return moment().toDate();
   }
 
   function onChange(_event, selectedDate) {
@@ -148,7 +152,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
 
   function showMode(currentMode) {
     if (!props.disabled) {
-      const dateValue = value ? getDate(value, config) : dateio.toJsDate(dateio.date());
+      const dateValue = value ? getDate(value, config) : getNow();
       setDate(dateValue);
       setVisible(true);
       setMode(currentMode);

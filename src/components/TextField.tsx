@@ -35,7 +35,7 @@ export default function TextField(props: { value: any, onValueChange: (_value: a
             top: props.label ? 26 : -2,
           },
           ios: {
-            top: props.label ? 24 : -2,
+            top: props.label ? 21 : -1,
           },
         })]}>
           {props.children}

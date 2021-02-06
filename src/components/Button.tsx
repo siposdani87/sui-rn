@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
         minHeight: 38,
         borderRadius: 19,
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
         padding: 5,
+        justifyContent: 'center',
         ...Styles.lightShadow,
     },
     text: {
