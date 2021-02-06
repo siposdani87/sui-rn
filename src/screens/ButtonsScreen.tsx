@@ -17,7 +17,10 @@ export default function ButtonsScreen() {
             <Button onPress={() => null} title='Save' />
             <Button onPress={() => null} iconName='save' backgroundColor={Colors.accent} />
             <Button onPress={() => null} title='Save' imageSource={require('../../assets/favicon.png')} />
-            <Button onPress={() => null} iconName='save' title='Save' textColor={Colors.lightBlue} iconColor={Colors.black} backgroundColor={Colors.white} />
+            <Button onPress={() => null} iconName='arrow-left' iconType='Community' title='Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Button containerStyle={{ flex: 1 }} onPress={() => null} iconName='arrow-left' iconType='Community' title='Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
           </View>
           <View style={{ flexDirection: 'row' }}>
             <IconButton onPress={() => null} iconName='save' />

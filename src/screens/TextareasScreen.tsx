@@ -45,10 +45,10 @@ export default function TextareasScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          <TextAreaField label='About' value={data.about} onValueChange={(v) => updateData('about', v)} numberOfLines={2} />
-          <TextAreaField label='About disabled' value={data.aboutDisabled} onValueChange={(v) => updateData('aboutDisabled', v)} numberOfLines={2} disabled={true} />
-          <TextAreaField label='About required' value={data.aboutRequired} onValueChange={(v) => updateData('aboutRequired', v)} numberOfLines={2} required={true} />
-          <TextAreaField label='About required disabled' value={data.aboutRequiredDisabled} onValueChange={(v) => updateData('aboutRequiredDisabled', v)} numberOfLines={2} required={true} disabled={true} />
+          <TextAreaField label='About' value={data.about} onValueChange={(v) => updateData('about', v)} />
+          <TextAreaField label='About disabled' value={data.aboutDisabled} onValueChange={(v) => updateData('aboutDisabled', v)} disabled={true} />
+          <TextAreaField label='About required' value={data.aboutRequired} onValueChange={(v) => updateData('aboutRequired', v)} numberOfLines={3} required={true} />
+          <TextAreaField label='About required disabled' value={data.aboutRequiredDisabled} onValueChange={(v) => updateData('aboutRequiredDisabled', v)} numberOfLines={3} required={true} disabled={true} />
         </View>
       </ScrollView>
     </Fragment>
