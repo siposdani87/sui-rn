@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 16,
         marginHorizontal: 10,
+        flexShrink: 1,
     },
     image: {
         width: 22,
