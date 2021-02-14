@@ -39,6 +39,14 @@ export default function DialogsScreen() {
           </Dialog>
           <Button onPress={openDialog('dialog2')} title='dialog2' />
 
+          <Dialog visible={isVisible('dialog3')} title='Dialog 3' onClose={closeDialog} buttons={[
+            <TextButton key={0} title='cancel long title!!!' onPress={closeDialog} />,
+            <Button key={1} title='done with long title!!!' onPress={closeDialog} />,
+          ]}>
+            <Text>Dialog 3 text</Text>
+          </Dialog>
+          <Button onPress={openDialog('dialog3')} title='dialog3' />
+
         </View>
       </ScrollView>
     </Fragment>

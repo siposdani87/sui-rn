@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     footerContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
+        flexWrap: 'wrap',
         alignItems: 'center',
         paddingBottom: 10,
         paddingHorizontal: 10,
