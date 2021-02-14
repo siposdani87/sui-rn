@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function IconToggleField(props: { value: any, checkedIcon: string, uncheckedIcon: string, trueValue?: any, falseValue?: any, onValueChange: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
+export default function IconToggleField(props: { value: any, checkedIcon: string, uncheckedIcon: string, trueValue?: any, falseValue?: any, onValueChange: (_value: any) => void, disableUncheck?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const trueValue = props.trueValue || true;
   const falseValue = props.falseValue || false;
   const [value, setValue] = useState(props.value);
@@ -25,7 +25,8 @@ export default function IconToggleField(props: { value: any, checkedIcon: string
   }
 
   function onPress() {
-    const v = value === trueValue ? falseValue : trueValue;
+    const falseV = props.disableUncheck ? trueValue : falseValue ;
+    const v = value === trueValue ? falseV : trueValue;
     onValueChange(v);
   }
 
