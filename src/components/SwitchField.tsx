@@ -26,7 +26,7 @@ export default function SwitchField(props: { value: any, onValueChange: (_value:
 
   function getTrackColor() {
     return {
-      false: isDarkTheme ? Colors.contentDefaultDark : Colors.contentDefaultLight,
+      false: !isDarkTheme ? Colors.contentDisabledDark : Colors.contentDefaultLight,
       true: isDarkTheme ? Colors.primary : Colors.primaryBright,
     };
   }
