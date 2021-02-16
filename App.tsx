@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Colors , setThemeStyles, setThemeColors } from './src/constants';
+import { Colors, setThemeStyles, setThemeColors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
 import { useFonts } from 'expo-font';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import Router from './Router';
 import AsyncStorage from '@react-native-community/async-storage';
 import { enableScreens } from 'react-native-screens';
 import { Linking, Platform } from 'react-native';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 
 enableScreens();
 
@@ -19,6 +20,7 @@ setThemeColors(Colors.greenBright, Colors.green, Colors.greenDark, Colors.white,
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 export default function App() {
+  const scheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -56,12 +58,14 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer initialState={initialState}
-        onStateChange={(state) =>
-          AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-        }>
-        <Router />
-      </NavigationContainer>
+      <AppearanceProvider>
+        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme} initialState={initialState}
+          onStateChange={(state) =>
+            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+          }>
+          <Router />
+        </NavigationContainer>
+      </AppearanceProvider>
     </SafeAreaProvider>
   );
 }
