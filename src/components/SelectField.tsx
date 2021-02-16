@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Label from './Label';
-import { View, StyleSheet, FlatList, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import IconButton from './IconButton';
 import Dialog from './Dialog';
+import Text from './Text';
 import Button from './Button';
 import SearchField from './SearchField';
 import TagField from './TagField';
@@ -183,7 +184,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>
         <SearchField value={query} onValueChange={searchInItems} />
-        <FlatList style={{ maxHeight: 175 }} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
+        <FlatList style={[styles.flatList, isDarkTheme ? styles.flatListDark : styles.flatListLight]} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => toggleSelection(item[valueKey])}>
             <Text style={[styles.itemText, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
           </TouchableOpacity>
@@ -197,6 +198,19 @@ const styles = StyleSheet.create({
   container: {},
   selectInput: {
     paddingRight: 40,
+  },
+  flatList: {
+    maxHeight: 175,
+    borderRadius: 3,
+    borderWidth: 1,
+  },
+  flatListDark: {
+    backgroundColor: 'rgba(255, 255, 255, .03)',
+    borderColor: 'rgba(255, 255, 255, .1)',
+  },
+  flatListLight: {
+    backgroundColor: 'rgba(0, 0, 0, .03)',
+    borderColor: 'rgba(0, 0, 0, .1)',
   },
   itemText: {
     fontFamily: Styles.fontFamilyBodyRegular,
