@@ -194,7 +194,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
           <SvgCss xml={svgXml} width="100" height="100" />
         )}
       </View>
-      <TextField style={[props.style, styles.fileInput]} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled}>
+      <TextField style={[props.style, styles.fileInput]} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled} readonly={true}>
         {isDocument() && (
           <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={getActionColor()} onPress={openDocumentLibrary} />
         )}
