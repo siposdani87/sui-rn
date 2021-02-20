@@ -50,7 +50,7 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
 
   function onPressTag(index){
     return () => {
-      if (props.readonly || props.disabled) {
+      if (props.disabled) {
         return;
       } else if (props.onPress) {
         props.onPress(index);
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 3,
     paddingTop: 3,
+    paddingBottom: 0,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

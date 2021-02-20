@@ -4,7 +4,7 @@ import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import Text from '../components/Text';
 
-export default function NoContent(props: { text: string, imageSource: ImageSourcePropType }) {
+export default function NoContent(props: { text: string, imageSource: ImageSourcePropType, children?: any }) {
     const isDarkTheme = useDarkTheme();
 
     return (
@@ -13,6 +13,7 @@ export default function NoContent(props: { text: string, imageSource: ImageSourc
                 <Image style={styles.image} source={props.imageSource} />
             </View>
             <Text style={styles.text} muted={true}>{props.text}</Text>
+            {props.children}
         </View>
     );
 }
@@ -44,9 +45,10 @@ const styles = StyleSheet.create({
         borderColor: Colors.blackBright,
     },
     text: {
-        marginHorizontal: 20,
         fontFamily: Styles.fontFamilyBodyRegular,
         fontWeight: '400',
         fontSize: 16,
+        marginHorizontal: 20,
+        marginBottom: 10,
     },
 });

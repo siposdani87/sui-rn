@@ -185,7 +185,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
     }
   }
 
-  function getValues(): any[] {
+  function getTags(): any[] {
     if (formattedValue) {
       return [formattedValue];
     }
@@ -196,7 +196,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
     <View style={[styles.container, props.containerStyle]}>
       {(config.calendarType === 'date' || config.clockType === 'time') && (
         <Fragment>
-          <TagField style={props.style} label={props.label} values={getValues()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled}>
+          <TagField style={props.style} label={props.label} values={getTags()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled}>
             {config.calendarType === 'date' && (
               <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar} />
             )}
