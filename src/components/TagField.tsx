@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   },
   tagContainer: {
     borderRadius: 3,
+    minHeight: 20,
     paddingHorizontal: 10,
     paddingVertical: 4,
     flexDirection: 'row',

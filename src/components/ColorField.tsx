@@ -10,8 +10,8 @@ import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
 
-export default function ColorField(props: { value: any, onValueChange: (_value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
-  const defaultColor = Colors.black;
+export default function ColorField(props: { value: any, onValueChange: (_value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, defaultColor?: string, containerStyle?: any, style?: any }) {
+  const defaultColor = props.defaultColor || Colors.grey;
   const [value, setValue] = useState(props.value);
   const [hue, setHue] = useState(0);
   const [sat, setSat] = useState(0);
@@ -22,11 +22,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
 
   useEffect(() => {
-    if (props.value) {
-      setValue(props.value);
-    } else {
-      setValue(defaultColor);
-    }
+    setValue(props.value);
   }, [props.value]);
 
   function onValueChange(v) {
@@ -37,7 +33,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
 
   function showColorPicker() {
     if (!props.disabled) {
-      const [h, s, v] = SUI.HEXToHSV(value);
+      const [h, s, v] = SUI.HEXToHSV(getValue());
       setHue(h);
       setSat(s);
       setVal(v);
@@ -64,6 +60,10 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
     onValueChange(hexColor);
   }
 
+  function getValue(): string{
+    return value || defaultColor;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Dialog visible={visible} title={props.label} onClose={hideColorPicker} buttons={[
@@ -81,7 +81,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
         />
       </Dialog>
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
-        <View style={[styles.colorDot, { backgroundColor: value }, props.style, getInputStyle()]}></View>
+        <View style={[styles.colorDot, { backgroundColor: getValue() }, props.style, getInputStyle()]}></View>
       </TouchableOpacity>
       <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={styles.label} />
       <ErrorField error={error} disabled={props.disabled} />

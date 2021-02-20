@@ -69,7 +69,7 @@ export default function TextsScreen() {
           <PasswordField label='Password' value={data.password} onValueChange={(v) => updateData('password', v)} />
           <PhoneField label='Phone' value={data.phone} onValueChange={(v) => updateData('phone', v)} />
           <NumberField label='Height' value={data.height} onValueChange={(v) => updateData('height', v)} />
-          <SearchField label='Search' value={data.query} placeholder='keywords...' onValueChange={(v) => updateData('query', v)} />
+          <SearchField label='Search' value={data.query} placeholder='Keywords...' onValueChange={(v) => updateData('query', v)} />
         </View>
       </ScrollView>
     </Fragment>
