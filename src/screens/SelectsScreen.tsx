@@ -75,9 +75,9 @@ export default function SelectsScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          <SelectField label='Body type' items={bodyTypes} value={data.bodyType} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyType', v)} placeholder='Please select...' />
+          <SelectField label='Body type' items={bodyTypes} value={data.bodyType} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyType', v)} placeholder='Please select...' searchPlaceholder='Search...' />
 
-          <SelectField label='Gender' items={genders} value={data.gender} okText='OK' onValueChange={(v) => updateData('gender', v)} />
+          <SelectField label='Gender' items={genders} value={data.gender} okText='OK' onValueChange={(v) => updateData('gender', v)} searchPlaceholder='Search...' />
           <SelectField label='Gender disabled' items={genders} value={data.genderDisabled} okText='OK' onValueChange={(v) => updateData('genderDisabled', v)} disabled={true} />
           <SelectField label='Gender required' items={genders} value={data.genderRequired} okText='OK' onValueChange={(v) => updateData('genderRequired', v)} required={true} />
           <SelectField label='Gender required disabled' items={genders} value={data.genderRequiredDisabled} okText='OK' onValueChange={(v) => updateData('genderRequiredDisabled', v)} required={true} disabled={true} />

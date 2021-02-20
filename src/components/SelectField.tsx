@@ -12,7 +12,7 @@ import TagField from './TagField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function SelectField(props: { value: any, items: any, onValueChange: (_value: any) => void, okText: string, multiple?: boolean, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, placeholder?: string, labelKey?: string, valueKey?: string, containerStyle?: any, style?: any }) {
+export default function SelectField(props: { value: any, items: any, onValueChange: (_value: any) => void, okText: string, multiple?: boolean, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, placeholder?: string, labelKey?: string, valueKey?: string, searchPlaceholder?: string, containerStyle?: any, style?: any }) {
   const valueKey = 'value';
   const labelKey = 'label';
 
@@ -183,7 +183,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>
-        <SearchField value={query} onValueChange={searchInItems} />
+        <SearchField value={query} onValueChange={searchInItems} placeholder={props.searchPlaceholder} />
         <FlatList style={[styles.flatList, isDarkTheme ? styles.flatListDark : styles.flatListLight]} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => toggleSelection(item[valueKey])}>
             <Text style={[styles.itemText, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    marginBottom: 2,
     borderRadius: 3,
   },
   selectedItemLight: {
