@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Link, Text, NoContent } from '../../src/components';
+import { Link, Text, NoContent, Button } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
 import { RichTextViewer } from 'expo-rich-text-editor/src';
 import { Colors } from '../constants';
@@ -13,7 +13,9 @@ export default function OthersScreen() {
       <StatusBar style='dark' />
       <ScrollView>
         <View style={styles.container}>
-          <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }} />
+          <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }}>
+            <Button title='Continue' onPress={null} />
+          </NoContent>
 
           <Text>Simple themed text</Text>
 
