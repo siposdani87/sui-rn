@@ -25,10 +25,17 @@ export default function TextField(props: { value: any, onValueChange: (_value: a
     return Colors.grey;
   }
 
+  function getValue(): string {
+    if (value === undefined || value === null){
+      return '';
+    }
+    return value.toString();
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <TextInput value={value} style={[styles.textInput, props.style, getInputStyle()]} onChangeText={onValueChange} placeholderTextColor={getPlaceholderTextColor()} placeholder={props.placeholder} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
+      <TextInput value={getValue()} style={[styles.textInput, props.style, getInputStyle()]} onChangeText={onValueChange} placeholderTextColor={getPlaceholderTextColor()} placeholder={props.placeholder} underlineColorAndroid='transparent' selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly} />
       {props.children && (
         <View style={[Styles.actionsContainer as any, Platform.select({
           android: {
