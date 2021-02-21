@@ -21,7 +21,7 @@ export default function NumberField(props: { value: any, onValueChange: (_value:
   }
 
   return (
-    <TextField value={(value || '').toString()} error={error} onValueChange={onValueChange} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={props.style} keyboardType='numeric'>
+    <TextField value={value} error={error} onValueChange={onValueChange} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={props.style} keyboardType='numeric'>
       {props.children}
     </TextField>
   );
