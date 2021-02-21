@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     color: Colors.deepGreyBright,
   },
   mutedDarkText: {
-    color: Colors.blackBright,
+    color: Colors.deepGreyDark,
   },
 });
