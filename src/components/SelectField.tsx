@@ -140,7 +140,9 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   }
 
   function searchInItems(q) {
-    props.onSearch(q);
+    if (props.onSearch) {
+      props.onSearch(q);
+    }
     setQuery(q);
     setFilteredItems(convert(props.items, q));
   }

@@ -63,7 +63,7 @@ export default function DatetimesScreen() {
           
           <DatetimeField label='Date' mode='date' format='YYYY. MM. DD.' okText='OK' value={data.date} onValueChange={(v) => updateData('date', v)} />
           <DatetimeField label='Time' mode='time' format='HH:mm' okText='OK' value={data.time} onValueChange={(v) => updateData('time', v)} />
-          <DatetimeField label='Year' mode='year' format='YYYY.' value={data.year} okText='OK' onValueChange={(v) => updateData('year', v)} />
+          <DatetimeField label='Year' mode='year' format='YYYY.' value={data.year} okText='OK' searchPlaceholder='Search...' onValueChange={(v) => updateData('year', v)} />
         </View>
       </ScrollView>
     </Fragment>

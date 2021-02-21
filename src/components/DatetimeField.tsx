@@ -57,7 +57,7 @@ for (const key in MODES) {
   }
 } */
 
-export default function DatetimeField(props: { mode: any, value: any, onValueChange: (_value: any) => void, okText: string, format: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
+export default function DatetimeField(props: { mode: any, value: any, onValueChange: (_value: any) => void, okText: string, format: string, label?: string, error?: any, required?: boolean, disabled?: boolean, searchPlaceholder?: string, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const [value, setValue] = useState(props.value);
   const [formattedValue, setFormattedValue] = useState('');
   const [date, setDate] = useState(null);
@@ -217,7 +217,7 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
         </Fragment>
       )}
       {config.calendarType === 'year' && (
-        <SelectField style={props.style} label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} okText={props.okText} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
+        <SelectField style={props.style} label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} okText={props.okText} searchPlaceholder={props.searchPlaceholder} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       )}
     </View>
   );
