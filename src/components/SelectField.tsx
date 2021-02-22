@@ -17,7 +17,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   const labelKey = 'label';
 
   const [query, setQuery] = useState('');
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useState(props.value ?? null);
   const [items, setItems] = useState(convert(props.items));
   const [filteredItems, setFilteredItems] = useState(convert(props.items, query));
   const [visible, setVisible] = useState(false);
@@ -27,7 +27,8 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
-    setValue(props.value);
+    const correctedValue = props.value ?? null;
+    setValue(correctedValue);
   }, [props.value]);
 
   useEffect(() => {
@@ -119,7 +120,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     if (props.multiple) {
       onValueChange(selectedValues);
     } else {
-      onValueChange(selectedValues[0] || null);
+      onValueChange(selectedValues[0] ?? null);
     }
   }
 
@@ -158,7 +159,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     if (props.multiple) {
       onValueChange(v);
     } else {
-      onValueChange(v[0] || null);
+      onValueChange(v[0] ?? null);
     }
   }
 
@@ -179,7 +180,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
+      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
         <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />
       </TagField>
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
