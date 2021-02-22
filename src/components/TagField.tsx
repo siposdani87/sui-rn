@@ -9,10 +9,10 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
+export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, placeholder?: string, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
   const [values, setValues] = useState(props.values);
   const [error, onErrorChange] = useErrorField(props.error);
-  const getInputStyle = useInputStyle(values.length, error, props.required, props.disabled);
+  const getInputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
@@ -56,6 +56,13 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
         props.onPress(index);
       }
     };
+  }
+
+  function getValuesLength(): number {
+    if (values?.[0] === props.placeholder) {
+      return 0;
+    }
+    return values.length;
   }
 
   return (

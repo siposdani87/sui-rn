@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 export default function SelectsScreen() {
   const [data, setData] = useState({
     bodyType: null,
+    bodyTypeRequired: null,
 
     gender: null,
     genderDisabled: null,
@@ -41,6 +42,7 @@ export default function SelectsScreen() {
     setTimeout(() => {
       setData({
         bodyType: null,
+        bodyTypeRequired: undefined,
 
         gender: 'MALE',
         genderDisabled: 'MALE',
@@ -76,6 +78,7 @@ export default function SelectsScreen() {
       }>
         <View style={styles.container}>
           <SelectField label='Body type' items={bodyTypes} value={data.bodyType} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyType', v)} placeholder='Please select...' searchPlaceholder='Search...' />
+          <SelectField label='Body type required' items={bodyTypes} value={data.bodyTypeRequired} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyTypeRequired', v)} placeholder='Please select...' searchPlaceholder='Search...' required={true} />
 
           <SelectField label='Gender' items={genders} value={data.gender} okText='OK' onValueChange={(v) => updateData('gender', v)} searchPlaceholder='Search...' />
           <SelectField label='Gender disabled' items={genders} value={data.genderDisabled} okText='OK' onValueChange={(v) => updateData('genderDisabled', v)} disabled={true} />

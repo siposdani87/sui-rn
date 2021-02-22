@@ -4,7 +4,7 @@ import useDarkTheme from './useDarkTheme';
 
 export default function useInputStyle(value: any, error: any, required: boolean, disabled: boolean) {
   const isDarkTheme = useDarkTheme();
-  const hasError = error || (required && (!value || value && value.length === 0));
+  const hasError = error || (required && (!value || value?.length === 0));
 
   function getInputStyle() {
     if (hasError) {
