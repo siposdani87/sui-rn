@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
         fontFamily: Styles.fontFamilyBodyMedium,
         fontWeight: '500',
         fontSize: 16,
-        paddingHorizontal: 10,
+        flexShrink: 1,
     },
 });
