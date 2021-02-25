@@ -9,7 +9,7 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
     const borderColor = props.borderColor || backgroundColor;
-    const color = props.iconColor || defaultColor;
+    const iconColor = props.iconColor || defaultColor;
     const iconSize = props.iconSize || 26;
 
     return (
@@ -19,10 +19,10 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
                     <Image style={[styles.image, { width: iconSize, height: iconSize }]} source={props.imageSource} />
                 )}
                 {!!props.iconName && !props.iconType && (
-                    <MaterialIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
+                    <MaterialIcons style={[styles.icon, { color: iconColor, fontSize: iconSize }]} name={props.iconName} />
                 )}
                 {!!props.iconName && props.iconType === 'Community' && (
-                    <MaterialCommunityIcons style={[styles.icon, { color, fontSize: iconSize }]} name={props.iconName} />
+                    <MaterialCommunityIcons style={[styles.icon, { color: iconColor, fontSize: iconSize }]} name={props.iconName} />
                 )}
             </View>
         </TouchableOpacity>

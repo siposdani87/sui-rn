@@ -11,7 +11,7 @@ export default function ButtonsScreen() {
       <ScrollView>
         <View style={styles.container}>
           <View>
-            <Button onPress={() => null} iconName='save' title='long title with save icon and more text and more' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
+            <Button onPress={() => null} iconName='save' keepFormat={true} title='Long title with save Icon and more Text and more' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
           </View>
           <View style={{ flexDirection: 'row' }}>
             <Button onPress={() => null} title='Save' />
@@ -20,15 +20,16 @@ export default function ButtonsScreen() {
             <Button onPress={() => null} iconName='arrow-left' iconType='Community' title='Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <Button containerStyle={{ flex: 1 }} onPress={() => null} iconName='arrow-left' iconType='Community' title='Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
+            <Button containerStyle={{ flex: 1 }} onPress={() => null} layout='left' iconName='arrow-left' iconType='Community' title='Left Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
+            <Button containerStyle={{ flex: 1 }} onPress={() => null} layout='right' iconName='arrow-right' iconType='Community' title='Right Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <IconButton onPress={() => null} iconName='save' />
+            <IconButton onPress={() => null} iconName='save' iconSize={30} />
             <IconButton onPress={() => null} imageSource={require('../../assets/favicon.png')} borderColor={Colors.accent} />
             <IconButton onPress={() => null} iconName='save' iconColor={Colors.primary} borderColor={Colors.primary} />
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <TextButton onPress={() => null} title='Save' />
+            <TextButton onPress={() => null} title='Save' textSize={24} keepFormat={true} />
             <TextButton onPress={() => null} title='Save' textColor={Colors.accent} />
             <TextButton onPress={() => null} title='Save' textColor={Colors.primary} borderColor={Colors.primary} />
           </View>
