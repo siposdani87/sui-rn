@@ -59,8 +59,7 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     button: {
-        minHeight: 38,
-        borderRadius: 19,
+        borderRadius: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -73,6 +72,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         flexShrink: 1,
         paddingHorizontal: 10,
+        paddingVertical: 3,
     },
     image: {
         width: 22,
