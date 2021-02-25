@@ -22,9 +22,9 @@ export default function Button(props: { onPress: () => void, iconColor?: string,
 
     function getSpacing() {
         if (layout === 'left') {
-            return { marginLeft: hasTitle() ? 5 : null };
+            return { marginRight: hasTitle() ? 5 : null };
         }
-        return { marginRight: hasTitle() ? 5 : null };
+        return { marginLeft: hasTitle() ? 5 : null };
     }
 
     function getTitle(): string {
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 16,
         flexShrink: 1,
+        paddingHorizontal: 10,
     },
     image: {
         width: 22,

@@ -10,12 +10,13 @@ export default function ButtonsScreen() {
       <StatusBar style='dark' />
       <ScrollView>
         <View style={styles.container}>
-          <View>
+          <View style={{ flexDirection: 'row' }}>
             <Button onPress={() => null} iconName='save' keepFormat={true} title='Long title with save Icon and more Text and more' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
           </View>
           <View style={{ flexDirection: 'row' }}>
             <Button onPress={() => null} title='Save' />
             <Button onPress={() => null} iconName='save' backgroundColor={Colors.accent} />
+            <Button onPress={() => null} imageSource={require('../../assets/favicon.png')} />
             <Button onPress={() => null} title='Save' imageSource={require('../../assets/favicon.png')} />
             <Button onPress={() => null} iconName='arrow-left' iconType='Community' title='Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
           </View>
@@ -24,7 +25,7 @@ export default function ButtonsScreen() {
             <Button containerStyle={{ flex: 1 }} onPress={() => null} layout='right' iconName='arrow-right' iconType='Community' title='Right Save' textColor={Colors.lightBlue} iconColor={Colors.lightBlue} backgroundColor={Colors.white} />
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <IconButton onPress={() => null} iconName='save' iconSize={30} />
+            <IconButton onPress={() => null} iconName='save' iconSize={36} />
             <IconButton onPress={() => null} imageSource={require('../../assets/favicon.png')} borderColor={Colors.accent} />
             <IconButton onPress={() => null} iconName='save' iconColor={Colors.primary} borderColor={Colors.primary} />
           </View>
