@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     button: {
-        minHeight: 38,
-        borderRadius: 19,
+        borderRadius: 20,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -43,5 +42,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         flexShrink: 1,
         paddingHorizontal: 10,
+        paddingVertical: 3,
     },
 });
