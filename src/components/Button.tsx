@@ -63,15 +63,14 @@ const styles = StyleSheet.create({
         borderRadius: 19,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         borderWidth: 1,
         padding: 5,
-        justifyContent: 'center',
     },
     text: {
         fontFamily: Styles.fontFamilyBodyMedium,
         fontWeight: '500',
         fontSize: 16,
-        marginHorizontal: 10,
         flexShrink: 1,
     },
     image: {
