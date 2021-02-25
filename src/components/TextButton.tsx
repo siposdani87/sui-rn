@@ -42,5 +42,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 16,
         flexShrink: 1,
+        paddingHorizontal: 10,
     },
 });
