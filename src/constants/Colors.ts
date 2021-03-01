@@ -31,9 +31,9 @@ const baseColors = {
 
   // Material Design Palette
 
-  greyBright: '#E0E0E0',
-  grey: '#9E9E9E',
-  greyDark: '#616161',
+  // greyBright: '#E0E0E0',
+  // grey: '#9E9E9E',
+  // greyDark: '#616161',
 
   blueGreyBright: '#90A4AE',
   blueGrey: '#607D8B',

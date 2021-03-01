@@ -73,7 +73,7 @@ const styles = {
     },
     tabBarLightOptions: {
         activeTintColor: Colors.primaryDark,
-        inactiveTintColor: Colors.grey,
+        inactiveTintColor: Colors.deepGreyBright,
         style: {
             backgroundColor: Colors.lightGreyBright,
         },
@@ -89,7 +89,7 @@ const styles = {
     },
     tabBarDarkOptions: {
         activeTintColor: Colors.primaryBright,
-        inactiveTintColor: Colors.grey,
+        inactiveTintColor: Colors.deepGreyBright,
         style: {
             backgroundColor: Colors.black,
         },
