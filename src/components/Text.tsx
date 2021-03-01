@@ -8,7 +8,7 @@ export default function Text(props: { children?: any, muted?: boolean } & TextPr
 
   function getTextStyle() {
     if (props.muted){
-      return isDarkTheme ? styles.mutedDarkText : styles.mutedLightText;
+      return styles.mutedText;
     }
     return isDarkTheme ? styles.darkText : styles.lightText;
   }
@@ -30,10 +30,7 @@ const styles = StyleSheet.create({
   darkText: {
     color: Colors.white,
   },
-  mutedLightText: {
+  mutedText: {
     color: Colors.deepGreyBright,
-  },
-  mutedDarkText: {
-    color: Colors.deepGreyDark,
   },
 });
