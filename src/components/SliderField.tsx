@@ -27,7 +27,7 @@ export default function SliderField(props: { value: any, onValueChange: (_value:
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <Slider style={[{flex: 1, height: 40}, props.style, getInputStyle()]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.grey} maximumTrackTintColor={Colors.grey} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
+      <Slider style={[{flex: 1, height: 40}, props.style, getInputStyle()]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.deepGreyBright} maximumTrackTintColor={Colors.deepGreyBright} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
       <ErrorField error={error} disabled={props.disabled} />
     </View>
   );

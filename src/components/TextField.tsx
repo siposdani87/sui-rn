@@ -22,7 +22,7 @@ export default function TextField(props: { value: any, onValueChange: (_value: a
   }
 
   function getPlaceholderTextColor(){
-    return Colors.grey;
+    return Colors.deepGreyBright;
   }
 
   function getValue(): string {

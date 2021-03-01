@@ -11,7 +11,7 @@ import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
 
 export default function ColorField(props: { value: any, onValueChange: (_value: any) => void, okText: string, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, defaultColor?: string, containerStyle?: any, style?: any }) {
-  const defaultColor = props.defaultColor || Colors.grey;
+  const defaultColor = props.defaultColor || Colors.deepGreyBright;
   const [value, setValue] = useState(props.value);
   const [hue, setHue] = useState(0);
   const [sat, setSat] = useState(0);
