@@ -35,7 +35,7 @@ export default function Label(props: { text?: string, onPress?: () => void, requ
     <View style={[styles.container, props.containerStyle]}>
       {props.children}
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
-        <Text style={[styles.text, props.style, getTextStyle()]} numberOfLines={2}>
+        <Text style={[styles.text, props.style, getTextStyle()]}>
           {props.text ? SUI.capitalize(props.text) : ''} {props.required ? '*' : ''}
         </Text>
       </TouchableOpacity>
