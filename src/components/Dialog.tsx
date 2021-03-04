@@ -43,7 +43,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     {(!!props.title || !!props.onClose) && (
-                        <View style={styles.headerContainer}>
+                        <View style={[styles.headerContainer, props.onClose ? { paddingRight: 25 } : null]}>
                             {!!props.title && (
                                 <Text style={styles.headerText}>{props.title}</Text>
                             )}
@@ -110,9 +110,10 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     headerContainer: {
-        paddingVertical: 10,
+        paddingTop: 10,
+        paddingBottom: 5,
         paddingHorizontal: 15,
-        minHeight: 30,
+        minHeight: 15,
     },
     headerText: {
         fontFamily: Styles.fontFamilyHeadingRegular,
