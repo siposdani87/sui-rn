@@ -55,7 +55,7 @@ export default function CheckboxesScreen() {
 
           <SwitchField label='Banned profile' value={data.isBanned} onValueChange={(v) => updateData('isBanned', v)} />
 
-          <IconToggleField label='Deleted profile' value={data.isDeleted} onValueChange={(v) => updateData('isDeleted', v)} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
+          <IconToggleField label='Deleted profile, this action is not restorable! Do yout want to remove your social account from this application?' value={data.isDeleted} onValueChange={(v) => updateData('isDeleted', v)} checkedIcon='check-circle' uncheckedIcon='highlight-off' />
         </View>
       </ScrollView>
     </Fragment>
