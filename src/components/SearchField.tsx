@@ -20,7 +20,7 @@ export default function SearchField(props: { value: any, onValueChange: (_value:
   return (
     <TextField value={value} error={props.error} onValueChange={props.onValueChange} label={props.label} required={props.required} disabled={props.disabled} placeholder={props.placeholder} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={props.containerStyle} style={props.style}>
       {props.children}
-      <IconButton iconName='close' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={clear} />
+      <IconButton iconName='close' iconSize={20} containerStyle={{margin: 4}} iconColor={getActionColor()} onPress={clear} />
     </TextField>
   );
 }
