@@ -42,15 +42,13 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
         <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
-                    {(!!props.title || !!props.onClose) && (
-                        <View style={[styles.headerContainer, props.onClose ? { paddingRight: 25 } : null]}>
-                            {!!props.title && (
-                                <Text style={styles.headerText}>{props.title}</Text>
-                            )}
-                            {!!props.onClose && (
-                                <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
-                            )}
-                        </View>
+                    <View style={[styles.headerContainer, props.onClose ? { paddingRight: 25 } : null]}>
+                        {!!props.title && (
+                            <Text style={styles.headerText}>{props.title}</Text>
+                        )}
+                    </View>
+                    {!!props.onClose && (
+                        <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
                     )}
                     <View style={styles.bodyContainer}>
                         {props.children}
