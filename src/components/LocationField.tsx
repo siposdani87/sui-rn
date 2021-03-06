@@ -102,14 +102,18 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
     setDimensions({ width, height });
   }
 
+  function getActionButtons(): any[]{
+    const actionButtons = [];
+    if (props.onSearch) {
+      actionButtons.push(<IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={onSearch} />);
+    }
+    actionButtons.push(<IconButton iconName='settings' containerStyle={Styles.fieldIconButton} iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />);
+    return actionButtons;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
-      <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>
-        {!!props.onSearch && (
-          <IconButton iconName='pin-drop' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={onSearch} />
-        )}
-        <IconButton iconName='settings' containerStyle={Styles.fieldIconButton} iconColor={visibleCoords ? Colors.accent : (isDarkTheme ? Colors.primaryBright : Colors.primary)} onPress={toggleSettings} />
-      </TextField>
+      <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} actionButtons={getActionButtons()} />
       {visibleCoords && (
         <View style={styles.coordsContainer}>
           <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={onLatitudeChange} required={props.required} disabled={props.disabled} />

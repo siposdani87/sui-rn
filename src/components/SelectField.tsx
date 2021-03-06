@@ -177,12 +177,16 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     })
   }
 
+  function getActionButtons(): any[]{
+    const actionButtons = [];
+    actionButtons.push(<IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />);
+    return actionButtons;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} readonly={getReadonly()}>
-        <IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />
-      </TagField>
+      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} readonly={getReadonly()} actionButtons={getActionButtons()} />
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>

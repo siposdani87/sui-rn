@@ -175,6 +175,20 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     setState({ fileName: v });
   }
 
+  function getActionButtons(): any[] {
+    const actionsButtons = [];
+    if (isDocument()) {
+      actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={getActionColor()} onPress={openDocumentLibrary} />);
+    }
+    if (!isDocument()){
+      actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={getActionColor()} onPress={openCamera} />);
+    }
+    if (!isDocument()){
+      actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName='image' iconColor={getActionColor()} onPress={openImageLibrary} />);
+    }
+    return actionsButtons;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
@@ -202,17 +216,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
           <SvgCss xml={svgXml} width="100" height="100" />
         )}
       </View>
-      <TextField style={[props.style, styles.fileInput]} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled} readonly={true}>
-        {isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='description' iconColor={getActionColor()} onPress={openDocumentLibrary} />
-        )}
-        {!isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='photo-camera' iconColor={getActionColor()} onPress={openCamera} />
-        )}
-        {!isDocument() && (
-          <IconButton containerStyle={Styles.fieldIconButton} iconName='image' iconColor={getActionColor()} onPress={openImageLibrary} />
-        )}
-      </TextField>
+      <TextField style={props.style} label='' value={state.fileName || ''} onValueChange={onFilenameChange} required={props.required} error={error} disabled={props.disabled} readonly={true} actionButtons={getActionButtons()} />
     </View>
   );
 }
@@ -226,9 +230,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     height: 100,
     marginBottom: 5,
-  },
-  fileInput: {
-    paddingRight: 75,
   },
   image: {
     width: 100,
