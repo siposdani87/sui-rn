@@ -45,6 +45,11 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
     onValueChange(v);
   }
 
+  function onCoordinatehange(latitude, longitude) {
+    const v = { ...value, latitude, longitude };
+    onValueChange(v);
+  }
+
   function toggleSettings() {
     setVisibleCoords(!visibleCoords);
   }
@@ -63,7 +68,8 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
   }
 
   function onDragEnd(event: MapEvent) {
-    console.log(event);
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    onCoordinatehange(latitude, longitude);
   }
 
   function getCoordinates(v) {
@@ -123,7 +129,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
       {dimensions && (
         <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
           {!!value.latitude && !!value.longitude && (
-            <Marker draggable={false} onDragEnd={onDragEnd} key='marker' {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
+            <Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
           )}
         </MapView>
       )}
