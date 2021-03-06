@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Styles } from '../constants';
 import useActionColor from '../hooks/useActionColor';
 import IconButton from './IconButton';
 import TextField from './TextField';
@@ -21,7 +22,7 @@ export default function SearchField(props: { value: any, onValueChange: (_value:
     if (props.actionButtons) {
       actionsButtons.concat(props.actionButtons);
     }
-    actionsButtons.push(<IconButton iconName='close' iconSize={20} containerStyle={{margin: 4}} iconColor={getActionColor()} onPress={clear} />);
+    actionsButtons.push(<IconButton iconName='close' iconSize={20} style={{ padding: 7 }} containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={clear} />);
     return actionsButtons;
   }
   
