@@ -8,7 +8,7 @@ import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function LocationField(props: { value: any, onValueChange: (_value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, mapType?: MapTypes, customMapType?: MapStyleElement[] }) {
+export default function LocationField(props: { value: any, onValueChange: (_value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, mapType?: MapTypes, customMapStyle?: MapStyleElement[] }) {
   const defaultValue = {
     address: '',
     latitude: 0,
@@ -127,7 +127,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
         </View>
       )}
       {dimensions && (
-        <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} mapType={props.mapType} customMapStyle={props.customMapType}>
+        <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} mapType={props.mapType} customMapStyle={props.customMapStyle}>
           {!!value.latitude && !!value.longitude && (
             <Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
           )}
