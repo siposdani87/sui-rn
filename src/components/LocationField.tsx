@@ -3,12 +3,12 @@ import { View, StyleSheet, ImageURISource } from 'react-native';
 import TextField from './TextField';
 import { Colors, Styles } from '../constants';
 import IconButton from './IconButton';
-import MapView, { Marker, MapEvent } from 'react-native-maps';
+import MapView, { Marker, MapEvent, MapTypes, MapStyleElement } from 'react-native-maps';
 import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
 
-export default function LocationField(props: { value: any, onValueChange: (_value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
+export default function LocationField(props: { value: any, onValueChange: (_value: any) => void, latitudeText: string, longitudeText: string, markerImage?: ImageURISource, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, mapType?: MapTypes, customMapType?: MapStyleElement[] }) {
   const defaultValue = {
     address: '',
     latitude: 0,
@@ -127,7 +127,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
         </View>
       )}
       {dimensions && (
-        <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} scrollEnabled={true}>
+        <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} mapType={props.mapType} customMapStyle={props.customMapType}>
           {!!value.latitude && !!value.longitude && (
             <Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
           )}
@@ -147,6 +147,5 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     borderRadius: 3,
-    // ...StyleSheet.absoluteFillObject,
   },
 });
