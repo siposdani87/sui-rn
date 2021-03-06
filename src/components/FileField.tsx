@@ -154,13 +154,21 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
     );
   }
 
+  function isRemovable(): boolean {
+    return !props.disabled && !props.required;
+  }
+
   function removeImage() {
-    _onFileDataChange('', '');
+    if (isRemovable()){
+      _onFileDataChange('', '');
+    }
   }
 
   function removeDocument() {
-    _setDefaultSvg();
-    _onFileDataChange('', '');
+    if (isRemovable){
+      _setDefaultSvg();
+      _onFileDataChange('', '');
+    }
   }
 
   function onFilenameChange(v) {
@@ -173,7 +181,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
       <View style={styles.imageContainer}>
         {!isDocument() && !!state.fileData && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 0 }} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 2 }} iconName='close' iconSize={18} backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeImage} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeImage}>
               <Image source={{ uri: state.fileData }} style={styles.image} />
             </TouchableOpacity>
@@ -184,7 +192,7 @@ export default function FileField(props: { value: ImageURISource | ImageRequireS
         )}
         {isDocument() && !!state.fileData && !!svgXml && (
           <View style={styles.imageBox}>
-            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 0 }} iconName='close' backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeDocument} />
+            <IconButton containerStyle={styles.removeIconButtonContainer} style={{ padding: 2 }} iconName='close' iconSize={18} backgroundColor={Colors.accent} iconColor={Colors.accentText} onPress={removeDocument} />
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={removeDocument}>
               <SvgCss xml={svgXml} width="100" height="100" />
             </TouchableOpacity>
@@ -220,7 +228,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   fileInput: {
-    paddingRight: 60,
+    paddingRight: 75,
   },
   image: {
     width: 100,
