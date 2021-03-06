@@ -64,9 +64,8 @@ const styles = StyleSheet.create({
         width: Layout.window.width,
     },
     flashContainer: {
-        padding: 10,
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingVertical: 15,
+        paddingHorizontal: 20,
         marginBottom: 20,
         marginLeft: 40,
         marginRight: 40,
