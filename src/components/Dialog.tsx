@@ -6,7 +6,7 @@ import Text from './Text';
 import useDarkTheme from '../hooks/useDarkTheme';
 
 
-export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any, onClose?: () => void, children?: any }) {
+export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any[], onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = useDarkTheme();
 

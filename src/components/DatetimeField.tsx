@@ -192,18 +192,22 @@ export default function DatetimeField(props: { mode: any, value: any, onValueCha
     return [];
   }
 
+  function getActionButtons(): any[]{
+    const actionButtons = [];
+    if (config.calendarType === 'date'){
+      actionButtons.push(<IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar} />);
+    }
+    if (config.clockType === 'time'){
+      actionButtons.push(<IconButton iconName='schedule' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showClock} />);
+    }
+    return actionButtons;
+  }
+
   return (
     <View style={[styles.container, props.containerStyle]}>
       {(config.calendarType === 'date' || config.clockType === 'time') && (
         <Fragment>
-          <TagField style={props.style} label={props.label} values={getTags()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled}>
-            {config.calendarType === 'date' && (
-              <IconButton iconName='event' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar} />
-            )}
-            {config.clockType === 'time' && (
-              <IconButton iconName='schedule' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showClock} />
-            )}
-          </TagField>
+          <TagField style={props.style} label={props.label} values={getTags()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>
           {Platform.OS === 'ios' && (
             <Dialog visible={visible} title={props.label} onClose={hide} buttons={[
               <Button key={0} title={props.okText} onPress={selectDate} />,

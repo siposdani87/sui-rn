@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet, Platform, Text } from 'react-native';
@@ -9,7 +9,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, placeholder?: string, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
+export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, placeholder?: string, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, actionButtons?: any[] }) {
   const [values, setValues] = useState(props.values);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
@@ -80,7 +80,7 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
           </View>
         ))}
       </View>
-      {props.children && (
+      {props.actionButtons && (
         <View style={[Styles.actionsContainer as any, Platform.select({
           android: {
             top: props.label ? 26 : -2,
@@ -89,7 +89,9 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
             top: props.label ? 21 : -1,
           },
         })]}>
-          {props.children}
+          {props.actionButtons.map((actionButton, key) => (
+            <Fragment key={key}>{actionButton}</Fragment>
+          ))}
         </View>
       )}
       <ErrorField error={error} disabled={props.disabled} />
