@@ -39,7 +39,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
     }
 
     return (
-        <Modal animationType='fade' transparent={true} visible={visible} onRequestClose={onClose}>
+        <Modal animationType='fade' transparent={true} statusBarTranslucent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
                     <View style={[styles.headerContainer, props.onClose ? { paddingRight: 25 } : null]}>
