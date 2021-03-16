@@ -3,7 +3,7 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function Button(props: { onPress: () => void, iconColor?: string, textColor?: string, textSize?: number, backgroundColor?: string, borderColor?: string, title?: string, imageSource?: any, iconName?: any, iconSize?: number, iconType?: string, keepFormat?: boolean, layout?: string, containerStyle?: any, style?: any }) {
+export default function Button(props: { onPress: () => void, iconColor?: string, textColor?: string, textSize?: number, backgroundColor?: string, borderColor?: string, title?: string, imageSource?: any, iconName?: any, iconSize?: number, iconType?: string, keepFormat?: boolean, layout?: string, disabled?: boolean, containerStyle?: any, style?: any }) {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;
     const textColor = props.textColor || Colors.primaryText;
@@ -12,11 +12,11 @@ export default function Button(props: { onPress: () => void, iconColor?: string,
     const iconSize = props.iconSize || 26;
     const layout = props.layout || 'left';
 
-    function hasIcon() {
+    function hasIcon(): boolean {
         return !!props.imageSource || !!props.iconName;
     }
 
-    function hasTitle() {
+    function hasTitle(): boolean {
         return !!props.title;
     }
 
@@ -28,11 +28,17 @@ export default function Button(props: { onPress: () => void, iconColor?: string,
     }
 
     function getTitle(): string {
-        return props.keepFormat ? props.title : props.title.toUpperCase()
+        return props.keepFormat ? props.title : props.title.toUpperCase();
+    }
+
+    function onPress() {
+        if (!props.disabled && props.onPress) {
+            props.onPress();
+        }
     }
 
     return (
-        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 {layout === 'right' && hasTitle() && (
                     <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { paddingRight: hasIcon() ? 0 : null, color: textColor, fontSize: textSize }]}>{getTitle()}</Text>

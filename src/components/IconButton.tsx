@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function IconButton(props: { onPress: () => void, iconColor?: string, backgroundColor?: string, borderColor?: string, imageSource?: any, iconName?: any, iconType?: string, iconSize?: number, containerStyle?: any, style?: any }) {
+export default function IconButton(props: { onPress: () => void, iconColor?: string, backgroundColor?: string, borderColor?: string, imageSource?: any, iconName?: any, iconType?: string, iconSize?: number, disabled?: boolean, containerStyle?: any, style?: any }) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
@@ -12,8 +12,14 @@ export default function IconButton(props: { onPress: () => void, iconColor?: str
     const iconColor = props.iconColor || defaultColor;
     const iconSize = props.iconSize || 26;
 
+    function onPress() {
+        if (!props.disabled && props.onPress) {
+            props.onPress();
+        }
+    }
+
     return (
-        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 {!!props.imageSource && (
                     <Image style={[styles.image, { width: iconSize, height: iconSize }]} source={props.imageSource} />
