@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function TextButton(props: { onPress: () => void, textColor?: string, textSize?: number, backgroundColor?: string, borderColor?: string, title: string, keepFormat?: boolean, containerStyle?: any, style?: any }) {
+export default function TextButton(props: { onPress: () => void, textColor?: string, textSize?: number, backgroundColor?: string, borderColor?: string, title: string, keepFormat?: boolean, disabled?: boolean, containerStyle?: any, style?: any }) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
@@ -12,11 +12,17 @@ export default function TextButton(props: { onPress: () => void, textColor?: str
     const textSize = props.textSize || 16;
 
     function getTitle(): string {
-        return props.keepFormat ? props.title : props.title.toUpperCase()
+        return props.keepFormat ? props.title : props.title.toUpperCase();
+    }
+
+    function onPress() {
+        if (!props.disabled && props.onPress) {
+            props.onPress();
+        }
     }
 
     return (
-        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+        <TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
             <View style={[styles.button, { backgroundColor, borderColor }, backgroundColor !== 'transparent' ? Styles.lightShadow : null, props.style]}>
                 <Text numberOfLines={1} adjustsFontSizeToFit={true} style={[styles.text, { color: textColor, fontSize: textSize }]}>{getTitle()}</Text>
             </View>
