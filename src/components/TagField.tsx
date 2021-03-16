@@ -35,20 +35,20 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
   }
 
   function getTextColor() {
-    if (props.disabled){
+    if (props.disabled) {
       return isDarkTheme ? Colors.contentDisabledDark : Colors.contentDisabledLight;
     }
     return isDarkTheme ? Colors.contentDefaultDark : Colors.contentDefaultLight;
   }
 
   function getBackgroundColor() {
-    if (props.disabled){
+    if (props.disabled) {
       return isDarkTheme ? Colors.inputDisabledDark : Colors.inputDisabledLight;
     }
     return isDarkTheme ? Colors.inputDefaultDark : Colors.inputDefaultLight;
   }
 
-  function onPressTag(index){
+  function onPressTag(index) {
     return () => {
       if (props.disabled) {
         return;
