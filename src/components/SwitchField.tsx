@@ -42,7 +42,7 @@ export default function SwitchField(props: { value: any, onValueChange: (_value:
     return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
   }
 
-  function getValue(): boolean{
+  function getValue(): boolean {
     return value === trueValue;
   }
 

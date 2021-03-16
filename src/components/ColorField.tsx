@@ -60,7 +60,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
     onValueChange(hexColor);
   }
 
-  function getValue(): string{
+  function getValue(): string {
     return value || defaultColor;
   }
 
