@@ -5,10 +5,14 @@ import { StatusBar } from 'expo-status-bar';
 
 export default function FilesScreen() {
   const [data, setData] = useState({
-    profilePicture: null,
     logoPicture: require('../../assets/icon.png'),
+    logoPictureDefault: null,
+    profilePicture: null,
     document: null,
+    documentDisabled: null,
   });
+
+  const defaultValue = 'https://www.gravatar.com/avatar/111111?s=200&d=mp&f=y';
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -17,11 +21,13 @@ export default function FilesScreen() {
 
     setTimeout(() => {
       setData({
-        profilePicture: 'https://www.gravatar.com/avatar/0?s=200&d=robohash&f=y',
         logoPicture: {
           uri: null,
         },
+        logoPictureDefault: null,
+        profilePicture: 'https://www.gravatar.com/avatar/000000?s=200&d=robohash&f=y',
         document: null,
+        documentDisabled: 'http://www.africau.edu/images/default/sample.pdf',
       });
       setRefreshing(false);
     }, 2000);
@@ -46,11 +52,16 @@ export default function FilesScreen() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
         <View style={styles.container}>
-          <FileField label='Logo picture' value={data.logoPicture} mimeType='image/*' onValueChange={(v) => updateData('logoPicture', v)} />
+          <FileField label='Logo picture required' value={data.logoPicture} defaultValue={{ uri: defaultValue }} mimeType='image/*' onValueChange={(v) => updateData('logoPicture', v)} required={true} />
 
-          <FileField label='Profile picture' value={{ uri: data.profilePicture }} mimeType='image/*' onValueChange={(v) => updateData('profilePicture', v)} />
+          <FileField label='Logo picture default required' value={data.logoPictureDefault} defaultValue={{ uri: defaultValue }} mimeType='image/*' onValueChange={(v) => updateData('logoPictureDefault', v)} required={true} />
+
+          <FileField label='Profile picture' value={{ uri: data.profilePicture }} defaultValue={{ uri: defaultValue }} mimeType='image/*' onValueChange={(v) => updateData('profilePicture', v)} />
 
           <FileField label='Document' value={{ uri: data.document }} mimeType='application/pdf' onValueChange={(v) => updateData('document', v)} />
+
+          <FileField label='Document disabled' value={{ uri: data.documentDisabled }} mimeType='text/html' onValueChange={(v) => updateData('documentdocumentDisabled', v)} disabled={true} />
+
         </View>
       </ScrollView>
     </Fragment>
