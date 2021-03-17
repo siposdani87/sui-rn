@@ -15,7 +15,7 @@ export default class Base {
         this.dispatch = dispatch;
     }
 
-    get objects() {
+    /* get objects() {
         const methods = {};
         for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
             const method = this[name];
@@ -24,5 +24,5 @@ export default class Base {
             }
         }
         return Object.assign(this, methods);
-    }
+    } */
 }
