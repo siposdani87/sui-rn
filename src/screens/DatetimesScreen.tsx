@@ -35,7 +35,6 @@ export default function DatetimesScreen() {
       setRefreshing(false);
     }, 2000);
   }, []);
-  console.log(data);
 
   useEffect(() => {
     onRefresh();

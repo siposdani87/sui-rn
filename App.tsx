@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Colors, setThemeStyles, setThemeColors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
@@ -10,7 +10,11 @@ import Router from './Router';
 import AsyncStorage from '@react-native-community/async-storage';
 import { enableScreens } from 'react-native-screens';
 import { Linking, Platform } from 'react-native';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { AppearanceProvider } from 'react-native-appearance';
+import { Flash } from './src/containers';
+import { ServiceContext, Services } from './ServiceContext';
+import { Base } from './src/utils';
+import { useDarkTheme } from './src/hooks';
 
 enableScreens();
 
@@ -20,15 +24,24 @@ setThemeColors(Colors.greenBright, Colors.green, Colors.greenDark, Colors.white,
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 export default function App() {
-  const scheme = useColorScheme();
+  const isDarkTheme = useDarkTheme();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
     Inter_700Bold,
   });
 
+  const [state, dispatch] = useReducer(Base.reducer, {});
+  const services = useMemo(() => {
+    return new Services(dispatch);
+  }, []);
+
   const [isReady, setIsReady] = useState(!__DEV__);
   const [initialState, setInitialState] = useState();
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   useEffect(() => {
     const restoreState = async () => {
@@ -57,15 +70,18 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <AppearanceProvider>
-        <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme} initialState={initialState}
-          onStateChange={(state) =>
-            AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
-          }>
-          <Router />
-        </NavigationContainer>
-      </AppearanceProvider>
-    </SafeAreaProvider>
+    <ServiceContext.Provider value={services}>
+      <SafeAreaProvider>
+        <AppearanceProvider>
+          <Flash services={services}></Flash>
+          <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme} initialState={initialState}
+            onStateChange={(state) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            }>
+            <Router />
+          </NavigationContainer>
+        </AppearanceProvider>
+      </SafeAreaProvider>
+    </ServiceContext.Provider>
   );
 }

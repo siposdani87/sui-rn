@@ -22,6 +22,7 @@ export default function HomeScreen({ navigation }) {
                     <TextButton title='Textareas' onPress={() => navigation.navigate('Textareas')} />
                     <TextButton title='Texts' onPress={() => navigation.navigate('Texts')} />
                     <TextButton title='Dialogs' onPress={() => navigation.navigate('Dialogs')} />
+                    <TextButton title='Flashes' onPress={() => navigation.navigate('Flashes')} />
                 </View>
             </ScrollView>
         </Fragment>

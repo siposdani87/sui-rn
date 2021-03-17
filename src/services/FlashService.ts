@@ -5,7 +5,7 @@ import { FLASH } from '../constants/ActionTypes';
 export default class FlashService extends Base {
     private flashes: any[];
     private options: {
-        closable: string[];
+        closableTypes: string[];
         duration: number;
     };
 
@@ -13,7 +13,7 @@ export default class FlashService extends Base {
         super(dispatch);
         this.flashes = [];
         this.options = {
-            closable: ['error'],
+            closableTypes: ['error'],
             duration: 4000,
         };
     }
@@ -42,8 +42,8 @@ export default class FlashService extends Base {
         return null;
     }
 
-    public isClosable(type, opt_closeCallback = null) {
-        return this.options.closable.indexOf(type) !== -1 || SUI.isFunction(opt_closeCallback);
+    public isClosable(flash): boolean {
+        return (this.options.closableTypes.indexOf(flash.type) !== -1 || SUI.isFunction(flash.closeCallback)) && !SUI.eq(flash.duration, Infinity);
     }
 
     public close(flash, opt_force = false) {
@@ -63,17 +63,17 @@ export default class FlashService extends Base {
         this.close(flash, true);
     }
 
-    private _add(type, message, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
-        this.removeFlash(opt_id);
+    private _add(type: string, message: string, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
+        this.removeById(opt_id);
         const flash = {
             type,
             message,
-            id: opt_id,
+            id: opt_id || SUI.generateId('flash'),
             duration: opt_duration,
             closeCallback: opt_closeCallback,
         };
         this.flashes.push(flash);
-        if (!this.isClosable(type, opt_closeCallback) && !SUI.eq(opt_duration, Infinity)) {
+        if (!this.isClosable(flash) && !SUI.eq(flash.duration, Infinity)) {
             setTimeout(() => {
                 this.close(flash);
             }, opt_duration || this.options.duration);
@@ -84,11 +84,11 @@ export default class FlashService extends Base {
         return flash;
     }
 
-    private removeFlash(opt_id = '') {
+    private removeById(opt_id: string) {
         if (opt_id) {
             const flash = this.flashes.find((item) => item.id === opt_id);
             if (flash) {
-                this.close(flash, true);
+                this.remove(flash);
             }
         }
     }
