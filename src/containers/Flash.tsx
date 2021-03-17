@@ -1,5 +1,4 @@
 import React from 'react';
-import SUI from 'sui-js';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,8 +15,8 @@ export default function Flash(props: { services: any }) {
         }
     }
 
-    function closable(flash) {
-        return props.services.flashService.isClosable(flash.type, flash.opt_closeCallback) && !SUI.eq(flash.opt_duration, Infinity);
+    function isClosable(flash): boolean {
+        return props.services.flashService.isClosable(flash);
     }
 
     function getContainerStyle(flash) {
@@ -45,7 +44,7 @@ export default function Flash(props: { services: any }) {
                 <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(flash)}>
                     <View style={getContainerStyle(flash)}>
                         <Text style={styles.flashText}>{flash.message}</Text>
-                        {closable(flash) && (
+                        {isClosable(flash) && (
                             <IconButton containerStyle={styles.flashClose} iconName='close' iconSize={18} onPress={close(flash)} />
                         )}
                     </View>
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         borderStyle: 'solid',
         borderTopWidth: 5,
-        borderTopColor: Colors.blackDark,
+        borderTopColor: Colors.deepGreyBright,
         ...Styles.shadow,
     },
     flashLightContainer: {
@@ -88,8 +87,8 @@ const styles = StyleSheet.create({
     },
     flashClose: {
         position: 'absolute',
-        right: 2,
-        top: 2,
+        right: -7,
+        top: -7,
         zIndex: 1,
     },
     successLightContainer: {
