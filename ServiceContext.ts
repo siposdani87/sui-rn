@@ -13,8 +13,8 @@ export class Services extends Base {
         super(dispatch);
         this.httpService = new HttpService(dispatch, () => {
             return null;
-        }, 'http://localhost:4000', 'hu-HU', null); //.objects;
-        this.flashService = new FlashService(dispatch); //.objects;
-        this.confirmService = new ConfirmService(dispatch); //.objects;
+        }, 'http://localhost:4000', 'hu-HU', null);
+        this.flashService = new FlashService(dispatch);
+        this.confirmService = new ConfirmService(dispatch);
     }
 }
