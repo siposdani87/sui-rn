@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { enableScreens } from 'react-native-screens';
 import { Linking, Platform } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
-import { Flash } from './src/containers';
+import { Confirm, Flash, Loader } from './src/containers';
 import { ServiceContext, Services } from './ServiceContext';
 import { Base } from './src/utils';
 import { useDarkTheme } from './src/hooks';
@@ -40,7 +40,7 @@ export default function App() {
   const [initialState, setInitialState] = useState();
 
   useEffect(() => {
-    console.log(state);
+    console.log('reducerState:', state);
   }, [state]);
 
   useEffect(() => {
@@ -49,10 +49,10 @@ export default function App() {
         const initialUrl = await Linking.getInitialURL();
         if (Platform.OS !== 'web' && initialUrl === null) {
           const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
-          const state = savedStateString ? JSON.parse(savedStateString) : undefined;
+          const savedState = savedStateString ? JSON.parse(savedStateString) : undefined;
 
-          if (state !== undefined) {
-            setInitialState(state);
+          if (savedState !== undefined) {
+            setInitialState(savedState);
           }
         }
       } finally {
@@ -73,10 +73,12 @@ export default function App() {
     <ServiceContext.Provider value={services}>
       <SafeAreaProvider>
         <AppearanceProvider>
-          <Flash services={services}></Flash>
+          <Confirm services={services} />
+          <Flash services={services} />
+          <Loader services={services} color={Colors.accent} backgroundColor={Colors.primary} />
           <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme} initialState={initialState}
-            onStateChange={(state) =>
-              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))
+            onStateChange={(navigationState) =>
+              AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(navigationState))
             }>
             <Router />
           </NavigationContainer>

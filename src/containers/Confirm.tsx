@@ -8,6 +8,7 @@ export default function Confirm(props: { services: any }) {
     const type = props.services.confirmService.getType();
     const title = props.services.confirmService.getTitle();
     const message = props.services.confirmService.getMessage();
+    const alertButtons = props.services.confirmService.getButtons();
 
     function close() {
         props.services.confirmService.close();
@@ -22,9 +23,14 @@ export default function Confirm(props: { services: any }) {
         };
     }
 
-    function getButtons(): any[] {
-        const alertButtons = props.services.confirmService.getButtons();
+    function getOnClose() {
+        if (alertButtons.length === 0) {
+            return close;
+        }
+        return null;
+    }
 
+    function getButtons(): any[] {
         return alertButtons.map((alertButton) => {
             switch (alertButton.style) {
                 case 'default':
@@ -56,7 +62,7 @@ export default function Confirm(props: { services: any }) {
     }
 
     return (
-        <Dialog type={type} title={title} visible={props.services.confirmService.isVisible()} buttons={getButtons()}>
+        <Dialog type={type} title={title} visible={props.services.confirmService.isVisible()} buttons={getButtons()} onClose={getOnClose()}>
             <View style={styles.container}>
                 {getIcon()}
                 <Text style={styles.text}>{message}</Text>

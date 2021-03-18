@@ -15,6 +15,7 @@ import SlidersScreen from './src/screens/SlidersScreen';
 import RichEditorsScreen from './src/screens/RichEditorsScreen';
 import DialogsScreen from './src/screens/DialogsScreen';
 import FlashesScreen from './src/screens/FlashesScreen';
+import ConfirmsScreen from './src/screens/ConfirmsScreen';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ export default function Router() {
             <Stack.Screen name='Texts' component = { TextsScreen } />
             <Stack.Screen name='Dialogs' component = { DialogsScreen } />
             <Stack.Screen name='Flashes' component = { FlashesScreen } />
+            <Stack.Screen name='Confirms' component = { ConfirmsScreen } />
         </Stack.Navigator>
     );
 }
