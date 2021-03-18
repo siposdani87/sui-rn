@@ -30,14 +30,12 @@ export default function App() {
     Inter_500Medium,
     Inter_700Bold,
   });
-
+  const [isReady, setIsReady] = useState(!__DEV__);
+  const [initialState, setInitialState] = useState();
   const [state, dispatch] = useReducer(Base.reducer, {});
   const services = useMemo(() => {
     return new Services(dispatch);
   }, []);
-
-  const [isReady, setIsReady] = useState(!__DEV__);
-  const [initialState, setInitialState] = useState();
 
   useEffect(() => {
     console.log('reducerState:', state);
