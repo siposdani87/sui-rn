@@ -3,9 +3,9 @@ import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
 import { Colors, Styles } from '../constants';
 import Text from '../components/Text';
 
-export default function NoContent(props: { text?: string, imageSource?: ImageSourcePropType, children?: any }) {
+export default function NoContent(props: { text?: string, imageSource?: ImageSourcePropType, children?: any, containerStyle?: any }) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.containerStyle]}>
             {!!props.imageSource && (
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} source={props.imageSource} />
