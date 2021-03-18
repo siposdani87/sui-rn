@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     choice: {
         borderTopWidth: 5,
-        borderTopColor: Colors.accent,
+        borderTopColor: Colors.deepGreyBright,
     },
     dialogLightContainer: {
         backgroundColor: Colors.white,
