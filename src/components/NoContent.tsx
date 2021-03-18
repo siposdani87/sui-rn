@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Styles } from '../constants';
 import Text from '../components/Text';
 
 export default function NoContent(props: { text?: string, imageSource?: ImageSourcePropType, children?: any, containerStyle?: any }) {
@@ -26,12 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageContainer: {
-        borderColor: Colors.deepGreyBright,
-        borderWidth: 2,
-        borderStyle: 'dotted',
-        padding: 15,
         marginBottom: 10,
-        borderRadius: 15,
     },
     image: {
         width: 150,
