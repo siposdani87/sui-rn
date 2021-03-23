@@ -129,7 +129,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
       {dimensions && (
         <MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} mapType={props.mapType} customMapStyle={props.customMapStyle}>
           {!!value.latitude && !!value.longitude && (
-            <Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address} />
+            <Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier='marker' coordinate={getCoordinates(value)} title={value.address.toString()} />
           )}
         </MapView>
       )}
