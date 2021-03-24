@@ -13,7 +13,7 @@ export default function SelectsScreen() {
     genderRequired: null,
     genderRequiredDisabled: null,
 
-    hobbies: [],
+    hobbies: null,
     hobbiesDisabled: [],
     hobbiesRequired: [],
     hobbiesRequiredDisabled: [],

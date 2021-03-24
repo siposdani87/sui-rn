@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Colors, setThemeStyles, setThemeColors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
+import { Oswald_400Regular, Oswald_500Medium, Oswald_700Bold } from '@expo-google-fonts/oswald';
+import { Ubuntu_400Regular } from '@expo-google-fonts/ubuntu';
 import { useFonts } from 'expo-font';
 
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
@@ -18,8 +20,8 @@ import { useDarkTheme } from './src/hooks';
 
 enableScreens();
 
-setThemeStyles('Inter_700Bold', ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
-setThemeColors(Colors.greenBright, Colors.green, Colors.greenDark, Colors.white, Colors.amberBright, Colors.amber, Colors.amberDark, Colors.white);
+setThemeStyles('Ubuntu_400Regular', ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
+setThemeColors(Colors.deepPurpleBright, Colors.deepPurple, Colors.deepPurpleDark, Colors.white, Colors.cyanBright, Colors.cyan, Colors.cyanDark, Colors.white);
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
@@ -29,6 +31,10 @@ export default function App() {
     Inter_400Regular,
     Inter_500Medium,
     Inter_700Bold,
+    Oswald_400Regular, 
+    Oswald_500Medium, 
+    Oswald_700Bold,
+    Ubuntu_400Regular,
   });
   const [isReady, setIsReady] = useState(!__DEV__);
   const [initialState, setInitialState] = useState();
