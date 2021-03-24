@@ -49,7 +49,7 @@ export default function FlatList(props: { data: any[], keyExtractor?: (_item: an
 
     return (
         <View style={{ marginTop: -10 }}>
-            <RNFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={props.numColumns} columnWrapperStyle={props.columnWrapperStyle} horizontal={false} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} maxToRenderPerBatch={2} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={Platform.OS === 'ios' ? getRefreshControl() : null} />
+            <RNFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={props.numColumns} columnWrapperStyle={props.columnWrapperStyle} horizontal={false} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={Platform.OS === 'ios' ? getRefreshControl() : null} />
         </View>
     );
 }
