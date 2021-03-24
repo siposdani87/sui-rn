@@ -92,7 +92,7 @@ export default function SelectsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

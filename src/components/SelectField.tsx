@@ -178,7 +178,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     }
     return results.filter((_v) => {
       return _v;
-    })
+    });
   }
 
   function getActionButtons(): any[]{

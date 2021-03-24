@@ -37,7 +37,7 @@ export default function ButtonsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
