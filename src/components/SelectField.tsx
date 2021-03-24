@@ -166,7 +166,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   function getTags(): string[] {
     let results = [];
     if (props.multiple) {
-      results = value.map((_v) => {
+      results = (value || []).map((_v) => {
         return getLabel(_v);
       });
     } else {
@@ -191,7 +191,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
         <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>
         <SearchField value={query} onValueChange={searchInItems} placeholder={props.searchPlaceholder} />
-        <FlatList style={[styles.flatList, isDarkTheme ? styles.flatListDark : styles.flatListLight]} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
+        <FlatList style={[styles.flatList, isDarkTheme ? styles.flatListDark : styles.flatListLight]} removeClippedSubviews={true} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => toggleSelection(item[valueKey])}>
             <Text style={[styles.itemText, isSelected(item[valueKey]) ? (isDarkTheme ? styles.selectedItemDark : styles.selectedItemLight) : null]}>{item[labelKey]}</Text>
           </TouchableOpacity>
