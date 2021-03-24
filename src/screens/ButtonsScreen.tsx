@@ -11,7 +11,7 @@ export default function ButtonsScreen() {
       <ScrollView>
         <View style={styles.container}>
           <View style={{ flexDirection: 'row' }}>
-            <Button onPress={() => null} iconName='save' keepFormat={true} title='Long title with save Icon and more Text and more' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.deepPurple} />
+            <Button onPress={() => null} iconName='save' keepFormat={true} title='Long title with save Icon and more Text and more' iconColor={Colors.amber} textColor={Colors.white} backgroundColor={Colors.pink} />
           </View>
           <View style={{ flexDirection: 'row' }}>
             <Button onPress={() => null} title='Save' />

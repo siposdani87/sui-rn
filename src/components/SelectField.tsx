@@ -17,7 +17,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   const labelKey = 'label';
 
   const [query, setQuery] = useState('');
-  const [value, setValue] = useState(props.value ?? null);
+  const [value, setValue] = useState(correctValue(props.value));
   const [items, setItems] = useState(convert(props.items));
   const [filteredItems, setFilteredItems] = useState(convert(props.items, query));
   const [visible, setVisible] = useState(false);
@@ -27,8 +27,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
-    const correctedValue = props.value ?? null;
-    setValue(correctedValue);
+    setValue(correctValue(props.value));
   }, [props.value]);
 
   useEffect(() => {
@@ -61,6 +60,11 @@ export default function SelectField(props: { value: any, items: any, onValueChan
       });
     }
     return results;
+  }
+
+  function correctValue(v) {
+    const defaultValue = props.multiple ? [] : null;
+    return v ?? defaultValue;
   }
 
   function getIndex(v, key) {
@@ -166,7 +170,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
   function getTags(): string[] {
     let results = [];
     if (props.multiple) {
-      results = (value || []).map((_v) => {
+      results = value.map((_v) => {
         return getLabel(_v);
       });
     } else {
