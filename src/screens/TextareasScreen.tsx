@@ -52,7 +52,7 @@ export default function TextareasScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

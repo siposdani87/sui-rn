@@ -12,7 +12,7 @@ export default function Flash(props: { services: any }) {
     function close(flash) {
         return () => {
             props.services.flashService.close(flash);
-        }
+        };
     }
 
     function isClosable(flash): boolean {

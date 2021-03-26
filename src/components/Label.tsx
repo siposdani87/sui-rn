@@ -41,7 +41,7 @@ export default function Label(props: { text?: string, onPress?: () => void, requ
       </TouchableOpacity>
       {(props.desc || props.onPressDesc) && (
         <Fragment>
-          <Dialog visible={visible} onClose={() => { setVisible(false) }}>
+          <Dialog visible={visible} onClose={() => { setVisible(false); }}>
             <Text>{props.desc}</Text>
           </Dialog>
           <IconButton containerStyle={styles.infoContainer} iconName='info-outline' iconSize={20} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onPressDesc} />

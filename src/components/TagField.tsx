@@ -29,9 +29,9 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
     return () => {
       const filteredValues = values.filter((_v) => {
         return _v !== v;
-      })
+      });
       onValuesChange(filteredValues);
-    }
+    };
   }
 
   function getTextColor() {

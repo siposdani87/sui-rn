@@ -59,7 +59,7 @@ export default function CheckboxesScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

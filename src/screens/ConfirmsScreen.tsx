@@ -52,7 +52,7 @@ export default function ConfirmsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
