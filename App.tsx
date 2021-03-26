@@ -23,6 +23,22 @@ enableScreens();
 setThemeStyles('Ubuntu_400Regular', ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
 setThemeColors(Colors.deepPurpleBright, Colors.deepPurple, Colors.deepPurpleDark, Colors.white, Colors.cyanBright, Colors.cyan, Colors.cyanDark, Colors.white);
 
+const appLightTheme = {
+  ...DefaultTheme,
+  colors: {
+      ...DefaultTheme.colors,
+      primary: Colors.primary,
+  },
+};
+
+const appDarkTheme = {
+  ...DarkTheme,
+  colors: {
+      ...DarkTheme.colors,
+      primary: Colors.primaryBright,
+  },
+};
+
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 
 export default function App() {
@@ -80,7 +96,7 @@ export default function App() {
           <Confirm services={services} />
           <Flash services={services} />
           <Loader services={services} color={Colors.accent} backgroundColor={Colors.primary} />
-          <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme} initialState={initialState}
+          <NavigationContainer theme={isDarkTheme ? appDarkTheme : appLightTheme} initialState={initialState}
             onStateChange={(navigationState) =>
               AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(navigationState))
             }>

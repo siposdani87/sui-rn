@@ -4,7 +4,7 @@ import ErrorField from './ErrorField';
 import Label from './Label';
 import { View, StyleSheet } from 'react-native';
 import { RichTextEditor } from 'expo-rich-text-editor/src';
-import { Styles } from '../constants';
+import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
 import useInputStyle from '../hooks/useInputStyle';
@@ -13,6 +13,7 @@ import useActionColor from '../hooks/useActionColor';
 export default function TextAreaField(props: { value: any, onValueChange: (_value: any) => void, numberOfLines?: number, richText?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
   const style = StyleSheet.flatten(props.style);
   const [value, setValue] = useState(props.value);
+  const [isFocused, setIsFocused] = useState(false);
   const [error, onErrorChange] = useErrorField(props.error);
   const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
   const getActionColor = useActionColor(props.disabled);
@@ -45,13 +46,23 @@ export default function TextAreaField(props: { value: any, onValueChange: (_valu
     };
   }
 
+  function getFocusStyle() {
+    if (isFocused) {
+      return {
+        borderBottomWidth: 3,
+        borderBottomColor: Colors.primary,
+      };
+    }
+    return null;
+  }
+
   if (props.richText) {
-    const editorStyle = [styles.editor, style, getInputStyle()];
+    const editorStyle = [styles.editor, style, getInputStyle(), getFocusStyle()];
 
     return (
       <View style={[styles.container, props.containerStyle]}>
         <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-        <RichTextEditor minHeight={height} value={value} onValueChange={onValueChange} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} />
+        <RichTextEditor minHeight={height} value={value} onValueChange={onValueChange} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)} selectionColor={Colors.deepGreyBright} actionMap={getActionMap()} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} />
         <ErrorField error={error} disabled={props.disabled} />
       </View>
     );

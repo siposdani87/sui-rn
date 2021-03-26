@@ -54,7 +54,7 @@ export default function ColorsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

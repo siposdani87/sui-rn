@@ -76,7 +76,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
     return {
       latitude: v.latitude,
       longitude: v.longitude,
-    }
+    };
   }
 
   function regionFrom(coords: { latitude: number, longitude: number, accuracy?: number }) {
@@ -96,7 +96,7 @@ export default function LocationField(props: { value: any, onValueChange: (_valu
       latitudeDelta,
       longitudeDelta,
       accuracy,
-    }
+    };
   }
 
   function onLayout(event) {

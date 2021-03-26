@@ -53,7 +53,7 @@ export default function SlidersScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

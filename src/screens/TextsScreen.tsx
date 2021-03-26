@@ -73,7 +73,7 @@ export default function TextsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

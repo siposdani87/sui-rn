@@ -66,7 +66,7 @@ export default function DatetimesScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

@@ -7,7 +7,7 @@ export default class Base {
             };
         }
         return state;
-    }
+    };
 
     protected dispatch: (_state: any) => void;
 

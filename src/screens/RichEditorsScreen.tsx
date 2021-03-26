@@ -52,7 +52,7 @@ export default function RichEditorsScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

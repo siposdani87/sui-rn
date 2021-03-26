@@ -64,7 +64,7 @@ export default function FlashesScreen() {
         </View>
       </ScrollView>
     </Fragment>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
