@@ -9,7 +9,7 @@ import { useFonts } from 'expo-font';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import Router from './Router';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { enableScreens } from 'react-native-screens';
 import { Linking, Platform } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
