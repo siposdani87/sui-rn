@@ -19,7 +19,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
   const [error, onErrorChange] = useErrorField(props.error);
   const [visible, setVisible] = useState(false);
   const colorPickerRef = useRef(null);
-  const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
+  const inputStyle = useInputStyle(value, error, props.required, props.disabled);
 
   useEffect(() => {
     setValue(props.value);
@@ -81,7 +81,7 @@ export default function ColorField(props: { value: any, onValueChange: (_value: 
         />
       </Dialog>
       <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
-        <View style={[styles.colorDot, { backgroundColor: getValue() }, props.style, getInputStyle()]}></View>
+        <View style={[styles.colorDot, { backgroundColor: getValue() }, props.style, inputStyle]}></View>
       </TouchableOpacity>
       <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={styles.label} />
       <ErrorField error={error} disabled={props.disabled} />

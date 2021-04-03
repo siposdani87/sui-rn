@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, placeholder?: string, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, actionButtons?: any[] }) {
   const [values, setValues] = useState(props.values);
   const [error, onErrorChange] = useErrorField(props.error);
-  const getInputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
+  const inputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <View style={[styles.textInput, props.style, getInputStyle()]}>
+      <View style={[styles.textInput, props.style, inputStyle]}>
         {values.map((value, index) => (
           <View key={index} style={[styles.tagContainer, { backgroundColor: getBackgroundColor(), paddingRight: (props.readonly || props.disabled) ? null : 25 }]}>
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPressTag(index)}>
