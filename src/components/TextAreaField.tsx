@@ -15,7 +15,7 @@ export default function TextAreaField(props: { value: any, onValueChange: (_valu
   const [value, setValue] = useState(props.value);
   const [isFocused, setIsFocused] = useState(false);
   const [error, onErrorChange] = useErrorField(props.error);
-  const getInputStyle = useInputStyle(value, error, props.required, props.disabled);
+  const inputStyle = useInputStyle(value, error, props.required, props.disabled, isFocused);
   const getActionColor = useActionColor(props.disabled);
   const numberOfLines = props.numberOfLines || 5;
   const height = 20 * numberOfLines + 16;
@@ -46,18 +46,8 @@ export default function TextAreaField(props: { value: any, onValueChange: (_valu
     };
   }
 
-  function getFocusStyle() {
-    if (isFocused) {
-      return {
-        borderBottomWidth: 3,
-        borderBottomColor: Colors.primary,
-      };
-    }
-    return null;
-  }
-
   if (props.richText) {
-    const editorStyle = [styles.editor, style, getInputStyle(), getFocusStyle()];
+    const editorStyle = [styles.editor, style, inputStyle];
 
     return (
       <View style={[styles.container, props.containerStyle]}>

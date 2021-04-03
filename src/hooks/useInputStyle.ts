@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleProp, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import useDarkTheme from './useDarkTheme';
 
-export default function useInputStyle(value: any, error: any, required: boolean, disabled: boolean) {
+export default function useInputStyle(value: any, error: any, required: boolean, disabled: boolean, focused?: boolean): StyleProp<any> {
   const isDarkTheme = useDarkTheme();
   const hasError = error || (required && (!value || value?.length === 0));
 
@@ -19,7 +19,19 @@ export default function useInputStyle(value: any, error: any, required: boolean,
     return isDarkTheme ? styles.defaultDarkTextInput : styles.defaultLightTextInput;
   }
 
-  return getInputStyle;
+  function getFocusStyle() {
+    if (focused) {
+      const bottomColor = hasError ? (isDarkTheme ? Colors.errorDefaultDark : Colors.errorDefaultLight) : (isDarkTheme ? Colors.primaryBright : Colors.primary);
+
+      return {
+        borderBottomWidth: 3,
+        borderBottomColor: bottomColor,
+      };
+    }
+    return null;
+  }
+
+  return StyleSheet.flatten([getInputStyle(), getFocusStyle()]);
 }
 
 const styles = StyleSheet.create({
