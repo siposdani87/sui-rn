@@ -1,27 +1,26 @@
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Colors, setThemeStyles, setThemeColors } from './src/constants';
 import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Oswald_400Regular, Oswald_500Medium, Oswald_700Bold } from '@expo-google-fonts/oswald';
 import { Ubuntu_400Regular } from '@expo-google-fonts/ubuntu';
-import { useFonts } from 'expo-font';
-
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import AppLoading from 'expo-app-loading';
-import Router from './Router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { enableScreens } from 'react-native-screens';
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { Linking, Platform } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
-import { Confirm, Flash, Loader } from './src/containers';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { enableScreens } from 'react-native-screens';
+import Router from './Router';
 import { ServiceContext, Services } from './ServiceContext';
-import { Base } from './src/utils';
+import { Colors, setThemeColors, setThemeStyles } from './src/constants';
+import { Confirm, Flash, Loader } from './src/containers';
 import { useDarkTheme } from './src/hooks';
+import { Base } from './src/utils';
 
 enableScreens();
 
-setThemeStyles('Ubuntu_400Regular', ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
-setThemeColors(Colors.deepPurpleBright, Colors.deepPurple, Colors.deepPurpleDark, Colors.white, Colors.cyanBright, Colors.cyan, Colors.cyanDark, Colors.white);
+const colors = setThemeColors(Colors.deepPurpleBright, Colors.deepPurple, Colors.deepPurpleDark, Colors.white, Colors.cyanBright, Colors.cyan, Colors.cyanDark, Colors.white);
+setThemeStyles(colors, 'Ubuntu_400Regular', ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
 
 const appLightTheme = {
   ...DefaultTheme,

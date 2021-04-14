@@ -1,8 +1,8 @@
+import { RichTextViewer } from 'expo-rich-text-editor/src';
+import { StatusBar } from 'expo-status-bar';
 import React, { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Link, Text, NoContent, Button } from '../../src/components';
-import { StatusBar } from 'expo-status-bar';
-import { RichTextViewer } from 'expo-rich-text-editor/src';
+import { Button, Link, NoContent, Text } from '../../src/components';
 import { Colors } from '../constants';
 
 export default function OthersScreen() {
@@ -21,7 +21,7 @@ export default function OthersScreen() {
 
           <Link onPress={() => null} title='Open new link' />
 
-          <RichTextViewer html={sampleHtml} linkStyle={styles.linkStyle} />
+          <RichTextViewer html={sampleHtml} linkStyle={{color: Colors.primary}} />
         </View>
       </ScrollView>
     </Fragment>
@@ -31,8 +31,5 @@ export default function OthersScreen() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-  },
-  linkStyle: {
-    color: Colors.primary,
   },
 });
