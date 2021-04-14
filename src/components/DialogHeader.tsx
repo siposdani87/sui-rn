@@ -1,13 +1,15 @@
 import React from 'react';
+import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
-import { View, Image, StyleSheet, ImageSourcePropType } from 'react-native';
-import Text from './Text';
 import IconButton from './IconButton';
+import Text from './Text';
 
-export default function HeaderImage(props: { title: string, imageSource: ImageSourcePropType, onClose?: () => void }) {
+export default function DialogHeader(props: { title: string, imageSource?: ImageSourcePropType, onClose?: () => void }) {
   return (
     <View style={styles.container}>
-      <Image source={props.imageSource} style={[styles.image]} />
+      {!!props.imageSource && (
+        <Image source={props.imageSource} style={[styles.image]} />
+      )}
       <Text style={styles.titleText}>{props.title}</Text>
       {!!props.onClose && (
         <IconButton iconName='close' onPress={props.onClose} containerStyle={styles.closeButton} />

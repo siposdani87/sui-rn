@@ -4,11 +4,11 @@ export { default as CheckboxField } from './CheckboxField';
 export { default as ColorField } from './ColorField';
 export { default as DatetimeField } from './DatetimeField';
 export { default as Dialog } from './Dialog';
+export { default as DialogHeader } from './DialogHeader';
 export { default as EmailField } from './EmailField';
 export { default as ErrorField } from './ErrorField';
 export { default as FileField } from './FileField';
 export { default as FlatList } from './FlatList';
-export { default as HeaderImage } from './HeaderImage';
 export { default as IconButton } from './IconButton';
 export { default as IconToggleField } from './IconToggleField';
 export { default as Label } from './Label';
@@ -28,3 +28,4 @@ export { default as Text } from './Text';
 export { default as TextAreaField } from './TextAreaField';
 export { default as TextButton } from './TextButton';
 export { default as TextField } from './TextField';
+
