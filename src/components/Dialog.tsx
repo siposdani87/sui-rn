@@ -1,10 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { StyleSheet, View, Modal, ViewStyle } from 'react-native';
+import { Modal, StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
-import IconButton from './IconButton';
-import Text from './Text';
 import useDarkTheme from '../hooks/useDarkTheme';
-
+import DialogHeader from './DialogHeader';
 
 export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any[], onClose?: () => void, children?: any }) {
     const [visible, setVisible] = useState(false);
@@ -42,14 +40,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
         <Modal animationType='fade' transparent={true} statusBarTranslucent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
                 <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
-                    <View style={[styles.headerContainer, props.onClose ? { paddingRight: 25 } : null]}>
-                        {!!props.title && (
-                            <Text style={styles.headerText}>{props.title}</Text>
-                        )}
-                    </View>
-                    {!!props.onClose && (
-                        <IconButton iconName='close' onPress={onClose} containerStyle={styles.closeButton} />
-                    )}
+                    <DialogHeader title={props.title} onClose={props.onClose} />
                     <View style={styles.bodyContainer}>
                         {props.children}
                     </View>
@@ -107,18 +98,6 @@ const styles = StyleSheet.create({
     dialogDarkContainer: {
         backgroundColor: Colors.black,
     },
-    headerContainer: {
-        paddingTop: 10,
-        paddingBottom: 5,
-        paddingHorizontal: 15,
-        minHeight: 15,
-    },
-    headerText: {
-        fontFamily: Styles.fontFamilyHeadingRegular,
-        fontWeight: '400',
-        fontSize: 22,
-        textTransform: 'uppercase',
-    },
     bodyContainer: {
         padding: 15,
     },
@@ -129,11 +108,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingBottom: 10,
         paddingHorizontal: 10,
-    },
-    closeButton: {
-        position: 'absolute',
-        top: -5,
-        right: -5,
-        zIndex: 1,
     },
 });
