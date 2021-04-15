@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
 import IconButton from './IconButton';
 import Text from './Text';
 
-export default function DialogHeader(props: { title: string, imageSource?: ImageSourcePropType, onClose?: () => void }) {
+export default function DialogHeader(props: { title?: string, imageSource?: ImageSourcePropType, onClose?: () => void }) {
   return (
-    <View style={styles.container}>
-      {!!props.imageSource && (
-        <Image source={props.imageSource} style={[styles.image]} />
-      )}
-      <Text style={styles.titleText}>{props.title}</Text>
+    <Fragment>
+      <View style={[styles.container, props.onClose ? { paddingRight: 25 } : null]}>
+        {!!props.imageSource && (
+          <Image source={props.imageSource} style={[styles.image]} />
+        )}
+        {!!props.title && (
+          <Text style={styles.titleText}>{props.title}</Text>
+        )}
+
+      </View>
       {!!props.onClose && (
         <IconButton iconName='close' onPress={props.onClose} containerStyle={styles.closeButton} />
       )}
-    </View>
+    </Fragment>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginHorizontal: 15,
-    marginTop: 10,
     alignItems: 'center',
+    paddingTop: 10,
+    paddingBottom: 5,
+    paddingHorizontal: 15,
+    minHeight: 15,
   },
   image: {
     height: 50,
@@ -39,8 +46,8 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    top: -15,
-    right: -20,
+    top: -5,
+    right: -5,
     zIndex: 1,
   },
 });
