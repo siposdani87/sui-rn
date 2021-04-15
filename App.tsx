@@ -9,15 +9,12 @@ import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { Linking, Platform } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { enableScreens } from 'react-native-screens';
 import Router from './Router';
 import { ServiceContext, Services } from './ServiceContext';
 import { Colors, setThemeColors, setThemeStyles } from './src/constants';
 import { Confirm, Flash, Loader } from './src/containers';
 import { useDarkTheme } from './src/hooks';
 import { Base } from './src/utils';
-
-enableScreens();
 
 const colors = setThemeColors(Colors.deepPurpleBright, Colors.deepPurple, Colors.deepPurpleDark, Colors.white, Colors.cyanBright, Colors.cyan, Colors.cyanDark, Colors.white);
 setThemeStyles(colors, 'Ubuntu_400Regular', ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'], ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold']);
