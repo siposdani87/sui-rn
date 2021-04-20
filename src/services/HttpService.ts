@@ -47,7 +47,7 @@ export default class HttpService extends Base {
         return this._handleResponse(this.fetch.delete(url, opt_data, opt_params, await this._getHeaders(opt_headers)));
     }
 
-    private async _getHeaders(opt_headers) {
+    private async _getHeaders(opt_headers): Promise<HeadersInit> {
         const token = await this.getTokenAsync();
         return {
             'Authorization': `Bearer ${token}`,
@@ -57,13 +57,13 @@ export default class HttpService extends Base {
         };
     }
 
-    private _handleResponse(fetchPromise): Promise<any> {
+    private _handleResponse(fetchPromise: Promise<any>): Promise<any> {
         this._setInprogress(HTTP_REQUEST, true);
         return new Promise((resolve, reject) => {
-            fetchPromise.then(({ data, status }) => {
+            fetchPromise.then(({data, status}) => {
                 this._statusHandler(status, false);
                 resolve(data);
-            }, ({ data, status }) => {
+            }, ({data, status}) => {
                 this._statusHandler(status, false);
                 reject(data);
             }).catch(() => {
