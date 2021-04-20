@@ -14,39 +14,52 @@ export default class Fetch {
         };
     }
 
-    public getUrl(url, opt_params) {
+    public getUrl(url: string, opt_params = {}): string {
         const query = this._getQuery(opt_params);
         return this.backendUrl + url + query;
     }
 
-    public async get(url, opt_params, opt_headers) {
+    public async get(url, opt_params, opt_headers): Promise<any> {
         return await this._handleRequest('GET', url, null, opt_params, opt_headers);
     }
 
-    public async post(url, opt_data, opt_params, opt_headers) {
+    public async post(url, opt_data, opt_params, opt_headers): Promise<any> {
         return await this._handleRequest('POST', url, opt_data, opt_params, opt_headers);
     }
 
-    public async put(url, opt_data, opt_params, opt_headers) {
+    public async put(url, opt_data, opt_params, opt_headers): Promise<any> {
         return await this._handleRequest('PUT', url, opt_data, opt_params, opt_headers);
     }
 
-    public async patch(url, opt_data, opt_params, opt_headers) {
+    public async patch(url, opt_data, opt_params, opt_headers): Promise<any> {
         return await this._handleRequest('PATCH', url, opt_data, opt_params, opt_headers);
     }
 
-    public async delete(url, opt_data, opt_params, opt_headers) {
+    public async delete(url, opt_data, opt_params, opt_headers): Promise<any> {
         return await this._handleRequest('DELETE', url, opt_data, opt_params, opt_headers);
     }
 
-    private _getHeaders(url) {
+    private _getHeaders(url: string, opt_headers = {}): HeadersInit {
         const extension = SUI.getExtensionName(url);
+        const headers = this.filteredHeaders(opt_headers);
         return {
             'X-Requested-With': 'XMLHttpRequest',
             'Content-Type': this.mimeTypes[extension] || this.mimeTypes.json,
-            // 'Accept-Encoding': 'gzip, deflate, br',
-            // 'Accept': 'application/json',
+            ...headers,
         };
+    }
+
+    private filteredHeaders(opt_headers): any {
+        const deniedKeys = ['responseType'];
+
+        return Object.keys(opt_headers)
+            .filter(key => !deniedKeys.includes(key))
+            .reduce((obj, key) => {
+                return {
+                    ...obj,
+                    [key]: opt_headers[key],
+                };
+            }, {});
     }
 
     private _getQuery(opt_params) {
@@ -73,7 +86,18 @@ export default class Fetch {
         return null;
     }
 
-    private async _handleResponse(response: Response) {
+    private async _handleResponse(_request: Request, response: Response, responseType?: string): Promise<any> {
+        const data = await this._dataHandler(response, responseType);
+        return new Promise((resolve, reject) => {
+            if (response.status >= 200 && response.status < 300) {
+                resolve({ data, ...response });
+            } else {
+                reject({ data, ...response });
+            }
+        });
+    }
+
+    private async _dataHandler(response: Response, responseType?: string): Promise<any> {
         const contentType = response.headers.get('content-type');
         /*
             arrayBuffer()
@@ -82,30 +106,40 @@ export default class Fetch {
             formData()
         */
         let data = {};
-        if (contentType?.includes(this.mimeTypes.json)) {
+        if (contentType?.includes('/json')) {
             const jsonData = await response.json();
             const object = new SUI.Object();
             data = object.merge(jsonData);
+        } else if (responseType === 'blob') {
+            data = {
+                blob: await response.blob(),
+                filename: this._getFilenameFromHeader(response),
+            };
         }
-        return new Promise((resolve, reject) => {
-            // console.log('_handleResponse', contentType, response);
-            if (response.status >= 200 && response.status < 300) {
-                resolve({ data, response });
-            } else {
-                reject({ data, response });
-            }
-        });
+        return data;
     }
 
-    private async _handleRequest(method, url, opt_data, opt_params = {}, opt_headers = {}) {
-        const options = {
+    private _getFilenameFromHeader(response: Response): string {
+        let filename = '';
+
+        try {
+            if (response.headers.has('Content-Disposition')) {
+                filename = response.headers.get('Content-Disposition').match(/filename="(.+)"/)[1];
+            }
+        } catch (_e) {
+            // console.error(e);
+        }
+        return filename;
+    }
+
+    private async _handleRequest(method, url, opt_data, opt_params, opt_headers): Promise<Response> {
+        const options: RequestInit = {
             method,
-            headers: Object.assign(this._getHeaders(url), opt_headers),
+            headers: this._getHeaders(url, opt_headers),
             body: this._getRequestBody(opt_data),
         };
-        // console.log('_handleRequest', this.getUrl(url, opt_params), options);
         const request = new Request(this.getUrl(url, opt_params), options);
         const response = await fetch(request);
-        return await this._handleResponse(response);
+        return await this._handleResponse(request, response, opt_headers?.responseType);
     }
 }
