@@ -1,4 +1,5 @@
-import { HTTP_REQUEST, HTTP_RESPONSE, HTTP_401, HTTP_403 } from '../constants/ActionTypes';
+import SUI from 'sui-js';
+import { HTTP_401, HTTP_403, HTTP_REQUEST, HTTP_RESPONSE } from '../constants/ActionTypes';
 import { Base, Fetch } from '../utils';
 
 export default class HttpService extends Base {
@@ -66,7 +67,7 @@ export default class HttpService extends Base {
                 this._statusHandler(status, false);
                 reject(data);
             }).catch(() => {
-                reject({});
+                reject(new SUI.Object());
             });
         });
     }

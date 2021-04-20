@@ -68,19 +68,12 @@ export default class Fetch {
 
     private _getRequestBody(opt_data) {
         if (opt_data) {
-            /*let formData = new FormData();
-            for (let key in opt_data) {
-                if (opt_data.hasOwnProperty(key)) {
-                    formData.append(key, opt_data[key]);
-                }
-            }
-            return formData;*/
             return JSON.stringify(opt_data);
         }
         return null;
     }
 
-    private async _handleResponse(response) {
+    private async _handleResponse(response: Response) {
         const contentType = response.headers.get('content-type');
         /*
             arrayBuffer()
@@ -88,18 +81,18 @@ export default class Fetch {
             text()
             formData()
         */
-        let result = {};
-        if (contentType && contentType.includes(this.mimeTypes.json)) {
-            const data = await response.json();
+        let data = {};
+        if (contentType?.includes(this.mimeTypes.json)) {
+            const jsonData = await response.json();
             const object = new SUI.Object();
-            result = object.merge(data);
+            data = object.merge(jsonData);
         }
         return new Promise((resolve, reject) => {
-            // console.log('_handleResponse', contentType, response.status, result);
+            // console.log('_handleResponse', contentType, response);
             if (response.status >= 200 && response.status < 300) {
-                resolve({ data: result, status: response.status });
+                resolve({ data, response });
             } else {
-                reject({ data: result, status: response.status });
+                reject({ data, response });
             }
         });
     }
@@ -109,13 +102,10 @@ export default class Fetch {
             method,
             headers: Object.assign(this._getHeaders(url), opt_headers),
             body: this._getRequestBody(opt_data),
-            // mode: 'cors',
-            // credentials: 'same-origin',
-            // cache: 'no-cache',
-            // referrer: 'no-referrer',
         };
         // console.log('_handleRequest', this.getUrl(url, opt_params), options);
-        const response = await fetch(this.getUrl(url, opt_params), options);
+        const request = new Request(this.getUrl(url, opt_params), options);
+        const response = await fetch(request);
         return await this._handleResponse(response);
     }
 }
