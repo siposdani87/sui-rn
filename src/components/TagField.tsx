@@ -1,13 +1,13 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
-import { View, StyleSheet, Platform, Text } from 'react-native';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors, Styles } from '../constants';
+import useDarkTheme from '../hooks/useDarkTheme';
 import useErrorField from '../hooks/useErrorField';
 import useInputStyle from '../hooks/useInputStyle';
-import useDarkTheme from '../hooks/useDarkTheme';
+import ErrorField from './ErrorField';
 import IconButton from './IconButton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import Label from './Label';
 
 export default function TagField(props: { values: any[], onValuesChange: (_value: any[]) => void, onPress?: (_index: number) => void, readonly?: boolean, label?: string, error?: any, placeholder?: string, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, actionButtons?: any[] }) {
   const [values, setValues] = useState(props.values);
@@ -16,13 +16,19 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
   const isDarkTheme = useDarkTheme();
 
   useEffect(() => {
-    setValues(props.values);
-  }, [props.values]);
+    const v = props.values;
+    if (v.length === 0 && props.placeholder) {
+      v.push(props.placeholder);
+    }
+    setValues(v);
+  }, [props.values, props.placeholder]);
 
   function onValuesChange(v) {
     onErrorChange();
     setValues(v);
-    props.onValuesChange(v);
+    props.onValuesChange(v.filter((k) => {
+      return k !== getPlaceholder();
+    }));
   }
 
   function removeTag(v) {
@@ -59,10 +65,18 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
   }
 
   function getValuesLength(): number {
-    if (values?.[0] === props.placeholder) {
+    if (values?.[0] === getPlaceholder()) {
       return 0;
     }
     return values.length;
+  }
+
+  function allowRemove(v: string): boolean {
+    return !props.readonly && !props.disabled && v !== getPlaceholder();
+  }
+
+  function getPlaceholder(): string {
+    return props.placeholder || '';
   }
 
   return (
@@ -70,11 +84,11 @@ export default function TagField(props: { values: any[], onValuesChange: (_value
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
       <View style={[styles.textInput, props.style, inputStyle]}>
         {values.map((value, index) => (
-          <View key={index} style={[styles.tagContainer, { backgroundColor: getBackgroundColor(), paddingRight: (props.readonly || props.disabled) ? null : 25 }]}>
+          <View key={index} style={[styles.tagContainer, { backgroundColor: getBackgroundColor(), paddingRight: allowRemove(value) ? 25 : null }]}>
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPressTag(index)}>
               <Text style={[styles.tagText, { color: getTextColor() }]}>{value}</Text>
             </TouchableOpacity>
-            {!props.readonly && !props.disabled && (
+            {allowRemove(value) && (
               <IconButton containerStyle={styles.actionButtonContainer} style={styles.actionButton} iconName='close' iconColor={getTextColor()} iconSize={20} onPress={removeTag(value)} />
             )}
           </View>

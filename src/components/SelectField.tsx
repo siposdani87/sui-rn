@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Label from './Label';
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors, Styles } from '../constants';
+import useActionColor from '../hooks/useActionColor';
+import useDarkTheme from '../hooks/useDarkTheme';
 import useErrorField from '../hooks/useErrorField';
-import IconButton from './IconButton';
-import Dialog from './Dialog';
-import Text from './Text';
 import Button from './Button';
+import Dialog from './Dialog';
+import IconButton from './IconButton';
+import Label from './Label';
 import SearchField from './SearchField';
 import TagField from './TagField';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useActionColor from '../hooks/useActionColor';
+import Text from './Text';
 
 export default function SelectField(props: { value: any, items: any, onValueChange: (_value: any) => void, okText: string, multiple?: boolean, onSearch?: (_value: any) => void, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, placeholder?: string, labelKey?: string, valueKey?: string, searchPlaceholder?: string, containerStyle?: any, style?: any }) {
   const valueKey = 'value';
@@ -81,7 +81,7 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     return '';
   }
 
-  function getValue(l){
+  function getValue(l) {
     const index = getIndex(l, labelKey);
     if (index >= 0) {
       return items[index][valueKey];
@@ -121,17 +121,17 @@ export default function SelectField(props: { value: any, items: any, onValueChan
 
   function selectValue() {
     hideDialog();
-    if (props.multiple) {
-      onValueChange(selectedValues);
-    } else {
-      onValueChange(selectedValues[0] ?? null);
-    }
+    const values = selectedValues.filter((v) => {
+      return !!v;
+    });
+    handleValueChanges(values);
   }
 
   function showDialog() {
     if (!props.disabled) {
       if (props.multiple) {
-        setSelectedValues(value);
+        const v = value.length === 0 ? [null] : value;
+        setSelectedValues(v);
       } else {
         setSelectedValues([value]);
       }
@@ -152,45 +152,45 @@ export default function SelectField(props: { value: any, items: any, onValueChan
     setFilteredItems(convert(props.items, q));
   }
 
-  function getReadonly(): boolean {
-    return props.multiple ? !value[0] : !value;
+  function onValuesChange(tags) {
+    const values = tags.map((tag) => {
+      return getValue(tag);
+    });
+    handleValueChanges(values);
   }
 
-  function onValuesChange(values) {
-    const v = values.map((_l) => {
-      return getValue(_l);
-    });
+  function handleValueChanges(values) {
     if (props.multiple) {
-      onValueChange(v);
+      onValueChange(values);
     } else {
-      onValueChange(v[0] ?? null);
+      onValueChange(values[0] || null);
     }
   }
 
   function getTags(): string[] {
     let results = [];
     if (props.multiple) {
-      results = value.map((_v) => {
-        return getLabel(_v);
+      results = value.map((v) => {
+        return getLabel(v);
       });
-    } else {
+    } else if (value) {
       results = [getLabel(value)];
     }
-    return results.filter((_v) => {
-      return _v;
+    return results.filter((result) => {
+      return !!result;
     });
   }
 
-  function getActionButtons(): any[]{
-    const actionButtons = [];
-    actionButtons.push(<IconButton iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />);
-    return actionButtons;
+  function getActionButtons(): any[] {
+    return [
+      (<IconButton key={0} iconName='expand-more' containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog} />),
+    ];
   }
 
   return (
     <View style={[styles.container, props.containerStyle]}>
       <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} readonly={getReadonly()} actionButtons={getActionButtons()} />
+      <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()} />
       <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
         <Button key={0} title={props.okText} onPress={selectValue} />,
       ]}>

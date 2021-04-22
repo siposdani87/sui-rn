@@ -5,7 +5,7 @@ export default function useActionColor(disabled: boolean) {
     const isDarkTheme = useDarkTheme();
     
     function getActionColor(selected?: boolean) {
-      if (disabled){
+      if (disabled) {
         return isDarkTheme ? Colors.contentDisabledDark : Colors.contentDisabledLight;
       }
       if (selected){

@@ -1,12 +1,15 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SelectField } from '../../src/components';
-import { StatusBar } from 'expo-status-bar';
 
 export default function SelectsScreen() {
   const [data, setData] = useState({
     bodyType: null,
     bodyTypeRequired: null,
+
+    notifications: [],
+    notificationsRequired: [],
 
     gender: null,
     genderDisabled: null,
@@ -33,6 +36,11 @@ export default function SelectsScreen() {
     { name: 'Gardening', value: 'GARDENING' },
     { name: 'Play games', value: 'PLAY_GAMES' },
   ];
+  const notifications = [
+    { name: 'Email', id: 1 },
+    { name: 'SMS', id: 2 },
+    { name: 'Push', id: 3 },
+  ];
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -43,6 +51,9 @@ export default function SelectsScreen() {
       setData({
         bodyType: null,
         bodyTypeRequired: undefined,
+
+        notifications: null,
+        notificationsRequired: undefined,
 
         gender: 'MALE',
         genderDisabled: 'MALE',
@@ -79,6 +90,9 @@ export default function SelectsScreen() {
         <View style={styles.container}>
           <SelectField label='Body type' items={bodyTypes} value={data.bodyType} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyType', v)} placeholder='Please select...' searchPlaceholder='Search...' />
           <SelectField label='Body type required' items={bodyTypes} value={data.bodyTypeRequired} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('bodyTypeRequired', v)} placeholder='Please select...' searchPlaceholder='Search...' required={true} />
+
+          <SelectField multiple={true} label='Notifications' items={notifications} value={data.notifications} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('notifications', v)} placeholder='All notifications' />
+          <SelectField multiple={true} label='Notifications required' items={notifications} value={data.notificationsRequired} valueKey='id' labelKey='name' okText='OK' onValueChange={(v) => updateData('notificationsRequired', v)} required={true} placeholder='All notifications' />
 
           <SelectField label='Gender' items={genders} value={data.gender} okText='OK' onValueChange={(v) => updateData('gender', v)} searchPlaceholder='Search...' />
           <SelectField label='Gender disabled' items={genders} value={data.genderDisabled} okText='OK' onValueChange={(v) => updateData('genderDisabled', v)} disabled={true} />
