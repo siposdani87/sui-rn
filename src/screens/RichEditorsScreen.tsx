@@ -1,14 +1,14 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { TextAreaField } from '../../src/components';
-import { StatusBar } from 'expo-status-bar';
 
 export default function RichEditorsScreen() {
   const [data, setData] = useState({
-    bio: '',
+    bio: undefined,
     bioDisabled: '',
-    bioRequired: '',
-    bioRequiredDisabled: '',
+    bioRequired: null,
+    bioRequiredDisabled: undefined,
   });
   const [refreshing, setRefreshing] = useState(false);
 
@@ -19,8 +19,8 @@ export default function RichEditorsScreen() {
       setData({
         bio: '<p>0 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p><p>1 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
         bioDisabled: '<p>Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
-        bioRequired: '',
-        bioRequiredDisabled: '',
+        bioRequired: null,
+        bioRequiredDisabled: undefined,
       });
       setRefreshing(false);
     }, 2000);
