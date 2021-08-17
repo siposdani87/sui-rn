@@ -24,6 +24,7 @@ const appLightTheme = {
   colors: {
       ...DefaultTheme.colors,
       primary: Colors.primary,
+      background: '#FFF',
   },
 };
 
@@ -32,6 +33,7 @@ const appDarkTheme = {
   colors: {
       ...DarkTheme.colors,
       primary: Colors.primaryBright,
+      background: '#000',
   },
 };
 

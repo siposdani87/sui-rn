@@ -6,7 +6,7 @@ import { TextButton } from '../components';
 export default function HomeScreen({ navigation }) {
     return (
         <Fragment>
-            <StatusBar style='dark' />
+            <StatusBar style='light' />
             <ScrollView>
                 <View>
                     <TextButton title='Buttons' onPress={() => navigation.navigate('Buttons')} />
@@ -24,6 +24,7 @@ export default function HomeScreen({ navigation }) {
                     <TextButton title='Dialogs' onPress={() => navigation.navigate('Dialogs')} />
                     <TextButton title='Flashes' onPress={() => navigation.navigate('Flashes')} />
                     <TextButton title='Confirms' onPress={() => navigation.navigate('Confirms')} />
+                    <TextButton title='Tabs' onPress={() => navigation.navigate('Tabs')} />
                 </View>
             </ScrollView>
         </Fragment>

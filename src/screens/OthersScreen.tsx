@@ -10,7 +10,7 @@ export default function OthersScreen() {
 
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView>
         <View style={styles.container}>
           <NoContent text='No content yet!' imageSource={{ uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y' }}>

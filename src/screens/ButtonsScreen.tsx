@@ -7,7 +7,7 @@ import { Colors } from '../constants';
 export default function ButtonsScreen() {
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView>
         <View style={styles.container}>
           <View style={{ flexDirection: 'row' }}>

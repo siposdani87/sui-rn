@@ -11,7 +11,7 @@ export default function DialogsScreen() {
 
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView>
         <View style={styles.container}>
           <Dialog visible={dialog1} onClose={closeDialog1}>

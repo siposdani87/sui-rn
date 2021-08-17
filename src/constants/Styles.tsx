@@ -62,9 +62,9 @@ const styles = {
         },
     }),
     tabBarOptions: {
-        showIcon: false,
-        showLabel: true,
-        labelStyle: {
+        headerShown: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle: {
             fontSize: 14,
             fontFamily: '',
             fontWeight: '400',
@@ -72,15 +72,15 @@ const styles = {
         },
     },
     tabBarLightOptions: {
-        activeTintColor: Colors.primaryDark,
-        inactiveTintColor: Colors.deepGreyBright,
-        style: {
+        tabBarActiveTintColor: Colors.primaryDark,
+        tabBarInactiveTintColor: Colors.deepGreyBright,
+        tabBarStyle: {
             backgroundColor: Colors.lightGreyBright,
         },
         indicatorStyle: {
             backgroundColor: Colors.accent,
         },
-        tabStyle: {
+        tabBarItemStyle: {
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 1,
@@ -88,15 +88,15 @@ const styles = {
         },
     },
     tabBarDarkOptions: {
-        activeTintColor: Colors.primaryBright,
-        inactiveTintColor: Colors.deepGreyBright,
-        style: {
+        tabBarActiveTintColor: Colors.primaryBright,
+        tabBarInactiveTintColor: Colors.deepGreyBright,
+        tabBarStyle: {
             backgroundColor: Colors.black,
         },
         indicatorStyle: {
             backgroundColor: Colors.accentBright,
         },
-        tabStyle: {
+        tabBarItemStyle: {
             alignItems: 'center',
             justifyContent: 'center',
             borderTopWidth: 1,
@@ -128,11 +128,11 @@ const styles = {
                 },
             }),
         },
-        contentStyle: {
+        /* contentStyle: {
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-        },
+        }, */
     },
     floatingButtonContainer: {
         position: 'absolute',
@@ -165,12 +165,12 @@ export function setThemeStyles(colors, fontFamilyApp: string, fontFamilyHeadings
     [styles.fontFamilyBodyRegular, styles.fontFamilyBodyMedium, styles.fontFamilyBodyBold] = fontFamilyBodies;
 
     styles.stackNavigatorOptions.headerTitleStyle.fontFamily = styles.fontFamilyHeadingRegular;
-    styles.tabBarOptions.labelStyle.fontFamily = styles.fontFamilyBodyRegular;
+    styles.tabBarOptions.tabBarLabelStyle.fontFamily = styles.fontFamilyBodyRegular;
 
-    styles.tabBarLightOptions.activeTintColor = colors.primaryDark;
+    styles.tabBarLightOptions.tabBarActiveTintColor = colors.primaryDark;
     styles.tabBarLightOptions.indicatorStyle.backgroundColor = colors.accent;
 
-    styles.tabBarDarkOptions.activeTintColor = colors.primaryBright;
+    styles.tabBarDarkOptions.tabBarActiveTintColor = colors.primaryBright;
     styles.tabBarDarkOptions.indicatorStyle.backgroundColor = colors.accentBright;
 
     styles.stackNavigatorOptions.headerTintColor = colors.primaryText;
