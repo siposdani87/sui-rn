@@ -16,12 +16,14 @@ import RichEditorsScreen from './src/screens/RichEditorsScreen';
 import DialogsScreen from './src/screens/DialogsScreen';
 import FlashesScreen from './src/screens/FlashesScreen';
 import ConfirmsScreen from './src/screens/ConfirmsScreen';
+import TabsScreen from './src/screens/TabsScreen';
+import { Styles } from './src/constants';
 
 const Stack = createStackNavigator();
 
 export default function Router() {
     return (
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Home' screenOptions={Styles.stackNavigatorOptions as any}>
             <Stack.Screen name='Buttons' component = { ButtonsScreen } />
             <Stack.Screen name='Checkboxes' component = { CheckboxesScreen } />
             <Stack.Screen name='Colors' component = { ColorsScreen } />
@@ -38,6 +40,7 @@ export default function Router() {
             <Stack.Screen name='Dialogs' component = { DialogsScreen } />
             <Stack.Screen name='Flashes' component = { FlashesScreen } />
             <Stack.Screen name='Confirms' component = { ConfirmsScreen } />
+            <Stack.Screen name='Tabs' component = { TabsScreen } />
         </Stack.Navigator>
     );
 }

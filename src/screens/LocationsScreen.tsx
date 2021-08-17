@@ -43,7 +43,7 @@ export default function LocationsScreen() {
 
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>

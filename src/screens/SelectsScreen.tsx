@@ -83,7 +83,7 @@ export default function SelectsScreen() {
 
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>

@@ -47,7 +47,7 @@ export default function FlashesScreen() {
 
   return (
     <Fragment>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <ScrollView>
         <View style={styles.container}>
           <View style={{ flexDirection: 'column' }}>
