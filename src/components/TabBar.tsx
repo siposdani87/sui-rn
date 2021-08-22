@@ -1,14 +1,11 @@
-// import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Styles } from '../constants';
-//import { useBanner } from '../hooks';
 
-// TODO: props: any is hotfix (original: BottomTabBarProps)
-export default function TabBar(props: any) {
+export default function TabBar(props: BottomTabBarProps & { hasPaddingBottom?: boolean, tabBarStyle?: any, tabBarItemStyle?: any, tabBarLabelStyle?: any, tabBarActiveTintColor?: string, tabBarInactiveTintColor?: string }) {
   const insets = useSafeAreaInsets();
-  const allowBanner = false; // useBanner();
 
   const { descriptors, state, navigation } = props;
 
@@ -17,7 +14,7 @@ export default function TabBar(props: any) {
   }
 
   return (
-    <View style={[props.tabBarStyle as any, { flexDirection: 'row', paddingBottom: allowBanner ? 0 : insets.bottom }]}>
+    <View style={[props.tabBarStyle, { flexDirection: 'row', paddingBottom: props.hasPaddingBottom ? 0 : insets.bottom }]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label = options.tabBarLabel ? options.tabBarLabel : options.title ? options.title : route.name;
