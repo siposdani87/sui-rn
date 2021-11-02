@@ -4,7 +4,14 @@ import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import DialogHeader from './DialogHeader';
 
-export default function Dialog(props: { visible: boolean, type?: string; title?: string, buttons?: any[], onClose?: () => void, children?: any }) {
+export default function Dialog(props: {
+    visible: boolean;
+    type?: string;
+    title?: string;
+    buttons?: any[];
+    onClose?: () => void;
+    children?: any;
+}) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = useDarkTheme();
 
@@ -19,7 +26,7 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
         }
     }
 
-    function getStyle(type) {
+    function getStyle(type: string) {
         switch (type) {
             case 'success':
                 return styles.success;
@@ -37,17 +44,30 @@ export default function Dialog(props: { visible: boolean, type?: string; title?:
     }
 
     return (
-        <Modal animationType='fade' transparent={true} statusBarTranslucent={true} visible={visible} onRequestClose={onClose}>
+        <Modal
+            animationType="fade"
+            transparent={true}
+            statusBarTranslucent={true}
+            visible={visible}
+            onRequestClose={onClose}
+        >
             <View style={styles.dropContainer}>
-                <View style={[styles.dialogContainer, props.type ? getStyle(props.type) : null, isDarkTheme ? styles.dialogDarkContainer : styles.dialogLightContainer]}>
+                <View
+                    style={[
+                        styles.dialogContainer,
+                        props.type ? getStyle(props.type) : null,
+                        isDarkTheme
+                            ? styles.dialogDarkContainer
+                            : styles.dialogLightContainer,
+                    ]}
+                >
                     <DialogHeader title={props.title} onClose={props.onClose} />
-                    <View style={styles.bodyContainer}>
-                        {props.children}
-                    </View>
+                    <View style={styles.bodyContainer}>{props.children}</View>
                     <View style={styles.footerContainer}>
-                        {props.buttons && props.buttons.map((button, key) => (
-                            <Fragment key={key}>{button}</Fragment>
-                        ))}
+                        {props.buttons &&
+                            props.buttons.map((button, key) => (
+                                <Fragment key={key}>{button}</Fragment>
+                            ))}
                     </View>
                 </View>
             </View>
@@ -70,7 +90,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         borderRadius: 3,
         margin: 20,
-        ...Styles.shadow as ViewStyle,
+        ...(Styles.shadow as ViewStyle),
     },
     success: {
         borderTopWidth: 5,

@@ -23,24 +23,27 @@ const Stack = createStackNavigator();
 
 export default function Router() {
     return (
-        <Stack.Navigator initialRouteName='Home' screenOptions={Styles.stackNavigatorOptions as any}>
-            <Stack.Screen name='Buttons' component = { ButtonsScreen } />
-            <Stack.Screen name='Checkboxes' component = { CheckboxesScreen } />
-            <Stack.Screen name='Colors' component = { ColorsScreen } />
-            <Stack.Screen name='Datetimes' component = { DatetimesScreen } />
-            <Stack.Screen name='Files' component = { FilesScreen } />
-            <Stack.Screen name='Home' component = { HomeScreen } />
-            <Stack.Screen name='Locations' component = { LocationsScreen } />
-            <Stack.Screen name='Others' component = { OthersScreen } />
-            <Stack.Screen name='RichEditors' component = { RichEditorsScreen } />
-            <Stack.Screen name='Selects' component = { SelectsScreen } />
-            <Stack.Screen name='Sliders' component = { SlidersScreen } />
-            <Stack.Screen name='Textareas' component = { TextareasScreen } />
-            <Stack.Screen name='Texts' component = { TextsScreen } />
-            <Stack.Screen name='Dialogs' component = { DialogsScreen } />
-            <Stack.Screen name='Flashes' component = { FlashesScreen } />
-            <Stack.Screen name='Confirms' component = { ConfirmsScreen } />
-            <Stack.Screen name='Tabs' component = { TabsScreen } />
+        <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={Styles.stackNavigatorOptions as any}
+        >
+            <Stack.Screen name="Buttons" component={ButtonsScreen} />
+            <Stack.Screen name="Checkboxes" component={CheckboxesScreen} />
+            <Stack.Screen name="Colors" component={ColorsScreen} />
+            <Stack.Screen name="Datetimes" component={DatetimesScreen} />
+            <Stack.Screen name="Files" component={FilesScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Locations" component={LocationsScreen} />
+            <Stack.Screen name="Others" component={OthersScreen} />
+            <Stack.Screen name="RichEditors" component={RichEditorsScreen} />
+            <Stack.Screen name="Selects" component={SelectsScreen} />
+            <Stack.Screen name="Sliders" component={SlidersScreen} />
+            <Stack.Screen name="Textareas" component={TextareasScreen} />
+            <Stack.Screen name="Texts" component={TextsScreen} />
+            <Stack.Screen name="Dialogs" component={DialogsScreen} />
+            <Stack.Screen name="Flashes" component={FlashesScreen} />
+            <Stack.Screen name="Confirms" component={ConfirmsScreen} />
+            <Stack.Screen name="Tabs" component={TabsScreen} />
         </Stack.Navigator>
     );
 }

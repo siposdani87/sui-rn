@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import NoContent from './NoContent';
-import { FlatList as RNFlatList, ImageSourcePropType, ListRenderItem, Platform, RefreshControl, View } from 'react-native';
+import {
+    FlatList as RNFlatList,
+    ImageSourcePropType,
+    ListRenderItem,
+    Platform,
+    RefreshControl,
+    View,
+} from 'react-native';
 
 const config = {
     progressViewOffset: -1000,
     onEndReachedThreshold: 0.5,
 };
 
-export default function FlatList(props: { data: any[], keyExtractor?: (_item: any, _index: number) => string, renderItem: ListRenderItem<any>, numColumns?: number, columnWrapperStyle?: any, refreshing: boolean, onRefresh: () => void, onEndReached: () => void, refreshText: string, noContentText: string, noContentImageSource: ImageSourcePropType }) {
+export default function FlatList(props: {
+    data: any[];
+    keyExtractor?: (_item: any, _index: number) => string;
+    renderItem: ListRenderItem<any>;
+    numColumns?: number;
+    columnWrapperStyle?: any;
+    refreshing: boolean;
+    onRefresh: () => void;
+    onEndReached: () => void;
+    refreshText: string;
+    noContentText: string;
+    noContentImageSource: ImageSourcePropType;
+}) {
     const [flatListReady, setFlatListReady] = useState(false);
 
     function onRefresh() {
@@ -37,19 +56,48 @@ export default function FlatList(props: { data: any[], keyExtractor?: (_item: an
 
     function getListEmptyComponent() {
         return (
-            <NoContent imageSource={props.noContentImageSource} text={props.noContentText} containerStyle={{ marginTop: 10 }} />
+            <NoContent
+                imageSource={props.noContentImageSource}
+                text={props.noContentText}
+                containerStyle={{ marginTop: 10 }}
+            />
         );
     }
 
     function getRefreshControl() {
         return (
-            <RefreshControl refreshing={false} onRefresh={onRefresh} title={props.refreshText} tintColor='transparent' />
+            <RefreshControl
+                refreshing={false}
+                onRefresh={onRefresh}
+                title={props.refreshText}
+                tintColor="transparent"
+            />
         );
     }
 
     return (
         <View style={{ marginTop: -10 }}>
-            <RNFlatList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={props.numColumns} columnWrapperStyle={props.columnWrapperStyle} horizontal={false} ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }} removeClippedSubviews={true} style={{ marginTop: 10 }} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={getListEmptyComponent()} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} onScrollEndDrag={onScrollEndDrag} refreshControl={Platform.OS === 'ios' ? getRefreshControl() : null} />
+            <RNFlatList
+                data={props.data}
+                keyExtractor={props.keyExtractor}
+                renderItem={props.renderItem}
+                numColumns={props.numColumns}
+                columnWrapperStyle={props.columnWrapperStyle}
+                horizontal={false}
+                ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }}
+                removeClippedSubviews={true}
+                style={{ marginTop: 10 }}
+                progressViewOffset={config.progressViewOffset}
+                onEndReachedThreshold={config.onEndReachedThreshold}
+                ListEmptyComponent={getListEmptyComponent()}
+                refreshing={props.refreshing}
+                onRefresh={onRefresh}
+                onEndReached={onEndReached}
+                onScrollEndDrag={onScrollEndDrag}
+                refreshControl={
+                    Platform.OS === 'ios' ? getRefreshControl() : null
+                }
+            />
         </View>
     );
 }

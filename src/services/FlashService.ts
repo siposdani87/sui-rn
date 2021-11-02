@@ -1,6 +1,21 @@
 import { Base } from '../utils';
 import SUI from 'sui-js';
 import { FLASH } from '../constants/ActionTypes';
+import { Dispatch } from 'react';
+
+interface Message {
+    type: string;
+    content: string;
+    closable: boolean;
+}
+
+interface Flash {
+    type: string;
+    message: string;
+    id: string;
+    duration?: number;
+    closeCallback?: () => void;
+}
 
 export default class FlashService extends Base {
     private flashes: any[];
@@ -9,7 +24,7 @@ export default class FlashService extends Base {
         duration: number;
     };
 
-    constructor(dispatch) {
+    constructor(dispatch: Dispatch<any>) {
         super(dispatch);
         this.flashes = [];
         this.options = {
@@ -18,35 +33,96 @@ export default class FlashService extends Base {
         };
     }
 
-    public addSuccess(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        return this._add('success', message, opt_duration, opt_closeCallback, opt_id);
+    public addSuccess(
+        message: string,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ) {
+        return this._add(
+            'success',
+            message,
+            opt_duration,
+            opt_closeCallback,
+            opt_id,
+        );
     }
 
-    public addInfo(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        return this._add('info', message, opt_duration, opt_closeCallback, opt_id);
+    public addInfo(
+        message: string,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ) {
+        return this._add(
+            'info',
+            message,
+            opt_duration,
+            opt_closeCallback,
+            opt_id,
+        );
     }
 
-    public addWarning(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        return this._add('warning', message, opt_duration, opt_closeCallback, opt_id);
+    public addWarning(
+        message: string,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ) {
+        return this._add(
+            'warning',
+            message,
+            opt_duration,
+            opt_closeCallback,
+            opt_id,
+        );
     }
 
-    public addError(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
-        return this._add('error', message, opt_duration, opt_closeCallback, opt_id);
+    public addError(
+        message: string,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ) {
+        return this._add(
+            'error',
+            message,
+            opt_duration,
+            opt_closeCallback,
+            opt_id,
+        );
     }
 
-    public addMessage(message, opt_duration = 0, opt_closeCallback = null, opt_id = '') {
+    public addMessage(
+        message: Message,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ) {
         if (SUI.isObject(message) && !SUI.isNull(message)) {
-            const closeCallback = message.closable ? SUI.noop : opt_closeCallback;
-            return this._add(message.type, message.content, opt_duration, closeCallback, opt_id);
+            const closeCallback = message.closable
+                ? SUI.noop
+                : opt_closeCallback;
+            return this._add(
+                message.type,
+                message.content,
+                opt_duration,
+                closeCallback,
+                opt_id,
+            );
         }
         return null;
     }
 
-    public isClosable(flash): boolean {
-        return (this.options.closableTypes.indexOf(flash.type) !== -1 || SUI.isFunction(flash.closeCallback)) && !SUI.eq(flash.duration, Infinity);
+    public isClosable(flash: Flash): boolean {
+        return (
+            (this.options.closableTypes.indexOf(flash.type) !== -1 ||
+                SUI.isFunction(flash.closeCallback)) &&
+            !SUI.eq(flash.duration, Infinity)
+        );
     }
 
-    public close(flash, opt_force = false) {
+    public close(flash: Flash, opt_force = false) {
         const index = this.flashes.findIndex((item) => item.id === flash.id);
         if (index !== -1 && (opt_force || !SUI.eq(flash.duration, Infinity))) {
             if (flash.closeCallback) {
@@ -59,18 +135,24 @@ export default class FlashService extends Base {
         }
     }
 
-    public remove(flash) {
+    public remove(flash: Flash) {
         this.close(flash, true);
     }
 
-    private _add(type: string, message: string, opt_duration = 0, opt_closeCallback = null, opt_id = ''): any {
+    private _add(
+        type: string,
+        message: string,
+        opt_duration = 0,
+        opt_closeCallback = null,
+        opt_id = '',
+    ): any {
         this.removeById(opt_id);
-        const flash = {
+        const flash: Flash = {
             type,
             message,
             id: opt_id || SUI.generateId('flash'),
             duration: opt_duration,
-            closeCallback: opt_closeCallback,
+            closeCallback: opt_closeCallback ?? undefined,
         };
         this.flashes.push(flash);
         if (!this.isClosable(flash) && !SUI.eq(flash.duration, Infinity)) {
