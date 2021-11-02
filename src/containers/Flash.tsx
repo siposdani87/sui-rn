@@ -20,19 +20,40 @@ export default function Flash(props: { services: any }) {
     }
 
     function getContainerStyle(flash) {
-        const containerStyles: any[] = [styles.flashContainer, isDarkTheme ? styles.flashDarkContainer : styles.flashLightContainer];
+        const containerStyles: any[] = [
+            styles.flashContainer,
+            isDarkTheme
+                ? styles.flashDarkContainer
+                : styles.flashLightContainer,
+        ];
         switch (flash.type.toLowerCase()) {
             case 'success':
-                containerStyles.push(isDarkTheme ? styles.successDarkContainer : styles.successLightContainer);
+                containerStyles.push(
+                    isDarkTheme
+                        ? styles.successDarkContainer
+                        : styles.successLightContainer,
+                );
                 break;
             case 'info':
-                containerStyles.push(isDarkTheme ? styles.infoDarkContainer : styles.infoLightContainer);
+                containerStyles.push(
+                    isDarkTheme
+                        ? styles.infoDarkContainer
+                        : styles.infoLightContainer,
+                );
                 break;
             case 'warning':
-                containerStyles.push(isDarkTheme ? styles.warningDarkContainer : styles.warningLightContainer);
+                containerStyles.push(
+                    isDarkTheme
+                        ? styles.warningDarkContainer
+                        : styles.warningLightContainer,
+                );
                 break;
             case 'error':
-                containerStyles.push(isDarkTheme ? styles.errorDarkContainer : styles.errorLightContainer);
+                containerStyles.push(
+                    isDarkTheme
+                        ? styles.errorDarkContainer
+                        : styles.errorLightContainer,
+                );
                 break;
         }
         return containerStyles;
@@ -41,11 +62,20 @@ export default function Flash(props: { services: any }) {
     return (
         <View style={[styles.container, { top: insets.top + 20 }]}>
             {props.services.flashService.flashes.map((flash, index) => (
-                <TouchableOpacity activeOpacity={Styles.activeOpacity} key={index} onPress={close(flash)}>
+                <TouchableOpacity
+                    activeOpacity={Styles.activeOpacity}
+                    key={index}
+                    onPress={close(flash)}
+                >
                     <View style={getContainerStyle(flash)}>
                         <Text style={styles.flashText}>{flash.message}</Text>
                         {isClosable(flash) && (
-                            <IconButton containerStyle={styles.flashClose} iconName='close' iconSize={18} onPress={close(flash)} />
+                            <IconButton
+                                containerStyle={styles.flashClose}
+                                iconName="close"
+                                iconSize={18}
+                                onPress={close(flash)}
+                            />
                         )}
                     </View>
                 </TouchableOpacity>

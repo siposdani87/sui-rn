@@ -8,31 +8,69 @@ import Slider from '@react-native-community/slider';
 import useInputStyle from '../hooks/useInputStyle';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function SliderField(props: { value: any, onValueChange: (_value: any) => void, minimumValue?: number, maximumValue?: number, step?: number, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any }) {
-  const [value, setValue] = useState(props.value);
-  const [error, onErrorChange] = useErrorField(props.error);
-  const inputStyle = useInputStyle(value, error, props.required, props.disabled);
-  const isDarkTheme = useDarkTheme();
+export default function SliderField(props: {
+    value: any;
+    onValueChange: (_value: any) => void;
+    minimumValue?: number;
+    maximumValue?: number;
+    step?: number;
+    label?: string;
+    error?: any;
+    required?: boolean;
+    disabled?: boolean;
+    desc?: string;
+    onPressDesc?: () => void;
+    containerStyle?: any;
+    style?: any;
+}) {
+    const [value, setValue] = useState(props.value);
+    const [error, onErrorChange] = useErrorField(props.error);
+    const inputStyle = useInputStyle(
+        value,
+        error,
+        props.required,
+        props.disabled,
+    );
+    const isDarkTheme = useDarkTheme();
 
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
-  function onValueChange(v) {
-    onErrorChange();
-    setValue(v);
-    props.onValueChange(v);
-  }
+    function onValueChange(v) {
+        onErrorChange();
+        setValue(v);
+        props.onValueChange(v);
+    }
 
-  return (
-    <View style={[styles.container, props.containerStyle]}>
-      <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} />
-      <Slider style={[{flex: 1, height: 40}, props.style, inputStyle]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.deepGreyBright} maximumTrackTintColor={Colors.deepGreyBright} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled} />
-      <ErrorField error={error} disabled={props.disabled} />
-    </View>
-  );
+    return (
+        <View style={[styles.container, props.containerStyle]}>
+            <Label
+                text={props.label}
+                required={props.required}
+                disabled={props.disabled}
+                desc={props.desc}
+                onPressDesc={props.onPressDesc}
+            />
+            <Slider
+                style={[{ flex: 1, height: 40 }, props.style, inputStyle]}
+                value={value}
+                onSlidingComplete={onValueChange}
+                step={props.step}
+                minimumValue={props.minimumValue}
+                maximumValue={props.maximumValue}
+                minimumTrackTintColor={Colors.deepGreyBright}
+                maximumTrackTintColor={Colors.deepGreyBright}
+                thumbTintColor={
+                    isDarkTheme ? Colors.primaryBright : Colors.primary
+                }
+                disabled={props.disabled}
+            />
+            <ErrorField error={error} disabled={props.disabled} />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+    container: {},
 });

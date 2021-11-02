@@ -104,9 +104,7 @@ const styles = {
         },
     },
     stackNavigatorOptions: {
-        headerRight: () => (
-            <View />
-        ),
+        headerRight: () => <View />,
         headerBackTitle: null,
         headerBackTitleVisible: false,
         headerTintColor: Colors.primaryText,
@@ -159,31 +157,66 @@ const styles = {
     },
 };
 
-export function setThemeStyles(colors, fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]) {
+export function setThemeStyles(
+    colors,
+    fontFamilyApp: string,
+    fontFamilyHeadings: string[],
+    fontFamilyBodies: string[],
+) {
     styles.fontFamilyApp = fontFamilyApp;
-    [styles.fontFamilyHeadingRegular, styles.fontFamilyHeadingMedium, styles.fontFamilyHeadingBold] = fontFamilyHeadings;
-    [styles.fontFamilyBodyRegular, styles.fontFamilyBodyMedium, styles.fontFamilyBodyBold] = fontFamilyBodies;
+    [
+        styles.fontFamilyHeadingRegular,
+        styles.fontFamilyHeadingMedium,
+        styles.fontFamilyHeadingBold,
+    ] = fontFamilyHeadings;
+    [
+        styles.fontFamilyBodyRegular,
+        styles.fontFamilyBodyMedium,
+        styles.fontFamilyBodyBold,
+    ] = fontFamilyBodies;
 
-    styles.stackNavigatorOptions.headerTitleStyle.fontFamily = styles.fontFamilyHeadingRegular;
-    styles.tabBarOptions.tabBarLabelStyle.fontFamily = styles.fontFamilyBodyRegular;
+    styles.stackNavigatorOptions.headerTitleStyle.fontFamily =
+        styles.fontFamilyHeadingRegular;
+    styles.tabBarOptions.tabBarLabelStyle.fontFamily =
+        styles.fontFamilyBodyRegular;
 
     styles.tabBarLightOptions.tabBarActiveTintColor = colors.primaryDark;
     styles.tabBarLightOptions.indicatorStyle.backgroundColor = colors.accent;
 
     styles.tabBarDarkOptions.tabBarActiveTintColor = colors.primaryBright;
-    styles.tabBarDarkOptions.indicatorStyle.backgroundColor = colors.accentBright;
+    styles.tabBarDarkOptions.indicatorStyle.backgroundColor =
+        colors.accentBright;
 
     styles.stackNavigatorOptions.headerTintColor = colors.primaryText;
     styles.stackNavigatorOptions.headerTitleStyle.color = colors.primaryText;
-    styles.stackNavigatorOptions.headerStyle.backgroundColor = colors.primaryDark;
+    styles.stackNavigatorOptions.headerStyle.backgroundColor =
+        colors.primaryDark;
 
     return styles;
 }
 
 Platform.select({
-    ios: () => setThemeStyles(Colors, 'Verdana', ['Helvetica', 'Helvetica', 'Helvetica'], ['Arial', 'Arial', 'Arial']),
-    android: () => setThemeStyles(Colors, 'monospace', ['sans-serif', 'sans-serif', 'sans-serif'], ['Roboto', 'Roboto', 'Roboto']),
-    default: () => setThemeStyles(Colors, 'Verdana', ['sans-serif', 'sans-serif', 'sans-serif'], ['Arial', 'Arial', 'Arial']),
+    ios: () =>
+        setThemeStyles(
+            Colors,
+            'Verdana',
+            ['Helvetica', 'Helvetica', 'Helvetica'],
+            ['Arial', 'Arial', 'Arial'],
+        ),
+    android: () =>
+        setThemeStyles(
+            Colors,
+            'monospace',
+            ['sans-serif', 'sans-serif', 'sans-serif'],
+            ['Roboto', 'Roboto', 'Roboto'],
+        ),
+    default: () =>
+        setThemeStyles(
+            Colors,
+            'Verdana',
+            ['sans-serif', 'sans-serif', 'sans-serif'],
+            ['Arial', 'Arial', 'Arial'],
+        ),
 })();
 
 export default styles;

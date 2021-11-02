@@ -3,7 +3,12 @@ import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
 import { Styles } from '../constants';
 import Text from '../components/Text';
 
-export default function NoContent(props: { text?: string, imageSource?: ImageSourcePropType, children?: any, containerStyle?: any }) {
+export default function NoContent(props: {
+    text?: string;
+    imageSource?: ImageSourcePropType;
+    children?: any;
+    containerStyle?: any;
+}) {
     return (
         <View style={[styles.container, props.containerStyle]}>
             {!!props.imageSource && (
@@ -12,7 +17,9 @@ export default function NoContent(props: { text?: string, imageSource?: ImageSou
                 </View>
             )}
             {!!props.text && (
-                <Text style={styles.text} muted={true}>{props.text}</Text>
+                <Text style={styles.text} muted={true}>
+                    {props.text}
+                </Text>
             )}
             {props.children}
         </View>

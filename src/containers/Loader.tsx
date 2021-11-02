@@ -3,7 +3,11 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Layout, Styles } from '../constants';
 
-export default function Loader(props: { services: any, backgroundColor: string, color: string }) {
+export default function Loader(props: {
+    services: any;
+    backgroundColor: string;
+    color: string;
+}) {
     const insets = useSafeAreaInsets();
     const backgroundColor = props.backgroundColor || Colors.primary;
 
@@ -11,7 +15,11 @@ export default function Loader(props: { services: any, backgroundColor: string, 
         return (
             <View style={[styles.container, { top: insets.top + 15 }]}>
                 <View style={[styles.loader, { backgroundColor }]}>
-                    <ActivityIndicator animating={true} size='small' color={props.color} />
+                    <ActivityIndicator
+                        animating={true}
+                        size="small"
+                        color={props.color}
+                    />
                 </View>
             </View>
         );

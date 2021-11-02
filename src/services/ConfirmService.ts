@@ -1,6 +1,7 @@
 import { CONFIRM } from '../constants/ActionTypes';
 import { AlertButton } from 'react-native';
 import { Base } from '../utils';
+import { Dispatch } from 'react';
 
 export default class ConfirmService extends Base {
     private visible: boolean;
@@ -8,8 +9,8 @@ export default class ConfirmService extends Base {
     private title: string;
     private message: string;
     private buttons: AlertButton[];
-    
-    constructor(dispatch) {
+
+    constructor(dispatch: Dispatch<any>) {
         super(dispatch);
         this.visible = false;
         this.type = 'info';
@@ -18,27 +19,32 @@ export default class ConfirmService extends Base {
         this.buttons = [];
     }
 
-    public success(message: string, buttons?: AlertButton[], title?: string){
+    public success(message: string, buttons?: AlertButton[], title?: string) {
         this.open('success', message, buttons, title);
     }
 
-    public info(message: string, buttons?: AlertButton[], title?: string){
+    public info(message: string, buttons?: AlertButton[], title?: string) {
         this.open('info', message, buttons, title);
     }
 
-    public warning(message: string, buttons?: AlertButton[], title?: string){
+    public warning(message: string, buttons?: AlertButton[], title?: string) {
         this.open('warning', message, buttons, title);
     }
 
-    public error(message: string, buttons?: AlertButton[], title?: string){
+    public error(message: string, buttons?: AlertButton[], title?: string) {
         this.open('error', message, buttons, title);
     }
 
-    public choice(message: string, buttons?: AlertButton[], title?: string){
+    public choice(message: string, buttons?: AlertButton[], title?: string) {
         this.open('choice', message, buttons, title);
     }
 
-    private open(type, message: string, buttons?: AlertButton[], title?: string) {
+    private open(
+        type: string,
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ) {
         this.type = type;
         this.title = title || '';
         this.message = message || '';

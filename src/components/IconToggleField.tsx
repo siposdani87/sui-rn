@@ -7,64 +7,101 @@ import { MaterialIcons } from '@expo/vector-icons';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
 
-export default function IconToggleField(props: { value: any, checkedIcon: string, uncheckedIcon: string, trueValue?: any, falseValue?: any, onValueChange: (_value: any) => void, disableUncheck?: boolean, label?: string, error?: any, required?: boolean, disabled?: boolean, desc?: string, onPressDesc?: () => void, containerStyle?: any, style?: any, children?: any }) {
-  const trueValue = props.trueValue || true;
-  const falseValue = props.falseValue || false;
-  const [value, setValue] = useState(props.value);
-  const [error, onErrorChange] = useErrorField(props.error);
-  const isDarkTheme = useDarkTheme();
+export default function IconToggleField(props: {
+    value: any;
+    checkedIcon: string;
+    uncheckedIcon: string;
+    trueValue?: any;
+    falseValue?: any;
+    onValueChange: (_value: any) => void;
+    disableUncheck?: boolean;
+    label?: string;
+    error?: any;
+    required?: boolean;
+    disabled?: boolean;
+    desc?: string;
+    onPressDesc?: () => void;
+    containerStyle?: any;
+    style?: any;
+    children?: any;
+}) {
+    const trueValue = props.trueValue || true;
+    const falseValue = props.falseValue || false;
+    const [value, setValue] = useState(props.value);
+    const [error, onErrorChange] = useErrorField(props.error);
+    const isDarkTheme = useDarkTheme();
 
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
-  function onValueChange(v) {
-    onErrorChange();
-    setValue(v);
-    props.onValueChange(v);
-  }
-
-  function onPress() {
-    const falseV = props.disableUncheck ? trueValue : falseValue ;
-    const v = value === trueValue ? falseV : trueValue;
-    onValueChange(v);
-  }
-
-  function getColor() {
-    if (props.disabled) {
-      return isDarkTheme ? Colors.checkboxDisabledDark : Colors.checkboxDisabledLight;
-    } else if (props.required && value === falseValue) {
-      return isDarkTheme ? Colors.errorDefaultDark : Colors.errorDefaultLight;
-    } else if (value === trueValue) {
-      return isDarkTheme ? Colors.primaryBright : Colors.primary;
+    function onValueChange(v) {
+        onErrorChange();
+        setValue(v);
+        props.onValueChange(v);
     }
-    return isDarkTheme ? Colors.checkboxDefaultDark : Colors.checkboxDefaultLight;
-  }
 
-  function getIcon(): any {
-    return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
-  }
+    function onPress() {
+        const falseV = props.disableUncheck ? trueValue : falseValue;
+        const v = value === trueValue ? falseV : trueValue;
+        onValueChange(v);
+    }
 
-  return (
-    <View style={[styles.container, props.containerStyle]}>
-      <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
-        <MaterialIcons name={getIcon()} size={26} color={getColor()} />
-      </TouchableOpacity>
-      <Label containerStyle={styles.labelContainer} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>{props.children}</Label>
-      <ErrorField error={error} disabled={props.disabled} />
-    </View>
-  );
+    function getColor() {
+        if (props.disabled) {
+            return isDarkTheme
+                ? Colors.checkboxDisabledDark
+                : Colors.checkboxDisabledLight;
+        } else if (props.required && value === falseValue) {
+            return isDarkTheme
+                ? Colors.errorDefaultDark
+                : Colors.errorDefaultLight;
+        } else if (value === trueValue) {
+            return isDarkTheme ? Colors.primaryBright : Colors.primary;
+        }
+        return isDarkTheme
+            ? Colors.checkboxDefaultDark
+            : Colors.checkboxDefaultLight;
+    }
+
+    function getIcon(): any {
+        return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
+    }
+
+    return (
+        <View style={[styles.container, props.containerStyle]}>
+            <TouchableOpacity
+                activeOpacity={Styles.activeOpacity}
+                onPress={onPress}
+                style={[styles.iconToggle, props.style]}
+            >
+                <MaterialIcons name={getIcon()} size={26} color={getColor()} />
+            </TouchableOpacity>
+            <Label
+                containerStyle={styles.labelContainer}
+                text={props.label}
+                onPress={onPress}
+                required={props.required}
+                disabled={props.disabled}
+                desc={props.desc}
+                onPressDesc={props.onPressDesc}
+            >
+                {props.children}
+            </Label>
+            <ErrorField error={error} disabled={props.disabled} />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  labelContainer: {
-    marginLeft: 30,
-  },
-  iconToggle: {
-    position: 'absolute',
-    top: -3,
-    left: 0,
-    zIndex: 1,
-  },
+    container: {},
+    labelContainer: {
+        marginLeft: 30,
+    },
+    iconToggle: {
+        position: 'absolute',
+        top: -3,
+        left: 0,
+        zIndex: 1,
+    },
 });

@@ -1,5 +1,7 @@
+import { Dispatch } from 'react';
+
 export default class Base {
-    public static reducer = (state = {}, action) => {
+    public static reducer = (state = {}, action: any) => {
         if (action.type) {
             return {
                 ...state,
@@ -9,9 +11,9 @@ export default class Base {
         return state;
     };
 
-    protected dispatch: (_state: any) => void;
+    protected dispatch: Dispatch<any>;
 
-    constructor(dispatch) {
+    constructor(dispatch: Dispatch<any>) {
         this.dispatch = dispatch;
     }
 
