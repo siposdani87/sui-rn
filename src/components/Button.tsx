@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Image, StyleProp, ImageStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 
 export default function Button(props: {
@@ -37,15 +37,15 @@ export default function Button(props: {
         return !!props.title;
     }
 
-    function getSpacing() {
+    function getSpacing(): StyleProp<ImageStyle> {
         if (layout === 'left') {
-            return { marginRight: hasTitle() ? 5 : null };
+            return { marginRight: hasTitle() ? 5 : undefined };
         }
-        return { marginLeft: hasTitle() ? 5 : null };
+        return { marginLeft: hasTitle() ? 5 : undefined };
     }
 
     function getTitle(): string {
-        return props.keepFormat ? props.title : props.title.toUpperCase();
+        return (props.keepFormat ? props.title : props.title?.toUpperCase()) ?? '';
     }
 
     function onPress() {
@@ -77,7 +77,7 @@ export default function Button(props: {
                         style={[
                             styles.text,
                             {
-                                paddingRight: hasIcon() ? 0 : null,
+                                paddingRight: hasIcon() ? 0 : undefined,
                                 color: textColor,
                                 fontSize: textSize,
                             },
@@ -123,7 +123,7 @@ export default function Button(props: {
                         style={[
                             styles.text,
                             {
-                                paddingLeft: hasIcon() ? 0 : null,
+                                paddingLeft: hasIcon() ? 0 : undefined,
                                 color: textColor,
                                 fontSize: textSize,
                             },

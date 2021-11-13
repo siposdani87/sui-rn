@@ -16,7 +16,7 @@ export default function SearchField(props: {
     placeholder?: string;
     containerStyle?: any;
     style?: any;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 }) {
     const [value, setValue] = useState(props.value);
     const getActionColor = useActionColor(props.disabled);
@@ -31,7 +31,7 @@ export default function SearchField(props: {
     }
 
     function getActionButtons(): any[] {
-        const actionsButtons = [];
+        const actionsButtons: JSX.Element[] = [];
         if (props.actionButtons) {
             actionsButtons.concat(props.actionButtons);
         }

@@ -175,14 +175,14 @@ const additionalColors = {
 const colors = Object.assign(baseColors, additionalColors);
 
 export function setThemeColors(
-    primaryBright,
-    primary,
-    primaryDark,
-    primaryText,
-    accentBright,
-    accent,
-    accentDark,
-    accentText,
+    primaryBright: string,
+    primary: string,
+    primaryDark: string,
+    primaryText: string,
+    accentBright: string,
+    accent: string,
+    accentDark: string,
+    accentText: string,
 ) {
     colors.primaryBright = primaryBright;
     colors.primary = primary;

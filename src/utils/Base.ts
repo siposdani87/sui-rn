@@ -16,15 +16,4 @@ export default class Base {
     constructor(dispatch: Dispatch<any>) {
         this.dispatch = dispatch;
     }
-
-    /* get objects() {
-        const methods = {};
-        for (const name of Object.getOwnPropertyNames(Object.getPrototypeOf(this))) {
-            const method = this[name];
-            if (['constructor'].indexOf(name) === -1 && name[0] !== '_') {
-                methods[name] = method;
-            }
-        }
-        return Object.assign(this, methods);
-    } */
 }

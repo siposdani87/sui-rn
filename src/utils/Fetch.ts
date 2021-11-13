@@ -1,5 +1,21 @@
 import SUI from 'sui-js';
 
+export interface Data {
+    [key: string]: any;
+}
+
+export interface Params {
+    [key: string]: any;
+}
+
+export interface Headers {
+    [name: string]: string;
+}
+
+interface MimeTypes {
+    [key: string]: string;
+}
+
 export default class Fetch {
     private backendUrl: string;
 
@@ -7,29 +23,38 @@ export default class Fetch {
         this.backendUrl = backendUrl;
     }
 
-    get mimeTypes() {
+    get mimeTypes(): MimeTypes {
         return {
             json: 'application/json',
             html: 'text/html',
         };
     }
 
-    public getUrl(url: string, opt_params = {}): string {
+    public getUrl(url: string, opt_params?: Params): string {
         const query = this._getQuery(opt_params);
         return this.backendUrl + url + query;
     }
 
-    public async get(url, opt_params, opt_headers): Promise<any> {
+    public async get(
+        url: string,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return await this._handleRequest(
             'GET',
             url,
-            null,
+            undefined,
             opt_params,
             opt_headers,
         );
     }
 
-    public async post(url, opt_data, opt_params, opt_headers): Promise<any> {
+    public async post(
+        url: string,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return await this._handleRequest(
             'POST',
             url,
@@ -39,7 +64,12 @@ export default class Fetch {
         );
     }
 
-    public async put(url, opt_data, opt_params, opt_headers): Promise<any> {
+    public async put(
+        url: string,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return await this._handleRequest(
             'PUT',
             url,
@@ -49,7 +79,12 @@ export default class Fetch {
         );
     }
 
-    public async patch(url, opt_data, opt_params, opt_headers): Promise<any> {
+    public async patch(
+        url: string,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return await this._handleRequest(
             'PATCH',
             url,
@@ -59,7 +94,12 @@ export default class Fetch {
         );
     }
 
-    public async delete(url, opt_data, opt_params, opt_headers): Promise<any> {
+    public async delete(
+        url: string,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return await this._handleRequest(
             'DELETE',
             url,
@@ -69,7 +109,7 @@ export default class Fetch {
         );
     }
 
-    private _getHeaders(url: string, opt_headers = {}): HeadersInit {
+    private _getHeaders(url: string, opt_headers?: Headers): HeadersInit {
         const extension = SUI.getExtensionName(url);
         const headers = this.filteredHeaders(opt_headers);
         return {
@@ -79,20 +119,20 @@ export default class Fetch {
         };
     }
 
-    private filteredHeaders(opt_headers): any {
+    private filteredHeaders(opt_headers?: Headers): any {
         const deniedKeys = ['responseType'];
 
-        return Object.keys(opt_headers)
+        return Object.keys(opt_headers ?? {})
             .filter((key) => !deniedKeys.includes(key))
             .reduce((obj, key) => {
                 return {
                     ...obj,
-                    [key]: opt_headers[key],
+                    [key]: opt_headers?.[key],
                 };
             }, {});
     }
 
-    private _getQuery(opt_params) {
+    private _getQuery(opt_params?: Params) {
         const queries = [];
         if (opt_params) {
             for (const key of Object.keys(opt_params)) {
@@ -109,7 +149,7 @@ export default class Fetch {
         return queries.length === 0 ? '' : '?' + queries.join('&');
     }
 
-    private _getRequestBody(opt_data) {
+    private _getRequestBody(opt_data?: Data) {
         if (opt_data) {
             return JSON.stringify(opt_data);
         }
@@ -161,9 +201,11 @@ export default class Fetch {
 
         try {
             if (response.headers.has('Content-Disposition')) {
-                filename = response.headers
-                    .get('Content-Disposition')
-                    .match(/filename="(.+)"/)[1];
+                const contentDisposition =
+                    response.headers.get('Content-Disposition') ?? '';
+
+                filename =
+                    contentDisposition.match(/filename="(.+)"/)?.[1] ?? '';
             }
         } catch (_e) {
             // console.error(e);
@@ -172,11 +214,11 @@ export default class Fetch {
     }
 
     private async _handleRequest(
-        method,
-        url,
-        opt_data,
-        opt_params,
-        opt_headers,
+        method: string,
+        url: string,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
     ): Promise<Response> {
         const options: RequestInit = {
             method,

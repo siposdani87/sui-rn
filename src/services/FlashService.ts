@@ -9,7 +9,7 @@ interface Message {
     closable: boolean;
 }
 
-interface Flash {
+export interface Flash {
     type: string;
     message: string;
     id: string;
@@ -18,7 +18,7 @@ interface Flash {
 }
 
 export default class FlashService extends Base {
-    private flashes: any[];
+    private flashes: Flash[];
     private options: {
         closableTypes: string[];
         duration: number;

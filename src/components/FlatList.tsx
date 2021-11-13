@@ -95,7 +95,7 @@ export default function FlatList(props: {
                 onEndReached={onEndReached}
                 onScrollEndDrag={onScrollEndDrag}
                 refreshControl={
-                    Platform.OS === 'ios' ? getRefreshControl() : null
+                    Platform.OS === 'ios' ? getRefreshControl() : undefined
                 }
             />
         </View>

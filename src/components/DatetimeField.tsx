@@ -83,7 +83,7 @@ export default function DatetimeField(props: {
     const getActionColor = useActionColor(props.disabled);
 
     useEffect(() => {
-        function generateYears(minYear, maxYear) {
+        function generateYears(minYear: number, maxYear: number) {
             return Array.from(Array(maxYear - minYear), (_, i) => {
                 const v = i + minYear + 1;
                 return {

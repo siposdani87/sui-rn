@@ -15,7 +15,8 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "rules": {},
+    "rules": {
+        "react-native/no-inline-styles": "off",
     "globals": {
         "JSX": "readonly"
     },

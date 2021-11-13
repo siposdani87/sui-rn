@@ -43,7 +43,7 @@ export default function ColorField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    function onValueChange(v: string) {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
@@ -74,7 +74,7 @@ export default function ColorField(props: {
 
     function selectColor() {
         hideColorPicker();
-        const hexColor = colorPickerRef.current.getCurrentColor();
+        const hexColor = colorPickerRef.current?.getCurrentColor();
         onValueChange(hexColor);
     }
 

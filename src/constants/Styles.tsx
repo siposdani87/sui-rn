@@ -158,7 +158,7 @@ const styles = {
 };
 
 export function setThemeStyles(
-    colors,
+    colors: any,
     fontFamilyApp: string,
     fontFamilyHeadings: string[],
     fontFamilyBodies: string[],

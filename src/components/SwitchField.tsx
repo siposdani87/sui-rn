@@ -30,7 +30,7 @@ export default function SwitchField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(boolV) {
+    function onValueChange(boolV: boolean) {
         const v = boolV ? trueValue : falseValue;
         onErrorChange();
         setValue(v);
