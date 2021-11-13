@@ -46,9 +46,9 @@ export default function TextsScreen() {
 
     useEffect(() => {
         onRefresh();
-    }, []);
+    }, [onRefresh]);
 
-    function updateData(key, value) {
+    function updateData(key: string, value: string) {
         console.log('updateData', key, value);
         setData({
             ...data,

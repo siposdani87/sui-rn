@@ -9,7 +9,7 @@ export default function useErrorField(error?: any) {
         setPrevError(newError);
     }
 
-    function onErrorChange() {
+    function onErrorChange(): void {
         if (prevError) {
             setClearError(prevError);
         }

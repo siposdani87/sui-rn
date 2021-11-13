@@ -7,6 +7,7 @@ import {
     HTTP_RESPONSE,
 } from '../constants/ActionTypes';
 import { Base, Fetch } from '../utils';
+import { Data, Params, Headers } from '../utils/Fetch';
 
 export default class HttpService extends Base {
     private getTokenAsync: () => Promise<any>;
@@ -30,15 +31,15 @@ export default class HttpService extends Base {
         this.fetch = new Fetch(backendUrl);
     }
 
-    public getUrl(url: string, opt_params: any) {
+    public getUrl(url: string, opt_params?: Params) {
         return this.fetch.getUrl(url, opt_params);
     }
 
-    public isInprogress() {
+    public isInprogress(): boolean {
         return this.inprogress > 0;
     }
 
-    public async get(url: string, opt_params?: any, opt_headers?: any) {
+    public async get(url: string, opt_params?: Params, opt_headers?: Headers) {
         return this._handleResponse(
             this.fetch.get(
                 url,
@@ -50,9 +51,9 @@ export default class HttpService extends Base {
 
     public async post(
         url: string,
-        opt_data?: any,
-        opt_params?: any,
-        opt_headers?: any,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
     ) {
         return this._handleResponse(
             this.fetch.post(
@@ -66,9 +67,9 @@ export default class HttpService extends Base {
 
     public async put(
         url: string,
-        opt_data?: any,
-        opt_params?: any,
-        opt_headers?: any,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
     ) {
         return this._handleResponse(
             this.fetch.put(
@@ -82,9 +83,9 @@ export default class HttpService extends Base {
 
     public async patch(
         url: string,
-        opt_data?: any,
-        opt_params?: any,
-        opt_headers?: any,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
     ) {
         return this._handleResponse(
             this.fetch.patch(
@@ -98,9 +99,9 @@ export default class HttpService extends Base {
 
     public async delete(
         url: string,
-        opt_data?: any,
-        opt_params?: any,
-        opt_headers?: any,
+        opt_data?: Data,
+        opt_params?: Params,
+        opt_headers?: Headers,
     ) {
         return this._handleResponse(
             this.fetch.delete(
@@ -112,7 +113,7 @@ export default class HttpService extends Base {
         );
     }
 
-    private async _getHeaders(opt_headers: any): Promise<HeadersInit> {
+    private async _getHeaders(opt_headers?: Headers): Promise<Headers> {
         const token = await this.getTokenAsync();
         return {
             Authorization: `Bearer ${token}`,

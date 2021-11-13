@@ -264,7 +264,7 @@ export default function FileField(props: {
         }
     }
 
-    function showAlert(e) {
+    function showAlert(e: any) {
         Alert.alert('ERROR', e.message, [{ text: 'OK', onPress: () => null }], {
             cancelable: true,
         });
@@ -303,7 +303,7 @@ export default function FileField(props: {
     }
 
     function getRequiredTextField(): boolean {
-        return props.required && !isValidValue(value);
+        return !!props.required && !isValidValue(value);
     }
 
     function getActionButtons(): any[] {

@@ -4,22 +4,23 @@ import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
 import useDarkTheme from '../hooks/useDarkTheme';
+import { Flash } from '../services/FlashService';
 
 export default function Flash(props: { services: any }) {
     const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();
 
-    function close(flash) {
+    function close(flash: Flash) {
         return () => {
             props.services.flashService.close(flash);
         };
     }
 
-    function isClosable(flash): boolean {
+    function isClosable(flash: Flash): boolean {
         return props.services.flashService.isClosable(flash);
     }
 
-    function getContainerStyle(flash) {
+    function getContainerStyle(flash: Flash) {
         const containerStyles: any[] = [
             styles.flashContainer,
             isDarkTheme

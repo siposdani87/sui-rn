@@ -82,7 +82,7 @@ export default function TagField(props: {
         return isDarkTheme ? Colors.inputDefaultDark : Colors.inputDefaultLight;
     }
 
-    function onPressTag(index) {
+    function onPressTag(index: number) {
         return () => {
             if (props.disabled) {
                 return;
@@ -124,7 +124,7 @@ export default function TagField(props: {
                             styles.tagContainer,
                             {
                                 backgroundColor: getBackgroundColor(),
-                                paddingRight: allowRemove(value) ? 25 : null,
+                                paddingRight: allowRemove(value) ? 25 : undefined,
                             },
                         ]}
                     >
