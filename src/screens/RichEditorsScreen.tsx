@@ -3,8 +3,15 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { TextAreaField } from '../../src/components';
 
+interface RichEditorsState {
+    bio: string | null | undefined;
+    bioDisabled: string | null | undefined;
+    bioRequired: string | null | undefined;
+    bioRequiredDisabled: string | null | undefined;
+}
+
 export default function RichEditorsScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<RichEditorsState>({
         bio: undefined,
         bioDisabled: '',
         bioRequired: null,
@@ -31,13 +38,13 @@ export default function RichEditorsScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
     return (
         <Fragment>

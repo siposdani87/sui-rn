@@ -23,10 +23,10 @@ export default function TextAreaField(props: {
     onPressDesc?: () => void;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const style = StyleSheet.flatten(props.style);
-    const [value, setValue] = useState(props.value);
-    const [isFocused, setIsFocused] = useState(false);
+    const [value, setValue] = useState<string>(props.value);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
         value,
@@ -43,13 +43,13 @@ export default function TextAreaField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: string): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function getActionMap(): ActionMap {
+    const getActionMap = (): ActionMap => {
         const size = 24;
 
         return {
@@ -117,7 +117,7 @@ export default function TextAreaField(props: {
                 />
             ),
         };
-    }
+    };
 
     if (props.richText) {
         const editorStyle = [styles.editor, style, inputStyle];

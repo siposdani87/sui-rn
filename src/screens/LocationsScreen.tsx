@@ -2,9 +2,14 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { LocationField } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
+import { LocationType } from '../components/LocationField';
+
+interface LocationsState {
+    location: LocationType | null;
+}
 
 export default function LocationsScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<LocationsState>({
         location: null,
     });
 
@@ -29,15 +34,15 @@ export default function LocationsScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
-    function onSearch(v) {
+    function onSearch(v: string) {
         console.log('onSearch', v);
     }
 

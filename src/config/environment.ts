@@ -1,4 +1,8 @@
-const environment = {
+interface Environment {
+    dark_theme: boolean | null;
+}
+
+const environment: Environment = {
     dark_theme: null,
 };
 

@@ -6,30 +6,30 @@ import { Colors } from '../constants';
 import { ServiceContext, Services } from '../../ServiceContext';
 
 export default function ConfirmsScreen() {
-    const services = useContext<Services>(ServiceContext);
+    const services = useContext<Services | null>(ServiceContext);
 
     function showSuccessConfirm() {
-        services.confirmService.success(
+        services?.confirmService.success(
             'Success confirm! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         );
     }
 
     function showInfoConfirm() {
-        services.confirmService.info('Info confirm!');
+        services?.confirmService.info('Info confirm!');
     }
 
     function showWarningConfirm() {
-        services.confirmService.warning('Warning confirm!');
+        services?.confirmService.warning('Warning confirm!');
     }
 
     function showErrorConfirm() {
-        services.confirmService.error(
+        services?.confirmService.error(
             'Error confirm! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         );
     }
 
     function showChoiceConfirm() {
-        services.confirmService.choice(
+        services?.confirmService.choice(
             'Choice confirm! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
             [
                 {

@@ -26,19 +26,19 @@ export default function FlatList(props: {
     refreshText: string;
     noContentText: string;
     noContentImageSource: ImageSourcePropType;
-}) {
-    const [flatListReady, setFlatListReady] = useState(false);
+}): JSX.Element {
+    const [flatListReady, setFlatListReady] = useState<boolean>(false);
 
-    function onRefresh() {
+    const onRefresh = (): void => {
         // console.log('onRefresh->refreshing', props.refreshing);
         if (!props.refreshing) {
             // console.log('onRefresh', state.flatListReady);
             setFlatListReady(false);
             props.onRefresh();
         }
-    }
+    };
 
-    function onEndReached() {
+    const onEndReached = (): void => {
         // console.log('onEndReached->refreshing', props.refreshing);
         if (!props.refreshing) {
             // console.log('onEndReached', state.flatListReady);
@@ -47,14 +47,14 @@ export default function FlatList(props: {
                 props.onEndReached();
             }
         }
-    }
+    };
 
-    function onScrollEndDrag() {
+    const onScrollEndDrag = (): void => {
         // console.log('onScrollEndDrag');
         setFlatListReady(true);
-    }
+    };
 
-    function getListEmptyComponent() {
+    const getListEmptyComponent = (): JSX.Element => {
         return (
             <NoContent
                 imageSource={props.noContentImageSource}
@@ -62,9 +62,9 @@ export default function FlatList(props: {
                 containerStyle={{ marginTop: 10 }}
             />
         );
-    }
+    };
 
-    function getRefreshControl() {
+    const getRefreshControl = (): JSX.Element => {
         return (
             <RefreshControl
                 refreshing={false}
@@ -73,7 +73,7 @@ export default function FlatList(props: {
                 tintColor="transparent"
             />
         );
-    }
+    };
 
     return (
         <View style={{ marginTop: -10 }}>

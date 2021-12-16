@@ -20,7 +20,7 @@ export default function OthersScreen() {
                             uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y',
                         }}
                     >
-                        <Button title="Continue" onPress={null} />
+                        <Button title="Continue" onPress={() => {}} />
                     </NoContent>
 
                     <Text>Simple themed text</Text>
@@ -28,7 +28,7 @@ export default function OthersScreen() {
                     <Link onPress={() => null} title="Open new link" />
 
                     <RichTextViewer
-                        html={sampleHtml}
+                        value={sampleHtml}
                         linkStyle={{ color: Colors.primary }}
                     />
                 </View>

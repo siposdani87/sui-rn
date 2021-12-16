@@ -21,6 +21,26 @@ import { Styles } from './src/constants';
 
 const Stack = createStackNavigator();
 
+export type StackParamList = {
+    Buttons: undefined;
+    Checkboxes: undefined;
+    Colors: undefined;
+    Datetimes: undefined;
+    Files: undefined;
+    Home: undefined;
+    Locations: undefined;
+    Others: undefined;
+    RichEditors: undefined;
+    Selects: undefined;
+    Sliders: undefined;
+    Textareas: undefined;
+    Texts: undefined;
+    Dialogs: undefined;
+    Flashes: undefined;
+    Confirms: undefined;
+    Tabs: undefined;
+};
+
 export default function Router() {
     return (
         <Stack.Navigator

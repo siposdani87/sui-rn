@@ -1,27 +1,35 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    TouchableOpacity,
+    StyleProp,
+    ViewStyle,
+} from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
 import useDarkTheme from '../hooks/useDarkTheme';
-import { Flash } from '../services/FlashService';
+import FlashService, { FlashType } from '../services/FlashService';
 
-export default function Flash(props: { services: any }) {
+export default function Flash(props: {
+    flashService: FlashService;
+}): JSX.Element {
     const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();
 
-    function close(flash: Flash) {
+    const close = (flash: FlashType): (() => void) => {
         return () => {
-            props.services.flashService.close(flash);
+            props.flashService.close(flash);
         };
-    }
+    };
 
-    function isClosable(flash: Flash): boolean {
-        return props.services.flashService.isClosable(flash);
-    }
+    const isClosable = (flash: FlashType): boolean => {
+        return props.flashService.isClosable(flash);
+    };
 
-    function getContainerStyle(flash: Flash) {
-        const containerStyles: any[] = [
+    const getContainerStyle = (flash: FlashType): StyleProp<ViewStyle>[] => {
+        const containerStyles: StyleProp<ViewStyle>[] = [
             styles.flashContainer,
             isDarkTheme
                 ? styles.flashDarkContainer
@@ -58,11 +66,11 @@ export default function Flash(props: { services: any }) {
                 break;
         }
         return containerStyles;
-    }
+    };
 
     return (
         <View style={[styles.container, { top: insets.top + 20 }]}>
-            {props.services.flashService.flashes.map((flash, index) => (
+            {props.flashService.getFlashes().map((flash, index) => (
                 <TouchableOpacity
                     activeOpacity={Styles.activeOpacity}
                     key={index}

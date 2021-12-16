@@ -17,20 +17,20 @@ export default function SearchField(props: {
     containerStyle?: any;
     style?: any;
     actionButtons?: JSX.Element[];
-}) {
-    const [value, setValue] = useState(props.value);
+}): JSX.Element {
+    const [value, setValue] = useState<string>(props.value);
     const getActionColor = useActionColor(props.disabled);
 
     useEffect(() => {
         setValue(props.value);
     }, [props.value]);
 
-    function clear() {
+    const clear = (): void => {
         setValue('');
         props.onValueChange('');
-    }
+    };
 
-    function getActionButtons(): any[] {
+    const getActionButtons = (): JSX.Element[] => {
         const actionsButtons: JSX.Element[] = [];
         if (props.actionButtons) {
             actionsButtons.concat(props.actionButtons);
@@ -46,7 +46,7 @@ export default function SearchField(props: {
             />,
         );
         return actionsButtons;
-    }
+    };
 
     return (
         <TextField

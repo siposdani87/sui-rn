@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function useModalState(
     initialOpen?: boolean,
-): [boolean, () => void, () => void, () => void] {
+): [visible: boolean, open: () => void, clos: () => void, toggle: () => void] {
     const [visible, setVisible] = useState<boolean>(initialOpen ?? false);
 
     const open = () => {

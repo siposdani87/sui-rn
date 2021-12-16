@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import SUI from 'sui-js';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -18,11 +18,11 @@ export default function Label(props: {
     containerStyle?: any;
     style?: any;
     children?: any;
-}) {
+}): JSX.Element | null {
     const isDarkTheme = useDarkTheme();
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState<boolean>(false);
 
-    function getTextStyle() {
+    const getTextStyle = (): StyleProp<TextStyle> => {
         if (props.disabled) {
             return isDarkTheme
                 ? styles.labelDisabledDarkText
@@ -31,15 +31,15 @@ export default function Label(props: {
         return isDarkTheme
             ? styles.labelDefaultDarkText
             : styles.labelDefaultLightText;
-    }
+    };
 
-    function onPressDesc() {
+    const onPressDesc = (): void => {
         if (props.onPressDesc) {
             props.onPressDesc();
         } else {
             setVisible(true);
         }
-    }
+    };
 
     if (!props.text && !props.children) {
         return null;

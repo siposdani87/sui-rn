@@ -1,9 +1,15 @@
+import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { Fragment } from 'react';
 import { View, ScrollView } from 'react-native';
 import { TextButton } from '../components';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { StackParamList } from '../../Router';
 
-export default function HomeScreen({ navigation }) {
+type ScreenNavigationProp = StackNavigationProp<StackParamList>;
+
+export default function HomeScreen() {
+    const navigation = useNavigation<ScreenNavigationProp>();
     return (
         <Fragment>
             <StatusBar style="light" />

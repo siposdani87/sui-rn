@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -11,7 +11,22 @@ import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
 
-const MODES = {
+interface Year {
+    label: string;
+    value: number;
+}
+
+interface Mode {
+    format: string;
+    calendarType: string;
+    clockType: string;
+}
+
+interface Modes {
+    [key: string]: Mode;
+}
+
+const MODES: Modes = {
     'datetime-local': {
         format: 'YYYY-MM-DDTHH:mm:ss', // 2016-05-26T11:25:00 (UTC)
         calendarType: 'date',
@@ -72,26 +87,26 @@ export default function DatetimeField(props: {
     onPressDesc?: () => void;
     containerStyle?: any;
     style?: any;
-}) {
-    const [value, setValue] = useState(props.value);
-    const [formattedValue, setFormattedValue] = useState('');
-    const [date, setDate] = useState(null);
-    const [config, setConfig] = useState(MODES[props.mode]);
-    const [years, setYears] = useState([]);
-    const [mode, setMode] = useState('date');
-    const [visible, setVisible] = useState(false);
+}): JSX.Element {
+    const [value, setValue] = useState<string | null>(props.value);
+    const [formattedValue, setFormattedValue] = useState<string>('');
+    const [date, setDate] = useState<Date | null>(null);
+    const [config, setConfig] = useState<Mode>(MODES[props.mode]);
+    const [years, setYears] = useState<Year[]>([]);
+    const [mode, setMode] = useState<string>('date');
+    const [visible, setVisible] = useState<boolean>(false);
     const getActionColor = useActionColor(props.disabled);
 
     useEffect(() => {
-        function generateYears(minYear: number, maxYear: number) {
+        const generateYears = (minYear: number, maxYear: number): Year[] => {
             return Array.from(Array(maxYear - minYear), (_, i) => {
                 const v = i + minYear + 1;
                 return {
-                    label: getFormattedValue(v, config),
+                    label: getFormattedValue(v.toString(), config),
                     value: v,
                 };
             });
-        }
+        };
         if (props.mode === 'year') {
             const minYear = 1900;
             const maxYear = new Date().getFullYear() + 10;
@@ -114,37 +129,40 @@ export default function DatetimeField(props: {
         }
     }, [config, value]);
 
-    function getDate(v, c): Date {
+    const getDate = (v: string, c: Mode): Date => {
         // return dateio.toJsDate(dateio.parse(v, c.format));
         return moment(v, c.format).toDate();
-    }
+    };
 
-    function getFormattedValue(v, c): string {
+    const getFormattedValue = (v: Date | string, c: Mode): string => {
         // dateio.formats[props.format] = props.format;
         // return dateio.format(dateio.parse(v, c.format), props.format as any);
         return moment(v, c.format).format(props.format);
-    }
+    };
 
-    function getValue(v, c): string {
+    const getValue = (v: Date | string, c: Mode): string => {
         // return dateio.format(dateio.parse(v, c.format), c.format);
         return moment(v, c.format).format(c.format);
-    }
+    };
 
-    function getNow(): Date {
+    const getNow = (): Date => {
         // return dateio.toJsDate(dateio.date());
         return moment().toDate();
-    }
+    };
 
-    function onChange(_event, selectedDate) {
+    const onChange = (
+        _event: SyntheticEvent<Readonly<{ timestamp: number }>, Event>,
+        selectedDate?: Date,
+    ): void => {
         if (Platform.OS === 'android') {
             hide();
-            onValueChange(selectedDate);
+            onValueChange(selectedDate ?? null);
         } else if (Platform.OS === 'ios') {
-            setDate(selectedDate);
+            setDate(selectedDate ?? null);
         }
-    }
+    };
 
-    function onValueChange(d) {
+    const onValueChange = (d: Date | string | null): void => {
         if (d) {
             const v = getValue(d, config);
             setValue(v);
@@ -155,39 +173,39 @@ export default function DatetimeField(props: {
             setFormattedValue('');
             props.onValueChange(null);
         }
-    }
+    };
 
-    function showCalendar() {
+    const showCalendar = (): void => {
         showMode('date');
-    }
+    };
 
-    function showClock() {
+    const showClock = (): void => {
         showMode('time');
-    }
+    };
 
-    function showMode(currentMode) {
+    const showMode = (currentMode: string): void => {
         if (!props.disabled) {
             const dateValue = value ? getDate(value, config) : getNow();
             setDate(dateValue);
             setVisible(true);
             setMode(currentMode);
         }
-    }
+    };
 
-    function hide() {
+    const hide = (): void => {
         setVisible(false);
-    }
+    };
 
-    function selectDate() {
+    const selectDate = (): void => {
         hide();
         onValueChange(date);
-    }
+    };
 
-    function renderDateTimePicker() {
+    const renderDateTimePicker = (): JSX.Element | null => {
         if (visible) {
             return (
                 <DateTimePicker
-                    value={date}
+                    value={date ?? getNow()}
                     mode={mode as any}
                     is24Hour={true}
                     display="default"
@@ -196,24 +214,24 @@ export default function DatetimeField(props: {
             );
         }
         return null;
-    }
+    };
 
-    function onValuesChange(values) {
+    const onValuesChange = (values: string[]): void => {
         if (values.length === 0) {
             onValueChange(null);
         } else {
             onValueChange(values[0]);
         }
-    }
+    };
 
-    function getTags(): any[] {
+    const getTags = (): string[] => {
         if (formattedValue) {
             return [formattedValue];
         }
         return [];
-    }
+    };
 
-    function getActionButtons(): any[] {
+    const getActionButtons = (): JSX.Element[] => {
         const actionButtons = [];
         if (config.calendarType === 'date') {
             actionButtons.push(
@@ -236,7 +254,7 @@ export default function DatetimeField(props: {
             );
         }
         return actionButtons;
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

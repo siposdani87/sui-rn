@@ -14,7 +14,7 @@ export default function TextButton(props: {
     disabled?: boolean;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
@@ -22,15 +22,15 @@ export default function TextButton(props: {
     const textColor = props.textColor || defaultColor;
     const textSize = props.textSize || 16;
 
-    function getTitle(): string {
+    const getTitle = (): string => {
         return props.keepFormat ? props.title : props.title.toUpperCase();
-    }
+    };
 
-    function onPress() {
+    const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    }
+    };
 
     return (
         <TouchableOpacity

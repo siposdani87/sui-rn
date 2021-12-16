@@ -19,19 +19,33 @@ import useActionColor from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 
-const fileColors = {
+export type ImageSource =
+    | ImageURISource
+    | ImageRequireSource
+    | null
+    | { uri: string | null }; // ImageSourcePropType|null|{uri: string|null};
+
+interface FileColor {
+    [key: string]: string;
+}
+
+interface MimeType {
+    [key: string]: string;
+}
+
+const fileColors: FileColor = {
     docx: 'blue',
     xlsx: 'green',
     pdf: 'red',
 };
 
-const mimeTypes = {
+const mimeTypes: MimeType = {
     docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     pdf: 'application/pdf',
 };
 
-const fileTypeSVG =
+const fileTypeSVG: string =
     '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
     '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
     '<path style="fill:#E2E5E7;" d="M128,0c-17.6,0-32,14.4-32,32v448c0,17.6,14.4,32,32,32h320c17.6,0,32-14.4,32-32V128L352,0H128z"/>' +
@@ -43,8 +57,8 @@ const fileTypeSVG =
     '</svg>';
 
 export default function FileField(props: {
-    value: ImageURISource | ImageRequireSource;
-    defaultValue?: ImageURISource | ImageRequireSource;
+    value: ImageSource;
+    defaultValue?: ImageSource;
     mimeType: string;
     onValueChange: (_value: any) => void;
     label?: string;
@@ -57,81 +71,38 @@ export default function FileField(props: {
     quality?: number;
     containerStyle?: any;
     style?: any;
-}) {
-    const [value, setValue] = useState(props.value);
-    const [svgXml, setSvgXml] = useState(null);
-    const [defaultSvgXml, setDefaultSvgXml] = useState(null);
-    const [imageSource, setImageSource] = useState(null);
-    const [defaultImageSource, setDefaultImageSource] = useState(null);
+}): JSX.Element {
+    const [value, setValue] = useState<ImageSource>(props.value);
+    const [svgXml, setSvgXml] = useState<string | null>(null);
+    const [defaultSvgXml, setDefaultSvgXml] = useState<string | null>(null);
+    const [imageSource, setImageSource] = useState<ImageSource>(null);
+    const [defaultImageSource, setDefaultImageSource] =
+        useState<ImageSource>(null);
     const [state, setState] = useReducer(
-        (oldState, newState) => ({ ...oldState, ...newState }),
+        (oldState: any, newState: any) => ({ ...oldState, ...newState }),
         { fileName: '', fileData: '' },
     );
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
     const searchStr = ';base64,';
 
-    const options: ImagePicker.ImagePickerOptions = {
-        mediaTypes: isImage()
-            ? ImagePicker.MediaTypeOptions.Images
-            : isVideo()
-            ? ImagePicker.MediaTypeOptions.Videos
-            : ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: props.aspect,
-        quality: props.quality,
-        base64: true,
-        exif: true,
+    const isValidValue = (v: ImageSource): boolean => {
+        return isValidValueUri(v) || isRequireFile(v);
     };
 
-    useEffect(() => {
-        if (isDocument()) {
-            handleDefaultSvgXml(value);
-        } else {
-            handleDefaultImageSource(value);
-        }
-    }, [value]);
-
-    useEffect(() => {
-        if (isValidValue(props.value) && !state.fileData) {
-            setValue(props.value);
-            onFileDataChange('', '');
-        }
-    }, [getValueUri(props.value)]);
-
-    useEffect(() => {
-        if (isValidValue(value)) {
-            setImageSource(value);
-        } else {
-            setImageSource(defaultImageSource);
-        }
-    }, [value, defaultImageSource]);
-
-    useEffect(() => {
-        if (isValidValueUri(value)) {
-            setSvgXml(getSvgXmlByFilename(getValueUri(value)));
-        } else {
-            setSvgXml(defaultSvgXml);
-        }
-    }, [value, defaultSvgXml]);
-
-    function isValidValue(v): boolean {
-        return isValidValueUri(v) || isRequireFile(v);
-    }
-
-    function isRequireFile(v): boolean {
+    const isRequireFile = (v: ImageSource): boolean => {
         return v !== null && v >= 0; // SUI.isNumber(v);
-    }
+    };
 
-    function isValidValueUri(v): boolean {
+    const isValidValueUri = (v: ImageSource): boolean => {
         return !!getValueUri(v);
-    }
+    };
 
-    function getValueUri(v) {
-        return (v as ImageURISource)?.uri;
-    }
+    const getValueUri = (v: ImageSource): string => {
+        return (v as ImageURISource)?.uri ?? '';
+    };
 
-    function handleDefaultSvgXml(v?: any) {
+    const handleDefaultSvgXml = (v: ImageSource): void => {
         if (isValidValue(v)) {
             setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
         } else {
@@ -140,57 +111,62 @@ export default function FileField(props: {
                 : 'grey';
             setDefaultSvgXml(getFileIconSrc('N/A', color));
         }
-    }
+    };
 
-    function handleDefaultImageSource(v?: any) {
+    const handleDefaultImageSource = (v?: any): void => {
         if (v && props.required) {
             setDefaultImageSource(v);
         } else if (props.defaultValue) {
             setDefaultImageSource(props.defaultValue);
         }
-    }
+    };
 
-    function getSvgXmlByFilename(filename: string): string {
+    const getSvgXmlByFilename = (filename: string): string => {
         const type = SUI.getExtensionName(filename);
-        const color = fileColors[type];
+        const color = fileColors[type] ?? 'black';
         return getFileIconSrc(type, color);
-    }
+    };
 
-    function onFileDataChange(fileName, fileData) {
+    const onFileDataChange = (
+        fileName: string,
+        fileData: string | null,
+    ): void => {
         onErrorChange();
         setState({ fileName, fileData });
         props.onValueChange(fileData);
-    }
+    };
 
-    function isImage(): boolean {
+    const isImage = (): boolean => {
         return props.mimeType.indexOf('image') === 0;
-    }
+    };
 
-    function isVideo(): boolean {
+    const isVideo = (): boolean => {
         return props.mimeType.indexOf('video') === 0;
-    }
+    };
 
-    function isDocument(): boolean {
+    const isDocument = (): boolean => {
         return !(isImage() || isVideo());
-    }
+    };
 
-    function getFileIconSrc(type, color) {
+    const getFileIconSrc = (type: string, color: string): string => {
         return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
-    }
+    };
 
-    async function handleImageDataUri(result: ImagePicker.ImagePickerResult) {
+    const handleImageDataUri = async (
+        result: ImagePicker.ImagePickerResult,
+    ): Promise<void> => {
         if (result.cancelled === false) {
-            const filename = result.uri.split('/').pop();
+            const filename = result.uri.split('/').pop() ?? 'file';
             const uri = 'data:image/jpeg;base64,' + result.base64;
             const dataUri = getDataUri(uri, filename);
             setImageSource({ uri: dataUri });
             onFileDataChange(filename, dataUri);
         }
-    }
+    };
 
-    async function handleDocumentDataUri(
+    const handleDocumentDataUri = async (
         result: DocumentPicker.DocumentResult,
-    ) {
+    ): Promise<void> => {
         if (result.type !== 'cancel') {
             const filename = result.name;
             const mimeType = mimeTypes[SUI.getExtensionName(filename)];
@@ -202,13 +178,13 @@ export default function FileField(props: {
             setSvgXml(getSvgXmlByFilename(filename));
             onFileDataChange(filename, dataUri);
         }
-    }
+    };
 
-    function getDataUri(uri: string, filename: string): string {
+    const getDataUri = (uri: string, filename: string): string => {
         return uri.replace(searchStr, ';filename=' + filename + searchStr);
-    }
+    };
 
-    async function openImageLibrary() {
+    const openImageLibrary = async (): Promise<void> => {
         if (!props.disabled) {
             const mediaLibraryPermission =
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -225,9 +201,9 @@ export default function FileField(props: {
                 }
             }
         }
-    }
+    };
 
-    async function openCamera() {
+    const openCamera = async (): Promise<void> => {
         if (!props.disabled) {
             const mediaLibraryPermission =
                 await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -247,9 +223,9 @@ export default function FileField(props: {
                 }
             }
         }
-    }
+    };
 
-    async function openDocumentLibrary() {
+    const openDocumentLibrary = async (): Promise<void> => {
         if (!props.disabled) {
             try {
                 const result = await DocumentPicker.getDocumentAsync({
@@ -262,51 +238,51 @@ export default function FileField(props: {
                 showAlert(e);
             }
         }
-    }
+    };
 
-    function showAlert(e: any) {
+    const showAlert = (e: any): void => {
         Alert.alert('ERROR', e.message, [{ text: 'OK', onPress: () => null }], {
             cancelable: true,
         });
-    }
+    };
 
-    function isRemovable(): boolean {
+    const isRemovable = (): boolean => {
         return !props.required && (isValidValue(value) || !!state.fileData);
-    }
+    };
 
-    function remove() {
+    const remove = (): void => {
         if (isDocument()) {
             removeDocument();
         } else {
             removeImage();
         }
-    }
+    };
 
-    function removeImage() {
+    const removeImage = (): void => {
         if (isRemovable()) {
             setImageSource(defaultImageSource);
             setValue(null);
             onFileDataChange('', null);
         }
-    }
+    };
 
-    function removeDocument() {
+    const removeDocument = (): void => {
         if (isRemovable()) {
             setSvgXml(defaultSvgXml);
             setValue(null);
             onFileDataChange('', null);
         }
-    }
+    };
 
-    function onFilenameChange(filename: string) {
+    const onFilenameChange = (filename: string): void => {
         setState({ fileName: filename });
-    }
+    };
 
-    function getRequiredTextField(): boolean {
+    const getRequiredTextField = (): boolean => {
         return !!props.required && !isValidValue(value);
-    }
+    };
 
-    function getActionButtons(): any[] {
+    const getActionButtons = (): JSX.Element[] => {
         const actionsButtons = [];
         if (isRemovable()) {
             actionsButtons.push(
@@ -353,7 +329,51 @@ export default function FileField(props: {
             );
         }
         return actionsButtons;
-    }
+    };
+
+    const options: ImagePicker.ImagePickerOptions = {
+        mediaTypes: isImage()
+            ? ImagePicker.MediaTypeOptions.Images
+            : isVideo()
+            ? ImagePicker.MediaTypeOptions.Videos
+            : ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: props.aspect,
+        quality: props.quality,
+        base64: true,
+        exif: true,
+    };
+
+    useEffect(() => {
+        if (isDocument()) {
+            handleDefaultSvgXml(value);
+        } else {
+            handleDefaultImageSource(value);
+        }
+    }, [value]);
+
+    useEffect(() => {
+        if (isValidValue(props.value) && !state.fileData) {
+            setValue(props.value);
+            onFileDataChange('', '');
+        }
+    }, [getValueUri(props.value)]);
+
+    useEffect(() => {
+        if (isValidValue(value)) {
+            setImageSource(value);
+        } else {
+            setImageSource(defaultImageSource);
+        }
+    }, [value, defaultImageSource]);
+
+    useEffect(() => {
+        if (isValidValueUri(value)) {
+            setSvgXml(getSvgXmlByFilename(getValueUri(value)));
+        } else {
+            setSvgXml(defaultSvgXml);
+        }
+    }, [value, defaultSvgXml]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>
@@ -366,7 +386,7 @@ export default function FileField(props: {
             />
             <View style={styles.imageContainer}>
                 {!isDocument() && !!imageSource && (
-                    <Image source={imageSource} style={styles.image} />
+                    <Image source={imageSource as any} style={styles.image} />
                 )}
                 {isDocument() && !!svgXml && (
                     <SvgCss xml={svgXml} width="100" height="100" />

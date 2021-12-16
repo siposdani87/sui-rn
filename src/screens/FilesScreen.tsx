@@ -2,9 +2,18 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { FileField } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
+import { ImageSource } from '../components/FileField';
+
+interface FilesState {
+    logoPicture: ImageSource;
+    logoPictureDefault: ImageSource;
+    profilePicture: string | null;
+    document: string | null;
+    documentDisabled: string | null;
+}
 
 export default function FilesScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<FilesState>({
         logoPicture: require('../../assets/icon.png'),
         logoPictureDefault: null,
         profilePicture: null,
@@ -40,13 +49,13 @@ export default function FilesScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
     return (
         <Fragment>

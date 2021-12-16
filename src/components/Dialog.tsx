@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Modal, StyleSheet, View, ViewStyle } from 'react-native';
+import { Modal, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import DialogHeader from './DialogHeader';
@@ -11,22 +11,22 @@ export default function Dialog(props: {
     buttons?: any[];
     onClose?: () => void;
     children?: any;
-}) {
-    const [visible, setVisible] = useState(false);
+}): JSX.Element {
+    const [visible, setVisible] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();
 
     if (props.visible !== visible) {
         setVisible(props.visible);
     }
 
-    function onClose() {
+    const onClose = (): void => {
         setVisible(false);
         if (props.onClose) {
             props.onClose();
         }
-    }
+    };
 
-    function getStyle(type: string) {
+    const getStyle = (type: string): StyleProp<ViewStyle> => {
         switch (type) {
             case 'success':
                 return styles.success;
@@ -41,7 +41,7 @@ export default function Dialog(props: {
             default:
                 return null;
         }
-    }
+    };
 
     return (
         <Modal

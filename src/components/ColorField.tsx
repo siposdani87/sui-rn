@@ -10,6 +10,12 @@ import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
 
+interface Color {
+    saturation: number;
+    hue: number;
+    value: number;
+}
+
 export default function ColorField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -23,15 +29,15 @@ export default function ColorField(props: {
     defaultColor?: string;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
-    const [value, setValue] = useState(props.value);
-    const [hue, setHue] = useState(0);
-    const [sat, setSat] = useState(0);
-    const [val, setVal] = useState(1);
+    const [value, setValue] = useState<string>(props.value);
+    const [hue, setHue] = useState<number>(0);
+    const [sat, setSat] = useState<number>(0);
+    const [val, setVal] = useState<number>(1);
     const [error, onErrorChange] = useErrorField(props.error);
-    const [visible, setVisible] = useState(false);
-    const colorPickerRef = useRef(null);
+    const [visible, setVisible] = useState<boolean>(false);
+    const colorPickerRef = useRef<any>(null);
     const inputStyle = useInputStyle(
         value,
         error,
@@ -43,13 +49,13 @@ export default function ColorField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v: string) {
+    const onValueChange = (v: string): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function showColorPicker() {
+    const showColorPicker = (): void => {
         if (!props.disabled) {
             const [h, s, v] = SUI.HEXToHSV(getValue());
             setHue(h);
@@ -57,30 +63,30 @@ export default function ColorField(props: {
             setVal(v);
             setVisible(true);
         }
-    }
+    };
 
-    function hideColorPicker() {
+    const hideColorPicker = (): void => {
         setVisible(false);
-    }
+    };
 
-    function onSatValPickerChange(c) {
+    const onSatValPickerChange = (c: Color): void => {
         setSat(c.saturation);
         setVal(c.value);
-    }
+    };
 
-    function onHuePickerChange(c) {
+    const onHuePickerChange = (c: Color): void => {
         setHue(c.hue);
-    }
+    };
 
-    function selectColor() {
+    const selectColor = () => {
         hideColorPicker();
         const hexColor = colorPickerRef.current?.getCurrentColor();
         onValueChange(hexColor);
-    }
+    };
 
-    function getValue(): string {
+    const getValue = (): string => {
         return value || defaultColor;
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

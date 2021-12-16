@@ -15,7 +15,7 @@ export default function CheckboxField(props: {
     containerStyle?: any;
     style?: any;
     children?: any;
-}) {
+}): JSX.Element {
     return (
         <IconToggleField
             value={props.value}

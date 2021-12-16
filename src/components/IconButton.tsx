@@ -16,7 +16,7 @@ export default function IconButton(props: {
     disabled?: boolean;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';
@@ -24,11 +24,11 @@ export default function IconButton(props: {
     const iconColor = props.iconColor || defaultColor;
     const iconSize = props.iconSize || 26;
 
-    function onPress() {
+    const onPress = () => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    }
+    };
 
     return (
         <TouchableOpacity

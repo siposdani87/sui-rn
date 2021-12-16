@@ -2,16 +2,17 @@ import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Layout, Styles } from '../constants';
+import { HttpService } from '../services';
 
 export default function Loader(props: {
-    services: any;
+    httpService: HttpService;
     backgroundColor: string;
     color: string;
-}) {
+}): JSX.Element | null {
     const insets = useSafeAreaInsets();
     const backgroundColor = props.backgroundColor || Colors.primary;
 
-    if (props.services.httpService.isInprogress()) {
+    if (props.httpService.isInprogress()) {
         return (
             <View style={[styles.container, { top: insets.top + 15 }]}>
                 <View style={[styles.loader, { backgroundColor }]}>

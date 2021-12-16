@@ -30,13 +30,13 @@ export default function TextareasScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
     return (
         <Fragment>

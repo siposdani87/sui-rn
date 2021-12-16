@@ -1,18 +1,18 @@
-import { StyleProp, StyleSheet } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Colors } from '../constants';
 import useDarkTheme from './useDarkTheme';
 
 export default function useInputStyle(
     value: any,
     error: any,
-    required: boolean,
-    disabled: boolean,
+    required?: boolean,
+    disabled?: boolean,
     focused?: boolean,
-): StyleProp<any> {
+): StyleProp<ViewStyle> {
     const isDarkTheme = useDarkTheme();
     const hasError = error || (required && (!value || value?.length === 0));
 
-    function getInputStyle() {
+    const getInputStyle = (): StyleProp<ViewStyle> => {
         if (hasError) {
             if (disabled) {
                 return isDarkTheme
@@ -31,9 +31,9 @@ export default function useInputStyle(
         return isDarkTheme
             ? styles.defaultDarkTextInput
             : styles.defaultLightTextInput;
-    }
+    };
 
-    function getFocusStyle() {
+    const getFocusStyle = (): StyleProp<ViewStyle> | null => {
         if (focused) {
             const bottomColor = hasError
                 ? isDarkTheme
@@ -49,7 +49,7 @@ export default function useInputStyle(
             };
         }
         return null;
-    }
+    };
 
     return StyleSheet.flatten([getInputStyle(), getFocusStyle()]);
 }

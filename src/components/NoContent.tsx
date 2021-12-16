@@ -8,7 +8,7 @@ export default function NoContent(props: {
     imageSource?: ImageSourcePropType;
     children?: any;
     containerStyle?: any;
-}) {
+}): JSX.Element {
     return (
         <View style={[styles.container, props.containerStyle]}>
             {!!props.imageSource && (
