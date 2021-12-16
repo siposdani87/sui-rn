@@ -113,7 +113,7 @@ export default function App() {
         }
     }, [isReady]);
 
-    if (!isReady && !fontsLoaded) {
+    if (!isReady || !fontsLoaded) {
         return <AppLoading />;
     }
 
