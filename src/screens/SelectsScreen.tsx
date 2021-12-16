@@ -3,8 +3,26 @@ import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SelectField } from '../../src/components';
 
+interface SelectsState {
+    bodyType: string | null | undefined;
+    bodyTypeRequired: string | null | undefined;
+
+    notifications: string[] | null | undefined;
+    notificationsRequired: string[] | null | undefined;
+
+    gender: string | null;
+    genderDisabled: string | null;
+    genderRequired: string | null;
+    genderRequiredDisabled: string | null;
+
+    hobbies: string[] | null;
+    hobbiesDisabled: string[] | null;
+    hobbiesRequired: string[] | null;
+    hobbiesRequiredDisabled: string[] | null;
+}
+
 export default function SelectsScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<SelectsState>({
         bodyType: null,
         bodyTypeRequired: null,
 
@@ -73,13 +91,13 @@ export default function SelectsScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
     return (
         <Fragment>

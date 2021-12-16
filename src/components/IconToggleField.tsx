@@ -24,10 +24,10 @@ export default function IconToggleField(props: {
     containerStyle?: any;
     style?: any;
     children?: any;
-}) {
+}): JSX.Element {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState<boolean>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
@@ -35,19 +35,19 @@ export default function IconToggleField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: boolean): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function onPress() {
+    const onPress = (): void => {
         const falseV = props.disableUncheck ? trueValue : falseValue;
         const v = value === trueValue ? falseV : trueValue;
         onValueChange(v);
-    }
+    };
 
-    function getColor() {
+    const getColor = (): string => {
         if (props.disabled) {
             return isDarkTheme
                 ? Colors.checkboxDisabledDark
@@ -62,11 +62,11 @@ export default function IconToggleField(props: {
         return isDarkTheme
             ? Colors.checkboxDefaultDark
             : Colors.checkboxDefaultLight;
-    }
+    };
 
-    function getIcon(): any {
+    const getIcon = (): string => {
         return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>
@@ -75,7 +75,11 @@ export default function IconToggleField(props: {
                 onPress={onPress}
                 style={[styles.iconToggle, props.style]}
             >
-                <MaterialIcons name={getIcon()} size={26} color={getColor()} />
+                <MaterialIcons
+                    name={getIcon() as any}
+                    size={26}
+                    color={getColor()}
+                />
             </TouchableOpacity>
             <Label
                 containerStyle={styles.labelContainer}

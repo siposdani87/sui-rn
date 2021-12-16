@@ -76,8 +76,8 @@ export default function App() {
         Oswald_700Bold,
         Ubuntu_400Regular,
     });
-    const [isReady, setIsReady] = useState(!__DEV__);
-    const [initialState, setInitialState] = useState();
+    const [isReady, setIsReady] = useState<boolean>(!__DEV__);
+    const [initialState, setInitialState] = useState<any>();
     const [state, dispatch] = useReducer(Base.reducer, {});
     const services = useMemo(() => {
         return new Services(dispatch);
@@ -121,10 +121,10 @@ export default function App() {
         <ServiceContext.Provider value={services}>
             <SafeAreaProvider>
                 <AppearanceProvider>
-                    <Confirm services={services} />
-                    <Flash services={services} />
+                    <Confirm confirmService={services.confirmService} />
+                    <Flash flashService={services.flashService} />
                     <Loader
-                        services={services}
+                        httpService={services.httpService}
                         color={Colors.accent}
                         backgroundColor={Colors.primary}
                     />

@@ -9,17 +9,17 @@ export default function Link(props: {
     color?: string;
     disabled?: boolean;
     containerStyle?: any;
-}) {
+}): JSX.Element {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.primaryBright : Colors.primary;
     const color = props.color || defaultColor;
     const colorStyle = { color, textDecorationColor: color };
 
-    function onPress() {
+    const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    }
+    };
 
     return (
         <TouchableOpacity

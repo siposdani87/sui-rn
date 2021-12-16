@@ -15,21 +15,21 @@ export default function RadioButtonField(props: {
     containerStyle?: any;
     style?: any;
     children?: any;
-}) {
-    const [value, setValue] = useState(props.value);
+}): JSX.Element {
+    const [value, setValue] = useState<any>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 
     useEffect(() => {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: string): void => {
         if (v === props.trueValue) {
             onErrorChange();
             setValue(v);
             props.onValueChange(v);
         }
-    }
+    };
 
     return (
         <IconToggleField

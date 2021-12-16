@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, Switch, StyleSheet, Platform } from 'react-native';
+import { View, Switch, StyleSheet, Platform, ColorValue } from 'react-native';
 import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
+
+interface TrackColor {
+    false?: ColorValue;
+    true?: ColorValue;
+}
 
 export default function SwitchField(props: {
     value: any;
@@ -19,10 +24,10 @@ export default function SwitchField(props: {
     onPressDesc?: () => void;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState<boolean>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
@@ -30,23 +35,23 @@ export default function SwitchField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(boolV: boolean) {
+    const onValueChange = (boolV: boolean): void => {
         const v = boolV ? trueValue : falseValue;
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function getTrackColor() {
+    const getTrackColor = (): TrackColor => {
         return {
             false: !isDarkTheme
                 ? Colors.contentDisabledDark
                 : Colors.contentDefaultLight,
             true: isDarkTheme ? Colors.primary : Colors.primaryBright,
         };
-    }
+    };
 
-    function getThumbColor() {
+    const getThumbColor = (): string => {
         if (props.disabled) {
             return isDarkTheme
                 ? Colors.checkboxDisabledDark
@@ -61,16 +66,16 @@ export default function SwitchField(props: {
         return isDarkTheme
             ? Colors.checkboxDefaultDark
             : Colors.checkboxDefaultLight;
-    }
+    };
 
-    function getValue(): boolean {
+    const getValue = (): boolean => {
         return value === trueValue;
-    }
+    };
 
-    function onPress() {
+    const onPress = (): void => {
         const v = value === trueValue ? falseValue : trueValue;
         setValue(v);
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

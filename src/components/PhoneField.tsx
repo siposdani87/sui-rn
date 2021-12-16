@@ -16,7 +16,7 @@ export default function PhoneField(
         style?: any;
         actionButtons?: any[];
     } & TextInputProps,
-) {
+): JSX.Element {
     return (
         <TextField
             value={props.value}

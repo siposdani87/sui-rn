@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ImageURISource } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    ImageURISource,
+    NativeSyntheticEvent,
+    LayoutRectangle,
+} from 'react-native';
 import TextField from './TextField';
 import { Colors, Styles } from '../constants';
 import IconButton from './IconButton';
@@ -8,10 +14,24 @@ import MapView, {
     MapEvent,
     MapTypes,
     MapStyleElement,
+    LatLng,
+    Region,
 } from 'react-native-maps';
 import NumberField from './NumberField';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useActionColor from '../hooks/useActionColor';
+
+export interface LocationType {
+    address: string;
+    latitude: number;
+    longitude: number;
+}
+
+const defaultValue: LocationType = {
+    address: '',
+    latitude: 0,
+    longitude: 0,
+};
 
 export default function LocationField(props: {
     value: any;
@@ -30,15 +50,15 @@ export default function LocationField(props: {
     style?: any;
     mapType?: MapTypes;
     customMapStyle?: MapStyleElement[];
-}) {
-    const defaultValue = {
-        address: '',
-        latitude: 0,
-        longitude: 0,
-    };
-    const [value, setValue] = useState(props.value || defaultValue);
-    const [dimensions, setDimensions] = useState(null);
-    const [visibleCoords, setVisibleCoords] = useState(false);
+}): JSX.Element {
+    const [value, setValue] = useState<LocationType>(
+        props.value || defaultValue,
+    );
+    const [dimensions, setDimensions] = useState<{
+        width: number;
+        height: number;
+    } | null>(null);
+    const [visibleCoords, setVisibleCoords] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();
     const getActionColor = useActionColor(props.disabled);
 
@@ -47,95 +67,94 @@ export default function LocationField(props: {
         setValue(coords);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: LocationType): void => {
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function onAddressChange(address) {
+    const onAddressChange = (address: string): void => {
         const v = { ...value, address };
         onValueChange(v);
-    }
+    };
 
-    function onLatitudeChange(latitude) {
+    const onLatitudeChange = (latitude: number): void => {
         const v = { ...value, latitude };
         onValueChange(v);
-    }
+    };
 
-    function onLongitudeChange(longitude) {
+    const onLongitudeChange = (longitude: number): void => {
         const v = { ...value, longitude };
         onValueChange(v);
-    }
+    };
 
-    function onCoordinatehange(latitude, longitude) {
+    const onCoordinatehange = (latitude: number, longitude: number): void => {
         const v = { ...value, latitude, longitude };
         onValueChange(v);
-    }
+    };
 
-    function toggleSettings() {
+    const toggleSettings = (): void => {
         setVisibleCoords(!visibleCoords);
-    }
+    };
 
-    function onSearch() {
+    const onSearch = (): void => {
         if (props.onSearch) {
             props.onSearch(value);
         }
-    }
+    };
 
-    function getLocationProps() {
+    const getLocationProps = (): any => {
         return {
             style: { height: 100, width: 100 },
             image: props.markerImage,
         };
-    }
+    };
 
-    function onDragEnd(event: MapEvent) {
+    const onDragEnd = (event: MapEvent): void => {
         const { latitude, longitude } = event.nativeEvent.coordinate;
         onCoordinatehange(latitude, longitude);
-    }
+    };
 
-    function getCoordinates(v) {
+    const getCoordinates = (v: LocationType): LatLng => {
         return {
             latitude: v.latitude,
             longitude: v.longitude,
         };
-    }
+    };
 
-    function regionFrom(coords: {
+    const regionFrom = (coords: {
         latitude: number;
         longitude: number;
         accuracy?: number;
-    }) {
+    }): Region => {
         const lat = coords?.latitude || 0;
         const lon = coords?.longitude || 0;
         const accuracy = coords?.accuracy || 10;
-        // const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
-        // const latitudeDelta = accuracy / oneDegreeOfLatitudeInMeters;
-        // const longitudeDelta = accuracy / (oneDegreeOfLatitudeInMeters * Math.cos(lat * (Math.PI / 180)));
-
         const latitudeDelta = 0.02;
         const longitudeDelta =
-            (dimensions.width / dimensions.height) * latitudeDelta;
+            ((dimensions?.width ?? 1) / (dimensions?.height ?? 1)) *
+            latitudeDelta;
 
         return {
             latitude: lat,
             longitude: lon,
             latitudeDelta,
             longitudeDelta,
-            accuracy,
+            // accuracy,
         };
-    }
+    };
 
-    function onLayout(event) {
+    const onLayout = (
+        event: NativeSyntheticEvent<{ layout: LayoutRectangle }>,
+    ): void => {
         if (dimensions) {
             return;
         }
         const { width } = event.nativeEvent.layout;
         const height = (width / 16) * 9;
         setDimensions({ width, height });
-    }
+    };
 
-    function getActionButtons(): any[] {
+    const getActionButtons = (): JSX.Element[] => {
         const actionButtons = [];
         if (props.onSearch) {
             actionButtons.push(
@@ -162,7 +181,7 @@ export default function LocationField(props: {
             />,
         );
         return actionButtons;
-    }
+    };
 
     return (
         <View

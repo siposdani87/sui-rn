@@ -4,32 +4,33 @@ import { Button } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
 import { Colors } from '../constants';
 import { ServiceContext, Services } from '../../ServiceContext';
+import { FlashType } from '../services/FlashService';
 
 export default function FlashesScreen() {
-    const services = useContext<Services>(ServiceContext);
+    const services = useContext<Services | null>(ServiceContext);
 
     function showSuccessFlash() {
-        services.flashService.addSuccess(
+        services?.flashService.addSuccess(
             'Success flash! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         );
     }
 
     function showInfoFlash() {
-        services.flashService.addInfo('Info flash!');
+        services?.flashService.addInfo('Info flash!');
     }
 
     function showWarningFlash() {
-        services.flashService.addWarning('Warning flash!');
+        services?.flashService.addWarning('Warning flash!');
     }
 
     function showErrorFlash() {
-        services.flashService.addError(
+        services?.flashService.addError(
             'Error flash! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         );
     }
 
     function showMessageFlash() {
-        services.flashService.addMessage({
+        services?.flashService.addMessage({
             type: '',
             closable: true,
             content:
@@ -37,19 +38,21 @@ export default function FlashesScreen() {
         });
     }
 
-    let infinityFlash = null;
+    let infinityFlash: FlashType | null = null;
     function showInfinityFlash() {
         if (!infinityFlash) {
-            infinityFlash = services.flashService.addWarning(
-                'Infinity flash!',
-                Infinity,
-            );
+            infinityFlash =
+                services?.flashService.addWarning(
+                    'Infinity flash!',
+                    Infinity,
+                ) ?? null;
         }
     }
 
     function closeInfinityFlash() {
         if (infinityFlash) {
-            infinityFlash = services.flashService.remove(infinityFlash);
+            services?.flashService.remove(infinityFlash);
+            infinityFlash = null;
         }
     }
 

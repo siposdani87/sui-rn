@@ -25,14 +25,8 @@ export default function TagField(props: {
     style?: any;
     actionButtons?: any[];
 }) {
-    const [values, setValues] = useState(props.values);
+    const [values, setValues] = useState<string[]>(props.values);
     const [error, onErrorChange] = useErrorField(props.error);
-    const inputStyle = useInputStyle(
-        getValuesLength(),
-        error,
-        props.required,
-        props.disabled,
-    );
     const isDarkTheme = useDarkTheme();
 
     useEffect(() => {
@@ -43,7 +37,7 @@ export default function TagField(props: {
         setValues(v);
     }, [props.values, props.placeholder]);
 
-    function onValuesChange(v) {
+    const onValuesChange = (v: string[]): void => {
         onErrorChange();
         setValues(v);
         props.onValuesChange(
@@ -51,18 +45,18 @@ export default function TagField(props: {
                 return k !== getPlaceholder();
             }),
         );
-    }
+    };
 
-    function removeTag(v) {
+    const removeTag = (v: string): (() => void) => {
         return () => {
             const filteredValues = values.filter((_v) => {
                 return _v !== v;
             });
             onValuesChange(filteredValues);
         };
-    }
+    };
 
-    function getTextColor() {
+    const getTextColor = (): string => {
         if (props.disabled) {
             return isDarkTheme
                 ? Colors.contentDisabledDark
@@ -71,18 +65,18 @@ export default function TagField(props: {
         return isDarkTheme
             ? Colors.contentDefaultDark
             : Colors.contentDefaultLight;
-    }
+    };
 
-    function getBackgroundColor() {
+    const getBackgroundColor = (): string => {
         if (props.disabled) {
             return isDarkTheme
                 ? Colors.inputDisabledDark
                 : Colors.inputDisabledLight;
         }
         return isDarkTheme ? Colors.inputDefaultDark : Colors.inputDefaultLight;
-    }
+    };
 
-    function onPressTag(index: number) {
+    const onPressTag = (index: number): (() => void) => {
         return () => {
             if (props.disabled) {
                 return;
@@ -90,22 +84,29 @@ export default function TagField(props: {
                 props.onPress(index);
             }
         };
-    }
+    };
 
-    function getValuesLength(): number {
+    const getValuesLength = (): number => {
         if (values?.[0] === getPlaceholder()) {
             return 0;
         }
         return values.length;
-    }
+    };
 
-    function allowRemove(v: string): boolean {
+    const allowRemove = (v: string): boolean => {
         return !props.readonly && !props.disabled && v !== getPlaceholder();
-    }
+    };
 
-    function getPlaceholder(): string {
+    const getPlaceholder = (): string => {
         return props.placeholder || '';
-    }
+    };
+
+    const inputStyle = useInputStyle(
+        getValuesLength(),
+        error,
+        props.required,
+        props.disabled,
+    );
 
     return (
         <View style={[styles.container, props.containerStyle]}>
@@ -124,7 +125,9 @@ export default function TagField(props: {
                             styles.tagContainer,
                             {
                                 backgroundColor: getBackgroundColor(),
-                                paddingRight: allowRemove(value) ? 25 : undefined,
+                                paddingRight: allowRemove(value)
+                                    ? 25
+                                    : undefined,
                             },
                         ]}
                     >

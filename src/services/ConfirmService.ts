@@ -19,23 +19,43 @@ export default class ConfirmService extends Base {
         this.buttons = [];
     }
 
-    public success(message: string, buttons?: AlertButton[], title?: string) {
+    public success(
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ): void {
         this.open('success', message, buttons, title);
     }
 
-    public info(message: string, buttons?: AlertButton[], title?: string) {
+    public info(
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ): void {
         this.open('info', message, buttons, title);
     }
 
-    public warning(message: string, buttons?: AlertButton[], title?: string) {
+    public warning(
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ): void {
         this.open('warning', message, buttons, title);
     }
 
-    public error(message: string, buttons?: AlertButton[], title?: string) {
+    public error(
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ): void {
         this.open('error', message, buttons, title);
     }
 
-    public choice(message: string, buttons?: AlertButton[], title?: string) {
+    public choice(
+        message: string,
+        buttons?: AlertButton[],
+        title?: string,
+    ): void {
         this.open('choice', message, buttons, title);
     }
 
@@ -44,7 +64,7 @@ export default class ConfirmService extends Base {
         message: string,
         buttons?: AlertButton[],
         title?: string,
-    ) {
+    ): void {
         this.type = type;
         this.title = title || '';
         this.message = message || '';
@@ -75,7 +95,7 @@ export default class ConfirmService extends Base {
         return this.visible;
     }
 
-    public close() {
+    public close(): void {
         this.visible = false;
         this.dispatch({
             type: CONFIRM,

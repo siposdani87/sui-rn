@@ -31,7 +31,7 @@ export default class HttpService extends Base {
         this.fetch = new Fetch(backendUrl);
     }
 
-    public getUrl(url: string, opt_params?: Params) {
+    public getUrl(url: string, opt_params?: Params): string {
         return this.fetch.getUrl(url, opt_params);
     }
 
@@ -39,7 +39,11 @@ export default class HttpService extends Base {
         return this.inprogress > 0;
     }
 
-    public async get(url: string, opt_params?: Params, opt_headers?: Headers) {
+    public async get(
+        url: string,
+        opt_params?: Params,
+        opt_headers?: Headers,
+    ): Promise<any> {
         return this._handleResponse(
             this.fetch.get(
                 url,
@@ -54,7 +58,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ) {
+    ): Promise<any> {
         return this._handleResponse(
             this.fetch.post(
                 url,
@@ -70,7 +74,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ) {
+    ): Promise<any> {
         return this._handleResponse(
             this.fetch.put(
                 url,
@@ -86,7 +90,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ) {
+    ): Promise<any> {
         return this._handleResponse(
             this.fetch.patch(
                 url,
@@ -102,7 +106,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ) {
+    ): Promise<any> {
         return this._handleResponse(
             this.fetch.delete(
                 url,
@@ -143,7 +147,7 @@ export default class HttpService extends Base {
         });
     }
 
-    private _statusHandler(status: number, inProgress: boolean) {
+    private _statusHandler(status: number, inProgress: boolean): void {
         let type = HTTP_RESPONSE;
         switch (status) {
             case 401:
@@ -159,7 +163,7 @@ export default class HttpService extends Base {
         this._setInprogress(type, inProgress);
     }
 
-    private _setInprogress(type: string, inProgress: boolean) {
+    private _setInprogress(type: string, inProgress: boolean): void {
         if (inProgress) {
             this.inprogress++;
         } else {

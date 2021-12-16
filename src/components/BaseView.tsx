@@ -6,7 +6,7 @@ export default function BaseView(props: {
     barStyle?: StatusBarStyle;
     backgroundColor?: any;
     children: any;
-}) {
+}): JSX.Element {
     const backgroundColor = props.backgroundColor || 'transparent';
     const translucent = backgroundColor === 'transparent';
 

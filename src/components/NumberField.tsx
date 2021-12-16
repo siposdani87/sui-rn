@@ -14,15 +14,15 @@ export default function NumberField(props: {
     containerStyle?: any;
     style?: any;
     actionButtons?: any[];
-}) {
-    const [value, setValue] = useState(props.value);
+}): JSX.Element {
+    const [value, setValue] = useState<any>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 
     useEffect(() => {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: string): void => {
         let floatValue = parseFloat(v);
         if (isNaN(floatValue)) {
             floatValue = 0;
@@ -30,7 +30,7 @@ export default function NumberField(props: {
         onErrorChange();
         setValue(floatValue);
         props.onValueChange(floatValue);
-    }
+    };
 
     return (
         <TextField

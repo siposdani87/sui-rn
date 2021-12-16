@@ -1,42 +1,44 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, AlertButton } from 'react-native';
 import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
+import { ConfirmService } from '../services';
 
-export default function Confirm(props: { services: any }) {
-    const type = props.services.confirmService.getType();
-    const title = props.services.confirmService.getTitle();
-    const message = props.services.confirmService.getMessage();
-    const alertButtons = props.services.confirmService.getButtons();
+export default function Confirm(props: { confirmService: ConfirmService }) {
+    const type = props.confirmService.getType();
+    const title = props.confirmService.getTitle();
+    const message = props.confirmService.getMessage();
+    const alertButtons = props.confirmService.getButtons();
 
-    function close() {
-        props.services.confirmService.close();
-    }
+    const close = (): void => {
+        props.confirmService.close();
+    };
 
-    function onPress(alertButton) {
+    const onPress = (alertButton: AlertButton) => {
         return (value?: string) => {
             if (alertButton.onPress) {
                 alertButton.onPress(value);
             }
             close();
         };
-    }
+    };
 
-    function getOnClose() {
+    const getOnClose = () => {
         if (alertButtons.length === 0) {
             return close;
         }
-        return null;
-    }
+        return undefined;
+    };
 
-    function getButtons(): any[] {
+    const getButtons = (): JSX.Element[] => {
         return alertButtons.map((alertButton) => {
+            const title = alertButton.text ?? '';
             switch (alertButton.style) {
                 case 'default':
                     return (
                         <TextButton
-                            title={alertButton.text}
+                            title={title}
                             onPress={onPress(alertButton)}
                             textColor={Colors.primary}
                         />
@@ -44,14 +46,14 @@ export default function Confirm(props: { services: any }) {
                 case 'cancel':
                     return (
                         <TextButton
-                            title={alertButton.text}
+                            title={title}
                             onPress={onPress(alertButton)}
                         />
                     );
                 case 'destructive':
                     return (
                         <TextButton
-                            title={alertButton.text}
+                            title={title}
                             onPress={onPress(alertButton)}
                             textColor={Colors.error}
                         />
@@ -59,15 +61,15 @@ export default function Confirm(props: { services: any }) {
                 default:
                     return (
                         <TextButton
-                            title={alertButton.text}
+                            title={title}
                             onPress={onPress(alertButton)}
                         />
                     );
             }
         });
-    }
+    };
 
-    function getIcon(): any {
+    const getIcon = (): JSX.Element | null => {
         const iconSize = 26;
         switch (type) {
             case 'success':
@@ -109,13 +111,13 @@ export default function Confirm(props: { services: any }) {
             default:
                 return null;
         }
-    }
+    };
 
     return (
         <Dialog
             type={type}
             title={title}
-            visible={props.services.confirmService.isVisible()}
+            visible={props.confirmService.isVisible()}
             buttons={getButtons()}
             onClose={getOnClose()}
         >

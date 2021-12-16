@@ -2,7 +2,7 @@ import { createContext, Dispatch } from 'react';
 import { ConfirmService, FlashService, HttpService } from './src/services';
 import { Base } from './src/utils';
 
-export const ServiceContext = createContext(null);
+export const ServiceContext = createContext<Services|null>(null);
 
 export class Services extends Base {
     public httpService: HttpService;

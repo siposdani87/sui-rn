@@ -31,38 +31,11 @@ export default function SelectField(props: {
     searchPlaceholder?: string;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const valueKey = 'value';
     const labelKey = 'label';
 
-    const [query, setQuery] = useState('');
-    const [value, setValue] = useState(correctValue(props.value));
-    const [items, setItems] = useState(convert(props.items));
-    const [filteredItems, setFilteredItems] = useState(
-        convert(props.items, query),
-    );
-    const [visible, setVisible] = useState(false);
-    const [selectedValues, setSelectedValues] = useState([]);
-    const [error, onErrorChange] = useErrorField(props.error);
-    const getActionColor = useActionColor(props.disabled);
-    const isDarkTheme = useDarkTheme();
-
-    useEffect(() => {
-        setValue(correctValue(props.value));
-    }, [props.value]);
-
-    useEffect(() => {
-        setItems(convert(props.items));
-        setFilteredItems(convert(props.items, query));
-    }, [props.items, props.required, props.placeholder]);
-
-    function onValueChange(v) {
-        onErrorChange();
-        setValue(v);
-        props.onValueChange(v);
-    }
-
-    function convert(options: any[], query?: string) {
+    const convert = (options: any[], query?: string): any[] => {
         const results = [];
         options.forEach((option) => {
             const optionValue = option[props.valueKey || valueKey];
@@ -81,44 +54,71 @@ export default function SelectField(props: {
             });
         }
         return results;
-    }
+    };
 
-    function correctValue(v) {
+    const correctValue = (v: any): any => {
         const defaultValue = props.multiple ? [] : null;
         return v ?? defaultValue;
-    }
+    };
 
-    function getIndex(v, key) {
+    const [query, setQuery] = useState<string>('');
+    const [value, setValue] = useState<any>(correctValue(props.value));
+    const [items, setItems] = useState<any[]>(convert(props.items));
+    const [filteredItems, setFilteredItems] = useState<any[]>(
+        convert(props.items, query),
+    );
+    const [visible, setVisible] = useState<boolean>(false);
+    const [selectedValues, setSelectedValues] = useState<any[]>([]);
+    const [error, onErrorChange] = useErrorField(props.error);
+    const getActionColor = useActionColor(props.disabled);
+    const isDarkTheme = useDarkTheme();
+
+    useEffect(() => {
+        setValue(correctValue(props.value));
+    }, [props.value]);
+
+    useEffect(() => {
+        setItems(convert(props.items));
+        setFilteredItems(convert(props.items, query));
+    }, [props.items, props.required, props.placeholder]);
+
+    const onValueChange = (v: string): void => {
+        onErrorChange();
+        setValue(v);
+        props.onValueChange(v);
+    };
+
+    const getIndex = (v: any, key: string): number => {
         return items.findIndex((item) => {
             return (item[key] || '').toString() === (v || '').toString();
         });
-    }
+    };
 
-    function getLabel(v) {
+    const getLabel = (v: any): string => {
         const index = getIndex(v, valueKey);
         if (index >= 0) {
             return items[index][labelKey];
         }
         return '';
-    }
+    };
 
-    function getValue(l) {
+    const getValue = (l: string): any => {
         const index = getIndex(l, labelKey);
         if (index >= 0) {
             return items[index][valueKey];
         }
         return null;
-    }
+    };
 
-    function keyExtractor(item): string {
+    const keyExtractor = (item: any): string => {
         return (item[valueKey] || '').toString();
-    }
+    };
 
-    function isSelected(v): boolean {
+    const isSelected = (v: any): boolean => {
         return selectedValues.indexOf(v) !== -1;
-    }
+    };
 
-    function toggleSelection(v) {
+    const toggleSelection = (v: any): void => {
         if (v === null) {
             setSelectedValues([v]);
         } else {
@@ -138,17 +138,17 @@ export default function SelectField(props: {
             }
             setSelectedValues(newSelectedValues);
         }
-    }
+    };
 
-    function selectValue() {
+    const selectValue = (): void => {
         hideDialog();
         const values = selectedValues.filter((v) => {
             return !!v;
         });
         handleValueChanges(values);
-    }
+    };
 
-    function showDialog() {
+    const showDialog = (): void => {
         if (!props.disabled) {
             if (props.multiple) {
                 const v = value.length === 0 ? [null] : value;
@@ -159,39 +159,39 @@ export default function SelectField(props: {
             setFilteredItems(convert(props.items, query));
             setVisible(true);
         }
-    }
+    };
 
-    function hideDialog() {
+    const hideDialog = (): void => {
         setVisible(false);
-    }
+    };
 
-    function searchInItems(q) {
+    const searchInItems = (q: string): void => {
         if (props.onSearch) {
             props.onSearch(q);
         }
         setQuery(q);
         setFilteredItems(convert(props.items, q));
-    }
+    };
 
-    function onValuesChange(tags) {
+    const onValuesChange = (tags: string[]): void => {
         const values = tags.map((tag) => {
             return getValue(tag);
         });
         handleValueChanges(values);
-    }
+    };
 
-    function handleValueChanges(values) {
+    const handleValueChanges = (values: any): void => {
         if (props.multiple) {
             onValueChange(values);
         } else {
             onValueChange(values[0] || null);
         }
-    }
+    };
 
-    function getTags(): string[] {
-        let results = [];
+    const getTags = (): string[] => {
+        let results: string[] = [];
         if (props.multiple) {
-            results = value.map((v) => {
+            results = (value as any[]).map((v) => {
                 return getLabel(v);
             });
         } else if (value) {
@@ -200,9 +200,9 @@ export default function SelectField(props: {
         return results.filter((result) => {
             return !!result;
         });
-    }
+    };
 
-    function getActionButtons(): any[] {
+    const getActionButtons = (): JSX.Element[] => {
         return [
             <IconButton
                 key={0}
@@ -212,7 +212,7 @@ export default function SelectField(props: {
                 onPress={showDialog}
             />,
         ];
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

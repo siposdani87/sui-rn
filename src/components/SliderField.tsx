@@ -22,8 +22,8 @@ export default function SliderField(props: {
     onPressDesc?: () => void;
     containerStyle?: any;
     style?: any;
-}) {
-    const [value, setValue] = useState(props.value);
+}): JSX.Element {
+    const [value, setValue] = useState<number>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
         value,
@@ -37,11 +37,11 @@ export default function SliderField(props: {
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: number): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

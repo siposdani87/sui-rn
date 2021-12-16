@@ -5,7 +5,7 @@ import { Colors, Styles } from '../constants';
 
 export default function TabBar(
     props: BottomTabBarProps & { hasPaddingBottom?: boolean },
-) {
+): JSX.Element | null {
     const { descriptors, state, navigation } = props;
 
     if (state.routes.length < 2) {

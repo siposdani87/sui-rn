@@ -1,6 +1,14 @@
 import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { View, StyleSheet, Text, TouchableOpacity, Image, StyleProp, ImageStyle } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    Image,
+    StyleProp,
+    ImageStyle,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 
 export default function Button(props: {
@@ -20,7 +28,7 @@ export default function Button(props: {
     disabled?: boolean;
     containerStyle?: any;
     style?: any;
-}) {
+}): JSX.Element {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;
     const textColor = props.textColor || Colors.primaryText;
@@ -29,30 +37,32 @@ export default function Button(props: {
     const iconSize = props.iconSize || 26;
     const layout = props.layout || 'left';
 
-    function hasIcon(): boolean {
+    const hasIcon = (): boolean => {
         return !!props.imageSource || !!props.iconName;
-    }
+    };
 
-    function hasTitle(): boolean {
+    const hasTitle = (): boolean => {
         return !!props.title;
-    }
+    };
 
-    function getSpacing(): StyleProp<ImageStyle> {
+    const getSpacing = (): StyleProp<ImageStyle> => {
         if (layout === 'left') {
             return { marginRight: hasTitle() ? 5 : undefined };
         }
         return { marginLeft: hasTitle() ? 5 : undefined };
-    }
+    };
 
-    function getTitle(): string {
-        return (props.keepFormat ? props.title : props.title?.toUpperCase()) ?? '';
-    }
+    const getTitle = (): string => {
+        return (
+            (props.keepFormat ? props.title : props.title?.toUpperCase()) ?? ''
+        );
+    };
 
-    function onPress() {
+    const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    }
+    };
 
     return (
         <TouchableOpacity

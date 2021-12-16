@@ -9,8 +9,15 @@ import {
 } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
 
+interface CheckboxesState {
+    isPrivate: boolean | null;
+    isBanned: boolean | null;
+    isDeleted: boolean | null;
+    radioButton: string | null;
+}
+
 export default function CheckboxesScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<CheckboxesState>({
         isPrivate: false,
         isBanned: false,
         isDeleted: false,
@@ -37,7 +44,7 @@ export default function CheckboxesScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    function updateData(key: string, value: any) {
         console.log('updateData', key, value);
         setData({
             ...data,

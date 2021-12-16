@@ -7,6 +7,8 @@ import {
     StyleSheet,
     TextInputProps,
     Platform,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
@@ -28,9 +30,9 @@ export default function TextField(
         style?: any;
         actionButtons?: any[];
     } & TextInputProps,
-) {
-    const [value, setValue] = useState(props.value);
-    const [isFocused, setIsFocused] = useState(false);
+): JSX.Element {
+    const [value, setValue] = useState<string>(props.value);
+    const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
         value,
@@ -44,28 +46,28 @@ export default function TextField(
         setValue(props.value);
     }, [props.value]);
 
-    function onValueChange(v) {
+    const onValueChange = (v: string): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    }
+    };
 
-    function getPlaceholderTextColor() {
+    const getPlaceholderTextColor = (): string => {
         return Colors.deepGreyBright;
-    }
+    };
 
-    function getValue(): string {
+    const getValue = (): string => {
         if (value === undefined || value === null) {
             return '';
         }
         return value.toString();
-    }
+    };
 
-    function getActionButtonsStyle() {
+    const getActionButtonsStyle = (): StyleProp<ViewStyle> => {
         return {
             paddingRight: (props.actionButtons?.length || 0) * 38,
         };
-    }
+    };
 
     return (
         <View style={[styles.container, props.containerStyle]}>

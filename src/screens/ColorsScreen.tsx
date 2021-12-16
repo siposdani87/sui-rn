@@ -4,8 +4,15 @@ import { ColorField } from '../../src/components';
 import { StatusBar } from 'expo-status-bar';
 import { Colors } from '../constants';
 
+interface ColorsState {
+    favouriteColor: string;
+    favouriteColorDisabled: string;
+    favouriteColorRequired: string;
+    favouriteColorRequiredDisabled: string;
+}
+
 export default function ColorsScreen() {
-    const [data, setData] = useState({
+    const [data, setData] = useState<ColorsState>({
         favouriteColor: '',
         favouriteColorDisabled: '',
         favouriteColorRequired: '#673AB7',
@@ -32,13 +39,13 @@ export default function ColorsScreen() {
         onRefresh();
     }, []);
 
-    function updateData(key, value) {
+    const updateData = (key: string, value: any): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
             [key]: value,
         });
-    }
+    };
 
     return (
         <Fragment>
