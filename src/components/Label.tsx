@@ -1,9 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import SUI from 'sui-js';
-import { View, StyleSheet, StyleProp, TextStyle } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    StyleProp,
+    TextStyle,
+    TouchableOpacity,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
