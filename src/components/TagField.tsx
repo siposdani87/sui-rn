@@ -1,6 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import useErrorField from '../hooks/useErrorField';
