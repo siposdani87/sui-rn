@@ -12,6 +12,10 @@ export interface Headers {
     [name: string]: string;
 }
 
+export interface HttpResponse extends Response {
+    data: any;
+}
+
 interface MimeTypes {
     [key: string]: string;
 }
@@ -39,7 +43,7 @@ export default class Fetch {
         url: string,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         return await this._handleRequest(
             'GET',
             url,
@@ -54,7 +58,7 @@ export default class Fetch {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         return await this._handleRequest(
             'POST',
             url,
@@ -69,7 +73,7 @@ export default class Fetch {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         return await this._handleRequest(
             'PUT',
             url,
@@ -84,7 +88,7 @@ export default class Fetch {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         return await this._handleRequest(
             'PATCH',
             url,
@@ -99,7 +103,7 @@ export default class Fetch {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         return await this._handleRequest(
             'DELETE',
             url,
@@ -160,7 +164,7 @@ export default class Fetch {
         _request: Request,
         response: Response,
         responseType?: string,
-    ): Promise<any> {
+    ): Promise<HttpResponse> {
         const data = await this._dataHandler(response, responseType);
         return new Promise((resolve, reject) => {
             if (response.status >= 200 && response.status < 300) {
@@ -174,7 +178,7 @@ export default class Fetch {
     private async _dataHandler(
         response: Response,
         responseType?: string,
-    ): Promise<any> {
+    ): Promise<SUI.Object> {
         const contentType = response.headers.get('content-type');
         /*
             arrayBuffer()
@@ -182,16 +186,13 @@ export default class Fetch {
             text()
             formData()
         */
-        let data = {};
+        let data = new SUI.Object();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();
-            const object = new SUI.Object();
-            data = object.merge(jsonData);
+            data = data.merge(jsonData);
         } else if (responseType === 'blob') {
-            data = {
-                blob: await response.blob(),
-                filename: this._getFilenameFromHeader(response),
-            };
+            data.set('filename', this._getFilenameFromHeader(response));
+            data.setRaw('blob', await response.blob());
         }
         return data;
     }
@@ -219,7 +220,7 @@ export default class Fetch {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<Response> {
+    ): Promise<HttpResponse> {
         const options: RequestInit = {
             method,
             headers: this._getHeaders(url, opt_headers),

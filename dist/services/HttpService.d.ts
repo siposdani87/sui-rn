@@ -1,22 +1,26 @@
 import { Dispatch } from 'react';
+import SUI from 'sui-js';
 import { Base } from '../utils';
 import { Data, Params, Headers } from '../utils/Fetch';
+interface DataResponse extends SUI.Object {
+}
 export default class HttpService extends Base {
     private getTokenAsync;
     private inprogress;
     private language;
     private secret;
     private fetch;
-    constructor(dispatch: Dispatch<any>, getTokenAsync: () => Promise<any>, backendUrl: string, language: string, secret: string);
+    constructor(dispatch: Dispatch<any>, getTokenAsync: () => Promise<string>, backendUrl: string, language: string, secret: string);
     getUrl(url: string, opt_params?: Params): string;
     isInprogress(): boolean;
-    get(url: string, opt_params?: Params, opt_headers?: Headers): Promise<any>;
-    post(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<any>;
-    put(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<any>;
-    patch(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<any>;
-    delete(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<any>;
+    get(url: string, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
+    post(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
+    put(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
+    patch(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
+    delete(url: string, opt_data?: Data, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
     private _getHeaders;
     private _handleResponse;
     private _statusHandler;
     private _setInprogress;
 }
+export {};

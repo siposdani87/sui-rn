@@ -91,17 +91,14 @@ export default class Fetch {
             text()
             formData()
         */
-        let data = {};
+        let data = new SUI.Object();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();
-            const object = new SUI.Object();
-            data = object.merge(jsonData);
+            data = data.merge(jsonData);
         }
         else if (responseType === 'blob') {
-            data = {
-                blob: await response.blob(),
-                filename: this._getFilenameFromHeader(response),
-            };
+            data.set('filename', this._getFilenameFromHeader(response));
+            data.setRaw('blob', await response.blob());
         }
         return data;
     }
