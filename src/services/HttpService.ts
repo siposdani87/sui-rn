@@ -7,10 +7,12 @@ import {
     HTTP_RESPONSE,
 } from '../constants/ActionTypes';
 import { Base, Fetch } from '../utils';
-import { Data, Params, Headers } from '../utils/Fetch';
+import { Data, Params, Headers, HttpResponse } from '../utils/Fetch';
+
+interface DataResponse extends SUI.Object {}
 
 export default class HttpService extends Base {
-    private getTokenAsync: () => Promise<any>;
+    private getTokenAsync: () => Promise<string>;
     private inprogress: number;
     private language: string;
     private secret: string;
@@ -18,7 +20,7 @@ export default class HttpService extends Base {
 
     constructor(
         dispatch: Dispatch<any>,
-        getTokenAsync: () => Promise<any>,
+        getTokenAsync: () => Promise<string>,
         backendUrl: string,
         language: string,
         secret: string,
@@ -43,7 +45,7 @@ export default class HttpService extends Base {
         url: string,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<DataResponse> {
         return this._handleResponse(
             this.fetch.get(
                 url,
@@ -58,7 +60,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<DataResponse> {
         return this._handleResponse(
             this.fetch.post(
                 url,
@@ -74,7 +76,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<DataResponse> {
         return this._handleResponse(
             this.fetch.put(
                 url,
@@ -90,7 +92,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<DataResponse> {
         return this._handleResponse(
             this.fetch.patch(
                 url,
@@ -106,7 +108,7 @@ export default class HttpService extends Base {
         opt_data?: Data,
         opt_params?: Params,
         opt_headers?: Headers,
-    ): Promise<any> {
+    ): Promise<DataResponse> {
         return this._handleResponse(
             this.fetch.delete(
                 url,
@@ -127,7 +129,9 @@ export default class HttpService extends Base {
         };
     }
 
-    private _handleResponse(fetchPromise: Promise<any>): Promise<any> {
+    private _handleResponse(
+        fetchPromise: Promise<HttpResponse>,
+    ): Promise<DataResponse> {
         this._setInprogress(HTTP_REQUEST, true);
         return new Promise((resolve, reject) => {
             fetchPromise
