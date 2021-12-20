@@ -9,7 +9,7 @@ import {
 import { Base, Fetch } from '../utils';
 import { Data, Params, Headers, HttpResponse } from '../utils/Fetch';
 
-interface DataResponse extends SUI.Object {}
+export interface DataResponse extends SUI.Object {}
 
 export default class HttpService extends Base {
     private getTokenAsync: () => Promise<string>;
