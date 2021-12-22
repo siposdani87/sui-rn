@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, Switch, StyleSheet, Platform } from 'react-native';
+import { View, Switch, StyleSheet, Platform, } from 'react-native';
 import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';

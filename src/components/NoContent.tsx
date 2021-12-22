@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Image,
+    ImageSourcePropType,
+    StyleProp,
+    ViewStyle,
+} from 'react-native';
 import { Styles } from '../constants';
 import Text from '../components/Text';
 
@@ -7,7 +14,7 @@ export default function NoContent(props: {
     text?: string;
     imageSource?: ImageSourcePropType;
     children?: any;
-    containerStyle?: any;
+    containerStyle?: StyleProp<ViewStyle>;
 }): JSX.Element {
     return (
         <View style={[styles.container, props.containerStyle]}>

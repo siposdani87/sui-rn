@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TextField from './TextField';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, } from 'react-native';
 import { RichTextEditor } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';

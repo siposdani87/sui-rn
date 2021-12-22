@@ -8,6 +8,8 @@ import {
     Alert,
     ImageURISource,
     ImageRequireSource,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 import useErrorField from '../hooks/useErrorField';
 import IconButton from './IconButton';
@@ -69,8 +71,8 @@ export default function FileField(props: {
     onPressDesc?: () => void;
     aspect?: [number, number];
     quality?: number;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const [value, setValue] = useState<ImageSource>(props.value);
     const [svgXml, setSvgXml] = useState<string | null>(null);

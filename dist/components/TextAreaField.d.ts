@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 export default function TextAreaField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -10,6 +11,6 @@ export default function TextAreaField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<TextStyle>;
 }): JSX.Element;

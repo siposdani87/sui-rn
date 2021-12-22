@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+    StyleProp,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    ViewStyle,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 
@@ -8,7 +14,7 @@ export default function Link(props: {
     onPress: () => void;
     color?: string;
     disabled?: boolean;
-    containerStyle?: any;
+    containerStyle?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.primaryBright : Colors.primary;

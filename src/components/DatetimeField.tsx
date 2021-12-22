@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 // import * as Localization from 'expo-localization';
@@ -85,8 +85,8 @@ export default function DatetimeField(props: {
     searchPlaceholder?: string;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const [value, setValue] = useState<string | null>(props.value);
     const [formattedValue, setFormattedValue] = useState<string>('');

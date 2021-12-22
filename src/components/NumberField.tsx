@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import useErrorField from '../hooks/useErrorField';
 import TextField from './TextField';
 
@@ -11,8 +12,8 @@ export default function NumberField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: any[];
 }): JSX.Element {
     const [value, setValue] = useState<any>(props.value);

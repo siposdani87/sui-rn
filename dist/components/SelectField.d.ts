@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function SelectField(props: {
     value: any;
     items: any;
@@ -16,6 +17,6 @@ export default function SelectField(props: {
     labelKey?: string;
     valueKey?: string;
     searchPlaceholder?: string;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

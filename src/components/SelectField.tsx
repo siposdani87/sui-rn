@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+    FlatList,
+    StyleProp,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+    ViewStyle,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 import useActionColor from '../hooks/useActionColor';
 import useDarkTheme from '../hooks/useDarkTheme';
@@ -29,8 +36,8 @@ export default function SelectField(props: {
     labelKey?: string;
     valueKey?: string;
     searchPlaceholder?: string;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const valueKey = 'value';
     const labelKey = 'label';

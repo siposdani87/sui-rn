@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function TagField(props: {
     values: any[];
     onValuesChange: (_value: any[]) => void;
@@ -11,7 +12,7 @@ export default function TagField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: any[];
 }): JSX.Element;

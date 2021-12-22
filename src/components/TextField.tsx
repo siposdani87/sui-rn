@@ -9,6 +9,7 @@ import {
     Platform,
     StyleProp,
     ViewStyle,
+    TextStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
@@ -26,8 +27,8 @@ export default function TextField(
         placeholder?: string;
         desc?: string;
         onPressDesc?: () => void;
-        containerStyle?: any;
-        style?: any;
+        containerStyle?: StyleProp<ViewStyle>;
+        style?: StyleProp<TextStyle>;
         actionButtons?: any[];
     } & TextInputProps,
 ): JSX.Element {

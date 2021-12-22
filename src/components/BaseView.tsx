@@ -4,7 +4,7 @@ import { StatusBar, StatusBarStyle } from 'expo-status-bar';
 
 export default function BaseView(props: {
     barStyle?: StatusBarStyle;
-    backgroundColor?: any;
+    backgroundColor?: string;
     children: any;
 }): JSX.Element {
     const backgroundColor = props.backgroundColor || 'transparent';

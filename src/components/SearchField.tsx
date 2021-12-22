@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { Styles } from '../constants';
 import useActionColor from '../hooks/useActionColor';
 import IconButton from './IconButton';
@@ -14,8 +15,8 @@ export default function SearchField(props: {
     desc?: string;
     onPressDesc?: () => void;
     placeholder?: string;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: JSX.Element[];
 }): JSX.Element {
     const [value, setValue] = useState<string>(props.value);

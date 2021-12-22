@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, Switch, StyleSheet, Platform, ColorValue } from 'react-native';
+import {
+    View,
+    Switch,
+    StyleSheet,
+    Platform,
+    ColorValue,
+    StyleProp,
+    ViewStyle,
+} from 'react-native';
 import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import useDarkTheme from '../hooks/useDarkTheme';
@@ -22,8 +30,8 @@ export default function SwitchField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;

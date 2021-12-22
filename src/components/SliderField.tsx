@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { Colors } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import Slider from '@react-native-community/slider';
@@ -20,8 +20,8 @@ export default function SliderField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const [value, setValue] = useState<number>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);

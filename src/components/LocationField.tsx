@@ -5,6 +5,8 @@ import {
     ImageURISource,
     NativeSyntheticEvent,
     LayoutRectangle,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 import TextField from './TextField';
 import { Colors, Styles } from '../constants';
@@ -46,8 +48,8 @@ export default function LocationField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     mapType?: MapTypes;
     customMapStyle?: MapStyleElement[];
 }): JSX.Element {

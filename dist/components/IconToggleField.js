@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import useErrorField from '../hooks/useErrorField';

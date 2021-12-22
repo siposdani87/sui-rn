@@ -2,7 +2,13 @@ import { Image } from 'react-native';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
-export function cacheImages(images: string[]) {
+export interface Fonts {
+    [x: string]: any;
+}
+
+export function cacheImages(
+    images: (string | number)[],
+): (Promise<boolean> | Promise<Asset>)[] {
     return images.map((image) => {
         if (typeof image === 'string') {
             return Image.prefetch(image);
@@ -11,8 +17,8 @@ export function cacheImages(images: string[]) {
     });
 }
 
-export function cacheFonts(fonts: string[]) {
-    return fonts.map((font) => {
+export function cacheFonts(fonts: Fonts): Promise<void>[] {
+    return fonts.map((font: string | Record<string, Font.FontSource>) => {
         return Font.loadAsync(font);
     });
 }

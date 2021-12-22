@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, } from 'react-native';
 import { Styles } from '../constants';
 import Text from '../components/Text';
 export default function NoContent(props) {

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ImageURISource, ImageRequireSource } from 'react-native';
+import { ImageURISource, ImageRequireSource, StyleProp, ViewStyle } from 'react-native';
 export declare type ImageSource = ImageURISource | ImageRequireSource | null | {
     uri: string | null;
 };
@@ -16,6 +16,6 @@ export default function FileField(props: {
     onPressDesc?: () => void;
     aspect?: [number, number];
     quality?: number;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;
