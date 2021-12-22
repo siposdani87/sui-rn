@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { TextInputProps } from 'react-native';
+import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
 export default function TextField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -11,7 +11,7 @@ export default function TextField(props: {
     placeholder?: string;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<TextStyle>;
     actionButtons?: any[];
 } & TextInputProps): JSX.Element;

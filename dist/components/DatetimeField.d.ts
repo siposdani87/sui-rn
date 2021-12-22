@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function DatetimeField(props: {
     mode: any;
     value: any;
@@ -12,6 +13,6 @@ export default function DatetimeField(props: {
     searchPlaceholder?: string;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

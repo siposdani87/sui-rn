@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function Button(props: {
     onPress: () => void;
     iconColor?: string;
@@ -14,6 +15,6 @@ export default function Button(props: {
     keepFormat?: boolean;
     layout?: string;
     disabled?: boolean;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

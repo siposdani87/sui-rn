@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function SliderField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -11,6 +12,6 @@ export default function SliderField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

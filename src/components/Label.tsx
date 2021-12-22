@@ -6,6 +6,7 @@ import {
     StyleProp,
     TextStyle,
     TouchableOpacity,
+    ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
@@ -20,8 +21,8 @@ export default function Label(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     children?: any;
 }): JSX.Element | null {
     const isDarkTheme = useDarkTheme();

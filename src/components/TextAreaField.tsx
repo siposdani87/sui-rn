@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import TextField from './TextField';
 import ErrorField from './ErrorField';
 import Label from './Label';
-import { View, StyleSheet } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    StyleProp,
+    ViewStyle,
+    TextStyle,
+} from 'react-native';
 import { ActionMap, RichTextEditor } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
@@ -21,8 +27,8 @@ export default function TextAreaField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<TextStyle>;
 }): JSX.Element {
     const style = StyleSheet.flatten(props.style);
     const [value, setValue] = useState<string>(props.value);
@@ -148,7 +154,7 @@ export default function TextAreaField(props: {
         );
     }
 
-    const textareaStyle = {
+    const textareaStyle: StyleProp<TextStyle> = {
         height,
         textAlignVertical: 'top',
         paddingTop: 5,

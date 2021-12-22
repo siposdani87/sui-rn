@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function SearchField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -9,7 +10,7 @@ export default function SearchField(props: {
     desc?: string;
     onPressDesc?: () => void;
     placeholder?: string;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: JSX.Element[];
 }): JSX.Element;

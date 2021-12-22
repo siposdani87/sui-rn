@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { TextInputProps } from 'react-native';
+import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 export default function EmailField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -9,7 +9,7 @@ export default function EmailField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: any[];
 } & TextInputProps): JSX.Element;

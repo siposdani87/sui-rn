@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ImageURISource } from 'react-native';
+import { ImageURISource, StyleProp, ViewStyle } from 'react-native';
 import { MapTypes, MapStyleElement } from 'react-native-maps';
 export interface LocationType {
     address: string;
@@ -19,8 +19,8 @@ export default function LocationField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     mapType?: MapTypes;
     customMapStyle?: MapStyleElement[];
 }): JSX.Element;

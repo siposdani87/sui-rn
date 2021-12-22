@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function TextButton(props: {
     onPress: () => void;
     textColor?: string;
@@ -8,6 +9,6 @@ export default function TextButton(props: {
     title: string;
     keepFormat?: boolean;
     disabled?: boolean;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

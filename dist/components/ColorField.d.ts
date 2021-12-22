@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function ColorField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -10,6 +11,6 @@ export default function ColorField(props: {
     desc?: string;
     onPressDesc?: () => void;
     defaultColor?: string;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element;

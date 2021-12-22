@@ -8,6 +8,7 @@ import {
     Image,
     StyleProp,
     ImageStyle,
+    ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 
@@ -26,8 +27,8 @@ export default function Button(props: {
     keepFormat?: boolean;
     layout?: string;
     disabled?: boolean;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 }): JSX.Element {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;

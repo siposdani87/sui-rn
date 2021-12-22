@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, TouchableOpacity, View, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useActionColor from '../hooks/useActionColor';
 import useDarkTheme from '../hooks/useDarkTheme';

@@ -5,6 +5,8 @@ import {
     Text,
     View,
     TouchableOpacity,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
@@ -26,8 +28,8 @@ export default function TagField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     actionButtons?: any[];
 }) {
     const [values, setValues] = useState<string[]>(props.values);

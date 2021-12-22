@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function IconToggleField(props: {
     value: any;
     checkedIcon: string;
@@ -13,7 +14,7 @@ export default function IconToggleField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     children?: any;
 }): JSX.Element;

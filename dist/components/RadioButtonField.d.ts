@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { StyleProp, ViewStyle } from 'react-native';
 export default function RadioButtonField(props: {
     value: any;
     trueValue?: any;
@@ -9,7 +10,7 @@ export default function RadioButtonField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     children?: any;
 }): JSX.Element;

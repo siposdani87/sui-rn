@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import IconToggleField from './IconToggleField';
 
 export default function CheckboxField(props: {
@@ -12,8 +13,8 @@ export default function CheckboxField(props: {
     disabled?: boolean;
     desc?: string;
     onPressDesc?: () => void;
-    containerStyle?: any;
-    style?: any;
+    containerStyle?: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     children?: any;
 }): JSX.Element {
     return (

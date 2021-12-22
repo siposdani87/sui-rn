@@ -146,6 +146,7 @@ export default class HttpService extends Base {
                     },
                 )
                 .catch(() => {
+                    this._statusHandler(500, false);
                     reject(new SUI.Object());
                 });
         });
