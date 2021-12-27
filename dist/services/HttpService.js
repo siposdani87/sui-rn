@@ -57,6 +57,7 @@ export default class HttpService extends Base {
                 reject(data);
             })
                 .catch(() => {
+                this._statusHandler(500, false);
                 reject(new SUI.Object());
             });
         });
