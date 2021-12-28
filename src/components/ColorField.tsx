@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import ErrorField from './ErrorField';
 import SUI from 'sui-js';
 import Label from './Label';
-import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    StyleProp,
+    ViewStyle,
+} from 'react-native';
 import { Colors, Styles } from '../constants';
 import useErrorField from '../hooks/useErrorField';
 import HsvColorPicker from 'react-native-hsv-color-picker';
