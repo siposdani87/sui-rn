@@ -15,7 +15,7 @@ export class Services extends Base {
             dispatch,
             async () => {
                 return new Promise((resolve) => {
-                    resolve(null);
+                    resolve('token');
                 });
             },
             'http://localhost:4000',
