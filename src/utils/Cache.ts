@@ -2,12 +2,14 @@ import { Image } from 'react-native';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 
-export interface Fonts {
+interface Fonts {
     [x: string]: any;
 }
 
+type Images = (string | number)[];
+
 export function cacheImages(
-    images: (string | number)[],
+    images: Images,
 ): (Promise<boolean> | Promise<Asset>)[] {
     return images.map((image) => {
         if (typeof image === 'string') {
