@@ -33,7 +33,7 @@
     "@unimodules/core": "~7.2.0",
     "@unimodules/react-native-adapter": "~6.5.0",
     "expo": "^44.0.0",
-    "expo-asset": "~8.4.5",
+    "expo-asset": "~8.4.6",
     "expo-document-picker": "~10.1.0",
     "expo-file-system": "~13.1.0",
     "expo-font": "~10.0.4",
