@@ -1,6 +1,8 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
 import Colors from './Colors';
+import { StackNavigationOptions } from '@react-navigation/stack';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
 const styles = {
     fontFamilyApp: '',
@@ -70,7 +72,7 @@ const styles = {
             fontWeight: '400',
             textTransform: 'uppercase',
         },
-    },
+    } as BottomTabNavigationOptions,
     tabBarLightOptions: {
         tabBarActiveTintColor: Colors.primaryDark,
         tabBarInactiveTintColor: Colors.deepGreyBright,
@@ -86,7 +88,7 @@ const styles = {
             borderTopWidth: 1,
             borderTopColor: Colors.lightGrey,
         },
-    },
+    } as BottomTabNavigationOptions,
     tabBarDarkOptions: {
         tabBarActiveTintColor: Colors.primaryBright,
         tabBarInactiveTintColor: Colors.deepGreyBright,
@@ -102,10 +104,9 @@ const styles = {
             borderTopWidth: 1,
             borderTopColor: Colors.blackBright,
         },
-    },
+    } as BottomTabNavigationOptions,
     stackNavigatorOptions: {
         headerRight: () => <View />,
-        headerBackTitle: null,
         headerBackTitleVisible: false,
         headerTintColor: Colors.primaryText,
         headerTitleAlign: 'left',
@@ -126,12 +127,7 @@ const styles = {
                 },
             }),
         },
-        /* contentStyle: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-        }, */
-    },
+    } as StackNavigationOptions,
     floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,
@@ -155,7 +151,7 @@ const styles = {
         flexDirection: 'row',
         zIndex: 1,
     },
-};
+} as any;
 
 export function setThemeStyles(
     colors: any,
