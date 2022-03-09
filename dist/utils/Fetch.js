@@ -1,4 +1,4 @@
-import SUI from 'sui-js';
+import { getExtensionName, Objekt } from 'sui-js';
 export default class Fetch {
     backendUrl;
     constructor(backendUrl) {
@@ -30,7 +30,7 @@ export default class Fetch {
         return await this._handleRequest('DELETE', url, opt_data, opt_params, opt_headers);
     }
     _getHeaders(url, opt_headers) {
-        const extension = SUI.getExtensionName(url);
+        const extension = getExtensionName(url);
         const headers = this.filteredHeaders(opt_headers);
         return {
             'X-Requested-With': 'XMLHttpRequest',
@@ -91,7 +91,7 @@ export default class Fetch {
             text()
             formData()
         */
-        let data = new SUI.Object();
+        let data = new Objekt();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();
             data = data.merge(jsonData);

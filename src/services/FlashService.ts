@@ -1,7 +1,7 @@
 import { Base } from '../utils';
-import SUI from 'sui-js';
 import { FLASH } from '../constants/ActionTypes';
 import { Dispatch } from 'react';
+import { eq, generateId, isFunction, isNull, isObject, noop } from 'sui-js';
 
 interface Message {
     type: string;
@@ -103,10 +103,8 @@ export default class FlashService extends Base {
         opt_closeCallback = null,
         opt_id = '',
     ): FlashType | null {
-        if (SUI.isObject(message) && !SUI.isNull(message)) {
-            const closeCallback = message.closable
-                ? SUI.noop
-                : opt_closeCallback;
+        if (isObject(message) && !isNull(message)) {
+            const closeCallback = message.closable ? noop : opt_closeCallback;
             return this._add(
                 message.type,
                 message.content,
@@ -121,14 +119,14 @@ export default class FlashService extends Base {
     public isClosable(flash: FlashType): boolean {
         return (
             (this.options.closableTypes.indexOf(flash.type) !== -1 ||
-                SUI.isFunction(flash.closeCallback)) &&
-            !SUI.eq(flash.duration, Infinity)
+                isFunction(flash.closeCallback)) &&
+            !eq(flash.duration, Infinity)
         );
     }
 
     public close(flash: FlashType, opt_force = false) {
         const index = this.flashes.findIndex((item) => item.id === flash.id);
-        if (index !== -1 && (opt_force || !SUI.eq(flash.duration, Infinity))) {
+        if (index !== -1 && (opt_force || !eq(flash.duration, Infinity))) {
             if (flash.closeCallback) {
                 flash.closeCallback();
             }
@@ -147,19 +145,19 @@ export default class FlashService extends Base {
         type: string,
         message: string,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType {
         this.removeById(opt_id);
         const flash: FlashType = {
             type,
             message,
-            id: opt_id || SUI.generateId('flash'),
+            id: opt_id || generateId('flash'),
             duration: opt_duration,
             closeCallback: opt_closeCallback ?? undefined,
         };
         this.flashes.push(flash);
-        if (!this.isClosable(flash) && !SUI.eq(flash.duration, Infinity)) {
+        if (!this.isClosable(flash) && !eq(flash.duration, Infinity)) {
             setTimeout(() => {
                 this.close(flash);
             }, opt_duration || this.options.duration);

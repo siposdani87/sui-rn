@@ -104,7 +104,6 @@ const styles = {
     },
     stackNavigatorOptions: {
         headerRight: () => <View />,
-        headerBackTitle: null,
         headerBackTitleVisible: false,
         headerTintColor: Colors.primaryText,
         headerTitleAlign: 'left',
@@ -125,11 +124,6 @@ const styles = {
                 },
             }),
         },
-        /* contentStyle: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-        }, */
     },
     floatingButtonContainer: {
         position: 'absolute',

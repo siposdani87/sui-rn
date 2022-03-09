@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ErrorField from './ErrorField';
-import SUI from 'sui-js';
 import Label from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
@@ -9,6 +8,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
+import { convertHEXToHSV } from 'sui-js';
 export default function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
@@ -29,7 +29,7 @@ export default function ColorField(props) {
     };
     const showColorPicker = () => {
         if (!props.disabled) {
-            const [h, s, v] = SUI.HEXToHSV(getValue());
+            const [h, s, v] = convertHEXToHSV(getValue());
             setHue(h);
             setSat(s);
             setVal(v);

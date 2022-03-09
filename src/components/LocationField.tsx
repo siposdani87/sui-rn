@@ -157,7 +157,7 @@ export default function LocationField(props: {
     };
 
     const getActionButtons = (): JSX.Element[] => {
-        const actionButtons = [];
+        const actionButtons: JSX.Element[] = [];
         if (props.onSearch) {
             actionButtons.push(
                 <IconButton

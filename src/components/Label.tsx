@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import SUI from 'sui-js';
 import {
     View,
     StyleSheet,
@@ -13,6 +12,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
+import { capitalize } from 'sui-js';
 
 export default function Label(props: {
     text?: string;
@@ -59,7 +59,7 @@ export default function Label(props: {
                 onPress={props.onPress}
             >
                 <Text style={[styles.text, props.style, getTextStyle()]}>
-                    {props.text ? SUI.capitalize(props.text) : ''}{' '}
+                    {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
             </TouchableOpacity>

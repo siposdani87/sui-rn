@@ -232,7 +232,7 @@ export default function DatetimeField(props: {
     };
 
     const getActionButtons = (): JSX.Element[] => {
-        const actionButtons = [];
+        const actionButtons: JSX.Element[] = [];
         if (config.calendarType === 'date') {
             actionButtons.push(
                 <IconButton

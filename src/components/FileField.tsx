@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import Label from './Label';
-import SUI from 'sui-js';
 import {
     View,
     StyleSheet,
@@ -20,6 +19,7 @@ import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
+import { getExtensionName } from 'sui-js';
 
 export type ImageSource =
     | ImageURISource
@@ -124,7 +124,7 @@ export default function FileField(props: {
     };
 
     const getSvgXmlByFilename = (filename: string): string => {
-        const type = SUI.getExtensionName(filename);
+        const type = getExtensionName(filename);
         const color = fileColors[type] ?? 'black';
         return getFileIconSrc(type, color);
     };
@@ -171,7 +171,7 @@ export default function FileField(props: {
     ): Promise<void> => {
         if (result.type !== 'cancel') {
             const filename = result.name;
-            const mimeType = mimeTypes[SUI.getExtensionName(filename)];
+            const mimeType = mimeTypes[getExtensionName(filename)];
             const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
                 encoding: 'base64',
             });
@@ -285,7 +285,7 @@ export default function FileField(props: {
     };
 
     const getActionButtons = (): JSX.Element[] => {
-        const actionsButtons = [];
+        const actionsButtons: JSX.Element[] = [];
         if (isRemovable()) {
             actionsButtons.push(
                 <IconButton

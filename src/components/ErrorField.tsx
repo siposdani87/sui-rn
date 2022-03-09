@@ -1,9 +1,9 @@
 import React from 'react';
-import SUI from 'sui-js';
 import { View, Text, StyleSheet, TextStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import { StyleProp } from 'react-native';
+import { capitalize } from 'sui-js';
 
 export default function ErrorField(props: {
     error?: any;
@@ -28,7 +28,7 @@ export default function ErrorField(props: {
     return (
         <View style={styles.container}>
             <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>
-                {props.error ? SUI.capitalize(props.error.join('; ')) : null}
+                {props.error ? capitalize(props.error.join('; ')) : null}
             </Text>
         </View>
     );
