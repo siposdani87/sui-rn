@@ -14,7 +14,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
-import { convertHEXToHSV } from 'sui-js';
+import * as SUI from 'sui-js';
 
 interface Color {
     saturation: number;
@@ -63,7 +63,7 @@ export default function ColorField(props: {
 
     const showColorPicker = (): void => {
         if (!props.disabled) {
-            const [h, s, v] = convertHEXToHSV(getValue());
+            const [h, s, v] = SUI.convertHEXToHSV(getValue());
             setHue(h);
             setSat(s);
             setVal(v);

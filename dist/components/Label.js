@@ -5,7 +5,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
-import { capitalize } from 'sui-js';
+import * as SUI from 'sui-js';
 export default function Label(props) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState(false);
@@ -34,7 +34,7 @@ export default function Label(props) {
             {props.children}
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
                 <Text style={[styles.text, props.style, getTextStyle()]}>
-                    {props.text ? capitalize(props.text) : ''}{' '}
+                    {props.text ? SUI.capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
             </TouchableOpacity>

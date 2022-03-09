@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { Objekt } from 'sui-js';
+import * as SUI from 'sui-js';
 import {
     HTTP_401,
     HTTP_403,
@@ -9,7 +9,7 @@ import {
 import { Base, Fetch } from '../utils';
 import { Data, Params, Headers, HttpResponse } from '../utils/Fetch';
 
-export interface DataResponse extends Objekt {}
+export interface DataResponse extends SUI.Objekt {}
 
 export default class HttpService extends Base {
     private getTokenAsync: () => Promise<string>;
@@ -147,7 +147,7 @@ export default class HttpService extends Base {
                 )
                 .catch(() => {
                     this._statusHandler(500, false);
-                    reject(new Objekt());
+                    reject(new SUI.Objekt());
                 });
         });
     }

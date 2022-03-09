@@ -1,4 +1,4 @@
-import { getExtensionName, Objekt } from 'sui-js';
+import * as SUI from 'sui-js';
 
 export interface Data {
     [key: string]: any;
@@ -114,7 +114,7 @@ export default class Fetch {
     }
 
     private _getHeaders(url: string, opt_headers?: Headers): HeadersInit {
-        const extension = getExtensionName(url);
+        const extension = SUI.getExtensionName(url);
         const headers = this.filteredHeaders(opt_headers);
         return {
             'X-Requested-With': 'XMLHttpRequest',
@@ -178,7 +178,7 @@ export default class Fetch {
     private async _dataHandler(
         response: Response,
         responseType?: string,
-    ): Promise<Objekt> {
+    ): Promise<SUI.Objekt> {
         const contentType = response.headers.get('content-type');
         /*
             arrayBuffer()
@@ -186,7 +186,7 @@ export default class Fetch {
             text()
             formData()
         */
-        let data = new Objekt();
+        let data = new SUI.Objekt();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();
             data = data.merge(jsonData);
