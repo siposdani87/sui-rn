@@ -8,7 +8,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
-import { convertHEXToHSV } from 'sui-js';
+import * as SUI from 'sui-js';
 export default function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
@@ -29,7 +29,7 @@ export default function ColorField(props) {
     };
     const showColorPicker = () => {
         if (!props.disabled) {
-            const [h, s, v] = convertHEXToHSV(getValue());
+            const [h, s, v] = SUI.convertHEXToHSV(getValue());
             setHue(h);
             setSat(s);
             setVal(v);
