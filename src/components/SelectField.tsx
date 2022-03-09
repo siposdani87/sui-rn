@@ -43,7 +43,7 @@ export default function SelectField(props: {
     const labelKey = 'label';
 
     const convert = (options: any[], query?: string): any[] => {
-        const results = [];
+        const results: any[] = [];
         options.forEach((option) => {
             const optionValue = option[props.valueKey || valueKey];
             const optionLabel = option[props.labelKey || labelKey];

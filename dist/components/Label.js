@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import SUI from 'sui-js';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
+import { capitalize } from 'sui-js';
 export default function Label(props) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState(false);
@@ -34,7 +34,7 @@ export default function Label(props) {
             {props.children}
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
                 <Text style={[styles.text, props.style, getTextStyle()]}>
-                    {props.text ? SUI.capitalize(props.text) : ''}{' '}
+                    {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
             </TouchableOpacity>

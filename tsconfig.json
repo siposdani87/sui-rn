@@ -1,8 +1,6 @@
 {
     "compilerOptions": {
       "outDir": "dist",
-      "baseUrl": ".",
-      "rootDir": "src",
       "module": "ESNext",
       "target": "ESNext",
       "lib": ["DOM", "ESNext"],
@@ -16,11 +14,11 @@
       "noImplicitReturns": true,
       "noFallthroughCasesInSwitch": true,
       "noUnusedLocals": true,
-      "noUnusedParameters": true
+      "noUnusedParameters": true,
+      "noImplicitAny": false
     },
     "include": [
-      "src",
-      ".eslintrc.json"
+      "src/**/*",
     ],
     "exclude": [
       "**/__mocks__/*",

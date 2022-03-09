@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ErrorField from './ErrorField';
-import SUI from 'sui-js';
 import Label from './Label';
 import {
     View,
@@ -15,6 +14,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
+import { convertHEXToHSV } from 'sui-js';
 
 interface Color {
     saturation: number;
@@ -63,7 +63,7 @@ export default function ColorField(props: {
 
     const showColorPicker = (): void => {
         if (!props.disabled) {
-            const [h, s, v] = SUI.HEXToHSV(getValue());
+            const [h, s, v] = convertHEXToHSV(getValue());
             setHue(h);
             setSat(s);
             setVal(v);
