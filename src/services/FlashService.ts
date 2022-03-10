@@ -40,7 +40,7 @@ export default class FlashService extends Base {
     public addSuccess(
         message: string,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType {
         return this._add(
@@ -55,7 +55,7 @@ export default class FlashService extends Base {
     public addInfo(
         message: string,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType {
         return this._add(
@@ -70,7 +70,7 @@ export default class FlashService extends Base {
     public addWarning(
         message: string,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType {
         return this._add(
@@ -85,7 +85,7 @@ export default class FlashService extends Base {
     public addError(
         message: string,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType {
         return this._add(
@@ -100,7 +100,7 @@ export default class FlashService extends Base {
     public addMessage(
         message: Message,
         opt_duration = 0,
-        opt_closeCallback = null,
+        opt_closeCallback: any = null,
         opt_id = '',
     ): FlashType | null {
         if (SUI.isObject(message) && !SUI.isNull(message)) {

@@ -17,11 +17,11 @@ export default class FlashService extends Base {
     private options;
     constructor(dispatch: Dispatch<any>);
     getFlashes(): FlashType[];
-    addSuccess(message: string, opt_duration?: number, opt_closeCallback?: null, opt_id?: string): FlashType;
-    addInfo(message: string, opt_duration?: number, opt_closeCallback?: null, opt_id?: string): FlashType;
-    addWarning(message: string, opt_duration?: number, opt_closeCallback?: null, opt_id?: string): FlashType;
-    addError(message: string, opt_duration?: number, opt_closeCallback?: null, opt_id?: string): FlashType;
-    addMessage(message: Message, opt_duration?: number, opt_closeCallback?: null, opt_id?: string): FlashType | null;
+    addSuccess(message: string, opt_duration?: number, opt_closeCallback?: any, opt_id?: string): FlashType;
+    addInfo(message: string, opt_duration?: number, opt_closeCallback?: any, opt_id?: string): FlashType;
+    addWarning(message: string, opt_duration?: number, opt_closeCallback?: any, opt_id?: string): FlashType;
+    addError(message: string, opt_duration?: number, opt_closeCallback?: any, opt_id?: string): FlashType;
+    addMessage(message: Message, opt_duration?: number, opt_closeCallback?: any, opt_id?: string): FlashType | null;
     isClosable(flash: FlashType): boolean;
     close(flash: FlashType, opt_force?: boolean): void;
     remove(flash: FlashType): void;
