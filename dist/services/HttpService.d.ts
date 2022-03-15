@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 import { Base } from '../utils';
 import { Data, Params, Headers } from '../utils/Fetch';
 export interface DataResponse extends SUI.Objekt {

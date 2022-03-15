@@ -57,7 +57,7 @@
     "react-native-hsv-color-picker": "*",
     "react-native-maps": "*",
     "react-native-svg": "*",
-    "sui-js": "*"
+    "@siposdani87/sui-js": "*"
   },
   "devDependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -89,7 +89,7 @@
     "react-native-hsv-color-picker": "1.0.2",
     "react-native-maps": "0.29.4",
     "react-native-svg": "12.1.1",
-    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
+    "@siposdani87/sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
     "typescript": "~4.3.5"
   }
 }

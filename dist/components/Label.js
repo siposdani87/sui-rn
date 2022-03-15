@@ -5,7 +5,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 export default function Label(props) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState(false);

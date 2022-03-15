@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import useDarkTheme from '../hooks/useDarkTheme';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 export default function ErrorField(props) {
     const isDarkTheme = useDarkTheme();
     const getTextStyle = () => {

@@ -8,7 +8,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 export default function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
