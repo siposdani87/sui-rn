@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import { ImageURISource, ImageRequireSource, StyleProp, ViewStyle } from 'react-native';
-export declare type ImageSource = ImageURISource | ImageRequireSource | null | {
+export declare type ImageSourceType = ImageURISource | ImageRequireSource | null | {
     uri: string | null;
 };
 export default function FileField(props: {
-    value: ImageSource;
-    defaultValue?: ImageSource;
+    value: ImageSourceType;
+    defaultValue?: ImageSourceType;
     mimeType: string;
     onValueChange: (_value: any) => void;
     label?: string;

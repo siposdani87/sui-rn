@@ -1,4 +1,4 @@
-import SUI from '@siposdani87/sui-js';
+import * as SUI from '@siposdani87/sui-js';
 import { HTTP_401, HTTP_403, HTTP_REQUEST, HTTP_RESPONSE, } from '../constants/ActionTypes';
 import { Base, Fetch } from '../utils';
 export default class HttpService extends Base {

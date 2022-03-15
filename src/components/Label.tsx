@@ -12,7 +12,7 @@ import useDarkTheme from '../hooks/useDarkTheme';
 import IconButton from './IconButton';
 import Text from './Text';
 import Dialog from './Dialog';
-import SUI from '@siposdani87/sui-js';
+import * as SUI from '@siposdani87/sui-js';
 
 export default function Label(props: {
     text?: string;

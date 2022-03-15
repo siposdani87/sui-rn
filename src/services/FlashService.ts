@@ -1,7 +1,7 @@
 import { Base } from '../utils';
 import { FLASH } from '../constants/ActionTypes';
 import { Dispatch } from 'react';
-import SUI from '@siposdani87/sui-js';
+import * as SUI from '@siposdani87/sui-js';
 
 interface Message {
     type: string;

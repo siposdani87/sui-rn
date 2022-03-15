@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { TextAreaField } from '@siposdani87/sui-rn/dist/components';
+import { TextAreaField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 export default function TextareasScreen() {

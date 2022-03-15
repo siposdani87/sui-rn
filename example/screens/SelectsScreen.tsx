@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { SelectField } from '@siposdani87/sui-rn/dist/components';
+import { SelectField } from '@siposdani87/sui-rn';
 
 interface SelectsState {
     bodyType: string | null | undefined;

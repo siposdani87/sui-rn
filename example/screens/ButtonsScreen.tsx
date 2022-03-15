@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, IconButton, TextButton } from '@siposdani87/sui-rn/dist/components';
+import { Button, IconButton, TextButton, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
-import { Colors } from '@siposdani87/sui-rn/dist/constants';
 
 export default function ButtonsScreen() {
     return (

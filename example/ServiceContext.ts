@@ -1,6 +1,5 @@
 import { createContext, Dispatch } from 'react';
-import { ConfirmService, FlashService, HttpService } from '@siposdani87/sui-rn/dist/services';
-import { Base } from '@siposdani87/sui-rn/dist/utils';
+import { ConfirmService, FlashService, HttpService, Base } from '@siposdani87/sui-rn';
 
 export const ServiceContext = createContext<Services|null>(null);
 

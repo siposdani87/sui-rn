@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React, { Fragment } from 'react';
 import { View, ScrollView } from 'react-native';
-import { TextButton } from '@siposdani87/sui-rn/dist/components';
+import { TextButton } from '@siposdani87/sui-rn';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackParamList } from '../Router';
 
