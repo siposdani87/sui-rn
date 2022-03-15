@@ -23,10 +23,7 @@ import { AppearanceProvider } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Router from './Router';
 import { ServiceContext, Services } from './ServiceContext';
-import { Colors, setThemeColors, setThemeStyles } from '@siposdani87/sui-rn/dist/constants';
-import { Confirm, Flash, Loader } from '@siposdani87/sui-rn/dist/containers';
-import { useDarkTheme } from '@siposdani87/sui-rn/dist/hooks';
-import { Base } from '@siposdani87/sui-rn/dist/utils';
+import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme  } from '@siposdani87/sui-rn';
 
 const colors = setThemeColors(
     Colors.deepPurpleBright,

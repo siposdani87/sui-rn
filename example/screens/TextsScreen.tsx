@@ -7,7 +7,7 @@ import {
     PhoneField,
     SearchField,
     TextField,
-} from '@siposdani87/sui-rn/dist/components';
+} from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 export default function TextsScreen() {

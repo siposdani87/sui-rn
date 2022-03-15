@@ -1,12 +1,11 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { FileField } from '@siposdani87/sui-rn/dist/components';
+import { FileField, ImageSourceType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
-import { ImageSource } from '@siposdani87/sui-rn/dist/components/FileField';
 
 interface FilesState {
-    logoPicture: ImageSource;
-    logoPictureDefault: ImageSource;
+    logoPicture: ImageSourceType;
+    logoPictureDefault: ImageSourceType;
     profilePicture: string | null;
     document: string | null;
     documentDisabled: string | null;

@@ -6,7 +6,7 @@ import {
     Label,
     RadioButtonField,
     SwitchField,
-} from '@siposdani87/sui-rn/dist/components';
+} from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 interface CheckboxesState {

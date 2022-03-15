@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Styles } from '@siposdani87/sui-rn/dist/constants';
-import { useDarkTheme } from '@siposdani87/sui-rn/dist/hooks';
-import { TabBar } from '@siposdani87/sui-rn/dist/components';
+import { Styles, useDarkTheme, TabBar } from '@siposdani87/sui-rn';
 
 function HomeScreen() {
     return (

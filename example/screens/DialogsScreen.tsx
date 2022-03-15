@@ -7,8 +7,8 @@ import {
     Text,
     TextButton,
     TextField,
-} from '@siposdani87/sui-rn/dist/components';
-import { useModalState } from '@siposdani87/sui-rn/dist/hooks';
+    useModalState
+} from '@siposdani87/sui-rn';
 
 export default function DialogsScreen() {
     const [dialog1, openDialog1, closeDialog1] = useModalState();

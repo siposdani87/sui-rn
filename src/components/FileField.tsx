@@ -19,9 +19,9 @@ import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import SUI from '@siposdani87/sui-js';
+import * as SUI from '@siposdani87/sui-js';
 
-export type ImageSource =
+export type ImageSourceType =
     | ImageURISource
     | ImageRequireSource
     | null
@@ -59,8 +59,8 @@ const fileTypeSVG: string =
     '</svg>';
 
 export default function FileField(props: {
-    value: ImageSource;
-    defaultValue?: ImageSource;
+    value: ImageSourceType;
+    defaultValue?: ImageSourceType;
     mimeType: string;
     onValueChange: (_value: any) => void;
     label?: string;
@@ -74,12 +74,12 @@ export default function FileField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): JSX.Element {
-    const [value, setValue] = useState<ImageSource>(props.value);
+    const [value, setValue] = useState<ImageSourceType>(props.value);
     const [svgXml, setSvgXml] = useState<string | null>(null);
     const [defaultSvgXml, setDefaultSvgXml] = useState<string | null>(null);
-    const [imageSource, setImageSource] = useState<ImageSource>(null);
+    const [imageSource, setImageSource] = useState<ImageSourceType>(null);
     const [defaultImageSource, setDefaultImageSource] =
-        useState<ImageSource>(null);
+        useState<ImageSourceType>(null);
     const [state, setState] = useReducer(
         (oldState: any, newState: any) => ({ ...oldState, ...newState }),
         { fileName: '', fileData: '' },
@@ -88,23 +88,23 @@ export default function FileField(props: {
     const getActionColor = useActionColor(props.disabled);
     const searchStr = ';base64,';
 
-    const isValidValue = (v: ImageSource): boolean => {
+    const isValidValue = (v: ImageSourceType): boolean => {
         return isValidValueUri(v) || isRequireFile(v);
     };
 
-    const isRequireFile = (v: ImageSource): boolean => {
+    const isRequireFile = (v: ImageSourceType): boolean => {
         return v !== null && v >= 0; // SUI.isNumber(v);
     };
 
-    const isValidValueUri = (v: ImageSource): boolean => {
+    const isValidValueUri = (v: ImageSourceType): boolean => {
         return !!getValueUri(v);
     };
 
-    const getValueUri = (v: ImageSource): string => {
+    const getValueUri = (v: ImageSourceType): string => {
         return (v as ImageURISource)?.uri ?? '';
     };
 
-    const handleDefaultSvgXml = (v: ImageSource): void => {
+    const handleDefaultSvgXml = (v: ImageSourceType): void => {
         if (isValidValue(v)) {
             setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
         } else {

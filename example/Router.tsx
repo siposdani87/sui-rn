@@ -17,7 +17,7 @@ import DialogsScreen from './screens/DialogsScreen';
 import FlashesScreen from './screens/FlashesScreen';
 import ConfirmsScreen from './screens/ConfirmsScreen';
 import TabsScreen from './screens/TabsScreen';
-import { Styles } from '@siposdani87/sui-rn/dist/constants';
+import { Styles } from '@siposdani87/sui-rn';
 
 const Stack = createStackNavigator();
 

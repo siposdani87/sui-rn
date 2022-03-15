@@ -1,4 +1,4 @@
-import SUI from '@siposdani87/sui-js';
+import * as SUI from '@siposdani87/sui-js';
 
 export interface Data {
     [key: string]: any;

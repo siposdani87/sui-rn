@@ -2,8 +2,7 @@ import { RichTextViewer } from '@siposdani87/expo-rich-text-editor';
 import { StatusBar } from 'expo-status-bar';
 import React, { Fragment } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Link, NoContent, Text } from '@siposdani87/sui-rn/dist/components';
-import { Colors } from '@siposdani87/sui-rn/dist/constants';
+import { Button, Link, NoContent, Text, Colors } from '@siposdani87/sui-rn';
 
 export default function OthersScreen() {
     const sampleHtml =

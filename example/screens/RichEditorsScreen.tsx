@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { TextAreaField } from '@siposdani87/sui-rn/dist/components';
+import { TextAreaField } from '@siposdani87/sui-rn';
 
 interface RichEditorsState {
     bio: string | null | undefined;

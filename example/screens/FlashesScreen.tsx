@@ -1,10 +1,8 @@
 import React, { Fragment, useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button } from '@siposdani87/sui-rn/dist/components';
+import { Button, Colors, FlashType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
-import { Colors } from '@siposdani87/sui-rn/dist/constants';
 import { ServiceContext, Services } from '../ServiceContext';
-import { FlashType } from '@siposdani87/sui-rn/dist/services/FlashService';
 
 export default function FlashesScreen() {
     const services = useContext<Services | null>(ServiceContext);

@@ -1,8 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button } from '@siposdani87/sui-rn/dist/components';
+import { Button, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
-import { Colors } from '@siposdani87/sui-rn/dist/constants';
 import { ServiceContext, Services } from '../ServiceContext';
 
 export default function ConfirmsScreen() {
