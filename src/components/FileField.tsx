@@ -19,7 +19,7 @@ import TextField from './TextField';
 import useActionColor from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 
 export type ImageSource =
     | ImageURISource

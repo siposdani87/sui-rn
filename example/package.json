@@ -31,6 +31,8 @@
     "@react-native-community/slider": "4.1.12",
     "@siposdani87/expo-maps-polygon-editor": "latest",
     "@siposdani87/expo-rich-text-editor": "latest",
+    "@siposdani87/sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
+    "@siposdani87/sui-rn": "file:../",
     "expo": "^44.0.0",
     "expo-asset": "~8.4.6",
     "expo-document-picker": "~10.1.3",
@@ -50,8 +52,6 @@
     "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-svg": "12.1.1",
-    "sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
-    "@siposdani87/sui-rn": "file:../",
     "expo-modules-core": "~0.6.4",
     "@unimodules/core": "~7.2.0"
   },

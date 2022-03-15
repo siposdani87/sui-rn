@@ -1,6 +1,6 @@
 import { Base } from '../utils';
 import { FLASH } from '../constants/ActionTypes';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 export default class FlashService extends Base {
     flashes;
     options;

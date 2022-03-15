@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 import {
     HTTP_401,
     HTTP_403,

@@ -14,7 +14,7 @@ import HsvColorPicker from 'react-native-hsv-color-picker';
 import Dialog from './Dialog';
 import Button from './Button';
 import useInputStyle from '../hooks/useInputStyle';
-import * as SUI from 'sui-js';
+import SUI from '@siposdani87/sui-js';
 
 interface Color {
     saturation: number;
