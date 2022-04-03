@@ -19,7 +19,6 @@ export default function DatetimesScreen() {
         datetimeDisabled: null,
         datetimeRequired: null,
         datetimeRequiredDisabled: null,
-
         date: null,
         time: null,
         year: null,
@@ -33,6 +32,7 @@ export default function DatetimesScreen() {
         setTimeout(() => {
             const regex = /\.[0-9]{3}/g;
             setData({
+                ...data,
                 datetime: new Date()
                     .toISOString()
                     .replace(regex, '')
@@ -43,14 +43,13 @@ export default function DatetimesScreen() {
                     .replace('Z', '+00:00'),
                 datetimeRequired: null,
                 datetimeRequiredDisabled: null,
-
                 date: new Date().toISOString().split('T', 2)[0],
                 time: new Date()
                     .toISOString()
                     .split('T', 2)[1]
                     .split('.', 2)[0],
-                year: 1987,
-            });
+                year: 1987, 
+            }); 
             setRefreshing(false);
         }, 2000);
     }, []);
@@ -82,7 +81,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Datetime"
                         mode="datetime"
-                        format="YYYY. MM. DD., HH:mm"
+                        format="yyyy. MM. dd., HH:mm"
                         okText="OK"
                         value={data.datetime}
                         onValueChange={(v) => updateData('datetime', v)}
@@ -90,7 +89,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Datetime disabled"
                         mode="datetime"
-                        format="YYYY. MM. DD., HH:mm"
+                        format="yyyy. MM. dd., HH:mm"
                         okText="OK"
                         value={data.datetimeDisabled}
                         onValueChange={(v) => updateData('datetimeDisabled', v)}
@@ -99,7 +98,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Datetime required"
                         mode="datetime"
-                        format="YYYY. MM. DD., HH:mm"
+                        format="yyyy. MM. dd., HH:mm"
                         okText="OK"
                         value={data.datetimeRequired}
                         onValueChange={(v) => updateData('datetimeRequired', v)}
@@ -108,7 +107,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Datetime required disabled"
                         mode="datetime"
-                        format="YYYY. MM. DD., HH:mm"
+                        format="yyyy. MM. dd., HH:mm"
                         okText="OK"
                         value={data.datetimeRequiredDisabled}
                         onValueChange={(v) =>
@@ -121,7 +120,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Date"
                         mode="date"
-                        format="YYYY. MM. DD."
+                        format="yyyy. MM. dd."
                         okText="OK"
                         value={data.date}
                         onValueChange={(v) => updateData('date', v)}
@@ -137,7 +136,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Year"
                         mode="year"
-                        format="YYYY."
+                        format="yyyy."
                         value={data.year}
                         okText="OK"
                         searchPlaceholder="Search..."
