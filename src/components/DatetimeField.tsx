@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
-import { format, parse, parseISO } from 'date-fns';
+import { format, parse } from 'date-fns';
 
 interface Year {
     label: string;
@@ -32,7 +32,7 @@ const MODES: Modes = {
         clockType: 'time',
     },
     datetime: {
-        format: '', //"yyyy-MM-dd'T'HH:mm:ssXXX", // yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
+        format: "yyyy-MM-dd'T'HH:mm:ssXXX", // yyyy-MM-dd'T'HH:mm:ss.SSSxxx, yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
         calendarType: 'date',
         clockType: 'time',
     },
@@ -128,18 +128,12 @@ export default function DatetimeField(props: {
         if (v instanceof Date) {
             return format(v, props.format);
         }
-        if (!c.format) {
-            return format(parseISO(v), props.format);
-        }
         return format(parse(v, c.format, new Date()), props.format);
     };
 
     const getValue = (v: Date | string, c: Mode): string => {
         if (v instanceof Date) {
             return format(v, c.format);
-        }
-        if (!c.format) {
-            return format(parseISO(v), c.format);
         }
         return format(parse(v, c.format, new Date()), c.format);
     };
