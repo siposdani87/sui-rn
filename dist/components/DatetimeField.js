@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
-import { format, parse } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 const MODES = {
     'datetime-local': {
         format: "yyyy-MM-dd'T'HH:mm:ss",
@@ -16,7 +16,7 @@ const MODES = {
         clockType: 'time',
     },
     datetime: {
-        format: "yyyy-MM-dd'T'HH:mm:ssXXX",
+        format: '',
         calendarType: 'date',
         clockType: 'time',
     },
@@ -92,11 +92,17 @@ export default function DatetimeField(props) {
         if (v instanceof Date) {
             return format(v, props.format);
         }
+        if (!c.format) {
+            return format(parseISO(v), props.format);
+        }
         return format(parse(v, c.format, new Date()), props.format);
     };
     const getValue = (v, c) => {
         if (v instanceof Date) {
             return format(v, c.format);
+        }
+        if (!c.format) {
+            return format(parseISO(v), c.format);
         }
         return format(parse(v, c.format, new Date()), c.format);
     };
