@@ -1,8 +1,6 @@
 import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import moment from 'moment';
-// import * as Localization from 'expo-localization';
 import SelectField from './SelectField';
 import IconButton from './IconButton';
 import { Styles } from '../constants';
@@ -10,6 +8,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
+import { format, parse } from 'date-fns';
 
 interface Year {
     label: string;
@@ -28,17 +27,17 @@ interface Modes {
 
 const MODES: Modes = {
     'datetime-local': {
-        format: 'YYYY-MM-DDTHH:mm:ss', // 2016-05-26T11:25:00 (UTC)
+        format: "yyyy-MM-dd'T'HH:mm:ss", // 2016-05-26T11:25:00 (UTC)
         calendarType: 'date',
         clockType: 'time',
     },
     datetime: {
-        format: '', // YYYY-MM-DDTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
+        format: "yyyy-MM-dd'T'HH:mm:ssXXX", // yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
         calendarType: 'date',
         clockType: 'time',
     },
     date: {
-        format: 'YYYY-MM-DD', // 2016-05-26
+        format: 'yyyy-MM-dd', // 2016-05-26
         calendarType: 'date',
         clockType: '',
     },
@@ -48,29 +47,21 @@ const MODES: Modes = {
         clockType: 'time',
     },
     month: {
-        format: 'YYYY-MM', // 2016-05
+        format: 'yyyy-MM', // 2016-05
         calendarType: 'month',
         clockType: '',
     },
     week: {
-        format: 'YYYY-\\Www', // 2016-W22
+        format: "yyyy-'W'ww", // 2016-W22
         calendarType: 'week',
         clockType: '',
     },
     year: {
-        format: 'YYYY', // 2016
+        format: 'yyyy', // 2016
         calendarType: 'year',
         clockType: '',
     },
 };
-
-/* const dateio = new DateioAdapter({ locale: Localization.locale });
-for (const key in MODES) {
-  if (Object.prototype.hasOwnProperty.call(MODES, key)) {
-    const mode = MODES[key];
-    dateio.formats[mode.format] = mode.format;
-  }
-} */
 
 export default function DatetimeField(props: {
     mode: any;
@@ -130,24 +121,25 @@ export default function DatetimeField(props: {
     }, [config, value]);
 
     const getDate = (v: string, c: Mode): Date => {
-        // return dateio.toJsDate(dateio.parse(v, c.format));
-        return moment(v, c.format).toDate();
+        return parse(v, c.format, new Date());
     };
 
     const getFormattedValue = (v: Date | string, c: Mode): string => {
-        // dateio.formats[props.format] = props.format;
-        // return dateio.format(dateio.parse(v, c.format), props.format as any);
-        return moment(v, c.format).format(props.format);
+        if (v instanceof Date) {
+            return format(v, props.format);
+        }
+        return format(parse(v, c.format, new Date()), props.format);
     };
 
     const getValue = (v: Date | string, c: Mode): string => {
-        // return dateio.format(dateio.parse(v, c.format), c.format);
-        return moment(v, c.format).format(c.format);
+        if (v instanceof Date) {
+            return format(v, c.format);
+        }
+        return format(parse(v, c.format, new Date()), c.format);
     };
 
     const getNow = (): Date => {
-        // return dateio.toJsDate(dateio.date());
-        return moment().toDate();
+        return new Date();
     };
 
     const onChange = (

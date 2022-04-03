@@ -1,8 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import moment from 'moment';
-// import * as Localization from 'expo-localization';
 import SelectField from './SelectField';
 import IconButton from './IconButton';
 import { Styles } from '../constants';
@@ -10,19 +8,20 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
+import { format, parse } from 'date-fns';
 const MODES = {
     'datetime-local': {
-        format: 'YYYY-MM-DDTHH:mm:ss',
+        format: "yyyy-MM-dd'T'HH:mm:ss",
         calendarType: 'date',
         clockType: 'time',
     },
     datetime: {
-        format: '',
+        format: "yyyy-MM-dd'T'HH:mm:ssXXX",
         calendarType: 'date',
         clockType: 'time',
     },
     date: {
-        format: 'YYYY-MM-DD',
+        format: 'yyyy-MM-dd',
         calendarType: 'date',
         clockType: '',
     },
@@ -32,28 +31,21 @@ const MODES = {
         clockType: 'time',
     },
     month: {
-        format: 'YYYY-MM',
+        format: 'yyyy-MM',
         calendarType: 'month',
         clockType: '',
     },
     week: {
-        format: 'YYYY-\\Www',
+        format: "yyyy-'W'ww",
         calendarType: 'week',
         clockType: '',
     },
     year: {
-        format: 'YYYY',
+        format: 'yyyy',
         calendarType: 'year',
         clockType: '',
     },
 };
-/* const dateio = new DateioAdapter({ locale: Localization.locale });
-for (const key in MODES) {
-  if (Object.prototype.hasOwnProperty.call(MODES, key)) {
-    const mode = MODES[key];
-    dateio.formats[mode.format] = mode.format;
-  }
-} */
 export default function DatetimeField(props) {
     const [value, setValue] = useState(props.value);
     const [formattedValue, setFormattedValue] = useState('');
@@ -94,21 +86,22 @@ export default function DatetimeField(props) {
         }
     }, [config, value]);
     const getDate = (v, c) => {
-        // return dateio.toJsDate(dateio.parse(v, c.format));
-        return moment(v, c.format).toDate();
+        return parse(v, c.format, new Date());
     };
     const getFormattedValue = (v, c) => {
-        // dateio.formats[props.format] = props.format;
-        // return dateio.format(dateio.parse(v, c.format), props.format as any);
-        return moment(v, c.format).format(props.format);
+        if (v instanceof Date) {
+            return format(v, props.format);
+        }
+        return format(parse(v, c.format, new Date()), props.format);
     };
     const getValue = (v, c) => {
-        // return dateio.format(dateio.parse(v, c.format), c.format);
-        return moment(v, c.format).format(c.format);
+        if (v instanceof Date) {
+            return format(v, c.format);
+        }
+        return format(parse(v, c.format, new Date()), c.format);
     };
     const getNow = () => {
-        // return dateio.toJsDate(dateio.date());
-        return moment().toDate();
+        return new Date();
     };
     const onChange = (_event, selectedDate) => {
         if (Platform.OS === 'android') {

@@ -10,20 +10,56 @@ export default function ConfirmsScreen() {
     function showSuccessConfirm() {
         services?.confirmService.success(
             'Success confirm! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'OK',
+                },
+            ],
         );
     }
 
     function showInfoConfirm() {
-        services?.confirmService.info('Info confirm!');
+        services?.confirmService.info(
+            'Info confirm!',
+            [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'OK',
+                },
+            ],
+        );
     }
 
     function showWarningConfirm() {
-        services?.confirmService.warning('Warning confirm!');
+        services?.confirmService.warning(
+            'Warning confirm!',
+            [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'OK',
+                },
+            ],
+        );
     }
 
     function showErrorConfirm() {
         services?.confirmService.error(
             'Error confirm! Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'OK',
+                },
+            ],
         );
     }
 

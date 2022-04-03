@@ -1,6 +1,5 @@
 #!/bin/bash
 
-npm i
 npm update @siposdani87/sui-js
 rm -rf node_modules/@siposdani87/sui-rn
 mkdir -p node_modules/@siposdani87/sui-rn
