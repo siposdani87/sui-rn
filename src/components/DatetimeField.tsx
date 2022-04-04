@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
-import { format, parse } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 
 interface Year {
     label: string;
@@ -22,7 +22,13 @@ interface Mode {
 }
 
 interface Modes {
-    [key: string]: Mode;
+    'datetime-local': Mode;
+    datetime: Mode;
+    date: Mode;
+    time: Mode;
+    month: Mode;
+    week: Mode;
+    year: Mode;
 }
 
 const MODES: Modes = {
@@ -32,7 +38,7 @@ const MODES: Modes = {
         clockType: 'time',
     },
     datetime: {
-        format: "yyyy-MM-dd'T'HH:mm:ssXXX", // yyyy-MM-dd'T'HH:mm:ss.SSSxxx, yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
+        format: '', // 'yyyy-MM-dd[T]HH:mm:ss.SSSxxx', // yyyy-MM-dd'T'HH:mm:ssXXX, , yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
         calendarType: 'date',
         clockType: 'time',
     },
@@ -64,7 +70,7 @@ const MODES: Modes = {
 };
 
 export default function DatetimeField(props: {
-    mode: any;
+    mode: keyof Modes;
     value: any;
     onValueChange: (_value: any) => void;
     okText: string;
@@ -79,12 +85,12 @@ export default function DatetimeField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): JSX.Element {
-    const [value, setValue] = useState<string | null>(props.value);
+    const [value, setValue] = useState<string>(props.value ?? '');
     const [formattedValue, setFormattedValue] = useState<string>('');
     const [date, setDate] = useState<Date | null>(null);
     const [config, setConfig] = useState<Mode>(MODES[props.mode]);
     const [years, setYears] = useState<Year[]>([]);
-    const [mode, setMode] = useState<string>('date');
+    const [pickerMode, setPickerMode] = useState<string>('date');
     const [visible, setVisible] = useState<boolean>(false);
     const getActionColor = useActionColor(props.disabled);
 
@@ -107,7 +113,7 @@ export default function DatetimeField(props: {
     }, [props.mode]);
 
     useEffect(() => {
-        setValue(props.value);
+        setValue(props.value ?? '');
     }, [props.value]);
 
     useEffect(() => {
@@ -121,6 +127,9 @@ export default function DatetimeField(props: {
     }, [config, value]);
 
     const getDate = (v: string, c: Mode): Date => {
+        if (!c.format) {
+            return parseISO(v);
+        }
         return parse(v, c.format, new Date());
     };
 
@@ -129,8 +138,16 @@ export default function DatetimeField(props: {
         const formatString = props.format
             .replace('YYYY', 'yyyy')
             .replaceAll('D', 'd');
+        console.log({
+            formatString,
+            v,
+            c,
+        });
         if (v instanceof Date) {
             return format(v, formatString);
+        }
+        if (!c.format) {
+            return format(parseISO(v), formatString);
         }
         return format(parse(v, c.format, new Date()), formatString);
     };
@@ -165,7 +182,7 @@ export default function DatetimeField(props: {
             setFormattedValue(getFormattedValue(d, config));
             props.onValueChange(v);
         } else {
-            setValue(null);
+            setValue('');
             setFormattedValue('');
             props.onValueChange(null);
         }
@@ -184,7 +201,7 @@ export default function DatetimeField(props: {
             const dateValue = value ? getDate(value, config) : getNow();
             setDate(dateValue);
             setVisible(true);
-            setMode(currentMode);
+            setPickerMode(currentMode);
         }
     };
 
@@ -202,7 +219,7 @@ export default function DatetimeField(props: {
             return (
                 <DateTimePicker
                     value={date ?? getNow()}
-                    mode={mode as any}
+                    mode={pickerMode as any}
                     is24Hour={true}
                     display="default"
                     onChange={onChange}
