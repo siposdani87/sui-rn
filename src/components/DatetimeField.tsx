@@ -125,10 +125,14 @@ export default function DatetimeField(props: {
     };
 
     const getFormattedValue = (v: Date | string, c: Mode): string => {
+        // TODO: moment format to date-fns iso standard
+        const formatString = props.format
+            .replace('YYYY', 'yyyy')
+            .replaceAll('D', 'd');
         if (v instanceof Date) {
-            return format(v, props.format);
+            return format(v, formatString);
         }
-        return format(parse(v, c.format, new Date()), props.format);
+        return format(parse(v, c.format, new Date()), formatString);
     };
 
     const getValue = (v: Date | string, c: Mode): string => {
