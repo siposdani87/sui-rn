@@ -86,7 +86,7 @@ export default function DatetimesScreen() {
                         value={data.datetime}
                         onValueChange={(v) => updateData('datetime', v)}
                     />
-                    <DatetimeField
+                     <DatetimeField
                         label="Datetime disabled"
                         mode="datetime"
                         format="yyyy. MM. dd., HH:mm"
@@ -94,7 +94,7 @@ export default function DatetimesScreen() {
                         value={data.datetimeDisabled}
                         onValueChange={(v) => updateData('datetimeDisabled', v)}
                         disabled={true}
-                    />
+                    /> 
                     <DatetimeField
                         label="Datetime required"
                         mode="datetime"

@@ -8,7 +8,7 @@ import Dialog from './Dialog';
 import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
-import { format, parse } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 const MODES = {
     'datetime-local': {
         format: "yyyy-MM-dd'T'HH:mm:ss",
@@ -16,7 +16,7 @@ const MODES = {
         clockType: 'time',
     },
     datetime: {
-        format: "yyyy-MM-dd'T'HH:mm:ssXXX",
+        format: '',
         calendarType: 'date',
         clockType: 'time',
     },
@@ -47,12 +47,12 @@ const MODES = {
     },
 };
 export default function DatetimeField(props) {
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState(props.value ?? '');
     const [formattedValue, setFormattedValue] = useState('');
     const [date, setDate] = useState(null);
     const [config, setConfig] = useState(MODES[props.mode]);
     const [years, setYears] = useState([]);
-    const [mode, setMode] = useState('date');
+    const [pickerMode, setPickerMode] = useState('date');
     const [visible, setVisible] = useState(false);
     const getActionColor = useActionColor(props.disabled);
     useEffect(() => {
@@ -73,7 +73,7 @@ export default function DatetimeField(props) {
         setConfig(MODES[props.mode]);
     }, [props.mode]);
     useEffect(() => {
-        setValue(props.value);
+        setValue(props.value ?? '');
     }, [props.value]);
     useEffect(() => {
         if (value) {
@@ -86,6 +86,9 @@ export default function DatetimeField(props) {
         }
     }, [config, value]);
     const getDate = (v, c) => {
+        if (!c.format) {
+            return parseISO(v);
+        }
         return parse(v, c.format, new Date());
     };
     const getFormattedValue = (v, c) => {
@@ -93,8 +96,16 @@ export default function DatetimeField(props) {
         const formatString = props.format
             .replace('YYYY', 'yyyy')
             .replaceAll('D', 'd');
+        console.log({
+            formatString,
+            v,
+            c,
+        });
         if (v instanceof Date) {
             return format(v, formatString);
+        }
+        if (!c.format) {
+            return format(parseISO(v), formatString);
         }
         return format(parse(v, c.format, new Date()), formatString);
     };
@@ -124,7 +135,7 @@ export default function DatetimeField(props) {
             props.onValueChange(v);
         }
         else {
-            setValue(null);
+            setValue('');
             setFormattedValue('');
             props.onValueChange(null);
         }
@@ -140,7 +151,7 @@ export default function DatetimeField(props) {
             const dateValue = value ? getDate(value, config) : getNow();
             setDate(dateValue);
             setVisible(true);
-            setMode(currentMode);
+            setPickerMode(currentMode);
         }
     };
     const hide = () => {
@@ -152,7 +163,7 @@ export default function DatetimeField(props) {
     };
     const renderDateTimePicker = () => {
         if (visible) {
-            return (<DateTimePicker value={date ?? getNow()} mode={mode} is24Hour={true} display="default" onChange={onChange}/>);
+            return (<DateTimePicker value={date ?? getNow()} mode={pickerMode} is24Hour={true} display="default" onChange={onChange}/>);
         }
         return null;
     };

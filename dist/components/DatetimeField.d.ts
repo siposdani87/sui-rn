@@ -1,7 +1,21 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+interface Mode {
+    format: string;
+    calendarType: string;
+    clockType: string;
+}
+interface Modes {
+    'datetime-local': Mode;
+    datetime: Mode;
+    date: Mode;
+    time: Mode;
+    month: Mode;
+    week: Mode;
+    year: Mode;
+}
 export default function DatetimeField(props: {
-    mode: any;
+    mode: keyof Modes;
     value: any;
     onValueChange: (_value: any) => void;
     okText: string;
@@ -16,3 +30,4 @@ export default function DatetimeField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): JSX.Element;
+export {};
