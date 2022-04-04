@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 interface DatetimesState {
     datetime: string | null;
     datetimeDisabled: string | null;
-    datetimeRequired: string | null;
+    datetimeRequired: string | null | undefined;
     datetimeRequiredDisabled: string | null;
     date: string | null;
     time: string | null;
@@ -17,7 +17,7 @@ export default function DatetimesScreen() {
     const [data, setData] = useState<DatetimesState>({
         datetime: null,
         datetimeDisabled: null,
-        datetimeRequired: null,
+        datetimeRequired: new Date().toISOString(),
         datetimeRequiredDisabled: null,
         date: null,
         time: null,
@@ -41,7 +41,7 @@ export default function DatetimesScreen() {
                     .toISOString()
                     .replace(regex, '')
                     .replace('Z', '+00:00'),
-                datetimeRequired: null,
+                datetimeRequired: undefined,
                 datetimeRequiredDisabled: null,
                 date: new Date().toISOString().split('T', 2)[0],
                 time: new Date()
