@@ -4,20 +4,20 @@ import { DatetimeField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 interface DatetimesState {
-    datetime: string | null;
-    datetimeDisabled: string | null;
-    datetimeRequired: string | null | undefined;
-    datetimeRequiredDisabled: string | null;
-    date: string | null;
-    time: string | null;
-    year: number | null;
+    datetime: Date | string | null;
+    datetimeDisabled: Date | string | null;
+    datetimeRequired: Date | string | null | undefined;
+    datetimeRequiredDisabled: Date | string | null;
+    date: Date | string | null;
+    time: Date | string | null;
+    year: Date | number | null;
 }
 
 export default function DatetimesScreen() {
     const [data, setData] = useState<DatetimesState>({
         datetime: null,
         datetimeDisabled: null,
-        datetimeRequired: new Date().toISOString(),
+        datetimeRequired: new Date(),
         datetimeRequiredDisabled: null,
         date: null,
         time: null,
@@ -38,9 +38,7 @@ export default function DatetimesScreen() {
                     .replace(regex, '')
                     .replace('Z', '+00:00'),
                 datetimeDisabled: new Date()
-                    .toISOString()
-                    .replace(regex, '')
-                    .replace('Z', '+00:00'),
+                    .toISOString(),
                 datetimeRequired: undefined,
                 datetimeRequiredDisabled: null,
                 date: new Date().toISOString().split('T', 2)[0],
@@ -120,7 +118,7 @@ export default function DatetimesScreen() {
                     <DatetimeField
                         label="Date"
                         mode="date"
-                        format="yyyy. MM. dd."
+                        format="D. MMM YYYY."
                         okText="OK"
                         value={data.date}
                         onValueChange={(v) => updateData('date', v)}
