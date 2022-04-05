@@ -16,7 +16,7 @@ interface Year {
 }
 
 interface Mode {
-    format: string;
+    format?: string;
     calendarType: string;
     clockType: string;
 }
@@ -71,8 +71,8 @@ const MODES: Modes = {
 
 export default function DatetimeField(props: {
     mode: keyof Modes;
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: string | null | undefined;
+    onValueChange: (_value: string | null) => void;
     okText: string;
     format: string;
     label?: string;
@@ -138,11 +138,6 @@ export default function DatetimeField(props: {
         const formatString = props.format
             .replace('YYYY', 'yyyy')
             .replaceAll('D', 'd');
-        console.log({
-            formatString,
-            v,
-            c,
-        });
         if (v instanceof Date) {
             return format(v, formatString);
         }
@@ -154,9 +149,12 @@ export default function DatetimeField(props: {
 
     const getValue = (v: Date | string, c: Mode): string => {
         if (v instanceof Date) {
+            if (!c.format) {
+                return v.toISOString();
+            }
             return format(v, c.format);
         }
-        return format(parse(v, c.format, new Date()), c.format);
+        return v;
     };
 
     const getNow = (): Date => {

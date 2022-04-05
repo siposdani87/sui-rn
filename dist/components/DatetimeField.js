@@ -96,11 +96,6 @@ export default function DatetimeField(props) {
         const formatString = props.format
             .replace('YYYY', 'yyyy')
             .replaceAll('D', 'd');
-        console.log({
-            formatString,
-            v,
-            c,
-        });
         if (v instanceof Date) {
             return format(v, formatString);
         }
@@ -111,9 +106,12 @@ export default function DatetimeField(props) {
     };
     const getValue = (v, c) => {
         if (v instanceof Date) {
+            if (!c.format) {
+                return v.toISOString();
+            }
             return format(v, c.format);
         }
-        return format(parse(v, c.format, new Date()), c.format);
+        return v;
     };
     const getNow = () => {
         return new Date();
