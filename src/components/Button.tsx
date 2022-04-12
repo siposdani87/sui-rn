@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function Button(props: {
+export function Button(props: {
     onPress: () => void;
     iconColor?: string;
     textColor?: string;

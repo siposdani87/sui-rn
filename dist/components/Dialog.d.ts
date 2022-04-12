@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export default function Dialog(props: {
+export declare function Dialog(props: {
     visible: boolean;
     type?: string;
     title?: string;

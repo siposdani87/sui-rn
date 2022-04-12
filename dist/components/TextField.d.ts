@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
-export default function TextField(props: {
+export declare function TextField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     readonly?: boolean;

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function NumberField(props: {
+export declare function NumberField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

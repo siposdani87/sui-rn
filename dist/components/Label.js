@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-import IconButton from './IconButton';
-import Text from './Text';
-import Dialog from './Dialog';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { IconButton } from './IconButton';
+import { Text } from './Text';
+import { Dialog } from './Dialog';
 import * as SUI from '@siposdani87/sui-js';
-export default function Label(props) {
+export function Label(props) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState(false);
     const getTextStyle = () => {

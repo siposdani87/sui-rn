@@ -2,7 +2,7 @@ import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image, } from 'react-native';
 import { Colors, Styles } from '../constants';
-export default function Button(props) {
+export function Button(props) {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;
     const textColor = props.textColor || Colors.primaryText;

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { Colors } from '../constants';
-import useDarkTheme from './useDarkTheme';
-export default function useInputStyle(value, error, required, disabled, focused) {
+import { useDarkTheme } from './useDarkTheme';
+export function useInputStyle(value, error, required, disabled, focused) {
     const isDarkTheme = useDarkTheme();
     const hasError = error || (required && (!value || value?.length === 0));
     const getInputStyle = () => {

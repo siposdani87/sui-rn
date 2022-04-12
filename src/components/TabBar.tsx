@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors, Styles } from '../constants';
 
-export default function TabBar(
+export function TabBar(
     props: BottomTabBarProps & { hasPaddingBottom?: boolean },
 ): JSX.Element | null {
     const { descriptors, state, navigation } = props;

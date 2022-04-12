@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
-import useErrorField from '../hooks/useErrorField';
+import { useErrorField } from '../hooks/useErrorField';
 import Slider from '@react-native-community/slider';
-import useInputStyle from '../hooks/useInputStyle';
-import useDarkTheme from '../hooks/useDarkTheme';
-export default function SliderField(props) {
+import { useInputStyle } from '../hooks/useInputStyle';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+export function SliderField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled);

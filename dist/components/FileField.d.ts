@@ -3,7 +3,7 @@ import { ImageURISource, ImageRequireSource, StyleProp, ViewStyle } from 'react-
 export declare type ImageSourceType = ImageURISource | ImageRequireSource | null | {
     uri: string | null;
 };
-export default function FileField(props: {
+export declare function FileField(props: {
     value: ImageSourceType;
     defaultValue?: ImageSourceType;
     mimeType: string;

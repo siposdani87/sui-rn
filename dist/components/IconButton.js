@@ -2,8 +2,8 @@ import React from 'react';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, TouchableOpacity, Image, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-export default function IconButton(props) {
+import { useDarkTheme } from '../hooks/useDarkTheme';
+export function IconButton(props) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
     const backgroundColor = props.backgroundColor || 'transparent';

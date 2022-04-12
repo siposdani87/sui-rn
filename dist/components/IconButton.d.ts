@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function IconButton(props: {
+export declare function IconButton(props: {
     onPress: () => void;
     iconColor?: string;
     backgroundColor?: string;

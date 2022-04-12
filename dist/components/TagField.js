@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useErrorField from '../hooks/useErrorField';
-import useInputStyle from '../hooks/useInputStyle';
-import ErrorField from './ErrorField';
-import IconButton from './IconButton';
-import Label from './Label';
-export default function TagField(props) {
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField } from '../hooks/useErrorField';
+import { useInputStyle } from '../hooks/useInputStyle';
+import { ErrorField } from './ErrorField';
+import { IconButton } from './IconButton';
+import { Label } from './Label';
+export function TagField(props) {
     const [values, setValues] = useState(props.values);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();

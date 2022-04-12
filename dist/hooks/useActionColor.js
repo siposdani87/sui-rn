@@ -1,6 +1,6 @@
 import { Colors } from '../constants';
-import useDarkTheme from './useDarkTheme';
-export default function useActionColor(disabled) {
+import { useDarkTheme } from './useDarkTheme';
+export function useActionColor(disabled) {
     const isDarkTheme = useDarkTheme();
     const getActionColor = (selected) => {
         if (disabled) {

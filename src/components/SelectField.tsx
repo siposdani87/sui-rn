@@ -8,18 +8,18 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useActionColor from '../hooks/useActionColor';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useErrorField from '../hooks/useErrorField';
-import Button from './Button';
-import Dialog from './Dialog';
-import IconButton from './IconButton';
-import Label from './Label';
-import SearchField from './SearchField';
-import TagField from './TagField';
-import Text from './Text';
+import { useActionColor } from '../hooks/useActionColor';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField } from '../hooks/useErrorField';
+import { Button } from './Button';
+import { Dialog } from './Dialog';
+import { IconButton } from './IconButton';
+import { Label } from './Label';
+import { SearchField } from './SearchField';
+import { TagField } from './TagField';
+import { Text } from './Text';
 
-export default function SelectField(props: {
+export function SelectField(props: {
     value: any;
     items: any;
     onValueChange: (_value: any) => void;

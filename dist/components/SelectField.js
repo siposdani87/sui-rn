@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useActionColor from '../hooks/useActionColor';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useErrorField from '../hooks/useErrorField';
-import Button from './Button';
-import Dialog from './Dialog';
-import IconButton from './IconButton';
-import Label from './Label';
-import SearchField from './SearchField';
-import TagField from './TagField';
-import Text from './Text';
-export default function SelectField(props) {
+import { useActionColor } from '../hooks/useActionColor';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField } from '../hooks/useErrorField';
+import { Button } from './Button';
+import { Dialog } from './Dialog';
+import { IconButton } from './IconButton';
+import { Label } from './Label';
+import { SearchField } from './SearchField';
+import { TagField } from './TagField';
+import { Text } from './Text';
+export function SelectField(props) {
     const valueKey = 'value';
     const labelKey = 'label';
     const convert = (options, query) => {

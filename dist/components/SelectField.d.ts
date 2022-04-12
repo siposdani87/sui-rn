@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function SelectField(props: {
+export declare function SelectField(props: {
     value: any;
     items: any;
     onValueChange: (_value: any) => void;

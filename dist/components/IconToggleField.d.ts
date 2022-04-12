@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function IconToggleField(props: {
+export declare function IconToggleField(props: {
     value: any;
     checkedIcon: string;
     uncheckedIcon: string;

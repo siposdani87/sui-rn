@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
-import IconButton from './IconButton';
-import Text from './Text';
+import { IconButton } from './IconButton';
+import { Text } from './Text';
 
-export default function DialogHeader(props: {
+export function DialogHeader(props: {
     title?: string;
     imageSource?: ImageSourcePropType;
     onClose?: () => void;

@@ -9,9 +9,9 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
-export default function IconButton(props: {
+export function IconButton(props: {
     onPress: () => void;
     iconColor?: string;
     backgroundColor?: string;

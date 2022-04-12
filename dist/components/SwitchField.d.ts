@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function SwitchField(props: {
+export declare function SwitchField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     trueValue?: any;

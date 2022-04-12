@@ -8,9 +8,9 @@ import {
     StyleProp,
     ViewStyle,
 } from 'react-native';
-import TextField from './TextField';
+import { TextField } from './TextField';
 import { Colors, Styles } from '../constants';
-import IconButton from './IconButton';
+import { IconButton } from './IconButton';
 import MapView, {
     Marker,
     MapEvent,
@@ -19,9 +19,9 @@ import MapView, {
     LatLng,
     Region,
 } from 'react-native-maps';
-import NumberField from './NumberField';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useActionColor from '../hooks/useActionColor';
+import { NumberField } from './NumberField';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useActionColor } from '../hooks/useActionColor';
 
 export interface LocationType {
     address: string;
@@ -35,7 +35,7 @@ const defaultValue: LocationType = {
     longitude: 0,
 };
 
-export default function LocationField(props: {
+export function LocationField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     latitudeText: string;

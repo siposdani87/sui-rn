@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import useErrorField from '../hooks/useErrorField';
-import TextField from './TextField';
-export default function NumberField(props) {
+import { useErrorField } from '../hooks/useErrorField';
+import { TextField } from './TextField';
+export function NumberField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     useEffect(() => {

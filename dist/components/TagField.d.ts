@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function TagField(props: {
+export declare function TagField(props: {
     values: any[];
     onValuesChange: (_value: any[]) => void;
     onPress?: (_index: number) => void;

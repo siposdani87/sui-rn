@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
-export default function TextAreaField(props: {
+export declare function TextAreaField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     numberOfLines?: number;

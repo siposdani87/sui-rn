@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { StatusBar, StatusBarStyle } from 'expo-status-bar';
 
-export default function BaseView(props: {
+export function BaseView(props: {
     barStyle?: StatusBarStyle;
     backgroundColor?: string;
     children: any;

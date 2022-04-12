@@ -1,1 +1,1 @@
-export default function useDarkTheme(): boolean;
+export declare function useDarkTheme(): boolean;

@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { DatetimeField } from '@siposdani87/sui-rn';
+import { DateTimeField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 interface DatetimesState {
@@ -76,7 +76,7 @@ export default function DatetimesScreen() {
                 }
             >
                 <View style={styles.container}>
-                    <DatetimeField
+                    <DateTimeField
                         label="Datetime"
                         mode="datetime"
                         format="yyyy. MM. dd., HH:mm"
@@ -84,7 +84,7 @@ export default function DatetimesScreen() {
                         value={data.datetime}
                         onValueChange={(v) => updateData('datetime', v)}
                     />
-                     <DatetimeField
+                     <DateTimeField
                         label="Datetime disabled"
                         mode="datetime"
                         format="yyyy. MM. dd., HH:mm"
@@ -93,7 +93,7 @@ export default function DatetimesScreen() {
                         onValueChange={(v) => updateData('datetimeDisabled', v)}
                         disabled={true}
                     /> 
-                    <DatetimeField
+                    <DateTimeField
                         label="Datetime required"
                         mode="datetime"
                         format="yyyy. MM. dd., HH:mm"
@@ -102,7 +102,7 @@ export default function DatetimesScreen() {
                         onValueChange={(v) => updateData('datetimeRequired', v)}
                         required={true}
                     />
-                    <DatetimeField
+                    <DateTimeField
                         label="Datetime required disabled"
                         mode="datetime"
                         format="yyyy. MM. dd., HH:mm"
@@ -115,7 +115,7 @@ export default function DatetimesScreen() {
                         disabled={true}
                     />
 
-                    <DatetimeField
+                    <DateTimeField
                         label="Date"
                         mode="date"
                         format="D. MMM YYYY."
@@ -123,7 +123,7 @@ export default function DatetimesScreen() {
                         value={data.date}
                         onValueChange={(v) => updateData('date', v)}
                     />
-                    <DatetimeField
+                    <DateTimeField
                         label="Time"
                         mode="time"
                         format="HH:mm"
@@ -131,7 +131,7 @@ export default function DatetimesScreen() {
                         value={data.time}
                         onValueChange={(v) => updateData('time', v)}
                     />
-                    <DatetimeField
+                    <DateTimeField
                         label="Year"
                         mode="year"
                         format="yyyy."

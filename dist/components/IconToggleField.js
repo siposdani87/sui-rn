@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import useErrorField from '../hooks/useErrorField';
-import useDarkTheme from '../hooks/useDarkTheme';
-export default function IconToggleField(props) {
+import { useErrorField } from '../hooks/useErrorField';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+export function IconToggleField(props) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
     const [value, setValue] = useState(props.value);

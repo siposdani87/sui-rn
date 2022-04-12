@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-import DialogHeader from './DialogHeader';
-export default function Dialog(props) {
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { DialogHeader } from './DialogHeader';
+export function Dialog(props) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = useDarkTheme();
     if (props.visible !== visible) {

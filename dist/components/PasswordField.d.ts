@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-export default function PasswordField(props: {
+export declare function PasswordField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

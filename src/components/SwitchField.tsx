@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import {
     View,
     Switch,
@@ -11,15 +11,15 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors } from '../constants';
-import useErrorField from '../hooks/useErrorField';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useErrorField } from '../hooks/useErrorField';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
 interface TrackColor {
     false?: ColorValue;
     true?: ColorValue;
 }
 
-export default function SwitchField(props: {
+export function SwitchField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     trueValue?: any;

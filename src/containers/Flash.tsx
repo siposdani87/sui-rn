@@ -9,7 +9,7 @@ import {
 import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 import { FlashService, FlashType } from '../services/FlashService';
 
 export function Flash(props: { flashService: FlashService }): JSX.Element {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Styles } from '../constants';
-import useActionColor from '../hooks/useActionColor';
-import IconButton from './IconButton';
-import TextField from './TextField';
-export default function SearchField(props) {
+import { useActionColor } from '../hooks/useActionColor';
+import { IconButton } from './IconButton';
+import { TextField } from './TextField';
+export function SearchField(props) {
     const [value, setValue] = useState(props.value);
     const getActionColor = useActionColor(props.disabled);
     useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
-import IconButton from './IconButton';
-import Text from './Text';
-export default function DialogHeader(props) {
+import { IconButton } from './IconButton';
+import { Text } from './Text';
+export function DialogHeader(props) {
     return (<Fragment>
             <View style={[
             styles.container,

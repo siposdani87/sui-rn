@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function SliderField(props: {
+export declare function SliderField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     minimumValue?: number;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 import { StyleProp } from 'react-native';
 import * as SUI from '@siposdani87/sui-js';
 
-export default function ErrorField(props: {
+export function ErrorField(props: {
     error?: string | null;
     disabled?: boolean;
 }): JSX.Element | null {
@@ -22,7 +22,7 @@ export default function ErrorField(props: {
             : styles.errorDefaultLightText;
     };
 
-    if (!props.error) {
+    if ((props.error as any) === false) {
         return null;
     }
     return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import IconToggleField from './IconToggleField';
+import { IconToggleField } from './IconToggleField';
 
-export default function CheckboxField(props: {
+export function CheckboxField(props: {
     value: any;
     trueValue?: any;
     falseValue?: any;
