@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity, } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 export function Flash(props) {
     const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();

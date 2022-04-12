@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Styles } from '../constants';
-import useActionColor from '../hooks/useActionColor';
-import IconButton from './IconButton';
-import TextField from './TextField';
+import { useActionColor } from '../hooks/useActionColor';
+import { IconButton } from './IconButton';
+import { TextField } from './TextField';
 
-export default function SearchField(props: {
+export function SearchField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

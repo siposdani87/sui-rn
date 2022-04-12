@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, } from 'react-native';
-import TextField from './TextField';
+import { TextField } from './TextField';
 import { Colors, Styles } from '../constants';
-import IconButton from './IconButton';
+import { IconButton } from './IconButton';
 import MapView, { Marker, } from 'react-native-maps';
-import NumberField from './NumberField';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useActionColor from '../hooks/useActionColor';
+import { NumberField } from './NumberField';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useActionColor } from '../hooks/useActionColor';
 const defaultValue = {
     address: '',
     latitude: 0,
     longitude: 0,
 };
-export default function LocationField(props) {
+export function LocationField(props) {
     const [value, setValue] = useState(props.value || defaultValue);
     const [dimensions, setDimensions] = useState(null);
     const [visibleCoords, setVisibleCoords] = useState(false);

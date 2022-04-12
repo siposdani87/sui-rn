@@ -1,8 +1,8 @@
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { Colors } from '../constants';
-import useDarkTheme from './useDarkTheme';
+import { useDarkTheme } from './useDarkTheme';
 
-export default function useInputStyle(
+export function useInputStyle(
     value: any,
     error: any,
     required?: boolean,

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-export default function PhoneField(props: {
+export declare function PhoneField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

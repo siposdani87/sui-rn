@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, Switch, StyleSheet, Platform, } from 'react-native';
 import { Colors } from '../constants';
-import useErrorField from '../hooks/useErrorField';
-import useDarkTheme from '../hooks/useDarkTheme';
-export default function SwitchField(props) {
+import { useErrorField } from '../hooks/useErrorField';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+export function SwitchField(props) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
     const [value, setValue] = useState(props.value);

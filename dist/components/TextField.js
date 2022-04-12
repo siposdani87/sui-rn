@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, TextInput, StyleSheet, Platform, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
-import useInputStyle from '../hooks/useInputStyle';
-export default function TextField(props) {
+import { useErrorField } from '../hooks/useErrorField';
+import { useInputStyle } from '../hooks/useInputStyle';
+export function TextField(props) {
     const [value, setValue] = useState(props.value);
     const [isFocused, setIsFocused] = useState(false);
     const [error, onErrorChange] = useErrorField(props.error);

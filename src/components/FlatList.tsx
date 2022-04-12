@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NoContent from './NoContent';
+import { NoContent } from './NoContent';
 import {
     FlatList as RNFlatList,
     ImageSourcePropType,
@@ -14,7 +14,7 @@ const config = {
     onEndReachedThreshold: 0.5,
 };
 
-export default function FlatList(props: {
+export function FlatList(props: {
     data: any[];
     keyExtractor?: (_item: any, _index: number) => string;
     renderItem: ListRenderItem<any>;

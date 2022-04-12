@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import useErrorField from '../hooks/useErrorField';
-import IconToggleField from './IconToggleField';
+import { useErrorField } from '../hooks/useErrorField';
+import { IconToggleField } from './IconToggleField';
 
-export default function RadioButtonField(props: {
+export function RadioButtonField(props: {
     value: any;
     trueValue?: any;
     onValueChange: (_value: any) => void;

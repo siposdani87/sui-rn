@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import TextField from './TextField';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { TextField } from './TextField';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, StyleSheet, } from 'react-native';
 import { RichTextEditor } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
+import { useErrorField } from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
-import useInputStyle from '../hooks/useInputStyle';
-import useActionColor from '../hooks/useActionColor';
-export default function TextAreaField(props) {
+import { useInputStyle } from '../hooks/useInputStyle';
+import { useActionColor } from '../hooks/useActionColor';
+export function TextAreaField(props) {
     const style = StyleSheet.flatten(props.style);
     const [value, setValue] = useState(props.value);
     const [isFocused, setIsFocused] = useState(false);

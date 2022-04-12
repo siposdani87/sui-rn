@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import {
     View,
     TextInput,
@@ -12,10 +12,10 @@ import {
     TextStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
-import useInputStyle from '../hooks/useInputStyle';
+import { useErrorField } from '../hooks/useErrorField';
+import { useInputStyle } from '../hooks/useInputStyle';
 
-export default function TextField(
+export function TextField(
     props: {
         value: any;
         onValueChange: (_value: any) => void;

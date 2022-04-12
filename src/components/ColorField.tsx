@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import {
     View,
     StyleSheet,
@@ -9,11 +9,11 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
+import { useErrorField } from '../hooks/useErrorField';
 import HsvColorPicker from 'react-native-hsv-color-picker';
-import Dialog from './Dialog';
-import Button from './Button';
-import useInputStyle from '../hooks/useInputStyle';
+import { Dialog } from './Dialog';
+import { Button } from './Button';
+import { useInputStyle } from '../hooks/useInputStyle';
 import * as SUI from '@siposdani87/sui-js';
 
 interface Color {
@@ -22,7 +22,7 @@ interface Color {
     value: number;
 }
 
-export default function ColorField(props: {
+export function ColorField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     okText: string;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-export default function Link(props) {
+import { useDarkTheme } from '../hooks/useDarkTheme';
+export function Link(props) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.primaryBright : Colors.primary;
     const color = props.color || defaultColor;

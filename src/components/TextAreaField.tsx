@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import TextField from './TextField';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { TextField } from './TextField';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import {
     View,
     StyleSheet,
@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import { ActionMap, RichTextEditor } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
+import { useErrorField } from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
-import useInputStyle from '../hooks/useInputStyle';
-import useActionColor from '../hooks/useActionColor';
+import { useInputStyle } from '../hooks/useInputStyle';
+import { useActionColor } from '../hooks/useActionColor';
 
-export default function TextAreaField(props: {
+export function TextAreaField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     numberOfLines?: number;

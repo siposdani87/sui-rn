@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import useErrorField from '../hooks/useErrorField';
-import IconToggleField from './IconToggleField';
-export default function RadioButtonField(props) {
+import { useErrorField } from '../hooks/useErrorField';
+import { IconToggleField } from './IconToggleField';
+export function RadioButtonField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     useEffect(() => {

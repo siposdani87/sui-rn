@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, KeyboardAvoidingView, Platform, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-export default function BaseView(props) {
+export function BaseView(props) {
     const backgroundColor = props.backgroundColor || 'transparent';
     const translucent = backgroundColor === 'transparent';
     return (<View style={[styles.areaView, { backgroundColor }]}>

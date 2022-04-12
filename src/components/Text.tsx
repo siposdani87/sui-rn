@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleProp, TextStyle } from 'react-native';
 import { Text as RNText, StyleSheet, TextProps } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
-export default function Text(
+export function Text(
     props: { children?: any; muted?: boolean } & TextProps,
 ): JSX.Element {
     const isDarkTheme = useDarkTheme();

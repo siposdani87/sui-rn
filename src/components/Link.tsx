@@ -7,9 +7,9 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
-export default function Link(props: {
+export function Link(props: {
     title: string;
     onPress: () => void;
     color?: string;

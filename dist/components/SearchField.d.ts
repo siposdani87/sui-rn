@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function SearchField(props: {
+export declare function SearchField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

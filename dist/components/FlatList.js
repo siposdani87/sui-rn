@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import NoContent from './NoContent';
+import { NoContent } from './NoContent';
 import { FlatList as RNFlatList, Platform, RefreshControl, View, } from 'react-native';
 const config = {
     progressViewOffset: -1000,
     onEndReachedThreshold: 0.5,
 };
-export default function FlatList(props) {
+export function FlatList(props) {
     const [flatListReady, setFlatListReady] = useState(false);
     const onRefresh = () => {
         // console.log('onRefresh->refreshing', props.refreshing);

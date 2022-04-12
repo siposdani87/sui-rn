@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function CheckboxField(props: {
+export declare function CheckboxField(props: {
     value: any;
     trueValue?: any;
     falseValue?: any;

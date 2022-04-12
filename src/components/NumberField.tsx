@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import useErrorField from '../hooks/useErrorField';
-import TextField from './TextField';
+import { useErrorField } from '../hooks/useErrorField';
+import { TextField } from './TextField';
 
-export default function NumberField(props: {
+export function NumberField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     label?: string;

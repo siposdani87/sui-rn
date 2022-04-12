@@ -9,14 +9,14 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-import useErrorField from '../hooks/useErrorField';
-import useInputStyle from '../hooks/useInputStyle';
-import ErrorField from './ErrorField';
-import IconButton from './IconButton';
-import Label from './Label';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField } from '../hooks/useErrorField';
+import { useInputStyle } from '../hooks/useInputStyle';
+import { ErrorField } from './ErrorField';
+import { IconButton } from './IconButton';
+import { Label } from './Label';
 
-export default function TagField(props: {
+export function TagField(props: {
     values: any[];
     onValuesChange: (_value: any[]) => void;
     onPress?: (_index: number) => void;

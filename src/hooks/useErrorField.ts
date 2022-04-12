@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useErrorField(
+export function useErrorField(
     error?: string | null,
 ): [string | null, () => void] {
     const [clearError, setClearError] = useState<string | null>(null);
@@ -8,7 +8,7 @@ export default function useErrorField(
 
     const newError = clearError !== error ? error : null;
     if (prevError !== newError) {
-        setPrevError(newError ?? null);
+        setPrevError(newError as any);
     }
 
     const onErrorChange = (): void => {

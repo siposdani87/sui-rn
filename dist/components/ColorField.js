@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ErrorField from './ErrorField';
-import Label from './Label';
+import { ErrorField } from './ErrorField';
+import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useErrorField from '../hooks/useErrorField';
+import { useErrorField } from '../hooks/useErrorField';
 import HsvColorPicker from 'react-native-hsv-color-picker';
-import Dialog from './Dialog';
-import Button from './Button';
-import useInputStyle from '../hooks/useInputStyle';
+import { Dialog } from './Dialog';
+import { Button } from './Button';
+import { useInputStyle } from '../hooks/useInputStyle';
 import * as SUI from '@siposdani87/sui-js';
-export default function ColorField(props) {
+export function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
     const [hue, setHue] = useState(0);

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function ColorField(props: {
+export declare function ColorField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     okText: string;

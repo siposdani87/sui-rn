@@ -6,7 +6,7 @@ export interface LocationType {
     latitude: number;
     longitude: number;
 }
-export default function LocationField(props: {
+export declare function LocationField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     latitudeText: string;

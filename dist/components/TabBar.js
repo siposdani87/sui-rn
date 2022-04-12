@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Colors, Styles } from '../constants';
-export default function TabBar(props) {
+export function TabBar(props) {
     const { descriptors, state, navigation } = props;
     if (state.routes.length < 2) {
         return null;

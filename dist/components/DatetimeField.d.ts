@@ -14,7 +14,7 @@ interface Modes {
     week: Mode;
     year: Mode;
 }
-export default function DatetimeField(props: {
+export declare function DateTimeField(props: {
     mode: keyof Modes;
     value: Date | string | null | undefined;
     onValueChange: (_value: string | null) => void;

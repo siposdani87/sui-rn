@@ -8,9 +8,9 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
-export default function TextButton(props: {
+export function TextButton(props: {
     onPress: () => void;
     textColor?: string;
     textSize?: number;

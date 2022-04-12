@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function Label(props: {
+export declare function Label(props: {
     text?: string;
     onPress?: () => void;
     required?: boolean;

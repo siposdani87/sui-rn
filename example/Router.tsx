@@ -5,7 +5,7 @@ import OthersScreen from './screens/OthersScreen';
 import HomeScreen from './screens/HomeScreen';
 import TextareasScreen from './screens/TextareasScreen';
 import CheckboxesScreen from './screens/CheckboxesScreen';
-import DatetimesScreen from './screens/DatetimesScreen';
+import DatetimesScreen from './screens/DateTimesScreen';
 import FilesScreen from './screens/FilesScreen';
 import SelectsScreen from './screens/SelectsScreen';
 import TextsScreen from './screens/TextsScreen';

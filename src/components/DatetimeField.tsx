@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import SelectField from './SelectField';
-import IconButton from './IconButton';
+import { SelectField } from './SelectField';
+import { IconButton } from './IconButton';
 import { Styles } from '../constants';
-import Dialog from './Dialog';
-import Button from './Button';
-import TagField from './TagField';
+import { Dialog } from './Dialog';
+import { Button } from './Button';
+import { TagField } from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
 import { convertToISOFormat } from '@siposdani87/sui-js';
@@ -70,7 +70,7 @@ const MODES: Modes = {
     },
 };
 
-export default function DatetimeField(props: {
+export function DateTimeField(props: {
     mode: keyof Modes;
     value: Date | string | null | undefined;
     onValueChange: (_value: string | null) => void;

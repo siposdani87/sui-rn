@@ -8,9 +8,9 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Styles } from '../constants';
-import Text from '../components/Text';
+import { Text } from '../components/Text';
 
-export default function NoContent(props: {
+export function NoContent(props: {
     text?: string;
     imageSource?: ImageSourcePropType;
     children?: any;

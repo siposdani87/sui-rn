@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import Label from './Label';
+import { Label } from './Label';
 import { View, StyleSheet, Image, Alert, } from 'react-native';
-import useErrorField from '../hooks/useErrorField';
-import IconButton from './IconButton';
+import { useErrorField } from '../hooks/useErrorField';
+import { IconButton } from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Styles } from '../constants';
-import TextField from './TextField';
-import useActionColor from '../hooks/useActionColor';
+import { TextField } from './TextField';
+import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 import * as SUI from '@siposdani87/sui-js';
@@ -30,7 +30,7 @@ const fileTypeSVG = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
     '<path style="fill:#000000;" d="M416,416c0,8.8-7.2,16-16,16H48c-8.8,0-16-7.2-16-16V256c0-8.8,7.2-16,16-16h352c8.8,0,16,7.2,16,16V416z"/>' +
     '<text x="220" y="380" text-anchor="middle" style="fill:#FFF;font-weight:700;font-family:Arial;font-size:120px;">TYPE</text>' +
     '</svg>';
-export default function FileField(props) {
+export function FileField(props) {
     const [value, setValue] = useState(props.value);
     const [svgXml, setSvgXml] = useState(null);
     const [defaultSvgXml, setDefaultSvgXml] = useState(null);

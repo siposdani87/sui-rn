@@ -1,10 +1,10 @@
 import { useState } from 'react';
-export default function useErrorField(error) {
+export function useErrorField(error) {
     const [clearError, setClearError] = useState(null);
     const [prevError, setPrevError] = useState(null);
     const newError = clearError !== error ? error : null;
     if (prevError !== newError) {
-        setPrevError(newError ?? null);
+        setPrevError(newError);
     }
     const onErrorChange = () => {
         if (prevError) {

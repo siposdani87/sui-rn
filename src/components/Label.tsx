@@ -8,13 +8,13 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import useDarkTheme from '../hooks/useDarkTheme';
-import IconButton from './IconButton';
-import Text from './Text';
-import Dialog from './Dialog';
+import { useDarkTheme } from '../hooks/useDarkTheme';
+import { IconButton } from './IconButton';
+import { Text } from './Text';
+import { Dialog } from './Dialog';
 import * as SUI from '@siposdani87/sui-js';
 
-export default function Label(props: {
+export function Label(props: {
     text?: string;
     onPress?: () => void;
     required?: boolean;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Image, } from 'react-native';
 import { Styles } from '../constants';
-import Text from '../components/Text';
-export default function NoContent(props) {
+import { Text } from '../components/Text';
+export function NoContent(props) {
     return (<View style={[styles.container, props.containerStyle]}>
             {!!props.imageSource && (<View style={styles.imageContainer}>
                     <Image style={styles.image} source={props.imageSource}/>

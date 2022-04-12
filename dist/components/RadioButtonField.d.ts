@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
-export default function RadioButtonField(props: {
+export declare function RadioButtonField(props: {
     value: any;
     trueValue?: any;
     onValueChange: (_value: any) => void;
