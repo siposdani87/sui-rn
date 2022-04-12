@@ -2,7 +2,7 @@ export * from './BaseView';
 export * from './Button';
 export * from './CheckboxField';
 export * from './ColorField';
-export * from './DateTimeField1';
+export * from './DateTimeField';
 export * from './Dialog';
 export * from './DialogHeader';
 export * from './EmailField';
