@@ -5,7 +5,7 @@ import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ConfirmService } from '../services';
 
-export default function Confirm(props: { confirmService: ConfirmService }) {
+export function Confirm(props: { confirmService: ConfirmService }) {
     const type = props.confirmService.getType();
     const title = props.confirmService.getTitle();
     const message = props.confirmService.getMessage();
@@ -33,12 +33,12 @@ export default function Confirm(props: { confirmService: ConfirmService }) {
 
     const getButtons = (): JSX.Element[] => {
         return alertButtons.map((alertButton) => {
-            const title = alertButton.text ?? '';
+            const buttonText = alertButton.text ?? '';
             switch (alertButton.style) {
                 case 'default':
                     return (
                         <TextButton
-                            title={title}
+                            title={buttonText}
                             onPress={onPress(alertButton)}
                             textColor={Colors.primary}
                         />
@@ -46,14 +46,14 @@ export default function Confirm(props: { confirmService: ConfirmService }) {
                 case 'cancel':
                     return (
                         <TextButton
-                            title={title}
+                            title={buttonText}
                             onPress={onPress(alertButton)}
                         />
                     );
                 case 'destructive':
                     return (
                         <TextButton
-                            title={title}
+                            title={buttonText}
                             onPress={onPress(alertButton)}
                             textColor={Colors.error}
                         />
@@ -61,7 +61,7 @@ export default function Confirm(props: { confirmService: ConfirmService }) {
                 default:
                     return (
                         <TextButton
-                            title={title}
+                            title={buttonText}
                             onPress={onPress(alertButton)}
                         />
                     );

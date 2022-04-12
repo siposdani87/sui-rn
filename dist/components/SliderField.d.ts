@@ -7,7 +7,7 @@ export default function SliderField(props: {
     maximumValue?: number;
     step?: number;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

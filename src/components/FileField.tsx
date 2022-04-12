@@ -64,7 +64,7 @@ export default function FileField(props: {
     mimeType: string;
     onValueChange: (_value: any) => void;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

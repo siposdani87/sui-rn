@@ -9,6 +9,7 @@ import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
+import { convertToISOFormat } from '@siposdani87/sui-js';
 const MODES = {
     'datetime-local': {
         format: "yyyy-MM-dd'T'HH:mm:ss",
@@ -86,6 +87,9 @@ export default function DatetimeField(props) {
         }
     }, [config, value]);
     const getDate = (v, c) => {
+        if (v instanceof Date) {
+            return v;
+        }
         if (!c.format) {
             return parseISO(v);
         }
@@ -93,9 +97,7 @@ export default function DatetimeField(props) {
     };
     const getFormattedValue = (v, c) => {
         // TODO: moment format to date-fns iso standard
-        const formatString = props.format
-            .replace('YYYY', 'yyyy')
-            .replaceAll('D', 'd');
+        const formatString = convertToISOFormat(props.format);
         if (v instanceof Date) {
             return format(v, formatString);
         }

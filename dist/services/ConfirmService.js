@@ -1,6 +1,6 @@
 import { CONFIRM } from '../constants/ActionTypes';
 import { Base } from '../utils';
-export default class ConfirmService extends Base {
+export class ConfirmService extends Base {
     visible;
     type;
     title;

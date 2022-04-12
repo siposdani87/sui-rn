@@ -7,7 +7,7 @@ export default function EmailField(
         value: any;
         onValueChange: (_value: any) => void;
         label?: string;
-        error?: any;
+        error?: string | null;
         required?: boolean;
         disabled?: boolean;
         desc?: string;

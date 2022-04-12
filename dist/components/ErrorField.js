@@ -15,12 +15,14 @@ export default function ErrorField(props) {
             ? styles.errorDefaultDarkText
             : styles.errorDefaultLightText;
     };
-    if (props.error === false) {
+    if (!props.error) {
         return null;
     }
     return (<View style={styles.container}>
             <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>
-                {props.error ? SUI.capitalize(props.error.join('; ')) : null}
+                {props.error
+            ? SUI.capitalize(props.error.join('; '))
+            : null}
             </Text>
         </View>);
 }

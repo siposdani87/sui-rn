@@ -21,7 +21,7 @@ export default function TextField(
         onValueChange: (_value: any) => void;
         readonly?: boolean;
         label?: string;
-        error?: any;
+        error?: string | null;
         required?: boolean;
         disabled?: boolean;
         placeholder?: string;

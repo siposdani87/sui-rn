@@ -10,7 +10,7 @@ interface DatetimesState {
     datetimeRequiredDisabled: Date | string | null;
     date: Date | string | null;
     time: Date | string | null;
-    year: Date | number | null;
+    year: Date | string | null;
 }
 
 export default function DatetimesScreen() {
@@ -46,7 +46,7 @@ export default function DatetimesScreen() {
                     .toISOString()
                     .split('T', 2)[1]
                     .split('.', 2)[0],
-                year: 1987, 
+                year: '1987', 
             }); 
             setRefreshing(false);
         }, 2000);

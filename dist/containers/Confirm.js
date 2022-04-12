@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Dialog, TextButton, Text } from '../components';
 import { Colors } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-export default function Confirm(props) {
+export function Confirm(props) {
     const type = props.confirmService.getType();
     const title = props.confirmService.getTitle();
     const message = props.confirmService.getMessage();
@@ -27,16 +27,16 @@ export default function Confirm(props) {
     };
     const getButtons = () => {
         return alertButtons.map((alertButton) => {
-            const title = alertButton.text ?? '';
+            const buttonText = alertButton.text ?? '';
             switch (alertButton.style) {
                 case 'default':
-                    return (<TextButton title={title} onPress={onPress(alertButton)} textColor={Colors.primary}/>);
+                    return (<TextButton title={buttonText} onPress={onPress(alertButton)} textColor={Colors.primary}/>);
                 case 'cancel':
-                    return (<TextButton title={title} onPress={onPress(alertButton)}/>);
+                    return (<TextButton title={buttonText} onPress={onPress(alertButton)}/>);
                 case 'destructive':
-                    return (<TextButton title={title} onPress={onPress(alertButton)} textColor={Colors.error}/>);
+                    return (<TextButton title={buttonText} onPress={onPress(alertButton)} textColor={Colors.error}/>);
                 default:
-                    return (<TextButton title={title} onPress={onPress(alertButton)}/>);
+                    return (<TextButton title={buttonText} onPress={onPress(alertButton)}/>);
             }
         });
     };

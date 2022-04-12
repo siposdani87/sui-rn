@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-export default class Base {
+export class Base {
     public static reducer = (state = {}, action: any) => {
         if (action.type) {
             return {

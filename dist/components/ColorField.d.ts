@@ -5,7 +5,7 @@ export default function ColorField(props: {
     onValueChange: (_value: any) => void;
     okText: string;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -22,7 +22,7 @@ export default function TagField(props: {
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;
-    error?: any;
+    error?: string | null;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
