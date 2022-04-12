@@ -1,7 +1,7 @@
 import { AlertButton } from 'react-native';
 import { Base } from '../utils';
 import { Dispatch } from 'react';
-export default class ConfirmService extends Base {
+export declare class ConfirmService extends Base {
     private visible;
     private type;
     private title;

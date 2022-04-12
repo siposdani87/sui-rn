@@ -1,5 +1,5 @@
 /// <reference types="react" />
 export default function ErrorField(props: {
-    error?: any;
+    error?: string | null;
     disabled?: boolean;
 }): JSX.Element | null;

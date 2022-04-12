@@ -25,7 +25,7 @@ export default function SwitchField(props: {
     trueValue?: any;
     falseValue?: any;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

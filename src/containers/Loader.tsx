@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Layout, Styles } from '../constants';
 import { HttpService } from '../services';
 
-export default function Loader(props: {
+export function Loader(props: {
     httpService: HttpService;
     backgroundColor: string;
     color: string;

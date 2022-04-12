@@ -4,7 +4,7 @@ export default function useErrorField(error) {
     const [prevError, setPrevError] = useState(null);
     const newError = clearError !== error ? error : null;
     if (prevError !== newError) {
-        setPrevError(newError);
+        setPrevError(newError ?? null);
     }
     const onErrorChange = () => {
         if (prevError) {

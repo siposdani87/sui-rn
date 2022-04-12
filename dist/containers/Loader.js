@@ -2,7 +2,7 @@ import React from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Layout, Styles } from '../constants';
-export default function Loader(props) {
+export function Loader(props) {
     const insets = useSafeAreaInsets();
     const backgroundColor = props.backgroundColor || Colors.primary;
     if (props.httpService.isInprogress()) {

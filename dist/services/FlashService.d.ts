@@ -12,7 +12,7 @@ export interface FlashType {
     duration?: number;
     closeCallback?: () => void;
 }
-export default class FlashService extends Base {
+export declare class FlashService extends Base {
     private flashes;
     private options;
     constructor(dispatch: Dispatch<any>);

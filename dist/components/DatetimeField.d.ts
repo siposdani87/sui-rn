@@ -16,12 +16,12 @@ interface Modes {
 }
 export default function DatetimeField(props: {
     mode: keyof Modes;
-    value: string | null | undefined;
+    value: Date | string | null | undefined;
     onValueChange: (_value: string | null) => void;
     okText: string;
     format: string;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     searchPlaceholder?: string;

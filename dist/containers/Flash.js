@@ -4,7 +4,7 @@ import { Colors, Layout, Styles } from '../constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconButton, Text } from '../components';
 import useDarkTheme from '../hooks/useDarkTheme';
-export default function Flash(props) {
+export function Flash(props) {
     const isDarkTheme = useDarkTheme();
     const insets = useSafeAreaInsets();
     const close = (flash) => {

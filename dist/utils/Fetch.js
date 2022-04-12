@@ -1,5 +1,5 @@
 import * as SUI from '@siposdani87/sui-js';
-export default class Fetch {
+export class Fetch {
     backendUrl;
     constructor(backendUrl) {
         this.backendUrl = backendUrl;

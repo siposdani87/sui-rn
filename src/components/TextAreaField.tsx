@@ -22,7 +22,7 @@ export default function TextAreaField(props: {
     numberOfLines?: number;
     richText?: boolean;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

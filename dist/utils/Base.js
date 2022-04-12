@@ -1,4 +1,4 @@
-export default class Base {
+export class Base {
     static reducer = (state = {}, action) => {
         if (action.type) {
             return {

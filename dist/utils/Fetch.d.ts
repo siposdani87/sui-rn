@@ -13,7 +13,7 @@ export interface HttpResponse extends Response {
 interface MimeTypes {
     [key: string]: string;
 }
-export default class Fetch {
+export declare class Fetch {
     private backendUrl;
     constructor(backendUrl: string);
     get mimeTypes(): MimeTypes;

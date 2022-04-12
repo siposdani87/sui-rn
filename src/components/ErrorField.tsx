@@ -6,7 +6,7 @@ import { StyleProp } from 'react-native';
 import * as SUI from '@siposdani87/sui-js';
 
 export default function ErrorField(props: {
-    error?: any;
+    error?: string | null;
     disabled?: boolean;
 }): JSX.Element | null {
     const isDarkTheme = useDarkTheme();
@@ -22,13 +22,15 @@ export default function ErrorField(props: {
             : styles.errorDefaultLightText;
     };
 
-    if (props.error === false) {
+    if (!props.error) {
         return null;
     }
     return (
         <View style={styles.container}>
             <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>
-                {props.error ? SUI.capitalize(props.error.join('; ')) : null}
+                {props.error
+                    ? SUI.capitalize((props.error as any).join('; '))
+                    : null}
             </Text>
         </View>
     );

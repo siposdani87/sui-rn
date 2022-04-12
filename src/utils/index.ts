@@ -1,3 +1,3 @@
-export { default as Base } from './Base';
+export * from './Base';
 export * from './Cache';
-export { default as Fetch } from './Fetch';
+export * from './Fetch';

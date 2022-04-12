@@ -17,7 +17,7 @@ export interface FlashType {
     closeCallback?: () => void;
 }
 
-export default class FlashService extends Base {
+export class FlashService extends Base {
     private flashes: FlashType[];
     private options: {
         closableTypes: string[];

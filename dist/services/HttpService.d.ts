@@ -4,7 +4,7 @@ import { Base } from '../utils';
 import { Data, Params, Headers } from '../utils/Fetch';
 export interface DataResponse extends SUI.Objekt {
 }
-export default class HttpService extends Base {
+export declare class HttpService extends Base {
     private getTokenAsync;
     private inprogress;
     private language;

@@ -22,7 +22,7 @@ export default function IconToggleField(props: {
     onValueChange: (_value: any) => void;
     disableUncheck?: boolean;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

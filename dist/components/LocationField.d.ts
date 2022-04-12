@@ -14,7 +14,7 @@ export default function LocationField(props: {
     markerImage?: ImageURISource;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

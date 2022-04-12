@@ -9,6 +9,7 @@ import Button from './Button';
 import TagField from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
+import { convertToISOFormat } from '@siposdani87/sui-js';
 
 interface Year {
     label: string;
@@ -71,12 +72,12 @@ const MODES: Modes = {
 
 export default function DatetimeField(props: {
     mode: keyof Modes;
-    value: string | null | undefined;
+    value: Date | string | null | undefined;
     onValueChange: (_value: string | null) => void;
     okText: string;
     format: string;
     label?: string;
-    error?: any;
+    error?: string | null;
     required?: boolean;
     disabled?: boolean;
     searchPlaceholder?: string;
@@ -85,7 +86,7 @@ export default function DatetimeField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): JSX.Element {
-    const [value, setValue] = useState<string>(props.value ?? '');
+    const [value, setValue] = useState<Date | string>(props.value ?? '');
     const [formattedValue, setFormattedValue] = useState<string>('');
     const [date, setDate] = useState<Date | null>(null);
     const [config, setConfig] = useState<Mode>(MODES[props.mode]);
@@ -126,7 +127,10 @@ export default function DatetimeField(props: {
         }
     }, [config, value]);
 
-    const getDate = (v: string, c: Mode): Date => {
+    const getDate = (v: Date | string, c: Mode): Date => {
+        if (v instanceof Date) {
+            return v;
+        }
         if (!c.format) {
             return parseISO(v);
         }
@@ -135,9 +139,7 @@ export default function DatetimeField(props: {
 
     const getFormattedValue = (v: Date | string, c: Mode): string => {
         // TODO: moment format to date-fns iso standard
-        const formatString = props.format
-            .replace('YYYY', 'yyyy')
-            .replaceAll('D', 'd');
+        const formatString = convertToISOFormat(props.format);
         if (v instanceof Date) {
             return format(v, formatString);
         }

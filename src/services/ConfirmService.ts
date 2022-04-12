@@ -3,7 +3,7 @@ import { AlertButton } from 'react-native';
 import { Base } from '../utils';
 import { Dispatch } from 'react';
 
-export default class ConfirmService extends Base {
+export class ConfirmService extends Base {
     private visible: boolean;
     private type: string;
     private title: string;

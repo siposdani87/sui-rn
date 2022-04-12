@@ -11,7 +11,7 @@ import { Data, Params, Headers, HttpResponse } from '../utils/Fetch';
 
 export interface DataResponse extends SUI.Objekt {}
 
-export default class HttpService extends Base {
+export class HttpService extends Base {
     private getTokenAsync: () => Promise<string>;
     private inprogress: number;
     private language: string;

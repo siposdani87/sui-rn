@@ -20,7 +20,7 @@ interface MimeTypes {
     [key: string]: string;
 }
 
-export default class Fetch {
+export class Fetch {
     private backendUrl: string;
 
     constructor(backendUrl: string) {
