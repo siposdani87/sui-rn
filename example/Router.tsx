@@ -5,7 +5,7 @@ import OthersScreen from './screens/OthersScreen';
 import HomeScreen from './screens/HomeScreen';
 import TextareasScreen from './screens/TextareasScreen';
 import CheckboxesScreen from './screens/CheckboxesScreen';
-import DatetimesScreen from './screens/DateTimesScreen';
+import DateTimesScreen from './screens/DateTimesScreen';
 import FilesScreen from './screens/FilesScreen';
 import SelectsScreen from './screens/SelectsScreen';
 import TextsScreen from './screens/TextsScreen';
@@ -50,7 +50,7 @@ export default function Router() {
             <Stack.Screen name="Buttons" component={ButtonsScreen} />
             <Stack.Screen name="Checkboxes" component={CheckboxesScreen} />
             <Stack.Screen name="Colors" component={ColorsScreen} />
-            <Stack.Screen name="Datetimes" component={DatetimesScreen} />
+            <Stack.Screen name="Datetimes" component={DateTimesScreen} />
             <Stack.Screen name="Files" component={FilesScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Locations" component={LocationsScreen} />

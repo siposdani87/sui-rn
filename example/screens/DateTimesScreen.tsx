@@ -3,7 +3,7 @@ import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { DateTimeField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
-interface DatetimesState {
+interface DateTimesState {
     datetime: Date | string | null;
     datetimeDisabled: Date | string | null;
     datetimeRequired: Date | string | null | undefined;
@@ -13,8 +13,8 @@ interface DatetimesState {
     year: Date | string | null;
 }
 
-export default function DatetimesScreen() {
-    const [data, setData] = useState<DatetimesState>({
+export default function DateTimesScreen() {
+    const [data, setData] = useState<DateTimesState>({
         datetime: null,
         datetimeDisabled: null,
         datetimeRequired: new Date(),
