@@ -1,6 +1,8 @@
-import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker, {
+    DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 import { SelectField } from './SelectField';
 import { IconButton } from './IconButton';
 import { Styles } from '../constants';
@@ -164,8 +166,8 @@ export function DateTimeField(props: {
     };
 
     const onChange = (
-        _event: SyntheticEvent<Readonly<{ timestamp: number }>, Event>,
-        selectedDate?: Date,
+        _event: DateTimePickerEvent,
+        selectedDate?: Date | undefined,
     ): void => {
         if (Platform.OS === 'android') {
             hide();
