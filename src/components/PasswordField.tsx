@@ -30,7 +30,7 @@ export function PasswordField(
             containerStyle={props.containerStyle}
             style={props.style}
             secureTextEntry={true}
-            autoCompleteType={props.autoCompleteType}
+            autoComplete={props.autoComplete}
             textContentType={props.textContentType}
             actionButtons={props.actionButtons}
         />
