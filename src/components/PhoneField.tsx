@@ -30,7 +30,7 @@ export function PhoneField(
             containerStyle={props.containerStyle}
             style={props.style}
             keyboardType="phone-pad"
-            autoCompleteType={props.autoCompleteType}
+            autoComplete={props.autoComplete}
             textContentType={props.textContentType}
             actionButtons={props.actionButtons}
         />

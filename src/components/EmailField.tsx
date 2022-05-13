@@ -31,7 +31,7 @@ export function EmailField(
             style={props.style}
             autoCapitalize="none"
             keyboardType="email-address"
-            autoCompleteType={props.autoCompleteType}
+            autoComplete={props.autoComplete}
             textContentType={props.textContentType}
             actionButtons={props.actionButtons}
         />
