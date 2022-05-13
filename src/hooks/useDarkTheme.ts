@@ -1,8 +1,8 @@
-import { useColorScheme } from 'react-native-appearance';
+import { Appearance } from 'react-native';
 import environment from '../config/environment';
 
 export function useDarkTheme(): boolean {
-    const colorScheme = useColorScheme();
+    const colorScheme = Appearance.getColorScheme();
     return environment.dark_theme === null
         ? colorScheme === 'dark'
         : environment.dark_theme ?? false;

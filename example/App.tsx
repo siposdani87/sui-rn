@@ -15,15 +15,14 @@ import {
     DefaultTheme,
     NavigationContainer,
 } from '@react-navigation/native';
-import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { Linking, Platform } from 'react-native';
-import { AppearanceProvider } from 'react-native-appearance';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Router from './Router';
 import { ServiceContext, Services } from './ServiceContext';
-import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme  } from '@siposdani87/sui-rn';
+import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme } from '@siposdani87/sui-rn';
+import * as SplashScreen from 'expo-splash-screen';
 
 const colors = setThemeColors(
     Colors.deepPurpleBright,
@@ -81,6 +80,12 @@ export default function App() {
     }, []);
 
     useEffect(() => {
+        if (fontsLoaded && isReady) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, isReady]);
+
+    useEffect(() => {
         console.log('reducerState:', state);
     }, [state]);
 
@@ -111,33 +116,31 @@ export default function App() {
     }, [isReady]);
 
     if (!isReady || !fontsLoaded) {
-        return <AppLoading />;
+        return null;
     }
 
     return (
         <ServiceContext.Provider value={services}>
             <SafeAreaProvider>
-                <AppearanceProvider>
-                    <Confirm confirmService={services.confirmService} />
-                    <Flash flashService={services.flashService} />
-                    <Loader
-                        httpService={services.httpService}
-                        color={Colors.accent}
-                        backgroundColor={Colors.primary}
-                    />
-                    <NavigationContainer
-                        theme={isDarkTheme ? appDarkTheme : appLightTheme}
-                        initialState={initialState}
-                        onStateChange={(navigationState) =>
-                            AsyncStorage.setItem(
-                                PERSISTENCE_KEY,
-                                JSON.stringify(navigationState),
-                            )
-                        }
-                    >
-                        <Router />
-                    </NavigationContainer>
-                </AppearanceProvider>
+                <Confirm confirmService={services.confirmService} />
+                <Flash flashService={services.flashService} />
+                <Loader
+                    httpService={services.httpService}
+                    color={Colors.accent}
+                    backgroundColor={Colors.primary}
+                />
+                <NavigationContainer
+                    theme={isDarkTheme ? appDarkTheme : appLightTheme}
+                    initialState={initialState}
+                    onStateChange={(navigationState) =>
+                        AsyncStorage.setItem(
+                            PERSISTENCE_KEY,
+                            JSON.stringify(navigationState),
+                        )
+                    }
+                >
+                    <Router />
+                </NavigationContainer>
             </SafeAreaProvider>
         </ServiceContext.Provider>
     );
