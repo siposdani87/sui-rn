@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
@@ -10,17 +10,10 @@ import {
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
-import HsvColorPicker from 'react-native-hsv-color-picker';
+import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
 import { useInputStyle } from '../hooks/useInputStyle';
-import * as SUI from '@siposdani87/sui-js';
-
-interface Color {
-    saturation: number;
-    hue: number;
-    value: number;
-}
 
 export function ColorField(props: {
     value: any;
@@ -38,12 +31,9 @@ export function ColorField(props: {
 }): JSX.Element {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState<string>(props.value);
-    const [hue, setHue] = useState<number>(0);
-    const [sat, setSat] = useState<number>(0);
-    const [val, setVal] = useState<number>(1);
+    const [currentColor, setCurrentColor] = useState<string>(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
     const [visible, setVisible] = useState<boolean>(false);
-    const colorPickerRef = useRef<any>(null);
     const inputStyle = useInputStyle(
         value,
         error,
@@ -63,10 +53,6 @@ export function ColorField(props: {
 
     const showColorPicker = (): void => {
         if (!props.disabled) {
-            const [h, s, v] = SUI.convertHEXToHSV(getValue());
-            setHue(h);
-            setSat(s);
-            setVal(v);
             setVisible(true);
         }
     };
@@ -75,23 +61,17 @@ export function ColorField(props: {
         setVisible(false);
     };
 
-    const onSatValPickerChange = (c: Color): void => {
-        setSat(c.saturation);
-        setVal(c.value);
-    };
-
-    const onHuePickerChange = (c: Color): void => {
-        setHue(c.hue);
-    };
-
     const selectColor = () => {
         hideColorPicker();
-        const hexColor = colorPickerRef.current?.getCurrentColor();
-        onValueChange(hexColor);
+        onValueChange(currentColor);
     };
 
     const getValue = (): string => {
         return value || defaultColor;
+    };
+
+    const onColorChange = (color: string) => {
+        setCurrentColor(color);
     };
 
     return (
@@ -102,23 +82,18 @@ export function ColorField(props: {
                 onClose={hideColorPicker}
                 buttons={[
                     <Button
-                        key={0}
+                        key="0"
                         title={props.okText}
                         onPress={selectColor}
                     />,
                 ]}
             >
-                <HsvColorPicker
-                    ref={colorPickerRef}
-                    huePickerHue={hue}
-                    onHuePickerDragEnd={onHuePickerChange}
-                    onHuePickerPress={onHuePickerChange}
-                    satValPickerHue={hue}
-                    satValPickerSaturation={sat}
-                    satValPickerValue={val}
-                    onSatValPickerDragEnd={onSatValPickerChange}
-                    onSatValPickerPress={onSatValPickerChange}
-                />
+                <View style={styles.colorPickerContainer}>
+                    <ColorPicker
+                        color={currentColor}
+                        onColorChangeComplete={onColorChange}
+                    />
+                </View>
             </Dialog>
             <TouchableOpacity
                 activeOpacity={Styles.activeOpacity}
@@ -165,5 +140,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: Colors.black,
         borderWidth: 1,
+    },
+    colorPickerContainer: {
+        height: 300,
     },
 });
