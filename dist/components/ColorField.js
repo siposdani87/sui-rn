@@ -1,23 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
-import HsvColorPicker from 'react-native-hsv-color-picker';
+import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
 import { useInputStyle } from '../hooks/useInputStyle';
-import * as SUI from '@siposdani87/sui-js';
 export function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
-    const [hue, setHue] = useState(0);
-    const [sat, setSat] = useState(0);
-    const [val, setVal] = useState(1);
+    const [currentColor, setCurrentColor] = useState(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
     const [visible, setVisible] = useState(false);
-    const colorPickerRef = useRef(null);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled);
     useEffect(() => {
         setValue(props.value);
@@ -29,36 +25,29 @@ export function ColorField(props) {
     };
     const showColorPicker = () => {
         if (!props.disabled) {
-            const [h, s, v] = SUI.convertHEXToHSV(getValue());
-            setHue(h);
-            setSat(s);
-            setVal(v);
             setVisible(true);
         }
     };
     const hideColorPicker = () => {
         setVisible(false);
     };
-    const onSatValPickerChange = (c) => {
-        setSat(c.saturation);
-        setVal(c.value);
-    };
-    const onHuePickerChange = (c) => {
-        setHue(c.hue);
-    };
     const selectColor = () => {
         hideColorPicker();
-        const hexColor = colorPickerRef.current?.getCurrentColor();
-        onValueChange(hexColor);
+        onValueChange(currentColor);
     };
     const getValue = () => {
         return value || defaultColor;
     };
+    const onColorChange = (color) => {
+        setCurrentColor(color);
+    };
     return (<View style={[styles.container, props.containerStyle]}>
             <Dialog visible={visible} title={props.label} onClose={hideColorPicker} buttons={[
-            <Button key={0} title={props.okText} onPress={selectColor}/>,
+            <Button key="0" title={props.okText} onPress={selectColor}/>,
         ]}>
-                <HsvColorPicker ref={colorPickerRef} huePickerHue={hue} onHuePickerDragEnd={onHuePickerChange} onHuePickerPress={onHuePickerChange} satValPickerHue={hue} satValPickerSaturation={sat} satValPickerValue={val} onSatValPickerDragEnd={onSatValPickerChange} onSatValPickerPress={onSatValPickerChange}/>
+                <View style={styles.colorPickerContainer}>
+                    <ColorPicker color={currentColor} onColorChangeComplete={onColorChange}/>
+                </View>
             </Dialog>
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
                 <View style={[
@@ -89,6 +78,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: Colors.black,
         borderWidth: 1,
+    },
+    colorPickerContainer: {
+        height: 300,
     },
 });
 //# sourceMappingURL=ColorField.js.map
