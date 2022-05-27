@@ -30,13 +30,13 @@ export default function TextsScreen() {
 
         setTimeout(() => {
             setData({
-                name: 'Sipos Dániel',
-                nameDisabled: 'Sipos Dániel',
+                name: 'John Doe',
+                nameDisabled: 'Jane Doe',
                 nameRequired: '',
                 nameRequiredDisabled: '',
-                email: 'siposdani87@hotmail.com',
-                password: '1234',
-                phone: '+36309520471',
+                email: 'user@example.com',
+                password: 'TX3-ZaZ6k-$5&t!K',
+                phone: '+362012345678',
                 height: 178,
                 query: '',
             });
