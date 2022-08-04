@@ -52,7 +52,8 @@
     "react-native-svg": "12.3.0",
     "expo-modules-core": "~0.11.3",
     "@unimodules/core": "~7.2.0",
-    "expo-splash-screen": "~0.16.1"
+    "expo-splash-screen": "~0.16.1",
+    "@shopify/flash-list": "1.1.0"
   },
   "devDependencies": {
     "@expo-google-fonts/inter": "^0.2.0",
