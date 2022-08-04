@@ -29,7 +29,7 @@ export function TabBar(
         >
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
-                const label = options.tabBarLabel
+                const label: any = options.tabBarLabel
                     ? options.tabBarLabel
                     : options.title
                     ? options.title
