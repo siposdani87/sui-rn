@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { NoContent } from './NoContent';
 import {
-    FlatList as RNFlatList,
     ImageSourcePropType,
-    ListRenderItem,
     Platform,
     RefreshControl,
     View,
+    StyleSheet,
 } from 'react-native';
+import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 const config = {
     progressViewOffset: -1000,
@@ -30,18 +30,14 @@ export function FlatList(props: {
     const [flatListReady, setFlatListReady] = useState<boolean>(false);
 
     const onRefresh = (): void => {
-        // console.log('onRefresh->refreshing', props.refreshing);
         if (!props.refreshing) {
-            // console.log('onRefresh', state.flatListReady);
             setFlatListReady(false);
             props.onRefresh();
         }
     };
 
     const onEndReached = (): void => {
-        // console.log('onEndReached->refreshing', props.refreshing);
         if (!props.refreshing) {
-            // console.log('onEndReached', state.flatListReady);
             if (flatListReady) {
                 setFlatListReady(false);
                 props.onEndReached();
@@ -50,7 +46,6 @@ export function FlatList(props: {
     };
 
     const onScrollEndDrag = (): void => {
-        // console.log('onScrollEndDrag');
         setFlatListReady(true);
     };
 
@@ -59,7 +54,7 @@ export function FlatList(props: {
             <NoContent
                 imageSource={props.noContentImageSource}
                 text={props.noContentText}
-                containerStyle={{ marginTop: 10 }}
+                containerStyle={styles.container}
             />
         );
     };
@@ -76,17 +71,17 @@ export function FlatList(props: {
     };
 
     return (
-        <View style={{ marginTop: -10 }}>
-            <RNFlatList
+        <View style={styles.base}>
+            <FlashList
                 data={props.data}
                 keyExtractor={props.keyExtractor}
                 renderItem={props.renderItem}
                 numColumns={props.numColumns}
-                columnWrapperStyle={props.columnWrapperStyle}
+                // columnWrapperStyle={props.columnWrapperStyle}
                 horizontal={false}
-                ListHeaderComponentStyle={{ height: 0, margin: 0, padding: 0 }}
+                ListHeaderComponentStyle={styles.listHeaderComponent}
                 removeClippedSubviews={true}
-                style={{ marginTop: 10 }}
+                style={styles.container}
                 progressViewOffset={config.progressViewOffset}
                 onEndReachedThreshold={config.onEndReachedThreshold}
                 ListEmptyComponent={getListEmptyComponent()}
@@ -97,7 +92,22 @@ export function FlatList(props: {
                 refreshControl={
                     Platform.OS === 'ios' ? getRefreshControl() : undefined
                 }
+                estimatedItemSize={200}
             />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    base: {
+        marginTop: -10,
+    },
+    container: {
+        marginTop: 10,
+    },
+    listHeaderComponent: {
+        height: 0,
+        margin: 0,
+        padding: 0,
+    },
+});
