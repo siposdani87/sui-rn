@@ -71,7 +71,7 @@ export function FlatList(props: {
     };
 
     return (
-        <View style={styles.base}>
+        <View style={styles.container}>
             <FlashList
                 data={props.data}
                 keyExtractor={props.keyExtractor}
@@ -81,7 +81,7 @@ export function FlatList(props: {
                 horizontal={false}
                 ListHeaderComponentStyle={styles.listHeaderComponent}
                 removeClippedSubviews={true}
-                style={styles.container}
+                // style={styles.container}
                 progressViewOffset={config.progressViewOffset}
                 onEndReachedThreshold={config.onEndReachedThreshold}
                 ListEmptyComponent={getListEmptyComponent()}
@@ -99,11 +99,8 @@ export function FlatList(props: {
 }
 
 const styles = StyleSheet.create({
-    base: {
-        marginTop: -10,
-    },
     container: {
-        marginTop: 10,
+        flex: 1,
     },
     listHeaderComponent: {
         height: 0,
