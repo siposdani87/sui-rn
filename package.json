@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "description": "",
   "author": "Dániel Sipos",
-  "license": "MIT",
+  "license": "ISC",
   "homepage": "https://siposdani87.com",
   "private": false,
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     "url": "https://github.com/siposdani87/sui-rn/issues"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "prebuild": "npm run clean",
