@@ -1,11 +1,11 @@
 {
   "name": "@siposdani87/sui-rn",
   "version": "0.4.0",
-  "description": "This is a basic UI library. It is written in the TypeScript language. The codebase was ready to use with Expo and React Native.",
+  "description": "",
   "author": "Dániel Sipos",
   "license": "MIT",
   "homepage": "https://siposdani87.com",
-  "private": false,
+  "private": true,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "keywords": [
@@ -23,7 +23,7 @@
     "url": "https://github.com/siposdani87/sui-rn/issues"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "restricted"
   },
   "scripts": {
     "prebuild": "npm run clean",
@@ -64,7 +64,7 @@
     "@react-native-community/eslint-config": "^3.0.1",
     "@react-native-community/slider": "*",
     "@react-navigation/bottom-tabs": "*",
-    "@react-navigation/stack": "6.2.1",
+    "@react-navigation/stack": "*",
     "@shopify/flash-list": "1.1.0",
     "@siposdani87/expo-maps-polygon-editor": "*",
     "@siposdani87/expo-rich-text-editor": "*",
