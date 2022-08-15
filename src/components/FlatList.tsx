@@ -6,8 +6,10 @@ import {
     RefreshControl,
     View,
     StyleSheet,
+    FlatList as RNFlatList,
+    ListRenderItem,
 } from 'react-native';
-import { FlashList, ListRenderItem } from '@shopify/flash-list';
+// import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 const config = {
     progressViewOffset: -1000,
@@ -71,17 +73,17 @@ export function FlatList(props: {
     };
 
     return (
-        <View style={styles.container}>
-            <FlashList
+        <View style={styles.base}>
+            <RNFlatList
                 data={props.data}
                 keyExtractor={props.keyExtractor}
                 renderItem={props.renderItem}
                 numColumns={props.numColumns}
-                // columnWrapperStyle={props.columnWrapperStyle}
+                columnWrapperStyle={props.columnWrapperStyle}
                 horizontal={false}
                 ListHeaderComponentStyle={styles.listHeaderComponent}
                 removeClippedSubviews={true}
-                // style={styles.container}
+                style={styles.container}
                 progressViewOffset={config.progressViewOffset}
                 onEndReachedThreshold={config.onEndReachedThreshold}
                 ListEmptyComponent={getListEmptyComponent()}
@@ -92,15 +94,18 @@ export function FlatList(props: {
                 refreshControl={
                     Platform.OS === 'ios' ? getRefreshControl() : undefined
                 }
-                estimatedItemSize={200}
+                // estimatedItemSize={200}
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    base: {
+        marginTop: -10,
+    },
     container: {
-        flex: 1,
+        marginTop: 10,
     },
     listHeaderComponent: {
         height: 0,

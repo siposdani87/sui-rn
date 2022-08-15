@@ -1,6 +1,5 @@
 /// <reference types="react" />
-import { ImageSourcePropType } from 'react-native';
-import { ListRenderItem } from '@shopify/flash-list';
+import { ImageSourcePropType, ListRenderItem } from 'react-native';
 export declare function FlatList(props: {
     data: any[];
     keyExtractor?: (_item: any, _index: number) => string;
