@@ -24,32 +24,7 @@ expo install @siposdani87/sui-rn
 Check example directory for more samples and options.
 
 ```js
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { TextField } from '@siposdani87/sui-rn';
 
-export SampleScreen = () => {
-    const [data, setData] = useState({
-        name: '',
-    });
-
-    function updateData(key: string, value: string) {
-        setData({
-            ...data,
-            [key]: value,
-        });
-    }
-
-    return (
-        <View>
-            <TextField
-                label="Name"
-                value={data.name}
-                onValueChange={(v) => updateData('name', v)}
-            />
-        </View>
-    );
-}
 ```
 
 ## Preview

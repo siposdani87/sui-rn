@@ -31,7 +31,7 @@
     "@react-native-community/slider": "4.2.3",
     "@siposdani87/expo-maps-polygon-editor": "latest",
     "@siposdani87/expo-rich-text-editor": "latest",
-    "@siposdani87/sui-js": "git+https://siposdani87:pTUa5kZeCCawnTzkYVUV@bitbucket.org/siposdani87/sui-js.git#develop",
+    "@siposdani87/sui-js": "latest",
     "@siposdani87/sui-rn": "file:../",
     "expo": "^46.0.0",
     "expo-asset": "~8.6.1",
