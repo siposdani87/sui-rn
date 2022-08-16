@@ -9,7 +9,6 @@ import {
     FlatList as RNFlatList,
     ListRenderItem,
 } from 'react-native';
-// import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 const config = {
     progressViewOffset: -1000,

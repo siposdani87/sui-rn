@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NoContent } from './NoContent';
 import { Platform, RefreshControl, View, StyleSheet, FlatList as RNFlatList, } from 'react-native';
-// import { FlashList, ListRenderItem } from '@shopify/flash-list';
 const config = {
     progressViewOffset: -1000,
     onEndReachedThreshold: 0.5,
