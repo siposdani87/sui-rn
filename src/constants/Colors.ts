@@ -1,15 +1,19 @@
-const baseColors = {
+export type ColorTypes = {
+    [key: string]: string;
+};
+
+const baseColors: ColorTypes = {
     // Theme
 
-    primaryBright: '',
-    primary: '',
-    primaryDark: '',
-    primaryText: '',
+    primaryBright: '#7986CB',
+    primary: '#3F51B5',
+    primaryDark: '#303F9F',
+    primaryText: '#FAFAFA',
 
-    accentBright: '',
-    accent: '',
-    accentDark: '',
-    accentText: '',
+    accentBright: '#F06292',
+    accent: '#E91E63',
+    accentDark: '#C2185B',
+    accentText: '#FAFAFA',
 
     // Black & White & Grey
 
@@ -108,7 +112,7 @@ const baseColors = {
     brownDark: '#5D4037',
 };
 
-const additionalColors = {
+const additionalColors: ColorTypes = {
     successBright: baseColors.greenBright,
     success: baseColors.green,
     successDark: baseColors.greenDark,
@@ -172,7 +176,10 @@ const additionalColors = {
     errorDisabledDark: baseColors.redDark,
 };
 
-const colors = Object.assign(baseColors, additionalColors);
+const colors = {
+    ...baseColors,
+    ...additionalColors,
+};
 
 export function setThemeColors(
     primaryBright: string,
