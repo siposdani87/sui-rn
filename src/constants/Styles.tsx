@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
-import Colors from './Colors';
+import { default as Colors, type ColorTypes } from './Colors';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
@@ -154,7 +154,7 @@ const styles = {
 } as any;
 
 export function setThemeStyles(
-    colors: any,
+    colors: ColorTypes,
     fontFamilyApp: string,
     fontFamilyHeadings: string[],
     fontFamilyBodies: string[],

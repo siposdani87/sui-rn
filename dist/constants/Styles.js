@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
-import Colors from './Colors';
+import { default as Colors } from './Colors';
 const styles = {
     fontFamilyApp: '',
     fontFamilyHeadingRegular: '',

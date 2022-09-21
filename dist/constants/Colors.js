@@ -1,13 +1,13 @@
 const baseColors = {
     // Theme
-    primaryBright: '',
-    primary: '',
-    primaryDark: '',
-    primaryText: '',
-    accentBright: '',
-    accent: '',
-    accentDark: '',
-    accentText: '',
+    primaryBright: '#7986CB',
+    primary: '#3F51B5',
+    primaryDark: '#303F9F',
+    primaryText: '#FAFAFA',
+    accentBright: '#F06292',
+    accent: '#E91E63',
+    accentDark: '#C2185B',
+    accentText: '#FAFAFA',
     // Black & White & Grey
     whiteBright: '#FFFFFF',
     white: '#FAFAFA',
@@ -126,7 +126,10 @@ const additionalColors = {
     errorDefaultDark: baseColors.redBright,
     errorDisabledDark: baseColors.redDark,
 };
-const colors = Object.assign(baseColors, additionalColors);
+const colors = {
+    ...baseColors,
+    ...additionalColors,
+};
 export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
     colors.primaryBright = primaryBright;
     colors.primary = primary;
