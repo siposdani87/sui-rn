@@ -31,10 +31,9 @@ export function Confirm(props) {
             switch (alertButton.style) {
                 case 'default':
                     return (<TextButton title={buttonText} onPress={onPress(alertButton)} textColor={Colors.primary}/>);
-                case 'cancel':
-                    return (<TextButton title={buttonText} onPress={onPress(alertButton)}/>);
                 case 'destructive':
                     return (<TextButton title={buttonText} onPress={onPress(alertButton)} textColor={Colors.error}/>);
+                case 'cancel':
                 default:
                     return (<TextButton title={buttonText} onPress={onPress(alertButton)}/>);
             }
@@ -48,9 +47,9 @@ export function Confirm(props) {
             case 'info':
                 return (<MaterialIcons name="info" size={iconSize} color={Colors.info} style={styles.icon}/>);
             case 'warning':
-                return (<MaterialIcons name="warning" size={iconSize} color={Colors.warning} style={styles.icon}/>);
+                return (<MaterialIcons name="error" size={iconSize} color={Colors.warning} style={styles.icon}/>);
             case 'error':
-                return (<MaterialIcons name="error" size={iconSize} color={Colors.error} style={styles.icon}/>);
+                return (<MaterialIcons name="dangerous" size={iconSize} color={Colors.error} style={styles.icon}/>);
             default:
                 return null;
         }
