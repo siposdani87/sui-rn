@@ -43,13 +43,6 @@ export function Confirm(props: { confirmService: ConfirmService }) {
                             textColor={Colors.primary}
                         />
                     );
-                case 'cancel':
-                    return (
-                        <TextButton
-                            title={buttonText}
-                            onPress={onPress(alertButton)}
-                        />
-                    );
                 case 'destructive':
                     return (
                         <TextButton
@@ -58,6 +51,7 @@ export function Confirm(props: { confirmService: ConfirmService }) {
                             textColor={Colors.error}
                         />
                     );
+                case 'cancel':
                 default:
                     return (
                         <TextButton
@@ -93,7 +87,7 @@ export function Confirm(props: { confirmService: ConfirmService }) {
             case 'warning':
                 return (
                     <MaterialIcons
-                        name="warning"
+                        name="error"
                         size={iconSize}
                         color={Colors.warning}
                         style={styles.icon}
@@ -102,7 +96,7 @@ export function Confirm(props: { confirmService: ConfirmService }) {
             case 'error':
                 return (
                     <MaterialIcons
-                        name="error"
+                        name="dangerous"
                         size={iconSize}
                         color={Colors.error}
                         style={styles.icon}
