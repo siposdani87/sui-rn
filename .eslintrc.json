@@ -16,7 +16,9 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "react-hooks/exhaustive-deps": "off"
+        "react-hooks/exhaustive-deps": "off",
+        "react-native/no-inline-styles": "off",
+        "react/no-unstable-nested-components": "off"
     },
     "globals": {
         "JSX": "readonly"
