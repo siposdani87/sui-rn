@@ -18,6 +18,7 @@ import FlashesScreen from './screens/FlashesScreen';
 import ConfirmsScreen from './screens/ConfirmsScreen';
 import TabsScreen from './screens/TabsScreen';
 import { Styles } from '@siposdani87/sui-rn';
+import FlatListScreen from './screens/FlatListScreen';
 
 const Stack = createStackNavigator();
 
@@ -39,13 +40,14 @@ export type StackParamList = {
     Flashes: undefined;
     Confirms: undefined;
     Tabs: undefined;
+    FlatList: undefined;
 };
 
 export default function Router() {
     return (
         <Stack.Navigator
             initialRouteName="Home"
-            screenOptions={Styles.stackNavigatorOptions as any}
+            screenOptions={Styles.stackNavigatorOptions}
         >
             <Stack.Screen name="Buttons" component={ButtonsScreen} />
             <Stack.Screen name="Checkboxes" component={CheckboxesScreen} />
@@ -64,6 +66,7 @@ export default function Router() {
             <Stack.Screen name="Flashes" component={FlashesScreen} />
             <Stack.Screen name="Confirms" component={ConfirmsScreen} />
             <Stack.Screen name="Tabs" component={TabsScreen} />
+            <Stack.Screen name="FlatList" component={FlatListScreen} />
         </Stack.Navigator>
     );
 }

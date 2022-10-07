@@ -31,9 +31,7 @@ export function TabBar(
                 const { options } = descriptors[route.key];
                 const label: any = options.tabBarLabel
                     ? options.tabBarLabel
-                    : options.title
-                    ? options.title
-                    : route.name;
+                    : options.title ?? route.name;
                 const isFocused = state.index === index;
 
                 const onPress = () => {
