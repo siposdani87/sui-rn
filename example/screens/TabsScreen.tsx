@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Styles, useDarkTheme, TabBar } from '@siposdani87/sui-rn';
 
 function HomeScreen() {
@@ -30,14 +30,14 @@ export default function TabsScreen() {
 
     return (
         <Tab.Navigator
-            tabBar={(props) => <TabBar {...props} />}
+            tabBar={(props: BottomTabBarProps) => <TabBar {...props} />}
             screenOptions={
                 {
                     ...Styles.tabBarOptions,
                     ...(isDarkTheme
                         ? Styles.tabBarDarkOptions
                         : Styles.tabBarLightOptions),
-                } as any
+                }
             }
         >
             <Tab.Screen name="Home" component={HomeScreen} />

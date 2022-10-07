@@ -76,6 +76,10 @@ export default function HomeScreen() {
                         onPress={() => navigation.navigate('Confirms')}
                     />
                     <TextButton
+                        title="FlatList"
+                        onPress={() => navigation.navigate('FlatList')}
+                    />
+                    <TextButton
                         title="Tabs"
                         onPress={() => navigation.navigate('Tabs')}
                     />
