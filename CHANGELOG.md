@@ -1,3 +1,11 @@
+## 0.8.0 - TBD
+
+*
+
+## 0.7.0 - 2022-10-10
+
+* Remove navigation styles and components
+
 ## 0.6.0 - 2022-09-27
 
 * Fix startup issues
@@ -13,7 +21,8 @@
 ## 0.3.0 - 2022-05-13
 
 * Upgrade Expo SDK to version 45
-* Fix autoComplate prop
+* Fix autoComplete prop
+
 ## 0.2.0 - 2022-02-11
 
 * Upgrade Expo SDK to version 44
