@@ -81,8 +81,8 @@ export function SwitchField(props: {
     };
 
     const onPress = (): void => {
-        const v = value === trueValue ? falseValue : trueValue;
-        setValue(v);
+        const v = getValue() ? falseValue : trueValue;
+        onValueChange(v);
     };
 
     return (
@@ -101,6 +101,7 @@ export function SwitchField(props: {
                 containerStyle={styles.labelContainer}
                 text={props.label}
                 required={props.required}
+                disabled={props.disabled}
                 desc={props.desc}
                 onPressDesc={props.onPressDesc}
             />
