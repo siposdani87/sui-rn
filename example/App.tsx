@@ -14,6 +14,7 @@ import {
     DarkTheme,
     DefaultTheme,
     NavigationContainer,
+    Theme,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
@@ -24,7 +25,7 @@ import { ServiceContext, Services } from './ServiceContext';
 import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme } from '@siposdani87/sui-rn';
 import * as SplashScreen from 'expo-splash-screen';
 
-const colors = setThemeColors(
+setThemeColors(
     Colors.deepPurpleBright,
     Colors.deepPurple,
     Colors.deepPurpleDark,
@@ -34,27 +35,28 @@ const colors = setThemeColors(
     Colors.cyanDark,
     Colors.white,
 );
+
 setThemeStyles(
     'Ubuntu_400Regular',
     ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'],
     ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'],
 );
 
-const appLightTheme = {
+const appLightTheme: Theme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
         primary: Colors.primary,
-        background: '#FFF',
+        background: Colors.whiteBright,
     },
 };
 
-const appDarkTheme = {
+const appDarkTheme: Theme = {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
         primary: Colors.primaryBright,
-        background: '#000',
+        background: Colors.blackDark,
     },
 };
 
