@@ -1,5 +1,4 @@
-import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import { default as Colors } from './Colors';
 const styles = {
     fontFamilyApp: '',
@@ -60,71 +59,6 @@ const styles = {
             blurRadius: 5,
         },
     }),
-    tabBarOptions: {
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarLabelStyle: {
-            fontSize: 14,
-            fontFamily: '',
-            fontWeight: '400',
-            textTransform: 'uppercase',
-        },
-    },
-    tabBarLightOptions: {
-        tabBarActiveTintColor: Colors.primaryDark,
-        tabBarInactiveTintColor: Colors.deepGreyBright,
-        tabBarStyle: {
-            backgroundColor: Colors.lightGreyBright,
-        },
-        indicatorStyle: {
-            backgroundColor: Colors.accent,
-        },
-        tabBarItemStyle: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTopWidth: 1,
-            borderTopColor: Colors.lightGrey,
-        },
-    },
-    tabBarDarkOptions: {
-        tabBarActiveTintColor: Colors.primaryBright,
-        tabBarInactiveTintColor: Colors.deepGreyBright,
-        tabBarStyle: {
-            backgroundColor: Colors.black,
-        },
-        indicatorStyle: {
-            backgroundColor: Colors.accentBright,
-        },
-        tabBarItemStyle: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderTopWidth: 1,
-            borderTopColor: Colors.blackBright,
-        },
-    },
-    stackNavigatorOptions: {
-        headerRight: () => <View />,
-        headerBackTitleVisible: false,
-        headerTintColor: Colors.primaryText,
-        headerTitleAlign: 'left',
-        headerTitleStyle: {
-            fontFamily: '',
-            fontWeight: '400',
-            fontSize: 16,
-            color: Colors.primaryText,
-        },
-        headerStyle: {
-            backgroundColor: Colors.primaryDark,
-            ...Platform.select({
-                android: {
-                    elevation: 0,
-                },
-                ios: {
-                    shadowOpacity: 0,
-                },
-            }),
-        },
-    },
     floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,
@@ -149,7 +83,7 @@ const styles = {
         zIndex: 1,
     },
 };
-export function setThemeStyles(colors, fontFamilyApp, fontFamilyHeadings, fontFamilyBodies) {
+export function setThemeStyles(fontFamilyApp, fontFamilyHeadings, fontFamilyBodies) {
     styles.fontFamilyApp = fontFamilyApp;
     [
         styles.fontFamilyHeadingRegular,
@@ -161,25 +95,12 @@ export function setThemeStyles(colors, fontFamilyApp, fontFamilyHeadings, fontFa
         styles.fontFamilyBodyMedium,
         styles.fontFamilyBodyBold,
     ] = fontFamilyBodies;
-    styles.stackNavigatorOptions.headerTitleStyle.fontFamily =
-        styles.fontFamilyHeadingRegular;
-    styles.tabBarOptions.tabBarLabelStyle.fontFamily =
-        styles.fontFamilyBodyRegular;
-    styles.tabBarLightOptions.tabBarActiveTintColor = colors.primaryDark;
-    styles.tabBarLightOptions.indicatorStyle.backgroundColor = colors.accent;
-    styles.tabBarDarkOptions.tabBarActiveTintColor = colors.primaryBright;
-    styles.tabBarDarkOptions.indicatorStyle.backgroundColor =
-        colors.accentBright;
-    styles.stackNavigatorOptions.headerTintColor = colors.primaryText;
-    styles.stackNavigatorOptions.headerTitleStyle.color = colors.primaryText;
-    styles.stackNavigatorOptions.headerStyle.backgroundColor =
-        colors.primaryDark;
     return styles;
 }
 Platform.select({
-    ios: () => setThemeStyles(Colors, 'Verdana', ['Helvetica', 'Helvetica', 'Helvetica'], ['Arial', 'Arial', 'Arial']),
-    android: () => setThemeStyles(Colors, 'monospace', ['sans-serif', 'sans-serif', 'sans-serif'], ['Roboto', 'Roboto', 'Roboto']),
-    default: () => setThemeStyles(Colors, 'Verdana', ['sans-serif', 'sans-serif', 'sans-serif'], ['Arial', 'Arial', 'Arial']),
+    ios: () => setThemeStyles('Verdana', ['Helvetica', 'Helvetica', 'Helvetica'], ['Arial', 'Arial', 'Arial']),
+    android: () => setThemeStyles('monospace', ['sans-serif', 'sans-serif', 'sans-serif'], ['Roboto', 'Roboto', 'Roboto']),
+    default: () => setThemeStyles('Verdana', ['sans-serif', 'sans-serif', 'sans-serif'], ['Arial', 'Arial', 'Arial']),
 })();
 export default styles;
 //# sourceMappingURL=Styles.js.map

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ButtonsScreen from './screens/ButtonsScreen';
 import OthersScreen from './screens/OthersScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -16,11 +16,9 @@ import RichEditorsScreen from './screens/RichEditorsScreen';
 import DialogsScreen from './screens/DialogsScreen';
 import FlashesScreen from './screens/FlashesScreen';
 import ConfirmsScreen from './screens/ConfirmsScreen';
-import TabsScreen from './screens/TabsScreen';
-import { Styles } from '@siposdani87/sui-rn';
 import FlatListScreen from './screens/FlatListScreen';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export type StackParamList = {
     Buttons: undefined;
@@ -39,16 +37,12 @@ export type StackParamList = {
     Dialogs: undefined;
     Flashes: undefined;
     Confirms: undefined;
-    Tabs: undefined;
     FlatList: undefined;
 };
 
 export default function Router() {
     return (
-        <Stack.Navigator
-            initialRouteName="Home"
-            screenOptions={Styles.stackNavigatorOptions}
-        >
+        <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Buttons" component={ButtonsScreen} />
             <Stack.Screen name="Checkboxes" component={CheckboxesScreen} />
             <Stack.Screen name="Colors" component={ColorsScreen} />
@@ -65,7 +59,6 @@ export default function Router() {
             <Stack.Screen name="Dialogs" component={DialogsScreen} />
             <Stack.Screen name="Flashes" component={FlashesScreen} />
             <Stack.Screen name="Confirms" component={ConfirmsScreen} />
-            <Stack.Screen name="Tabs" component={TabsScreen} />
             <Stack.Screen name="FlatList" component={FlatListScreen} />
         </Stack.Navigator>
     );

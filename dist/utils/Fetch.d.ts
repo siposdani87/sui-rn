@@ -1,3 +1,4 @@
+/// <reference types="react-native" />
 export interface Data {
     [key: string]: any;
 }

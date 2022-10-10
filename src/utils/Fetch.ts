@@ -44,7 +44,7 @@ export class Fetch {
         opt_params?: Params,
         opt_headers?: Headers,
     ): Promise<HttpResponse> {
-        return await this._handleRequest(
+        return this._handleRequest(
             'GET',
             url,
             undefined,
@@ -59,7 +59,7 @@ export class Fetch {
         opt_params?: Params,
         opt_headers?: Headers,
     ): Promise<HttpResponse> {
-        return await this._handleRequest(
+        return this._handleRequest(
             'POST',
             url,
             opt_data,
@@ -74,7 +74,7 @@ export class Fetch {
         opt_params?: Params,
         opt_headers?: Headers,
     ): Promise<HttpResponse> {
-        return await this._handleRequest(
+        return this._handleRequest(
             'PUT',
             url,
             opt_data,
@@ -89,7 +89,7 @@ export class Fetch {
         opt_params?: Params,
         opt_headers?: Headers,
     ): Promise<HttpResponse> {
-        return await this._handleRequest(
+        return this._handleRequest(
             'PATCH',
             url,
             opt_data,
@@ -104,7 +104,7 @@ export class Fetch {
         opt_params?: Params,
         opt_headers?: Headers,
     ): Promise<HttpResponse> {
-        return await this._handleRequest(
+        return this._handleRequest(
             'DELETE',
             url,
             opt_data,
@@ -113,7 +113,7 @@ export class Fetch {
         );
     }
 
-    private _getHeaders(url: string, opt_headers?: Headers): HeadersInit {
+    private _getHeaders(url: string, opt_headers?: Headers): HeadersInit_ {
         const extension = SUI.getExtensionName(url);
         const headers = this.filteredHeaders(opt_headers);
         return {
@@ -228,7 +228,7 @@ export class Fetch {
         };
         const request = new Request(this.getUrl(url, opt_params), options);
         const response = await fetch(request);
-        return await this._handleResponse(
+        return this._handleResponse(
             request,
             response,
             opt_headers?.responseType,

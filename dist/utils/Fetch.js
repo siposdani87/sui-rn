@@ -15,19 +15,19 @@ export class Fetch {
         return this.backendUrl + url + query;
     }
     async get(url, opt_params, opt_headers) {
-        return await this._handleRequest('GET', url, undefined, opt_params, opt_headers);
+        return this._handleRequest('GET', url, undefined, opt_params, opt_headers);
     }
     async post(url, opt_data, opt_params, opt_headers) {
-        return await this._handleRequest('POST', url, opt_data, opt_params, opt_headers);
+        return this._handleRequest('POST', url, opt_data, opt_params, opt_headers);
     }
     async put(url, opt_data, opt_params, opt_headers) {
-        return await this._handleRequest('PUT', url, opt_data, opt_params, opt_headers);
+        return this._handleRequest('PUT', url, opt_data, opt_params, opt_headers);
     }
     async patch(url, opt_data, opt_params, opt_headers) {
-        return await this._handleRequest('PATCH', url, opt_data, opt_params, opt_headers);
+        return this._handleRequest('PATCH', url, opt_data, opt_params, opt_headers);
     }
     async delete(url, opt_data, opt_params, opt_headers) {
-        return await this._handleRequest('DELETE', url, opt_data, opt_params, opt_headers);
+        return this._handleRequest('DELETE', url, opt_data, opt_params, opt_headers);
     }
     _getHeaders(url, opt_headers) {
         const extension = SUI.getExtensionName(url);
@@ -124,7 +124,7 @@ export class Fetch {
         };
         const request = new Request(this.getUrl(url, opt_params), options);
         const response = await fetch(request);
-        return await this._handleResponse(request, response, opt_headers?.responseType);
+        return this._handleResponse(request, response, opt_headers?.responseType);
     }
 }
 //# sourceMappingURL=Fetch.js.map

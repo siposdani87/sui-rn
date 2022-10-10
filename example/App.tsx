@@ -35,7 +35,6 @@ const colors = setThemeColors(
     Colors.white,
 );
 setThemeStyles(
-    colors,
     'Ubuntu_400Regular',
     ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'],
     ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'],

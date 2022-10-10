@@ -31,7 +31,7 @@ export default function RichEditorsScreen() {
                 bioRequiredDisabled: undefined,
             });
             setRefreshing(false);
-        }, 2000);
+        });
     }, []);
 
     useEffect(() => {
