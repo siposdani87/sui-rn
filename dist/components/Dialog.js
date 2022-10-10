@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'stretch',
-        borderRadius: 3,
+        borderRadius: 15,
         margin: 20,
         ...Styles.shadow,
     },

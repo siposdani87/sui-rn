@@ -61,7 +61,7 @@ export default function FlatListScreen() {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: 'white',
-        borderRadius: 8,
+        borderRadius: 10,
         paddingVertical: 45,
         paddingHorizontal: 25,
         flex: 1,

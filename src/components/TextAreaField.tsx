@@ -16,6 +16,64 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useInputStyle } from '../hooks/useInputStyle';
 import { useActionColor } from '../hooks/useActionColor';
 
+const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
+    const size = 24;
+
+    return {
+        undo: ({ selected }) => (
+            <MaterialIcons name="undo" size={size} color={getColor(selected)} />
+        ),
+        redo: ({ selected }) => (
+            <MaterialIcons name="redo" size={size} color={getColor(selected)} />
+        ),
+        bold: ({ selected }) => (
+            <MaterialIcons
+                name="format-bold"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        italic: ({ selected }) => (
+            <MaterialIcons
+                name="format-italic"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        underline: ({ selected }) => (
+            <MaterialIcons
+                name="format-underlined"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        unorderedList: ({ selected }) => (
+            <MaterialIcons
+                name="format-list-bulleted"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        orderedList: ({ selected }) => (
+            <MaterialIcons
+                name="format-list-numbered"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        clear: ({ selected }) => (
+            <MaterialIcons
+                name="format-clear"
+                size={size}
+                color={getColor(selected)}
+            />
+        ),
+        code: ({ selected }) => (
+            <MaterialIcons name="code" size={size} color={getColor(selected)} />
+        ),
+    };
+};
+
 export function TextAreaField(props: {
     value: any;
     onValueChange: (_value: any) => void;
@@ -55,76 +113,6 @@ export function TextAreaField(props: {
         props.onValueChange(v);
     };
 
-    const getActionMap = (): ActionMap => {
-        const size = 24;
-
-        return {
-            undo: ({ selected }) => (
-                <MaterialIcons
-                    name="undo"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            redo: ({ selected }) => (
-                <MaterialIcons
-                    name="redo"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            bold: ({ selected }) => (
-                <MaterialIcons
-                    name="format-bold"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            italic: ({ selected }) => (
-                <MaterialIcons
-                    name="format-italic"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            underline: ({ selected }) => (
-                <MaterialIcons
-                    name="format-underlined"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            unorderedList: ({ selected }) => (
-                <MaterialIcons
-                    name="format-list-bulleted"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            orderedList: ({ selected }) => (
-                <MaterialIcons
-                    name="format-list-numbered"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            clear: ({ selected }) => (
-                <MaterialIcons
-                    name="format-clear"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-            code: ({ selected }) => (
-                <MaterialIcons
-                    name="code"
-                    size={size}
-                    color={getActionColor(selected)}
-                />
-            ),
-        };
-    };
-
     if (props.richText) {
         const editorStyle = [styles.editor, style, inputStyle];
 
@@ -141,13 +129,13 @@ export function TextAreaField(props: {
                     minHeight={height}
                     value={value}
                     onValueChange={onValueChange}
-                    onBlur={() => setIsFocused(false)}
-                    onFocus={() => setIsFocused(true)}
                     selectionColor={Colors.deepGreyBright}
-                    actionMap={getActionMap()}
+                    actionMap={getActionMap(getActionColor)}
                     toolbarStyle={styles.toolbar}
                     editorStyle={editorStyle}
                     disabled={props.disabled}
+                    onBlur={() => setIsFocused(false)}
+                    onFocus={() => setIsFocused(true)}
                 />
                 <ErrorField error={error} disabled={props.disabled} />
             </View>

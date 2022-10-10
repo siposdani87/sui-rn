@@ -23,7 +23,6 @@ export * from './SearchField';
 export * from './SelectField';
 export * from './SliderField';
 export * from './SwitchField';
-export * from './TabBar';
 export * from './TagField';
 export * from './Text';
 export * from './TextAreaField';

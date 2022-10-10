@@ -3,10 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Fragment } from 'react';
 import { View, ScrollView } from 'react-native';
 import { TextButton } from '@siposdani87/sui-rn';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../Router';
 
-type ScreenNavigationProp = StackNavigationProp<StackParamList>;
+type ScreenNavigationProp = NativeStackNavigationProp<StackParamList>;
 
 export default function HomeScreen() {
     const navigation = useNavigation<ScreenNavigationProp>();
@@ -78,10 +78,6 @@ export default function HomeScreen() {
                     <TextButton
                         title="FlatList"
                         onPress={() => navigation.navigate('FlatList')}
-                    />
-                    <TextButton
-                        title="Tabs"
-                        onPress={() => navigation.navigate('Tabs')}
                     />
                 </View>
             </ScrollView>
