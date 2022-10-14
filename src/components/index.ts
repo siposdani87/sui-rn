@@ -19,6 +19,7 @@ export * from './NumberField';
 export * from './PasswordField';
 export * from './PhoneField';
 export * from './RadioButtonField';
+export * from './RichTextAreaField';
 export * from './SearchField';
 export * from './SelectField';
 export * from './SliderField';

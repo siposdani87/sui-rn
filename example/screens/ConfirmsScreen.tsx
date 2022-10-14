@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
@@ -78,7 +78,7 @@ export default function ConfirmsScreen() {
     }
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView>
                 <View style={styles.container}>
@@ -113,7 +113,7 @@ export default function ConfirmsScreen() {
                     </View>
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

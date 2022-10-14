@@ -1,6 +1,6 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Colors, FlashType } from '@siposdani87/sui-rn';
+import { Button, Colors, FlashItem } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 import { ServiceContext, Services } from '../ServiceContext';
 
@@ -36,7 +36,7 @@ export default function FlashesScreen() {
         });
     }
 
-    let infinityFlash: FlashType | null = null;
+    let infinityFlash: FlashItem | null = null;
     function showInfinityFlash() {
         if (!infinityFlash) {
             infinityFlash =
@@ -55,7 +55,7 @@ export default function FlashesScreen() {
     }
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView>
                 <View style={styles.container}>
@@ -103,7 +103,7 @@ export default function FlashesScreen() {
                     </View>
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

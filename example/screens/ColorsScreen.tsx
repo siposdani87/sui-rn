@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { ColorField, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
@@ -47,7 +47,7 @@ export default function ColorsScreen() {
     };
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -94,7 +94,7 @@ export default function ColorsScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

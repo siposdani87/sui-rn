@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
 import { IconButton } from './IconButton';
@@ -10,7 +10,7 @@ export function DialogHeader(props: {
     onClose?: () => void;
 }): JSX.Element {
     return (
-        <Fragment>
+        <>
             <View
                 style={[
                     styles.container,
@@ -31,7 +31,7 @@ export function DialogHeader(props: {
                     containerStyle={styles.closeButton}
                 />
             )}
-        </Fragment>
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
@@ -6,9 +6,6 @@ import { DialogHeader } from './DialogHeader';
 export function Dialog(props) {
     const [visible, setVisible] = useState(false);
     const isDarkTheme = useDarkTheme();
-    if (props.visible !== visible) {
-        setVisible(props.visible);
-    }
     const onClose = () => {
         setVisible(false);
         if (props.onClose) {
@@ -31,6 +28,11 @@ export function Dialog(props) {
                 return null;
         }
     };
+    useEffect(() => {
+        if (props.visible !== visible) {
+            setVisible(props.visible);
+        }
+    }, [props.visible]);
     return (<Modal animationType="fade" transparent={true} statusBarTranslucent={true} visible={visible} onRequestClose={onClose}>
             <View style={styles.dropContainer}>
                 <View style={[

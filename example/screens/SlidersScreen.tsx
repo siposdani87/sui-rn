@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SliderField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
@@ -40,7 +40,7 @@ export default function SlidersScreen() {
     };
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -91,7 +91,7 @@ export default function SlidersScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

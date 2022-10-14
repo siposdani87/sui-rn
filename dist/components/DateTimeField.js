@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SelectField } from './SelectField';
@@ -193,7 +193,7 @@ export function DateTimeField(props) {
     };
     return (<View style={[styles.container, props.containerStyle]}>
             {(config.calendarType === 'date' ||
-            config.clockType === 'time') && (<Fragment>
+            config.clockType === 'time') && (<>
                     <TagField style={props.style} label={props.label} values={getTags()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>
                     {Platform.OS === 'ios' && (<Dialog visible={visible} title={props.label} onClose={hide} buttons={[
                     <Button key={0} title={props.okText} onPress={selectDate}/>,
@@ -201,7 +201,7 @@ export function DateTimeField(props) {
                             {renderDateTimePicker()}
                         </Dialog>)}
                     {Platform.OS === 'android' && renderDateTimePicker()}
-                </Fragment>)}
+                </>)}
             {config.calendarType === 'year' && (<SelectField style={props.style} label={props.label} error={props.error} items={years} value={value} onValueChange={onValueChange} okText={props.okText} searchPlaceholder={props.searchPlaceholder} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>)}
         </View>);
 }

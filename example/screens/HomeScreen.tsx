@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import React, { Fragment } from 'react';
-import { View, ScrollView } from 'react-native';
+import React from 'react';
+import { ScrollView } from 'react-native';
 import { TextButton } from '@siposdani87/sui-rn';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../Router';
@@ -11,10 +11,10 @@ type ScreenNavigationProp = NativeStackNavigationProp<StackParamList>;
 export default function HomeScreen() {
     const navigation = useNavigation<ScreenNavigationProp>();
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView>
-                <View>
+                <>
                     <TextButton
                         title="Buttons"
                         onPress={() => navigation.navigate('Buttons')}
@@ -44,8 +44,8 @@ export default function HomeScreen() {
                         onPress={() => navigation.navigate('Others')}
                     />
                     <TextButton
-                        title="RichEditors"
-                        onPress={() => navigation.navigate('RichEditors')}
+                        title="RichTextAreas"
+                        onPress={() => navigation.navigate('RichTextAreas')}
                     />
                     <TextButton
                         title="Selects"
@@ -56,8 +56,8 @@ export default function HomeScreen() {
                         onPress={() => navigation.navigate('Sliders')}
                     />
                     <TextButton
-                        title="Textareas"
-                        onPress={() => navigation.navigate('Textareas')}
+                        title="TextAreas"
+                        onPress={() => navigation.navigate('TextAreas')}
                     />
                     <TextButton
                         title="Texts"
@@ -79,8 +79,8 @@ export default function HomeScreen() {
                         title="FlatList"
                         onPress={() => navigation.navigate('FlatList')}
                     />
-                </View>
+                </>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }

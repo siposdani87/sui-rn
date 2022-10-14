@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import {
     Button,
@@ -16,7 +16,7 @@ export default function DialogsScreen() {
     const [dialog3, openDialog3, closeDialog3] = useModalState();
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView>
                 <View style={styles.container}>
@@ -79,7 +79,7 @@ export default function DialogsScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

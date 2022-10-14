@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
-export declare function TextAreaField(props: {
+export declare function RichTextAreaField(props: {
     value: any;
     onValueChange: (_value: any) => void;
     numberOfLines?: number;
