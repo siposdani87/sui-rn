@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import {
     EmailField,
@@ -61,7 +61,7 @@ export default function TextsScreen() {
     }
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -129,7 +129,7 @@ export default function TextsScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

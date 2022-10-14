@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
@@ -38,14 +38,14 @@ export function Label(props) {
                     {props.required ? '*' : ''}
                 </Text>
             </TouchableOpacity>
-            {(props.desc || props.onPressDesc) && (<Fragment>
+            {(props.desc || props.onPressDesc) && (<>
                     <Dialog visible={visible} onClose={() => {
                 setVisible(false);
             }}>
                         <Text>{props.desc}</Text>
                     </Dialog>
                     <IconButton containerStyle={styles.infoContainer} iconName="info-outline" iconSize={20} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onPressDesc}/>
-                </Fragment>)}
+                </>)}
         </View>);
 }
 const styles = StyleSheet.create({

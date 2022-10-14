@@ -9,7 +9,7 @@ interface Message {
     closable: boolean;
 }
 
-export interface FlashType {
+export interface FlashItem {
     type: string;
     message: string;
     id: string;
@@ -18,7 +18,7 @@ export interface FlashType {
 }
 
 export class FlashService extends Base {
-    private flashes: FlashType[];
+    private flashes: FlashItem[];
     private options: {
         closableTypes: string[];
         duration: number;
@@ -33,7 +33,7 @@ export class FlashService extends Base {
         };
     }
 
-    public getFlashes(): FlashType[] {
+    public getFlashes(): FlashItem[] {
         return this.flashes;
     }
 
@@ -42,7 +42,7 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType {
+    ): FlashItem {
         return this._add(
             'success',
             message,
@@ -57,7 +57,7 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType {
+    ): FlashItem {
         return this._add(
             'info',
             message,
@@ -72,7 +72,7 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType {
+    ): FlashItem {
         return this._add(
             'warning',
             message,
@@ -87,7 +87,7 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType {
+    ): FlashItem {
         return this._add(
             'error',
             message,
@@ -102,7 +102,7 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType | null {
+    ): FlashItem | null {
         if (SUI.isObject(message) && !SUI.isNull(message)) {
             const closeCallback = message.closable
                 ? SUI.noop
@@ -118,7 +118,7 @@ export class FlashService extends Base {
         return null;
     }
 
-    public isClosable(flash: FlashType): boolean {
+    public isClosable(flash: FlashItem): boolean {
         return (
             (this.options.closableTypes.indexOf(flash.type) !== -1 ||
                 SUI.isFunction(flash.closeCallback)) &&
@@ -126,7 +126,7 @@ export class FlashService extends Base {
         );
     }
 
-    public close(flash: FlashType, opt_force = false) {
+    public close(flash: FlashItem, opt_force = false) {
         const index = this.flashes.findIndex((item) => item.id === flash.id);
         if (index !== -1 && (opt_force || !SUI.eq(flash.duration, Infinity))) {
             if (flash.closeCallback) {
@@ -139,7 +139,7 @@ export class FlashService extends Base {
         }
     }
 
-    public remove(flash: FlashType): void {
+    public remove(flash: FlashItem): void {
         this.close(flash, true);
     }
 
@@ -149,9 +149,9 @@ export class FlashService extends Base {
         opt_duration = 0,
         opt_closeCallback: any = null,
         opt_id = '',
-    ): FlashType {
+    ): FlashItem {
         this.removeById(opt_id);
-        const flash: FlashType = {
+        const flash: FlashItem = {
             type,
             message,
             id: opt_id || SUI.generateId('flash'),

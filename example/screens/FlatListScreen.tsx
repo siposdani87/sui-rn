@@ -42,19 +42,17 @@ export default function FlatListScreen() {
     }, []);
 
     return (
-        <View>
-            <FlatList
-                data={items}
-                keyExtractor={keyExtractor}
-                renderItem={renderItem}
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                onEndReached={onEndReached}
-                refreshText='Loading...'
-                noContentText='No content yet!'
-                noContentImageSource={require('../assets/icon.png')}
-            ></FlatList>
-        </View>
+        <FlatList
+            data={items}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            onEndReached={onEndReached}
+            refreshText='Loading...'
+            noContentText='No content yet!'
+            noContentImageSource={require('../assets/icon.png')}
+        ></FlatList>
     );
 }
 

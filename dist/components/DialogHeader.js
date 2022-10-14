@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { Styles } from '../constants';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 export function DialogHeader(props) {
-    return (<Fragment>
+    return (<>
             <View style={[
             styles.container,
             props.onClose ? { paddingRight: 25 } : null,
@@ -13,7 +13,7 @@ export function DialogHeader(props) {
                 {!!props.title && (<Text style={styles.titleText}>{props.title}</Text>)}
             </View>
             {!!props.onClose && (<IconButton iconName="close" onPress={props.onClose} containerStyle={styles.closeButton}/>)}
-        </Fragment>);
+        </>);
 }
 const styles = StyleSheet.create({
     container: {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker, {
     DateTimePickerEvent,
@@ -275,7 +275,7 @@ export function DateTimeField(props: {
         <View style={[styles.container, props.containerStyle]}>
             {(config.calendarType === 'date' ||
                 config.clockType === 'time') && (
-                <Fragment>
+                <>
                     <TagField
                         style={props.style}
                         label={props.label}
@@ -303,7 +303,7 @@ export function DateTimeField(props: {
                         </Dialog>
                     )}
                     {Platform.OS === 'android' && renderDateTimePicker()}
-                </Fragment>
+                </>
             )}
             {config.calendarType === 'year' && (
                 <SelectField

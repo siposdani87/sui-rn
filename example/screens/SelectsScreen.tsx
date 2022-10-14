@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SelectField } from '@siposdani87/sui-rn';
 
@@ -100,7 +100,7 @@ export default function SelectsScreen() {
     };
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -241,7 +241,7 @@ export default function SelectsScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

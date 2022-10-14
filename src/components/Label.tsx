@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     StyleSheet,
@@ -64,7 +64,7 @@ export function Label(props: {
                 </Text>
             </TouchableOpacity>
             {(props.desc || props.onPressDesc) && (
-                <Fragment>
+                <>
                     <Dialog
                         visible={visible}
                         onClose={() => {
@@ -82,7 +82,7 @@ export function Label(props: {
                         }
                         onPress={onPressDesc}
                     />
-                </Fragment>
+                </>
             )}
         </View>
     );

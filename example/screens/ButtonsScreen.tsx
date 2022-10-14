@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, IconButton, TextButton, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
 export default function ButtonsScreen() {
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView>
                 <View style={styles.container}>
@@ -109,7 +109,7 @@ export default function ButtonsScreen() {
                     </View>
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

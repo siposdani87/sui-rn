@@ -1,9 +1,9 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { TextAreaField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 
-export default function TextareasScreen() {
+export default function TextAreasScreen() {
     const [data, setData] = useState({
         about: '',
         aboutDisabled: '',
@@ -39,7 +39,7 @@ export default function TextareasScreen() {
     };
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -80,7 +80,7 @@ export default function TextareasScreen() {
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 

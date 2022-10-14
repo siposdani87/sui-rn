@@ -1,17 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { TextAreaField } from '@siposdani87/sui-rn';
+import { RichTextAreaField } from '@siposdani87/sui-rn';
 
-interface RichEditorsState {
+interface RichTextAreasState {
     bio: string | null | undefined;
     bioDisabled: string | null | undefined;
     bioRequired: string | null | undefined;
     bioRequiredDisabled: string | null | undefined;
 }
 
-export default function RichEditorsScreen() {
-    const [data, setData] = useState<RichEditorsState>({
+export default function RichTextAreasScreen() {
+    const [data, setData] = useState<RichTextAreasState>({
         bio: undefined,
         bioDisabled: '',
         bioRequired: null,
@@ -31,7 +31,7 @@ export default function RichEditorsScreen() {
                 bioRequiredDisabled: undefined,
             });
             setRefreshing(false);
-        });
+        }, 2000);
     }, []);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function RichEditorsScreen() {
     };
 
     return (
-        <Fragment>
+        <>
             <StatusBar style="light" />
             <ScrollView
                 refreshControl={
@@ -58,39 +58,35 @@ export default function RichEditorsScreen() {
                 }
             >
                 <View style={styles.container}>
-                    <TextAreaField
+                    <RichTextAreaField
                         label="About"
                         value={data.bio}
                         onValueChange={(v) => updateData('bio', v)}
-                        richText={true}
                     />
-                    <TextAreaField
+                    <RichTextAreaField
                         label="About disabled"
                         value={data.bioDisabled}
                         onValueChange={(v) => updateData('bioDisabled', v)}
-                        richText={true}
                         disabled={true}
                     />
-                    <TextAreaField
+                    <RichTextAreaField
                         label="About required"
                         value={data.bioRequired}
                         onValueChange={(v) => updateData('bioRequired', v)}
-                        richText={true}
                         required={true}
                     />
-                    <TextAreaField
+                    <RichTextAreaField
                         label="About required disabled"
                         value={data.bioRequiredDisabled}
                         onValueChange={(v) =>
                             updateData('bioRequiredDisabled', v)
                         }
-                        richText={true}
                         required={true}
                         disabled={true}
                     />
                 </View>
             </ScrollView>
-        </Fragment>
+        </>
     );
 }
 
