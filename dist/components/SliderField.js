@@ -12,14 +12,14 @@ export function SliderField(props) {
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled);
     const isDarkTheme = useDarkTheme();
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
     const onValueChange = (v) => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
     };
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <Slider style={[{ flex: 1, height: 40 }, props.style, inputStyle]} value={value} onSlidingComplete={onValueChange} step={props.step} minimumValue={props.minimumValue} maximumValue={props.maximumValue} minimumTrackTintColor={Colors.deepGreyBright} maximumTrackTintColor={Colors.deepGreyBright} thumbTintColor={isDarkTheme ? Colors.primaryBright : Colors.primary} disabled={props.disabled}/>

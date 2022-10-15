@@ -43,10 +43,6 @@ export function TextField(
         isFocused,
     );
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: string): void => {
         onErrorChange();
         setValue(v);
@@ -69,6 +65,10 @@ export function TextField(
             paddingRight: (props.actionButtons?.length || 0) * 38,
         };
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

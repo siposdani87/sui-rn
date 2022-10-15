@@ -41,10 +41,6 @@ export function ColorField(props: {
         props.disabled,
     );
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: string): void => {
         onErrorChange();
         setValue(v);
@@ -73,6 +69,10 @@ export function ColorField(props: {
     const onColorChange = (color: string) => {
         setCurrentColor(color);
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

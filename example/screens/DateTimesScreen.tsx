@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { DateTimeField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
 
 interface DateTimesState {
     datetime: Date | string | null;
@@ -14,7 +15,8 @@ interface DateTimesState {
 }
 
 export default function DateTimesScreen() {
-    const [data, setData] = useState<DateTimesState>({
+    const regex = /\.[0-9]{3}/g;
+    const [data, updateData, refreshing, onRefresh] = useData<DateTimesState>({
         datetime: null,
         datetimeDisabled: null,
         datetimeRequired: new Date(),
@@ -22,47 +24,22 @@ export default function DateTimesScreen() {
         date: null,
         time: null,
         year: null,
+    }, {
+        datetime: new Date()
+            .toISOString()
+            .replace(regex, '')
+            .replace('Z', '+00:00'),
+        datetimeDisabled: new Date()
+            .toISOString(),
+        datetimeRequired: undefined,
+        datetimeRequiredDisabled: null,
+        date: new Date().toISOString().split('T', 2)[0],
+        time: new Date()
+            .toISOString()
+            .split('T', 2)[1]
+            .split('.', 2)[0],
+        year: '1987', 
     });
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            const regex = /\.[0-9]{3}/g;
-            setData({
-                ...data,
-                datetime: new Date()
-                    .toISOString()
-                    .replace(regex, '')
-                    .replace('Z', '+00:00'),
-                datetimeDisabled: new Date()
-                    .toISOString(),
-                datetimeRequired: undefined,
-                datetimeRequiredDisabled: null,
-                date: new Date().toISOString().split('T', 2)[0],
-                time: new Date()
-                    .toISOString()
-                    .split('T', 2)[1]
-                    .split('.', 2)[0],
-                year: '1987', 
-            }); 
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

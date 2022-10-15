@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { RichTextAreaField } from '@siposdani87/sui-rn';
+import { useData } from '../utils/useData';
+
 
 interface RichTextAreasState {
     bio: string | null | undefined;
@@ -11,40 +13,18 @@ interface RichTextAreasState {
 }
 
 export default function RichTextAreasScreen() {
-    const [data, setData] = useState<RichTextAreasState>({
+    const [data, updateData, refreshing, onRefresh] = useData<RichTextAreasState>({
         bio: undefined,
         bioDisabled: '',
         bioRequired: null,
         bioRequiredDisabled: undefined,
+    }, {
+        bio: '<p>0 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p><p>1 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
+        bioDisabled:
+            '<p>Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
+        bioRequired: null,
+        bioRequiredDisabled: undefined,
     });
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                bio: '<p>0 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p><p>1 Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
-                bioDisabled:
-                    '<p>Az egy <b>gyors</b> szövege nem <i>számolok</i> ilyennel.</p><p>Második <u>bekezdés</u>, sokkal több információ kér ki ide!</p>',
-                bioRequired: null,
-                bioRequiredDisabled: undefined,
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

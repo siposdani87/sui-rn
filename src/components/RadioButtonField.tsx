@@ -20,10 +20,6 @@ export function RadioButtonField(props: {
     const [value, setValue] = useState<any>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: string): void => {
         if (v === props.trueValue) {
             onErrorChange();
@@ -31,6 +27,10 @@ export function RadioButtonField(props: {
             props.onValueChange(v);
         }
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <IconToggleField

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker, {
     DateTimePickerEvent,
@@ -97,38 +97,6 @@ export function DateTimeField(props: {
     const [visible, setVisible] = useState<boolean>(false);
     const getActionColor = useActionColor(props.disabled);
 
-    useEffect(() => {
-        const generateYears = (minYear: number, maxYear: number): Year[] => {
-            return Array.from(Array(maxYear - minYear), (_, i) => {
-                const v = i + minYear + 1;
-                return {
-                    label: getFormattedValue(v.toString(), config),
-                    value: v,
-                };
-            });
-        };
-        if (props.mode === 'year') {
-            const minYear = 1900;
-            const maxYear = new Date().getFullYear() + 10;
-            setYears(generateYears(minYear, maxYear));
-        }
-        setConfig(MODES[props.mode]);
-    }, [props.mode]);
-
-    useEffect(() => {
-        setValue(props.value ?? '');
-    }, [props.value]);
-
-    useEffect(() => {
-        if (value) {
-            setDate(getDate(value, config));
-            setFormattedValue(getFormattedValue(value, config));
-        } else {
-            setDate(null);
-            setFormattedValue('');
-        }
-    }, [config, value]);
-
     const getDate = (v: Date | string, c: Mode): Date => {
         if (v instanceof Date) {
             return v;
@@ -139,17 +107,20 @@ export function DateTimeField(props: {
         return parse(v, c.format, new Date());
     };
 
-    const getFormattedValue = (v: Date | string, c: Mode): string => {
-        // TODO: moment format to date-fns iso standard
-        const formatString = convertToISOFormat(props.format);
-        if (v instanceof Date) {
-            return format(v, formatString);
-        }
-        if (!c.format) {
-            return format(parseISO(v), formatString);
-        }
-        return format(parse(v, c.format, new Date()), formatString);
-    };
+    const getFormattedValue = useCallback(
+        (v: Date | string, c: Mode): string => {
+            // TODO: moment format to date-fns iso standard
+            const formatString = convertToISOFormat(props.format);
+            if (v instanceof Date) {
+                return format(v, formatString);
+            }
+            if (!c.format) {
+                return format(parseISO(v), formatString);
+            }
+            return format(parse(v, c.format, new Date()), formatString);
+        },
+        [props.format],
+    );
 
     const getValue = (v: Date | string, c: Mode): string => {
         if (v instanceof Date) {
@@ -270,6 +241,38 @@ export function DateTimeField(props: {
         }
         return actionButtons;
     };
+
+    useEffect(() => {
+        const generateYears = (minYear: number, maxYear: number): Year[] => {
+            return Array.from(Array(maxYear - minYear), (_, i) => {
+                const v = i + minYear + 1;
+                return {
+                    label: getFormattedValue(v.toString(), config),
+                    value: v,
+                };
+            });
+        };
+        if (props.mode === 'year') {
+            const minYear = 1900;
+            const maxYear = new Date().getFullYear() + 10;
+            setYears(generateYears(minYear, maxYear));
+        }
+        setConfig(MODES[props.mode]);
+    }, [props.mode, config, getFormattedValue]);
+
+    useEffect(() => {
+        setValue(props.value ?? '');
+    }, [props.value]);
+
+    useEffect(() => {
+        if (value) {
+            setDate(getDate(value, config));
+            setFormattedValue(getFormattedValue(value, config));
+        } else {
+            setDate(null);
+            setFormattedValue('');
+        }
+    }, [config, value, getFormattedValue]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Label } from './Label';
 import {
     View,
@@ -58,11 +58,49 @@ const fileTypeSVG: string =
     '<text x="220" y="380" text-anchor="middle" style="fill:#FFF;font-weight:700;font-family:Arial;font-size:120px;">TYPE</text>' +
     '</svg>';
 
+const searchStr: string = ';base64,';
+
+const isRequireValue = (v: ImageSourceType): boolean => {
+    return v !== null && v >= 0;
+};
+
+const getValueUri = (v: ImageSourceType): string => {
+    return (v as ImageURISource)?.uri ?? '';
+};
+
+const isValidValueUri = (imageSourceType: ImageSourceType): boolean => {
+    return !!getValueUri(imageSourceType);
+};
+
+const isValidValue = (v: ImageSourceType): boolean => {
+    return isValidValueUri(v) || isRequireValue(v);
+};
+
+const getFileIconSrc = (type: string, color: string): string => {
+    return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
+};
+
+const getSvgXmlByFilename = (filename: string): string => {
+    const type = SUI.getExtensionName(filename);
+    const color = fileColors[type] ?? 'black';
+    return getFileIconSrc(type, color);
+};
+
+const getDataUri = (uri: string, filename: string): string => {
+    return uri.replace(searchStr, ';filename=' + filename + searchStr);
+};
+
+const showAlert = (e: any): void => {
+    Alert.alert('ERROR', e.message, [{ text: 'OK', onPress: () => null }], {
+        cancelable: true,
+    });
+};
+
 export function FileField(props: {
     value: ImageSourceType;
     defaultValue?: ImageSourceType;
     mimeType: string;
-    onValueChange: (_value: any) => void;
+    onValueChange: (_value: string | null) => void;
     label?: string;
     error?: string | null;
     required?: boolean;
@@ -82,94 +120,73 @@ export function FileField(props: {
         useState<ImageSourceType>(null);
     const [state, setState] = useReducer(
         (oldState: any, newState: any) => ({ ...oldState, ...newState }),
-        { fileName: '', fileData: '' },
+        { filename: '', content: '' },
     );
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
-    const searchStr = ';base64,';
 
-    const isValidValue = (v: ImageSourceType): boolean => {
-        return isValidValueUri(v) || isRequireFile(v);
-    };
+    const handleDefaultSvgXml = useCallback(
+        (v: ImageSourceType): void => {
+            if (isValidValue(v)) {
+                setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
+            } else {
+                const color = props.required
+                    ? 'grey;stroke:red;stroke-width:10;stroke-dasharray:15,10'
+                    : 'grey';
+                setDefaultSvgXml(getFileIconSrc('N/A', color));
+            }
+        },
+        [props.required],
+    );
 
-    const isRequireFile = (v: ImageSourceType): boolean => {
-        return v !== null && v >= 0; // SUI.isNumber(v);
-    };
+    const handleDefaultImageSource = useCallback(
+        (v?: ImageSourceType): void => {
+            if (v && props.required) {
+                setDefaultImageSource(v);
+            } else if (props.defaultValue) {
+                setDefaultImageSource(props.defaultValue);
+            }
+        },
+        [props.defaultValue, props.required],
+    );
 
-    const isValidValueUri = (v: ImageSourceType): boolean => {
-        return !!getValueUri(v);
-    };
+    const onDataChange = useCallback(
+        (filename: string, content: string | null): void => {
+            onErrorChange();
+            setState({ filename, content });
+            props.onValueChange(content);
+        },
+        [onErrorChange, props],
+    );
 
-    const getValueUri = (v: ImageSourceType): string => {
-        return (v as ImageURISource)?.uri ?? '';
-    };
-
-    const handleDefaultSvgXml = (v: ImageSourceType): void => {
-        if (isValidValue(v)) {
-            setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
-        } else {
-            const color = props.required
-                ? 'grey;stroke:red;stroke-width:10;stroke-dasharray:15,10'
-                : 'grey';
-            setDefaultSvgXml(getFileIconSrc('N/A', color));
-        }
-    };
-
-    const handleDefaultImageSource = (v?: any): void => {
-        if (v && props.required) {
-            setDefaultImageSource(v);
-        } else if (props.defaultValue) {
-            setDefaultImageSource(props.defaultValue);
-        }
-    };
-
-    const getSvgXmlByFilename = (filename: string): string => {
-        const type = SUI.getExtensionName(filename);
-        const color = fileColors[type] ?? 'black';
-        return getFileIconSrc(type, color);
-    };
-
-    const onFileDataChange = (
-        fileName: string,
-        fileData: string | null,
-    ): void => {
-        onErrorChange();
-        setState({ fileName, fileData });
-        props.onValueChange(fileData);
-    };
-
-    const isImage = (): boolean => {
+    const isImage = useCallback((): boolean => {
         return props.mimeType.indexOf('image') === 0;
-    };
+    }, [props.mimeType]);
 
-    const isVideo = (): boolean => {
+    const isVideo = useCallback((): boolean => {
         return props.mimeType.indexOf('video') === 0;
-    };
+    }, [props.mimeType]);
 
-    const isDocument = (): boolean => {
+    const isDocument = useCallback((): boolean => {
         return !(isImage() || isVideo());
-    };
-
-    const getFileIconSrc = (type: string, color: string): string => {
-        return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
-    };
+    }, [isImage, isVideo]);
 
     const handleImageDataUri = async (
         result: ImagePicker.ImagePickerResult,
     ): Promise<void> => {
-        if (result.cancelled === false) {
+        if (!result.cancelled) {
             const filename = result.uri.split('/').pop() ?? 'file';
             const uri = 'data:image/jpeg;base64,' + result.base64;
             const dataUri = getDataUri(uri, filename);
             setImageSource({ uri: dataUri });
-            onFileDataChange(filename, dataUri);
+            onDataChange(filename, dataUri);
         }
     };
 
     const handleDocumentDataUri = async (
         result: DocumentPicker.DocumentResult,
     ): Promise<void> => {
-        if (result.type !== 'cancel') {
+        if (result.type === 'success') {
             const filename = result.name;
             const mimeType = mimeTypes[SUI.getExtensionName(filename)];
             const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
@@ -178,78 +195,65 @@ export function FileField(props: {
             const uri = 'data:' + mimeType + ';base64,' + fileBase64;
             const dataUri = getDataUri(uri, filename);
             setSvgXml(getSvgXmlByFilename(filename));
-            onFileDataChange(filename, dataUri);
+            onDataChange(filename, dataUri);
         }
-    };
-
-    const getDataUri = (uri: string, filename: string): string => {
-        return uri.replace(searchStr, ';filename=' + filename + searchStr);
     };
 
     const openImageLibrary = async (): Promise<void> => {
-        if (!props.disabled) {
-            const mediaLibraryPermission =
-                await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (mediaLibraryPermission.status === 'granted') {
-                try {
-                    const result = await ImagePicker.launchImageLibraryAsync(
-                        options,
-                    );
-                    if (result.cancelled === false) {
-                        await handleImageDataUri(result);
-                    }
-                } catch (e) {
-                    showAlert(e);
-                }
-            }
+        if (props.disabled) {
+            return;
         }
-    };
-
-    const openCamera = async (): Promise<void> => {
-        if (!props.disabled) {
-            const mediaLibraryPermission =
-                await ImagePicker.requestMediaLibraryPermissionsAsync();
-            const cameraPermission =
-                await ImagePicker.requestCameraPermissionsAsync();
-            if (
-                mediaLibraryPermission.status === 'granted' &&
-                cameraPermission.status === 'granted'
-            ) {
-                try {
-                    const result = await ImagePicker.launchCameraAsync(options);
-                    if (result.cancelled === false) {
-                        await handleImageDataUri(result);
-                    }
-                } catch (e) {
-                    showAlert(e);
-                }
-            }
-        }
-    };
-
-    const openDocumentLibrary = async (): Promise<void> => {
-        if (!props.disabled) {
+        const mediaLibraryPermission =
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (mediaLibraryPermission.status === 'granted') {
             try {
-                const result = await DocumentPicker.getDocumentAsync({
-                    type: props.mimeType || '*/*',
-                });
-                if (result.type !== 'cancel') {
-                    await handleDocumentDataUri(result);
-                }
+                const result = await ImagePicker.launchImageLibraryAsync(
+                    options,
+                );
+                await handleImageDataUri(result);
             } catch (e) {
                 showAlert(e);
             }
         }
     };
 
-    const showAlert = (e: any): void => {
-        Alert.alert('ERROR', e.message, [{ text: 'OK', onPress: () => null }], {
-            cancelable: true,
-        });
+    const openCamera = async (): Promise<void> => {
+        if (props.disabled) {
+            return;
+        }
+        const mediaLibraryPermission =
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const cameraPermission =
+            await ImagePicker.requestCameraPermissionsAsync();
+        if (
+            mediaLibraryPermission.status === 'granted' &&
+            cameraPermission.status === 'granted'
+        ) {
+            try {
+                const result = await ImagePicker.launchCameraAsync(options);
+                await handleImageDataUri(result);
+            } catch (e) {
+                showAlert(e);
+            }
+        }
+    };
+
+    const openDocumentLibrary = async (): Promise<void> => {
+        if (props.disabled) {
+            return;
+        }
+        try {
+            const result = await DocumentPicker.getDocumentAsync({
+                type: props.mimeType || '*/*',
+            });
+            await handleDocumentDataUri(result);
+        } catch (e) {
+            showAlert(e);
+        }
     };
 
     const isRemovable = (): boolean => {
-        return !props.required && (isValidValue(value) || !!state.fileData);
+        return !props.required && (isValidValue(value) || !!state.content);
     };
 
     const remove = (): void => {
@@ -264,7 +268,7 @@ export function FileField(props: {
         if (isRemovable()) {
             setImageSource(defaultImageSource);
             setValue(null);
-            onFileDataChange('', null);
+            onDataChange('', null);
         }
     };
 
@@ -272,12 +276,8 @@ export function FileField(props: {
         if (isRemovable()) {
             setSvgXml(defaultSvgXml);
             setValue(null);
-            onFileDataChange('', null);
+            onDataChange('', null);
         }
-    };
-
-    const onFilenameChange = (filename: string): void => {
-        setState({ fileName: filename });
     };
 
     const getRequiredTextField = (): boolean => {
@@ -352,13 +352,15 @@ export function FileField(props: {
         } else {
             handleDefaultImageSource(value);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
     useEffect(() => {
-        if (isValidValue(props.value) && !state.fileData) {
+        if (isValidValue(props.value) && !state.content) {
             setValue(props.value);
-            onFileDataChange('', '');
+            onDataChange('', '');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getValueUri(props.value)]);
 
     useEffect(() => {
@@ -396,9 +398,8 @@ export function FileField(props: {
             </View>
             <TextField
                 style={props.style}
-                label=""
-                value={state.fileName || ''}
-                onValueChange={onFilenameChange}
+                value={state.filename ?? ''}
+                onValueChange={() => {}}
                 required={getRequiredTextField()}
                 error={error}
                 disabled={props.disabled}

@@ -64,11 +64,6 @@ export function LocationField(props: {
     const isDarkTheme = useDarkTheme();
     const getActionColor = useActionColor(props.disabled);
 
-    useEffect(() => {
-        const coords = props.value || defaultValue;
-        setValue(coords);
-    }, [props.value]);
-
     const onValueChange = (v: LocationType): void => {
         setValue(v);
         props.onValueChange(v);
@@ -184,6 +179,11 @@ export function LocationField(props: {
         );
         return actionButtons;
     };
+
+    useEffect(() => {
+        const coords = props.value || defaultValue;
+        setValue(coords);
+    }, [props.value]);
 
     return (
         <View

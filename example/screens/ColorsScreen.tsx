@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { ColorField, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
 
 interface ColorsState {
     favouriteColor: string;
@@ -11,40 +12,17 @@ interface ColorsState {
 }
 
 export default function ColorsScreen() {
-    const [data, setData] = useState<ColorsState>({
+    const [data, updateData, refreshing, onRefresh] = useData<ColorsState>({
         favouriteColor: '',
         favouriteColorDisabled: '',
         favouriteColorRequired: '#673AB7',
         favouriteColorRequiredDisabled: '#673AB7',
+    }, {
+        favouriteColor: Colors.lightBlue,
+        favouriteColorDisabled: Colors.primary,
+        favouriteColorRequired: '',
+        favouriteColorRequiredDisabled: '',
     });
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                favouriteColor: Colors.lightBlue,
-                favouriteColorDisabled: Colors.primary,
-                favouriteColorRequired: '',
-                favouriteColorRequiredDisabled: '',
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

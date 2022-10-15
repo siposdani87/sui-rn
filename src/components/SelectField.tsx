@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     FlatList,
     StyleProp,
@@ -42,31 +42,37 @@ export function SelectField(props: {
     const valueKey = 'value';
     const labelKey = 'label';
 
-    const convert = (options: any[], query?: string): any[] => {
-        const results: any[] = [];
-        options.forEach((option) => {
-            const optionValue = option[props.valueKey || valueKey];
-            const optionLabel = option[props.labelKey || labelKey];
-            if (!query || optionLabel.indexOf(query) !== -1) {
-                results.push({
-                    [valueKey]: optionValue,
-                    [labelKey]: optionLabel,
+    const convert = useCallback(
+        (options: any[], query?: string): any[] => {
+            const results: any[] = [];
+            options.forEach((option) => {
+                const optionValue = option[props.valueKey || valueKey];
+                const optionLabel = option[props.labelKey || labelKey];
+                if (!query || optionLabel.indexOf(query) !== -1) {
+                    results.push({
+                        [valueKey]: optionValue,
+                        [labelKey]: optionLabel,
+                    });
+                }
+            });
+            if (props.placeholder) {
+                results.unshift({
+                    [valueKey]: null,
+                    [labelKey]: props.placeholder,
                 });
             }
-        });
-        if (props.placeholder) {
-            results.unshift({
-                [valueKey]: null,
-                [labelKey]: props.placeholder,
-            });
-        }
-        return results;
-    };
+            return results;
+        },
+        [props.labelKey, props.placeholder, props.valueKey],
+    );
 
-    const correctValue = (v: any): any => {
-        const defaultValue = props.multiple ? [] : null;
-        return v ?? defaultValue;
-    };
+    const correctValue = useCallback(
+        (v: any): any => {
+            const defaultValue = props.multiple ? [] : null;
+            return v ?? defaultValue;
+        },
+        [props.multiple],
+    );
 
     const [query, setQuery] = useState<string>('');
     const [value, setValue] = useState<any>(correctValue(props.value));
@@ -79,15 +85,6 @@ export function SelectField(props: {
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
     const isDarkTheme = useDarkTheme();
-
-    useEffect(() => {
-        setValue(correctValue(props.value));
-    }, [props.value]);
-
-    useEffect(() => {
-        setItems(convert(props.items));
-        setFilteredItems(convert(props.items, query));
-    }, [props.items, props.required, props.placeholder]);
 
     const onValueChange = (v: string): void => {
         onErrorChange();
@@ -220,6 +217,15 @@ export function SelectField(props: {
             />,
         ];
     };
+
+    useEffect(() => {
+        setValue(correctValue(props.value));
+    }, [props.value, correctValue]);
+
+    useEffect(() => {
+        setItems(convert(props.items));
+        setFilteredItems(convert(props.items, query));
+    }, [props.items, props.required, props.placeholder, query, convert]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

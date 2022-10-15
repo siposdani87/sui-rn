@@ -1,42 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { TextAreaField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
+
+interface TextAreasState {
+    about: string | null | undefined;
+    aboutDisabled: string | null | undefined;
+    aboutRequired: string | null | undefined;
+    aboutRequiredDisabled: string | null | undefined;
+}
 
 export default function TextAreasScreen() {
-    const [data, setData] = useState({
+    const [data, updateData, refreshing, onRefresh] = useData<TextAreasState>({
         about: '',
         aboutDisabled: '',
         aboutRequired: '',
         aboutRequiredDisabled: '',
+    }, {
+        about: 'About me it is not a long text!',
+        aboutDisabled: 'About me it is not a long text!',
+        aboutRequired: '',
+        aboutRequiredDisabled: '',
     });
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                about: 'About me it is not a long text!',
-                aboutDisabled: 'About me it is not a long text!',
-                aboutRequired: '',
-                aboutRequiredDisabled: '',
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

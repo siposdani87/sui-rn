@@ -1,47 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { LocationField, LocationType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
 
 interface LocationsState {
     location: LocationType | null;
 }
 
 export default function LocationsScreen() {
-    const [data, setData] = useState<LocationsState>({
+    const [data, updateData, refreshing, onRefresh] = useData<LocationsState>({
         location: null,
+    }, {
+        location: {
+            address: 'Öttevény',
+            latitude: 47.74,
+            longitude: 17.43,
+        },
     });
 
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                location: {
-                    address: 'Öttevény',
-                    latitude: 47.74,
-                    longitude: 17.43,
-                },
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
-
-    function onSearch(v: string) {
+    const onSearch = (v: string): void => {
         console.log('onSearch', v);
     }
 

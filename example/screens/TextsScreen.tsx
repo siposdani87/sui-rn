@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import {
     EmailField,
@@ -9,9 +9,22 @@ import {
     TextField,
 } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
+
+interface TextsState {
+    name: string | undefined;
+    nameDisabled: string | undefined;
+    nameRequired: string | undefined;
+    nameRequiredDisabled: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+    phone: string | undefined;
+    height: number | null | undefined;
+    query: string | null | undefined;
+}
 
 export default function TextsScreen() {
-    const [data, setData] = useState({
+    const [data, updateData, refreshing, onRefresh] = useData<TextsState>({
         name: '',
         nameDisabled: '',
         nameRequired: '',
@@ -21,42 +34,19 @@ export default function TextsScreen() {
         phone: '',
         height: 0,
         query: '',
+    }, {
+        name: 'John Doe',
+        nameDisabled: 'Jane Doe',
+        nameRequired: '',
+        nameRequiredDisabled: '',
+        email: 'user@example.com',
+        password: 'TX3-ZaZ6k-$5&t!K',
+        phone: '+362012345678',
+        height: 178,
+        query: '',
     });
 
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                name: 'John Doe',
-                nameDisabled: 'Jane Doe',
-                nameRequired: '',
-                nameRequiredDisabled: '',
-                email: 'user@example.com',
-                password: 'TX3-ZaZ6k-$5&t!K',
-                phone: '+362012345678',
-                height: 178,
-                query: '',
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, [onRefresh]);
-
-    function updateData(key: string, value: string) {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    }
-
-    function onPressDesc() {
+    const onPressDesc = (): void => {
         console.log('onPressDesc');
     }
 

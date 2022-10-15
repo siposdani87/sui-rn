@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, StyleSheet, TouchableOpacity, View, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useActionColor } from '../hooks/useActionColor';
@@ -14,7 +14,7 @@ import { Text } from './Text';
 export function SelectField(props) {
     const valueKey = 'value';
     const labelKey = 'label';
-    const convert = (options, query) => {
+    const convert = useCallback((options, query) => {
         const results = [];
         options.forEach((option) => {
             const optionValue = option[props.valueKey || valueKey];
@@ -33,11 +33,11 @@ export function SelectField(props) {
             });
         }
         return results;
-    };
-    const correctValue = (v) => {
+    }, [props.labelKey, props.placeholder, props.valueKey]);
+    const correctValue = useCallback((v) => {
         const defaultValue = props.multiple ? [] : null;
         return v ?? defaultValue;
-    };
+    }, [props.multiple]);
     const [query, setQuery] = useState('');
     const [value, setValue] = useState(correctValue(props.value));
     const [items, setItems] = useState(convert(props.items));
@@ -47,13 +47,6 @@ export function SelectField(props) {
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
     const isDarkTheme = useDarkTheme();
-    useEffect(() => {
-        setValue(correctValue(props.value));
-    }, [props.value]);
-    useEffect(() => {
-        setItems(convert(props.items));
-        setFilteredItems(convert(props.items, query));
-    }, [props.items, props.required, props.placeholder]);
     const onValueChange = (v) => {
         onErrorChange();
         setValue(v);
@@ -170,6 +163,13 @@ export function SelectField(props) {
             <IconButton key={0} iconName="expand-more" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog}/>,
         ];
     };
+    useEffect(() => {
+        setValue(correctValue(props.value));
+    }, [props.value, correctValue]);
+    useEffect(() => {
+        setItems(convert(props.items));
+        setFilteredItems(convert(props.items, query));
+    }, [props.items, props.required, props.placeholder, query, convert]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>

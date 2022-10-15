@@ -4,12 +4,13 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { TextButton } from '@siposdani87/sui-rn';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../Router';
+import { StackParamList } from '../utils/Router';
 
 type ScreenNavigationProp = NativeStackNavigationProp<StackParamList>;
 
 export default function HomeScreen() {
     const navigation = useNavigation<ScreenNavigationProp>();
+
     return (
         <>
             <StatusBar style="light" />

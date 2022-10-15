@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Colors } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
-import { ServiceContext, Services } from '../ServiceContext';
+import { ServiceContext, Services } from '../utils/ServiceContext';
 
 export default function ConfirmsScreen() {
     const services = useContext<Services | null>(ServiceContext);

@@ -43,7 +43,7 @@ export function Dialog(props: {
         if (props.visible !== visible) {
             setVisible(props.visible);
         }
-    }, [props.visible]);
+    }, [props.visible, visible]);
 
     return (
         <Modal

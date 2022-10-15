@@ -33,15 +33,15 @@ export function SliderField(props: {
     );
     const isDarkTheme = useDarkTheme();
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: number): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

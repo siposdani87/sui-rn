@@ -31,7 +31,7 @@ export function IconButton(props: {
     const iconColor = props.iconColor || defaultColor;
     const iconSize = props.iconSize || 26;
 
-    const onPress = () => {
+    const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
