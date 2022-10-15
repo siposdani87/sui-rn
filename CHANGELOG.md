@@ -1,6 +1,11 @@
-## 0.8.0 - TBD
+## 0.8.1 - TBD
 
-*
+* 
+
+## 0.8.0 - 2022-10-15
+
+* Refactor FieldField and SelectField
+* Improve hook deps arrays
 
 ## 0.7.0 - 2022-10-10
 
