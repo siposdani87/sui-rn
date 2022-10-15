@@ -37,10 +37,6 @@ export function IconToggleField(props: {
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: boolean): void => {
         onErrorChange();
         setValue(v);
@@ -73,6 +69,10 @@ export function IconToggleField(props: {
     const getIcon = (): string => {
         return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

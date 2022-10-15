@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import {
     CheckboxField,
@@ -8,6 +8,7 @@ import {
     SwitchField,
 } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
 
 interface CheckboxesState {
     isPrivate: boolean | null;
@@ -17,40 +18,17 @@ interface CheckboxesState {
 }
 
 export default function CheckboxesScreen() {
-    const [data, setData] = useState<CheckboxesState>({
+    const [data, updateData, refreshing, onRefresh] = useData<CheckboxesState>({
         isPrivate: false,
         isBanned: false,
         isDeleted: false,
         radioButton: null,
+    }, {
+        isPrivate: true,
+        isBanned: true,
+        isDeleted: true,
+        radioButton: 'yes',
     });
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                isPrivate: true,
-                isBanned: true,
-                isDeleted: true,
-                radioButton: 'yes',
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    function updateData(key: string, value: any) {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    }
 
     return (
         <>

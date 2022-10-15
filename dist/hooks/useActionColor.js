@@ -1,8 +1,9 @@
+import { useCallback } from 'react';
 import { Colors } from '../constants';
 import { useDarkTheme } from './useDarkTheme';
 export function useActionColor(disabled) {
     const isDarkTheme = useDarkTheme();
-    const getActionColor = (selected) => {
+    const getActionColor = useCallback((selected) => {
         if (disabled) {
             return isDarkTheme
                 ? Colors.contentDisabledDark
@@ -12,7 +13,7 @@ export function useActionColor(disabled) {
             return isDarkTheme ? Colors.accentBright : Colors.accent;
         }
         return isDarkTheme ? Colors.primaryBright : Colors.primary;
-    };
+    }, [disabled, isDarkTheme]);
     return getActionColor;
 }
 //# sourceMappingURL=useActionColor.js.map

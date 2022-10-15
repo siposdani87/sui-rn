@@ -20,8 +20,8 @@ import { useFonts } from 'expo-font';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import { Linking, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Router from './Router';
-import { ServiceContext, Services } from './ServiceContext';
+import Router from './utils/Router';
+import { ServiceContext, Services } from './utils/ServiceContext';
 import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme } from '@siposdani87/sui-rn';
 import * as SplashScreen from 'expo-splash-screen';
 

@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { FileField, ImageSourceType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
 
 interface FilesState {
     logoPicture: ImageSourceType;
@@ -12,49 +13,25 @@ interface FilesState {
 }
 
 export default function FilesScreen() {
-    const [data, setData] = useState<FilesState>({
+    const defaultValue =
+        'https://www.gravatar.com/avatar/111111?s=200&d=mp&f=y';
+    const [data, updateData, refreshing, onRefresh] = useData<FilesState>({
         logoPicture: require('../assets/icon.png'),
         logoPictureDefault: null,
         profilePicture: null,
         document: null,
         documentDisabled: null,
+    }, {
+        logoPicture: {
+            uri: null,
+        },
+        logoPictureDefault: null,
+        profilePicture:
+            'https://www.gravatar.com/avatar/000000?s=200&d=robohash&f=y',
+        document: null,
+        documentDisabled:
+            'http://www.africau.edu/images/default/sample.pdf',
     });
-
-    const defaultValue =
-        'https://www.gravatar.com/avatar/111111?s=200&d=mp&f=y';
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                logoPicture: {
-                    uri: null,
-                },
-                logoPictureDefault: null,
-                profilePicture:
-                    'https://www.gravatar.com/avatar/000000?s=200&d=robohash&f=y',
-                document: null,
-                documentDisabled:
-                    'http://www.africau.edu/images/default/sample.pdf',
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

@@ -10,9 +10,6 @@ export function TextField(props) {
     const [isFocused, setIsFocused] = useState(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled, isFocused);
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
     const onValueChange = (v) => {
         onErrorChange();
         setValue(v);
@@ -32,6 +29,9 @@ export function TextField(props) {
             paddingRight: (props.actionButtons?.length || 0) * 38,
         };
     };
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <TextInput value={getValue()} style={[

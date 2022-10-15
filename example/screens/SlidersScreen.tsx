@@ -1,43 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SliderField } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
+import { useData } from '../utils/useData';
+
+interface SlidersState {
+    weight: number | null | undefined;
+    weightDisabled: number | null | undefined;
+    weightRequired: number | null | undefined;
+    weightRequiredDisabled: number | null | undefined;
+}
 
 export default function SlidersScreen() {
-    const [data, setData] = useState({
+    const [data, updateData, refreshing, onRefresh] = useData<SlidersState>({
         weight: 0,
         weightDisabled: 0,
         weightRequired: 0,
         weightRequiredDisabled: 0,
+    }, {
+        weight: 92,
+        weightDisabled: 10,
+        weightRequired: 0,
+        weightRequiredDisabled: 46,
     });
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                weight: 92,
-                weightDisabled: 10,
-                weightRequired: 0,
-                weightRequiredDisabled: 46,
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>

@@ -15,9 +15,6 @@ export function ColorField(props) {
     const [error, onErrorChange] = useErrorField(props.error);
     const [visible, setVisible] = useState(false);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled);
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
     const onValueChange = (v) => {
         onErrorChange();
         setValue(v);
@@ -41,6 +38,9 @@ export function ColorField(props) {
     const onColorChange = (color) => {
         setCurrentColor(color);
     };
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Dialog visible={visible} title={props.label} onClose={hideColorPicker} buttons={[
             <Button key="0" title={props.okText} onPress={selectColor}/>,

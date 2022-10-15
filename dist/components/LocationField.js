@@ -18,10 +18,6 @@ export function LocationField(props) {
     const [visibleCoords, setVisibleCoords] = useState(false);
     const isDarkTheme = useDarkTheme();
     const getActionColor = useActionColor(props.disabled);
-    useEffect(() => {
-        const coords = props.value || defaultValue;
-        setValue(coords);
-    }, [props.value]);
     const onValueChange = (v) => {
         setValue(v);
         props.onValueChange(v);
@@ -101,6 +97,10 @@ export function LocationField(props) {
                     : Colors.primary} onPress={toggleSettings}/>);
         return actionButtons;
     };
+    useEffect(() => {
+        const coords = props.value || defaultValue;
+        setValue(coords);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
             <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} actionButtons={getActionButtons()}/>
             {visibleCoords && (<View style={styles.coordsContainer}>

@@ -12,9 +12,6 @@ export function IconToggleField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
     const onValueChange = (v) => {
         onErrorChange();
         setValue(v);
@@ -46,6 +43,9 @@ export function IconToggleField(props) {
     const getIcon = () => {
         return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
     };
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
                 <MaterialIcons name={getIcon()} size={26} color={getColor()}/>

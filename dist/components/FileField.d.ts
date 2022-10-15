@@ -7,7 +7,7 @@ export declare function FileField(props: {
     value: ImageSourceType;
     defaultValue?: ImageSourceType;
     mimeType: string;
-    onValueChange: (_value: any) => void;
+    onValueChange: (_value: string | null) => void;
     label?: string;
     error?: string | null;
     required?: boolean;

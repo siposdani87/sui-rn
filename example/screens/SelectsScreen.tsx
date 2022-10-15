@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import { SelectField } from '@siposdani87/sui-rn';
+import { useData } from '../utils/useData';
+
 
 interface SelectsState {
     bodyType: string | null | undefined;
@@ -21,8 +23,29 @@ interface SelectsState {
     hobbiesRequiredDisabled: string[] | null;
 }
 
+const genders = [
+    { label: 'Male', value: 'MALE' },
+    { label: 'Female', value: 'FEMALE' },
+    { label: 'Other', value: 'OTHER' },
+];
+const bodyTypes = [
+    { name: 'Avarage', id: 1 },
+    { name: 'Sportic', id: 2 },
+];
+const hobbies = [
+    { name: 'Hunting', value: 'HUNTING' },
+    { name: 'Sport', value: 'SPORT' },
+    { name: 'Gardening', value: 'GARDENING' },
+    { name: 'Play games', value: 'PLAY_GAMES' },
+];
+const notifications = [
+    { name: 'Email', id: 1 },
+    { name: 'SMS', id: 2 },
+    { name: 'Push', id: 3 },
+];
+
 export default function SelectsScreen() {
-    const [data, setData] = useState<SelectsState>({
+    const [data, updateData, refreshing, onRefresh] = useData<SelectsState>({
         bodyType: null,
         bodyTypeRequired: null,
 
@@ -38,66 +61,23 @@ export default function SelectsScreen() {
         hobbiesDisabled: [],
         hobbiesRequired: [],
         hobbiesRequiredDisabled: [],
+    }, {
+        bodyType: null,
+        bodyTypeRequired: undefined,
+
+        notifications: null,
+        notificationsRequired: undefined,
+
+        gender: 'MALE',
+        genderDisabled: 'MALE',
+        genderRequired: null,
+        genderRequiredDisabled: null,
+
+        hobbies: ['HUNTING', 'SPORT'],
+        hobbiesDisabled: ['HUNTING', 'SPORT'],
+        hobbiesRequired: [],
+        hobbiesRequiredDisabled: [],
     });
-    const genders = [
-        { label: 'Male', value: 'MALE' },
-        { label: 'Female', value: 'FEMALE' },
-        { label: 'Other', value: 'OTHER' },
-    ];
-    const bodyTypes = [
-        { name: 'Avarage', id: 1 },
-        { name: 'Sportic', id: 2 },
-    ];
-    const hobbies = [
-        { name: 'Hunting', value: 'HUNTING' },
-        { name: 'Sport', value: 'SPORT' },
-        { name: 'Gardening', value: 'GARDENING' },
-        { name: 'Play games', value: 'PLAY_GAMES' },
-    ];
-    const notifications = [
-        { name: 'Email', id: 1 },
-        { name: 'SMS', id: 2 },
-        { name: 'Push', id: 3 },
-    ];
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-
-        setTimeout(() => {
-            setData({
-                bodyType: null,
-                bodyTypeRequired: undefined,
-
-                notifications: null,
-                notificationsRequired: undefined,
-
-                gender: 'MALE',
-                genderDisabled: 'MALE',
-                genderRequired: null,
-                genderRequiredDisabled: null,
-
-                hobbies: ['HUNTING', 'SPORT'],
-                hobbiesDisabled: ['HUNTING', 'SPORT'],
-                hobbiesRequired: [],
-                hobbiesRequiredDisabled: [],
-            });
-            setRefreshing(false);
-        }, 2000);
-    }, []);
-
-    useEffect(() => {
-        onRefresh();
-    }, []);
-
-    const updateData = (key: string, value: any): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    };
 
     return (
         <>
