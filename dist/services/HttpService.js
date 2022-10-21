@@ -1,4 +1,4 @@
-import * as SUI from '@siposdani87/sui-js';
+import { Objekt } from '@siposdani87/sui-js';
 import { HTTP_401, HTTP_403, HTTP_REQUEST, HTTP_RESPONSE, } from '../constants/ActionTypes';
 import { Base, Fetch } from '../utils';
 export class HttpService extends Base {
@@ -58,7 +58,7 @@ export class HttpService extends Base {
             })
                 .catch(() => {
                 this._statusHandler(500, false);
-                reject(new SUI.Objekt());
+                reject(new Objekt());
             });
         });
     }

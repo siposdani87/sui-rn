@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
-import * as SUI from '@siposdani87/sui-js';
+import { Objekt } from '@siposdani87/sui-js';
 import { Base } from '../utils';
 import { Data, Params, Headers } from '../utils/Fetch';
-export interface DataResponse extends SUI.Objekt {
+export interface DataResponse extends Objekt {
 }
 export declare class HttpService extends Base {
     private getTokenAsync;

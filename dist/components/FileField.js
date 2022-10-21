@@ -10,7 +10,7 @@ import { TextField } from './TextField';
 import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import * as SUI from '@siposdani87/sui-js';
+import { getExtensionName } from '@siposdani87/sui-js';
 const fileColors = {
     docx: 'blue',
     xlsx: 'green',
@@ -47,7 +47,7 @@ const getFileIconSrc = (type, color) => {
     return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
 };
 const getSvgXmlByFilename = (filename) => {
-    const type = SUI.getExtensionName(filename);
+    const type = getExtensionName(filename);
     const color = fileColors[type] ?? 'black';
     return getFileIconSrc(type, color);
 };
@@ -113,7 +113,7 @@ export function FileField(props) {
     const handleDocumentDataUri = async (result) => {
         if (result.type === 'success') {
             const filename = result.name;
-            const mimeType = mimeTypes[SUI.getExtensionName(filename)];
+            const mimeType = mimeTypes[getExtensionName(filename)];
             const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
                 encoding: 'base64',
             });
