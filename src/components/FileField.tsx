@@ -19,7 +19,7 @@ import { TextField } from './TextField';
 import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import * as SUI from '@siposdani87/sui-js';
+import { getExtensionName } from '@siposdani87/sui-js';
 
 export type ImageSourceType =
     | ImageURISource
@@ -81,7 +81,7 @@ const getFileIconSrc = (type: string, color: string): string => {
 };
 
 const getSvgXmlByFilename = (filename: string): string => {
-    const type = SUI.getExtensionName(filename);
+    const type = getExtensionName(filename);
     const color = fileColors[type] ?? 'black';
     return getFileIconSrc(type, color);
 };
@@ -188,7 +188,7 @@ export function FileField(props: {
     ): Promise<void> => {
         if (result.type === 'success') {
             const filename = result.name;
-            const mimeType = mimeTypes[SUI.getExtensionName(filename)];
+            const mimeType = mimeTypes[getExtensionName(filename)];
             const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
                 encoding: 'base64',
             });

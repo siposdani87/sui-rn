@@ -1,4 +1,4 @@
-import * as SUI from '@siposdani87/sui-js';
+import { getExtensionName, Objekt } from '@siposdani87/sui-js';
 export class Fetch {
     backendUrl;
     constructor(backendUrl) {
@@ -30,7 +30,7 @@ export class Fetch {
         return this._handleRequest('DELETE', url, opt_data, opt_params, opt_headers);
     }
     _getHeaders(url, opt_headers) {
-        const extension = SUI.getExtensionName(url);
+        const extension = getExtensionName(url);
         const headers = this.filteredHeaders(opt_headers);
         return {
             'X-Requested-With': 'XMLHttpRequest',
@@ -91,7 +91,7 @@ export class Fetch {
             text()
             formData()
         */
-        let data = new SUI.Objekt();
+        let data = new Objekt();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();
             data = data.merge(jsonData);

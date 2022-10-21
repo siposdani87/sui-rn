@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
-import * as SUI from '@siposdani87/sui-js';
+import { capitalize } from '@siposdani87/sui-js';
 export function ErrorField(props) {
     const isDarkTheme = useDarkTheme();
     const getTextStyle = () => {
@@ -21,7 +21,7 @@ export function ErrorField(props) {
     return (<View style={styles.container}>
             <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>
                 {props.error
-            ? SUI.capitalize(props.error.join('; '))
+            ? capitalize(props.error.join('; '))
             : null}
             </Text>
         </View>);

@@ -12,7 +12,7 @@ import { useDarkTheme } from '../hooks/useDarkTheme';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 import { Dialog } from './Dialog';
-import * as SUI from '@siposdani87/sui-js';
+import { capitalize } from '@siposdani87/sui-js';
 
 export function Label(props: {
     text?: string;
@@ -59,7 +59,7 @@ export function Label(props: {
                 onPress={props.onPress}
             >
                 <Text style={[styles.text, props.style, getTextStyle()]}>
-                    {props.text ? SUI.capitalize(props.text) : ''}{' '}
+                    {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
             </TouchableOpacity>
