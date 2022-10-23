@@ -13,7 +13,7 @@ export interface DataResponse extends Objekt {}
 
 export class HttpService extends Base {
     private getTokenAsync: () => Promise<string>;
-    private inprogress: number;
+    private progressCounter: number;
     private language: string;
     private secret: string;
     private fetch: Fetch;
@@ -27,7 +27,7 @@ export class HttpService extends Base {
     ) {
         super(dispatch);
         this.getTokenAsync = getTokenAsync;
-        this.inprogress = 0;
+        this.progressCounter = 0;
         this.language = language;
         this.secret = secret;
         this.fetch = new Fetch(backendUrl);
@@ -38,7 +38,7 @@ export class HttpService extends Base {
     }
 
     public isInprogress(): boolean {
-        return this.inprogress > 0;
+        return this.progressCounter > 0;
     }
 
     public async get(
@@ -153,7 +153,7 @@ export class HttpService extends Base {
     }
 
     private _statusHandler(status: number, inProgress: boolean): void {
-        let type = HTTP_RESPONSE;
+        let type;
         switch (status) {
             case 401:
                 type = HTTP_401;
@@ -170,9 +170,9 @@ export class HttpService extends Base {
 
     private _setInprogress(type: string, inProgress: boolean): void {
         if (inProgress) {
-            this.inprogress++;
+            this.progressCounter++;
         } else {
-            this.inprogress--;
+            this.progressCounter--;
         }
         this.dispatch({
             type,
