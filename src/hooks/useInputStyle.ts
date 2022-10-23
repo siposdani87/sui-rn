@@ -4,7 +4,7 @@ import { useDarkTheme } from './useDarkTheme';
 
 export function useInputStyle(
     value: any,
-    error: any,
+    error: string | null,
     required?: boolean,
     disabled?: boolean,
     focused?: boolean,
@@ -35,13 +35,13 @@ export function useInputStyle(
 
     const getFocusStyle = (): StyleProp<ViewStyle> | null => {
         if (focused) {
-            const bottomColor = hasError
-                ? isDarkTheme
-                    ? Colors.errorDefaultDark
-                    : Colors.errorDefaultLight
-                : isDarkTheme
+            const errorColor = isDarkTheme
+                ? Colors.errorDefaultDark
+                : Colors.errorDefaultLight;
+            const primaryColor = isDarkTheme
                 ? Colors.primaryBright
                 : Colors.primary;
+            const bottomColor = hasError ? errorColor : primaryColor;
 
             return {
                 borderBottomWidth: 3,
