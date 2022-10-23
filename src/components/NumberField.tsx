@@ -14,7 +14,7 @@ export function NumberField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 }): JSX.Element {
     const [value, setValue] = useState<any>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);

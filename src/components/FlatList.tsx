@@ -8,6 +8,8 @@ import {
     StyleSheet,
     FlatList as RNFlatList,
     ListRenderItem,
+    StyleProp,
+    ViewStyle,
 } from 'react-native';
 
 const config = {
@@ -20,7 +22,7 @@ export function FlatList(props: {
     keyExtractor?: (_item: any, _index: number) => string;
     renderItem: ListRenderItem<any>;
     numColumns?: number;
-    columnWrapperStyle?: any;
+    columnWrapperStyle?: StyleProp<ViewStyle>;
     refreshing: boolean;
     onRefresh: () => void;
     onEndReached: () => void;

@@ -8,9 +8,9 @@ export function Dialog(props: {
     visible: boolean;
     type?: string;
     title?: string;
-    buttons?: any[];
+    buttons?: JSX.Element[];
     onClose?: () => void;
-    children?: any;
+    children?: JSX.Element | JSX.Element[];
 }): JSX.Element {
     const [visible, setVisible] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();

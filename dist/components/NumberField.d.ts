@@ -11,5 +11,5 @@ export declare function NumberField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 }): JSX.Element;

@@ -21,7 +21,7 @@ import { Text } from './Text';
 
 export function SelectField(props: {
     value: any;
-    items: any;
+    items: any[];
     onValueChange: (_value: any) => void;
     okText: string;
     multiple?: boolean;
@@ -227,6 +227,10 @@ export function SelectField(props: {
         setFilteredItems(convert(props.items, query));
     }, [props.items, props.required, props.placeholder, query, convert]);
 
+    const selectedItemStyle = isDarkTheme
+        ? styles.selectedItemDark
+        : styles.selectedItemLight;
+
     return (
         <View style={[styles.container, props.containerStyle]}>
             <Label
@@ -283,9 +287,7 @@ export function SelectField(props: {
                                 style={[
                                     styles.itemText,
                                     isSelected(item[valueKey])
-                                        ? isDarkTheme
-                                            ? styles.selectedItemDark
-                                            : styles.selectedItemLight
+                                        ? selectedItemStyle
                                         : null,
                                 ]}
                             >

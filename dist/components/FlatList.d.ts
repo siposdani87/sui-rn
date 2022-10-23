@@ -1,11 +1,11 @@
 /// <reference types="react" />
-import { ImageSourcePropType, ListRenderItem } from 'react-native';
+import { ImageSourcePropType, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
 export declare function FlatList(props: {
     data: any[];
     keyExtractor?: (_item: any, _index: number) => string;
     renderItem: ListRenderItem<any>;
     numColumns?: number;
-    columnWrapperStyle?: any;
+    columnWrapperStyle?: StyleProp<ViewStyle>;
     refreshing: boolean;
     onRefresh: () => void;
     onEndReached: () => void;

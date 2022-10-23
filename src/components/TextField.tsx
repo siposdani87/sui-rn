@@ -29,7 +29,7 @@ export function TextField(
         onPressDesc?: () => void;
         containerStyle?: StyleProp<ViewStyle>;
         style?: StyleProp<TextStyle>;
-        actionButtons?: any[];
+        actionButtons?: JSX.Element[];
     } & TextInputProps,
 ): JSX.Element {
     const [value, setValue] = useState<string>(props.value);
@@ -47,10 +47,6 @@ export function TextField(
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
-    };
-
-    const getPlaceholderTextColor = (): string => {
-        return Colors.deepGreyBright;
     };
 
     const getValue = (): string => {
@@ -90,7 +86,7 @@ export function TextField(
                 onChangeText={onValueChange}
                 onBlur={() => setIsFocused(false)}
                 onFocus={() => setIsFocused(true)}
-                placeholderTextColor={getPlaceholderTextColor()}
+                placeholderTextColor={Colors.deepGreyBright}
                 placeholder={props.placeholder}
                 underlineColorAndroid="transparent"
                 selectionColor={Colors.deepGreyBright}

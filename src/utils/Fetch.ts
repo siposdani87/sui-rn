@@ -208,8 +208,8 @@ export class Fetch {
                 filename =
                     contentDisposition.match(/filename="(.+)"/)?.[1] ?? '';
             }
-        } catch (_e) {
-            // console.error(e);
+        } catch (e) {
+            console.error(e);
         }
         return filename;
     }

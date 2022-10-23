@@ -44,7 +44,7 @@ export function Label(props) {
             }}>
                         <Text>{props.desc}</Text>
                     </Dialog>
-                    <IconButton containerStyle={styles.infoContainer} iconName="info-outline" iconSize={20} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onPressDesc}/>
+                    <IconButton containerStyle={styles.infoContainer} iconName="info" iconSize={20} iconColor={isDarkTheme ? Colors.primaryBright : Colors.primary} onPress={onPressDesc}/>
                 </>)}
         </View>);
 }

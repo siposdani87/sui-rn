@@ -8,7 +8,7 @@ import CheckboxesScreen from '../screens/CheckboxesScreen';
 import DateTimesScreen from '../screens/DateTimesScreen';
 import FilesScreen from '../screens/FilesScreen';
 import SelectsScreen from '../screens/SelectsScreen';
-import TextsScreen from '../screens/TextsScreen';
+import InputsScreen from '../screens/InputsScreen';
 import LocationsScreen from '../screens/LocationsScreen';
 import ColorsScreen from '../screens/ColorsScreen';
 import SlidersScreen from '../screens/SlidersScreen';
@@ -33,7 +33,7 @@ export type StackParamList = {
     Selects: undefined;
     Sliders: undefined;
     TextAreas: undefined;
-    Texts: undefined;
+    Inputs: undefined;
     Dialogs: undefined;
     Flashes: undefined;
     Confirms: undefined;
@@ -55,7 +55,7 @@ export default function Router() {
             <Stack.Screen name="Selects" component={SelectsScreen} />
             <Stack.Screen name="Sliders" component={SlidersScreen} />
             <Stack.Screen name="TextAreas" component={TextAreasScreen} />
-            <Stack.Screen name="Texts" component={TextsScreen} />
+            <Stack.Screen name="Inputs" component={InputsScreen} />
             <Stack.Screen name="Dialogs" component={DialogsScreen} />
             <Stack.Screen name="Flashes" component={FlashesScreen} />
             <Stack.Screen name="Confirms" component={ConfirmsScreen} />

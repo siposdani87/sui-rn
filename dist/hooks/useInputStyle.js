@@ -26,13 +26,13 @@ export function useInputStyle(value, error, required, disabled, focused) {
     };
     const getFocusStyle = () => {
         if (focused) {
-            const bottomColor = hasError
-                ? isDarkTheme
-                    ? Colors.errorDefaultDark
-                    : Colors.errorDefaultLight
-                : isDarkTheme
-                    ? Colors.primaryBright
-                    : Colors.primary;
+            const errorColor = isDarkTheme
+                ? Colors.errorDefaultDark
+                : Colors.errorDefaultLight;
+            const primaryColor = isDarkTheme
+                ? Colors.primaryBright
+                : Colors.primary;
+            const bottomColor = hasError ? errorColor : primaryColor;
             return {
                 borderBottomWidth: 3,
                 borderBottomColor: bottomColor,

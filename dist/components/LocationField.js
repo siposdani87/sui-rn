@@ -90,11 +90,10 @@ export function LocationField(props) {
         if (props.onSearch) {
             actionButtons.push(<IconButton iconName="pin-drop" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={onSearch}/>);
         }
-        actionButtons.push(<IconButton iconName="settings" containerStyle={Styles.fieldIconButton} iconColor={visibleCoords
-                ? Colors.accent
-                : isDarkTheme
-                    ? Colors.primaryBright
-                    : Colors.primary} onPress={toggleSettings}/>);
+        const primaryColor = isDarkTheme
+            ? Colors.primaryBright
+            : Colors.primary;
+        actionButtons.push(<IconButton iconName="settings" containerStyle={Styles.fieldIconButton} iconColor={visibleCoords ? Colors.accent : primaryColor} onPress={toggleSettings}/>);
         return actionButtons;
     };
     useEffect(() => {

@@ -13,5 +13,5 @@ export declare function CheckboxField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: any;
+    children?: JSX.Element | JSX.Element[];
 }): JSX.Element;

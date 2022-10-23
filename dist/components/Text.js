@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, StyleSheet } from 'react-native';
+import { Text as RNText, StyleSheet, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 export function Text(props) {

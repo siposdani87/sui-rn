@@ -23,7 +23,7 @@ export function Label(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: any;
+    children?: JSX.Element | JSX.Element[];
 }): JSX.Element | null {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState<boolean>(false);
@@ -75,7 +75,7 @@ export function Label(props: {
                     </Dialog>
                     <IconButton
                         containerStyle={styles.infoContainer}
-                        iconName="info-outline"
+                        iconName="info"
                         iconSize={20}
                         iconColor={
                             isDarkTheme ? Colors.primaryBright : Colors.primary
