@@ -18,6 +18,7 @@ import MapView, {
     MapStyleElement,
     LatLng,
     Region,
+    MarkerProps,
 } from 'react-native-maps';
 import { NumberField } from './NumberField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
@@ -99,7 +100,7 @@ export function LocationField(props: {
         }
     };
 
-    const getLocationProps = (): any => {
+    const getLocationProps = (): Partial<MarkerProps> => {
         return {
             style: { height: 100, width: 100 },
             image: props.markerImage,
@@ -163,17 +164,15 @@ export function LocationField(props: {
                 />,
             );
         }
+        const primaryColor = isDarkTheme
+            ? Colors.primaryBright
+            : Colors.primary;
+
         actionButtons.push(
             <IconButton
                 iconName="settings"
                 containerStyle={Styles.fieldIconButton}
-                iconColor={
-                    visibleCoords
-                        ? Colors.accent
-                        : isDarkTheme
-                        ? Colors.primaryBright
-                        : Colors.primary
-                }
+                iconColor={visibleCoords ? Colors.accent : primaryColor}
                 onPress={toggleSettings}
             />,
         );

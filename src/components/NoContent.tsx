@@ -13,7 +13,7 @@ import { Text } from '../components/Text';
 export function NoContent(props: {
     text?: string;
     imageSource?: ImageSourcePropType;
-    children?: any;
+    children?: JSX.Element | JSX.Element[];
     containerStyle?: StyleProp<ViewStyle>;
 }): JSX.Element {
     return (

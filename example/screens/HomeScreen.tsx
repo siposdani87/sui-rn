@@ -61,8 +61,8 @@ export default function HomeScreen() {
                         onPress={() => navigation.navigate('TextAreas')}
                     />
                     <TextButton
-                        title="Texts"
-                        onPress={() => navigation.navigate('Texts')}
+                        title="Inputs"
+                        onPress={() => navigation.navigate('Inputs')}
                     />
                     <TextButton
                         title="Dialogs"

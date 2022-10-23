@@ -25,7 +25,7 @@ export type ImageSourceType =
     | ImageURISource
     | ImageRequireSource
     | null
-    | { uri: string | null }; // ImageSourcePropType|null|{uri: string|null};
+    | { uri: string | null };
 
 interface FileColor {
     [key: string]: string;

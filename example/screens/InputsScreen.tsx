@@ -11,7 +11,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { useData } from '../utils/useData';
 
-interface TextsState {
+interface InputsState {
     name: string | undefined;
     nameDisabled: string | undefined;
     nameRequired: string | undefined;
@@ -23,8 +23,8 @@ interface TextsState {
     query: string | null | undefined;
 }
 
-export default function TextsScreen() {
-    const [data, updateData, refreshing, onRefresh] = useData<TextsState>({
+export default function InputsScreen() {
+    const [data, updateData, refreshing, onRefresh] = useData<InputsState>({
         name: '',
         nameDisabled: '',
         nameRequired: '',

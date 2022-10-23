@@ -14,5 +14,5 @@ export declare function TagField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 }): JSX.Element;

@@ -13,5 +13,5 @@ export declare function TextField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 } & TextInputProps): JSX.Element;

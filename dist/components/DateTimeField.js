@@ -135,7 +135,7 @@ export function DateTimeField(props) {
         if (visible) {
             return (<DateTimePicker value={date ?? getNow()} mode={pickerMode} is24Hour={true} display="default" onChange={onChange}/>);
         }
-        return null;
+        return undefined;
     };
     const onValuesChange = (values) => {
         if (values.length === 0) {

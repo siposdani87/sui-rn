@@ -3,14 +3,14 @@ import { HTTP_401, HTTP_403, HTTP_REQUEST, HTTP_RESPONSE, } from '../constants/A
 import { Base, Fetch } from '../utils';
 export class HttpService extends Base {
     getTokenAsync;
-    inprogress;
+    progressCounter;
     language;
     secret;
     fetch;
     constructor(dispatch, getTokenAsync, backendUrl, language, secret) {
         super(dispatch);
         this.getTokenAsync = getTokenAsync;
-        this.inprogress = 0;
+        this.progressCounter = 0;
         this.language = language;
         this.secret = secret;
         this.fetch = new Fetch(backendUrl);
@@ -19,7 +19,7 @@ export class HttpService extends Base {
         return this.fetch.getUrl(url, opt_params);
     }
     isInprogress() {
-        return this.inprogress > 0;
+        return this.progressCounter > 0;
     }
     async get(url, opt_params, opt_headers) {
         return this._handleResponse(this.fetch.get(url, opt_params, await this._getHeaders(opt_headers)));
@@ -63,7 +63,7 @@ export class HttpService extends Base {
         });
     }
     _statusHandler(status, inProgress) {
-        let type = HTTP_RESPONSE;
+        let type;
         switch (status) {
             case 401:
                 type = HTTP_401;
@@ -79,10 +79,10 @@ export class HttpService extends Base {
     }
     _setInprogress(type, inProgress) {
         if (inProgress) {
-            this.inprogress++;
+            this.progressCounter++;
         }
         else {
-            this.inprogress--;
+            this.progressCounter--;
         }
         this.dispatch({
             type,

@@ -6,7 +6,7 @@ export interface DataResponse extends Objekt {
 }
 export declare class HttpService extends Base {
     private getTokenAsync;
-    private inprogress;
+    private progressCounter;
     private language;
     private secret;
     private fetch;

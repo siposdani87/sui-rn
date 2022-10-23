@@ -15,7 +15,7 @@ export function RadioButtonField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: any;
+    children?: JSX.Element | JSX.Element[];
 }): JSX.Element {
     const [value, setValue] = useState<any>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);

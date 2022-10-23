@@ -187,7 +187,7 @@ export function DateTimeField(props: {
         onValueChange(date);
     };
 
-    const renderDateTimePicker = (): JSX.Element | null => {
+    const renderDateTimePicker = (): JSX.Element | undefined => {
         if (visible) {
             return (
                 <DateTimePicker
@@ -199,7 +199,7 @@ export function DateTimeField(props: {
                 />
             );
         }
-        return null;
+        return undefined;
     };
 
     const onValuesChange = (values: string[]): void => {

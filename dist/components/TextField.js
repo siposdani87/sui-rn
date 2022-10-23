@@ -15,9 +15,6 @@ export function TextField(props) {
         setValue(v);
         props.onValueChange(v);
     };
-    const getPlaceholderTextColor = () => {
-        return Colors.deepGreyBright;
-    };
     const getValue = () => {
         if (value === undefined || value === null) {
             return '';
@@ -39,7 +36,7 @@ export function TextField(props) {
             props.style,
             inputStyle,
             getActionButtonsStyle(),
-        ]} onChangeText={onValueChange} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)} placeholderTextColor={getPlaceholderTextColor()} placeholder={props.placeholder} underlineColorAndroid="transparent" selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly}/>
+        ]} onChangeText={onValueChange} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)} placeholderTextColor={Colors.deepGreyBright} placeholder={props.placeholder} underlineColorAndroid="transparent" selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly}/>
             {props.actionButtons && (<View style={[
                 Styles.actionsContainer,
                 Platform.select({

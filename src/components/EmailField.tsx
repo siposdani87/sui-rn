@@ -14,7 +14,7 @@ export function EmailField(
         onPressDesc?: () => void;
         containerStyle?: StyleProp<ViewStyle>;
         style?: StyleProp<ViewStyle>;
-        actionButtons?: any[];
+        actionButtons?: JSX.Element[];
     } & TextInputProps,
 ): JSX.Element {
     return (

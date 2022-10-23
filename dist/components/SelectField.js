@@ -170,6 +170,9 @@ export function SelectField(props) {
         setItems(convert(props.items));
         setFilteredItems(convert(props.items, query));
     }, [props.items, props.required, props.placeholder, query, convert]);
+    const selectedItemStyle = isDarkTheme
+        ? styles.selectedItemDark
+        : styles.selectedItemLight;
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>
@@ -186,9 +189,7 @@ export function SelectField(props) {
                             <Text style={[
                 styles.itemText,
                 isSelected(item[valueKey])
-                    ? isDarkTheme
-                        ? styles.selectedItemDark
-                        : styles.selectedItemLight
+                    ? selectedItemStyle
                     : null,
             ]}>
                                 {item[labelKey]}

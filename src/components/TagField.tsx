@@ -30,7 +30,7 @@ export function TagField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: any[];
+    actionButtons?: JSX.Element[];
 }) {
     const [values, setValues] = useState<string[]>(props.values);
     const [error, onErrorChange] = useErrorField(props.error);

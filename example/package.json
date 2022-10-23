@@ -29,7 +29,7 @@
     "@react-native-community/slider": "4.2.3",
     "@siposdani87/expo-maps-polygon-editor": "0.5.0",
     "@siposdani87/expo-rich-text-editor": "0.8.1",
-    "@siposdani87/sui-js": "0.8.7",
+    "@siposdani87/sui-js": "0.8.12",
     "@siposdani87/sui-rn": "file:../",
     "expo": "~46.0.2",
     "expo-asset": "~8.6.1",
