@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
     Text as RNText,
     StyleSheet,
@@ -10,7 +10,7 @@ import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 
 export function Text(
-    props: { children?: ReactNode; muted?: boolean } & TextProps,
+    props: { children?: any; muted?: boolean } & TextProps,
 ): JSX.Element {
     const isDarkTheme = useDarkTheme();
 
