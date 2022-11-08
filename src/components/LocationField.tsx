@@ -13,12 +13,12 @@ import { Colors, Styles } from '../constants';
 import { IconButton } from './IconButton';
 import MapView, {
     Marker,
-    MapEvent,
-    MapTypes,
     MapStyleElement,
     LatLng,
     Region,
-    MarkerProps,
+    MapMarkerProps,
+    MapType,
+    MarkerDragStartEndEvent,
 } from 'react-native-maps';
 import { NumberField } from './NumberField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
@@ -51,7 +51,7 @@ export function LocationField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    mapType?: MapTypes;
+    mapType?: MapType;
     customMapStyle?: MapStyleElement[];
 }): JSX.Element {
     const [value, setValue] = useState<LocationType>(
@@ -100,14 +100,14 @@ export function LocationField(props: {
         }
     };
 
-    const getLocationProps = (): Partial<MarkerProps> => {
+    const getLocationProps = (): Partial<MapMarkerProps> => {
         return {
             style: { height: 100, width: 100 },
             image: props.markerImage,
         };
     };
 
-    const onDragEnd = (event: MapEvent): void => {
+    const onDragEnd = (event: MarkerDragStartEndEvent): void => {
         const { latitude, longitude } = event.nativeEvent.coordinate;
         onCoordinatehange(latitude, longitude);
     };

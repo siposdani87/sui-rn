@@ -102,9 +102,10 @@ export function FileField(props) {
         return !(isImage() || isVideo());
     }, [isImage, isVideo]);
     const handleImageDataUri = async (result) => {
-        if (!result.cancelled) {
-            const filename = result.uri.split('/').pop() ?? 'file';
-            const uri = 'data:image/jpeg;base64,' + result.base64;
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            const filename = asset.fileName ?? asset.uri.split('/').pop() ?? 'file';
+            const uri = 'data:image/jpeg;base64,' + asset.base64;
             const dataUri = getDataUri(uri, filename);
             setImageSource({ uri: dataUri });
             onDataChange(filename, dataUri);
