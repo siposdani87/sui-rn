@@ -174,9 +174,11 @@ export function FileField(props: {
     const handleImageDataUri = async (
         result: ImagePicker.ImagePickerResult,
     ): Promise<void> => {
-        if (!result.cancelled) {
-            const filename = result.uri.split('/').pop() ?? 'file';
-            const uri = 'data:image/jpeg;base64,' + result.base64;
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            const filename =
+                asset.fileName ?? asset.uri.split('/').pop() ?? 'file';
+            const uri = 'data:image/jpeg;base64,' + asset.base64;
             const dataUri = getDataUri(uri, filename);
             setImageSource({ uri: dataUri });
             onDataChange(filename, dataUri);

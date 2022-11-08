@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, } from 'react-native';
-import { RichTextEditor } from '@siposdani87/expo-rich-text-editor';
+import { ActionKey, RichTextEditor, } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -11,15 +11,15 @@ import { useActionColor } from '../hooks/useActionColor';
 const getActionMap = (getColor) => {
     const size = 24;
     return {
-        undo: ({ selected }) => (<MaterialIcons name="undo" size={size} color={getColor(selected)}/>),
-        redo: ({ selected }) => (<MaterialIcons name="redo" size={size} color={getColor(selected)}/>),
-        bold: ({ selected }) => (<MaterialIcons name="format-bold" size={size} color={getColor(selected)}/>),
-        italic: ({ selected }) => (<MaterialIcons name="format-italic" size={size} color={getColor(selected)}/>),
-        underline: ({ selected }) => (<MaterialIcons name="format-underlined" size={size} color={getColor(selected)}/>),
-        unorderedList: ({ selected }) => (<MaterialIcons name="format-list-bulleted" size={size} color={getColor(selected)}/>),
-        orderedList: ({ selected }) => (<MaterialIcons name="format-list-numbered" size={size} color={getColor(selected)}/>),
-        clear: ({ selected }) => (<MaterialIcons name="format-clear" size={size} color={getColor(selected)}/>),
-        code: ({ selected }) => (<MaterialIcons name="code" size={size} color={getColor(selected)}/>),
+        [ActionKey.undo]: ({ selected }) => (<MaterialIcons name="undo" size={size} color={getColor(selected)}/>),
+        [ActionKey.redo]: ({ selected }) => (<MaterialIcons name="redo" size={size} color={getColor(selected)}/>),
+        [ActionKey.bold]: ({ selected }) => (<MaterialIcons name="format-bold" size={size} color={getColor(selected)}/>),
+        [ActionKey.italic]: ({ selected }) => (<MaterialIcons name="format-italic" size={size} color={getColor(selected)}/>),
+        [ActionKey.underline]: ({ selected }) => (<MaterialIcons name="format-underlined" size={size} color={getColor(selected)}/>),
+        [ActionKey.unorderedList]: ({ selected }) => (<MaterialIcons name="format-list-bulleted" size={size} color={getColor(selected)}/>),
+        [ActionKey.orderedList]: ({ selected }) => (<MaterialIcons name="format-list-numbered" size={size} color={getColor(selected)}/>),
+        [ActionKey.clear]: ({ selected }) => (<MaterialIcons name="format-clear" size={size} color={getColor(selected)}/>),
+        [ActionKey.code]: ({ selected }) => (<MaterialIcons name="code" size={size} color={getColor(selected)}/>),
     };
 };
 export function RichTextAreaField(props) {

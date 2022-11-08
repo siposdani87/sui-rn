@@ -8,7 +8,11 @@ import {
     ViewStyle,
     TextStyle,
 } from 'react-native';
-import { ActionMap, RichTextEditor } from '@siposdani87/expo-rich-text-editor';
+import {
+    ActionKey,
+    ActionMap,
+    RichTextEditor,
+} from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -19,55 +23,55 @@ const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
     const size = 24;
 
     return {
-        undo: ({ selected }) => (
+        [ActionKey.undo]: ({ selected }) => (
             <MaterialIcons name="undo" size={size} color={getColor(selected)} />
         ),
-        redo: ({ selected }) => (
+        [ActionKey.redo]: ({ selected }) => (
             <MaterialIcons name="redo" size={size} color={getColor(selected)} />
         ),
-        bold: ({ selected }) => (
+        [ActionKey.bold]: ({ selected }) => (
             <MaterialIcons
                 name="format-bold"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        italic: ({ selected }) => (
+        [ActionKey.italic]: ({ selected }) => (
             <MaterialIcons
                 name="format-italic"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        underline: ({ selected }) => (
+        [ActionKey.underline]: ({ selected }) => (
             <MaterialIcons
                 name="format-underlined"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        unorderedList: ({ selected }) => (
+        [ActionKey.unorderedList]: ({ selected }) => (
             <MaterialIcons
                 name="format-list-bulleted"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        orderedList: ({ selected }) => (
+        [ActionKey.orderedList]: ({ selected }) => (
             <MaterialIcons
                 name="format-list-numbered"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        clear: ({ selected }) => (
+        [ActionKey.clear]: ({ selected }) => (
             <MaterialIcons
                 name="format-clear"
                 size={size}
                 color={getColor(selected)}
             />
         ),
-        code: ({ selected }) => (
+        [ActionKey.code]: ({ selected }) => (
             <MaterialIcons name="code" size={size} color={getColor(selected)} />
         ),
     };
