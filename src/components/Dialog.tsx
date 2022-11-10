@@ -90,9 +90,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'stretch',
-        borderRadius: 15,
+        borderRadius: 3,
         margin: 20,
-        ...(Styles.shadow as ViewStyle),
+        ...Styles.shadow,
     },
     success: {
         borderTopWidth: 5,
