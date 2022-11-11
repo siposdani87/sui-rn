@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useErrorField } from '../hooks/useErrorField';
 import { IconToggleField, IconToggleFieldValueType } from './IconToggleField';
+import { ErrorValueType } from './ErrorField';
 
 export type RadioButtonFieldField = IconToggleFieldValueType;
 
@@ -11,7 +12,7 @@ export function RadioButtonField(props: {
     falseValue?: RadioButtonFieldField;
     onValueChange: (_value: RadioButtonFieldField) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

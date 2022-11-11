@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
+import { ErrorValueType } from './ErrorField';
 export declare type EmailFieldValueType = TextFieldValueType;
 export declare function EmailField(props: {
     value: EmailFieldValueType;
     onValueChange: (_value: EmailFieldValueType) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

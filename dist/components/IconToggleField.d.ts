@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare type IconToggleFieldValueType = any;
 export declare function IconToggleField(props: {
     value: IconToggleFieldValueType;
@@ -10,7 +11,7 @@ export declare function IconToggleField(props: {
     onValueChange: (_value: IconToggleFieldValueType) => void;
     disableUncheck?: boolean;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -4,6 +4,7 @@ import { Styles } from '../constants';
 import { useActionColor } from '../hooks/useActionColor';
 import { IconButton } from './IconButton';
 import { TextField, TextFieldValueType } from './TextField';
+import { ErrorValueType } from './ErrorField';
 
 export type SearchFieldValueType = TextFieldValueType;
 
@@ -11,7 +12,7 @@ export function SearchField(props: {
     value: SearchFieldValueType;
     onValueChange: (_value: SearchFieldValueType) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

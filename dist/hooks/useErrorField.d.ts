@@ -1,1 +1,2 @@
-export declare function useErrorField(error?: string[] | null): [string[] | null, () => void];
+import { ErrorValueType } from '../components';
+export declare function useErrorField(error?: ErrorValueType): [ErrorValueType, () => void];

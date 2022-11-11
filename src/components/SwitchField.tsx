@@ -13,6 +13,7 @@ import {
 import { Colors } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
+import { ErrorValueType } from './ErrorField';
 
 interface TrackColor {
     false?: ColorValue;
@@ -27,7 +28,7 @@ export function SwitchField(props: {
     trueValue?: SwitchFieldValueType;
     falseValue?: SwitchFieldValueType;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -1,5 +1,6 @@
 /// <reference types="react" />
+export declare type ErrorValueType = string[] | boolean | null;
 export declare function ErrorField(props: {
-    error?: string[] | boolean | null;
+    error?: ErrorValueType;
     disabled?: boolean;
 }): JSX.Element | null;

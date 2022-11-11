@@ -13,6 +13,7 @@ import { useDarkTheme } from '../hooks/useDarkTheme';
 import { useErrorField } from '../hooks/useErrorField';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
+import { ErrorValueType } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
 import { SearchField } from './SearchField';
@@ -27,7 +28,7 @@ export function SelectField(props: {
     multiple?: boolean;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

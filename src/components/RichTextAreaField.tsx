@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -84,7 +84,7 @@ export function RichTextAreaField(props: {
     onValueChange: (_value: RichTextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

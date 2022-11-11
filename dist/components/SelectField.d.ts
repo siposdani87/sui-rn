@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare function SelectField(props: {
     value: any;
     items: any[];
@@ -8,7 +9,7 @@ export declare function SelectField(props: {
     multiple?: boolean;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -12,6 +12,7 @@ import { TagField } from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
 import { convertToISOFormat } from '@siposdani87/sui-js';
+import { ErrorValueType } from './ErrorField';
 
 interface Year {
     label: string;
@@ -79,7 +80,7 @@ export function DateTimeField(props: {
     okText: string;
     format: string;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     searchPlaceholder?: string;

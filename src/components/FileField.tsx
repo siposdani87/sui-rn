@@ -20,6 +20,7 @@ import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 import { getExtensionName } from '@siposdani87/sui-js';
+import { ErrorValueType } from './ErrorField';
 
 export type ImageSourceType =
     | ImageURISource
@@ -102,7 +103,7 @@ export function FileField(props: {
     mimeType: string;
     onValueChange: (_value: string | null) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

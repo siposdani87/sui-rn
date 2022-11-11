@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare type TagFieldValueType = string[];
 export declare function TagField(props: {
     values: TagFieldValueType;
@@ -7,7 +8,7 @@ export declare function TagField(props: {
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;

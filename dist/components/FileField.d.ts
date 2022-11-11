@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ImageURISource, ImageRequireSource, StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare type ImageSourceType = ImageURISource | ImageRequireSource | null | {
     uri: string | null;
 };
@@ -9,7 +10,7 @@ export declare function FileField(props: {
     mimeType: string;
     onValueChange: (_value: string | null) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

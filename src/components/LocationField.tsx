@@ -23,6 +23,7 @@ import MapView, {
 import { NumberField } from './NumberField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 import { useActionColor } from '../hooks/useActionColor';
+import { ErrorValueType } from './ErrorField';
 
 export interface LocationType {
     address: string;
@@ -44,7 +45,7 @@ export function LocationField(props: {
     markerImage?: ImageURISource;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, TextFieldValueType } from './TextField';
 import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 
 export type TextAreaFieldValueType = TextFieldValueType;
 
@@ -9,7 +10,7 @@ export function TextAreaField(props: {
     onValueChange: (_value: TextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

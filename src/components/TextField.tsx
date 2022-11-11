@@ -14,6 +14,7 @@ import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { useInputStyle } from '../hooks/useInputStyle';
 import ActionButtons from './ActionButtons';
+import { ErrorValueType } from './ErrorField';
 
 export type TextFieldValueType = any; // string | null | undefined;
 
@@ -23,7 +24,7 @@ export function TextField(
         onValueChange: (_value: TextFieldValueType) => void;
         readonly?: boolean;
         label?: string;
-        error?: string[] | null;
+        error?: ErrorValueType;
         required?: boolean;
         disabled?: boolean;
         placeholder?: string;

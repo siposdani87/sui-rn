@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { IconToggleFieldValueType } from './IconToggleField';
+import { ErrorValueType } from './ErrorField';
 export declare type RadioButtonFieldField = IconToggleFieldValueType;
 export declare function RadioButtonField(props: {
     value: RadioButtonFieldField;
@@ -8,7 +9,7 @@ export declare function RadioButtonField(props: {
     falseValue?: RadioButtonFieldField;
     onValueChange: (_value: RadioButtonFieldField) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
