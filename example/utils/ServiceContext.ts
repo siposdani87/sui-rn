@@ -12,7 +12,7 @@ export class Services extends Base {
         super(dispatch);
         this.httpService = new HttpService(
             dispatch,
-            async () => {
+            () => {
                 return Promise.resolve('token');
             },
             'http://localhost:4000',

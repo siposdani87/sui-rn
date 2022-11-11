@@ -13,7 +13,7 @@
 
 ## 0.8.0 - 2022-10-15
 
-* Refactor FieldField and SelectField
+* Refactor FileField and SelectField
 * Improve hook deps arrays
 
 ## 0.7.0 - 2022-10-10

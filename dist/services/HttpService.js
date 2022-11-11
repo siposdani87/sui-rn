@@ -38,8 +38,11 @@ export class HttpService extends Base {
     }
     async _getHeaders(opt_headers) {
         const token = await this.getTokenAsync();
+        const authorizationHeader = token
+            ? { Authorization: `Bearer ${token}` }
+            : null;
         return {
-            Authorization: `Bearer ${token}`,
+            ...authorizationHeader,
             'Accept-Language': this.language,
             'X-Client': this.secret,
             ...opt_headers,

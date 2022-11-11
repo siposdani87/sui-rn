@@ -126,7 +126,7 @@ export function LocationField(props: {
     }): Region => {
         const lat = coords?.latitude || 0;
         const lon = coords?.longitude || 0;
-        // const accuracy = coords?.accuracy || 10;
+
         const latitudeDelta = 0.02;
         const longitudeDelta =
             ((dimensions?.width ?? 1) / (dimensions?.height ?? 1)) *
@@ -137,7 +137,6 @@ export function LocationField(props: {
             longitude: lon,
             latitudeDelta,
             longitudeDelta,
-            // accuracy,
         };
     };
 
