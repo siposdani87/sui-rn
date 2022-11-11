@@ -1,6 +1,6 @@
-## 0.9.2 - TBD
+## 0.9.2 - 2022-11-11
 
-* 
+* Improve token handling in HttpService
 
 ## 0.9.1 - 2022-11-11
 
