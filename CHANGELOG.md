@@ -1,6 +1,7 @@
-## 0.9.1 - TBD
+## 0.9.1 - 2022-11-11
 
-* 
+* Improve typings
+* Upgrade packages
 
 ## 0.9.0 - 2022-11-08
 
