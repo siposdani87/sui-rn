@@ -19,7 +19,6 @@ export interface HttpResponse extends Response {
 interface MimeTypes {
     [key: string]: string;
 }
-
 export class Fetch {
     private backendUrl: string;
 
@@ -123,7 +122,7 @@ export class Fetch {
         };
     }
 
-    private filteredHeaders(opt_headers?: Headers): any {
+    private filteredHeaders(opt_headers?: Headers): { [key: string]: string } {
         const deniedKeys = ['responseType'];
 
         return Object.keys(opt_headers ?? {})

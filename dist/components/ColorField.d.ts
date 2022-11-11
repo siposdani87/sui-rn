@@ -1,11 +1,11 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function ColorField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: string;
+    onValueChange: (_value: string) => void;
     okText: string;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

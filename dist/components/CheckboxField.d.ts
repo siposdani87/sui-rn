@@ -1,12 +1,14 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { IconToggleFieldValueType } from './IconToggleField';
+export declare type CheckboxFieldValueType = IconToggleFieldValueType;
 export declare function CheckboxField(props: {
-    value: any;
-    trueValue?: any;
-    falseValue?: any;
-    onValueChange: (_value: any) => void;
+    value: CheckboxFieldValueType;
+    trueValue?: CheckboxFieldValueType;
+    falseValue?: CheckboxFieldValueType;
+    onValueChange: (_value: CheckboxFieldValueType) => void;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

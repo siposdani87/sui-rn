@@ -79,7 +79,7 @@ export function DateTimeField(props: {
     okText: string;
     format: string;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     searchPlaceholder?: string;

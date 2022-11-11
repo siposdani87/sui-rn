@@ -13,16 +13,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useErrorField } from '../hooks/useErrorField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 
+export type IconToggleFieldValueType = any;
+
 export function IconToggleField(props: {
-    value: any;
+    value: IconToggleFieldValueType;
     checkedIcon: string;
     uncheckedIcon: string;
-    trueValue?: any;
-    falseValue?: any;
-    onValueChange: (_value: any) => void;
+    trueValue?: IconToggleFieldValueType;
+    falseValue?: IconToggleFieldValueType;
+    onValueChange: (_value: IconToggleFieldValueType) => void;
     disableUncheck?: boolean;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
@@ -33,11 +35,11 @@ export function IconToggleField(props: {
 }): JSX.Element {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
-    const [value, setValue] = useState<boolean>(props.value);
+    const [value, setValue] = useState<IconToggleFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
-    const onValueChange = (v: boolean): void => {
+    const onValueChange = (v: IconToggleFieldValueType): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
@@ -66,7 +68,7 @@ export function IconToggleField(props: {
             : Colors.checkboxDefaultLight;
     };
 
-    const getIcon = (): string => {
+    const getIcon = (): any => {
         return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
     };
 
@@ -81,11 +83,7 @@ export function IconToggleField(props: {
                 onPress={onPress}
                 style={[styles.iconToggle, props.style]}
             >
-                <MaterialIcons
-                    name={getIcon() as any}
-                    size={26}
-                    color={getColor()}
-                />
+                <MaterialIcons name={getIcon()} size={26} color={getColor()} />
             </TouchableOpacity>
             <Label
                 containerStyle={styles.labelContainer}

@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-import { TextField } from './TextField';
+import { TextField, TextFieldValueType } from './TextField';
+
+export type PasswordFieldValueType = TextFieldValueType;
 
 export function PasswordField(
     props: {
-        value: any;
-        onValueChange: (_value: any) => void;
+        value: PasswordFieldValueType;
+        onValueChange: (_value: PasswordFieldValueType) => void;
         label?: string;
-        error?: string | null;
+        error?: string[] | null;
         required?: boolean;
         disabled?: boolean;
         desc?: string;

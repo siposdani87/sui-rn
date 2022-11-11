@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 import { useErrorField } from '../hooks/useErrorField';
 import { useInputStyle } from '../hooks/useInputStyle';
+import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
@@ -97,19 +98,7 @@ export function TagField(props) {
                         {allowRemove(value) && (<IconButton containerStyle={styles.actionButtonContainer} style={styles.actionButton} iconName="close" iconColor={getTextColor()} iconSize={20} onPress={removeTag(value)}/>)}
                     </View>))}
             </View>
-            {props.actionButtons && (<View style={[
-                Styles.actionsContainer,
-                Platform.select({
-                    android: {
-                        top: props.label ? 26 : -2,
-                    },
-                    ios: {
-                        top: props.label ? 21 : -1,
-                    },
-                }),
-            ]}>
-                    {props.actionButtons.map((actionButton, key) => (<Fragment key={key}>{actionButton}</Fragment>))}
-                </View>)}
+            <ActionButtons actionButtons={props.actionButtons} label={props.label}/>
             <ErrorField error={error} disabled={props.disabled}/>
         </View>);
 }

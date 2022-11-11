@@ -3,13 +3,15 @@ import { StyleProp, ViewStyle } from 'react-native';
 import { Styles } from '../constants';
 import { useActionColor } from '../hooks/useActionColor';
 import { IconButton } from './IconButton';
-import { TextField } from './TextField';
+import { TextField, TextFieldValueType } from './TextField';
+
+export type SearchFieldValueType = TextFieldValueType;
 
 export function SearchField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: SearchFieldValueType;
+    onValueChange: (_value: SearchFieldValueType) => void;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
@@ -19,7 +21,7 @@ export function SearchField(props: {
     style?: StyleProp<ViewStyle>;
     actionButtons?: JSX.Element[];
 }): JSX.Element {
-    const [value, setValue] = useState<string>(props.value);
+    const [value, setValue] = useState<SearchFieldValueType>(props.value);
     const getActionColor = useActionColor(props.disabled);
 
     useEffect(() => {
@@ -32,9 +34,9 @@ export function SearchField(props: {
     };
 
     const getActionButtons = (): JSX.Element[] => {
-        const actionsButtons: JSX.Element[] = [];
+        let actionsButtons: JSX.Element[] = [];
         if (props.actionButtons) {
-            actionsButtons.concat(props.actionButtons);
+            actionsButtons = [...props.actionButtons];
         }
         actionsButtons.push(
             <IconButton
@@ -46,6 +48,7 @@ export function SearchField(props: {
                 onPress={clear}
             />,
         );
+
         return actionsButtons;
     };
 

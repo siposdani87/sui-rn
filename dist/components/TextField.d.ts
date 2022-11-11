@@ -1,11 +1,12 @@
 /// <reference types="react" />
 import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
+export declare type TextFieldValueType = any;
 export declare function TextField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: TextFieldValueType;
+    onValueChange: (_value: TextFieldValueType) => void;
     readonly?: boolean;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     placeholder?: string;

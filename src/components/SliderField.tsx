@@ -8,14 +8,16 @@ import Slider from '@react-native-community/slider';
 import { useInputStyle } from '../hooks/useInputStyle';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 
+export type SliderFieldValueType = number | undefined | null;
+
 export function SliderField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: SliderFieldValueType;
+    onValueChange: (_value: SliderFieldValueType) => void;
     minimumValue?: number;
     maximumValue?: number;
     step?: number;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
@@ -23,7 +25,7 @@ export function SliderField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): JSX.Element {
-    const [value, setValue] = useState<number>(props.value);
+    const [value, setValue] = useState<SliderFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
         value,
@@ -54,7 +56,7 @@ export function SliderField(props: {
             />
             <Slider
                 style={[{ flex: 1, height: 40 }, props.style, inputStyle]}
-                value={value}
+                value={value ?? undefined}
                 onSlidingComplete={onValueChange}
                 step={props.step}
                 minimumValue={props.minimumValue}

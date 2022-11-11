@@ -42,7 +42,7 @@ export function RichTextAreaField(props) {
     }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
-            <RichTextEditor minHeight={height} value={value} onValueChange={onValueChange} selectionColor={Colors.deepGreyBright} actionMap={getActionMap(getActionColor)} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)}/>
+            <RichTextEditor minHeight={height} value={value ?? ''} onValueChange={onValueChange} selectionColor={Colors.deepGreyBright} actionMap={getActionMap(getActionColor)} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)}/>
             <ErrorField error={error} disabled={props.disabled}/>
         </View>);
 }

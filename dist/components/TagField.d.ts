@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+export declare type TagFieldValueType = string[];
 export declare function TagField(props: {
-    values: any[];
-    onValuesChange: (_value: any[]) => void;
+    values: TagFieldValueType;
+    onValuesChange: (_value: TagFieldValueType) => void;
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;

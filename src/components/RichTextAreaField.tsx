@@ -77,12 +77,14 @@ const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
     };
 };
 
+export type RichTextAreaFieldValueType = string | null | undefined;
+
 export function RichTextAreaField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: RichTextAreaFieldValueType;
+    onValueChange: (_value: RichTextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
@@ -91,7 +93,7 @@ export function RichTextAreaField(props: {
     style?: StyleProp<TextStyle>;
 }): JSX.Element {
     const style = StyleSheet.flatten(props.style);
-    const [value, setValue] = useState<string>(props.value);
+    const [value, setValue] = useState<RichTextAreaFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
@@ -106,7 +108,7 @@ export function RichTextAreaField(props: {
     const numberOfLines = props.numberOfLines || 5;
     const height = 20 * numberOfLines + 16;
 
-    const onValueChange = (v: string): void => {
+    const onValueChange = (v: RichTextAreaFieldValueType): void => {
         onErrorChange();
         setValue(v);
         props.onValueChange(v);
@@ -127,7 +129,7 @@ export function RichTextAreaField(props: {
             />
             <RichTextEditor
                 minHeight={height}
-                value={value}
+                value={value ?? ''}
                 onValueChange={onValueChange}
                 selectionColor={Colors.deepGreyBright}
                 actionMap={getActionMap(getActionColor)}

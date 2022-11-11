@@ -1,13 +1,15 @@
 import React from 'react';
-import { TextField } from './TextField';
+import { TextField, TextFieldValueType } from './TextField';
 import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
+export type TextAreaFieldValueType = TextFieldValueType;
+
 export function TextAreaField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: TextAreaFieldValueType;
+    onValueChange: (_value: TextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

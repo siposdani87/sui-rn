@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextStyle } from 'react-native';
+import { View, Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
-import { StyleProp } from 'react-native';
 import { capitalize } from '@siposdani87/sui-js';
 
 export function ErrorField(props: {
-    error?: string | null;
+    error?: string[] | boolean | null;
     disabled?: boolean;
 }): JSX.Element | null {
     const isDarkTheme = useDarkTheme();
@@ -22,14 +21,16 @@ export function ErrorField(props: {
             : styles.errorDefaultLightText;
     };
 
-    if ((props.error as any) === false) {
+    console.log(props.error);
+    if ((props.error as boolean) === false) {
         return null;
     }
+
     return (
         <View style={styles.container}>
             <Text style={[styles.text, getTextStyle()]} numberOfLines={1}>
-                {props.error
-                    ? capitalize((props.error as any).join('; '))
+                {Array.isArray(props.error)
+                    ? capitalize(props.error.join('; '))
                     : null}
             </Text>
         </View>

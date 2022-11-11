@@ -14,9 +14,9 @@ export function SearchField(props) {
         props.onValueChange('');
     };
     const getActionButtons = () => {
-        const actionsButtons = [];
+        let actionsButtons = [];
         if (props.actionButtons) {
-            actionsButtons.concat(props.actionButtons);
+            actionsButtons = [...props.actionButtons];
         }
         actionsButtons.push(<IconButton iconName="close" iconSize={20} style={{ padding: 7 }} containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={clear}/>);
         return actionsButtons;

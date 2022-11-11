@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import React from 'react';
 import { TextProps } from 'react-native';
 export declare function Text(props: {
-    children?: any;
+    children?: React.ReactNode;
     muted?: boolean;
 } & TextProps): JSX.Element;
