@@ -7,6 +7,7 @@ import { useErrorField } from '../hooks/useErrorField';
 import Slider from '@react-native-community/slider';
 import { useInputStyle } from '../hooks/useInputStyle';
 import { useDarkTheme } from '../hooks/useDarkTheme';
+import { ErrorValueType } from './ErrorField';
 
 export type SliderFieldValueType = number | undefined | null;
 
@@ -17,7 +18,7 @@ export function SliderField(props: {
     maximumValue?: number;
     step?: number;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -1,10 +1,11 @@
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { ErrorValueType } from '../components';
 import { Colors } from '../constants';
 import { useDarkTheme } from './useDarkTheme';
 
 export function useInputStyle(
     value: any,
-    error: string[] | null,
+    error: ErrorValueType,
     required?: boolean,
     disabled?: boolean,
     focused?: boolean,

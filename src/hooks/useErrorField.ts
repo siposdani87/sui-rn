@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import { ErrorValueType } from '../components';
 
 export function useErrorField(
-    error: string[] | null = null,
-): [string[] | null, () => void] {
-    const [clearError, setClearError] = useState<string[] | null>(null);
-    const [prevError, setPrevError] = useState<string[] | null>(null);
+    error: ErrorValueType = null,
+): [ErrorValueType, () => void] {
+    const [clearError, setClearError] = useState<ErrorValueType>(null);
+    const [prevError, setPrevError] = useState<ErrorValueType>(null);
 
     const newError = clearError !== error ? error : null;
 

@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import { ImageURISource, StyleProp, ViewStyle } from 'react-native';
 import { MapStyleElement, MapType } from 'react-native-maps';
+import { ErrorValueType } from './ErrorField';
 export interface LocationType {
     address: string;
     latitude: number;
@@ -14,7 +15,7 @@ export declare function LocationField(props: {
     markerImage?: ImageURISource;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

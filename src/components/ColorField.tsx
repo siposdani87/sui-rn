@@ -14,13 +14,14 @@ import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
 import { useInputStyle } from '../hooks/useInputStyle';
+import { ErrorValueType } from './ErrorField';
 
 export function ColorField(props: {
     value: string;
     onValueChange: (_value: string) => void;
     okText: string;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

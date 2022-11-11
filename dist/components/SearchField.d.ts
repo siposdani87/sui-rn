@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
+import { ErrorValueType } from './ErrorField';
 export declare type SearchFieldValueType = TextFieldValueType;
 export declare function SearchField(props: {
     value: SearchFieldValueType;
     onValueChange: (_value: SearchFieldValueType) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

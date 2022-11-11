@@ -15,6 +15,7 @@ import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
+import { ErrorValueType } from './ErrorField';
 
 export type TagFieldValueType = string[];
 
@@ -24,7 +25,7 @@ export function TagField(props: {
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;

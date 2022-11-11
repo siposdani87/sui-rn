@@ -12,6 +12,7 @@ import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useErrorField } from '../hooks/useErrorField';
 import { useDarkTheme } from '../hooks/useDarkTheme';
+import { ErrorValueType } from './ErrorField';
 
 export type IconToggleFieldValueType = any;
 
@@ -24,7 +25,7 @@ export function IconToggleField(props: {
     onValueChange: (_value: IconToggleFieldValueType) => void;
     disableUncheck?: boolean;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare type SwitchFieldValueType = any;
 export declare function SwitchField(props: {
     value: SwitchFieldValueType;
@@ -7,7 +8,7 @@ export declare function SwitchField(props: {
     trueValue?: SwitchFieldValueType;
     falseValue?: SwitchFieldValueType;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

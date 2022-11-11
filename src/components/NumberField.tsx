@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { useErrorField } from '../hooks/useErrorField';
 import { TextField, TextFieldValueType } from './TextField';
+import { ErrorValueType } from './ErrorField';
 
 export type NumberFieldValueType = TextFieldValueType;
 
@@ -9,7 +10,7 @@ export function NumberField(props: {
     value: NumberFieldValueType;
     onValueChange: (_value: NumberFieldValueType) => void;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

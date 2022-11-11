@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextField, TextFieldValueType } from './TextField';
+import { ErrorValueType } from './ErrorField';
 
 export type PasswordFieldValueType = TextFieldValueType;
 
@@ -9,7 +10,7 @@ export function PasswordField(
         value: PasswordFieldValueType;
         onValueChange: (_value: PasswordFieldValueType) => void;
         label?: string;
-        error?: string[] | null;
+        error?: ErrorValueType;
         required?: boolean;
         disabled?: boolean;
         desc?: string;

@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 export declare type SliderFieldValueType = number | undefined | null;
 export declare function SliderField(props: {
     value: SliderFieldValueType;
@@ -8,7 +9,7 @@ export declare function SliderField(props: {
     maximumValue?: number;
     step?: number;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

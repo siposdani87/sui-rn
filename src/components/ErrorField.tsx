@@ -4,8 +4,10 @@ import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 import { capitalize } from '@siposdani87/sui-js';
 
+export type ErrorValueType = string[] | boolean | null;
+
 export function ErrorField(props: {
-    error?: string[] | boolean | null;
+    error?: ErrorValueType;
     disabled?: boolean;
 }): JSX.Element | null {
     const isDarkTheme = useDarkTheme();

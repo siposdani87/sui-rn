@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { ErrorValueType } from './ErrorField';
 interface Mode {
     format?: string;
     calendarType: string;
@@ -21,7 +22,7 @@ export declare function DateTimeField(props: {
     okText: string;
     format: string;
     label?: string;
-    error?: string[] | null;
+    error?: ErrorValueType;
     required?: boolean;
     disabled?: boolean;
     searchPlaceholder?: string;
