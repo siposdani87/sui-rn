@@ -12,7 +12,7 @@ import { Data, Params, Headers, HttpResponse } from '../utils/Fetch';
 export interface DataResponse extends Objekt {}
 
 export class HttpService extends Base {
-    private getTokenAsync: () => Promise<string>;
+    private getTokenAsync: () => Promise<string | null>;
     private progressCounter: number;
     private language: string;
     private secret: string;
@@ -20,7 +20,7 @@ export class HttpService extends Base {
 
     constructor(
         dispatch: Dispatch<any>,
-        getTokenAsync: () => Promise<string>,
+        getTokenAsync: () => Promise<string | null>,
         backendUrl: string,
         language: string,
         secret: string,
@@ -121,8 +121,12 @@ export class HttpService extends Base {
 
     private async _getHeaders(opt_headers?: Headers): Promise<Headers> {
         const token = await this.getTokenAsync();
+        const authorizationHeader = token
+            ? { Authorization: `Bearer ${token}` }
+            : null;
+
         return {
-            Authorization: `Bearer ${token}`,
+            ...authorizationHeader,
             'Accept-Language': this.language,
             'X-Client': this.secret,
             ...opt_headers,

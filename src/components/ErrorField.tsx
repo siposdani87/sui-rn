@@ -21,7 +21,6 @@ export function ErrorField(props: {
             : styles.errorDefaultLightText;
     };
 
-    console.log(props.error);
     if ((props.error as boolean) === false) {
         return null;
     }

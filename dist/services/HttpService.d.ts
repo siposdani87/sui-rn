@@ -10,7 +10,7 @@ export declare class HttpService extends Base {
     private language;
     private secret;
     private fetch;
-    constructor(dispatch: Dispatch<any>, getTokenAsync: () => Promise<string>, backendUrl: string, language: string, secret: string);
+    constructor(dispatch: Dispatch<any>, getTokenAsync: () => Promise<string | null>, backendUrl: string, language: string, secret: string);
     getUrl(url: string, opt_params?: Params): string;
     isInprogress(): boolean;
     get(url: string, opt_params?: Params, opt_headers?: Headers): Promise<DataResponse>;
