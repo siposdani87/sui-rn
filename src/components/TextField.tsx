@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
@@ -6,7 +6,6 @@ import {
     TextInput,
     StyleSheet,
     TextInputProps,
-    Platform,
     StyleProp,
     ViewStyle,
     TextStyle,
@@ -14,14 +13,17 @@ import {
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { useInputStyle } from '../hooks/useInputStyle';
+import ActionButtons from './ActionButtons';
+
+export type TextFieldValueType = any; // string | null | undefined;
 
 export function TextField(
     props: {
-        value: any;
-        onValueChange: (_value: any) => void;
+        value: TextFieldValueType;
+        onValueChange: (_value: TextFieldValueType) => void;
         readonly?: boolean;
         label?: string;
-        error?: string | null;
+        error?: string[] | null;
         required?: boolean;
         disabled?: boolean;
         placeholder?: string;
@@ -32,7 +34,7 @@ export function TextField(
         actionButtons?: JSX.Element[];
     } & TextInputProps,
 ): JSX.Element {
-    const [value, setValue] = useState<string>(props.value);
+    const [value, setValue] = useState<TextFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(
@@ -50,10 +52,7 @@ export function TextField(
     };
 
     const getValue = (): string => {
-        if (value === undefined || value === null) {
-            return '';
-        }
-        return value.toString();
+        return value?.toString() ?? '';
     };
 
     const getActionButtonsStyle = (): StyleProp<ViewStyle> => {
@@ -97,25 +96,10 @@ export function TextField(
                 autoCapitalize={props.autoCapitalize}
                 editable={!props.disabled && !props.readonly}
             />
-            {props.actionButtons && (
-                <View
-                    style={[
-                        Styles.actionsContainer as any,
-                        Platform.select({
-                            android: {
-                                top: props.label ? 26 : -2,
-                            },
-                            ios: {
-                                top: props.label ? 21 : -1,
-                            },
-                        }),
-                    ]}
-                >
-                    {props.actionButtons.map((actionButton, key) => (
-                        <Fragment key={key}>{actionButton}</Fragment>
-                    ))}
-                </View>
-            )}
+            <ActionButtons
+                actionButtons={props.actionButtons}
+                label={props.label}
+            />
             <ErrorField error={error} disabled={props.disabled} />
         </View>
     );

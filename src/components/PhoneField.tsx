@@ -1,13 +1,15 @@
 import React from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
-import { TextField } from './TextField';
+import { TextField, TextFieldValueType } from './TextField';
+
+export type PhoneFieldValueType = TextFieldValueType;
 
 export function PhoneField(
     props: {
-        value: any;
-        onValueChange: (_value: any) => void;
+        value: PhoneFieldValueType;
+        onValueChange: (_value: PhoneFieldValueType) => void;
         label?: string;
-        error?: string | null;
+        error?: string[] | null;
         required?: boolean;
         disabled?: boolean;
         desc?: string;

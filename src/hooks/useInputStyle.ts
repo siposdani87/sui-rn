@@ -4,7 +4,7 @@ import { useDarkTheme } from './useDarkTheme';
 
 export function useInputStyle(
     value: any,
-    error: string | null,
+    error: string[] | null,
     required?: boolean,
     disabled?: boolean,
     focused?: boolean,

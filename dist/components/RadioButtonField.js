@@ -14,7 +14,7 @@ export function RadioButtonField(props) {
     useEffect(() => {
         setValue(props.value);
     }, [props.value]);
-    return (<IconToggleField value={value} onValueChange={onValueChange} trueValue={props.trueValue} disableUncheck={true} error={error} containerStyle={props.containerStyle} style={props.style} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} checkedIcon="radio-button-checked" uncheckedIcon="radio-button-unchecked">
+    return (<IconToggleField value={value} onValueChange={onValueChange} trueValue={props.trueValue} falseValue={props.falseValue} disableUncheck={true} error={error} containerStyle={props.containerStyle} style={props.style} label={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} checkedIcon="radio-button-checked" uncheckedIcon="radio-button-unchecked">
             {props.children}
         </IconToggleField>);
 }

@@ -1,10 +1,11 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import { View, TextInput, StyleSheet, Platform, } from 'react-native';
+import { View, TextInput, StyleSheet, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useErrorField } from '../hooks/useErrorField';
 import { useInputStyle } from '../hooks/useInputStyle';
+import ActionButtons from './ActionButtons';
 export function TextField(props) {
     const [value, setValue] = useState(props.value);
     const [isFocused, setIsFocused] = useState(false);
@@ -16,10 +17,7 @@ export function TextField(props) {
         props.onValueChange(v);
     };
     const getValue = () => {
-        if (value === undefined || value === null) {
-            return '';
-        }
-        return value.toString();
+        return value?.toString() ?? '';
     };
     const getActionButtonsStyle = () => {
         return {
@@ -37,19 +35,7 @@ export function TextField(props) {
             inputStyle,
             getActionButtonsStyle(),
         ]} onChangeText={onValueChange} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)} placeholderTextColor={Colors.deepGreyBright} placeholder={props.placeholder} underlineColorAndroid="transparent" selectionColor={Colors.deepGreyBright} numberOfLines={props.numberOfLines} multiline={props.multiline} keyboardType={props.keyboardType} secureTextEntry={props.secureTextEntry} autoCapitalize={props.autoCapitalize} editable={!props.disabled && !props.readonly}/>
-            {props.actionButtons && (<View style={[
-                Styles.actionsContainer,
-                Platform.select({
-                    android: {
-                        top: props.label ? 26 : -2,
-                    },
-                    ios: {
-                        top: props.label ? 21 : -1,
-                    },
-                }),
-            ]}>
-                    {props.actionButtons.map((actionButton, key) => (<Fragment key={key}>{actionButton}</Fragment>))}
-                </View>)}
+            <ActionButtons actionButtons={props.actionButtons} label={props.label}/>
             <ErrorField error={error} disabled={props.disabled}/>
         </View>);
 }

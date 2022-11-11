@@ -7,6 +7,7 @@ import {
     Image,
     StyleProp,
     ViewStyle,
+    ImageSourcePropType,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
@@ -16,7 +17,7 @@ export function IconButton(props: {
     iconColor?: string;
     backgroundColor?: string;
     borderColor?: string;
-    imageSource?: any;
+    imageSource?: ImageSourcePropType;
     iconName?: any;
     iconType?: string;
     iconSize?: number;

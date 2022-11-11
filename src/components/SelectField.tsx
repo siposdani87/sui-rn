@@ -27,7 +27,7 @@ export function SelectField(props: {
     multiple?: boolean;
     onSearch?: (_value: any) => void;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

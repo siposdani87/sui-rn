@@ -1,12 +1,13 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+export declare type SwitchFieldValueType = any;
 export declare function SwitchField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
-    trueValue?: any;
-    falseValue?: any;
+    value: SwitchFieldValueType;
+    onValueChange: (_value: SwitchFieldValueType) => void;
+    trueValue?: SwitchFieldValueType;
+    falseValue?: SwitchFieldValueType;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

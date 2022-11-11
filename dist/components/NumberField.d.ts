@@ -1,10 +1,12 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
+import { TextFieldValueType } from './TextField';
+export declare type NumberFieldValueType = TextFieldValueType;
 export declare function NumberField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: NumberFieldValueType;
+    onValueChange: (_value: NumberFieldValueType) => void;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

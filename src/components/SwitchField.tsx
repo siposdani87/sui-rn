@@ -19,13 +19,15 @@ interface TrackColor {
     true?: ColorValue;
 }
 
+export type SwitchFieldValueType = any;
+
 export function SwitchField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
-    trueValue?: any;
-    falseValue?: any;
+    value: SwitchFieldValueType;
+    onValueChange: (_value: SwitchFieldValueType) => void;
+    trueValue?: SwitchFieldValueType;
+    falseValue?: SwitchFieldValueType;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
@@ -35,7 +37,7 @@ export function SwitchField(props: {
 }): JSX.Element {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
-    const [value, setValue] = useState<boolean>(props.value);
+    const [value, setValue] = useState<SwitchFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 

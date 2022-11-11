@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
@@ -12,17 +11,20 @@ import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 import { useErrorField } from '../hooks/useErrorField';
 import { useInputStyle } from '../hooks/useInputStyle';
+import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
 
+export type TagFieldValueType = string[];
+
 export function TagField(props: {
-    values: any[];
-    onValuesChange: (_value: any[]) => void;
+    values: TagFieldValueType;
+    onValuesChange: (_value: TagFieldValueType) => void;
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     placeholder?: string;
     required?: boolean;
     disabled?: boolean;
@@ -32,7 +34,7 @@ export function TagField(props: {
     style?: StyleProp<ViewStyle>;
     actionButtons?: JSX.Element[];
 }) {
-    const [values, setValues] = useState<string[]>(props.values);
+    const [values, setValues] = useState<TagFieldValueType>(props.values);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
@@ -44,7 +46,7 @@ export function TagField(props: {
         setValues(v);
     }, [props.values, props.placeholder]);
 
-    const onValuesChange = (v: string[]): void => {
+    const onValuesChange = (v: TagFieldValueType): void => {
         onErrorChange();
         setValues(v);
         props.onValuesChange(
@@ -164,25 +166,10 @@ export function TagField(props: {
                     </View>
                 ))}
             </View>
-            {props.actionButtons && (
-                <View
-                    style={[
-                        Styles.actionsContainer as any,
-                        Platform.select({
-                            android: {
-                                top: props.label ? 26 : -2,
-                            },
-                            ios: {
-                                top: props.label ? 21 : -1,
-                            },
-                        }),
-                    ]}
-                >
-                    {props.actionButtons.map((actionButton, key) => (
-                        <Fragment key={key}>{actionButton}</Fragment>
-                    ))}
-                </View>
-            )}
+            <ActionButtons
+                actionButtons={props.actionButtons}
+                label={props.label}
+            />
             <ErrorField error={error} disabled={props.disabled} />
         </View>
     );

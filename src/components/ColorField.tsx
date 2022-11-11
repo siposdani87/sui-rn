@@ -16,11 +16,11 @@ import { Button } from './Button';
 import { useInputStyle } from '../hooks/useInputStyle';
 
 export function ColorField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: string;
+    onValueChange: (_value: string) => void;
     okText: string;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;

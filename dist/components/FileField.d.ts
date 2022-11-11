@@ -9,7 +9,7 @@ export declare function FileField(props: {
     mimeType: string;
     onValueChange: (_value: string | null) => void;
     label?: string;
-    error?: string | null;
+    error?: string[] | null;
     required?: boolean;
     disabled?: boolean;
     desc?: string;
