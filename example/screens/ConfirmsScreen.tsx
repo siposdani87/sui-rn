@@ -79,7 +79,7 @@ export default function ConfirmsScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
                     <View style={{ flexDirection: 'column' }}>

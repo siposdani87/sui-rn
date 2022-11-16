@@ -6,7 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 export default function ButtonsScreen() {
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
                     <View style={{ flexDirection: 'row' }}>

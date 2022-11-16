@@ -52,14 +52,6 @@ const styles = {
         }),
     },
     activeOpacity: 0.6,
-    ...Platform.select({
-        android: {
-            blurRadius: 1,
-        },
-        ios: {
-            blurRadius: 5,
-        },
-    }),
     floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,

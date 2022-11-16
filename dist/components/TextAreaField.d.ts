@@ -2,7 +2,7 @@
 import { TextFieldValueType } from './TextField';
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export declare type TextAreaFieldValueType = TextFieldValueType;
+export type TextAreaFieldValueType = TextFieldValueType;
 export declare function TextAreaField(props: {
     value: TextAreaFieldValueType;
     onValueChange: (_value: TextAreaFieldValueType) => void;

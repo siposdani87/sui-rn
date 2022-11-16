@@ -2,7 +2,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
-export declare type SearchFieldValueType = TextFieldValueType;
+export type SearchFieldValueType = TextFieldValueType;
 export declare function SearchField(props: {
     value: SearchFieldValueType;
     onValueChange: (_value: SearchFieldValueType) => void;

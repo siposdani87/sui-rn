@@ -13,7 +13,7 @@ export default function HomeScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView>
                 <>
                     <TextButton

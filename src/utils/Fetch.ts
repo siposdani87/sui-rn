@@ -179,12 +179,6 @@ export class Fetch {
         responseType?: string,
     ): Promise<Objekt> {
         const contentType = response.headers.get('content-type');
-        /*
-            arrayBuffer()
-            blob()
-            text()
-            formData()
-        */
         let data = new Objekt();
         if (contentType?.includes('/json')) {
             const jsonData = await response.json();

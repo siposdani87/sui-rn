@@ -1,4 +1,15 @@
 declare const styles: {
+    fontFamilyApp: string;
+    fontFamilyHeadingRegular: string;
+    fontFamilyHeadingMedium: string;
+    fontFamilyHeadingBold: string;
+    fontFamilyBodyRegular: string;
+    fontFamilyBodyMedium: string;
+    fontFamilyBodyBold: string;
+    shadow: {};
+    lightShadow: {};
+    noShadow: {};
+    activeOpacity: number;
     floatingButtonContainer: {
         position: string;
         bottom: number;
@@ -22,20 +33,19 @@ declare const styles: {
         flexDirection: string;
         zIndex: number;
     };
-    blurRadius?: number | undefined;
-    fontFamilyApp: string;
-    fontFamilyHeadingRegular: string;
-    fontFamilyHeadingMedium: string;
-    fontFamilyHeadingBold: string;
-    fontFamilyBodyRegular: string;
-    fontFamilyBodyMedium: string;
-    fontFamilyBodyBold: string;
-    shadow: {};
-    lightShadow: {};
-    noShadow: {};
-    activeOpacity: number;
 };
 export declare function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]): {
+    fontFamilyApp: string;
+    fontFamilyHeadingRegular: string;
+    fontFamilyHeadingMedium: string;
+    fontFamilyHeadingBold: string;
+    fontFamilyBodyRegular: string;
+    fontFamilyBodyMedium: string;
+    fontFamilyBodyBold: string;
+    shadow: {};
+    lightShadow: {};
+    noShadow: {};
+    activeOpacity: number;
     floatingButtonContainer: {
         position: string;
         bottom: number;
@@ -59,17 +69,5 @@ export declare function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings
         flexDirection: string;
         zIndex: number;
     };
-    blurRadius?: number | undefined;
-    fontFamilyApp: string;
-    fontFamilyHeadingRegular: string;
-    fontFamilyHeadingMedium: string;
-    fontFamilyHeadingBold: string;
-    fontFamilyBodyRegular: string;
-    fontFamilyBodyMedium: string;
-    fontFamilyBodyBold: string;
-    shadow: {};
-    lightShadow: {};
-    noShadow: {};
-    activeOpacity: number;
 };
 export default styles;
