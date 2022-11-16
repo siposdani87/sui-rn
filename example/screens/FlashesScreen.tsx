@@ -56,7 +56,7 @@ export default function FlashesScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
                     <View style={{ flexDirection: 'column' }}>

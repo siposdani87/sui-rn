@@ -43,7 +43,7 @@ export default function DateTimesScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl

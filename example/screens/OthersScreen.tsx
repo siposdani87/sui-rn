@@ -10,7 +10,7 @@ export default function OthersScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
                     <NoContent

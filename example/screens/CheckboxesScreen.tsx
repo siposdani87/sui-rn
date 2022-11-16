@@ -32,7 +32,7 @@ export default function CheckboxesScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl

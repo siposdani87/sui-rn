@@ -26,7 +26,7 @@ export default function ColorsScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl

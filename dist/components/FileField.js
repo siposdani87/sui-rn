@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Label } from './Label';
 import { View, StyleSheet, Image, Alert, } from 'react-native';
 import { useErrorField } from '../hooks/useErrorField';
@@ -20,6 +20,9 @@ const mimeTypes = {
     docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     pdf: 'application/pdf',
+    jpeg: 'image/jpeg',
+    jpg: 'image/jpeg',
+    png: 'image/png',
 };
 const fileTypeSVG = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
     '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">' +
@@ -31,7 +34,16 @@ const fileTypeSVG = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
     '<text x="220" y="380" text-anchor="middle" style="fill:#FFF;font-weight:700;font-family:Arial;font-size:120px;">TYPE</text>' +
     '</svg>';
 const searchStr = ';base64,';
-const isRequireValue = (v) => {
+const isImage = (mimeType) => {
+    return mimeType.indexOf('image') === 0;
+};
+const isVideo = (mimeType) => {
+    return mimeType.indexOf('video') === 0;
+};
+const isDocument = (mimeType) => {
+    return !isImage(mimeType) && !isVideo(mimeType);
+};
+const isRequireSourceType = (v) => {
     return v !== null && v >= 0;
 };
 const getValueUri = (v) => {
@@ -41,7 +53,7 @@ const isValidValueUri = (imageSourceType) => {
     return !!getValueUri(imageSourceType);
 };
 const isValidValue = (v) => {
-    return isValidValueUri(v) || isRequireValue(v);
+    return isValidValueUri(v) || isRequireSourceType(v);
 };
 const getFileIconSrc = (type, color) => {
     return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
@@ -51,7 +63,9 @@ const getSvgXmlByFilename = (filename) => {
     const color = fileColors[type] ?? 'black';
     return getFileIconSrc(type, color);
 };
-const getDataUri = (uri, filename) => {
+const getDataUri = (base64Data, filename) => {
+    const mimeType = mimeTypes[getExtensionName(filename)];
+    const uri = 'data:' + mimeType + ';base64,' + base64Data;
     return uri.replace(searchStr, ';filename=' + filename + searchStr);
 };
 const showAlert = (e) => {
@@ -65,11 +79,29 @@ export function FileField(props) {
     const [defaultSvgXml, setDefaultSvgXml] = useState(null);
     const [imageSource, setImageSource] = useState(null);
     const [defaultImageSource, setDefaultImageSource] = useState(null);
-    const [state, setState] = useReducer((oldState, newState) => ({ ...oldState, ...newState }), { filename: '', content: '' });
+    const [fileData, setFileData] = useState({
+        filename: '',
+        content: null,
+    });
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
+    let mediaTypes = ImagePicker.MediaTypeOptions.All;
+    if (isImage(props.mimeType)) {
+        mediaTypes = ImagePicker.MediaTypeOptions.Images;
+    }
+    else if (isVideo(props.mimeType)) {
+        mediaTypes = ImagePicker.MediaTypeOptions.Videos;
+    }
+    const options = {
+        mediaTypes,
+        allowsEditing: true,
+        aspect: props.aspect,
+        quality: props.quality,
+        base64: true,
+        exif: true,
+    };
     const handleDefaultSvgXml = useCallback((v) => {
-        if (isValidValue(v)) {
+        if (isValidValueUri(v)) {
             setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
         }
         else {
@@ -89,24 +121,14 @@ export function FileField(props) {
     }, [props.defaultValue, props.required]);
     const onDataChange = useCallback((filename, content) => {
         onErrorChange();
-        setState({ filename, content });
+        setFileData({ filename, content });
         props.onValueChange(content);
     }, [onErrorChange, props]);
-    const isImage = useCallback(() => {
-        return props.mimeType.indexOf('image') === 0;
-    }, [props.mimeType]);
-    const isVideo = useCallback(() => {
-        return props.mimeType.indexOf('video') === 0;
-    }, [props.mimeType]);
-    const isDocument = useCallback(() => {
-        return !(isImage() || isVideo());
-    }, [isImage, isVideo]);
     const handleImageDataUri = async (result) => {
         if (!result.canceled) {
             const asset = result.assets[0];
-            const filename = asset.fileName ?? asset.uri.split('/').pop() ?? 'file';
-            const uri = 'data:image/jpeg;base64,' + asset.base64;
-            const dataUri = getDataUri(uri, filename);
+            const filename = asset.fileName ?? asset.uri.split('/').pop() ?? 'file.jpeg';
+            const dataUri = getDataUri(asset.base64, filename);
             setImageSource({ uri: dataUri });
             onDataChange(filename, dataUri);
         }
@@ -114,12 +136,10 @@ export function FileField(props) {
     const handleDocumentDataUri = async (result) => {
         if (result.type === 'success') {
             const filename = result.name;
-            const mimeType = mimeTypes[getExtensionName(filename)];
             const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
                 encoding: 'base64',
             });
-            const uri = 'data:' + mimeType + ';base64,' + fileBase64;
-            const dataUri = getDataUri(uri, filename);
+            const dataUri = getDataUri(fileBase64, filename);
             setSvgXml(getSvgXmlByFilename(filename));
             onDataChange(filename, dataUri);
         }
@@ -162,7 +182,7 @@ export function FileField(props) {
         }
         try {
             const result = await DocumentPicker.getDocumentAsync({
-                type: props.mimeType || '*/*',
+                type: props.mimeType,
             });
             await handleDocumentDataUri(result);
         }
@@ -171,31 +191,17 @@ export function FileField(props) {
         }
     };
     const isRemovable = () => {
-        return !props.required && (isValidValue(value) || !!state.content);
+        return !props.required && (isValidValue(value) || !!fileData.content);
     };
     const remove = () => {
-        if (isDocument()) {
-            removeDocument();
-        }
-        else {
-            removeImage();
-        }
-    };
-    const removeImage = () => {
         if (isRemovable()) {
+            setSvgXml(defaultSvgXml);
             setImageSource(defaultImageSource);
             setValue(null);
             onDataChange('', null);
         }
     };
-    const removeDocument = () => {
-        if (isRemovable()) {
-            setSvgXml(defaultSvgXml);
-            setValue(null);
-            onDataChange('', null);
-        }
-    };
-    const getRequiredTextField = () => {
+    const isRequired = () => {
         return !!props.required && !isValidValue(value);
     };
     const getActionButtons = () => {
@@ -203,31 +209,19 @@ export function FileField(props) {
         if (isRemovable()) {
             actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName="delete" iconColor={getActionColor()} onPress={remove} disabled={props.disabled}/>);
         }
-        if (isDocument()) {
+        if (isDocument(props.mimeType)) {
             actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName="description" iconColor={getActionColor()} onPress={openDocumentLibrary} disabled={props.disabled}/>);
         }
-        if (!isDocument()) {
+        if (!isDocument(props.mimeType)) {
             actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName="photo-camera" iconColor={getActionColor()} onPress={openCamera} disabled={props.disabled}/>);
         }
-        if (!isDocument()) {
+        if (!isDocument(props.mimeType)) {
             actionsButtons.push(<IconButton containerStyle={Styles.fieldIconButton} iconName="image" iconColor={getActionColor()} onPress={openImageLibrary} disabled={props.disabled}/>);
         }
         return actionsButtons;
     };
-    const options = {
-        mediaTypes: isImage()
-            ? ImagePicker.MediaTypeOptions.Images
-            : isVideo()
-                ? ImagePicker.MediaTypeOptions.Videos
-                : ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: props.aspect,
-        quality: props.quality,
-        base64: true,
-        exif: true,
-    };
     useEffect(() => {
-        if (isDocument()) {
+        if (isDocument(props.mimeType)) {
             handleDefaultSvgXml(value);
         }
         else {
@@ -236,7 +230,7 @@ export function FileField(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
     useEffect(() => {
-        if (isValidValue(props.value) && !state.content) {
+        if (isValidValue(props.value) && !fileData.content) {
             setValue(props.value);
             onDataChange('', '');
         }
@@ -258,17 +252,16 @@ export function FileField(props) {
             setSvgXml(defaultSvgXml);
         }
     }, [value, defaultSvgXml]);
-    return (<View style={[styles.container, props.containerStyle]}>
+    return (<View style={props.containerStyle}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <View style={styles.imageContainer}>
-                {!isDocument() && !!imageSource && (<Image source={imageSource} style={styles.image}/>)}
-                {isDocument() && !!svgXml && (<SvgCss xml={svgXml} width="100" height="100"/>)}
+                {!isDocument(props.mimeType) && !!imageSource && (<Image source={imageSource} style={styles.image}/>)}
+                {isDocument(props.mimeType) && !!svgXml && (<SvgCss xml={svgXml} width="100" height="100"/>)}
             </View>
-            <TextField style={props.style} value={state.filename ?? ''} onValueChange={() => { }} required={getRequiredTextField()} error={error} disabled={props.disabled} readonly={true} actionButtons={getActionButtons()}/>
+            <TextField style={props.style} value={fileData.filename} onValueChange={() => { }} required={isRequired()} error={error} disabled={props.disabled} readonly={true} actionButtons={getActionButtons()}/>
         </View>);
 }
 const styles = StyleSheet.create({
-    container: {},
     imageContainer: {
         flex: 1,
         height: 100,

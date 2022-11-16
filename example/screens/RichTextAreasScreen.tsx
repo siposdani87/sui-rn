@@ -28,7 +28,7 @@ export default function RichTextAreasScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl

@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export declare type IconToggleFieldValueType = any;
+export type IconToggleFieldValueType = any;
 export declare function IconToggleField(props: {
     value: IconToggleFieldValueType;
     checkedIcon: string;

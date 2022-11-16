@@ -26,7 +26,7 @@ export default function SlidersScreen() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl

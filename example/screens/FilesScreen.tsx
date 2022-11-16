@@ -1,15 +1,15 @@
 import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { FileField, ImageSourceType } from '@siposdani87/sui-rn';
+import { FileField, FileSourceType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 import { useData } from '../utils/useData';
 
 interface FilesState {
-    logoPicture: ImageSourceType;
-    logoPictureDefault: ImageSourceType;
-    profilePicture: string | null;
-    document: string | null;
-    documentDisabled: string | null;
+    logoPicture: FileSourceType;
+    logoPictureDefault: FileSourceType;
+    profilePicture: FileSourceType;
+    document: FileSourceType;
+    documentDisabled: FileSourceType;
 }
 
 export default function FilesScreen() {
@@ -26,16 +26,18 @@ export default function FilesScreen() {
             uri: null,
         },
         logoPictureDefault: null,
-        profilePicture:
-            'https://www.gravatar.com/avatar/000000?s=200&d=robohash&f=y',
+        profilePicture: {
+            uri: 'https://www.gravatar.com/avatar/000000?s=200&d=robohash&f=y',
+        },
         document: null,
-        documentDisabled:
-            'http://www.africau.edu/images/default/sample.pdf',
+        documentDisabled: {
+            uri: 'http://www.africau.edu/images/default/sample.pdf',
+        },
     });
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar />
             <ScrollView
                 refreshControl={
                     <RefreshControl
@@ -67,22 +69,22 @@ export default function FilesScreen() {
 
                     <FileField
                         label="Profile picture"
-                        value={{ uri: data.profilePicture }}
-                        defaultValue={{ uri: defaultValue }}
+                        value={data.profilePicture}
+                        defaultValue={require('../assets/icon.png')}
                         mimeType="image/*"
                         onValueChange={(v) => updateData('profilePicture', v)}
                     />
 
                     <FileField
                         label="Document"
-                        value={{ uri: data.document }}
+                        value={data.document}
                         mimeType="application/pdf"
                         onValueChange={(v) => updateData('document', v)}
                     />
 
                     <FileField
                         label="Document disabled"
-                        value={{ uri: data.documentDisabled }}
+                        value={data.documentDisabled}
                         mimeType="text/html"
                         onValueChange={(v) =>
                             updateData('documentdocumentDisabled', v)
