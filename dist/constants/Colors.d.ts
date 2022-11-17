@@ -1,4 +1,4 @@
-export type ColorTypes = {
+export declare type ColorTypes = {
     [key: string]: string;
 };
 declare const colors: {

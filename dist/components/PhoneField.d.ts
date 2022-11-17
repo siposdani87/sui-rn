@@ -2,7 +2,7 @@
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
-export type PhoneFieldValueType = TextFieldValueType;
+export declare type PhoneFieldValueType = TextFieldValueType;
 export declare function PhoneField(props: {
     value: PhoneFieldValueType;
     onValueChange: (_value: PhoneFieldValueType) => void;

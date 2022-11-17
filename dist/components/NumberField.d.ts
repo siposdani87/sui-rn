@@ -2,7 +2,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
-export type NumberFieldValueType = TextFieldValueType;
+export declare type NumberFieldValueType = TextFieldValueType;
 export declare function NumberField(props: {
     value: NumberFieldValueType;
     onValueChange: (_value: NumberFieldValueType) => void;

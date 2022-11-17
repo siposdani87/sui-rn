@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export type SliderFieldValueType = number | undefined | null;
+export declare type SliderFieldValueType = number | undefined | null;
 export declare function SliderField(props: {
     value: SliderFieldValueType;
     onValueChange: (_value: SliderFieldValueType) => void;
