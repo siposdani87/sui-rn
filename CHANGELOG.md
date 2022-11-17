@@ -1,6 +1,11 @@
-## 0.9.4 - TBD
+## 0.9.5 - TBD
 
 * 
+
+## 0.9.4 - 2022-11-17
+
+* Improve FileField component
+* Set typescript version
 
 ## 0.9.3 - 2022-11-13
 
