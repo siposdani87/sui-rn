@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { ErrorValueType } from './ErrorField';
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
-export type RichTextAreaFieldValueType = string | null | undefined;
+export declare type RichTextAreaFieldValueType = string | null | undefined;
 export declare function RichTextAreaField(props: {
     value: RichTextAreaFieldValueType;
     onValueChange: (_value: RichTextAreaFieldValueType) => void;

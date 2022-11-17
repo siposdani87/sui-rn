@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export type TagFieldValueType = string[];
+export declare type TagFieldValueType = string[];
 export declare function TagField(props: {
     values: TagFieldValueType;
     onValuesChange: (_value: TagFieldValueType) => void;

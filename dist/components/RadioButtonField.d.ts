@@ -2,7 +2,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 import { IconToggleFieldValueType } from './IconToggleField';
 import { ErrorValueType } from './ErrorField';
-export type RadioButtonFieldField = IconToggleFieldValueType;
+export declare type RadioButtonFieldField = IconToggleFieldValueType;
 export declare function RadioButtonField(props: {
     value: RadioButtonFieldField;
     trueValue?: RadioButtonFieldField;
