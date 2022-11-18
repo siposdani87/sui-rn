@@ -13,7 +13,7 @@ export default function ActionButtons(props: {
     return (
         <View
             style={[
-                Styles.actionsContainer as any,
+                Styles.actionsContainer,
                 Platform.select({
                     android: {
                         top: props.label ? 26 : -2,

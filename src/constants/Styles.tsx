@@ -1,7 +1,26 @@
-import { Platform } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
 import { default as Colors } from './Colors';
 
-const styles = {
+export type StylesType = {
+    fontFamilyApp: string;
+    fontFamilyHeadingRegular: string;
+    fontFamilyHeadingMedium: string;
+    fontFamilyHeadingBold: string;
+    fontFamilyBodyRegular: string;
+    fontFamilyBodyMedium: string;
+    fontFamilyBodyBold: string;
+    shadow: StyleProp<ViewStyle>;
+    lightShadow: StyleProp<ViewStyle>;
+    noShadow: StyleProp<ViewStyle>;
+    activeOpacity: number;
+    floatingButtonContainer: StyleProp<ViewStyle>;
+    navigationIconButton: StyleProp<ViewStyle>;
+    navigationIconContainer: StyleProp<ViewStyle>;
+    fieldIconButton: StyleProp<ViewStyle>;
+    actionsContainer: StyleProp<ViewStyle>;
+};
+
+const styles: StylesType = {
     fontFamilyApp: '',
     fontFamilyHeadingRegular: '',
     fontFamilyHeadingMedium: '',

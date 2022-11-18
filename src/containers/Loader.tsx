@@ -15,7 +15,9 @@ export function Loader(props: {
     if (props.httpService.isInprogress()) {
         return (
             <View style={[styles.container, { top: insets.top + 15 }]}>
-                <View style={[styles.loader, { backgroundColor }]}>
+                <View
+                    style={[styles.loader, Styles.shadow, { backgroundColor }]}
+                >
                     <ActivityIndicator
                         animating={true}
                         size="small"
@@ -41,6 +43,5 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 15,
         borderRadius: 50,
-        ...Styles.shadow,
     },
 });

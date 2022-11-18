@@ -7,7 +7,7 @@ export function Loader(props) {
     const backgroundColor = props.backgroundColor || Colors.primary;
     if (props.httpService.isInprogress()) {
         return (<View style={[styles.container, { top: insets.top + 15 }]}>
-                <View style={[styles.loader, { backgroundColor }]}>
+                <View style={[styles.loader, Styles.shadow, { backgroundColor }]}>
                     <ActivityIndicator animating={true} size="small" color={props.color}/>
                 </View>
             </View>);
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 15,
         borderRadius: 50,
-        ...Styles.shadow,
     },
 });
 //# sourceMappingURL=Loader.js.map

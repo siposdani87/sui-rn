@@ -1,4 +1,5 @@
-declare const styles: {
+import { StyleProp, ViewStyle } from 'react-native';
+export declare type StylesType = {
     fontFamilyApp: string;
     fontFamilyHeadingRegular: string;
     fontFamilyHeadingMedium: string;
@@ -6,68 +7,16 @@ declare const styles: {
     fontFamilyBodyRegular: string;
     fontFamilyBodyMedium: string;
     fontFamilyBodyBold: string;
-    shadow: {};
-    lightShadow: {};
-    noShadow: {};
+    shadow: StyleProp<ViewStyle>;
+    lightShadow: StyleProp<ViewStyle>;
+    noShadow: StyleProp<ViewStyle>;
     activeOpacity: number;
-    floatingButtonContainer: {
-        position: string;
-        bottom: number;
-        right: number;
-        zIndex: number;
-    };
-    navigationIconButton: {
-        marginLeft: number;
-        marginRight: number;
-    };
-    navigationIconContainer: {
-        flexDirection: string;
-        justifyContent: string;
-    };
-    fieldIconButton: {
-        margin: number;
-    };
-    actionsContainer: {
-        position: string;
-        right: number;
-        flexDirection: string;
-        zIndex: number;
-    };
+    floatingButtonContainer: StyleProp<ViewStyle>;
+    navigationIconButton: StyleProp<ViewStyle>;
+    navigationIconContainer: StyleProp<ViewStyle>;
+    fieldIconButton: StyleProp<ViewStyle>;
+    actionsContainer: StyleProp<ViewStyle>;
 };
-export declare function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]): {
-    fontFamilyApp: string;
-    fontFamilyHeadingRegular: string;
-    fontFamilyHeadingMedium: string;
-    fontFamilyHeadingBold: string;
-    fontFamilyBodyRegular: string;
-    fontFamilyBodyMedium: string;
-    fontFamilyBodyBold: string;
-    shadow: {};
-    lightShadow: {};
-    noShadow: {};
-    activeOpacity: number;
-    floatingButtonContainer: {
-        position: string;
-        bottom: number;
-        right: number;
-        zIndex: number;
-    };
-    navigationIconButton: {
-        marginLeft: number;
-        marginRight: number;
-    };
-    navigationIconContainer: {
-        flexDirection: string;
-        justifyContent: string;
-    };
-    fieldIconButton: {
-        margin: number;
-    };
-    actionsContainer: {
-        position: string;
-        right: number;
-        flexDirection: string;
-        zIndex: number;
-    };
-};
+declare const styles: StylesType;
+export declare function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]): StylesType;
 export default styles;

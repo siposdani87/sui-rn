@@ -18,6 +18,7 @@ export function Flash(props) {
     const getContainerStyle = (flash) => {
         const containerStyles = [
             styles.flashContainer,
+            Styles.shadow,
             isDarkTheme
                 ? styles.flashDarkContainer
                 : styles.flashLightContainer,
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderTopWidth: 5,
         borderTopColor: Colors.deepGreyBright,
-        ...Styles.shadow,
     },
     flashLightContainer: {
         backgroundColor: Colors.lightGreyBright,
