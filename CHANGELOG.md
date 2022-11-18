@@ -1,6 +1,6 @@
 ## 0.9.5 - TBD
 
-* 
+* Improve styles typings
 
 ## 0.9.4 - 2022-11-17
 

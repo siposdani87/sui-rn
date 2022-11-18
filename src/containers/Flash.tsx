@@ -29,6 +29,7 @@ export function Flash(props: { flashService: FlashService }): JSX.Element {
     const getContainerStyle = (flash: FlashItem): StyleProp<ViewStyle>[] => {
         const containerStyles: StyleProp<ViewStyle>[] = [
             styles.flashContainer,
+            Styles.shadow,
             isDarkTheme
                 ? styles.flashDarkContainer
                 : styles.flashLightContainer,
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderTopWidth: 5,
         borderTopColor: Colors.deepGreyBright,
-        ...Styles.shadow,
     },
     flashLightContainer: {
         backgroundColor: Colors.lightGreyBright,

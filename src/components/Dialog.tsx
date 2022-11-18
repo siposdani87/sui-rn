@@ -57,6 +57,7 @@ export function Dialog(props: {
                 <View
                     style={[
                         styles.dialogContainer,
+                        Styles.shadow,
                         props.type ? getStyle(props.type) : null,
                         isDarkTheme
                             ? styles.dialogDarkContainer
@@ -92,7 +93,6 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         borderRadius: 3,
         margin: 20,
-        ...Styles.shadow,
     },
     success: {
         borderTopWidth: 5,
