@@ -15,7 +15,6 @@ export type StylesType = {
     activeOpacity: number;
     floatingButtonContainer: StyleProp<ViewStyle>;
     navigationIconButton: StyleProp<ViewStyle>;
-    navigationIconContainer: StyleProp<ViewStyle>;
     fieldIconButton: StyleProp<ViewStyle>;
     actionsContainer: StyleProp<ViewStyle>;
 };
@@ -80,10 +79,6 @@ const styles: StylesType = {
     navigationIconButton: {
         marginLeft: 0,
         marginRight: 10,
-    },
-    navigationIconContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
     },
     fieldIconButton: {
         margin: 0,

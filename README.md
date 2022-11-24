@@ -14,9 +14,6 @@ This is a basic UI library. It is written in the TypeScript language. The codeba
 
 ```
 npm install @siposdani87/sui-rn
-
-# Expo
-expo install @siposdani87/sui-rn
 ```
 
 ### Basic Usage
