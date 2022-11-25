@@ -14,6 +14,7 @@ import {
     DarkTheme,
     DefaultTheme,
     NavigationContainer,
+    NavigationState,
     Theme,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -74,7 +75,7 @@ export default function App() {
         Ubuntu_400Regular,
     });
     const [isReady, setIsReady] = useState<boolean>(!__DEV__);
-    const [initialState, setInitialState] = useState<any>();
+    const [initialState, setInitialState] = useState<NavigationState>();
     const [state, dispatch] = useReducer(Base.reducer, {});
     const services = useMemo(() => {
         return new Services(dispatch);
