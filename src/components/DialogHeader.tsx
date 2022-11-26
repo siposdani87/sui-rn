@@ -10,20 +10,18 @@ export function DialogHeader(props: {
     onClose?: () => void;
 }): JSX.Element {
     return (
-        <>
-            <View
-                style={[
-                    styles.container,
-                    props.onClose ? { paddingRight: 25 } : null,
-                ]}
-            >
-                {!!props.imageSource && (
-                    <Image source={props.imageSource} style={[styles.image]} />
-                )}
-                {!!props.title && (
-                    <Text style={styles.titleText}>{props.title}</Text>
-                )}
-            </View>
+        <View
+            style={[
+                styles.container,
+                props.onClose ? { paddingRight: 35 } : null,
+            ]}
+        >
+            {!!props.imageSource && (
+                <Image source={props.imageSource} style={styles.image} />
+            )}
+            {!!props.title && (
+                <Text style={styles.titleText}>{props.title}</Text>
+            )}
             {!!props.onClose && (
                 <IconButton
                     iconName="close"
@@ -31,7 +29,7 @@ export function DialogHeader(props: {
                     containerStyle={styles.closeButton}
                 />
             )}
-        </>
+        </View>
     );
 }
 
@@ -42,7 +40,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 5,
         paddingHorizontal: 15,
-        minHeight: 15,
+        minHeight: 30,
     },
     image: {
         height: 50,
@@ -55,6 +53,8 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         fontSize: 22,
         textTransform: 'uppercase',
+        flex: 1,
+        flexWrap: 'wrap',
     },
     closeButton: {
         position: 'absolute',

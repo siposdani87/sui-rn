@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import {
     Button,
     Dialog,
+    DialogHeader,
     Text,
     TextButton,
     TextField,
@@ -77,6 +78,14 @@ export default function DialogsScreen() {
                         onPress={openDialog3}
                         title="dialog3 with long titles"
                     />
+
+                    <DialogHeader imageSource={require('../assets/favicon.png')} title='Long Long title with long words: Xenotransplantation' onClose={() => null}></DialogHeader>
+
+                    <DialogHeader title='Long Long title with long words: Xenotransplantation' onClose={() => null}></DialogHeader>
+
+                    <DialogHeader title='Long Long title with long words: Xenotransplantation'></DialogHeader>
+
+                    <DialogHeader onClose={() => null}></DialogHeader>
                 </View>
             </ScrollView>
         </>
