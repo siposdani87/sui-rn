@@ -83,7 +83,10 @@ export function SwitchField(props: {
         return value === trueValue;
     };
 
-    const onPress = (): void => {
+    const toggle = (): void => {
+        if (props.disabled) {
+            return;
+        }
         const v = getValue() ? falseValue : trueValue;
         onValueChange(v);
     };
@@ -100,7 +103,7 @@ export function SwitchField(props: {
                 thumbColor={getThumbColor()}
             />
             <Label
-                onPress={onPress}
+                onPress={toggle}
                 containerStyle={styles.labelContainer}
                 text={props.label}
                 required={props.required}

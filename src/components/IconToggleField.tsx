@@ -46,7 +46,10 @@ export function IconToggleField(props: {
         props.onValueChange(v);
     };
 
-    const onPress = (): void => {
+    const toggle = (): void => {
+        if (props.disabled) {
+            return;
+        }
         const falseV = props.disableUncheck ? trueValue : falseValue;
         const v = value === trueValue ? falseV : trueValue;
         onValueChange(v);
@@ -57,7 +60,7 @@ export function IconToggleField(props: {
             return isDarkTheme
                 ? Colors.checkboxDisabledDark
                 : Colors.checkboxDisabledLight;
-        } else if (props.required && value === falseValue) {
+        } else if (props.required && value !== trueValue) {
             return isDarkTheme
                 ? Colors.errorDefaultDark
                 : Colors.errorDefaultLight;
@@ -81,7 +84,7 @@ export function IconToggleField(props: {
         <View style={[styles.container, props.containerStyle]}>
             <TouchableOpacity
                 activeOpacity={Styles.activeOpacity}
-                onPress={onPress}
+                onPress={toggle}
                 style={[styles.iconToggle, props.style]}
             >
                 <MaterialIcons name={getIcon()} size={26} color={getColor()} />
@@ -89,7 +92,7 @@ export function IconToggleField(props: {
             <Label
                 containerStyle={styles.labelContainer}
                 text={props.label}
-                onPress={onPress}
+                onPress={toggle}
                 required={props.required}
                 disabled={props.disabled}
                 desc={props.desc}

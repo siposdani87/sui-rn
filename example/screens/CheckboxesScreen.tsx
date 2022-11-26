@@ -11,22 +11,40 @@ import { StatusBar } from 'expo-status-bar';
 import { useData } from '../utils/useData';
 
 interface CheckboxesState {
-    isPrivate: boolean | null;
-    isBanned: boolean | null;
-    isDeleted: boolean | null;
+    checkbox: boolean | null;
+    checkboxRequired: boolean | null;
+    checkboxDisabled: boolean | null;
+    checkboxRequiredDisabled: boolean | null;
+    switch: boolean | null;
+    switchRequired: boolean | null;
+    switchDisabled: boolean | null;
+    switchRequiredDisabled: boolean | null;
+    iconToggle: boolean | null;
     radioButton: string | null;
 }
 
 export default function CheckboxesScreen() {
     const [data, updateData, refreshing, onRefresh] = useData<CheckboxesState>({
-        isPrivate: false,
-        isBanned: false,
-        isDeleted: false,
+        checkbox: null,
+        checkboxRequired: null,
+        checkboxDisabled: null,
+        checkboxRequiredDisabled: null,
+        switch: null,
+        switchRequired: null,
+        switchDisabled: null,
+        switchRequiredDisabled: null,
+        iconToggle: false,
         radioButton: null,
     }, {
-        isPrivate: true,
-        isBanned: true,
-        isDeleted: true,
+        checkbox: true,
+        checkboxRequired: false,
+        checkboxDisabled: false,
+        checkboxRequiredDisabled: false,
+        switch: true,
+        switchRequired: false,
+        switchDisabled: false,
+        switchRequiredDisabled: false,
+        iconToggle: true,
         radioButton: 'yes',
     });
 
@@ -62,22 +80,67 @@ export default function CheckboxesScreen() {
                             onValueChange={(v) => updateData('radioButton', v)}
                         />
                     </View>
+
                     <CheckboxField
-                        label="Private profile"
-                        value={data.isPrivate}
-                        onValueChange={(v) => updateData('isPrivate', v)}
+                        label="Checkbox"
+                        value={data.checkbox}
+                        onValueChange={(v) => updateData('checkbox', v)}
+                    />
+
+                    <CheckboxField
+                        label="Checkbox required"
+                        required={true}
+                        value={data.checkboxRequired}
+                        onValueChange={(v) => updateData('checkboxRequired', v)}
+                    />
+
+                    <CheckboxField
+                        label="Checkbox disabled"
+                        disabled={true}
+                        value={data.checkboxDisabled}
+                        onValueChange={(v) => updateData('checkboxDisabled', v)}
+                    />
+
+                    <CheckboxField
+                        label="Checkbox required disabled"
+                        required={true}
+                        disabled={true}
+                        value={data.checkboxRequiredDisabled}
+                        onValueChange={(v) => updateData('checkboxRequiredDisabled', v)}
                     />
 
                     <SwitchField
-                        label="Banned profile"
-                        value={data.isBanned}
-                        onValueChange={(v) => updateData('isBanned', v)}
+                        label="Switch"
+                        value={data.switch}
+                        onValueChange={(v) => updateData('switch', v)}
+                    />
+
+                    <SwitchField
+                        label="Switch required"
+                        value={data.switchRequired}
+                        required={true}
+                        onValueChange={(v) => updateData('switchRequired', v)}
+                    />
+
+                    <SwitchField
+                        label="Switch disabled"
+                        value={data.switchDisabled}
+                        disabled={true}
+                        onValueChange={(v) => updateData('switchDisabled', v)}
+                    />
+
+                    <SwitchField
+                        label="Switch required disabled"
+                        value={data.switchRequiredDisabled}
+                        required={true}
+                        disabled={true}
+                        onValueChange={(v) => updateData('switchRequiredDisabled', v)}
                     />
 
                     <IconToggleField
-                        label="Deleted profile, this action is not restorable! Do yout want to remove your social account from this application?"
-                        value={data.isDeleted}
-                        onValueChange={(v) => updateData('isDeleted', v)}
+                        label="I agree with the rules? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non scelerisque magna."
+                        value={data.iconToggle}
+                        onValueChange={(v) => updateData('iconToggle', v)}
                         checkedIcon="check-circle"
                         uncheckedIcon="highlight-off"
                     />

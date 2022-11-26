@@ -17,7 +17,10 @@ export function IconToggleField(props) {
         setValue(v);
         props.onValueChange(v);
     };
-    const onPress = () => {
+    const toggle = () => {
+        if (props.disabled) {
+            return;
+        }
         const falseV = props.disableUncheck ? trueValue : falseValue;
         const v = value === trueValue ? falseV : trueValue;
         onValueChange(v);
@@ -28,7 +31,7 @@ export function IconToggleField(props) {
                 ? Colors.checkboxDisabledDark
                 : Colors.checkboxDisabledLight;
         }
-        else if (props.required && value === falseValue) {
+        else if (props.required && value !== trueValue) {
             return isDarkTheme
                 ? Colors.errorDefaultDark
                 : Colors.errorDefaultLight;
@@ -47,10 +50,10 @@ export function IconToggleField(props) {
         setValue(props.value);
     }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={[styles.iconToggle, props.style]}>
+            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={toggle} style={[styles.iconToggle, props.style]}>
                 <MaterialIcons name={getIcon()} size={26} color={getColor()}/>
             </TouchableOpacity>
-            <Label containerStyle={styles.labelContainer} text={props.label} onPress={onPress} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>
+            <Label containerStyle={styles.labelContainer} text={props.label} onPress={toggle} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>
                 {props.children}
             </Label>
             <ErrorField error={error} disabled={props.disabled}/>
