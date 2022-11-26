@@ -61,10 +61,6 @@ const styles = {
         marginLeft: 0,
         marginRight: 10,
     },
-    navigationIconContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
     fieldIconButton: {
         margin: 0,
     },

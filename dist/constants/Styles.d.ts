@@ -1,5 +1,5 @@
 import { StyleProp, ViewStyle } from 'react-native';
-export declare type StylesType = {
+export type StylesType = {
     fontFamilyApp: string;
     fontFamilyHeadingRegular: string;
     fontFamilyHeadingMedium: string;
@@ -13,7 +13,6 @@ export declare type StylesType = {
     activeOpacity: number;
     floatingButtonContainer: StyleProp<ViewStyle>;
     navigationIconButton: StyleProp<ViewStyle>;
-    navigationIconContainer: StyleProp<ViewStyle>;
     fieldIconButton: StyleProp<ViewStyle>;
     actionsContainer: StyleProp<ViewStyle>;
 };

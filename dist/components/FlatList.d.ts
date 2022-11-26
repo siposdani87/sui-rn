@@ -1,9 +1,10 @@
 /// <reference types="react" />
-import { ImageSourcePropType, ListRenderItem, StyleProp, ViewStyle } from 'react-native';
-export declare function FlatList(props: {
-    data: any[];
-    keyExtractor?: (_item: any, _index: number) => string;
-    renderItem: ListRenderItem<any>;
+import { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
+import { ListRenderItem } from '@shopify/flash-list';
+export declare function FlatList<T>(props: {
+    data: T[];
+    keyExtractor?: (_item: T, _index: number) => string;
+    renderItem: ListRenderItem<T>;
     numColumns?: number;
     columnWrapperStyle?: StyleProp<ViewStyle>;
     refreshing: boolean;
