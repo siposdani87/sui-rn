@@ -11,7 +11,7 @@ export default function FlatListScreen() {
     const [items, setItems] = useState<Item[]>([]);
     const refreshing = false;
 
-    const keyExtractor = (item: Item) => {
+    const keyExtractor = (item: Item): string => {
         return item.id;
     };
 
@@ -22,23 +22,29 @@ export default function FlatListScreen() {
     );
 
     const onEndReached = () => {
-
+        console.log('onEndReached');
+        setItems([...items, ...generateNewItems(items.length)]);
     };
 
     const onRefresh = () => {
-
+        console.log('onRefresh');
+        setItems(generateNewItems(0));
     };
 
-    useEffect(() => {
+    const generateNewItems = (start: number = 0): Item[] => {
         const newItems: Item[] = [];
-        for (let i = 0; i < 30; i++) {
+        for (let i = start; i < start + 30; i++) {
             newItems.push({
                 id: i.toString(),
                 name: `Item-${i}`,
             });
         }
 
-        setItems(newItems);
+        return newItems;
+    }
+
+    useEffect(() => {
+        setItems(generateNewItems(0));
     }, []);
 
     return (

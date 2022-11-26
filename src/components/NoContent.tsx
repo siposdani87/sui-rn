@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     StyleSheet,
     View,
@@ -13,9 +13,9 @@ import { Text } from '../components/Text';
 export function NoContent(props: {
     text?: string;
     imageSource?: ImageSourcePropType;
-    children?: JSX.Element | JSX.Element[];
+    children?: ReactNode;
     containerStyle?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     return (
         <View style={[styles.container, props.containerStyle]}>
             {!!props.imageSource && (

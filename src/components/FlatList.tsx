@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NoContent } from './NoContent';
 import {
     ImageSourcePropType,
-    Platform,
-    RefreshControl,
     View,
     StyleSheet,
-    FlatList as RNFlatList,
-    ListRenderItem,
     StyleProp,
     ViewStyle,
 } from 'react-native';
+import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 const config = {
     progressViewOffset: -1000,
     onEndReachedThreshold: 0.5,
 };
 
-export function FlatList(props: {
-    data: any[];
-    keyExtractor?: (_item: any, _index: number) => string;
-    renderItem: ListRenderItem<any>;
+export function FlatList<T>(props: {
+    data: T[];
+    keyExtractor?: (_item: T, _index: number) => string;
+    renderItem: ListRenderItem<T>;
     numColumns?: number;
     columnWrapperStyle?: StyleProp<ViewStyle>;
     refreshing: boolean;
@@ -29,40 +26,30 @@ export function FlatList(props: {
     refreshText: string;
     noContentText: string;
     noContentImageSource: ImageSourcePropType;
-}): JSX.Element {
-    const [flatListReady, setFlatListReady] = useState<boolean>(false);
+}) {
+    // const [flatListReady, setFlatListReady] = useState<boolean>(false);
 
     const onRefresh = (): void => {
         if (!props.refreshing) {
-            setFlatListReady(false);
+            // setFlatListReady(false);
             props.onRefresh();
         }
     };
 
     const onEndReached = (): void => {
         if (!props.refreshing) {
-            if (flatListReady) {
-                setFlatListReady(false);
-                props.onEndReached();
-            }
+            // if (flatListReady) {
+            // setFlatListReady(false);
+            props.onEndReached();
+            // }
         }
     };
 
-    const onScrollEndDrag = (): void => {
-        setFlatListReady(true);
-    };
+    // const onScrollEndDrag = (): void => {
+    // setFlatListReady(true);
+    // };
 
-    const getListEmptyComponent = (): JSX.Element => {
-        return (
-            <NoContent
-                imageSource={props.noContentImageSource}
-                text={props.noContentText}
-                containerStyle={styles.container}
-            />
-        );
-    };
-
-    const getRefreshControl = (): JSX.Element => {
+    /* const getRefreshControl = (): ReactNode => {
         return (
             <RefreshControl
                 refreshing={false}
@@ -71,31 +58,42 @@ export function FlatList(props: {
                 tintColor="transparent"
             />
         );
-    };
+    }; */
 
     return (
         <View style={styles.base}>
-            <RNFlatList
+            <FlashList
                 data={props.data}
                 keyExtractor={props.keyExtractor}
                 renderItem={props.renderItem}
                 numColumns={props.numColumns}
-                columnWrapperStyle={props.columnWrapperStyle}
+                // columnWrapperStyle={props.columnWrapperStyle}
                 horizontal={false}
-                ListHeaderComponentStyle={styles.listHeaderComponent}
-                removeClippedSubviews={true}
-                style={styles.container}
+                // ListHeaderComponentStyle={styles.listHeaderComponent}
+                // removeClippedSubviews={true}
+                // style={styles.container}
                 progressViewOffset={config.progressViewOffset}
                 onEndReachedThreshold={config.onEndReachedThreshold}
-                ListEmptyComponent={getListEmptyComponent()}
+                ListEmptyComponent={
+                    <NoContent
+                        imageSource={props.noContentImageSource}
+                        text={props.noContentText}
+                        // containerStyle={styles.container}
+                    />
+                }
                 refreshing={props.refreshing}
                 onRefresh={onRefresh}
                 onEndReached={onEndReached}
-                onScrollEndDrag={onScrollEndDrag}
-                refreshControl={
-                    Platform.OS === 'ios' ? getRefreshControl() : undefined
-                }
-                // estimatedItemSize={200}
+                // onScrollEndDrag={onScrollEndDrag}
+                /* refreshControl={
+                    <RefreshControl
+                        refreshing={false}
+                        onRefresh={onRefresh}
+                        title={props.refreshText}
+                        tintColor="transparent"
+                    />
+                } */
+                estimatedItemSize={200}
             />
         </View>
     );
@@ -103,14 +101,14 @@ export function FlatList(props: {
 
 const styles = StyleSheet.create({
     base: {
-        marginTop: -10,
+        flex: 1,
     },
-    container: {
+    /* container: {
         marginTop: 10,
-    },
-    listHeaderComponent: {
+    }, */
+    /* listHeaderComponent: {
         height: 0,
         margin: 0,
         padding: 0,
-    },
+    }, */
 });
