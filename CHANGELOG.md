@@ -1,6 +1,12 @@
-## 0.9.5 - TBD
+## 0.9.6 - TBD
+
+* 
+
+## 0.9.5 - 2022-11-26
 
 * Improve styles typings
+* Use FlashList
+* Improve disabled state of checkbox and switch
 
 ## 0.9.4 - 2022-11-17
 
