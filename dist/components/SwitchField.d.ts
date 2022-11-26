@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export declare type SwitchFieldValueType = any;
+export type SwitchFieldValueType = any;
 export declare function SwitchField(props: {
     value: SwitchFieldValueType;
     onValueChange: (_value: SwitchFieldValueType) => void;
