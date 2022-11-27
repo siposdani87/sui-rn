@@ -1,11 +1,11 @@
 import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { LocationField, LocationType } from '@siposdani87/sui-rn';
+import { LocationField, LocationFieldValueType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 import { useData } from '../utils/useData';
 
 interface LocationsState {
-    location: LocationType | null;
+    location: LocationFieldValueType;
 }
 
 export default function LocationsScreen() {
@@ -19,7 +19,7 @@ export default function LocationsScreen() {
         },
     });
 
-    const onSearch = (v: string): void => {
+    const onSearch = (v: LocationFieldValueType): void => {
         console.log('onSearch', v);
     }
 

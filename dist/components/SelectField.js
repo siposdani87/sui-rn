@@ -163,6 +163,9 @@ export function SelectField(props) {
             <IconButton key={0} iconName="expand-more" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog}/>,
         ];
     };
+    const selectedItemStyle = isDarkTheme
+        ? styles.selectedItemDark
+        : styles.selectedItemLight;
     useEffect(() => {
         setValue(correctValue(props.value));
     }, [props.value, correctValue]);
@@ -170,9 +173,6 @@ export function SelectField(props) {
         setItems(convert(props.items));
         setFilteredItems(convert(props.items, query));
     }, [props.items, props.required, props.placeholder, query, convert]);
-    const selectedItemStyle = isDarkTheme
-        ? styles.selectedItemDark
-        : styles.selectedItemLight;
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>

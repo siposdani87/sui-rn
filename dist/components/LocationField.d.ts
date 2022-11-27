@@ -2,18 +2,19 @@
 import { ImageURISource, StyleProp, ViewStyle } from 'react-native';
 import { MapStyleElement, MapType } from 'react-native-maps';
 import { ErrorValueType } from './ErrorField';
-export interface LocationType {
+type LocationType = {
     address: string;
     latitude: number;
     longitude: number;
-}
+};
+export type LocationFieldValueType = LocationType | null;
 export declare function LocationField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: LocationFieldValueType;
+    onValueChange: (_value: LocationFieldValueType) => void;
     latitudeText: string;
     longitudeText: string;
     markerImage?: ImageURISource;
-    onSearch?: (_value: any) => void;
+    onSearch?: (_value: LocationFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;
@@ -25,3 +26,4 @@ export declare function LocationField(props: {
     mapType?: MapType;
     customMapStyle?: MapStyleElement[];
 }): JSX.Element;
+export {};
