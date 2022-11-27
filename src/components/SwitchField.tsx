@@ -42,10 +42,6 @@ export function SwitchField(props: {
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (boolV: boolean): void => {
         const v = boolV ? trueValue : falseValue;
         onErrorChange();
@@ -55,10 +51,8 @@ export function SwitchField(props: {
 
     const getTrackColor = (): TrackColor => {
         return {
-            false: !isDarkTheme
-                ? Colors.contentDisabledDark
-                : Colors.contentDefaultLight,
-            true: isDarkTheme ? Colors.primary : Colors.primaryBright,
+            false: isDarkTheme ? Colors.blackBright : Colors.lightGreyBright,
+            true: isDarkTheme ? Colors.primaryBright : Colors.primaryDark,
         };
     };
 
@@ -67,12 +61,12 @@ export function SwitchField(props: {
             return isDarkTheme
                 ? Colors.checkboxDisabledDark
                 : Colors.checkboxDisabledLight;
-        } else if (props.required && !value) {
+        } else if (props.required && value !== trueValue) {
             return isDarkTheme
                 ? Colors.errorDefaultDark
                 : Colors.errorDefaultLight;
         } else if (value) {
-            return isDarkTheme ? Colors.primaryBright : Colors.primary;
+            return isDarkTheme ? Colors.primaryDark : Colors.primaryBright;
         }
         return isDarkTheme
             ? Colors.checkboxDefaultDark
@@ -90,6 +84,10 @@ export function SwitchField(props: {
         const v = getValue() ? falseValue : trueValue;
         onValueChange(v);
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

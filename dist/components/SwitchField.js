@@ -11,9 +11,6 @@ export function SwitchField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
     const onValueChange = (boolV) => {
         const v = boolV ? trueValue : falseValue;
         onErrorChange();
@@ -22,10 +19,8 @@ export function SwitchField(props) {
     };
     const getTrackColor = () => {
         return {
-            false: !isDarkTheme
-                ? Colors.contentDisabledDark
-                : Colors.contentDefaultLight,
-            true: isDarkTheme ? Colors.primary : Colors.primaryBright,
+            false: isDarkTheme ? Colors.blackBright : Colors.lightGreyBright,
+            true: isDarkTheme ? Colors.primaryBright : Colors.primaryDark,
         };
     };
     const getThumbColor = () => {
@@ -34,13 +29,13 @@ export function SwitchField(props) {
                 ? Colors.checkboxDisabledDark
                 : Colors.checkboxDisabledLight;
         }
-        else if (props.required && !value) {
+        else if (props.required && value !== trueValue) {
             return isDarkTheme
                 ? Colors.errorDefaultDark
                 : Colors.errorDefaultLight;
         }
         else if (value) {
-            return isDarkTheme ? Colors.primaryBright : Colors.primary;
+            return isDarkTheme ? Colors.primaryDark : Colors.primaryBright;
         }
         return isDarkTheme
             ? Colors.checkboxDefaultDark
@@ -56,6 +51,9 @@ export function SwitchField(props) {
         const v = getValue() ? falseValue : trueValue;
         onValueChange(v);
     };
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Switch value={getValue()} onValueChange={onValueChange} style={[styles.switch, props.style]} disabled={props.disabled} ios_backgroundColor={getTrackColor().false} trackColor={getTrackColor()} thumbColor={getThumbColor()}/>
             <Label onPress={toggle} containerStyle={styles.labelContainer} text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
