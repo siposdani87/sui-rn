@@ -1,6 +1,11 @@
-## 0.9.6 - TBD
+## 0.9.7 - TBD
 
 * 
+
+## 0.9.6 - 2022-11-27
+
+* Fix style of SwitchField
+* Cleanup FlatList
 
 ## 0.9.5 - 2022-11-26
 
