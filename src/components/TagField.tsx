@@ -39,14 +39,6 @@ export function TagField(props: {
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
 
-    useEffect(() => {
-        const v = props.values;
-        if (v.length === 0 && props.placeholder) {
-            v.push(props.placeholder);
-        }
-        setValues(v);
-    }, [props.values, props.placeholder]);
-
     const onValuesChange = (v: TagFieldValueType): void => {
         onErrorChange();
         setValues(v);
@@ -117,6 +109,14 @@ export function TagField(props: {
         props.required,
         props.disabled,
     );
+
+    useEffect(() => {
+        const v = props.values;
+        if (v.length === 0 && props.placeholder) {
+            v.push(props.placeholder);
+        }
+        setValues(v);
+    }, [props.values, props.placeholder]);
 
     return (
         <View style={[styles.container, props.containerStyle]}>

@@ -109,7 +109,7 @@ const getDataUri = (base64Data: string, filename: string): string => {
     return uri.replace(searchStr, ';filename=' + filename + searchStr);
 };
 
-const showAlert = (e: any): void => {
+const showAlert = (e: Error): void => {
     Alert.alert('ERROR', e.message, [{ text: 'OK', onPress: () => null }], {
         cancelable: true,
     });
@@ -239,7 +239,7 @@ export function FileField(props: {
                     options,
                 );
                 await handleImageDataUri(result);
-            } catch (e) {
+            } catch (e: any) {
                 showAlert(e);
             }
         }
@@ -260,7 +260,7 @@ export function FileField(props: {
             try {
                 const result = await ImagePicker.launchCameraAsync(options);
                 await handleImageDataUri(result);
-            } catch (e) {
+            } catch (e: any) {
                 showAlert(e);
             }
         }
@@ -275,7 +275,7 @@ export function FileField(props: {
                 type: props.mimeType,
             });
             await handleDocumentDataUri(result);
-        } catch (e) {
+        } catch (e: any) {
             showAlert(e);
         }
     };

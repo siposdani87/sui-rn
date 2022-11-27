@@ -25,10 +25,6 @@ export function SearchField(props: {
     const [value, setValue] = useState<SearchFieldValueType>(props.value);
     const getActionColor = useActionColor(props.disabled);
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const clear = (): void => {
         setValue('');
         props.onValueChange('');
@@ -52,6 +48,10 @@ export function SearchField(props: {
 
         return actionsButtons;
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <TextField

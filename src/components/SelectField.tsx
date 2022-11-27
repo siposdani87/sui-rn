@@ -219,6 +219,10 @@ export function SelectField(props: {
         ];
     };
 
+    const selectedItemStyle = isDarkTheme
+        ? styles.selectedItemDark
+        : styles.selectedItemLight;
+
     useEffect(() => {
         setValue(correctValue(props.value));
     }, [props.value, correctValue]);
@@ -227,10 +231,6 @@ export function SelectField(props: {
         setItems(convert(props.items));
         setFilteredItems(convert(props.items, query));
     }, [props.items, props.required, props.placeholder, query, convert]);
-
-    const selectedItemStyle = isDarkTheme
-        ? styles.selectedItemDark
-        : styles.selectedItemLight;
 
     return (
         <View style={[styles.container, props.containerStyle]}>

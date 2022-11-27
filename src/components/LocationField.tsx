@@ -25,25 +25,27 @@ import { useDarkTheme } from '../hooks/useDarkTheme';
 import { useActionColor } from '../hooks/useActionColor';
 import { ErrorValueType } from './ErrorField';
 
-export interface LocationType {
+type LocationType = {
     address: string;
     latitude: number;
     longitude: number;
-}
+};
 
-const defaultValue: LocationType = {
+export type LocationFieldValueType = LocationType | null;
+
+const defaultValue: LocationFieldValueType = {
     address: '',
     latitude: 0,
     longitude: 0,
 };
 
 export function LocationField(props: {
-    value: any;
-    onValueChange: (_value: any) => void;
+    value: LocationFieldValueType;
+    onValueChange: (_value: LocationFieldValueType) => void;
     latitudeText: string;
     longitudeText: string;
     markerImage?: ImageURISource;
-    onSearch?: (_value: any) => void;
+    onSearch?: (_value: LocationFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;
@@ -55,7 +57,7 @@ export function LocationField(props: {
     mapType?: MapType;
     customMapStyle?: MapStyleElement[];
 }): JSX.Element {
-    const [value, setValue] = useState<LocationType>(
+    const [value, setValue] = useState<LocationFieldValueType>(
         props.value || defaultValue,
     );
     const [dimensions, setDimensions] = useState<{
@@ -66,28 +68,31 @@ export function LocationField(props: {
     const isDarkTheme = useDarkTheme();
     const getActionColor = useActionColor(props.disabled);
 
-    const onValueChange = (v: LocationType): void => {
+    const onValueChange = (v: LocationFieldValueType): void => {
         setValue(v);
         props.onValueChange(v);
     };
 
     const onAddressChange = (address: string): void => {
-        const v = { ...value, address };
+        const v = {
+            ...value!,
+            address,
+        };
         onValueChange(v);
     };
 
     const onLatitudeChange = (latitude: number): void => {
-        const v = { ...value, latitude };
+        const v = { ...value!, latitude };
         onValueChange(v);
     };
 
     const onLongitudeChange = (longitude: number): void => {
-        const v = { ...value, longitude };
+        const v = { ...value!, longitude };
         onValueChange(v);
     };
 
     const onCoordinatehange = (latitude: number, longitude: number): void => {
-        const v = { ...value, latitude, longitude };
+        const v = { ...value!, latitude, longitude };
         onValueChange(v);
     };
 
@@ -96,9 +101,7 @@ export function LocationField(props: {
     };
 
     const onSearch = (): void => {
-        if (props.onSearch) {
-            props.onSearch(value);
-        }
+        props.onSearch?.(value);
     };
 
     const getLocationProps = (): Partial<MapMarkerProps> => {
@@ -113,10 +116,10 @@ export function LocationField(props: {
         onCoordinatehange(latitude, longitude);
     };
 
-    const getCoordinates = (v: LocationType): LatLng => {
+    const getCoordinates = (v: LocationFieldValueType): LatLng => {
         return {
-            latitude: v.latitude,
-            longitude: v.longitude,
+            latitude: v!.latitude,
+            longitude: v!.longitude,
         };
     };
 
@@ -125,8 +128,8 @@ export function LocationField(props: {
         longitude: number;
         accuracy?: number;
     }): Region => {
-        const lat = coords?.latitude || 0;
-        const lon = coords?.longitude || 0;
+        const latitude = coords?.latitude || 0;
+        const longitude = coords?.longitude || 0;
 
         const latitudeDelta = 0.02;
         const longitudeDelta =
@@ -134,8 +137,8 @@ export function LocationField(props: {
             latitudeDelta;
 
         return {
-            latitude: lat,
-            longitude: lon,
+            latitude,
+            longitude,
             latitudeDelta,
             longitudeDelta,
         };
@@ -192,7 +195,7 @@ export function LocationField(props: {
             <TextField
                 style={styles.addressInput}
                 label={props.label}
-                value={value.address}
+                value={value?.address}
                 onValueChange={onAddressChange}
                 required={props.required}
                 error={props.error}
@@ -206,7 +209,7 @@ export function LocationField(props: {
                     <NumberField
                         containerStyle={{ flex: 1, marginRight: 5 }}
                         label={props.latitudeText}
-                        value={value.latitude}
+                        value={value?.latitude}
                         onValueChange={onLatitudeChange}
                         required={props.required}
                         disabled={props.disabled}
@@ -214,7 +217,7 @@ export function LocationField(props: {
                     <NumberField
                         containerStyle={{ flex: 1, marginLeft: 5 }}
                         label={props.longitudeText}
-                        value={value.longitude}
+                        value={value?.longitude}
                         onValueChange={onLongitudeChange}
                         required={props.required}
                         disabled={props.disabled}
@@ -228,7 +231,7 @@ export function LocationField(props: {
                     mapType={props.mapType}
                     customMapStyle={props.customMapStyle}
                 >
-                    {!!value.latitude && !!value.longitude && (
+                    {!!value?.latitude && !!value?.longitude && (
                         <Marker
                             draggable={true}
                             onDragEnd={onDragEnd}
@@ -236,7 +239,7 @@ export function LocationField(props: {
                             {...getLocationProps()}
                             identifier="marker"
                             coordinate={getCoordinates(value)}
-                            title={value.address.toString()}
+                            title={value?.address.toString()}
                         />
                     )}
                 </MapView>

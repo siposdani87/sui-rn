@@ -12,13 +12,6 @@ export function TagField(props) {
     const [values, setValues] = useState(props.values);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
-    useEffect(() => {
-        const v = props.values;
-        if (v.length === 0 && props.placeholder) {
-            v.push(props.placeholder);
-        }
-        setValues(v);
-    }, [props.values, props.placeholder]);
     const onValuesChange = (v) => {
         onErrorChange();
         setValues(v);
@@ -75,6 +68,13 @@ export function TagField(props) {
         return props.placeholder || '';
     };
     const inputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
+    useEffect(() => {
+        const v = props.values;
+        if (v.length === 0 && props.placeholder) {
+            v.push(props.placeholder);
+        }
+        setValues(v);
+    }, [props.values, props.placeholder]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <View style={[styles.textInput, props.style, inputStyle]}>

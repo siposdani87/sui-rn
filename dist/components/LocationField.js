@@ -23,7 +23,10 @@ export function LocationField(props) {
         props.onValueChange(v);
     };
     const onAddressChange = (address) => {
-        const v = { ...value, address };
+        const v = {
+            ...value,
+            address,
+        };
         onValueChange(v);
     };
     const onLatitudeChange = (latitude) => {
@@ -42,9 +45,7 @@ export function LocationField(props) {
         setVisibleCoords(!visibleCoords);
     };
     const onSearch = () => {
-        if (props.onSearch) {
-            props.onSearch(value);
-        }
+        props.onSearch?.(value);
     };
     const getLocationProps = () => {
         return {
@@ -63,14 +64,14 @@ export function LocationField(props) {
         };
     };
     const regionFrom = (coords) => {
-        const lat = coords?.latitude || 0;
-        const lon = coords?.longitude || 0;
+        const latitude = coords?.latitude || 0;
+        const longitude = coords?.longitude || 0;
         const latitudeDelta = 0.02;
         const longitudeDelta = ((dimensions?.width ?? 1) / (dimensions?.height ?? 1)) *
             latitudeDelta;
         return {
-            latitude: lat,
-            longitude: lon,
+            latitude,
+            longitude,
             latitudeDelta,
             longitudeDelta,
         };
@@ -99,13 +100,13 @@ export function LocationField(props) {
         setValue(coords);
     }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]} onLayout={onLayout}>
-            <TextField style={styles.addressInput} label={props.label} value={value.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} actionButtons={getActionButtons()}/>
+            <TextField style={styles.addressInput} label={props.label} value={value?.address} onValueChange={onAddressChange} required={props.required} error={props.error} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} actionButtons={getActionButtons()}/>
             {visibleCoords && (<View style={styles.coordsContainer}>
-                    <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value.latitude} onValueChange={onLatitudeChange} required={props.required} disabled={props.disabled}/>
-                    <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value.longitude} onValueChange={onLongitudeChange} required={props.required} disabled={props.disabled}/>
+                    <NumberField containerStyle={{ flex: 1, marginRight: 5 }} label={props.latitudeText} value={value?.latitude} onValueChange={onLatitudeChange} required={props.required} disabled={props.disabled}/>
+                    <NumberField containerStyle={{ flex: 1, marginLeft: 5 }} label={props.longitudeText} value={value?.longitude} onValueChange={onLongitudeChange} required={props.required} disabled={props.disabled}/>
                 </View>)}
             {dimensions && (<MapView style={[styles.mapContainer, dimensions]} region={regionFrom(getCoordinates(value))} mapType={props.mapType} customMapStyle={props.customMapStyle}>
-                    {!!value.latitude && !!value.longitude && (<Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier="marker" coordinate={getCoordinates(value)} title={value.address.toString()}/>)}
+                    {!!value?.latitude && !!value?.longitude && (<Marker draggable={true} onDragEnd={onDragEnd} tracksViewChanges={false} {...getLocationProps()} identifier="marker" coordinate={getCoordinates(value)} title={value?.address.toString()}/>)}
                 </MapView>)}
         </View>);
 }

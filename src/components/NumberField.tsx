@@ -22,10 +22,6 @@ export function NumberField(props: {
     const [value, setValue] = useState<NumberFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 
-    useEffect(() => {
-        setValue(props.value);
-    }, [props.value]);
-
     const onValueChange = (v: string): void => {
         let floatValue = parseFloat(v);
         if (isNaN(floatValue)) {
@@ -35,6 +31,10 @@ export function NumberField(props: {
         setValue(floatValue);
         props.onValueChange(floatValue);
     };
+
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value]);
 
     return (
         <TextField
