@@ -148,7 +148,7 @@ export function SelectField(props) {
         let results = [];
         if (props.multiple) {
             results =
-                value?.map((v) => {
+                value?.map?.((v) => {
                     return getLabel(v);
                 }) ?? [];
         }

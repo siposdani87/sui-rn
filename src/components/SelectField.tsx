@@ -197,7 +197,7 @@ export function SelectField(props: {
         let results: string[] = [];
         if (props.multiple) {
             results =
-                (value as any[] | undefined)?.map((v) => {
+                (value as any[] | undefined)?.map?.((v) => {
                     return getLabel(v);
                 }) ?? [];
         } else if (value) {
