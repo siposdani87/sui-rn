@@ -1,6 +1,10 @@
-## 0.9.9 - TBD
+## 0.9.10 - TBD
 
-* 
+*
+
+## 0.9.9 - 2023-01-27
+
+* Remove refresh control from FlatList
 
 ## 0.9.8 - 2023-01-27
 
