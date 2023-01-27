@@ -1,8 +1,12 @@
-## 0.9.8 - TBD
+## 0.9.9 - TBD
 
 * 
 
-## 0.9.7 - 2023-01-27
+## 0.9.8 - 2023-01-27
+
+* Fix refresh control of FlatList
+
+## 0.9.7 - 2023-01-26
 
 * Fix undefined method on SelectField
 * Remove unused imports
