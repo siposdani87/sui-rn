@@ -65,7 +65,7 @@
     "@siposdani87/sui-js": "0.9.0",
     "date-fns": "2.29.3",
     "expo": "^47.0.0",
-    "expo-asset": "~8.6.2",
+    "expo-asset": "~8.7.0",
     "expo-document-picker": "~11.0.1",
     "expo-file-system": "~15.1.1",
     "expo-image-picker": "~14.0.2",
