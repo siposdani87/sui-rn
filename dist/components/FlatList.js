@@ -18,12 +18,18 @@ export function FlatList(props) {
         }
     };
     return (<View style={styles.base}>
-            <FlashList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={props.numColumns} horizontal={false} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={<NoContent imageSource={props.noContentImageSource} text={props.noContentText}/>} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} estimatedItemSize={200} refreshControl={<Text>{props.refreshText}</Text>}/>
+            <FlashList data={props.data} keyExtractor={props.keyExtractor} renderItem={props.renderItem} numColumns={props.numColumns} horizontal={false} progressViewOffset={config.progressViewOffset} onEndReachedThreshold={config.onEndReachedThreshold} ListEmptyComponent={<NoContent imageSource={props.noContentImageSource} text={props.noContentText}/>} refreshing={props.refreshing} onRefresh={onRefresh} onEndReached={onEndReached} estimatedItemSize={200} refreshControl={<View style={styles.refreshControl}>
+                        <Text>{props.refreshText}</Text>
+                    </View>}/>
         </View>);
 }
 const styles = StyleSheet.create({
     base: {
         flex: 1,
+    },
+    refreshControl: {
+        flex: 1,
+        justifyContent: 'center',
     },
 });
 //# sourceMappingURL=FlatList.js.map

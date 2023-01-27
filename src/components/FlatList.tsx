@@ -52,7 +52,11 @@ export function FlatList<T>(props: {
                 onRefresh={onRefresh}
                 onEndReached={onEndReached}
                 estimatedItemSize={200}
-                refreshControl={<Text>{props.refreshText}</Text>}
+                refreshControl={
+                    <View style={styles.refreshControl}>
+                        <Text>{props.refreshText}</Text>
+                    </View>
+                }
             />
         </View>
     );
@@ -61,5 +65,9 @@ export function FlatList<T>(props: {
 const styles = StyleSheet.create({
     base: {
         flex: 1,
+    },
+    refreshControl: {
+        flex: 1,
+        justifyContent: 'center',
     },
 });
