@@ -196,9 +196,10 @@ export function SelectField(props: {
     const getTags = (): string[] => {
         let results: string[] = [];
         if (props.multiple) {
-            results = (value as any[]).map((v) => {
-                return getLabel(v);
-            });
+            results =
+                (value as any[] | undefined)?.map((v) => {
+                    return getLabel(v);
+                }) ?? [];
         } else if (value) {
             results = [getLabel(value)];
         }
