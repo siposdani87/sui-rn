@@ -1,6 +1,6 @@
 import React from 'react';
 import { NoContent } from './NoContent';
-import { ImageSourcePropType, View, StyleSheet, Text } from 'react-native';
+import { ImageSourcePropType, View, StyleSheet } from 'react-native';
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 const config = {
@@ -52,11 +52,6 @@ export function FlatList<T>(props: {
                 onRefresh={onRefresh}
                 onEndReached={onEndReached}
                 estimatedItemSize={200}
-                refreshControl={
-                    <View style={styles.refreshControl}>
-                        <Text>{props.refreshText}</Text>
-                    </View>
-                }
             />
         </View>
     );
@@ -65,9 +60,5 @@ export function FlatList<T>(props: {
 const styles = StyleSheet.create({
     base: {
         flex: 1,
-    },
-    refreshControl: {
-        flex: 1,
-        justifyContent: 'center',
     },
 });
