@@ -65,8 +65,8 @@ export default function SelectsScreen() {
         bodyType: null,
         bodyTypeRequired: undefined,
 
-        notifications: null,
-        notificationsRequired: undefined,
+        notifications: undefined,
+        notificationsRequired: null,
 
         gender: 'MALE',
         genderDisabled: 'MALE',
