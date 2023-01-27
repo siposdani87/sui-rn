@@ -1,6 +1,10 @@
-## 0.9.10 - TBD
+## 0.9.11 - TBD
 
 *
+
+## 0.9.10 - 2023-01-27
+
+* Fix undefined method on SelectField
 
 ## 0.9.9 - 2023-01-27
 
@@ -12,7 +16,7 @@
 
 ## 0.9.7 - 2023-01-26
 
-* Fix undefined method on SelectField
+* Fix undefined value on SelectField
 * Remove unused imports
 
 ## 0.9.6 - 2022-11-27
