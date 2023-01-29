@@ -4,7 +4,7 @@
 [![Download](https://img.shields.io/npm/dt/@siposdani87/sui-rn.svg?style=square)](https://www.npmjs.com/package/@siposdani87/sui-rn)
 [![License](https://img.shields.io/npm/l/@siposdani87/sui-rn.svg?style=square)](./LICENSE)
 
-<a href="https://www.buymeacoffee.com/siposdani87" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="width: 150px !important;"></a>
+<a href="https://www.buymeacoffee.com/siposdani87" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-green.png" alt="Buy Me A Coffee" style="width: 150px !important;"></a>
 
 This is a basic UI library. It is written in the TypeScript language. The codebase was ready to use with Expo and React Native. In this library there are a lot of predefined form field components.
 
