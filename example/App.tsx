@@ -18,12 +18,11 @@ import {
     Theme,
 } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Linking, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Router from './utils/Router';
-import { ServiceContext, Services } from './utils/ServiceContext';
-import { Colors, setThemeColors, setThemeStyles, Confirm, Flash, Loader, Base, useDarkTheme } from '@siposdani87/sui-rn';
+import { Colors, setThemeColors, setThemeStyles, useDarkTheme } from '@siposdani87/sui-rn';
 import * as SplashScreen from 'expo-splash-screen';
 
 setThemeColors(
@@ -76,10 +75,6 @@ export default function App() {
     });
     const [isReady, setIsReady] = useState<boolean>(!__DEV__);
     const [initialState, setInitialState] = useState<NavigationState>();
-    const [state, dispatch] = useReducer(Base.reducer, {});
-    const services = useMemo(() => {
-        return new Services(dispatch);
-    }, []);
 
     useEffect(() => {
         if (fontsLoaded && isReady) {
@@ -87,9 +82,6 @@ export default function App() {
         }
     }, [fontsLoaded, isReady]);
 
-    useEffect(() => {
-        console.log('reducerState:', state);
-    }, [state]);
 
     useEffect(() => {
         const restoreState = async () => {
@@ -122,15 +114,7 @@ export default function App() {
     }
 
     return (
-        <ServiceContext.Provider value={services}>
             <SafeAreaProvider>
-                <Confirm confirmService={services.confirmService} />
-                <Flash flashService={services.flashService} />
-                <Loader
-                    httpService={services.httpService}
-                    color={Colors.accent}
-                    backgroundColor={Colors.primary}
-                />
                 <NavigationContainer
                     theme={isDarkTheme ? appDarkTheme : appLightTheme}
                     initialState={initialState}
@@ -144,6 +128,5 @@ export default function App() {
                     <Router />
                 </NavigationContainer>
             </SafeAreaProvider>
-        </ServiceContext.Provider>
     );
 }

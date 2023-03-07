@@ -2,7 +2,7 @@ import { RichTextViewer } from '@siposdani87/expo-rich-text-editor';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Link, NoContent, Text, Colors } from '@siposdani87/sui-rn';
+import { Link, Text, Colors } from '@siposdani87/sui-rn';
 
 export default function OthersScreen() {
     const sampleHtml =
@@ -13,15 +13,6 @@ export default function OthersScreen() {
             <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
-                    <NoContent
-                        text="No content yet!"
-                        imageSource={{
-                            uri: 'https://www.gravatar.com/avatar/0?s=200&d=identicon&f=y',
-                        }}
-                    >
-                        <Button title="Continue" onPress={() => {}} />
-                    </NoContent>
-
                     <Text>Simple themed text</Text>
 
                     <Link onPress={() => null} title="Open new link" />
