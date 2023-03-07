@@ -1,6 +1,10 @@
-## 0.9.12 - TBD
+## 0.9.13 - TBD
 
-*
+* 
+
+## 0.9.12 - 2023-03-07
+
+* Remove unused components and utils
 
 ## 0.9.11 - 2023-02-25
 
