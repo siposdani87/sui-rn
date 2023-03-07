@@ -12,16 +12,16 @@ import {
 } from '@siposdani87/sui-rn';
 
 export default function DialogsScreen() {
-    const [dialog1, openDialog1, closeDialog1] = useModalState();
-    const [dialog2, openDialog2, closeDialog2] = useModalState();
-    const [dialog3, openDialog3, closeDialog3] = useModalState();
+    const [visibleDialog1, openDialog1, closeDialog1] = useModalState();
+    const [visibleDialog2, openDialog2, closeDialog2] = useModalState();
+    const [visibleDialog3, openDialog3, closeDialog3] = useModalState();
 
     return (
         <>
             <StatusBar />
             <ScrollView>
                 <View style={styles.container}>
-                    <Dialog visible={dialog1} onClose={closeDialog1}>
+                    <Dialog visible={visibleDialog1} onClose={closeDialog1}>
                         <Text>
                             Dialog 1 text this paragraph has long long text to
                             test multiline content and numbers: 1, 34556, 54.54
@@ -30,7 +30,7 @@ export default function DialogsScreen() {
                     <Button onPress={openDialog1} title="dialog1 with text" />
 
                     <Dialog
-                        visible={dialog2}
+                        visible={visibleDialog2}
                         title="Dialog 2"
                         buttons={[
                             <TextButton
@@ -56,7 +56,7 @@ export default function DialogsScreen() {
                     <Button onPress={openDialog2} title="dialog2 with form" />
 
                     <Dialog
-                        visible={dialog3}
+                        visible={visibleDialog3}
                         title="Dialog 3 with long title and long long!!!"
                         onClose={closeDialog3}
                         buttons={[

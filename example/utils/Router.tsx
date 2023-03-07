@@ -14,9 +14,6 @@ import ColorsScreen from '../screens/ColorsScreen';
 import SlidersScreen from '../screens/SlidersScreen';
 import RichTextAreasScreen from '../screens/RichTextAreasScreen';
 import DialogsScreen from '../screens/DialogsScreen';
-import FlashesScreen from '../screens/FlashesScreen';
-import ConfirmsScreen from '../screens/ConfirmsScreen';
-import FlatListScreen from '../screens/FlatListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,9 +32,6 @@ export type StackParamList = {
     TextAreas: undefined;
     Inputs: undefined;
     Dialogs: undefined;
-    Flashes: undefined;
-    Confirms: undefined;
-    FlatList: undefined;
 };
 
 export default function Router() {
@@ -57,9 +51,6 @@ export default function Router() {
             <Stack.Screen name="TextAreas" component={TextAreasScreen} />
             <Stack.Screen name="Inputs" component={InputsScreen} />
             <Stack.Screen name="Dialogs" component={DialogsScreen} />
-            <Stack.Screen name="Flashes" component={FlashesScreen} />
-            <Stack.Screen name="Confirms" component={ConfirmsScreen} />
-            <Stack.Screen name="FlatList" component={FlatListScreen} />
         </Stack.Navigator>
     );
 }
