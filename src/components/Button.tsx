@@ -29,7 +29,7 @@ export function Button(props: {
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const backgroundColor = props.backgroundColor || Colors.primary;
     const borderColor = props.borderColor || backgroundColor;
     const textColor = props.textColor || Colors.primaryText;

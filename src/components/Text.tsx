@@ -7,11 +7,11 @@ import {
     TextStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 
 export function Text(
     props: { children?: React.ReactNode; muted?: boolean } & TextProps,
-): JSX.Element {
+) {
     const isDarkTheme = useDarkTheme();
 
     const getTextStyle = (): StyleProp<TextStyle> => {

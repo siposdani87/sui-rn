@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 import { IconToggleFieldValueType } from './IconToggleField';
@@ -16,5 +16,5 @@ export declare function CheckboxField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
+    children?: ReactNode;
 }): JSX.Element;

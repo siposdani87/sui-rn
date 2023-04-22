@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import {
     FlatList,
     StyleProp,
@@ -8,9 +8,8 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useActionColor } from '../hooks/useActionColor';
-import { useDarkTheme } from '../hooks/useDarkTheme';
-import { useErrorField } from '../hooks/useErrorField';
+import { useActionColor } from '../hooks';
+import { useDarkTheme, useErrorField } from '../hooks';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
 import { ErrorValueType } from './ErrorField';
@@ -39,7 +38,7 @@ export function SelectField(props: {
     searchPlaceholder?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const valueKey = 'value';
     const labelKey = 'label';
 
@@ -208,7 +207,7 @@ export function SelectField(props: {
         });
     };
 
-    const getActionButtons = (): JSX.Element[] => {
+    const getActionButtons = (): ReactNode[] => {
         return [
             <IconButton
                 key={0}

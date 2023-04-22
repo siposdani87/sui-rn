@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -14,5 +14,5 @@ export declare function PhoneField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 } & TextInputProps): JSX.Element;

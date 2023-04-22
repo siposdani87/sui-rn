@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 export function TextButton(props) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;

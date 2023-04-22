@@ -4,7 +4,7 @@ import { useDarkTheme } from './useDarkTheme';
 
 export function useActionColor(
     disabled?: boolean,
-): (_selected?: boolean) => string {
+): (selected?: boolean) => string {
     const isDarkTheme = useDarkTheme();
 
     const getActionColor = useCallback(

@@ -9,11 +9,10 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
-import { useInputStyle } from '../hooks/useInputStyle';
 import { ErrorValueType } from './ErrorField';
 
 export function ColorField(props: {
@@ -29,7 +28,7 @@ export function ColorField(props: {
     defaultColor?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState<string>(props.value);
     const [currentColor, setCurrentColor] = useState<string>(defaultColor);

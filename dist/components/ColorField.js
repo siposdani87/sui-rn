@@ -3,11 +3,10 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
-import { useInputStyle } from '../hooks/useInputStyle';
 export function ColorField(props) {
     const defaultColor = props.defaultColor || Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);

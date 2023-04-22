@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 import { DialogHeader } from './DialogHeader';
 export function Dialog(props) {
     const [visible, setVisible] = useState(false);

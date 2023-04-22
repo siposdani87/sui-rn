@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Label } from './Label';
 import { View, StyleSheet, Image, Alert, } from 'react-native';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useActionColor } from '../hooks';
 import { IconButton } from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Styles } from '../constants';
 import { TextField } from './TextField';
-import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 import { getExtensionName } from '@siposdani87/sui-js';
@@ -44,7 +43,7 @@ const isDocument = (mimeType) => {
     return !isImage(mimeType) && !isVideo(mimeType);
 };
 const isRequireSourceType = (v) => {
-    return v !== null && v >= 0;
+    return v !== null && typeof v === 'number' && v >= 0;
 };
 const getValueUri = (v) => {
     return v?.uri ?? '';

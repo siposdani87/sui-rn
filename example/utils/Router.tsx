@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ButtonsScreen from '../screens/ButtonsScreen';
 import OthersScreen from '../screens/OthersScreen';
 import HomeScreen from '../screens/HomeScreen';
-import TextAreasScreen from '../screens/TextAreasScreen';
+import TextAreasScreen from '../screens/TextAreas1Screen';
 import CheckboxesScreen from '../screens/CheckboxesScreen';
 import DateTimesScreen from '../screens/DateTimesScreen';
 import FilesScreen from '../screens/FilesScreen';
@@ -35,14 +35,15 @@ export type StackParamList = {
 };
 
 export default function Router() {
-    return (
+
+     return (
         <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Buttons" component={ButtonsScreen} />
             <Stack.Screen name="Checkboxes" component={CheckboxesScreen} />
             <Stack.Screen name="Colors" component={ColorsScreen} />
             <Stack.Screen name="Datetimes" component={DateTimesScreen} />
             <Stack.Screen name="Files" component={FilesScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Locations" component={LocationsScreen} />
             <Stack.Screen name="Others" component={OthersScreen} />
             <Stack.Screen name="RichTextAreas" component={RichTextAreasScreen} />

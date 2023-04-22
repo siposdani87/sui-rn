@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField } from '../hooks';
 import { IconToggleField, IconToggleFieldValueType } from './IconToggleField';
 import { ErrorValueType } from './ErrorField';
 
@@ -19,8 +19,8 @@ export function RadioButtonField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
-}): JSX.Element {
+    children?: ReactNode;
+}) {
     const [value, setValue] = useState<RadioButtonFieldField>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 

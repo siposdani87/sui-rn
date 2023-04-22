@@ -3,10 +3,8 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useInputStyle, useDarkTheme } from '../hooks';
 import Slider from '@react-native-community/slider';
-import { useInputStyle } from '../hooks/useInputStyle';
-import { useDarkTheme } from '../hooks/useDarkTheme';
 export function SliderField(props) {
     const [value, setValue] = useState(props.value);
     const [error, onErrorChange] = useErrorField(props.error);

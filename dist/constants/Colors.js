@@ -1,5 +1,5 @@
 const baseColors = {
-    // Theme
+    // Primary & Accent
     primaryBright: '#7986CB',
     primary: '#3F51B5',
     primaryDark: '#303F9F',
@@ -80,7 +80,7 @@ const baseColors = {
     brown: '#795548',
     brownDark: '#5D4037',
 };
-const additionalColors = {
+const themeColors = {
     successBright: baseColors.greenBright,
     success: baseColors.green,
     successDark: baseColors.greenDark,
@@ -128,7 +128,7 @@ const additionalColors = {
 };
 const colors = {
     ...baseColors,
-    ...additionalColors,
+    ...themeColors,
 };
 export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
     colors.primaryBright = primaryBright;

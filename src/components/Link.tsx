@@ -7,7 +7,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 
 export function Link(props: {
     title: string;
@@ -15,7 +15,7 @@ export function Link(props: {
     color?: string;
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.primaryBright : Colors.primary;
     const color = props.color || defaultColor;

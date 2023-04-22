@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Styles } from '../constants';
-import { useActionColor } from '../hooks/useActionColor';
+import { useActionColor } from '../hooks';
 import { IconButton } from './IconButton';
 import { TextField } from './TextField';
 export function SearchField(props) {

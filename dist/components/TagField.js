@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
-import { useErrorField } from '../hooks/useErrorField';
-import { useInputStyle } from '../hooks/useInputStyle';
+import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';

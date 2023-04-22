@@ -1,5 +1,4 @@
 import { Platform } from 'react-native';
-import { default as Colors } from './Colors';
 const styles = {
     fontFamilyApp: '',
     fontFamilyHeadingRegular: '',
@@ -14,7 +13,7 @@ const styles = {
                 elevation: 10,
             },
             ios: {
-                shadowColor: Colors.blackDark,
+                shadowColor: '#000000',
                 shadowOffset: {
                     width: 0,
                     height: 5,
@@ -30,7 +29,7 @@ const styles = {
                 elevation: 3,
             },
             ios: {
-                shadowColor: Colors.blackDark,
+                shadowColor: '#000000',
                 shadowOffset: {
                     width: 0,
                     height: 1,

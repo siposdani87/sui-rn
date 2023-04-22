@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import {
     StyleSheet,
     Text,
@@ -8,9 +8,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
-import { useErrorField } from '../hooks/useErrorField';
-import { useInputStyle } from '../hooks/useInputStyle';
+import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';
@@ -33,7 +31,7 @@ export function TagField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 }) {
     const [values, setValues] = useState<TagFieldValueType>(props.values);
     const [error, onErrorChange] = useErrorField(props.error);

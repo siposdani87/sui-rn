@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -15,5 +15,5 @@ export declare function SearchField(props: {
     placeholder?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 }): JSX.Element;

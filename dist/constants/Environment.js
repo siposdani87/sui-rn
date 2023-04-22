@@ -7,4 +7,4 @@ export function setEnvironment(darkTheme) {
 }
 setEnvironment(null);
 export default environment;
-//# sourceMappingURL=environment.js.map
+//# sourceMappingURL=Environment.js.map

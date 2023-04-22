@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField } from '../hooks';
 import { TextField, TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
 
@@ -17,8 +17,8 @@ export function NumberField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
-}): JSX.Element {
+    actionButtons?: ReactNode[];
+}) {
     const [value, setValue] = useState<NumberFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 

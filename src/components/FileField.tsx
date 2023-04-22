@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 import { Label } from './Label';
 import {
     View,
@@ -11,13 +11,12 @@ import {
     ViewStyle,
     ImageSourcePropType,
 } from 'react-native';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useActionColor } from '../hooks';
 import { IconButton } from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Styles } from '../constants';
 import { TextField } from './TextField';
-import { useActionColor } from '../hooks/useActionColor';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 import { getExtensionName } from '@siposdani87/sui-js';
@@ -78,7 +77,7 @@ const isDocument = (mimeType: string): boolean => {
 };
 
 const isRequireSourceType = (v: FileSourceType): boolean => {
-    return v !== null && v >= 0;
+    return v !== null && typeof v === 'number' && v >= 0;
 };
 
 const getValueUri = (v: FileSourceType): string => {
@@ -135,7 +134,7 @@ export function FileField(props: {
     quality?: number;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const [value, setValue] = useState<FileSourceType>(props.value);
     const [svgXml, setSvgXml] = useState<string | null>(null);
     const [defaultSvgXml, setDefaultSvgXml] = useState<string | null>(null);
@@ -297,8 +296,8 @@ export function FileField(props: {
         return !!props.required && !isValidValue(value);
     };
 
-    const getActionButtons = (): JSX.Element[] => {
-        const actionsButtons: JSX.Element[] = [];
+    const getActionButtons = (): ReactNode[] => {
+        const actionsButtons: ReactNode[] = [];
         if (isRemovable()) {
             actionsButtons.push(
                 <IconButton

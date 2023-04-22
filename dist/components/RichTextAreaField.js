@@ -4,10 +4,8 @@ import { Label } from './Label';
 import { View, StyleSheet, } from 'react-native';
 import { ActionKey, RichTextEditor, } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useInputStyle, useActionColor } from '../hooks';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useInputStyle } from '../hooks/useInputStyle';
-import { useActionColor } from '../hooks/useActionColor';
 const getActionMap = (getColor) => {
     const size = 24;
     return {

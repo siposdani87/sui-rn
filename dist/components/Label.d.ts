@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function Label(props: {
     text?: string;
@@ -9,5 +9,5 @@ export declare function Label(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
+    children?: ReactNode;
 }): JSX.Element | null;
