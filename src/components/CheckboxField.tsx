@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 import { IconToggleField, IconToggleFieldValueType } from './IconToggleField';
@@ -18,8 +18,8 @@ export function CheckboxField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
-}): JSX.Element {
+    children?: ReactNode;
+}) {
     return (
         <IconToggleField
             value={props.value}

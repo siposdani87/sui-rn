@@ -1,8 +1,8 @@
-interface Environment {
+export type EnvironmentType = {
     dark_theme: boolean | null;
-}
+};
 
-const environment: Environment = {
+const environment: EnvironmentType = {
     dark_theme: null,
 };
 

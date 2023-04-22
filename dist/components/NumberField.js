@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField } from '../hooks';
 import { TextField } from './TextField';
 export function NumberField(props) {
     const [value, setValue] = useState(props.value);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 import { capitalize } from '@siposdani87/sui-js';
 
 export type ErrorValueType = string[] | boolean | null;
@@ -9,7 +9,7 @@ export type ErrorValueType = string[] | boolean | null;
 export function ErrorField(props: {
     error?: ErrorValueType;
     disabled?: boolean;
-}): JSX.Element | null {
+}) {
     const isDarkTheme = useDarkTheme();
 
     const getTextStyle = (): StyleProp<TextStyle> => {

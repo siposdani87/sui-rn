@@ -3,8 +3,7 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, Switch, StyleSheet, Platform, } from 'react-native';
 import { Colors } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField, useDarkTheme } from '../hooks';
 export function SwitchField(props) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;

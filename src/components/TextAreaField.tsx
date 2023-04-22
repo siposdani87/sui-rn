@@ -17,7 +17,7 @@ export function TextAreaField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
-}): JSX.Element {
+}) {
     const style = StyleSheet.flatten(props.style);
     const numberOfLines = props.numberOfLines || 5;
     const height = 20 * numberOfLines + 16;

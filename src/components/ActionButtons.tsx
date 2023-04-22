@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactNode } from 'react';
 import { Platform, View } from 'react-native';
 import { Styles } from '../constants';
 
 export default function ActionButtons(props: {
     label?: string;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 }) {
     if (!props.actionButtons) {
         return null;

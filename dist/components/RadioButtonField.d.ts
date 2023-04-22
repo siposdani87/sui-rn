@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { IconToggleFieldValueType } from './IconToggleField';
 import { ErrorValueType } from './ErrorField';
@@ -16,5 +16,5 @@ export declare function RadioButtonField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
+    children?: ReactNode;
 }): JSX.Element;

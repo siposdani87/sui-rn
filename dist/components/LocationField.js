@@ -5,8 +5,7 @@ import { Colors, Styles } from '../constants';
 import { IconButton } from './IconButton';
 import MapView, { Marker, } from 'react-native-maps';
 import { NumberField } from './NumberField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
-import { useActionColor } from '../hooks/useActionColor';
+import { useDarkTheme, useActionColor } from '../hooks';
 const defaultValue = {
     address: '',
     latitude: 0,

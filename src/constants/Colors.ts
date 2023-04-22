@@ -1,9 +1,9 @@
-export type ColorTypes = {
+export type ColorsType = {
     [key: string]: string;
 };
 
-const baseColors: ColorTypes = {
-    // Theme
+const baseColors: ColorsType = {
+    // Primary & Accent
 
     primaryBright: '#7986CB',
     primary: '#3F51B5',
@@ -112,7 +112,7 @@ const baseColors: ColorTypes = {
     brownDark: '#5D4037',
 };
 
-const additionalColors: ColorTypes = {
+const themeColors: ColorsType = {
     successBright: baseColors.greenBright,
     success: baseColors.green,
     successDark: baseColors.greenDark,
@@ -178,7 +178,7 @@ const additionalColors: ColorTypes = {
 
 const colors = {
     ...baseColors,
-    ...additionalColors,
+    ...themeColors,
 };
 
 export function setThemeColors(

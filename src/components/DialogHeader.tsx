@@ -8,7 +8,7 @@ export function DialogHeader(props: {
     title?: string;
     imageSource?: ImageSourcePropType;
     onClose?: () => void;
-}): JSX.Element {
+}) {
     return (
         <View
             style={[

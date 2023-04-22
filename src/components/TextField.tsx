@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
@@ -11,8 +11,7 @@ import {
     TextStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
-import { useInputStyle } from '../hooks/useInputStyle';
+import { useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 import { ErrorValueType } from './ErrorField';
 
@@ -32,9 +31,9 @@ export function TextField(
         onPressDesc?: () => void;
         containerStyle?: StyleProp<ViewStyle>;
         style?: StyleProp<TextStyle>;
-        actionButtons?: JSX.Element[];
+        actionButtons?: ReactNode[];
     } & TextInputProps,
-): JSX.Element {
+) {
     const [value, setValue] = useState<TextFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);

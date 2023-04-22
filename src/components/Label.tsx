@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
     View,
     StyleSheet,
@@ -8,7 +8,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 import { Dialog } from './Dialog';
@@ -23,8 +23,8 @@ export function Label(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
-}): JSX.Element | null {
+    children?: ReactNode;
+}) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState<boolean>(false);
 

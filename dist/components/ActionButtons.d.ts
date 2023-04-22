@@ -1,5 +1,5 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 export default function ActionButtons(props: {
     label?: string;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 }): JSX.Element | null;

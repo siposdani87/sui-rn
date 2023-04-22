@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 export type TagFieldValueType = string[];
@@ -16,5 +16,5 @@ export declare function TagField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
+    actionButtons?: ReactNode[];
 }): JSX.Element;

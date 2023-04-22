@@ -25,6 +25,7 @@ import Router from './utils/Router';
 import { Colors, setThemeColors, setThemeStyles, useDarkTheme } from '@siposdani87/sui-rn';
 import * as SplashScreen from 'expo-splash-screen';
 
+
 setThemeColors(
     Colors.deepPurpleBright,
     Colors.deepPurple,

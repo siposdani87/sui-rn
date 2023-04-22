@@ -1,5 +1,4 @@
 import { Platform, StyleProp, ViewStyle } from 'react-native';
-import { default as Colors } from './Colors';
 
 export type StylesType = {
     fontFamilyApp: string;
@@ -33,7 +32,7 @@ const styles: StylesType = {
                 elevation: 10,
             },
             ios: {
-                shadowColor: Colors.blackDark,
+                shadowColor: '#000000',
                 shadowOffset: {
                     width: 0,
                     height: 5,
@@ -49,7 +48,7 @@ const styles: StylesType = {
                 elevation: 3,
             },
             ios: {
-                shadowColor: Colors.blackDark,
+                shadowColor: '#000000',
                 shadowOffset: {
                     width: 0,
                     height: 1,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import {
     View,
     StyleSheet,
@@ -21,8 +21,7 @@ import MapView, {
     MarkerDragStartEndEvent,
 } from 'react-native-maps';
 import { NumberField } from './NumberField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
-import { useActionColor } from '../hooks/useActionColor';
+import { useDarkTheme, useActionColor } from '../hooks';
 import { ErrorValueType } from './ErrorField';
 
 type LocationType = {
@@ -56,7 +55,7 @@ export function LocationField(props: {
     style?: StyleProp<ViewStyle>;
     mapType?: MapType;
     customMapStyle?: MapStyleElement[];
-}): JSX.Element {
+}) {
     const [value, setValue] = useState<LocationFieldValueType>(
         props.value || defaultValue,
     );
@@ -155,8 +154,8 @@ export function LocationField(props: {
         setDimensions({ width, height });
     };
 
-    const getActionButtons = (): JSX.Element[] => {
-        const actionButtons: JSX.Element[] = [];
+    const getActionButtons = (): ReactNode[] => {
+        const actionButtons: ReactNode[] = [];
         if (props.onSearch) {
             actionButtons.push(
                 <IconButton

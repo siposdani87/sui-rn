@@ -1,17 +1,17 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment, ReactNode } from 'react';
 import { Modal, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 import { DialogHeader } from './DialogHeader';
 
 export function Dialog(props: {
     visible: boolean;
     type?: string;
     title?: string;
-    buttons?: JSX.Element[];
+    buttons?: ReactNode[];
     onClose?: () => void;
-    children?: JSX.Element | JSX.Element[];
-}): JSX.Element {
+    children?: ReactNode;
+}) {
     const [visible, setVisible] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();
 

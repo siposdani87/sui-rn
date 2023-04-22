@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useDarkTheme } from '../hooks';
 import { capitalize } from '@siposdani87/sui-js';
 export function ErrorField(props) {
     const isDarkTheme = useDarkTheme();

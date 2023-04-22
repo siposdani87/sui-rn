@@ -3,8 +3,7 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, TextInput, StyleSheet, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
-import { useInputStyle } from '../hooks/useInputStyle';
+import { useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 export function TextField(props) {
     const [value, setValue] = useState(props.value);

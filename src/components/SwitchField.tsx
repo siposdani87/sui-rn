@@ -11,8 +11,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField, useDarkTheme } from '../hooks';
 import { ErrorValueType } from './ErrorField';
 
 interface TrackColor {
@@ -35,7 +34,7 @@ export function SwitchField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
     const [value, setValue] = useState<SwitchFieldValueType>(props.value);

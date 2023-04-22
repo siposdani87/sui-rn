@@ -4,8 +4,7 @@ import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useErrorField } from '../hooks/useErrorField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField, useDarkTheme } from '../hooks';
 export function IconToggleField(props) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;

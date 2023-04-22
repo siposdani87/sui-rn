@@ -14,10 +14,8 @@ import {
     RichTextEditor,
 } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
-import { useErrorField } from '../hooks/useErrorField';
+import { useErrorField, useInputStyle, useActionColor } from '../hooks';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useInputStyle } from '../hooks/useInputStyle';
-import { useActionColor } from '../hooks/useActionColor';
 
 const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
     const size = 24;
@@ -91,7 +89,7 @@ export function RichTextAreaField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
-}): JSX.Element {
+}) {
     const style = StyleSheet.flatten(props.style);
     const [value, setValue] = useState<RichTextAreaFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);

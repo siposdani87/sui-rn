@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Styles } from '../constants';
-import { useActionColor } from '../hooks/useActionColor';
+import { useActionColor } from '../hooks';
 import { IconButton } from './IconButton';
 import { TextField, TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -20,8 +20,8 @@ export function SearchField(props: {
     placeholder?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    actionButtons?: JSX.Element[];
-}): JSX.Element {
+    actionButtons?: ReactNode[];
+}) {
     const [value, setValue] = useState<SearchFieldValueType>(props.value);
     const getActionColor = useActionColor(props.disabled);
 
@@ -30,8 +30,8 @@ export function SearchField(props: {
         props.onValueChange('');
     };
 
-    const getActionButtons = (): JSX.Element[] => {
-        let actionsButtons: JSX.Element[] = [];
+    const getActionButtons = (): ReactNode[] => {
+        let actionsButtons: ReactNode[] = [];
         if (props.actionButtons) {
             actionsButtons = [...props.actionButtons];
         }

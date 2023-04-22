@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactNode } from 'react';
 import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
 import DateTimePicker, {
     DateTimePickerEvent,
@@ -88,7 +88,7 @@ export function DateTimeField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element {
+}) {
     const [value, setValue] = useState<Date | string>(props.value ?? '');
     const [formattedValue, setFormattedValue] = useState<string>('');
     const [date, setDate] = useState<Date | null>(null);
@@ -188,7 +188,7 @@ export function DateTimeField(props: {
         onValueChange(date);
     };
 
-    const renderDateTimePicker = (): JSX.Element | undefined => {
+    const renderDateTimePicker = (): ReactNode => {
         if (visible) {
             return (
                 <DateTimePicker
@@ -218,8 +218,8 @@ export function DateTimeField(props: {
         return [];
     };
 
-    const getActionButtons = (): JSX.Element[] => {
-        const actionButtons: JSX.Element[] = [];
+    const getActionButtons = (): ReactNode[] => {
+        const actionButtons: ReactNode[] = [];
         if (config.calendarType === 'date') {
             actionButtons.push(
                 <IconButton

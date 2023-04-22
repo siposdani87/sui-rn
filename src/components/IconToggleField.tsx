@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
@@ -10,8 +10,7 @@ import {
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useErrorField } from '../hooks/useErrorField';
-import { useDarkTheme } from '../hooks/useDarkTheme';
+import { useErrorField, useDarkTheme } from '../hooks';
 import { ErrorValueType } from './ErrorField';
 
 export type IconToggleFieldValueType = any;
@@ -32,8 +31,8 @@ export function IconToggleField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-    children?: JSX.Element | JSX.Element[];
-}): JSX.Element {
+    children?: ReactNode;
+}) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
     const [value, setValue] = useState<IconToggleFieldValueType>(props.value);

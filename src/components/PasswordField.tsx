@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextField, TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -17,9 +17,9 @@ export function PasswordField(
         onPressDesc?: () => void;
         containerStyle?: StyleProp<ViewStyle>;
         style?: StyleProp<ViewStyle>;
-        actionButtons?: JSX.Element[];
+        actionButtons?: ReactNode[];
     } & TextInputProps,
-): JSX.Element {
+) {
     return (
         <TextField
             value={props.value}
