@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         borderRadius: 3,
         margin: 20,
+        maxWidth: 520,
+        minWidth: 360,
     },
     success: {
         borderTopWidth: 5,
