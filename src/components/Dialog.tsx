@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment, ReactNode } from 'react';
 import { Modal, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Layout, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
 import { DialogHeader } from './DialogHeader';
 
@@ -92,9 +92,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'stretch',
         borderRadius: 3,
-        margin: 20,
+        margin: 10,
         maxWidth: 520,
-        minWidth: 360,
+        minWidth: Math.min(Layout.window.width - 20, 360),
     },
     success: {
         borderTopWidth: 5,
