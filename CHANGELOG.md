@@ -1,6 +1,8 @@
-## 0.9.15 - TBD
+## 0.9.15 - 2023-05-04
 
-*
+* Create Layout constant
+* Fix width of Dialog
+* Upgrade packages
 
 ## 0.9.14 - 2023-04-27
 
