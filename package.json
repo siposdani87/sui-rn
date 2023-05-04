@@ -61,7 +61,7 @@
     "@siposdani87/expo-maps-polygon-editor": "1.0.1",
     "@siposdani87/expo-rich-text-editor": "1.0.2",
     "@siposdani87/sui-js": "0.9.10",
-    "date-fns": "2.29.3",
+    "date-fns": "2.30.0",
     "expo": "^48.0.0",
     "expo-document-picker": "~11.2.1",
     "expo-file-system": "~15.2.2",
@@ -74,7 +74,7 @@
     "react-native-wheel-color-picker": "1.2.0"
   },
   "devDependencies": {
-    "@types/react": "~18.2.0",
+    "@types/react": "~18.0.27",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.21.0",
