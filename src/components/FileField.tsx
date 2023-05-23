@@ -19,7 +19,6 @@ import { Styles } from '../constants';
 import { TextField } from './TextField';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import { getExtensionName } from '@siposdani87/sui-js';
 import { ErrorValueType } from './ErrorField';
 
 export type FileSourceType =
@@ -63,6 +62,13 @@ const fileTypeSVG: string =
     '</svg>';
 
 const searchStr: string = ';base64,';
+
+const getExtensionName = (url: string): string => {
+    const realUrl = url.split('?', 2)[0];
+    return realUrl.slice(
+        (Math.max(0, realUrl.lastIndexOf('.')) || Infinity) + 1,
+    );
+};
 
 const isImage = (mimeType: string): boolean => {
     return mimeType.indexOf('image') === 0;

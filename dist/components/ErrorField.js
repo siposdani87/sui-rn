@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
-import { capitalize } from '@siposdani87/sui-js';
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 export function ErrorField(props) {
     const isDarkTheme = useDarkTheme();
     const getTextStyle = () => {

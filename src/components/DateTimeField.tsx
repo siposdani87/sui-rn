@@ -11,7 +11,6 @@ import { Button } from './Button';
 import { TagField } from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
-import { convertToISOFormat } from '@siposdani87/sui-js';
 import { ErrorValueType } from './ErrorField';
 
 interface Year {
@@ -71,6 +70,10 @@ const MODES: Modes = {
         calendarType: 'year',
         clockType: '',
     },
+};
+
+const convertToISOFormat = (formatString: string): string => {
+    return formatString.replace('YYYY', 'yyyy').replace(/D/g, 'd');
 };
 
 export function DateTimeField(props: {

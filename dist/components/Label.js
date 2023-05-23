@@ -5,7 +5,7 @@ import { useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 import { Dialog } from './Dialog';
-import { capitalize } from '@siposdani87/sui-js';
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 export function Label(props) {
     const isDarkTheme = useDarkTheme();
     const [visible, setVisible] = useState(false);

@@ -9,7 +9,6 @@ import { Styles } from '../constants';
 import { TextField } from './TextField';
 import { SvgCss } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import { getExtensionName } from '@siposdani87/sui-js';
 const fileColors = {
     docx: 'blue',
     xlsx: 'green',
@@ -33,6 +32,10 @@ const fileTypeSVG = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
     '<text x="220" y="380" text-anchor="middle" style="fill:#FFF;font-weight:700;font-family:Arial;font-size:120px;">TYPE</text>' +
     '</svg>';
 const searchStr = ';base64,';
+const getExtensionName = (url) => {
+    const realUrl = url.split('?', 2)[0];
+    return realUrl.slice((Math.max(0, realUrl.lastIndexOf('.')) || Infinity) + 1);
+};
 const isImage = (mimeType) => {
     return mimeType.indexOf('image') === 0;
 };
