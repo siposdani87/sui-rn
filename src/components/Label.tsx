@@ -12,7 +12,9 @@ import { useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 import { Dialog } from './Dialog';
-import { capitalize } from '@siposdani87/sui-js';
+
+const capitalize = (str: string): string =>
+    str.charAt(0).toUpperCase() + str.slice(1);
 
 export function Label(props: {
     text?: string;

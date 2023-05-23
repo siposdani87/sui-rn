@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
-import { capitalize } from '@siposdani87/sui-js';
+
+const capitalize = (str: string): string =>
+    str.charAt(0).toUpperCase() + str.slice(1);
 
 export type ErrorValueType = string[] | boolean | null;
 
