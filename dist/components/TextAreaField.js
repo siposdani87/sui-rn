@@ -3,7 +3,7 @@ import { TextField } from './TextField';
 import { StyleSheet } from 'react-native';
 export function TextAreaField(props) {
     const style = StyleSheet.flatten(props.style);
-    const numberOfLines = props.numberOfLines || 5;
+    const numberOfLines = props.numberOfLines ?? 5;
     const height = 20 * numberOfLines + 16;
     const textareaStyle = {
         height,

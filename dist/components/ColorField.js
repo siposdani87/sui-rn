@@ -8,7 +8,7 @@ import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
 export function ColorField(props) {
-    const defaultColor = props.defaultColor || Colors.deepGreyBright;
+    const defaultColor = props.defaultColor ?? Colors.deepGreyBright;
     const [value, setValue] = useState(props.value);
     const [currentColor, setCurrentColor] = useState(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
@@ -32,7 +32,7 @@ export function ColorField(props) {
         onValueChange(currentColor);
     };
     const getValue = () => {
-        return value || defaultColor;
+        return value ?? defaultColor;
     };
     const onColorChange = (color) => {
         setCurrentColor(color);

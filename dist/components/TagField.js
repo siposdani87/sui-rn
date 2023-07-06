@@ -63,7 +63,7 @@ export function TagField(props) {
         return !props.readonly && !props.disabled && v !== getPlaceholder();
     };
     const getPlaceholder = () => {
-        return props.placeholder || '';
+        return props.placeholder ?? '';
     };
     const inputStyle = useInputStyle(getValuesLength(), error, props.required, props.disabled);
     useEffect(() => {
@@ -76,7 +76,7 @@ export function TagField(props) {
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <View style={[styles.textInput, props.style, inputStyle]}>
-                {values.map((value, index) => (<View key={index} style={[
+                {values.map((value, index) => (<View key={value} style={[
                 styles.tagContainer,
                 {
                     backgroundColor: getBackgroundColor(),

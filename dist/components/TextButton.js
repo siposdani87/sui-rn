@@ -5,10 +5,10 @@ import { useDarkTheme } from '../hooks';
 export function TextButton(props) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
-    const backgroundColor = props.backgroundColor || 'transparent';
-    const borderColor = props.borderColor || backgroundColor;
-    const textColor = props.textColor || defaultColor;
-    const textSize = props.textSize || 16;
+    const backgroundColor = props.backgroundColor ?? 'transparent';
+    const borderColor = props.borderColor ?? backgroundColor;
+    const textColor = props.textColor ?? defaultColor;
+    const textSize = props.textSize ?? 16;
     const getTitle = () => {
         return props.keepFormat ? props.title : props.title.toUpperCase();
     };

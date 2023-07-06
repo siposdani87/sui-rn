@@ -20,7 +20,7 @@ export function TextField(props) {
     };
     const getActionButtonsStyle = () => {
         return {
-            paddingRight: (props.actionButtons?.length || 0) * 38,
+            paddingRight: (props.actionButtons?.length ?? 0) * 38,
         };
     };
     useEffect(() => {

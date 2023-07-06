@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -13,7 +13,6 @@ import {
 import { Colors, Styles } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
-import { ErrorValueType } from './ErrorField';
 
 export type TextFieldValueType = any; // string | null | undefined;
 
@@ -57,7 +56,7 @@ export function TextField(
 
     const getActionButtonsStyle = (): StyleProp<ViewStyle> => {
         return {
-            paddingRight: (props.actionButtons?.length || 0) * 38,
+            paddingRight: (props.actionButtons?.length ?? 0) * 38,
         };
     };
 

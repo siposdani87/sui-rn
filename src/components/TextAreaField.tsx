@@ -19,7 +19,7 @@ export function TextAreaField(props: {
     style?: StyleProp<TextStyle>;
 }) {
     const style = StyleSheet.flatten(props.style);
-    const numberOfLines = props.numberOfLines || 5;
+    const numberOfLines = props.numberOfLines ?? 5;
     const height = 20 * numberOfLines + 16;
 
     const textareaStyle: StyleProp<TextStyle> = {

@@ -71,11 +71,11 @@ const getExtensionName = (url: string): string => {
 };
 
 const isImage = (mimeType: string): boolean => {
-    return mimeType.indexOf('image') === 0;
+    return mimeType.startsWith('image');
 };
 
 const isVideo = (mimeType: string): boolean => {
-    return mimeType.indexOf('video') === 0;
+    return mimeType.startsWith('video');
 };
 
 const isDocument = (mimeType: string): boolean => {
@@ -211,7 +211,7 @@ export function FileField(props: {
         if (!result.canceled) {
             const asset = result.assets[0];
             const filename =
-                asset.fileName ?? asset.uri.split('/').pop() ?? 'file.jpeg';
+                asset.fileName ?? asset.uri.split('/').pop() ?? 'unknown.jpeg';
             const dataUri = getDataUri(asset.base64!, filename);
             setImageSource({ uri: dataUri });
             onDataChange(filename, dataUri);
@@ -219,11 +219,12 @@ export function FileField(props: {
     };
 
     const handleDocumentDataUri = async (
-        result: DocumentPicker.DocumentResult,
+        result: DocumentPicker.DocumentPickerResult,
     ): Promise<void> => {
-        if (result.type === 'success') {
-            const filename = result.name;
-            const fileBase64 = await FileSystem.readAsStringAsync(result.uri, {
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            const filename = asset.name;
+            const fileBase64 = await FileSystem.readAsStringAsync(asset.uri, {
                 encoding: 'base64',
             });
             const dataUri = getDataUri(fileBase64, filename);
@@ -277,7 +278,7 @@ export function FileField(props: {
         }
         try {
             const result = await DocumentPicker.getDocumentAsync({
-                type: props.mimeType,
+                type: '*/*', //TODO: use props.mimeType
             });
             await handleDocumentDataUri(result);
         } catch (e: any) {

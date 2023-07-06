@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 import { Colors, Layout, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
@@ -45,10 +45,7 @@ export function Dialog(props) {
         ]}>
                     <DialogHeader title={props.title} onClose={props.onClose}/>
                     <View style={styles.bodyContainer}>{props.children}</View>
-                    <View style={styles.footerContainer}>
-                        {props.buttons &&
-            props.buttons.map((button, key) => (<Fragment key={key}>{button}</Fragment>))}
-                    </View>
+                    <View style={styles.footerContainer}>{props.buttons}</View>
                 </View>
             </View>
         </Modal>);

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
+import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
 export type TextFieldValueType = any;
 export declare function TextField(props: {
     value: TextFieldValueType;

@@ -10,10 +10,9 @@ import {
 import { Colors, Styles } from '../constants';
 import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
-import { ErrorValueType } from './ErrorField';
 
 export type TagFieldValueType = string[];
 
@@ -98,7 +97,7 @@ export function TagField(props: {
     };
 
     const getPlaceholder = (): string => {
-        return props.placeholder || '';
+        return props.placeholder ?? '';
     };
 
     const inputStyle = useInputStyle(
@@ -128,7 +127,7 @@ export function TagField(props: {
             <View style={[styles.textInput, props.style, inputStyle]}>
                 {values.map((value, index) => (
                     <View
-                        key={index}
+                        key={value}
                         style={[
                             styles.tagContainer,
                             {

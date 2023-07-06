@@ -57,7 +57,7 @@ export function LocationField(props: {
     customMapStyle?: MapStyleElement[];
 }) {
     const [value, setValue] = useState<LocationFieldValueType>(
-        props.value || defaultValue,
+        props.value ?? defaultValue,
     );
     const [dimensions, setDimensions] = useState<{
         width: number;
@@ -127,8 +127,8 @@ export function LocationField(props: {
         longitude: number;
         accuracy?: number;
     }): Region => {
-        const latitude = coords?.latitude || 0;
-        const longitude = coords?.longitude || 0;
+        const latitude = coords?.latitude ?? 0;
+        const longitude = coords?.longitude ?? 0;
 
         const latitudeDelta = 0.02;
         const longitudeDelta =
@@ -182,7 +182,7 @@ export function LocationField(props: {
     };
 
     useEffect(() => {
-        const coords = props.value || defaultValue;
+        const coords = props.value ?? defaultValue;
         setValue(coords);
     }, [props.value]);
 
