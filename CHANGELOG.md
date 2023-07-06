@@ -1,6 +1,11 @@
-## 0.9.17 - TBD
+## 0.9.18 - TBD
 
 *
+
+## 0.9.17 - 2023-07-06
+
+* Upgrade Expo SDK to version 47
+* Fix sonarLint issues
 
 ## 0.9.16 - 2023-05-23
 
