@@ -5,7 +5,7 @@ import { useDarkTheme } from '../hooks';
 export function Link(props) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.primaryBright : Colors.primary;
-    const color = props.color || defaultColor;
+    const color = props.color ?? defaultColor;
     const colorStyle = { color, textDecorationColor: color };
     const onPress = () => {
         if (!props.disabled && props.onPress) {

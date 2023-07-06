@@ -12,7 +12,7 @@ const defaultValue = {
     longitude: 0,
 };
 export function LocationField(props) {
-    const [value, setValue] = useState(props.value || defaultValue);
+    const [value, setValue] = useState(props.value ?? defaultValue);
     const [dimensions, setDimensions] = useState(null);
     const [visibleCoords, setVisibleCoords] = useState(false);
     const isDarkTheme = useDarkTheme();
@@ -63,8 +63,8 @@ export function LocationField(props) {
         };
     };
     const regionFrom = (coords) => {
-        const latitude = coords?.latitude || 0;
-        const longitude = coords?.longitude || 0;
+        const latitude = coords?.latitude ?? 0;
+        const longitude = coords?.longitude ?? 0;
         const latitudeDelta = 0.02;
         const longitudeDelta = ((dimensions?.width ?? 1) / (dimensions?.height ?? 1)) *
             latitudeDelta;
@@ -95,7 +95,7 @@ export function LocationField(props) {
         return actionButtons;
     };
     useEffect(() => {
-        const coords = props.value || defaultValue;
+        const coords = props.value ?? defaultValue;
         setValue(coords);
     }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]} onLayout={onLayout}>

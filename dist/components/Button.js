@@ -3,13 +3,13 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { View, StyleSheet, Text, TouchableOpacity, Image, } from 'react-native';
 import { Colors, Styles } from '../constants';
 export function Button(props) {
-    const backgroundColor = props.backgroundColor || Colors.primary;
-    const borderColor = props.borderColor || backgroundColor;
-    const textColor = props.textColor || Colors.primaryText;
-    const iconColor = props.iconColor || textColor;
-    const textSize = props.textSize || 16;
-    const iconSize = props.iconSize || 26;
-    const layout = props.layout || 'left';
+    const backgroundColor = props.backgroundColor ?? Colors.primary;
+    const borderColor = props.borderColor ?? backgroundColor;
+    const textColor = props.textColor ?? Colors.primaryText;
+    const iconColor = props.iconColor ?? textColor;
+    const textSize = props.textSize ?? 16;
+    const iconSize = props.iconSize ?? 26;
+    const layout = props.layout ?? 'left';
     const hasIcon = () => {
         return !!props.imageSource || !!props.iconName;
     };

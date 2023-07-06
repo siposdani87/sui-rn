@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -13,7 +13,6 @@ import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
-import { ErrorValueType } from './ErrorField';
 
 export function ColorField(props: {
     value: string;
@@ -29,7 +28,7 @@ export function ColorField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }) {
-    const defaultColor = props.defaultColor || Colors.deepGreyBright;
+    const defaultColor = props.defaultColor ?? Colors.deepGreyBright;
     const [value, setValue] = useState<string>(props.value);
     const [currentColor, setCurrentColor] = useState<string>(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
@@ -63,7 +62,7 @@ export function ColorField(props: {
     };
 
     const getValue = (): string => {
-        return value || defaultColor;
+        return value ?? defaultColor;
     };
 
     const onColorChange = (color: string) => {

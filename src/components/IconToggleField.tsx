@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -11,7 +11,6 @@ import {
 import { Colors, Styles } from '../constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useErrorField, useDarkTheme } from '../hooks';
-import { ErrorValueType } from './ErrorField';
 
 export type IconToggleFieldValueType = any;
 

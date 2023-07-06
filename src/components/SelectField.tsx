@@ -8,8 +8,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { useActionColor } from '../hooks';
-import { useDarkTheme, useErrorField } from '../hooks';
+import { useDarkTheme, useErrorField, useActionColor } from '../hooks';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
 import { ErrorValueType } from './ErrorField';
@@ -46,8 +45,8 @@ export function SelectField(props: {
         (options: any[], query?: string): any[] => {
             const results: any[] = [];
             options.forEach((option) => {
-                const optionValue = option[props.valueKey || valueKey];
-                const optionLabel = option[props.labelKey || labelKey];
+                const optionValue = option[props.valueKey ?? valueKey];
+                const optionLabel = option[props.labelKey ?? labelKey];
                 if (!query || optionLabel.indexOf(query) !== -1) {
                     results.push({
                         [valueKey]: optionValue,

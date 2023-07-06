@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
+import { StyleProp, ViewStyle } from 'react-native';
 export declare function ColorField(props: {
     value: string;
     onValueChange: (_value: string) => void;

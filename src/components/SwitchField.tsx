@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField } from './ErrorField';
+import { ErrorField, ErrorValueType } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import { Colors } from '../constants';
 import { useErrorField, useDarkTheme } from '../hooks';
-import { ErrorValueType } from './ErrorField';
 
 interface TrackColor {
     false?: ColorValue;

@@ -30,13 +30,13 @@ export function Button(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }) {
-    const backgroundColor = props.backgroundColor || Colors.primary;
-    const borderColor = props.borderColor || backgroundColor;
-    const textColor = props.textColor || Colors.primaryText;
-    const iconColor = props.iconColor || textColor;
-    const textSize = props.textSize || 16;
-    const iconSize = props.iconSize || 26;
-    const layout = props.layout || 'left';
+    const backgroundColor = props.backgroundColor ?? Colors.primary;
+    const borderColor = props.borderColor ?? backgroundColor;
+    const textColor = props.textColor ?? Colors.primaryText;
+    const iconColor = props.iconColor ?? textColor;
+    const textSize = props.textSize ?? 16;
+    const iconSize = props.iconSize ?? 26;
+    const layout = props.layout ?? 'left';
 
     const hasIcon = (): boolean => {
         return !!props.imageSource || !!props.iconName;

@@ -27,10 +27,10 @@ export function IconButton(props: {
 }) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
-    const backgroundColor = props.backgroundColor || 'transparent';
-    const borderColor = props.borderColor || backgroundColor;
-    const iconColor = props.iconColor || defaultColor;
-    const iconSize = props.iconSize || 26;
+    const backgroundColor = props.backgroundColor ?? 'transparent';
+    const borderColor = props.borderColor ?? backgroundColor;
+    const iconColor = props.iconColor ?? defaultColor;
+    const iconSize = props.iconSize ?? 26;
 
     const onPress = (): void => {
         if (!props.disabled && props.onPress) {
