@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ErrorValueType } from './ErrorField';
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 export type RichTextAreaFieldValueType = string | null | undefined;
@@ -14,4 +14,4 @@ export declare function RichTextAreaField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

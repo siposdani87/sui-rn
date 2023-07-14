@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -15,4 +15,4 @@ export declare function NumberField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
-}): JSX.Element;
+}): React.JSX.Element;

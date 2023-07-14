@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { ErrorValueType } from './ErrorField';
 import { StyleProp, ViewStyle } from 'react-native';
 export type IconToggleFieldValueType = any;
@@ -19,4 +19,4 @@ export declare function IconToggleField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
     children?: ReactNode;
-}): JSX.Element;
+}): React.JSX.Element;

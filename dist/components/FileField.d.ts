@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ImageURISource, ImageRequireSource, StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 export type FileSourceType = ImageURISource | ImageRequireSource | null | {
@@ -19,4 +19,4 @@ export declare function FileField(props: {
     quality?: number;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

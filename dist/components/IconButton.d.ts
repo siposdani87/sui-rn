@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 export declare function IconButton(props: {
     onPress: () => void;
@@ -12,4 +12,4 @@ export declare function IconButton(props: {
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

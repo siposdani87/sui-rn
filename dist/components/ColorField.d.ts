@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ErrorValueType } from './ErrorField';
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function ColorField(props: {
@@ -14,4 +14,4 @@ export declare function ColorField(props: {
     defaultColor?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

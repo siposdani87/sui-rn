@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
 import { TextFieldValueType } from './TextField';
 import { ErrorValueType } from './ErrorField';
@@ -15,4 +15,4 @@ export declare function EmailField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
-} & TextInputProps): JSX.Element;
+} & TextInputProps): React.JSX.Element;

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 export declare function SelectField(props: {
@@ -20,4 +20,4 @@ export declare function SelectField(props: {
     searchPlaceholder?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

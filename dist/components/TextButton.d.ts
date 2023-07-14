@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function TextButton(props: {
     onPress: () => void;
@@ -11,4 +11,4 @@ export declare function TextButton(props: {
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;
