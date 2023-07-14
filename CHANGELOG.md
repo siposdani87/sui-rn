@@ -1,10 +1,14 @@
-## 0.9.18 - TBD
+## 0.9.19 - TBD
 
 *
 
+## 0.9.18 - 2023-07-14
+
+* Upgrade React Native to version 0.72.3
+
 ## 0.9.17 - 2023-07-06
 
-* Upgrade Expo SDK to version 47
+* Upgrade Expo SDK to version 49
 * Fix sonarLint issues
 
 ## 0.9.16 - 2023-05-23
