@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function Label(props: {
     text?: string;
@@ -10,4 +10,4 @@ export declare function Label(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
     children?: ReactNode;
-}): JSX.Element | null;
+}): React.JSX.Element | null;

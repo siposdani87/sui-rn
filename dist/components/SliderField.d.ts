@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 export type SliderFieldValueType = number | undefined | null;
@@ -16,4 +16,4 @@ export declare function SliderField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

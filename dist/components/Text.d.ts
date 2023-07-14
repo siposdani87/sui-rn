@@ -3,4 +3,4 @@ import { TextProps } from 'react-native';
 export declare function Text(props: {
     children?: React.ReactNode;
     muted?: boolean;
-} & TextProps): JSX.Element;
+} & TextProps): React.JSX.Element;

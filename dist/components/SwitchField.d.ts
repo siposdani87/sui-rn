@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ErrorValueType } from './ErrorField';
 import { StyleProp, ViewStyle } from 'react-native';
 export type SwitchFieldValueType = any;
@@ -15,4 +15,4 @@ export declare function SwitchField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

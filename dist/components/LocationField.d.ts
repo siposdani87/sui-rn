@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { ImageURISource, StyleProp, ViewStyle } from 'react-native';
 import { MapStyleElement, MapType } from 'react-native-maps';
 import { ErrorValueType } from './ErrorField';
@@ -25,5 +25,5 @@ export declare function LocationField(props: {
     style?: StyleProp<ViewStyle>;
     mapType?: MapType;
     customMapStyle?: MapStyleElement[];
-}): JSX.Element;
+}): React.JSX.Element;
 export {};

@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 export declare function Link(props: {
     title: string;
@@ -6,4 +6,4 @@ export declare function Link(props: {
     color?: string;
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 export declare function Dialog(props: {
     visible: boolean;
     type?: string;
@@ -6,4 +6,4 @@ export declare function Dialog(props: {
     buttons?: ReactNode[];
     onClose?: () => void;
     children?: ReactNode;
-}): JSX.Element;
+}): React.JSX.Element;

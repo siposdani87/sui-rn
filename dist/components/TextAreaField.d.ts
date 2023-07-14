@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 import { TextFieldValueType } from './TextField';
 import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
@@ -15,4 +15,4 @@ export declare function TextAreaField(props: {
     onPressDesc?: () => void;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
-}): JSX.Element;
+}): React.JSX.Element;

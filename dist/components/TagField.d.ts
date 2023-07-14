@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
 export type TagFieldValueType = string[];
@@ -17,4 +17,4 @@ export declare function TagField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
-}): JSX.Element;
+}): React.JSX.Element;
