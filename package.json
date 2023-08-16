@@ -1,6 +1,6 @@
 {
   "name": "@siposdani87/sui-rn",
-  "version": "0.9.19",
+  "version": "0.9.20",
   "description": "This is a basic UI library. It is written in the TypeScript language. The codebase was ready to use with Expo and React Native.",
   "author": "Dániel Sipos <siposdani87@gmail.com> (https://siposdani87.com)",
   "license": "ISC",
