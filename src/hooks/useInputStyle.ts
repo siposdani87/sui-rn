@@ -3,15 +3,16 @@ import { ErrorValueType } from '../components';
 import { Colors } from '../constants';
 import { useDarkTheme } from './useDarkTheme';
 
-export function useInputStyle(
-    value: any,
+export function useInputStyle<T>(
+    value: T,
     error: ErrorValueType,
     required?: boolean,
     disabled?: boolean,
     focused?: boolean,
 ): StyleProp<ViewStyle> {
     const isDarkTheme = useDarkTheme();
-    const hasError = error || (required && (!value || value?.length === 0));
+    const hasError =
+        error || (required && (!value || (value as Array<any>)?.length === 0));
 
     const getInputStyle = (): StyleProp<ViewStyle> => {
         if (hasError) {

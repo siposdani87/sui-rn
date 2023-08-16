@@ -10,13 +10,13 @@ import { SearchField } from './SearchField';
 import { TagField } from './TagField';
 import { Text } from './Text';
 export function SelectField(props) {
-    const valueKey = 'value';
-    const labelKey = 'label';
+    const valueKey = props.valueKey ?? 'value';
+    const labelKey = props.labelKey ?? 'label';
     const convert = useCallback((options, query) => {
         const results = [];
         options.forEach((option) => {
-            const optionValue = option[props.valueKey ?? valueKey];
-            const optionLabel = option[props.labelKey ?? labelKey];
+            const optionValue = option[valueKey];
+            const optionLabel = option[labelKey];
             if (!query || optionLabel.indexOf(query) !== -1) {
                 results.push({
                     [valueKey]: optionValue,
@@ -31,7 +31,7 @@ export function SelectField(props) {
             });
         }
         return results;
-    }, [props.labelKey, props.placeholder, props.valueKey]);
+    }, [labelKey, props.placeholder, valueKey]);
     const correctValue = useCallback((v) => {
         const defaultValue = props.multiple ? [] : null;
         return v ?? defaultValue;
@@ -122,9 +122,7 @@ export function SelectField(props) {
         setVisible(false);
     };
     const searchInItems = (q) => {
-        if (props.onSearch) {
-            props.onSearch(q);
-        }
+        props.onSearch?.(q);
         setQuery(q);
         setFilteredItems(convert(props.items, q));
     };

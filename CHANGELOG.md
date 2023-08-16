@@ -1,6 +1,12 @@
-## 0.9.19 - TBD
+## 0.9.20 - TBD
 
 *
+
+## 0.9.19 - 2023-08-14
+
+* Improve typings
+* Fix mimeType prop on FileField
+* Add key prop to buttons of Dialog
 
 ## 0.9.18 - 2023-07-14
 

@@ -152,7 +152,7 @@ export function DateTimeField(props: {
         }
     };
 
-    const onValueChange = (d: Date | string | null): void => {
+    const onValueChange = (d: Date | string | null | undefined): void => {
         if (d) {
             const v = getValue(d, config);
             setValue(v);

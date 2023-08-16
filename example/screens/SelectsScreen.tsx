@@ -140,7 +140,6 @@ export default function SelectsScreen() {
                         required={true}
                         placeholder="All notifications"
                     />
-
                     <SelectField
                         label="Gender"
                         items={genders}
@@ -176,7 +175,6 @@ export default function SelectsScreen() {
                         required={true}
                         disabled={true}
                     />
-
                     <SelectField
                         multiple={true}
                         label="Hobbies"

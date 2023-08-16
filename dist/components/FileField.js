@@ -185,7 +185,7 @@ export function FileField(props) {
         }
         try {
             const result = await DocumentPicker.getDocumentAsync({
-                type: '*/*', //TODO: use props.mimeType
+                type: props.mimeType,
             });
             await handleDocumentDataUri(result);
         }

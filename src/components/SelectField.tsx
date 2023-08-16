@@ -18,35 +18,50 @@ import { SearchField } from './SearchField';
 import { TagField } from './TagField';
 import { Text } from './Text';
 
-export function SelectField(props: {
-    value: any;
-    items: any[];
-    onValueChange: (_value: any) => void;
-    okText: string;
-    multiple?: boolean;
-    onSearch?: (_value: any) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    placeholder?: string;
-    labelKey?: string;
-    valueKey?: string;
-    searchPlaceholder?: string;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
-    const valueKey = 'value';
-    const labelKey = 'label';
+type ValueType = any;
+
+type LabelType = string;
+
+export function SelectField<T, K>(
+    props: {
+        items: T[];
+        okText: string;
+        onSearch?: (value: string) => void;
+        label?: string;
+        error?: ErrorValueType;
+        required?: boolean;
+        disabled?: boolean;
+        desc?: string;
+        onPressDesc?: () => void;
+        placeholder?: string;
+        labelKey?: keyof T;
+        valueKey?: keyof T;
+        searchPlaceholder?: string;
+        containerStyle?: StyleProp<ViewStyle>;
+        style?: StyleProp<ViewStyle>;
+    } & (
+        | {
+              multiple: true;
+              value: K[] | null | undefined;
+              onValueChange: (value: K[] | null | undefined) => void;
+          }
+        | {
+              multiple?: false;
+              value: K | null | undefined;
+              onValueChange: (value: K | null | undefined) => void;
+          }
+    ),
+) {
+    type PropValueType = typeof props.value;
+    const valueKey = props.valueKey ?? ('value' as keyof T);
+    const labelKey = props.labelKey ?? ('label' as keyof T);
 
     const convert = useCallback(
-        (options: any[], query?: string): any[] => {
-            const results: any[] = [];
+        (options: T[], query?: string): T[] => {
+            const results = [];
             options.forEach((option) => {
-                const optionValue = option[props.valueKey ?? valueKey];
-                const optionLabel = option[props.labelKey ?? labelKey];
+                const optionValue = option[valueKey] as ValueType;
+                const optionLabel = option[labelKey] as LabelType;
                 if (!query || optionLabel.indexOf(query) !== -1) {
                     results.push({
                         [valueKey]: optionValue,
@@ -60,13 +75,13 @@ export function SelectField(props: {
                     [labelKey]: props.placeholder,
                 });
             }
-            return results;
+            return results as T[];
         },
-        [props.labelKey, props.placeholder, props.valueKey],
+        [labelKey, props.placeholder, valueKey],
     );
 
     const correctValue = useCallback(
-        (v: any): any => {
+        (v: PropValueType): PropValueType => {
             const defaultValue = props.multiple ? [] : null;
             return v ?? defaultValue;
         },
@@ -74,54 +89,56 @@ export function SelectField(props: {
     );
 
     const [query, setQuery] = useState<string>('');
-    const [value, setValue] = useState<any>(correctValue(props.value));
-    const [items, setItems] = useState<any[]>(convert(props.items));
-    const [filteredItems, setFilteredItems] = useState<any[]>(
+    const [value, setValue] = useState<PropValueType>(
+        correctValue(props.value),
+    );
+    const [items, setItems] = useState<T[]>(convert(props.items));
+    const [filteredItems, setFilteredItems] = useState<T[]>(
         convert(props.items, query),
     );
     const [visible, setVisible] = useState<boolean>(false);
-    const [selectedValues, setSelectedValues] = useState<any[]>([]);
+    const [selectedValues, setSelectedValues] = useState<ValueType[]>([]);
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
     const isDarkTheme = useDarkTheme();
 
-    const onValueChange = (v: string): void => {
+    const onValueChange = (v: PropValueType): void => {
         onErrorChange();
         setValue(v);
-        props.onValueChange(v);
+        props.onValueChange(v as any);
     };
 
-    const getIndex = (v: any, key: string): number => {
+    const getIndex = (v: ValueType | LabelType, key: keyof T): number => {
         return items.findIndex((item) => {
             return (item[key] || '').toString() === (v || '').toString();
         });
     };
 
-    const getLabel = (v: any): string => {
+    const getLabel = (v: ValueType): LabelType => {
         const index = getIndex(v, valueKey);
         if (index >= 0) {
-            return items[index][labelKey];
+            return items[index][labelKey] as LabelType;
         }
         return '';
     };
 
-    const getValue = (l: string): any => {
+    const getValue = (l: LabelType): ValueType => {
         const index = getIndex(l, labelKey);
         if (index >= 0) {
-            return items[index][valueKey];
+            return items[index][valueKey] as ValueType;
         }
         return null;
     };
 
-    const keyExtractor = (item: any): string => {
+    const keyExtractor = (item: T): string => {
         return (item[valueKey] || '').toString();
     };
 
-    const isSelected = (v: any): boolean => {
+    const isSelected = (v: ValueType): boolean => {
         return selectedValues.indexOf(v) !== -1;
     };
 
-    const toggleSelection = (v: any): void => {
+    const toggleSelection = (v: ValueType): void => {
         if (v === null) {
             setSelectedValues([v]);
         } else {
@@ -154,7 +171,7 @@ export function SelectField(props: {
     const showDialog = (): void => {
         if (!props.disabled) {
             if (props.multiple) {
-                const v = value.length === 0 ? [null] : value;
+                const v = (value as K[]).length === 0 ? [null] : (value as K[]);
                 setSelectedValues(v);
             } else {
                 setSelectedValues([value]);
@@ -169,9 +186,7 @@ export function SelectField(props: {
     };
 
     const searchInItems = (q: string): void => {
-        if (props.onSearch) {
-            props.onSearch(q);
-        }
+        props.onSearch?.(q);
         setQuery(q);
         setFilteredItems(convert(props.items, q));
     };
@@ -183,7 +198,7 @@ export function SelectField(props: {
         handleValueChanges(values);
     };
 
-    const handleValueChanges = (values: any): void => {
+    const handleValueChanges = (values: K[]): void => {
         if (props.multiple) {
             onValueChange(values);
         } else {
@@ -195,7 +210,7 @@ export function SelectField(props: {
         let results: string[] = [];
         if (props.multiple) {
             results =
-                (value as any[] | undefined)?.map?.((v) => {
+                (value as K[])?.map?.((v) => {
                     return getLabel(v);
                 }) ?? [];
         } else if (value) {
@@ -278,7 +293,7 @@ export function SelectField(props: {
                     removeClippedSubviews={true}
                     keyExtractor={keyExtractor}
                     data={filteredItems}
-                    renderItem={({ item }) => (
+                    renderItem={({ item }: { item: T }) => (
                         <TouchableOpacity
                             activeOpacity={Styles.activeOpacity}
                             onPress={() => toggleSelection(item[valueKey])}
@@ -291,7 +306,7 @@ export function SelectField(props: {
                                         : null,
                                 ]}
                             >
-                                {item[labelKey]}
+                                {item[labelKey] as LabelType}
                             </Text>
                         </TouchableOpacity>
                     )}

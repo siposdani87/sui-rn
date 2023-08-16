@@ -15,7 +15,7 @@ import {
 } from '@siposdani87/expo-rich-text-editor';
 import { Colors, Styles } from '../constants';
 import { useErrorField, useInputStyle, useActionColor } from '../hooks';
-import { MaterialIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
     const size = 24;

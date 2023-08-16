@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
 export declare function Button(props: {
     onPress: () => void;
     iconColor?: string;
@@ -8,7 +8,7 @@ export declare function Button(props: {
     backgroundColor?: string;
     borderColor?: string;
     title?: string;
-    imageSource?: any;
+    imageSource?: ImageSourcePropType;
     iconName?: any;
     iconSize?: number;
     iconType?: string;

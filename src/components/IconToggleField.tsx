@@ -9,7 +9,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { MaterialIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useErrorField, useDarkTheme } from '../hooks';
 
 export type IconToggleFieldValueType = any;
@@ -70,7 +70,7 @@ export function IconToggleField(props: {
             : Colors.checkboxDefaultLight;
     };
 
-    const getIcon = (): any => {
+    const getIcon = (): string => {
         return value === trueValue ? props.checkedIcon : props.uncheckedIcon;
     };
 
@@ -85,7 +85,11 @@ export function IconToggleField(props: {
                 onPress={toggle}
                 style={[styles.iconToggle, props.style]}
             >
-                <MaterialIcons name={getIcon()} size={26} color={getColor()} />
+                <MaterialIcons
+                    name={getIcon() as any}
+                    size={26}
+                    color={getColor()}
+                />
             </TouchableOpacity>
             <Label
                 containerStyle={styles.labelContainer}
