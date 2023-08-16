@@ -1,5 +1,6 @@
 import React from 'react';
-import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
     View,
     StyleSheet,
@@ -9,6 +10,7 @@ import {
     StyleProp,
     ImageStyle,
     ViewStyle,
+    ImageSourcePropType,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 
@@ -20,7 +22,7 @@ export function Button(props: {
     backgroundColor?: string;
     borderColor?: string;
     title?: string;
-    imageSource?: any;
+    imageSource?: ImageSourcePropType;
     iconName?: any;
     iconSize?: number;
     iconType?: string;

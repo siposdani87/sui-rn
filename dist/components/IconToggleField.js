@@ -3,7 +3,7 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, TouchableOpacity, } from 'react-native';
 import { Colors, Styles } from '../constants';
-import { MaterialIcons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useErrorField, useDarkTheme } from '../hooks';
 export function IconToggleField(props) {
     const trueValue = props.trueValue || true;

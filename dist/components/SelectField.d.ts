@@ -1,13 +1,10 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { ErrorValueType } from './ErrorField';
-export declare function SelectField(props: {
-    value: any;
-    items: any[];
-    onValueChange: (_value: any) => void;
+export declare function SelectField<T, K>(props: {
+    items: T[];
     okText: string;
-    multiple?: boolean;
-    onSearch?: (_value: any) => void;
+    onSearch?: (value: string) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;
@@ -15,9 +12,17 @@ export declare function SelectField(props: {
     desc?: string;
     onPressDesc?: () => void;
     placeholder?: string;
-    labelKey?: string;
-    valueKey?: string;
+    labelKey?: keyof T;
+    valueKey?: keyof T;
     searchPlaceholder?: string;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
-}): React.JSX.Element;
+} & ({
+    multiple: true;
+    value: K[] | null | undefined;
+    onValueChange: (value: K[] | null | undefined) => void;
+} | {
+    multiple?: false;
+    value: K | null | undefined;
+    onValueChange: (value: K | null | undefined) => void;
+})): React.JSX.Element;

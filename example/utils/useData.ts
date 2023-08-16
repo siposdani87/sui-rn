@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 
-export function useData<T>(initialValue: T, newValue: T): [T, (key: string, value: any) => void, boolean, () => void] {
+export function useData<T, K = any>(initialValue: T, newValue: T): [T, (key: string, value: K) => void, boolean, () => void] {
     const [data, setData] = useState<T>(initialValue);
 
     const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -14,7 +14,7 @@ export function useData<T>(initialValue: T, newValue: T): [T, (key: string, valu
         }, 1000);
     }, []);
 
-    const updateData = (key: string, value: any): void => {
+    const updateData = <K,>(key: string, value: K): void => {
         console.log('updateData', key, value);
         setData({
             ...data,
