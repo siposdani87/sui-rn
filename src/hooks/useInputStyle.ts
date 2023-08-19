@@ -12,7 +12,7 @@ export function useInputStyle<T>(
 ): StyleProp<ViewStyle> {
     const isDarkTheme = useDarkTheme();
     const hasError =
-        error || (required && (!value || (value as Array<any>)?.length === 0));
+        error || (required && (!value || (value as string)?.length === 0));
 
     const getInputStyle = (): StyleProp<ViewStyle> => {
         if (hasError) {

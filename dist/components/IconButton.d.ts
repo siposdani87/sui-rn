@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleProp, ViewStyle, ImageSourcePropType } from 'react-native';
+import { StyleProp, ViewStyle, ImageSourcePropType, ColorValue } from 'react-native';
 export declare function IconButton(props: {
     onPress: () => void;
-    iconColor?: string;
-    backgroundColor?: string;
-    borderColor?: string;
+    iconColor?: ColorValue;
+    backgroundColor?: ColorValue;
+    borderColor?: ColorValue;
     imageSource?: ImageSourcePropType;
     iconName?: any;
     iconType?: string;

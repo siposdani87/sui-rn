@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    ColorValue,
     StyleProp,
     StyleSheet,
     Text,
@@ -12,7 +13,7 @@ import { useDarkTheme } from '../hooks';
 export function Link(props: {
     title: string;
     onPress: () => void;
-    color?: string;
+    color?: ColorValue;
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
 }) {
