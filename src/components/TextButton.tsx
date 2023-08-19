@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    ColorValue,
     StyleProp,
     StyleSheet,
     Text,
@@ -12,10 +13,10 @@ import { useDarkTheme } from '../hooks';
 
 export function TextButton(props: {
     onPress: () => void;
-    textColor?: string;
+    textColor?: ColorValue;
     textSize?: number;
-    backgroundColor?: string;
-    borderColor?: string;
+    backgroundColor?: ColorValue;
+    borderColor?: ColorValue;
     title: string;
     keepFormat?: boolean;
     disabled?: boolean;

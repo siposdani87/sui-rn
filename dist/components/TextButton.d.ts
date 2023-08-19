@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { ColorValue, StyleProp, ViewStyle } from 'react-native';
 export declare function TextButton(props: {
     onPress: () => void;
-    textColor?: string;
+    textColor?: ColorValue;
     textSize?: number;
-    backgroundColor?: string;
-    borderColor?: string;
+    backgroundColor?: ColorValue;
+    borderColor?: ColorValue;
     title: string;
     keepFormat?: boolean;
     disabled?: boolean;

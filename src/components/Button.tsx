@@ -11,16 +11,17 @@ import {
     ImageStyle,
     ViewStyle,
     ImageSourcePropType,
+    ColorValue,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
 
 export function Button(props: {
     onPress: () => void;
-    iconColor?: string;
-    textColor?: string;
+    iconColor?: ColorValue;
+    textColor?: ColorValue;
     textSize?: number;
-    backgroundColor?: string;
-    borderColor?: string;
+    backgroundColor?: ColorValue;
+    borderColor?: ColorValue;
     title?: string;
     imageSource?: ImageSourcePropType;
     iconName?: any;
