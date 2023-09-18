@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ButtonsScreen from '../screens/ButtonsScreen';
 import OthersScreen from '../screens/OthersScreen';
 import HomeScreen from '../screens/HomeScreen';
-import TextAreasScreen from '../screens/TextAreas1Screen';
+import TextAreasScreen from '../screens/TextAreasScreen';
 import CheckboxesScreen from '../screens/CheckboxesScreen';
 import DateTimesScreen from '../screens/DateTimesScreen';
 import FilesScreen from '../screens/FilesScreen';
