@@ -1,6 +1,10 @@
-## 0.9.20 - TBD
+## 0.9.21 - TBD
 
-*
+## 0.9.20 - 2023-09-18
+
+* Upgrade React Native to version 0.72.4
+* Use ColorValue instead of string color type
+* Migrate to new props of RichTextEditor
 
 ## 0.9.19 - 2023-08-14
 
