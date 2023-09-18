@@ -90,7 +90,7 @@ export function RichTextAreaField(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
 }) {
-    const style = StyleSheet.flatten(props.style);
+    const textStyle = StyleSheet.flatten(props.style);
     const [value, setValue] = useState<RichTextAreaFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     const [error, onErrorChange] = useErrorField(props.error);
@@ -101,7 +101,7 @@ export function RichTextAreaField(props: {
         props.disabled,
         isFocused,
     );
-    const editorStyle = [styles.editor, style, inputStyle];
+    const containerStyle = [styles.container, inputStyle];
     const getActionColor = useActionColor(props.disabled);
     const numberOfLines = props.numberOfLines || 5;
     const height = 20 * numberOfLines + 16;
@@ -117,7 +117,7 @@ export function RichTextAreaField(props: {
     }, [props.value]);
 
     return (
-        <View style={[styles.container, props.containerStyle]}>
+        <View style={props.containerStyle}>
             <Label
                 text={props.label}
                 required={props.required}
@@ -132,7 +132,8 @@ export function RichTextAreaField(props: {
                 selectionColor={Colors.deepGreyBright}
                 actionMap={getActionMap(getActionColor)}
                 toolbarStyle={styles.toolbar}
-                editorStyle={editorStyle}
+                textStyle={textStyle}
+                containerStyle={containerStyle}
                 disabled={props.disabled}
                 onBlur={() => setIsFocused(false)}
                 onFocus={() => setIsFocused(true)}
@@ -143,14 +144,15 @@ export function RichTextAreaField(props: {
 }
 
 const styles = StyleSheet.create({
-    container: {},
-    editor: {
-        fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+    container: {
         borderRadius: 3,
         borderWidth: 1,
         padding: 10,
+    },
+    text: {
+        fontFamily: Styles.fontFamilyBodyRegular,
+        fontWeight: '400',
+        fontSize: 16,
     },
     toolbar: {},
 });

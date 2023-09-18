@@ -21,12 +21,12 @@ const getActionMap = (getColor) => {
     };
 };
 export function RichTextAreaField(props) {
-    const style = StyleSheet.flatten(props.style);
+    const textStyle = StyleSheet.flatten(props.style);
     const [value, setValue] = useState(props.value);
     const [isFocused, setIsFocused] = useState(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled, isFocused);
-    const editorStyle = [styles.editor, style, inputStyle];
+    const containerStyle = [styles.container, inputStyle];
     const getActionColor = useActionColor(props.disabled);
     const numberOfLines = props.numberOfLines || 5;
     const height = 20 * numberOfLines + 16;
@@ -38,21 +38,22 @@ export function RichTextAreaField(props) {
     useEffect(() => {
         setValue(props.value);
     }, [props.value]);
-    return (<View style={[styles.container, props.containerStyle]}>
+    return (<View style={props.containerStyle}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
-            <RichTextEditor minHeight={height} value={value ?? ''} onValueChange={onValueChange} selectionColor={Colors.deepGreyBright} actionMap={getActionMap(getActionColor)} toolbarStyle={styles.toolbar} editorStyle={editorStyle} disabled={props.disabled} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)}/>
+            <RichTextEditor minHeight={height} value={value ?? ''} onValueChange={onValueChange} selectionColor={Colors.deepGreyBright} actionMap={getActionMap(getActionColor)} toolbarStyle={styles.toolbar} textStyle={textStyle} containerStyle={containerStyle} disabled={props.disabled} onBlur={() => setIsFocused(false)} onFocus={() => setIsFocused(true)}/>
             <ErrorField error={error} disabled={props.disabled}/>
         </View>);
 }
 const styles = StyleSheet.create({
-    container: {},
-    editor: {
-        fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+    container: {
         borderRadius: 3,
         borderWidth: 1,
         padding: 10,
+    },
+    text: {
+        fontFamily: Styles.fontFamilyBodyRegular,
+        fontWeight: '400',
+        fontSize: 16,
     },
     toolbar: {},
 });
