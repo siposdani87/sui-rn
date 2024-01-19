@@ -11,37 +11,37 @@ import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
 const MODES = {
     'datetime-local': {
-        format: "yyyy-MM-dd'T'HH:mm:ss",
+        format: "yyyy-MM-dd'T'HH:mm:ss", // 2016-05-26T11:25:00 (UTC)
         calendarType: 'date',
         clockType: 'time',
     },
     datetime: {
-        format: '',
+        format: '', // 'yyyy-MM-dd[T]HH:mm:ss.SSSxxx', // yyyy-MM-dd'T'HH:mm:ssXXX, , yyyy-MM-ddTHH:mm:ssZ : 2016-05-26T13:25:00+02:00 (ISO 8601, TZ:Hungary/Budapest)
         calendarType: 'date',
         clockType: 'time',
     },
     date: {
-        format: 'yyyy-MM-dd',
+        format: 'yyyy-MM-dd', // 2016-05-26
         calendarType: 'date',
         clockType: '',
     },
     time: {
-        format: 'HH:mm:ss',
+        format: 'HH:mm:ss', // 13:25:00
         calendarType: '',
         clockType: 'time',
     },
     month: {
-        format: 'yyyy-MM',
+        format: 'yyyy-MM', // 2016-05
         calendarType: 'month',
         clockType: '',
     },
     week: {
-        format: "yyyy-'W'ww",
+        format: "yyyy-'W'ww", // 2016-W22
         calendarType: 'week',
         clockType: '',
     },
     year: {
-        format: 'yyyy',
+        format: 'yyyy', // 2016
         calendarType: 'year',
         clockType: '',
     },
