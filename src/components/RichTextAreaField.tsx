@@ -103,7 +103,7 @@ export function RichTextAreaField(props: {
     );
     const containerStyle = [styles.container, inputStyle];
     const getActionColor = useActionColor(props.disabled);
-    const numberOfLines = props.numberOfLines || 5;
+    const numberOfLines = props.numberOfLines ?? 5;
     const height = 20 * numberOfLines + 16;
 
     const onValueChange = (v: RichTextAreaFieldValueType): void => {
@@ -132,7 +132,7 @@ export function RichTextAreaField(props: {
                 selectionColor={Colors.deepGreyBright}
                 actionMap={getActionMap(getActionColor)}
                 toolbarStyle={styles.toolbar}
-                textStyle={textStyle}
+                textStyle={textStyle as any}
                 containerStyle={containerStyle}
                 disabled={props.disabled}
                 onBlur={() => setIsFocused(false)}

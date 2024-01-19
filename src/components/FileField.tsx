@@ -17,7 +17,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Styles } from '../constants';
 import { TextField } from './TextField';
-import { SvgCss } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 import { ErrorValueType } from './ErrorField';
 
@@ -402,7 +402,7 @@ export function FileField(props: {
                     />
                 )}
                 {isDocument(props.mimeType) && !!svgXml && (
-                    <SvgCss xml={svgXml} width="100" height="100" />
+                    <SvgXml xml={svgXml} width="100" height="100" />
                 )}
             </View>
             <TextField

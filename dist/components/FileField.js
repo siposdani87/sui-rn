@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { Styles } from '../constants';
 import { TextField } from './TextField';
-import { SvgCss } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
 const fileColors = {
     docx: 'blue',
@@ -259,7 +259,7 @@ export function FileField(props) {
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
             <View style={styles.imageContainer}>
                 {!isDocument(props.mimeType) && !!imageSource && (<Image source={imageSource} style={styles.image}/>)}
-                {isDocument(props.mimeType) && !!svgXml && (<SvgCss xml={svgXml} width="100" height="100"/>)}
+                {isDocument(props.mimeType) && !!svgXml && (<SvgXml xml={svgXml} width="100" height="100"/>)}
             </View>
             <TextField style={props.style} value={fileData.filename} onValueChange={() => { }} required={isRequired()} error={error} disabled={props.disabled} readonly={true} actionButtons={getActionButtons()}/>
         </View>);
