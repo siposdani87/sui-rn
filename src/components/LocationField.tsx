@@ -40,11 +40,11 @@ const defaultValue: LocationFieldValueType = {
 
 export function LocationField(props: {
     value: LocationFieldValueType;
-    onValueChange: (_value: LocationFieldValueType) => void;
+    onValueChange: (value: LocationFieldValueType) => void;
     latitudeText: string;
     longitudeText: string;
     markerImage?: ImageURISource;
-    onSearch?: (_value: LocationFieldValueType) => void;
+    onSearch?: (value: LocationFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

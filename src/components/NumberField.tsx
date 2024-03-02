@@ -8,7 +8,7 @@ export type NumberFieldValueType = TextFieldValueType;
 
 export function NumberField(props: {
     value: NumberFieldValueType;
-    onValueChange: (_value: NumberFieldValueType) => void;
+    onValueChange: (value: NumberFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

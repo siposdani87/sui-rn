@@ -46,11 +46,15 @@ const MODES = {
         clockType: '',
     },
 };
-const convertToISOFormat = (formatString) => {
+const convertToUnicodeTokenFormat = (formatString) => {
+    // moment.js format to date-fns iso standard
     return formatString.replace('YYYY', 'yyyy').replace(/D/g, 'd');
 };
+const convertToValidValue = (value) => {
+    return value instanceof Date ? value : value?.toString() ?? '';
+};
 export function DateTimeField(props) {
-    const [value, setValue] = useState(props.value ?? '');
+    const [value, setValue] = useState(convertToValidValue(props.value));
     const [formattedValue, setFormattedValue] = useState('');
     const [date, setDate] = useState(null);
     const [config, setConfig] = useState(MODES[props.mode]);
@@ -58,32 +62,31 @@ export function DateTimeField(props) {
     const [pickerMode, setPickerMode] = useState('date');
     const [visible, setVisible] = useState(false);
     const getActionColor = useActionColor(props.disabled);
-    const getDate = (v, c) => {
+    const getDate = (v, mode) => {
         if (v instanceof Date) {
             return v;
         }
-        if (!c.format) {
+        if (!mode.format) {
             return parseISO(v);
         }
-        return parse(v, c.format, new Date());
+        return parse(v, mode.format, new Date());
     };
-    const getFormattedValue = useCallback((v, c) => {
-        // TODO: moment format to date-fns iso standard
-        const formatString = convertToISOFormat(props.format);
+    const getFormattedValue = useCallback((v, mode) => {
+        const formatString = convertToUnicodeTokenFormat(props.format);
         if (v instanceof Date) {
             return format(v, formatString);
         }
-        if (!c.format) {
+        if (!mode.format) {
             return format(parseISO(v), formatString);
         }
-        return format(parse(v, c.format, new Date()), formatString);
+        return format(parse(v, mode.format, new Date()), formatString);
     }, [props.format]);
-    const getValue = (v, c) => {
+    const getValue = (v, mode) => {
         if (v instanceof Date) {
-            if (!c.format) {
+            if (!mode.format) {
                 return v.toISOString();
             }
-            return format(v, c.format);
+            return format(v, mode.format);
         }
         return v;
     };
@@ -166,10 +169,10 @@ export function DateTimeField(props) {
     useEffect(() => {
         const generateYears = (minYear, maxYear) => {
             return Array.from(Array(maxYear - minYear), (_, i) => {
-                const v = i + minYear + 1;
+                const year = i + minYear + 1;
                 return {
-                    label: getFormattedValue(v.toString(), config),
-                    value: v,
+                    label: getFormattedValue(year.toString(), config),
+                    value: year,
                 };
             });
         };
@@ -181,7 +184,7 @@ export function DateTimeField(props) {
         setConfig(MODES[props.mode]);
     }, [props.mode, config, getFormattedValue]);
     useEffect(() => {
-        setValue(props.value ?? '');
+        setValue(convertToValidValue(props.value));
     }, [props.value]);
     useEffect(() => {
         if (value) {

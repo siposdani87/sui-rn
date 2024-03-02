@@ -15,10 +15,11 @@ interface Modes {
     week: Mode;
     year: Mode;
 }
+export type DateTimeFieldValueType = Date | string | number | null | undefined;
 export declare function DateTimeField(props: {
     mode: keyof Modes;
-    value: Date | string | null | undefined;
-    onValueChange: (_value: string | null) => void;
+    value: DateTimeFieldValueType;
+    onValueChange: (value: string | null) => void;
     okText: string;
     format: string;
     label?: string;

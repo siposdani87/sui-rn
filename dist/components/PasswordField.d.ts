@@ -5,7 +5,7 @@ import { ErrorValueType } from './ErrorField';
 export type PasswordFieldValueType = TextFieldValueType;
 export declare function PasswordField(props: {
     value: PasswordFieldValueType;
-    onValueChange: (_value: PasswordFieldValueType) => void;
+    onValueChange: (value: PasswordFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

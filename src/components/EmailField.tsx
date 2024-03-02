@@ -8,7 +8,7 @@ export type EmailFieldValueType = TextFieldValueType;
 export function EmailField(
     props: {
         value: EmailFieldValueType;
-        onValueChange: (_value: EmailFieldValueType) => void;
+        onValueChange: (value: EmailFieldValueType) => void;
         label?: string;
         error?: ErrorValueType;
         required?: boolean;

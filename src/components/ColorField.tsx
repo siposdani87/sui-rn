@@ -16,7 +16,7 @@ import { Button } from './Button';
 
 export function ColorField(props: {
     value: string;
-    onValueChange: (_value: string) => void;
+    onValueChange: (value: string) => void;
     okText: string;
     label?: string;
     error?: ErrorValueType;

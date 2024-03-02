@@ -8,7 +8,7 @@ export type PasswordFieldValueType = TextFieldValueType;
 export function PasswordField(
     props: {
         value: PasswordFieldValueType;
-        onValueChange: (_value: PasswordFieldValueType) => void;
+        onValueChange: (value: PasswordFieldValueType) => void;
         label?: string;
         error?: ErrorValueType;
         required?: boolean;

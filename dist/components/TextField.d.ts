@@ -4,7 +4,7 @@ import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
 export type TextFieldValueType = any;
 export declare function TextField(props: {
     value: TextFieldValueType;
-    onValueChange: (_value: TextFieldValueType) => void;
+    onValueChange: (value: TextFieldValueType) => void;
     readonly?: boolean;
     label?: string;
     error?: ErrorValueType;

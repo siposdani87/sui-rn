@@ -4,7 +4,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 export type SwitchFieldValueType = any;
 export declare function SwitchField(props: {
     value: SwitchFieldValueType;
-    onValueChange: (_value: SwitchFieldValueType) => void;
+    onValueChange: (value: SwitchFieldValueType) => void;
     trueValue?: SwitchFieldValueType;
     falseValue?: SwitchFieldValueType;
     label?: string;

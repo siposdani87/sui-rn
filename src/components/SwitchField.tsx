@@ -22,7 +22,7 @@ export type SwitchFieldValueType = any;
 
 export function SwitchField(props: {
     value: SwitchFieldValueType;
-    onValueChange: (_value: SwitchFieldValueType) => void;
+    onValueChange: (value: SwitchFieldValueType) => void;
     trueValue?: SwitchFieldValueType;
     falseValue?: SwitchFieldValueType;
     label?: string;

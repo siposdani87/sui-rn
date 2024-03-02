@@ -1,17 +1,17 @@
 import React from 'react';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import { DateTimeField } from '@siposdani87/sui-rn';
+import { DateTimeField, DateTimeFieldValueType } from '@siposdani87/sui-rn';
 import { StatusBar } from 'expo-status-bar';
 import { useData } from '../utils/useData';
 
 interface DateTimesState {
-    datetime: Date | string | null;
-    datetimeDisabled: Date | string | null;
-    datetimeRequired: Date | string | null | undefined;
-    datetimeRequiredDisabled: Date | string | null;
-    date: Date | string | null;
-    time: Date | string | null;
-    year: Date | string | null;
+    datetime: DateTimeFieldValueType;
+    datetimeDisabled: DateTimeFieldValueType;
+    datetimeRequired: DateTimeFieldValueType;
+    datetimeRequiredDisabled: DateTimeFieldValueType;
+    date: DateTimeFieldValueType;
+    time: DateTimeFieldValueType;
+    year: DateTimeFieldValueType;
 }
 
 export default function DateTimesScreen() {
@@ -38,7 +38,7 @@ export default function DateTimesScreen() {
             .toISOString()
             .split('T', 2)[1]
             .split('.', 2)[0],
-        year: '1987', 
+        year: 1987,
     });
 
     return (

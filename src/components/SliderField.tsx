@@ -11,7 +11,7 @@ export type SliderFieldValueType = number | undefined | null;
 
 export function SliderField(props: {
     value: SliderFieldValueType;
-    onValueChange: (_value: SliderFieldValueType) => void;
+    onValueChange: (value: SliderFieldValueType) => void;
     minimumValue?: number;
     maximumValue?: number;
     step?: number;
