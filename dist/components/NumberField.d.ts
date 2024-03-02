@@ -5,7 +5,7 @@ import { ErrorValueType } from './ErrorField';
 export type NumberFieldValueType = TextFieldValueType;
 export declare function NumberField(props: {
     value: NumberFieldValueType;
-    onValueChange: (_value: NumberFieldValueType) => void;
+    onValueChange: (value: NumberFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

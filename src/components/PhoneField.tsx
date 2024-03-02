@@ -8,7 +8,7 @@ export type PhoneFieldValueType = TextFieldValueType;
 export function PhoneField(
     props: {
         value: PhoneFieldValueType;
-        onValueChange: (_value: PhoneFieldValueType) => void;
+        onValueChange: (value: PhoneFieldValueType) => void;
         label?: string;
         error?: ErrorValueType;
         required?: boolean;

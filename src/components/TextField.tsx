@@ -19,7 +19,7 @@ export type TextFieldValueType = any; // string | null | undefined;
 export function TextField(
     props: {
         value: TextFieldValueType;
-        onValueChange: (_value: TextFieldValueType) => void;
+        onValueChange: (value: TextFieldValueType) => void;
         readonly?: boolean;
         label?: string;
         error?: ErrorValueType;

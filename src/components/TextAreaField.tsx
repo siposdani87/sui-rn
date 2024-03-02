@@ -7,7 +7,7 @@ export type TextAreaFieldValueType = TextFieldValueType;
 
 export function TextAreaField(props: {
     value: TextAreaFieldValueType;
-    onValueChange: (_value: TextAreaFieldValueType) => void;
+    onValueChange: (value: TextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
     error?: ErrorValueType;

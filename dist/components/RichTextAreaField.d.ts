@@ -4,7 +4,7 @@ import { StyleProp, ViewStyle, TextStyle } from 'react-native';
 export type RichTextAreaFieldValueType = string | null | undefined;
 export declare function RichTextAreaField(props: {
     value: RichTextAreaFieldValueType;
-    onValueChange: (_value: RichTextAreaFieldValueType) => void;
+    onValueChange: (value: RichTextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
     error?: ErrorValueType;

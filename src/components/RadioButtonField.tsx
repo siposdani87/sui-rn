@@ -10,7 +10,7 @@ export function RadioButtonField(props: {
     value: RadioButtonFieldField;
     trueValue?: RadioButtonFieldField;
     falseValue?: RadioButtonFieldField;
-    onValueChange: (_value: RadioButtonFieldField) => void;
+    onValueChange: (value: RadioButtonFieldField) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

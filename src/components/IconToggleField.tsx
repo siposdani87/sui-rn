@@ -20,7 +20,7 @@ export function IconToggleField(props: {
     uncheckedIcon: string;
     trueValue?: IconToggleFieldValueType;
     falseValue?: IconToggleFieldValueType;
-    onValueChange: (_value: IconToggleFieldValueType) => void;
+    onValueChange: (value: IconToggleFieldValueType) => void;
     disableUncheck?: boolean;
     label?: string;
     error?: ErrorValueType;

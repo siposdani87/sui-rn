@@ -8,7 +8,7 @@ export declare function FileField(props: {
     value: FileSourceType;
     defaultValue?: FileSourceType;
     mimeType: string;
-    onValueChange: (_value: string | null) => void;
+    onValueChange: (value: string | null) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

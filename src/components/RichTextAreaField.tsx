@@ -79,7 +79,7 @@ export type RichTextAreaFieldValueType = string | null | undefined;
 
 export function RichTextAreaField(props: {
     value: RichTextAreaFieldValueType;
-    onValueChange: (_value: RichTextAreaFieldValueType) => void;
+    onValueChange: (value: RichTextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
     error?: ErrorValueType;

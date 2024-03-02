@@ -4,7 +4,7 @@ import { ErrorValueType } from './ErrorField';
 export type TagFieldValueType = string[];
 export declare function TagField(props: {
     values: TagFieldValueType;
-    onValuesChange: (_value: TagFieldValueType) => void;
+    onValuesChange: (value: TagFieldValueType) => void;
     onPress?: (_index: number) => void;
     readonly?: boolean;
     label?: string;

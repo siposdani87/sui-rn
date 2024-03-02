@@ -5,7 +5,7 @@ import { ErrorValueType } from './ErrorField';
 export type TextAreaFieldValueType = TextFieldValueType;
 export declare function TextAreaField(props: {
     value: TextAreaFieldValueType;
-    onValueChange: (_value: TextAreaFieldValueType) => void;
+    onValueChange: (value: TextAreaFieldValueType) => void;
     numberOfLines?: number;
     label?: string;
     error?: ErrorValueType;

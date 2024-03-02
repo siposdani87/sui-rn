@@ -5,7 +5,7 @@ import { ErrorValueType } from './ErrorField';
 export type PhoneFieldValueType = TextFieldValueType;
 export declare function PhoneField(props: {
     value: PhoneFieldValueType;
-    onValueChange: (_value: PhoneFieldValueType) => void;
+    onValueChange: (value: PhoneFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;

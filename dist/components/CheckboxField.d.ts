@@ -7,7 +7,7 @@ export declare function CheckboxField(props: {
     value: CheckboxFieldValueType;
     trueValue?: CheckboxFieldValueType;
     falseValue?: CheckboxFieldValueType;
-    onValueChange: (_value: CheckboxFieldValueType) => void;
+    onValueChange: (value: CheckboxFieldValueType) => void;
     label?: string;
     error?: ErrorValueType;
     required?: boolean;
