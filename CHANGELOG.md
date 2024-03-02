@@ -1,3 +1,7 @@
+## 1.0.1 - 2024-03-02
+
+* Fix value type of DateTimeField
+
 ## 1.0.0 - 2024-03-02
 
 * Upgrade React Native to version 0.73.4
