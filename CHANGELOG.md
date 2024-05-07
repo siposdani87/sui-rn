@@ -1,3 +1,11 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## 1.0.2 - 2024-05-07
+
+* Upgrade React Native to version 0.73.6
+
 ## 1.0.1 - 2024-03-02
 
 * Fix value type of DateTimeField
