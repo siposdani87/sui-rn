@@ -241,9 +241,8 @@ export function FileField(props: {
             await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (mediaLibraryPermission.status === 'granted') {
             try {
-                const result = await ImagePicker.launchImageLibraryAsync(
-                    options,
-                );
+                const result =
+                    await ImagePicker.launchImageLibraryAsync(options);
                 await handleImageDataUri(result);
             } catch (e: any) {
                 showAlert(e);
@@ -358,7 +357,6 @@ export function FileField(props: {
         } else {
             handleDefaultImageSource(value);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
     useEffect(() => {
@@ -366,7 +364,6 @@ export function FileField(props: {
             setValue(props.value);
             onDataChange('', '');
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getValueUri(props.value)]);
 
     useEffect(() => {

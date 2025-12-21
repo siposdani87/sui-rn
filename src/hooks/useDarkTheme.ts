@@ -6,5 +6,5 @@ export function useDarkTheme(): boolean {
 
     return Environment.dark_theme === null
         ? colorScheme === 'dark'
-        : Environment.dark_theme ?? false;
+        : (Environment.dark_theme ?? false);
 }

@@ -26,7 +26,7 @@ export function RichTextAreaField(props) {
     const [isFocused, setIsFocused] = useState(false);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(value, error, props.required, props.disabled, isFocused);
-    const containerStyle = [styles.container, inputStyle];
+    const containerStyle = StyleSheet.flatten([styles.container, inputStyle]);
     const getActionColor = useActionColor(props.disabled);
     const numberOfLines = props.numberOfLines ?? 5;
     const height = 20 * numberOfLines + 16;

@@ -3,3 +3,10 @@
 node_modules
 .cache
 .expo
+
+.claude
+
+# Example app build files
+example/ios/
+example/android/
+example/.expo/

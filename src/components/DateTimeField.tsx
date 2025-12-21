@@ -78,7 +78,7 @@ const convertToUnicodeTokenFormat = (formatString: string): string => {
 };
 
 const convertToValidValue = (value: DateTimeFieldValueType): Date | string => {
-    return value instanceof Date ? value : value?.toString() ?? '';
+    return value instanceof Date ? value : (value?.toString() ?? '');
 };
 
 export type DateTimeFieldValueType = Date | string | number | null | undefined;
