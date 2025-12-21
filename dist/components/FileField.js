@@ -230,14 +230,12 @@ export function FileField(props) {
         else {
             handleDefaultImageSource(value);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
     useEffect(() => {
         if (isValidValue(props.value) && !fileData.content) {
             setValue(props.value);
             onDataChange('', '');
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [getValueUri(props.value)]);
     useEffect(() => {
         if (isValidValue(value)) {

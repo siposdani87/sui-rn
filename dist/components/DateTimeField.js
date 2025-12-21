@@ -51,7 +51,7 @@ const convertToUnicodeTokenFormat = (formatString) => {
     return formatString.replace('YYYY', 'yyyy').replace(/D/g, 'd');
 };
 const convertToValidValue = (value) => {
-    return value instanceof Date ? value : value?.toString() ?? '';
+    return value instanceof Date ? value : (value?.toString() ?? '');
 };
 export function DateTimeField(props) {
     const [value, setValue] = useState(convertToValidValue(props.value));
