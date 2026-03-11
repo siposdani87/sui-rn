@@ -1,15 +1,8 @@
 import React from 'react';
-import {
-    ColorValue,
-    StyleProp,
-    StyleSheet,
-    Text,
-    Pressable,
-    View,
-    ViewStyle,
-} from 'react-native';
-import { Colors, Styles, Tokens } from '../constants';
-import { useDarkTheme, usePressableStyle } from '../hooks';
+import { ColorValue, StyleProp, ViewStyle } from 'react-native';
+import { Colors } from '../constants';
+import { useDarkTheme } from '../hooks';
+import { Button } from './Button';
 
 export function TextButton(props: {
     onPress: () => void;
@@ -25,75 +18,21 @@ export function TextButton(props: {
 }) {
     const isDarkTheme = useDarkTheme();
     const defaultColor = isDarkTheme ? Colors.white : Colors.black;
-    const backgroundColor = props.backgroundColor ?? 'transparent';
-    const borderColor = props.borderColor ?? backgroundColor;
-    const textColor = props.textColor ?? defaultColor;
-    const textSize = props.textSize ?? Tokens.fontSizeBody;
-
-    const getTitle = (): string => {
-        return props.keepFormat ? props.title : props.title.toUpperCase();
-    };
-
-    const pressable = usePressableStyle([
-        styles.container,
-        props.containerStyle,
-    ]);
-
-    const onPress = (): void => {
-        if (!props.disabled && props.onPress) {
-            props.onPress();
-        }
-    };
 
     return (
-        <Pressable
-            style={pressable.style}
-            android_ripple={pressable.android_ripple}
-            onPress={onPress}
-        >
-            <View
-                style={[
-                    styles.button,
-                    { backgroundColor, borderColor },
-                    backgroundColor !== 'transparent'
-                        ? Styles.lightShadow
-                        : null,
-                    props.style,
-                ]}
-            >
-                <Text
-                    numberOfLines={1}
-                    adjustsFontSizeToFit={true}
-                    style={[
-                        styles.text,
-                        { color: textColor, fontSize: textSize },
-                    ]}
-                >
-                    {getTitle()}
-                </Text>
-            </View>
-        </Pressable>
+        <Button
+            onPress={props.onPress}
+            textColor={props.textColor ?? defaultColor}
+            textSize={props.textSize}
+            backgroundColor={props.backgroundColor ?? 'transparent'}
+            borderColor={
+                props.borderColor ?? props.backgroundColor ?? 'transparent'
+            }
+            title={props.title}
+            keepFormat={props.keepFormat}
+            disabled={props.disabled}
+            containerStyle={props.containerStyle}
+            style={props.style}
+        />
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        margin: Tokens.buttonMargin,
-    },
-    button: {
-        borderRadius: Tokens.borderRadiusButton,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: Tokens.buttonBorderWidth,
-        padding: Tokens.buttonPadding,
-    },
-    text: {
-        fontFamily: Styles.fontFamilyBodyMedium,
-        fontWeight: Tokens.fontWeightMedium,
-        fontSize: Tokens.fontSizeBody,
-        flexShrink: 1,
-        paddingHorizontal: Tokens.buttonPaddingHorizontal,
-        paddingVertical: Tokens.buttonPaddingVertical,
-    },
-});

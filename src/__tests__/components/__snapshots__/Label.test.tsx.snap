@@ -235,6 +235,9 @@ exports[`Label renders with description 1`] = `
               "fontSize": 26,
             },
             {
+              "marginRight": undefined,
+            },
+            {
               "color": "#3F51B5",
               "fontSize": 20,
             },
