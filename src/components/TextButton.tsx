@@ -4,7 +4,7 @@ import {
     StyleProp,
     StyleSheet,
     Text,
-    TouchableOpacity,
+    Pressable,
     View,
     ViewStyle,
 } from 'react-native';
@@ -41,9 +41,8 @@ export function TextButton(props: {
     };
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={[styles.container, props.containerStyle]}
-            activeOpacity={Styles.activeOpacity}
             onPress={onPress}
         >
             <View
@@ -67,7 +66,7 @@ export function TextButton(props: {
                     {getTitle()}
                 </Text>
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 

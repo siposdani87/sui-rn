@@ -90,45 +90,47 @@ const styles: StylesType = {
     },
 };
 
-export function setThemeStyles(
-    fontFamilyApp: string,
-    fontFamilyHeadings: string[],
-    fontFamilyBodies: string[],
-) {
-    styles.fontFamilyApp = fontFamilyApp;
+export interface ThemeStylesOptions {
+    fontFamilyApp: string;
+    fontFamilyHeadings: [string, string, string];
+    fontFamilyBodies: [string, string, string];
+}
+
+export function setThemeStyles(options: ThemeStylesOptions): StylesType {
+    styles.fontFamilyApp = options.fontFamilyApp;
     [
         styles.fontFamilyHeadingRegular,
         styles.fontFamilyHeadingMedium,
         styles.fontFamilyHeadingBold,
-    ] = fontFamilyHeadings;
+    ] = options.fontFamilyHeadings;
     [
         styles.fontFamilyBodyRegular,
         styles.fontFamilyBodyMedium,
         styles.fontFamilyBodyBold,
-    ] = fontFamilyBodies;
+    ] = options.fontFamilyBodies;
 
     return styles;
 }
 
 Platform.select({
     ios: () =>
-        setThemeStyles(
-            'Verdana',
-            ['Helvetica', 'Helvetica', 'Helvetica'],
-            ['Arial', 'Arial', 'Arial'],
-        ),
+        setThemeStyles({
+            fontFamilyApp: 'Verdana',
+            fontFamilyHeadings: ['Helvetica', 'Helvetica', 'Helvetica'],
+            fontFamilyBodies: ['Arial', 'Arial', 'Arial'],
+        }),
     android: () =>
-        setThemeStyles(
-            'monospace',
-            ['sans-serif', 'sans-serif', 'sans-serif'],
-            ['Roboto', 'Roboto', 'Roboto'],
-        ),
+        setThemeStyles({
+            fontFamilyApp: 'monospace',
+            fontFamilyHeadings: ['sans-serif', 'sans-serif', 'sans-serif'],
+            fontFamilyBodies: ['Roboto', 'Roboto', 'Roboto'],
+        }),
     default: () =>
-        setThemeStyles(
-            'Verdana',
-            ['sans-serif', 'sans-serif', 'sans-serif'],
-            ['Arial', 'Arial', 'Arial'],
-        ),
+        setThemeStyles({
+            fontFamilyApp: 'Verdana',
+            fontFamilyHeadings: ['sans-serif', 'sans-serif', 'sans-serif'],
+            fontFamilyBodies: ['Arial', 'Arial', 'Arial'],
+        }),
 })();
 
 export default styles;

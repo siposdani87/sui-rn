@@ -1,22 +1,14 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
+import { TextInputProps } from 'react-native';
 import { TextField, TextFieldValueType } from './TextField';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type PasswordFieldValueType = TextFieldValueType;
 
 export function PasswordField(
-    props: {
+    props: BaseFieldProps & {
         value: PasswordFieldValueType;
         onValueChange: (value: PasswordFieldValueType) => void;
-        label?: string;
-        error?: ErrorValueType;
-        required?: boolean;
-        disabled?: boolean;
-        desc?: string;
-        onPressDesc?: () => void;
-        containerStyle?: StyleProp<ViewStyle>;
-        style?: StyleProp<ViewStyle>;
         actionButtons?: ReactNode[];
     } & TextInputProps,
 ) {

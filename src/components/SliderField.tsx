@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Colors } from '../constants';
 import { useErrorField, useInputStyle, useDarkTheme } from '../hooks';
 import Slider from '@react-native-community/slider';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type SliderFieldValueType = number | undefined | null;
 
-export function SliderField(props: {
-    value: SliderFieldValueType;
-    onValueChange: (value: SliderFieldValueType) => void;
-    minimumValue?: number;
-    maximumValue?: number;
-    step?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
+export function SliderField(
+    props: BaseFieldProps & {
+        value: SliderFieldValueType;
+        onValueChange: (value: SliderFieldValueType) => void;
+        minimumValue?: number;
+        maximumValue?: number;
+        step?: number;
+    },
+) {
     const [value, setValue] = useState<SliderFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const inputStyle = useInputStyle(

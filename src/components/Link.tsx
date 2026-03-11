@@ -4,7 +4,7 @@ import {
     StyleProp,
     StyleSheet,
     Text,
-    TouchableOpacity,
+    Pressable,
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
@@ -29,13 +29,9 @@ export function Link(props: {
     };
 
     return (
-        <TouchableOpacity
-            activeOpacity={Styles.activeOpacity}
-            onPress={onPress}
-            style={props.containerStyle}
-        >
+        <Pressable onPress={onPress} style={props.containerStyle}>
             <Text style={[styles.text, colorStyle]}>{props.title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 

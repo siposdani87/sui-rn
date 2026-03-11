@@ -1,29 +1,22 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import { useErrorField } from '../hooks';
-import { TextField, TextFieldValueType } from './TextField';
-import { ErrorValueType } from './ErrorField';
+import { TextField } from './TextField';
+import { BaseFieldProps } from './BaseFieldProps';
 
-export type NumberFieldValueType = TextFieldValueType;
+export type NumberFieldValueType = number | null | undefined;
 
-export function NumberField(props: {
-    value: NumberFieldValueType;
-    onValueChange: (value: NumberFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-    actionButtons?: ReactNode[];
-}) {
+export function NumberField(
+    props: BaseFieldProps & {
+        value: NumberFieldValueType;
+        onValueChange: (value: NumberFieldValueType) => void;
+        actionButtons?: ReactNode[];
+    },
+) {
     const [value, setValue] = useState<NumberFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 
-    const onValueChange = (v: string): void => {
-        let floatValue = parseFloat(v);
+    const onValueChange = (v: string | null | undefined): void => {
+        let floatValue = parseFloat(v ?? '');
         if (isNaN(floatValue)) {
             floatValue = 0;
         }
@@ -38,7 +31,7 @@ export function NumberField(props: {
 
     return (
         <TextField
-            value={value}
+            value={value?.toString() ?? ''}
             error={error}
             onValueChange={onValueChange}
             label={props.label}

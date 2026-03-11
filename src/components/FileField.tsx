@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, ReactNode } from 'react';
+import React, {
+    useState,
+    useEffect,
+    useCallback,
+    useMemo,
+    ReactNode,
+} from 'react';
 import { Label } from './Label';
 import {
     View,
@@ -7,8 +13,6 @@ import {
     Alert,
     ImageURISource,
     ImageRequireSource,
-    StyleProp,
-    ViewStyle,
     ImageSourcePropType,
 } from 'react-native';
 import { useErrorField, useActionColor } from '../hooks';
@@ -19,7 +23,7 @@ import { Styles } from '../constants';
 import { TextField } from './TextField';
 import { SvgXml } from 'react-native-svg';
 import * as FileSystem from 'expo-file-system';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type FileSourceType =
     | ImageURISource
@@ -125,22 +129,16 @@ interface FileContent {
     content: string | null;
 }
 
-export function FileField(props: {
-    value: FileSourceType;
-    defaultValue?: FileSourceType;
-    mimeType: string;
-    onValueChange: (value: string | null) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    aspect?: [number, number];
-    quality?: number;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
+export function FileField(
+    props: BaseFieldProps & {
+        value: FileSourceType;
+        defaultValue?: FileSourceType;
+        mimeType: string;
+        onValueChange: (value: string | null) => void;
+        aspect?: [number, number];
+        quality?: number;
+    },
+) {
     const [value, setValue] = useState<FileSourceType>(props.value);
     const [svgXml, setSvgXml] = useState<string | null>(null);
     const [defaultSvgXml, setDefaultSvgXml] = useState<string | null>(null);
@@ -162,14 +160,17 @@ export function FileField(props: {
         mediaTypes = ImagePicker.MediaTypeOptions.Videos;
     }
 
-    const options: ImagePicker.ImagePickerOptions = {
-        mediaTypes,
-        allowsEditing: true,
-        aspect: props.aspect,
-        quality: props.quality,
-        base64: true,
-        exif: true,
-    };
+    const options: ImagePicker.ImagePickerOptions = useMemo(
+        () => ({
+            mediaTypes,
+            allowsEditing: true,
+            aspect: props.aspect,
+            quality: props.quality,
+            base64: true,
+            exif: true,
+        }),
+        [mediaTypes, props.aspect, props.quality],
+    );
 
     const handleDefaultSvgXml = useCallback(
         (v: FileSourceType): void => {
@@ -205,35 +206,42 @@ export function FileField(props: {
         [onErrorChange, props],
     );
 
-    const handleImageDataUri = async (
-        result: ImagePicker.ImagePickerResult,
-    ): Promise<void> => {
-        if (!result.canceled) {
-            const asset = result.assets[0];
-            const filename =
-                asset.fileName ?? asset.uri.split('/').pop() ?? 'unknown.jpeg';
-            const dataUri = getDataUri(asset.base64!, filename);
-            setImageSource({ uri: dataUri });
-            onDataChange(filename, dataUri);
-        }
-    };
+    const handleImageDataUri = useCallback(
+        async (result: ImagePicker.ImagePickerResult): Promise<void> => {
+            if (!result.canceled) {
+                const asset = result.assets[0];
+                const filename =
+                    asset.fileName ??
+                    asset.uri.split('/').pop() ??
+                    'unknown.jpeg';
+                const dataUri = getDataUri(asset.base64!, filename);
+                setImageSource({ uri: dataUri });
+                onDataChange(filename, dataUri);
+            }
+        },
+        [onDataChange],
+    );
 
-    const handleDocumentDataUri = async (
-        result: DocumentPicker.DocumentPickerResult,
-    ): Promise<void> => {
-        if (!result.canceled) {
-            const asset = result.assets[0];
-            const filename = asset.name;
-            const fileBase64 = await FileSystem.readAsStringAsync(asset.uri, {
-                encoding: 'base64',
-            });
-            const dataUri = getDataUri(fileBase64, filename);
-            setSvgXml(getSvgXmlByFilename(filename));
-            onDataChange(filename, dataUri);
-        }
-    };
+    const handleDocumentDataUri = useCallback(
+        async (result: DocumentPicker.DocumentPickerResult): Promise<void> => {
+            if (!result.canceled) {
+                const asset = result.assets[0];
+                const filename = asset.name;
+                const fileBase64 = await FileSystem.readAsStringAsync(
+                    asset.uri,
+                    {
+                        encoding: 'base64',
+                    },
+                );
+                const dataUri = getDataUri(fileBase64, filename);
+                setSvgXml(getSvgXmlByFilename(filename));
+                onDataChange(filename, dataUri);
+            }
+        },
+        [onDataChange],
+    );
 
-    const openImageLibrary = async (): Promise<void> => {
+    const openImageLibrary = useCallback(async (): Promise<void> => {
         if (props.disabled) {
             return;
         }
@@ -244,13 +252,13 @@ export function FileField(props: {
                 const result =
                     await ImagePicker.launchImageLibraryAsync(options);
                 await handleImageDataUri(result);
-            } catch (e: any) {
-                showAlert(e);
+            } catch (e: unknown) {
+                showAlert(e instanceof Error ? e : new Error(String(e)));
             }
         }
-    };
+    }, [props.disabled, options, handleImageDataUri]);
 
-    const openCamera = async (): Promise<void> => {
+    const openCamera = useCallback(async (): Promise<void> => {
         if (props.disabled) {
             return;
         }
@@ -265,13 +273,13 @@ export function FileField(props: {
             try {
                 const result = await ImagePicker.launchCameraAsync(options);
                 await handleImageDataUri(result);
-            } catch (e: any) {
-                showAlert(e);
+            } catch (e: unknown) {
+                showAlert(e instanceof Error ? e : new Error(String(e)));
             }
         }
-    };
+    }, [props.disabled, options, handleImageDataUri]);
 
-    const openDocumentLibrary = async (): Promise<void> => {
+    const openDocumentLibrary = useCallback(async (): Promise<void> => {
         if (props.disabled) {
             return;
         }
@@ -280,23 +288,30 @@ export function FileField(props: {
                 type: props.mimeType,
             });
             await handleDocumentDataUri(result);
-        } catch (e: any) {
-            showAlert(e);
+        } catch (e: unknown) {
+            showAlert(e instanceof Error ? e : new Error(String(e)));
         }
-    };
+    }, [props.disabled, props.mimeType, handleDocumentDataUri]);
 
     const isRemovable = (): boolean => {
         return !props.required && (isValidValue(value) || !!fileData.content);
     };
 
-    const remove = (): void => {
-        if (isRemovable()) {
+    const remove = useCallback((): void => {
+        if (!props.required && (isValidValue(value) || !!fileData.content)) {
             setSvgXml(defaultSvgXml);
             setImageSource(defaultImageSource);
             setValue(null);
             onDataChange('', null);
         }
-    };
+    }, [
+        props.required,
+        value,
+        fileData.content,
+        defaultSvgXml,
+        defaultImageSource,
+        onDataChange,
+    ]);
 
     const isRequired = (): boolean => {
         return !!props.required && !isValidValue(value);

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ComponentProps, useCallback } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
     View,
     StyleSheet,
-    TouchableOpacity,
+    Pressable,
     Image,
     StyleProp,
     ViewStyle,
@@ -20,7 +20,7 @@ export function IconButton(props: {
     backgroundColor?: ColorValue;
     borderColor?: ColorValue;
     imageSource?: ImageSourcePropType;
-    iconName?: any;
+    iconName?: string;
     iconType?: string;
     iconSize?: number;
     disabled?: boolean;
@@ -34,16 +34,15 @@ export function IconButton(props: {
     const iconColor = props.iconColor ?? defaultColor;
     const iconSize = props.iconSize ?? 26;
 
-    const onPress = (): void => {
+    const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    };
+    }, [props.disabled, props.onPress]);
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={[styles.container, props.containerStyle]}
-            activeOpacity={Styles.activeOpacity}
             onPress={onPress}
         >
             <View
@@ -71,7 +70,11 @@ export function IconButton(props: {
                             styles.icon,
                             { color: iconColor, fontSize: iconSize },
                         ]}
-                        name={props.iconName}
+                        name={
+                            props.iconName as ComponentProps<
+                                typeof MaterialIcons
+                            >['name']
+                        }
                     />
                 )}
                 {!!props.iconName && props.iconType === 'Community' && (
@@ -80,11 +83,15 @@ export function IconButton(props: {
                             styles.icon,
                             { color: iconColor, fontSize: iconSize },
                         ]}
-                        name={props.iconName}
+                        name={
+                            props.iconName as ComponentProps<
+                                typeof MaterialCommunityIcons
+                            >['name']
+                        }
                     />
                 )}
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 
