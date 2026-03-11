@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { Colors } from '../constants';
+import { Colors, Tokens } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
         zIndex: 1,
     },
     colorDot: {
-        width: 30,
-        height: 30,
-        borderRadius: 15,
+        width: Tokens.borderRadiusColorDot * 2,
+        height: Tokens.borderRadiusColorDot * 2,
+        borderRadius: Tokens.borderRadiusColorDot,
         borderColor: Colors.black,
-        borderWidth: 1,
+        borderWidth: Tokens.inputBorderWidth,
     },
     colorPickerContainer: {
-        height: 300,
+        height: Tokens.colorPickerHeight,
     },
 });

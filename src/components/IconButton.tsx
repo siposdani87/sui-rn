@@ -11,7 +11,7 @@ import {
     ImageSourcePropType,
     ColorValue,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 export function IconButton(props: {
@@ -32,7 +32,7 @@ export function IconButton(props: {
     const backgroundColor = props.backgroundColor ?? 'transparent';
     const borderColor = props.borderColor ?? backgroundColor;
     const iconColor = props.iconColor ?? defaultColor;
-    const iconSize = props.iconSize ?? 26;
+    const iconSize = props.iconSize ?? Tokens.iconSizeDefault;
 
     const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
@@ -97,22 +97,22 @@ export function IconButton(props: {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 5,
+        margin: Tokens.buttonMargin,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: Tokens.borderRadiusButton,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        padding: 5,
+        borderWidth: Tokens.buttonBorderWidth,
+        padding: Tokens.buttonPadding,
     },
     image: {
-        width: 22,
-        height: 22,
+        width: Tokens.imageSizeSmall,
+        height: Tokens.imageSizeSmall,
         resizeMode: 'contain',
     },
     icon: {
-        fontSize: 26,
+        fontSize: Tokens.iconSizeDefault,
     },
 });

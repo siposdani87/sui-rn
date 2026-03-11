@@ -7,7 +7,7 @@ import {
     Pressable,
     ViewStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 export function Link(props: {
@@ -38,8 +38,8 @@ export function Link(props: {
 const styles = StyleSheet.create({
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
         textDecorationLine: 'underline',
         textDecorationStyle: 'solid',
     },

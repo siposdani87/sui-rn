@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native';
-import { Styles } from '../constants';
+import { Styles, Tokens } from '../constants';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 
@@ -37,21 +37,21 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 10,
-        paddingBottom: 5,
-        paddingHorizontal: 15,
+        paddingTop: Tokens.spacingMd,
+        paddingBottom: Tokens.spacingSm,
+        paddingHorizontal: Tokens.dialogBodyPadding,
         minHeight: 30,
     },
     image: {
         height: 50,
         width: 50,
         resizeMode: 'contain',
-        marginRight: 10,
+        marginRight: Tokens.spacingMd,
     },
     titleText: {
         fontFamily: Styles.fontFamilyHeadingRegular,
-        fontWeight: '400',
-        fontSize: 22,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeHeading,
         textTransform: 'uppercase',
         flex: 1,
         flexWrap: 'wrap',

@@ -8,7 +8,7 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 export function TextButton(props: {
@@ -28,7 +28,7 @@ export function TextButton(props: {
     const backgroundColor = props.backgroundColor ?? 'transparent';
     const borderColor = props.borderColor ?? backgroundColor;
     const textColor = props.textColor ?? defaultColor;
-    const textSize = props.textSize ?? 16;
+    const textSize = props.textSize ?? Tokens.fontSizeBody;
 
     const getTitle = (): string => {
         return props.keepFormat ? props.title : props.title.toUpperCase();
@@ -72,22 +72,22 @@ export function TextButton(props: {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 5,
+        margin: Tokens.buttonMargin,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: Tokens.borderRadiusButton,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        padding: 5,
+        borderWidth: Tokens.buttonBorderWidth,
+        padding: Tokens.buttonPadding,
     },
     text: {
         fontFamily: Styles.fontFamilyBodyMedium,
-        fontWeight: '500',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightMedium,
+        fontSize: Tokens.fontSizeBody,
         flexShrink: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 3,
+        paddingHorizontal: Tokens.buttonPaddingHorizontal,
+        paddingVertical: Tokens.buttonPaddingVertical,
     },
 });

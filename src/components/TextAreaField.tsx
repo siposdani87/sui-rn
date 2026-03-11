@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, TextFieldValueType } from './TextField';
 import { StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { Tokens } from '../constants';
 import { BaseFieldProps } from './BaseFieldProps';
 
 export type TextAreaFieldValueType = TextFieldValueType;
@@ -15,12 +16,14 @@ export function TextAreaField(
 ) {
     const style = StyleSheet.flatten(props.style);
     const numberOfLines = props.numberOfLines ?? 5;
-    const height = 20 * numberOfLines + 16;
+    const height =
+        Tokens.lineHeightMultiplier * numberOfLines +
+        Tokens.textAreaPaddingVertical;
 
     const textareaStyle: StyleProp<TextStyle> = {
         height,
         textAlignVertical: 'top',
-        paddingTop: 5,
+        paddingTop: Tokens.spacingSm,
         ...style,
     };
 

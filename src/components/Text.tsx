@@ -6,7 +6,7 @@ import {
     StyleProp,
     TextStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 export function Text(
@@ -31,8 +31,8 @@ export function Text(
 const styles = StyleSheet.create({
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
     },
     lightText: {
         color: Colors.black,

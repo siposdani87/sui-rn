@@ -6,7 +6,7 @@ import React, {
     useState,
 } from 'react';
 import { FlatList, StyleSheet, Pressable, View } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme, useErrorField, useActionColor } from '../hooks';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
@@ -339,9 +339,9 @@ const styles = StyleSheet.create({
         paddingRight: 40,
     },
     flatList: {
-        maxHeight: 175,
-        borderRadius: 3,
-        borderWidth: 1,
+        maxHeight: Tokens.selectListMaxHeight,
+        borderRadius: Tokens.borderRadiusInput,
+        borderWidth: Tokens.inputBorderWidth,
     },
     flatListDark: {
         backgroundColor: 'rgba(255, 255, 255, .03)',
@@ -353,11 +353,11 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        borderRadius: 3,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
+        paddingHorizontal: Tokens.inputPaddingHorizontal,
+        paddingVertical: Tokens.spacingSm,
+        borderRadius: Tokens.borderRadiusInput,
     },
     selectedItemLight: {
         backgroundColor: Colors.inputDefaultLight,

@@ -7,7 +7,7 @@ import {
     Pressable,
     ViewStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
@@ -75,7 +75,7 @@ export function Label(props: {
                     <IconButton
                         containerStyle={styles.infoContainer}
                         iconName="info"
-                        iconSize={20}
+                        iconSize={Tokens.iconSizeSmall}
                         iconColor={
                             isDarkTheme ? Colors.primaryBright : Colors.primary
                         }
@@ -90,12 +90,12 @@ export function Label(props: {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginBottom: 3,
+        marginBottom: Tokens.spacingXs,
     },
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
     },
     labelDefaultLightText: {
         color: Colors.labelDefaultLight,

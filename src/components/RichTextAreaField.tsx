@@ -13,13 +13,13 @@ import {
     ActionMap,
     RichTextEditor,
 } from '@siposdani87/expo-rich-text-editor';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useErrorField, useInputStyle, useActionColor } from '../hooks';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { BaseFieldProps } from './BaseFieldProps';
 
 const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
-    const size = 24;
+    const size = Tokens.iconSizeAction;
 
     return {
         [ActionKey.undo]: ({ selected }) => (
@@ -100,7 +100,9 @@ export function RichTextAreaField(
     const containerStyle = StyleSheet.flatten([styles.container, inputStyle]);
     const getActionColor = useActionColor(props.disabled);
     const numberOfLines = props.numberOfLines ?? 5;
-    const height = 20 * numberOfLines + 16;
+    const height =
+        Tokens.lineHeightMultiplier * numberOfLines +
+        Tokens.textAreaPaddingVertical;
 
     const onValueChange = (v: RichTextAreaFieldValueType): void => {
         onErrorChange();
@@ -141,14 +143,14 @@ export function RichTextAreaField(
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 3,
-        borderWidth: 1,
-        padding: 10,
+        borderRadius: Tokens.borderRadiusInput,
+        borderWidth: Tokens.inputBorderWidth,
+        padding: Tokens.inputPaddingHorizontal,
     },
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
     },
     toolbar: {},
 });

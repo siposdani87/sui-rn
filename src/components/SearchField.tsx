@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Styles } from '../constants';
+import { Styles, Tokens } from '../constants';
 import { useActionColor } from '../hooks';
 import { IconButton } from './IconButton';
 import { TextField, TextFieldValueType } from './TextField';
@@ -31,7 +31,7 @@ export function SearchField(
         actionsButtons.push(
             <IconButton
                 iconName="close"
-                iconSize={20}
+                iconSize={Tokens.iconSizeSmall}
                 style={{ padding: 7 }}
                 containerStyle={Styles.fieldIconButton}
                 iconColor={getActionColor()}
