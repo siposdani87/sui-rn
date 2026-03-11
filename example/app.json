@@ -10,22 +10,18 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.siposdani87.suirn"
+      "bundleIdentifier": "com.siposdani87.suirn",
+      "newArchEnabled": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.siposdani87.suirn"
+      "package": "com.siposdani87.suirn",
+      "newArchEnabled": true
     },
     "plugins": [
       "expo-font",

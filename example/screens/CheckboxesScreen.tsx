@@ -71,34 +71,34 @@ export default function CheckboxesScreen() {
                             label="Yes"
                             value={data.radioButton}
                             trueValue="yes"
-                            onValueChange={(v) => updateData('radioButton', v)}
+                            onValueChange={(v) => updateData('radioButton', (v as string) ?? null)}
                         />
                         <RadioButtonField
                             label="No"
                             value={data.radioButton}
                             trueValue="no"
-                            onValueChange={(v) => updateData('radioButton', v)}
+                            onValueChange={(v) => updateData('radioButton', (v as string) ?? null)}
                         />
                     </View>
 
                     <CheckboxField
                         label="Checkbox"
                         value={data.checkbox}
-                        onValueChange={(v) => updateData('checkbox', v)}
+                        onValueChange={(v) => updateData('checkbox', (v as boolean) ?? null)}
                     />
 
                     <CheckboxField
                         label="Checkbox required"
                         required={true}
                         value={data.checkboxRequired}
-                        onValueChange={(v) => updateData('checkboxRequired', v)}
+                        onValueChange={(v) => updateData('checkboxRequired', (v as boolean) ?? null)}
                     />
 
                     <CheckboxField
                         label="Checkbox disabled"
                         disabled={true}
                         value={data.checkboxDisabled}
-                        onValueChange={(v) => updateData('checkboxDisabled', v)}
+                        onValueChange={(v) => updateData('checkboxDisabled', (v as boolean) ?? null)}
                     />
 
                     <CheckboxField
@@ -106,27 +106,27 @@ export default function CheckboxesScreen() {
                         required={true}
                         disabled={true}
                         value={data.checkboxRequiredDisabled}
-                        onValueChange={(v) => updateData('checkboxRequiredDisabled', v)}
+                        onValueChange={(v) => updateData('checkboxRequiredDisabled', (v as boolean) ?? null)}
                     />
 
                     <SwitchField
                         label="Switch"
                         value={data.switch}
-                        onValueChange={(v) => updateData('switch', v)}
+                        onValueChange={(v) => updateData('switch', (v as boolean) ?? null)}
                     />
 
                     <SwitchField
                         label="Switch required"
                         value={data.switchRequired}
                         required={true}
-                        onValueChange={(v) => updateData('switchRequired', v)}
+                        onValueChange={(v) => updateData('switchRequired', (v as boolean) ?? null)}
                     />
 
                     <SwitchField
                         label="Switch disabled"
                         value={data.switchDisabled}
                         disabled={true}
-                        onValueChange={(v) => updateData('switchDisabled', v)}
+                        onValueChange={(v) => updateData('switchDisabled', (v as boolean) ?? null)}
                     />
 
                     <SwitchField
@@ -134,13 +134,13 @@ export default function CheckboxesScreen() {
                         value={data.switchRequiredDisabled}
                         required={true}
                         disabled={true}
-                        onValueChange={(v) => updateData('switchRequiredDisabled', v)}
+                        onValueChange={(v) => updateData('switchRequiredDisabled', (v as boolean) ?? null)}
                     />
 
                     <IconToggleField
                         label="I agree with the rules? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non scelerisque magna."
                         value={data.iconToggle}
-                        onValueChange={(v) => updateData('iconToggle', v)}
+                        onValueChange={(v) => updateData('iconToggle', (v as boolean) ?? null)}
                         checkedIcon="check-circle"
                         uncheckedIcon="highlight-off"
                     />

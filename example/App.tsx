@@ -26,22 +26,22 @@ import { Colors, setThemeColors, setThemeStyles, useDarkTheme } from '@siposdani
 import * as SplashScreen from 'expo-splash-screen';
 
 
-setThemeColors(
-    Colors.deepPurpleBright,
-    Colors.deepPurple,
-    Colors.deepPurpleDark,
-    Colors.white,
-    Colors.cyanBright,
-    Colors.cyan,
-    Colors.cyanDark,
-    Colors.white,
-);
+setThemeColors({
+    primaryBright: Colors.deepPurpleBright,
+    primary: Colors.deepPurple,
+    primaryDark: Colors.deepPurpleDark,
+    primaryText: Colors.white,
+    accentBright: Colors.cyanBright,
+    accent: Colors.cyan,
+    accentDark: Colors.cyanDark,
+    accentText: Colors.white,
+});
 
-setThemeStyles(
-    'Ubuntu_400Regular',
-    ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'],
-    ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'],
-);
+setThemeStyles({
+    fontFamilyApp: 'Ubuntu_400Regular',
+    fontFamilyHeadings: ['Oswald_400Regular', 'Oswald_500Medium', 'Oswald_700Bold'],
+    fontFamilyBodies: ['Inter_400Regular', 'Inter_500Medium', 'Inter_700Bold'],
+});
 
 const appLightTheme: Theme = {
     ...DefaultTheme,

@@ -52,7 +52,7 @@ export default function FilesScreen() {
                         value={data.logoPicture}
                         defaultValue={{ uri: defaultValue }}
                         mimeType="image/*"
-                        onValueChange={(v) => updateData('logoPicture', v)}
+                        onValueChange={(v) => updateData('logoPicture', v ? { uri: v } : null)}
                         required={true}
                     />
 
@@ -62,7 +62,7 @@ export default function FilesScreen() {
                         defaultValue={{ uri: defaultValue }}
                         mimeType="image/*"
                         onValueChange={(v) =>
-                            updateData('logoPictureDefault', v)
+                            updateData('logoPictureDefault', v ? { uri: v } : null)
                         }
                         required={true}
                     />
@@ -72,14 +72,14 @@ export default function FilesScreen() {
                         value={data.profilePicture}
                         defaultValue={require('../assets/icon.png')}
                         mimeType="image/*"
-                        onValueChange={(v) => updateData('profilePicture', v)}
+                        onValueChange={(v) => updateData('profilePicture', v ? { uri: v } : null)}
                     />
 
                     <FileField
                         label="Document"
                         value={data.document}
                         mimeType="application/pdf"
-                        onValueChange={(v) => updateData('document', v)}
+                        onValueChange={(v) => updateData('document', v ? { uri: v } : null)}
                     />
 
                     <FileField
@@ -87,7 +87,7 @@ export default function FilesScreen() {
                         value={data.documentDisabled}
                         mimeType="text/html"
                         onValueChange={(v) =>
-                            updateData('documentdocumentDisabled', v)
+                            updateData('documentDisabled', v ? { uri: v } : null)
                         }
                         disabled={true}
                     />
