@@ -1,25 +1,18 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
 import { IconToggleField, IconToggleFieldValueType } from './IconToggleField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type CheckboxFieldValueType = IconToggleFieldValueType;
 
-export function CheckboxField(props: {
-    value: CheckboxFieldValueType;
-    trueValue?: CheckboxFieldValueType;
-    falseValue?: CheckboxFieldValueType;
-    onValueChange: (value: CheckboxFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-    children?: ReactNode;
-}) {
+export function CheckboxField(
+    props: BaseFieldProps & {
+        value: CheckboxFieldValueType;
+        trueValue?: CheckboxFieldValueType;
+        falseValue?: CheckboxFieldValueType;
+        onValueChange: (value: CheckboxFieldValueType) => void;
+        children?: ReactNode;
+    },
+) {
     return (
         <IconToggleField
             value={props.value}

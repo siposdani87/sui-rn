@@ -1,0 +1,308 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Label renders required indicator 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+        "marginBottom": 3,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <Text
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#212121",
+          },
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            undefined,
+            {
+              "color": "#757575",
+            },
+          ],
+        ]
+      }
+    >
+      Email
+       
+      *
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Label renders with description 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+        "marginBottom": 3,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <Text
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#212121",
+          },
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            undefined,
+            {
+              "color": "#757575",
+            },
+          ],
+        ]
+      }
+    >
+      Password
+       
+    </Text>
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "margin": 5,
+        },
+        {
+          "margin": 0,
+          "position": "absolute",
+          "right": -5,
+          "top": -5,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 20,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "padding": 5,
+          },
+          {
+            "backgroundColor": "transparent",
+            "borderColor": "transparent",
+          },
+          null,
+          undefined,
+        ]
+      }
+    >
+      <View
+        name="info"
+        style={
+          [
+            {
+              "fontSize": 26,
+            },
+            {
+              "color": "#3F51B5",
+              "fontSize": 20,
+            },
+          ]
+        }
+        testID="material-icon"
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Label renders with text 1`] = `
+<View
+  style={
+    [
+      {
+        "flexDirection": "row",
+        "marginBottom": 3,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <Text
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#212121",
+          },
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            undefined,
+            {
+              "color": "#757575",
+            },
+          ],
+        ]
+      }
+    >
+      Username
+       
+    </Text>
+  </View>
+</View>
+`;

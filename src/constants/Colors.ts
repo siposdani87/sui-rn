@@ -1,8 +1,4 @@
-export type ColorsType = {
-    [key: string]: string;
-};
-
-const baseColors: ColorsType = {
+const baseColors = {
     // Primary & Accent
 
     primaryBright: '#7986CB',
@@ -34,10 +30,6 @@ const baseColors: ColorsType = {
     blackDark: '#000000',
 
     // Material Design Palette
-
-    // greyBright: '#E0E0E0',
-    // grey: '#9E9E9E',
-    // greyDark: '#616161',
 
     blueGreyBright: '#90A4AE',
     blueGrey: '#607D8B',
@@ -112,7 +104,7 @@ const baseColors: ColorsType = {
     brownDark: '#5D4037',
 };
 
-const themeColors: ColorsType = {
+const themeColors = {
     successBright: baseColors.greenBright,
     success: baseColors.green,
     successDark: baseColors.greenDark,
@@ -181,43 +173,47 @@ const colors = {
     ...themeColors,
 };
 
-export function setThemeColors(
-    primaryBright: string,
-    primary: string,
-    primaryDark: string,
-    primaryText: string,
-    accentBright: string,
-    accent: string,
-    accentDark: string,
-    accentText: string,
-) {
-    colors.primaryBright = primaryBright;
-    colors.primary = primary;
-    colors.primaryDark = primaryDark;
-    colors.primaryText = primaryText;
+export type ColorsType = typeof colors;
 
-    colors.accentBright = accentBright;
-    colors.accent = accent;
-    colors.accentDark = accentDark;
-    colors.accentText = accentText;
+export interface ThemeColorsOptions {
+    primaryBright: string;
+    primary: string;
+    primaryDark: string;
+    primaryText: string;
+    accentBright: string;
+    accent: string;
+    accentDark: string;
+    accentText: string;
+}
 
-    colors.primaryDefaultLight = primary;
-    colors.primaryDefaultDark = primaryBright;
-    colors.accentDefaultLight = accent;
-    colors.accentDefaultDark = accentBright;
+export function setThemeColors(options: ThemeColorsOptions): ColorsType {
+    colors.primaryBright = options.primaryBright;
+    colors.primary = options.primary;
+    colors.primaryDark = options.primaryDark;
+    colors.primaryText = options.primaryText;
+
+    colors.accentBright = options.accentBright;
+    colors.accent = options.accent;
+    colors.accentDark = options.accentDark;
+    colors.accentText = options.accentText;
+
+    colors.primaryDefaultLight = options.primary;
+    colors.primaryDefaultDark = options.primaryBright;
+    colors.accentDefaultLight = options.accent;
+    colors.accentDefaultDark = options.accentBright;
 
     return colors;
 }
 
-setThemeColors(
-    colors.indigoBright,
-    colors.indigo,
-    colors.indigoDark,
-    colors.white,
-    colors.pinkBright,
-    colors.pink,
-    colors.pinkDark,
-    colors.white,
-);
+setThemeColors({
+    primaryBright: colors.indigoBright,
+    primary: colors.indigo,
+    primaryDark: colors.indigoDark,
+    primaryText: colors.white,
+    accentBright: colors.pinkBright,
+    accent: colors.pink,
+    accentDark: colors.pinkDark,
+    accentText: colors.white,
+});
 
 export default colors;

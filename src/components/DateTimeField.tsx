@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useCallback, ReactNode } from 'react';
-import { View, StyleSheet, Platform, StyleProp, ViewStyle } from 'react-native';
+import React, {
+    useState,
+    useEffect,
+    useCallback,
+    useMemo,
+    ReactNode,
+} from 'react';
+import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker, {
     DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
@@ -11,7 +17,7 @@ import { Button } from './Button';
 import { TagField } from './TagField';
 import { useActionColor } from '../hooks';
 import { format, parse, parseISO } from 'date-fns';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 interface Year {
     label: string;
@@ -83,22 +89,16 @@ const convertToValidValue = (value: DateTimeFieldValueType): Date | string => {
 
 export type DateTimeFieldValueType = Date | string | number | null | undefined;
 
-export function DateTimeField(props: {
-    mode: keyof Modes;
-    value: DateTimeFieldValueType;
-    onValueChange: (value: string | null) => void;
-    okText: string;
-    format: string;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    searchPlaceholder?: string;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
+export function DateTimeField(
+    props: BaseFieldProps & {
+        mode: keyof Modes;
+        value: DateTimeFieldValueType;
+        onValueChange: (value: string | null) => void;
+        okText: string;
+        format: string;
+        searchPlaceholder?: string;
+    },
+) {
     const [value, setValue] = useState<Date | string>(
         convertToValidValue(props.value),
     );
@@ -106,7 +106,9 @@ export function DateTimeField(props: {
     const [date, setDate] = useState<Date | null>(null);
     const [config, setConfig] = useState<Mode>(MODES[props.mode]);
     const [years, setYears] = useState<Year[]>([]);
-    const [pickerMode, setPickerMode] = useState<string>('date');
+    const [pickerMode, setPickerMode] = useState<'date' | 'time' | 'datetime'>(
+        'date',
+    );
     const [visible, setVisible] = useState<boolean>(false);
     const getActionColor = useActionColor(props.disabled);
 
@@ -160,51 +162,57 @@ export function DateTimeField(props: {
         }
     };
 
-    const onValueChange = (d: Date | string | null | undefined): void => {
-        if (d) {
-            const v = getValue(d, config);
-            setValue(v);
-            setFormattedValue(getFormattedValue(d, config));
-            props.onValueChange(v);
-        } else {
-            setValue('');
-            setFormattedValue('');
-            props.onValueChange(null);
-        }
-    };
+    const onValueChange = useCallback(
+        (d: Date | string | null | undefined): void => {
+            if (d) {
+                const v = getValue(d, config);
+                setValue(v);
+                setFormattedValue(getFormattedValue(d, config));
+                props.onValueChange(v);
+            } else {
+                setValue('');
+                setFormattedValue('');
+                props.onValueChange(null);
+            }
+        },
+        [config, getFormattedValue, props.onValueChange],
+    );
 
-    const showCalendar = (): void => {
+    const showMode = useCallback(
+        (currentMode: 'date' | 'time' | 'datetime'): void => {
+            if (!props.disabled) {
+                const dateValue = value ? getDate(value, config) : getNow();
+                setDate(dateValue);
+                setVisible(true);
+                setPickerMode(currentMode);
+            }
+        },
+        [props.disabled, value, config],
+    );
+
+    const showCalendar = useCallback((): void => {
         showMode('date');
-    };
+    }, [showMode]);
 
-    const showClock = (): void => {
+    const showClock = useCallback((): void => {
         showMode('time');
-    };
+    }, [showMode]);
 
-    const showMode = (currentMode: string): void => {
-        if (!props.disabled) {
-            const dateValue = value ? getDate(value, config) : getNow();
-            setDate(dateValue);
-            setVisible(true);
-            setPickerMode(currentMode);
-        }
-    };
-
-    const hide = (): void => {
+    const hide = useCallback((): void => {
         setVisible(false);
-    };
+    }, []);
 
-    const selectDate = (): void => {
+    const selectDate = useCallback((): void => {
         hide();
         onValueChange(date);
-    };
+    }, [hide, onValueChange, date]);
 
     const renderDateTimePicker = (): ReactNode => {
         if (visible) {
             return (
                 <DateTimePicker
                     value={date ?? getNow()}
-                    mode={pickerMode as any}
+                    mode={pickerMode}
                     is24Hour={true}
                     display="default"
                     onChange={onChange}
@@ -214,25 +222,28 @@ export function DateTimeField(props: {
         return undefined;
     };
 
-    const onValuesChange = (values: string[]): void => {
-        if (values.length === 0) {
-            onValueChange(null);
-        } else {
-            onValueChange(values[0]);
-        }
-    };
+    const onValuesChange = useCallback(
+        (values: string[]): void => {
+            if (values.length === 0) {
+                onValueChange(null);
+            } else {
+                onValueChange(values[0]);
+            }
+        },
+        [onValueChange],
+    );
 
-    const getTags = (): string[] => {
+    const tags = useMemo((): string[] => {
         if (formattedValue) {
             return [formattedValue];
         }
         return [];
-    };
+    }, [formattedValue]);
 
-    const getActionButtons = (): ReactNode[] => {
-        const actionButtons: ReactNode[] = [];
+    const actionButtons = useMemo((): ReactNode[] => {
+        const buttons: ReactNode[] = [];
         if (config.calendarType === 'date') {
-            actionButtons.push(
+            buttons.push(
                 <IconButton
                     iconName="event"
                     containerStyle={Styles.fieldIconButton}
@@ -242,7 +253,7 @@ export function DateTimeField(props: {
             );
         }
         if (config.clockType === 'time') {
-            actionButtons.push(
+            buttons.push(
                 <IconButton
                     iconName="schedule"
                     containerStyle={Styles.fieldIconButton}
@@ -251,8 +262,14 @@ export function DateTimeField(props: {
                 />,
             );
         }
-        return actionButtons;
-    };
+        return buttons;
+    }, [
+        config.calendarType,
+        config.clockType,
+        getActionColor,
+        showCalendar,
+        showClock,
+    ]);
 
     useEffect(() => {
         const generateYears = (minYear: number, maxYear: number): Year[] => {
@@ -294,12 +311,12 @@ export function DateTimeField(props: {
                     <TagField
                         style={props.style}
                         label={props.label}
-                        values={getTags()}
+                        values={tags}
                         error={props.error}
                         onValuesChange={onValuesChange}
                         required={props.required}
                         disabled={props.disabled}
-                        actionButtons={getActionButtons()}
+                        actionButtons={actionButtons}
                     />
                     {Platform.OS === 'ios' && (
                         <Dialog

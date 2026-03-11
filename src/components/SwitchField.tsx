@@ -1,39 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField, ErrorValueType } from './ErrorField';
+import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import {
-    View,
-    Switch,
-    StyleSheet,
-    Platform,
-    ColorValue,
-    StyleProp,
-    ViewStyle,
-} from 'react-native';
+import { View, Switch, StyleSheet, Platform, ColorValue } from 'react-native';
 import { Colors } from '../constants';
 import { useErrorField, useDarkTheme } from '../hooks';
+import { BaseFieldProps } from './BaseFieldProps';
 
 interface TrackColor {
     false?: ColorValue;
     true?: ColorValue;
 }
 
-export type SwitchFieldValueType = any;
+export type SwitchFieldValueType = boolean | string | number | null | undefined;
 
-export function SwitchField(props: {
-    value: SwitchFieldValueType;
-    onValueChange: (value: SwitchFieldValueType) => void;
-    trueValue?: SwitchFieldValueType;
-    falseValue?: SwitchFieldValueType;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
+export function SwitchField(
+    props: BaseFieldProps & {
+        value: SwitchFieldValueType;
+        onValueChange: (value: SwitchFieldValueType) => void;
+        trueValue?: SwitchFieldValueType;
+        falseValue?: SwitchFieldValueType;
+    },
+) {
     const trueValue = props.trueValue || true;
     const falseValue = props.falseValue || false;
     const [value, setValue] = useState<SwitchFieldValueType>(props.value);
@@ -79,8 +66,7 @@ export function SwitchField(props: {
         if (props.disabled) {
             return;
         }
-        const v = getValue() ? falseValue : trueValue;
-        onValueChange(v);
+        onValueChange(!getValue());
     };
 
     useEffect(() => {

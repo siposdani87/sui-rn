@@ -5,8 +5,6 @@ import {
     ImageURISource,
     NativeSyntheticEvent,
     LayoutRectangle,
-    StyleProp,
-    ViewStyle,
 } from 'react-native';
 import { TextField } from './TextField';
 import { Colors, Styles } from '../constants';
@@ -22,9 +20,9 @@ import MapView, {
 } from 'react-native-maps';
 import { NumberField } from './NumberField';
 import { useDarkTheme, useActionColor } from '../hooks';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
-type LocationType = {
+export type LocationType = {
     address: string;
     latitude: number;
     longitude: number;
@@ -38,24 +36,18 @@ const defaultValue: LocationFieldValueType = {
     longitude: 0,
 };
 
-export function LocationField(props: {
-    value: LocationFieldValueType;
-    onValueChange: (value: LocationFieldValueType) => void;
-    latitudeText: string;
-    longitudeText: string;
-    markerImage?: ImageURISource;
-    onSearch?: (value: LocationFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-    mapType?: MapType;
-    customMapStyle?: MapStyleElement[];
-}) {
+export function LocationField(
+    props: BaseFieldProps & {
+        value: LocationFieldValueType;
+        onValueChange: (value: LocationFieldValueType) => void;
+        latitudeText: string;
+        longitudeText: string;
+        markerImage?: ImageURISource;
+        onSearch?: (value: LocationFieldValueType) => void;
+        mapType?: MapType;
+        customMapStyle?: MapStyleElement[];
+    },
+) {
     const [value, setValue] = useState<LocationFieldValueType>(
         props.value ?? defaultValue,
     );
@@ -72,21 +64,21 @@ export function LocationField(props: {
         props.onValueChange(v);
     };
 
-    const onAddressChange = (address: string): void => {
+    const onAddressChange = (address: string | null | undefined): void => {
         const v = {
             ...value!,
-            address,
+            address: address ?? '',
         };
         onValueChange(v);
     };
 
-    const onLatitudeChange = (latitude: number): void => {
-        const v = { ...value!, latitude };
+    const onLatitudeChange = (latitude: number | null | undefined): void => {
+        const v = { ...value!, latitude: latitude ?? 0 };
         onValueChange(v);
     };
 
-    const onLongitudeChange = (longitude: number): void => {
-        const v = { ...value!, longitude };
+    const onLongitudeChange = (longitude: number | null | undefined): void => {
+        const v = { ...value!, longitude: longitude ?? 0 };
         onValueChange(v);
     };
 

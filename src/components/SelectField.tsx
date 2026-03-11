@@ -1,58 +1,48 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import {
-    FlatList,
-    StyleProp,
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    ViewStyle,
-} from 'react-native';
+import React, {
+    ReactNode,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
+import { FlatList, StyleSheet, Pressable, View } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme, useErrorField, useActionColor } from '../hooks';
 import { Button } from './Button';
 import { Dialog } from './Dialog';
-import { ErrorValueType } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
 import { SearchField } from './SearchField';
 import { TagField } from './TagField';
 import { Text } from './Text';
-
-type ValueType = any;
+import { BaseFieldProps } from './BaseFieldProps';
 
 type LabelType = string;
 
 export function SelectField<T, K>(
-    props: {
+    props: BaseFieldProps & {
         items: T[];
         okText: string;
         onSearch?: (value: string) => void;
-        label?: string;
-        error?: ErrorValueType;
-        required?: boolean;
-        disabled?: boolean;
-        desc?: string;
-        onPressDesc?: () => void;
         placeholder?: string;
         labelKey?: keyof T;
         valueKey?: keyof T;
         searchPlaceholder?: string;
-        containerStyle?: StyleProp<ViewStyle>;
-        style?: StyleProp<ViewStyle>;
     } & (
-        | {
-              multiple: true;
-              value: K[] | null | undefined;
-              onValueChange: (value: K[] | null | undefined) => void;
-          }
-        | {
-              multiple?: false;
-              value: K | null | undefined;
-              onValueChange: (value: K | null | undefined) => void;
-          }
-    ),
+            | {
+                  multiple: true;
+                  value: K[] | null | undefined;
+                  onValueChange: (value: K[] | null | undefined) => void;
+              }
+            | {
+                  multiple?: false;
+                  value: K | null | undefined;
+                  onValueChange: (value: K | null | undefined) => void;
+              }
+        ),
 ) {
     type PropValueType = typeof props.value;
+    type ValueType = K | null;
     const valueKey = props.valueKey ?? ('value' as keyof T);
     const labelKey = props.labelKey ?? ('label' as keyof T);
 
@@ -102,11 +92,15 @@ export function SelectField<T, K>(
     const getActionColor = useActionColor(props.disabled);
     const isDarkTheme = useDarkTheme();
 
-    const onValueChange = (v: PropValueType): void => {
-        onErrorChange();
-        setValue(v);
-        props.onValueChange(v as any);
-    };
+    const onValueChange = useCallback(
+        (v: PropValueType): void => {
+            onErrorChange();
+            setValue(v);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (props.onValueChange as (value: any) => void)(v);
+        },
+        [onErrorChange, props.onValueChange],
+    );
 
     const getIndex = (v: ValueType | LabelType, key: keyof T): number => {
         return items.findIndex((item) => {
@@ -122,91 +116,112 @@ export function SelectField<T, K>(
         return '';
     };
 
-    const getValue = (l: LabelType): ValueType => {
-        const index = getIndex(l, labelKey);
-        if (index >= 0) {
-            return items[index][valueKey] as ValueType;
-        }
-        return null;
-    };
+    const getValue = useCallback(
+        (l: LabelType): ValueType => {
+            const index = getIndex(l, labelKey);
+            if (index >= 0) {
+                return items[index][valueKey] as ValueType;
+            }
+            return null;
+        },
+        [items, labelKey, valueKey],
+    );
 
-    const keyExtractor = (item: T): string => {
-        return (item[valueKey] || '').toString();
-    };
+    const keyExtractor = useCallback(
+        (item: T): string => {
+            return (item[valueKey] || '').toString();
+        },
+        [valueKey],
+    );
 
     const isSelected = (v: ValueType): boolean => {
         return selectedValues.indexOf(v) !== -1;
     };
 
-    const toggleSelection = (v: ValueType): void => {
-        if (v === null) {
-            setSelectedValues([v]);
-        } else {
-            const hasV = selectedValues.indexOf(v) !== -1;
-            let newSelectedValues = selectedValues.filter((_v) => {
-                return _v !== v && _v !== null;
-            });
-            if (!hasV) {
-                if (props.multiple) {
-                    newSelectedValues.push(v);
-                } else {
-                    newSelectedValues = [v];
-                }
+    const toggleSelection = useCallback(
+        (v: ValueType): void => {
+            if (v === null) {
+                setSelectedValues([v]);
+            } else {
+                setSelectedValues((prev) => {
+                    const hasV = prev.indexOf(v) !== -1;
+                    let newSelectedValues = prev.filter((_v) => {
+                        return _v !== v && _v !== null;
+                    });
+                    if (!hasV) {
+                        if (props.multiple) {
+                            newSelectedValues.push(v);
+                        } else {
+                            newSelectedValues = [v];
+                        }
+                    }
+                    if (newSelectedValues.length === 0) {
+                        newSelectedValues.push(v);
+                    }
+                    return newSelectedValues;
+                });
             }
-            if (newSelectedValues.length === 0) {
-                newSelectedValues.push(v);
-            }
-            setSelectedValues(newSelectedValues);
-        }
-    };
+        },
+        [props.multiple],
+    );
 
-    const selectValue = (): void => {
+    const hideDialog = useCallback((): void => {
+        setVisible(false);
+    }, []);
+
+    const handleValueChanges = useCallback(
+        (values: K[]): void => {
+            if (props.multiple) {
+                onValueChange(values);
+            } else {
+                onValueChange(values[0] || null);
+            }
+        },
+        [props.multiple, onValueChange],
+    );
+
+    const selectValue = useCallback((): void => {
         hideDialog();
         const values = selectedValues.filter((v) => {
             return !!v;
         });
-        handleValueChanges(values);
-    };
+        handleValueChanges(values as K[]);
+    }, [hideDialog, selectedValues, handleValueChanges]);
 
-    const showDialog = (): void => {
+    const showDialog = useCallback((): void => {
         if (!props.disabled) {
             if (props.multiple) {
                 const v = (value as K[]).length === 0 ? [null] : (value as K[]);
                 setSelectedValues(v);
             } else {
-                setSelectedValues([value]);
+                setSelectedValues([value as ValueType]);
             }
             setFilteredItems(convert(props.items, query));
             setVisible(true);
         }
-    };
+    }, [props.disabled, props.multiple, props.items, value, query, convert]);
 
-    const hideDialog = (): void => {
-        setVisible(false);
-    };
+    const searchInItems = useCallback(
+        (q: string | null | undefined): void => {
+            const query = q ?? '';
+            props.onSearch?.(query);
+            setQuery(query);
+            setFilteredItems(convert(props.items, query));
+        },
+        [props.onSearch, props.items, convert],
+    );
 
-    const searchInItems = (q: string): void => {
-        props.onSearch?.(q);
-        setQuery(q);
-        setFilteredItems(convert(props.items, q));
-    };
+    const onValuesChange = useCallback(
+        (tags: string[]): void => {
+            const values = tags.map((tag) => {
+                return getValue(tag);
+            });
+            handleValueChanges(values as K[]);
+        },
+        [getValue, handleValueChanges],
+    );
 
-    const onValuesChange = (tags: string[]): void => {
-        const values = tags.map((tag) => {
-            return getValue(tag);
-        });
-        handleValueChanges(values);
-    };
-
-    const handleValueChanges = (values: K[]): void => {
-        if (props.multiple) {
-            onValueChange(values);
-        } else {
-            onValueChange(values[0] || null);
-        }
-    };
-
-    const getTags = (): string[] => {
+    const tags = useMemo((): string[] => {
         let results: string[] = [];
         if (props.multiple) {
             results =
@@ -214,15 +229,15 @@ export function SelectField<T, K>(
                     return getLabel(v);
                 }) ?? [];
         } else if (value) {
-            results = [getLabel(value)];
+            results = [getLabel(value as ValueType)];
         }
         return results.filter((result) => {
             return !!result;
         });
-    };
+    }, [props.multiple, value, items, labelKey, valueKey]);
 
-    const getActionButtons = (): ReactNode[] => {
-        return [
+    const actionButtons = useMemo(
+        (): ReactNode[] => [
             <IconButton
                 key={0}
                 iconName="expand-more"
@@ -230,8 +245,9 @@ export function SelectField<T, K>(
                 iconColor={getActionColor()}
                 onPress={showDialog}
             />,
-        ];
-    };
+        ],
+        [getActionColor, showDialog],
+    );
 
     const selectedItemStyle = isDarkTheme
         ? styles.selectedItemDark
@@ -257,14 +273,14 @@ export function SelectField<T, K>(
             />
             <TagField
                 style={[props.style, styles.selectInput]}
-                values={getTags()}
+                values={tags}
                 onValuesChange={onValuesChange}
                 onPress={showDialog}
                 error={error}
                 placeholder={props.placeholder}
                 required={props.required}
                 disabled={props.disabled}
-                actionButtons={getActionButtons()}
+                actionButtons={actionButtons}
             />
             <Dialog
                 visible={visible}
@@ -294,21 +310,22 @@ export function SelectField<T, K>(
                     keyExtractor={keyExtractor}
                     data={filteredItems}
                     renderItem={({ item }: { item: T }) => (
-                        <TouchableOpacity
-                            activeOpacity={Styles.activeOpacity}
-                            onPress={() => toggleSelection(item[valueKey])}
+                        <Pressable
+                            onPress={() =>
+                                toggleSelection(item[valueKey] as ValueType)
+                            }
                         >
                             <Text
                                 style={[
                                     styles.itemText,
-                                    isSelected(item[valueKey])
+                                    isSelected(item[valueKey] as ValueType)
                                         ? selectedItemStyle
                                         : null,
                                 ]}
                             >
                                 {item[labelKey] as LabelType}
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                     )}
                 />
             </Dialog>

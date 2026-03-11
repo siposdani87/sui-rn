@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Dialog doesn't render content when not visible 1`] = `null`;
+
+exports[`Dialog renders when visible 1`] = `
+<Modal
+  animationType="fade"
+  onRequestClose={[Function]}
+  statusBarTranslucent={true}
+  transparent={true}
+  visible={true}
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "rgba(0, 0, 0, 0.8)",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "stretch",
+            "borderRadius": 3,
+            "flex": 1,
+            "flexDirection": "column",
+            "justifyContent": "center",
+            "margin": 10,
+            "maxWidth": 520,
+            "minWidth": 360,
+          },
+          {
+            "shadowColor": "#000000",
+            "shadowOffset": {
+              "height": 5,
+              "width": 0,
+            },
+            "shadowOpacity": 0.34,
+            "shadowRadius": 6.27,
+          },
+          null,
+          {
+            "backgroundColor": "#FAFAFA",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "minHeight": 30,
+              "paddingBottom": 5,
+              "paddingHorizontal": 15,
+              "paddingTop": 10,
+            },
+            null,
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "Arial",
+                "fontSize": 16,
+                "fontWeight": "400",
+              },
+              {
+                "color": "#212121",
+              },
+              {
+                "flex": 1,
+                "flexWrap": "wrap",
+                "fontFamily": "Helvetica",
+                "fontSize": 22,
+                "fontWeight": "400",
+                "textTransform": "uppercase",
+              },
+            ]
+          }
+        >
+          Test Dialog
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "padding": 15,
+          }
+        }
+      >
+        <Text>
+          Dialog content
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "flex-end",
+            "paddingBottom": 10,
+            "paddingHorizontal": 10,
+          }
+        }
+      />
+    </View>
+  </View>
+</Modal>
+`;

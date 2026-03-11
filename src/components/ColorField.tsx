@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField, ErrorValueType } from './ErrorField';
+import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import {
-    View,
-    StyleSheet,
-    TouchableOpacity,
-    StyleProp,
-    ViewStyle,
-} from 'react-native';
-import { Colors, Styles } from '../constants';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { Colors } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
+import { BaseFieldProps } from './BaseFieldProps';
 
-export function ColorField(props: {
-    value: string;
-    onValueChange: (value: string) => void;
-    okText: string;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    defaultColor?: string;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-}) {
+export function ColorField(
+    props: BaseFieldProps & {
+        value: string;
+        onValueChange: (value: string) => void;
+        okText: string;
+        defaultColor?: string;
+    },
+) {
     const defaultColor = props.defaultColor ?? Colors.deepGreyBright;
     const [value, setValue] = useState<string>(props.value);
     const [currentColor, setCurrentColor] = useState<string>(defaultColor);
@@ -94,8 +83,7 @@ export function ColorField(props: {
                     />
                 </View>
             </Dialog>
-            <TouchableOpacity
-                activeOpacity={Styles.activeOpacity}
+            <Pressable
                 onPress={showColorPicker}
                 style={styles.colorDotContainer}
             >
@@ -107,7 +95,7 @@ export function ColorField(props: {
                         inputStyle,
                     ]}
                 />
-            </TouchableOpacity>
+            </Pressable>
             <Label
                 text={props.label}
                 onPress={showColorPicker}

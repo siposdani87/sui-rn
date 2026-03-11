@@ -8,7 +8,7 @@ const globals = require('globals');
 
 module.exports = [
   {
-    ignores: ['node_modules/**', 'dist/**', 'example/**', 'eslint.config.js'],
+    ignores: ['node_modules/**', 'dist/**', 'example/**', 'src/__tests__/**', 'eslint.config.js', 'jest.config.js', 'commitlint.config.js'],
   },
   js.configs.recommended,
   {
@@ -43,7 +43,7 @@ module.exports = [
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
     settings: {
       react: {

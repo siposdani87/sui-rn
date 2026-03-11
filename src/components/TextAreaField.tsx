@@ -1,23 +1,18 @@
 import React from 'react';
 import { TextField, TextFieldValueType } from './TextField';
-import { StyleSheet, StyleProp, ViewStyle, TextStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
+import { StyleSheet, StyleProp, TextStyle } from 'react-native';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type TextAreaFieldValueType = TextFieldValueType;
 
-export function TextAreaField(props: {
-    value: TextAreaFieldValueType;
-    onValueChange: (value: TextAreaFieldValueType) => void;
-    numberOfLines?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<TextStyle>;
-}) {
+export function TextAreaField(
+    props: Omit<BaseFieldProps, 'style'> & {
+        value: TextAreaFieldValueType;
+        onValueChange: (value: TextAreaFieldValueType) => void;
+        numberOfLines?: number;
+        style?: StyleProp<TextStyle>;
+    },
+) {
     const style = StyleSheet.flatten(props.style);
     const numberOfLines = props.numberOfLines ?? 5;
     const height = 20 * numberOfLines + 16;

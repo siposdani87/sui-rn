@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { ErrorField, ErrorValueType } from './ErrorField';
+import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -13,25 +13,19 @@ import {
 import { Colors, Styles } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
+import { BaseFieldProps } from './BaseFieldProps';
 
-export type TextFieldValueType = any; // string | null | undefined;
+export type TextFieldValueType = string | null | undefined;
 
 export function TextField(
-    props: {
+    props: Omit<BaseFieldProps, 'style'> & {
         value: TextFieldValueType;
         onValueChange: (value: TextFieldValueType) => void;
         readonly?: boolean;
-        label?: string;
-        error?: ErrorValueType;
-        required?: boolean;
-        disabled?: boolean;
         placeholder?: string;
-        desc?: string;
-        onPressDesc?: () => void;
-        containerStyle?: StyleProp<ViewStyle>;
         style?: StyleProp<TextStyle>;
         actionButtons?: ReactNode[];
-    } & TextInputProps,
+    } & Omit<TextInputProps, 'value' | 'onChangeText'>,
 ) {
     const [value, setValue] = useState<TextFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);

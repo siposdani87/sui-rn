@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Button renders disabled state 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "margin": 5,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "padding": 5,
+        },
+        {
+          "backgroundColor": "#3F51B5",
+          "borderColor": "#3F51B5",
+        },
+        {
+          "shadowColor": "#000000",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.22,
+          "shadowRadius": 2.22,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      adjustsFontSizeToFit={true}
+      numberOfLines={1}
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "paddingHorizontal": 10,
+            "paddingVertical": 3,
+          },
+          {
+            "color": "#FAFAFA",
+            "fontSize": 16,
+            "paddingLeft": undefined,
+          },
+        ]
+      }
+    >
+      SUBMIT
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Button renders with icon 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "margin": 5,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "padding": 5,
+        },
+        {
+          "backgroundColor": "#3F51B5",
+          "borderColor": "#3F51B5",
+        },
+        {
+          "shadowColor": "#000000",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.22,
+          "shadowRadius": 2.22,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      name="add"
+      style={
+        [
+          {
+            "fontSize": 26,
+          },
+          {
+            "marginRight": undefined,
+          },
+          {
+            "color": "#FAFAFA",
+            "fontSize": 26,
+          },
+        ]
+      }
+      testID="material-icon"
+    />
+  </View>
+</View>
+`;
+
+exports[`Button renders with title 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "margin": 5,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "alignItems": "center",
+          "borderRadius": 20,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "padding": 5,
+        },
+        {
+          "backgroundColor": "#3F51B5",
+          "borderColor": "#3F51B5",
+        },
+        {
+          "shadowColor": "#000000",
+          "shadowOffset": {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.22,
+          "shadowRadius": 2.22,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      adjustsFontSizeToFit={true}
+      numberOfLines={1}
+      style={
+        [
+          {
+            "flexShrink": 1,
+            "fontFamily": "Arial",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "paddingHorizontal": 10,
+            "paddingVertical": 3,
+          },
+          {
+            "color": "#FAFAFA",
+            "fontSize": 16,
+            "paddingLeft": undefined,
+          },
+        ]
+      }
+    >
+      SUBMIT
+    </Text>
+  </View>
+</View>
+`;

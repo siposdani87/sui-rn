@@ -6,9 +6,10 @@
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["ESNext"],
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "jsx": "react-native",
     "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
@@ -19,8 +20,7 @@
     "noUnusedParameters": true
   },
   "include": [
-    "src",
-    ".eslintrc.json"
+    "src"
   ],
   "exclude": [
     "**/__mocks__/*",

@@ -15,7 +15,7 @@ import SlidersScreen from '../screens/SlidersScreen';
 import RichTextAreasScreen from '../screens/RichTextAreasScreen';
 import DialogsScreen from '../screens/DialogsScreen';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 export type StackParamList = {
     Buttons: undefined;

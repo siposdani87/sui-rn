@@ -1,26 +1,19 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import { useErrorField } from '../hooks';
 import { IconToggleField, IconToggleFieldValueType } from './IconToggleField';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type RadioButtonFieldField = IconToggleFieldValueType;
 
-export function RadioButtonField(props: {
-    value: RadioButtonFieldField;
-    trueValue?: RadioButtonFieldField;
-    falseValue?: RadioButtonFieldField;
-    onValueChange: (value: RadioButtonFieldField) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-    children?: ReactNode;
-}) {
+export function RadioButtonField(
+    props: BaseFieldProps & {
+        value: RadioButtonFieldField;
+        trueValue?: RadioButtonFieldField;
+        falseValue?: RadioButtonFieldField;
+        onValueChange: (value: RadioButtonFieldField) => void;
+        children?: ReactNode;
+    },
+) {
     const [value, setValue] = useState<RadioButtonFieldField>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
 

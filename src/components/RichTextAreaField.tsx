@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ErrorField, ErrorValueType } from './ErrorField';
+import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import {
     View,
@@ -16,6 +16,7 @@ import {
 import { Colors, Styles } from '../constants';
 import { useErrorField, useInputStyle, useActionColor } from '../hooks';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { BaseFieldProps } from './BaseFieldProps';
 
 const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
     const size = 24;
@@ -77,19 +78,14 @@ const getActionMap = (getColor: (selected: boolean) => string): ActionMap => {
 
 export type RichTextAreaFieldValueType = string | null | undefined;
 
-export function RichTextAreaField(props: {
-    value: RichTextAreaFieldValueType;
-    onValueChange: (value: RichTextAreaFieldValueType) => void;
-    numberOfLines?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<TextStyle>;
-}) {
+export function RichTextAreaField(
+    props: Omit<BaseFieldProps, 'style'> & {
+        value: RichTextAreaFieldValueType;
+        onValueChange: (value: RichTextAreaFieldValueType) => void;
+        numberOfLines?: number;
+        style?: StyleProp<TextStyle>;
+    },
+) {
     const textStyle = StyleSheet.flatten(props.style);
     const [value, setValue] = useState<RichTextAreaFieldValueType>(props.value);
     const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -132,8 +128,8 @@ export function RichTextAreaField(props: {
                 selectionColor={Colors.deepGreyBright}
                 actionMap={getActionMap(getActionColor)}
                 toolbarStyle={styles.toolbar}
-                textStyle={textStyle as any}
-                containerStyle={containerStyle as any}
+                textStyle={textStyle as TextStyle}
+                containerStyle={containerStyle as ViewStyle}
                 disabled={props.disabled}
                 onBlur={() => setIsFocused(false)}
                 onFocus={() => setIsFocused(true)}

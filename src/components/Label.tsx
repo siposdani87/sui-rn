@@ -4,7 +4,7 @@ import {
     StyleSheet,
     StyleProp,
     TextStyle,
-    TouchableOpacity,
+    Pressable,
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles } from '../constants';
@@ -56,15 +56,12 @@ export function Label(props: {
     return (
         <View style={[styles.container, props.containerStyle]}>
             {props.children}
-            <TouchableOpacity
-                activeOpacity={Styles.activeOpacity}
-                onPress={props.onPress}
-            >
+            <Pressable onPress={props.onPress}>
                 <Text style={[styles.text, props.style, getTextStyle()]}>
                     {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
-            </TouchableOpacity>
+            </Pressable>
             {(props.desc || props.onPressDesc) && (
                 <>
                     <Dialog

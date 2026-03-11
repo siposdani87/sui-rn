@@ -1,7 +1,11 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from 'react';
 
-export function useData<T, K = any>(initialValue: T, newValue: T): [T, (key: string, value: K) => void, boolean, () => void] {
+export function useData<T extends object>(
+    initialValue: T,
+    newValue: T,
+): [T, (key: keyof T, value: T[keyof T]) => void, boolean, () => void] {
     const [data, setData] = useState<T>(initialValue);
+    const newValueRef = useRef(newValue);
 
     const [refreshing, setRefreshing] = useState<boolean>(false);
 
@@ -9,22 +13,25 @@ export function useData<T, K = any>(initialValue: T, newValue: T): [T, (key: str
         setRefreshing(true);
 
         setTimeout(() => {
-            setData(newValue);
+            setData(newValueRef.current);
             setRefreshing(false);
         }, 1000);
     }, []);
 
-    const updateData = <K,>(key: string, value: K): void => {
-        console.log('updateData', key, value);
-        setData({
-            ...data,
-            [key]: value,
-        });
-    }
+    const updateData = useCallback(
+        (key: keyof T, value: T[keyof T]): void => {
+            console.log('updateData', key, value);
+            setData((prev) => ({
+                ...prev,
+                [key]: value,
+            }));
+        },
+        [],
+    );
 
     useEffect(() => {
         onRefresh();
-    }, []);
+    }, [onRefresh]);
 
     return [data, updateData, refreshing, onRefresh];
 }

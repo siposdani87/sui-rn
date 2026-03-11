@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ErrorField renders error messages 1`] = `
+<View
+  style={
+    {
+      "height": 17,
+      "marginTop": 3,
+    }
+  }
+>
+  <Text
+    numberOfLines={1}
+    style={
+      [
+        {
+          "fontFamily": "Arial",
+          "fontSize": 12,
+          "fontWeight": "400",
+        },
+        {
+          "color": "#F44336",
+        },
+      ]
+    }
+  >
+    Field is required; Must be valid
+  </Text>
+</View>
+`;

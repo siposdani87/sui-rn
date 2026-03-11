@@ -1,37 +1,25 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    StyleProp,
-    ViewStyle,
-} from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
-import { ErrorField, ErrorValueType } from './ErrorField';
+import { ErrorField } from './ErrorField';
 import { IconButton } from './IconButton';
 import { Label } from './Label';
+import { BaseFieldProps } from './BaseFieldProps';
 
 export type TagFieldValueType = string[];
 
-export function TagField(props: {
-    values: TagFieldValueType;
-    onValuesChange: (value: TagFieldValueType) => void;
-    onPress?: (_index: number) => void;
-    readonly?: boolean;
-    label?: string;
-    error?: ErrorValueType;
-    placeholder?: string;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
-    actionButtons?: ReactNode[];
-}) {
+export function TagField(
+    props: BaseFieldProps & {
+        values: TagFieldValueType;
+        onValuesChange: (value: TagFieldValueType) => void;
+        onPress?: (_index: number) => void;
+        readonly?: boolean;
+        placeholder?: string;
+        actionButtons?: ReactNode[];
+    },
+) {
     const [values, setValues] = useState<TagFieldValueType>(props.values);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
@@ -138,10 +126,7 @@ export function TagField(props: {
                             },
                         ]}
                     >
-                        <TouchableOpacity
-                            activeOpacity={Styles.activeOpacity}
-                            onPress={onPressTag(index)}
-                        >
+                        <Pressable onPress={onPressTag(index)}>
                             <Text
                                 style={[
                                     styles.tagText,
@@ -150,7 +135,7 @@ export function TagField(props: {
                             >
                                 {value}
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                         {allowRemove(value) && (
                             <IconButton
                                 containerStyle={styles.actionButtonContainer}

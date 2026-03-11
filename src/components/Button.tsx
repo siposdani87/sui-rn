@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ComponentProps, useCallback } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity,
+    Pressable,
     Image,
     StyleProp,
     ImageStyle,
@@ -24,7 +24,7 @@ export function Button(props: {
     borderColor?: ColorValue;
     title?: string;
     imageSource?: ImageSourcePropType;
-    iconName?: any;
+    iconName?: string;
     iconSize?: number;
     iconType?: string;
     keepFormat?: boolean;
@@ -62,16 +62,15 @@ export function Button(props: {
         );
     };
 
-    const onPress = (): void => {
+    const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    };
+    }, [props.disabled, props.onPress]);
 
     return (
-        <TouchableOpacity
+        <Pressable
             style={[styles.container, props.containerStyle]}
-            activeOpacity={Styles.activeOpacity}
             onPress={onPress}
         >
             <View
@@ -117,7 +116,11 @@ export function Button(props: {
                             getSpacing(),
                             { color: iconColor, fontSize: iconSize },
                         ]}
-                        name={props.iconName}
+                        name={
+                            props.iconName as ComponentProps<
+                                typeof MaterialIcons
+                            >['name']
+                        }
                     />
                 )}
                 {!!props.iconName && props.iconType === 'Community' && (
@@ -127,7 +130,11 @@ export function Button(props: {
                             getSpacing(),
                             { color: iconColor, fontSize: iconSize },
                         ]}
-                        name={props.iconName}
+                        name={
+                            props.iconName as ComponentProps<
+                                typeof MaterialCommunityIcons
+                            >['name']
+                        }
                     />
                 )}
                 {layout === 'left' && hasTitle() && (
@@ -147,7 +154,7 @@ export function Button(props: {
                     </Text>
                 )}
             </View>
-        </TouchableOpacity>
+        </Pressable>
     );
 }
 
