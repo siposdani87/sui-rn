@@ -8,7 +8,7 @@ const globals = require('globals');
 
 module.exports = [
   {
-    ignores: ['node_modules/**', 'dist/**', 'example/**', 'src/__tests__/**', 'eslint.config.js'],
+    ignores: ['node_modules/**', 'dist/**', 'example/**', 'src/__tests__/**', 'eslint.config.js', 'jest.config.js', 'commitlint.config.js'],
   },
   js.configs.recommended,
   {
