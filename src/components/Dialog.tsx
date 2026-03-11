@@ -1,6 +1,13 @@
 import React, { useEffect, useState, ReactNode, Fragment } from 'react';
-import { Modal, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { Colors, Layout, Styles, Tokens } from '../constants';
+import {
+    Modal,
+    StyleProp,
+    StyleSheet,
+    View,
+    ViewStyle,
+    useWindowDimensions,
+} from 'react-native';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 import { DialogHeader } from './DialogHeader';
 
@@ -14,6 +21,7 @@ export function Dialog(props: {
 }) {
     const [visible, setVisible] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();
+    const { width: windowWidth } = useWindowDimensions();
 
     const onClose = (): void => {
         setVisible(false);
@@ -64,6 +72,12 @@ export function Dialog(props: {
                 <View
                     style={[
                         styles.dialogContainer,
+                        {
+                            minWidth: Math.min(
+                                windowWidth - Tokens.dialogMargin * 2,
+                                360,
+                            ),
+                        },
                         Styles.shadow,
                         props.type ? getStyle(props.type) : null,
                         isDarkTheme
@@ -105,7 +119,6 @@ const styles = StyleSheet.create({
         borderRadius: Tokens.dialogBorderRadius,
         margin: Tokens.dialogMargin,
         maxWidth: Tokens.dialogMaxWidth,
-        minWidth: Math.min(Layout.window.width - Tokens.dialogMargin * 2, 360),
     },
     success: {
         borderTopWidth: Tokens.dialogStatusBorderWidth,

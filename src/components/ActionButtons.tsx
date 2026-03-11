@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode } from 'react';
 import { Platform, View } from 'react-native';
-import { Styles } from '../constants';
+import { Styles, Tokens } from '../constants';
 
 export default function ActionButtons(props: {
     label?: string;
@@ -10,20 +10,13 @@ export default function ActionButtons(props: {
         return null;
     }
 
+    const labelOffset = Tokens.fontSizeBody + Tokens.spacingXs;
+    const platformAdjust = Platform.select({ android: 7, ios: 2 }) ?? 2;
+    const noLabelAdjust = Platform.select({ android: -2, ios: -1 }) ?? -1;
+    const top = props.label ? labelOffset + platformAdjust : noLabelAdjust;
+
     return (
-        <View
-            style={[
-                Styles.actionsContainer,
-                Platform.select({
-                    android: {
-                        top: props.label ? 26 : -2,
-                    },
-                    ios: {
-                        top: props.label ? 21 : -1,
-                    },
-                }),
-            ]}
-        >
+        <View style={[Styles.actionsContainer, { top }]}>
             {props.actionButtons.map((actionButton, key) => (
                 <Fragment key={key}>{actionButton}</Fragment>
             ))}

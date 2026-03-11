@@ -36,6 +36,8 @@ exports[`Dialog renders when visible 1`] = `
             "justifyContent": "center",
             "margin": 10,
             "maxWidth": 520,
+          },
+          {
             "minWidth": 360,
           },
           {
