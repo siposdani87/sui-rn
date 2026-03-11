@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dialog doesn't render content when not visible 1`] = `null`;
 
@@ -12,13 +12,17 @@ exports[`Dialog renders when visible 1`] = `
 >
   <View
     style={
-      {
-        "alignItems": "center",
-        "backgroundColor": "rgba(0, 0, 0, 0.8)",
-        "flex": 1,
-        "flexDirection": "row",
-        "justifyContent": "center",
-      }
+      [
+        {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0.8)",
+        },
+      ]
     }
   >
     <View

@@ -15,7 +15,7 @@ import {
     ImageRequireSource,
     ImageSourcePropType,
 } from 'react-native';
-import { useErrorField, useActionColor } from '../hooks';
+import { useErrorField, useActionColor, useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
@@ -39,10 +39,16 @@ interface MimeType {
     [key: string]: string;
 }
 
-const fileColors: FileColor = {
-    docx: 'blue',
-    xlsx: 'green',
-    pdf: 'red',
+const fileColorsLight: FileColor = {
+    docx: '#1976D2',
+    xlsx: '#388E3C',
+    pdf: '#D32F2F',
+};
+
+const fileColorsDark: FileColor = {
+    docx: '#64B5F6',
+    xlsx: '#81C784',
+    pdf: '#E57373',
 };
 
 const mimeTypes: MimeType = {
@@ -106,9 +112,14 @@ const getFileIconSrc = (type: string, color: string): string => {
     return fileTypeSVG.replace('#000000', color).replace('TYPE', type);
 };
 
-const getSvgXmlByFilename = (filename: string): string => {
+const getSvgXmlByFilename = (
+    filename: string,
+    isDarkTheme: boolean,
+): string => {
     const type = getExtensionName(filename);
-    const color = fileColors[type] ?? 'black';
+    const fileColors = isDarkTheme ? fileColorsDark : fileColorsLight;
+    const fallback = isDarkTheme ? '#BDBDBD' : '#212121';
+    const color = fileColors[type] ?? fallback;
     return getFileIconSrc(type, color);
 };
 
@@ -151,6 +162,7 @@ export function FileField(
     });
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
+    const isDarkTheme = useDarkTheme();
 
     let mediaTypes: ImagePicker.MediaTypeOptions =
         ImagePicker.MediaTypeOptions.All;
@@ -175,15 +187,19 @@ export function FileField(
     const handleDefaultSvgXml = useCallback(
         (v: FileSourceType): void => {
             if (isValidValueUri(v)) {
-                setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
+                setDefaultSvgXml(
+                    getSvgXmlByFilename(getValueUri(v), isDarkTheme),
+                );
             } else {
+                const grey = isDarkTheme ? '#9E9E9E' : '#757575';
+                const errorStroke = isDarkTheme ? '#E57373' : '#D32F2F';
                 const color = props.required
-                    ? 'grey;stroke:red;stroke-width:10;stroke-dasharray:15,10'
-                    : 'grey';
+                    ? `${grey};stroke:${errorStroke};stroke-width:10;stroke-dasharray:15,10`
+                    : grey;
                 setDefaultSvgXml(getFileIconSrc('N/A', color));
             }
         },
-        [props.required],
+        [props.required, isDarkTheme],
     );
 
     const handleDefaultImageSource = useCallback(
@@ -234,11 +250,11 @@ export function FileField(
                     },
                 );
                 const dataUri = getDataUri(fileBase64, filename);
-                setSvgXml(getSvgXmlByFilename(filename));
+                setSvgXml(getSvgXmlByFilename(filename, isDarkTheme));
                 onDataChange(filename, dataUri);
             }
         },
-        [onDataChange],
+        [onDataChange, isDarkTheme],
     );
 
     const openImageLibrary = useCallback(async (): Promise<void> => {
@@ -391,11 +407,11 @@ export function FileField(
 
     useEffect(() => {
         if (isValidValueUri(value)) {
-            setSvgXml(getSvgXmlByFilename(getValueUri(value)));
+            setSvgXml(getSvgXmlByFilename(getValueUri(value), isDarkTheme));
         } else {
             setSvgXml(defaultSvgXml);
         }
-    }, [value, defaultSvgXml]);
+    }, [value, defaultSvgXml, isDarkTheme]);
 
     return (
         <View style={props.containerStyle}>

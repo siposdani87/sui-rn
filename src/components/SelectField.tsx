@@ -344,12 +344,12 @@ const styles = StyleSheet.create({
         borderWidth: Tokens.inputBorderWidth,
     },
     flatListDark: {
-        backgroundColor: 'rgba(255, 255, 255, .03)',
-        borderColor: 'rgba(255, 255, 255, .1)',
+        backgroundColor: Colors.inputDefaultDark,
+        borderColor: Colors.inputDisabledDark,
     },
     flatListLight: {
-        backgroundColor: 'rgba(0, 0, 0, .03)',
-        borderColor: 'rgba(0, 0, 0, .1)',
+        backgroundColor: Colors.inputDisabledLight,
+        borderColor: Colors.inputDefaultLight,
     },
     itemText: {
         fontFamily: Styles.fontFamilyBodyRegular,

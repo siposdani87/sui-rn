@@ -3,7 +3,12 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Colors, Tokens } from '../constants';
-import { useErrorField, useInputStyle, usePressableStyle } from '../hooks';
+import {
+    useErrorField,
+    useInputStyle,
+    useDarkTheme,
+    usePressableStyle,
+} from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
@@ -22,6 +27,7 @@ export function ColorField(
     const [currentColor, setCurrentColor] = useState<string>(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
     const [visible, setVisible] = useState<boolean>(false);
+    const isDarkTheme = useDarkTheme();
     const pressable = usePressableStyle(styles.colorDotContainer);
     const inputStyle = useInputStyle(
         value,
@@ -92,7 +98,12 @@ export function ColorField(
                 <View
                     style={[
                         styles.colorDot,
-                        { backgroundColor: getValue() },
+                        {
+                            backgroundColor: getValue(),
+                            borderColor: isDarkTheme
+                                ? Colors.white
+                                : Colors.black,
+                        },
                         props.style,
                         inputStyle,
                     ]}
@@ -127,7 +138,7 @@ const styles = StyleSheet.create({
         width: Tokens.borderRadiusColorDot * 2,
         height: Tokens.borderRadiusColorDot * 2,
         borderRadius: Tokens.borderRadiusColorDot,
-        borderColor: Colors.black,
+        borderColor: Colors.black, // overridden inline for dark mode
         borderWidth: Tokens.inputBorderWidth,
     },
     colorPickerContainer: {

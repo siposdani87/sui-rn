@@ -53,7 +53,14 @@ export function Dialog(props: {
             visible={visible}
             onRequestClose={onClose}
         >
-            <View style={styles.dropContainer}>
+            <View
+                style={[
+                    styles.dropContainer,
+                    isDarkTheme
+                        ? styles.dropContainerDark
+                        : styles.dropContainerLight,
+                ]}
+            >
                 <View
                     style={[
                         styles.dialogContainer,
@@ -83,7 +90,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    dropContainerLight: {
         backgroundColor: `rgba(0, 0, 0, ${Tokens.dialogScrimOpacity})`,
+    },
+    dropContainerDark: {
+        backgroundColor: `rgba(0, 0, 0, ${Math.min(Tokens.dialogScrimOpacity + 0.15, 1)})`,
     },
     dialogContainer: {
         flex: 1,
