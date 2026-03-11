@@ -6,7 +6,7 @@ Stay on Expo SDK 54 / React Native 0.81 / React 19.1. Focus on code quality, typ
 
 ## Pre-Release
 
-- [x] Bump version to 1.2.0 in `package.json`
+- [x] Bump version to 1.3.0 in `package.json`
 - [x] Update `@siposdani87/expo-rich-text-editor` to 1.2.1 in example `package.json`
 - [x] Update `@siposdani87/expo-maps-polygon-editor` to 1.2.1 in example `package.json`
 

@@ -20,7 +20,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Environment:**
-- Library version: [e.g. 1.2.0]
+- Library version: [e.g. 1.3.0]
 - Expo SDK: [e.g. 54]
 - React Native: [e.g. 0.81]
 - Platform: [e.g. iOS 17, Android 14]
