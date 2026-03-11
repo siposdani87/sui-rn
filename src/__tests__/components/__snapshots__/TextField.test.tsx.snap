@@ -1,0 +1,421 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`TextField renders with error 1`] = `
+<View
+  style={
+    [
+      {},
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+          "marginBottom": 3,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Text
+        style={
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            {
+              "color": "#212121",
+            },
+            [
+              {
+                "fontFamily": "Arial",
+                "fontSize": 16,
+                "fontWeight": "400",
+              },
+              undefined,
+              {
+                "color": "#757575",
+              },
+            ],
+          ]
+        }
+      >
+        Email
+         
+      </Text>
+    </View>
+  </View>
+  <TextInput
+    editable={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholderTextColor="#9E9E9E"
+    selectionColor="#9E9E9E"
+    style={
+      [
+        {
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "height": 36,
+          "paddingHorizontal": 10,
+        },
+        undefined,
+        {
+          "borderColor": "#F44336",
+          "color": "#212121",
+        },
+        {
+          "paddingRight": 0,
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <View
+    style={
+      {
+        "height": 17,
+        "marginTop": 3,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 12,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#F44336",
+          },
+        ]
+      }
+    >
+      Invalid email address
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`TextField renders with label 1`] = `
+<View
+  style={
+    [
+      {},
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+          "marginBottom": 3,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Text
+        style={
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            {
+              "color": "#212121",
+            },
+            [
+              {
+                "fontFamily": "Arial",
+                "fontSize": 16,
+                "fontWeight": "400",
+              },
+              undefined,
+              {
+                "color": "#757575",
+              },
+            ],
+          ]
+        }
+      >
+        Username
+         
+      </Text>
+    </View>
+  </View>
+  <TextInput
+    editable={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholderTextColor="#9E9E9E"
+    selectionColor="#9E9E9E"
+    style={
+      [
+        {
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "height": 36,
+          "paddingHorizontal": 10,
+        },
+        undefined,
+        {
+          "borderColor": "#BDBDBD",
+          "color": "#212121",
+        },
+        {
+          "paddingRight": 0,
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <View
+    style={
+      {
+        "height": 17,
+        "marginTop": 3,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 12,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#F44336",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`TextField renders with placeholder 1`] = `
+<View
+  style={
+    [
+      {},
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      [
+        {
+          "flexDirection": "row",
+          "marginBottom": 3,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Text
+        style={
+          [
+            {
+              "fontFamily": "Arial",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            {
+              "color": "#212121",
+            },
+            [
+              {
+                "fontFamily": "Arial",
+                "fontSize": 16,
+                "fontWeight": "400",
+              },
+              undefined,
+              {
+                "color": "#757575",
+              },
+            ],
+          ]
+        }
+      >
+        Name
+         
+      </Text>
+    </View>
+  </View>
+  <TextInput
+    editable={true}
+    onBlur={[Function]}
+    onChangeText={[Function]}
+    onFocus={[Function]}
+    placeholder="Enter your name"
+    placeholderTextColor="#9E9E9E"
+    selectionColor="#9E9E9E"
+    style={
+      [
+        {
+          "borderRadius": 3,
+          "borderWidth": 1,
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "height": 36,
+          "paddingHorizontal": 10,
+        },
+        undefined,
+        {
+          "borderColor": "#BDBDBD",
+          "color": "#212121",
+        },
+        {
+          "paddingRight": 0,
+        },
+      ]
+    }
+    underlineColorAndroid="transparent"
+    value=""
+  />
+  <View
+    style={
+      {
+        "height": 17,
+        "marginTop": 3,
+      }
+    }
+  >
+    <Text
+      numberOfLines={1}
+      style={
+        [
+          {
+            "fontFamily": "Arial",
+            "fontSize": 12,
+            "fontWeight": "400",
+          },
+          {
+            "color": "#F44336",
+          },
+        ]
+      }
+    />
+  </View>
+</View>
+`;
