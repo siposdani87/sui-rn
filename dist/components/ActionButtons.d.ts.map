@@ -1,0 +1,1 @@
+{"version":3,"file":"ActionButtons.d.ts","sourceRoot":"","sources":["../../src/components/ActionButtons.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAY,SAAS,EAAE,MAAM,OAAO,CAAC;AAInD,MAAM,CAAC,OAAO,UAAU,aAAa,CAAC,KAAK,EAAE;IACzC,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,aAAa,CAAC,EAAE,SAAS,EAAE,CAAC;CAC/B,4BAwBA"}

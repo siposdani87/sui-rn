@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, } from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SelectField } from './SelectField';
@@ -102,7 +102,7 @@ export function DateTimeField(props) {
             setDate(selectedDate ?? null);
         }
     };
-    const onValueChange = (d) => {
+    const onValueChange = useCallback((d) => {
         if (d) {
             const v = getValue(d, config);
             setValue(v);
@@ -114,58 +114,64 @@ export function DateTimeField(props) {
             setFormattedValue('');
             props.onValueChange(null);
         }
-    };
-    const showCalendar = () => {
-        showMode('date');
-    };
-    const showClock = () => {
-        showMode('time');
-    };
-    const showMode = (currentMode) => {
+    }, [config, getFormattedValue, props.onValueChange]);
+    const showMode = useCallback((currentMode) => {
         if (!props.disabled) {
             const dateValue = value ? getDate(value, config) : getNow();
             setDate(dateValue);
             setVisible(true);
             setPickerMode(currentMode);
         }
-    };
-    const hide = () => {
+    }, [props.disabled, value, config]);
+    const showCalendar = useCallback(() => {
+        showMode('date');
+    }, [showMode]);
+    const showClock = useCallback(() => {
+        showMode('time');
+    }, [showMode]);
+    const hide = useCallback(() => {
         setVisible(false);
-    };
-    const selectDate = () => {
+    }, []);
+    const selectDate = useCallback(() => {
         hide();
         onValueChange(date);
-    };
+    }, [hide, onValueChange, date]);
     const renderDateTimePicker = () => {
         if (visible) {
             return (<DateTimePicker value={date ?? getNow()} mode={pickerMode} is24Hour={true} display="default" onChange={onChange}/>);
         }
         return undefined;
     };
-    const onValuesChange = (values) => {
+    const onValuesChange = useCallback((values) => {
         if (values.length === 0) {
             onValueChange(null);
         }
         else {
             onValueChange(values[0]);
         }
-    };
-    const getTags = () => {
+    }, [onValueChange]);
+    const tags = useMemo(() => {
         if (formattedValue) {
             return [formattedValue];
         }
         return [];
-    };
-    const getActionButtons = () => {
-        const actionButtons = [];
+    }, [formattedValue]);
+    const actionButtons = useMemo(() => {
+        const buttons = [];
         if (config.calendarType === 'date') {
-            actionButtons.push(<IconButton iconName="event" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar}/>);
+            buttons.push(<IconButton iconName="event" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showCalendar}/>);
         }
         if (config.clockType === 'time') {
-            actionButtons.push(<IconButton iconName="schedule" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showClock}/>);
+            buttons.push(<IconButton iconName="schedule" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showClock}/>);
         }
-        return actionButtons;
-    };
+        return buttons;
+    }, [
+        config.calendarType,
+        config.clockType,
+        getActionColor,
+        showCalendar,
+        showClock,
+    ]);
     useEffect(() => {
         const generateYears = (minYear, maxYear) => {
             return Array.from(Array(maxYear - minYear), (_, i) => {
@@ -199,7 +205,7 @@ export function DateTimeField(props) {
     return (<View style={[styles.container, props.containerStyle]}>
             {(config.calendarType === 'date' ||
             config.clockType === 'time') && (<>
-                    <TagField style={props.style} label={props.label} values={getTags()} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>
+                    <TagField style={props.style} label={props.label} values={tags} error={props.error} onValuesChange={onValuesChange} required={props.required} disabled={props.disabled} actionButtons={actionButtons}/>
                     {Platform.OS === 'ios' && (<Dialog visible={visible} title={props.label} onClose={hide} buttons={[
                     <Button key={0} title={props.okText} onPress={selectDate}/>,
                 ]}>

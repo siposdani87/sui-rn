@@ -1,19 +1,13 @@
 import React, { ReactNode } from 'react';
-import { ErrorValueType } from './ErrorField';
-import { TextInputProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
-export type TextFieldValueType = any;
-export declare function TextField(props: {
+import { TextInputProps, StyleProp, TextStyle } from 'react-native';
+import { BaseFieldProps } from './BaseFieldProps';
+export type TextFieldValueType = string | null | undefined;
+export declare function TextField(props: Omit<BaseFieldProps, 'style'> & {
     value: TextFieldValueType;
     onValueChange: (value: TextFieldValueType) => void;
     readonly?: boolean;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
     placeholder?: string;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
     actionButtons?: ReactNode[];
-} & TextInputProps): React.JSX.Element;
+} & Omit<TextInputProps, 'value' | 'onChangeText'>): React.JSX.Element;
+//# sourceMappingURL=TextField.d.ts.map

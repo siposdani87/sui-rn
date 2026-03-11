@@ -24,16 +24,16 @@ export function LocationField(props) {
     const onAddressChange = (address) => {
         const v = {
             ...value,
-            address,
+            address: address ?? '',
         };
         onValueChange(v);
     };
     const onLatitudeChange = (latitude) => {
-        const v = { ...value, latitude };
+        const v = { ...value, latitude: latitude ?? 0 };
         onValueChange(v);
     };
     const onLongitudeChange = (longitude) => {
-        const v = { ...value, longitude };
+        const v = { ...value, longitude: longitude ?? 0 };
         onValueChange(v);
     };
     const onCoordinatehange = (latitude, longitude) => {

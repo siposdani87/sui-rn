@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import { View, Switch, StyleSheet, Platform, } from 'react-native';
+import { View, Switch, StyleSheet, Platform } from 'react-native';
 import { Colors } from '../constants';
 import { useErrorField, useDarkTheme } from '../hooks';
 export function SwitchField(props) {
@@ -47,8 +47,7 @@ export function SwitchField(props) {
         if (props.disabled) {
             return;
         }
-        const v = getValue() ? falseValue : trueValue;
-        onValueChange(v);
+        onValueChange(!getValue());
     };
     useEffect(() => {
         setValue(props.value);

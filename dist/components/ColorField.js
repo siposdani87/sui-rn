@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import { View, StyleSheet, TouchableOpacity, } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { Colors } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
@@ -48,14 +48,14 @@ export function ColorField(props) {
                     <ColorPicker color={currentColor} onColorChangeComplete={onColorChange}/>
                 </View>
             </Dialog>
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={showColorPicker} style={styles.colorDotContainer}>
+            <Pressable onPress={showColorPicker} style={styles.colorDotContainer}>
                 <View style={[
             styles.colorDot,
             { backgroundColor: getValue() },
             props.style,
             inputStyle,
         ]}/>
-            </TouchableOpacity>
+            </Pressable>
             <Label text={props.label} onPress={showColorPicker} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc} containerStyle={styles.label}/>
             <ErrorField error={error} disabled={props.disabled}/>
         </View>);

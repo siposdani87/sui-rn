@@ -7,3 +7,4 @@ export declare function Dialog(props: {
     onClose?: () => void;
     children?: ReactNode;
 }): React.JSX.Element;
+//# sourceMappingURL=Dialog.d.ts.map

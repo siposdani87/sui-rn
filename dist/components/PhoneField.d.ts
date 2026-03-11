@@ -1,18 +1,11 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, TextInputProps, ViewStyle } from 'react-native';
+import { TextInputProps } from 'react-native';
 import { TextFieldValueType } from './TextField';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 export type PhoneFieldValueType = TextFieldValueType;
-export declare function PhoneField(props: {
+export declare function PhoneField(props: BaseFieldProps & {
     value: PhoneFieldValueType;
     onValueChange: (value: PhoneFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
 } & TextInputProps): React.JSX.Element;
+//# sourceMappingURL=PhoneField.d.ts.map

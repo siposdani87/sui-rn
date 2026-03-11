@@ -1,20 +1,12 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 export type TagFieldValueType = string[];
-export declare function TagField(props: {
+export declare function TagField(props: BaseFieldProps & {
     values: TagFieldValueType;
     onValuesChange: (value: TagFieldValueType) => void;
     onPress?: (_index: number) => void;
     readonly?: boolean;
-    label?: string;
-    error?: ErrorValueType;
     placeholder?: string;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
 }): React.JSX.Element;
+//# sourceMappingURL=TagField.d.ts.map

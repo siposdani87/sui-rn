@@ -1,20 +1,12 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
 import { IconToggleFieldValueType } from './IconToggleField';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 export type RadioButtonFieldField = IconToggleFieldValueType;
-export declare function RadioButtonField(props: {
+export declare function RadioButtonField(props: BaseFieldProps & {
     value: RadioButtonFieldField;
     trueValue?: RadioButtonFieldField;
     falseValue?: RadioButtonFieldField;
     onValueChange: (value: RadioButtonFieldField) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     children?: ReactNode;
 }): React.JSX.Element;
+//# sourceMappingURL=RadioButtonField.d.ts.map

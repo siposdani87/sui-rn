@@ -12,3 +12,4 @@ export declare function TextButton(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=TextButton.d.ts.map

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet, TouchableOpacity, Image, } from 'react-native';
+import { View, StyleSheet, Pressable, Image, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
 export function IconButton(props) {
@@ -11,12 +11,12 @@ export function IconButton(props) {
     const borderColor = props.borderColor ?? backgroundColor;
     const iconColor = props.iconColor ?? defaultColor;
     const iconSize = props.iconSize ?? 26;
-    const onPress = () => {
+    const onPress = useCallback(() => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    };
-    return (<TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
+    }, [props.disabled, props.onPress]);
+    return (<Pressable style={[styles.container, props.containerStyle]} onPress={onPress}>
             <View style={[
             styles.button,
             { backgroundColor, borderColor },
@@ -38,7 +38,7 @@ export function IconButton(props) {
                 { color: iconColor, fontSize: iconSize },
             ]} name={props.iconName}/>)}
             </View>
-        </TouchableOpacity>);
+        </Pressable>);
 }
 const styles = StyleSheet.create({
     container: {

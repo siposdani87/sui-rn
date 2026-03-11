@@ -1,18 +1,9 @@
 import React, { ReactNode } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { TextFieldValueType } from './TextField';
-import { ErrorValueType } from './ErrorField';
-export type NumberFieldValueType = TextFieldValueType;
-export declare function NumberField(props: {
+import { BaseFieldProps } from './BaseFieldProps';
+export type NumberFieldValueType = number | null | undefined;
+export declare function NumberField(props: BaseFieldProps & {
     value: NumberFieldValueType;
     onValueChange: (value: NumberFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     actionButtons?: ReactNode[];
 }): React.JSX.Element;
+//# sourceMappingURL=NumberField.d.ts.map

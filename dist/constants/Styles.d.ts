@@ -17,5 +17,11 @@ export type StylesType = {
     actionsContainer: StyleProp<ViewStyle>;
 };
 declare const styles: StylesType;
-export declare function setThemeStyles(fontFamilyApp: string, fontFamilyHeadings: string[], fontFamilyBodies: string[]): StylesType;
+export interface ThemeStylesOptions {
+    fontFamilyApp: string;
+    fontFamilyHeadings: [string, string, string];
+    fontFamilyBodies: [string, string, string];
+}
+export declare function setThemeStyles(options: ThemeStylesOptions): StylesType;
 export default styles;
+//# sourceMappingURL=Styles.d.ts.map

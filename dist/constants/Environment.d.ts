@@ -4,3 +4,4 @@ export type EnvironmentType = {
 declare const environment: EnvironmentType;
 export declare function setEnvironment(darkTheme: boolean | null): EnvironmentType;
 export default environment;
+//# sourceMappingURL=Environment.d.ts.map

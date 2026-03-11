@@ -1,4 +1,5 @@
 export * from './ActionButtons';
+export * from './BaseFieldProps';
 export * from './Button';
 export * from './CheckboxField';
 export * from './ColorField';
@@ -27,3 +28,4 @@ export * from './Text';
 export * from './TextAreaField';
 export * from './TextButton';
 export * from './TextField';
+//# sourceMappingURL=index.d.ts.map

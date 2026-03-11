@@ -11,3 +11,4 @@ export declare function Label(props: {
     style?: StyleProp<ViewStyle>;
     children?: ReactNode;
 }): React.JSX.Element | null;
+//# sourceMappingURL=Label.d.ts.map

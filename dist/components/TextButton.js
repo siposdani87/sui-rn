@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import { StyleSheet, Text, Pressable, View, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
 export function TextButton(props) {
@@ -17,7 +17,7 @@ export function TextButton(props) {
             props.onPress();
         }
     };
-    return (<TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
+    return (<Pressable style={[styles.container, props.containerStyle]} onPress={onPress}>
             <View style={[
             styles.button,
             { backgroundColor, borderColor },
@@ -33,7 +33,7 @@ export function TextButton(props) {
                     {getTitle()}
                 </Text>
             </View>
-        </TouchableOpacity>);
+        </Pressable>);
 }
 const styles = StyleSheet.create({
     container: {

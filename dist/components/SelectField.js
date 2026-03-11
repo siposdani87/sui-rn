@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View, } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState, } from 'react';
+import { FlatList, StyleSheet, Pressable, View } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme, useErrorField, useActionColor } from '../hooks';
 import { Button } from './Button';
@@ -45,11 +45,12 @@ export function SelectField(props) {
     const [error, onErrorChange] = useErrorField(props.error);
     const getActionColor = useActionColor(props.disabled);
     const isDarkTheme = useDarkTheme();
-    const onValueChange = (v) => {
+    const onValueChange = useCallback((v) => {
         onErrorChange();
         setValue(v);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         props.onValueChange(v);
-    };
+    }, [onErrorChange, props.onValueChange]);
     const getIndex = (v, key) => {
         return items.findIndex((item) => {
             return (item[key] || '').toString() === (v || '').toString();
@@ -62,50 +63,63 @@ export function SelectField(props) {
         }
         return '';
     };
-    const getValue = (l) => {
+    const getValue = useCallback((l) => {
         const index = getIndex(l, labelKey);
         if (index >= 0) {
             return items[index][valueKey];
         }
         return null;
-    };
-    const keyExtractor = (item) => {
+    }, [items, labelKey, valueKey]);
+    const keyExtractor = useCallback((item) => {
         return (item[valueKey] || '').toString();
-    };
+    }, [valueKey]);
     const isSelected = (v) => {
         return selectedValues.indexOf(v) !== -1;
     };
-    const toggleSelection = (v) => {
+    const toggleSelection = useCallback((v) => {
         if (v === null) {
             setSelectedValues([v]);
         }
         else {
-            const hasV = selectedValues.indexOf(v) !== -1;
-            let newSelectedValues = selectedValues.filter((_v) => {
-                return _v !== v && _v !== null;
-            });
-            if (!hasV) {
-                if (props.multiple) {
+            setSelectedValues((prev) => {
+                const hasV = prev.indexOf(v) !== -1;
+                let newSelectedValues = prev.filter((_v) => {
+                    return _v !== v && _v !== null;
+                });
+                if (!hasV) {
+                    if (props.multiple) {
+                        newSelectedValues.push(v);
+                    }
+                    else {
+                        newSelectedValues = [v];
+                    }
+                }
+                if (newSelectedValues.length === 0) {
                     newSelectedValues.push(v);
                 }
-                else {
-                    newSelectedValues = [v];
-                }
-            }
-            if (newSelectedValues.length === 0) {
-                newSelectedValues.push(v);
-            }
-            setSelectedValues(newSelectedValues);
+                return newSelectedValues;
+            });
         }
-    };
-    const selectValue = () => {
+    }, [props.multiple]);
+    const hideDialog = useCallback(() => {
+        setVisible(false);
+    }, []);
+    const handleValueChanges = useCallback((values) => {
+        if (props.multiple) {
+            onValueChange(values);
+        }
+        else {
+            onValueChange(values[0] || null);
+        }
+    }, [props.multiple, onValueChange]);
+    const selectValue = useCallback(() => {
         hideDialog();
         const values = selectedValues.filter((v) => {
             return !!v;
         });
         handleValueChanges(values);
-    };
-    const showDialog = () => {
+    }, [hideDialog, selectedValues, handleValueChanges]);
+    const showDialog = useCallback(() => {
         if (!props.disabled) {
             if (props.multiple) {
                 const v = value.length === 0 ? [null] : value;
@@ -117,30 +131,20 @@ export function SelectField(props) {
             setFilteredItems(convert(props.items, query));
             setVisible(true);
         }
-    };
-    const hideDialog = () => {
-        setVisible(false);
-    };
-    const searchInItems = (q) => {
-        props.onSearch?.(q);
-        setQuery(q);
-        setFilteredItems(convert(props.items, q));
-    };
-    const onValuesChange = (tags) => {
+    }, [props.disabled, props.multiple, props.items, value, query, convert]);
+    const searchInItems = useCallback((q) => {
+        const query = q ?? '';
+        props.onSearch?.(query);
+        setQuery(query);
+        setFilteredItems(convert(props.items, query));
+    }, [props.onSearch, props.items, convert]);
+    const onValuesChange = useCallback((tags) => {
         const values = tags.map((tag) => {
             return getValue(tag);
         });
         handleValueChanges(values);
-    };
-    const handleValueChanges = (values) => {
-        if (props.multiple) {
-            onValueChange(values);
-        }
-        else {
-            onValueChange(values[0] || null);
-        }
-    };
-    const getTags = () => {
+    }, [getValue, handleValueChanges]);
+    const tags = useMemo(() => {
         let results = [];
         if (props.multiple) {
             results =
@@ -154,12 +158,10 @@ export function SelectField(props) {
         return results.filter((result) => {
             return !!result;
         });
-    };
-    const getActionButtons = () => {
-        return [
-            <IconButton key={0} iconName="expand-more" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog}/>,
-        ];
-    };
+    }, [props.multiple, value, items, labelKey, valueKey]);
+    const actionButtons = useMemo(() => [
+        <IconButton key={0} iconName="expand-more" containerStyle={Styles.fieldIconButton} iconColor={getActionColor()} onPress={showDialog}/>,
+    ], [getActionColor, showDialog]);
     const selectedItemStyle = isDarkTheme
         ? styles.selectedItemDark
         : styles.selectedItemLight;
@@ -172,7 +174,7 @@ export function SelectField(props) {
     }, [props.items, props.required, props.placeholder, query, convert]);
     return (<View style={[styles.container, props.containerStyle]}>
             <Label text={props.label} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}/>
-            <TagField style={[props.style, styles.selectInput]} values={getTags()} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={getActionButtons()}/>
+            <TagField style={[props.style, styles.selectInput]} values={tags} onValuesChange={onValuesChange} onPress={showDialog} error={error} placeholder={props.placeholder} required={props.required} disabled={props.disabled} actionButtons={actionButtons}/>
             <Dialog visible={visible} title={props.label} onClose={hideDialog} buttons={[
             <Button key={0} title={props.okText} onPress={selectValue}/>,
         ]}>
@@ -182,7 +184,7 @@ export function SelectField(props) {
             isDarkTheme
                 ? styles.flatListDark
                 : styles.flatListLight,
-        ]} removeClippedSubviews={true} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (<TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={() => toggleSelection(item[valueKey])}>
+        ]} removeClippedSubviews={true} keyExtractor={keyExtractor} data={filteredItems} renderItem={({ item }) => (<Pressable onPress={() => toggleSelection(item[valueKey])}>
                             <Text style={[
                 styles.itemText,
                 isSelected(item[valueKey])
@@ -191,7 +193,7 @@ export function SelectField(props) {
             ]}>
                                 {item[labelKey]}
                             </Text>
-                        </TouchableOpacity>)}/>
+                        </Pressable>)}/>
             </Dialog>
         </View>);
 }

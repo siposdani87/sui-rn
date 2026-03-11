@@ -1,4 +1,5 @@
 export * from './ActionButtons';
+export * from './BaseFieldProps';
 export * from './Button';
 export * from './CheckboxField';
 export * from './ColorField';

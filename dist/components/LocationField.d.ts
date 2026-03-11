@@ -1,29 +1,21 @@
 import React from 'react';
-import { ImageURISource, StyleProp, ViewStyle } from 'react-native';
+import { ImageURISource } from 'react-native';
 import { MapStyleElement, MapType } from 'react-native-maps';
-import { ErrorValueType } from './ErrorField';
-type LocationType = {
+import { BaseFieldProps } from './BaseFieldProps';
+export type LocationType = {
     address: string;
     latitude: number;
     longitude: number;
 };
 export type LocationFieldValueType = LocationType | null;
-export declare function LocationField(props: {
+export declare function LocationField(props: BaseFieldProps & {
     value: LocationFieldValueType;
     onValueChange: (value: LocationFieldValueType) => void;
     latitudeText: string;
     longitudeText: string;
     markerImage?: ImageURISource;
     onSearch?: (value: LocationFieldValueType) => void;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     mapType?: MapType;
     customMapStyle?: MapStyleElement[];
 }): React.JSX.Element;
-export {};
+//# sourceMappingURL=LocationField.d.ts.map

@@ -7,3 +7,4 @@ export declare function Link(props: {
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=Link.d.ts.map

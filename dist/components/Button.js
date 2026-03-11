@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { View, StyleSheet, Text, TouchableOpacity, Image, } from 'react-native';
+import { View, StyleSheet, Text, Pressable, Image, } from 'react-native';
 import { Colors, Styles } from '../constants';
 export function Button(props) {
     const backgroundColor = props.backgroundColor ?? Colors.primary;
@@ -26,12 +26,12 @@ export function Button(props) {
     const getTitle = () => {
         return ((props.keepFormat ? props.title : props.title?.toUpperCase()) ?? '');
     };
-    const onPress = () => {
+    const onPress = useCallback(() => {
         if (!props.disabled && props.onPress) {
             props.onPress();
         }
-    };
-    return (<TouchableOpacity style={[styles.container, props.containerStyle]} activeOpacity={Styles.activeOpacity} onPress={onPress}>
+    }, [props.disabled, props.onPress]);
+    return (<Pressable style={[styles.container, props.containerStyle]} onPress={onPress}>
             <View style={[
             styles.button,
             { backgroundColor, borderColor },
@@ -76,7 +76,7 @@ export function Button(props) {
                         {getTitle()}
                     </Text>)}
             </View>
-        </TouchableOpacity>);
+        </Pressable>);
 }
 const styles = StyleSheet.create({
     container: {

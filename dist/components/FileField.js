@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, } from 'react';
 import { Label } from './Label';
 import { View, StyleSheet, Image, Alert, } from 'react-native';
 import { useErrorField, useActionColor } from '../hooks';
@@ -94,14 +94,14 @@ export function FileField(props) {
     else if (isVideo(props.mimeType)) {
         mediaTypes = ImagePicker.MediaTypeOptions.Videos;
     }
-    const options = {
+    const options = useMemo(() => ({
         mediaTypes,
         allowsEditing: true,
         aspect: props.aspect,
         quality: props.quality,
         base64: true,
         exif: true,
-    };
+    }), [mediaTypes, props.aspect, props.quality]);
     const handleDefaultSvgXml = useCallback((v) => {
         if (isValidValueUri(v)) {
             setDefaultSvgXml(getSvgXmlByFilename(getValueUri(v)));
@@ -126,16 +126,18 @@ export function FileField(props) {
         setFileData({ filename, content });
         props.onValueChange(content);
     }, [onErrorChange, props]);
-    const handleImageDataUri = async (result) => {
+    const handleImageDataUri = useCallback(async (result) => {
         if (!result.canceled) {
             const asset = result.assets[0];
-            const filename = asset.fileName ?? asset.uri.split('/').pop() ?? 'unknown.jpeg';
+            const filename = asset.fileName ??
+                asset.uri.split('/').pop() ??
+                'unknown.jpeg';
             const dataUri = getDataUri(asset.base64, filename);
             setImageSource({ uri: dataUri });
             onDataChange(filename, dataUri);
         }
-    };
-    const handleDocumentDataUri = async (result) => {
+    }, [onDataChange]);
+    const handleDocumentDataUri = useCallback(async (result) => {
         if (!result.canceled) {
             const asset = result.assets[0];
             const filename = asset.name;
@@ -146,8 +148,8 @@ export function FileField(props) {
             setSvgXml(getSvgXmlByFilename(filename));
             onDataChange(filename, dataUri);
         }
-    };
-    const openImageLibrary = async () => {
+    }, [onDataChange]);
+    const openImageLibrary = useCallback(async () => {
         if (props.disabled) {
             return;
         }
@@ -158,11 +160,11 @@ export function FileField(props) {
                 await handleImageDataUri(result);
             }
             catch (e) {
-                showAlert(e);
+                showAlert(e instanceof Error ? e : new Error(String(e)));
             }
         }
-    };
-    const openCamera = async () => {
+    }, [props.disabled, options, handleImageDataUri]);
+    const openCamera = useCallback(async () => {
         if (props.disabled) {
             return;
         }
@@ -175,11 +177,11 @@ export function FileField(props) {
                 await handleImageDataUri(result);
             }
             catch (e) {
-                showAlert(e);
+                showAlert(e instanceof Error ? e : new Error(String(e)));
             }
         }
-    };
-    const openDocumentLibrary = async () => {
+    }, [props.disabled, options, handleImageDataUri]);
+    const openDocumentLibrary = useCallback(async () => {
         if (props.disabled) {
             return;
         }
@@ -190,20 +192,27 @@ export function FileField(props) {
             await handleDocumentDataUri(result);
         }
         catch (e) {
-            showAlert(e);
+            showAlert(e instanceof Error ? e : new Error(String(e)));
         }
-    };
+    }, [props.disabled, props.mimeType, handleDocumentDataUri]);
     const isRemovable = () => {
         return !props.required && (isValidValue(value) || !!fileData.content);
     };
-    const remove = () => {
-        if (isRemovable()) {
+    const remove = useCallback(() => {
+        if (!props.required && (isValidValue(value) || !!fileData.content)) {
             setSvgXml(defaultSvgXml);
             setImageSource(defaultImageSource);
             setValue(null);
             onDataChange('', null);
         }
-    };
+    }, [
+        props.required,
+        value,
+        fileData.content,
+        defaultSvgXml,
+        defaultImageSource,
+        onDataChange,
+    ]);
     const isRequired = () => {
         return !!props.required && !isValidValue(value);
     };

@@ -9,7 +9,7 @@ export declare function Button(props: {
     borderColor?: ColorValue;
     title?: string;
     imageSource?: ImageSourcePropType;
-    iconName?: any;
+    iconName?: string;
     iconSize?: number;
     iconType?: string;
     keepFormat?: boolean;
@@ -18,3 +18,4 @@ export declare function Button(props: {
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=Button.d.ts.map

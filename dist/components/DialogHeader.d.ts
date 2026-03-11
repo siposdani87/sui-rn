@@ -5,3 +5,4 @@ export declare function DialogHeader(props: {
     imageSource?: ImageSourcePropType;
     onClose?: () => void;
 }): React.JSX.Element;
+//# sourceMappingURL=DialogHeader.d.ts.map

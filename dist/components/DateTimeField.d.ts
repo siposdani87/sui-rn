@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 interface Mode {
     format?: string;
     calendarType: string;
@@ -16,20 +15,13 @@ interface Modes {
     year: Mode;
 }
 export type DateTimeFieldValueType = Date | string | number | null | undefined;
-export declare function DateTimeField(props: {
+export declare function DateTimeField(props: BaseFieldProps & {
     mode: keyof Modes;
     value: DateTimeFieldValueType;
     onValueChange: (value: string | null) => void;
     okText: string;
     format: string;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
     searchPlaceholder?: string;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
 export {};
+//# sourceMappingURL=DateTimeField.d.ts.map

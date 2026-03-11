@@ -6,10 +6,11 @@ export declare function IconButton(props: {
     backgroundColor?: ColorValue;
     borderColor?: ColorValue;
     imageSource?: ImageSourcePropType;
-    iconName?: any;
+    iconName?: string;
     iconType?: string;
     iconSize?: number;
     disabled?: boolean;
     containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=IconButton.d.ts.map

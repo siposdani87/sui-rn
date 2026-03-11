@@ -1,19 +1,11 @@
 import React from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
+import { BaseFieldProps } from './BaseFieldProps';
 export type SliderFieldValueType = number | undefined | null;
-export declare function SliderField(props: {
+export declare function SliderField(props: BaseFieldProps & {
     value: SliderFieldValueType;
     onValueChange: (value: SliderFieldValueType) => void;
     minimumValue?: number;
     maximumValue?: number;
     step?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=SliderField.d.ts.map

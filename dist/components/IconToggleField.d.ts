@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
-import { ErrorValueType } from './ErrorField';
-import { StyleProp, ViewStyle } from 'react-native';
-export type IconToggleFieldValueType = any;
-export declare function IconToggleField(props: {
+import { BaseFieldProps } from './BaseFieldProps';
+export type IconToggleFieldValueType = boolean | string | number | null | undefined;
+export declare function IconToggleField(props: BaseFieldProps & {
     value: IconToggleFieldValueType;
     checkedIcon: string;
     uncheckedIcon: string;
@@ -10,13 +9,6 @@ export declare function IconToggleField(props: {
     falseValue?: IconToggleFieldValueType;
     onValueChange: (value: IconToggleFieldValueType) => void;
     disableUncheck?: boolean;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    style?: StyleProp<ViewStyle>;
     children?: ReactNode;
 }): React.JSX.Element;
+//# sourceMappingURL=IconToggleField.d.ts.map

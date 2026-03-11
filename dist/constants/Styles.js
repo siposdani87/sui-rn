@@ -70,24 +70,36 @@ const styles = {
         zIndex: 1,
     },
 };
-export function setThemeStyles(fontFamilyApp, fontFamilyHeadings, fontFamilyBodies) {
-    styles.fontFamilyApp = fontFamilyApp;
+export function setThemeStyles(options) {
+    styles.fontFamilyApp = options.fontFamilyApp;
     [
         styles.fontFamilyHeadingRegular,
         styles.fontFamilyHeadingMedium,
         styles.fontFamilyHeadingBold,
-    ] = fontFamilyHeadings;
+    ] = options.fontFamilyHeadings;
     [
         styles.fontFamilyBodyRegular,
         styles.fontFamilyBodyMedium,
         styles.fontFamilyBodyBold,
-    ] = fontFamilyBodies;
+    ] = options.fontFamilyBodies;
     return styles;
 }
 Platform.select({
-    ios: () => setThemeStyles('Verdana', ['Helvetica', 'Helvetica', 'Helvetica'], ['Arial', 'Arial', 'Arial']),
-    android: () => setThemeStyles('monospace', ['sans-serif', 'sans-serif', 'sans-serif'], ['Roboto', 'Roboto', 'Roboto']),
-    default: () => setThemeStyles('Verdana', ['sans-serif', 'sans-serif', 'sans-serif'], ['Arial', 'Arial', 'Arial']),
+    ios: () => setThemeStyles({
+        fontFamilyApp: 'Verdana',
+        fontFamilyHeadings: ['Helvetica', 'Helvetica', 'Helvetica'],
+        fontFamilyBodies: ['Arial', 'Arial', 'Arial'],
+    }),
+    android: () => setThemeStyles({
+        fontFamilyApp: 'monospace',
+        fontFamilyHeadings: ['sans-serif', 'sans-serif', 'sans-serif'],
+        fontFamilyBodies: ['Roboto', 'Roboto', 'Roboto'],
+    }),
+    default: () => setThemeStyles({
+        fontFamilyApp: 'Verdana',
+        fontFamilyHeadings: ['sans-serif', 'sans-serif', 'sans-serif'],
+        fontFamilyBodies: ['Arial', 'Arial', 'Arial'],
+    }),
 })();
 export default styles;
 //# sourceMappingURL=Styles.js.map

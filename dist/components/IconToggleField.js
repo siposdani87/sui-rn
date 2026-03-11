@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
-import { View, StyleSheet, TouchableOpacity, } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { Colors } from '../constants';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useErrorField, useDarkTheme } from '../hooks';
 export function IconToggleField(props) {
@@ -49,9 +49,9 @@ export function IconToggleField(props) {
         setValue(props.value);
     }, [props.value]);
     return (<View style={[styles.container, props.containerStyle]}>
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={toggle} style={[styles.iconToggle, props.style]}>
+            <Pressable onPress={toggle} style={[styles.iconToggle, props.style]}>
                 <MaterialIcons name={getIcon()} size={26} color={getColor()}/>
-            </TouchableOpacity>
+            </Pressable>
             <Label containerStyle={styles.labelContainer} text={props.label} onPress={toggle} required={props.required} disabled={props.disabled} desc={props.desc} onPressDesc={props.onPressDesc}>
                 {props.children}
             </Label>

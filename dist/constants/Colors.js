@@ -22,9 +22,6 @@ const baseColors = {
     black: '#212121',
     blackDark: '#000000',
     // Material Design Palette
-    // greyBright: '#E0E0E0',
-    // grey: '#9E9E9E',
-    // greyDark: '#616161',
     blueGreyBright: '#90A4AE',
     blueGrey: '#607D8B',
     blueGreyDark: '#455A64',
@@ -130,21 +127,30 @@ const colors = {
     ...baseColors,
     ...themeColors,
 };
-export function setThemeColors(primaryBright, primary, primaryDark, primaryText, accentBright, accent, accentDark, accentText) {
-    colors.primaryBright = primaryBright;
-    colors.primary = primary;
-    colors.primaryDark = primaryDark;
-    colors.primaryText = primaryText;
-    colors.accentBright = accentBright;
-    colors.accent = accent;
-    colors.accentDark = accentDark;
-    colors.accentText = accentText;
-    colors.primaryDefaultLight = primary;
-    colors.primaryDefaultDark = primaryBright;
-    colors.accentDefaultLight = accent;
-    colors.accentDefaultDark = accentBright;
+export function setThemeColors(options) {
+    colors.primaryBright = options.primaryBright;
+    colors.primary = options.primary;
+    colors.primaryDark = options.primaryDark;
+    colors.primaryText = options.primaryText;
+    colors.accentBright = options.accentBright;
+    colors.accent = options.accent;
+    colors.accentDark = options.accentDark;
+    colors.accentText = options.accentText;
+    colors.primaryDefaultLight = options.primary;
+    colors.primaryDefaultDark = options.primaryBright;
+    colors.accentDefaultLight = options.accent;
+    colors.accentDefaultDark = options.accentBright;
     return colors;
 }
-setThemeColors(colors.indigoBright, colors.indigo, colors.indigoDark, colors.white, colors.pinkBright, colors.pink, colors.pinkDark, colors.white);
+setThemeColors({
+    primaryBright: colors.indigoBright,
+    primary: colors.indigo,
+    primaryDark: colors.indigoDark,
+    primaryText: colors.white,
+    accentBright: colors.pinkBright,
+    accent: colors.pink,
+    accentDark: colors.pinkDark,
+    accentText: colors.white,
+});
 export default colors;
 //# sourceMappingURL=Colors.js.map

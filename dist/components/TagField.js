@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
@@ -85,14 +85,14 @@ export function TagField(props) {
                         : undefined,
                 },
             ]}>
-                        <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPressTag(index)}>
+                        <Pressable onPress={onPressTag(index)}>
                             <Text style={[
                 styles.tagText,
                 { color: getTextColor() },
             ]}>
                                 {value}
                             </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                         {allowRemove(value) && (<IconButton containerStyle={styles.actionButtonContainer} style={styles.actionButton} iconName="close" iconColor={getTextColor()} iconSize={20} onPress={removeTag(value)}/>)}
                     </View>))}
             </View>

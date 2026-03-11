@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, } from 'react-native';
+import { View, StyleSheet, Pressable, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
 import { IconButton } from './IconButton';
@@ -32,12 +32,12 @@ export function Label(props) {
     }
     return (<View style={[styles.container, props.containerStyle]}>
             {props.children}
-            <TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={props.onPress}>
+            <Pressable onPress={props.onPress}>
                 <Text style={[styles.text, props.style, getTextStyle()]}>
                     {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}
                 </Text>
-            </TouchableOpacity>
+            </Pressable>
             {(props.desc || props.onPressDesc) && (<>
                     <Dialog visible={visible} onClose={() => {
                 setVisible(false);

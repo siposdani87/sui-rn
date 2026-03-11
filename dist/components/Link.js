@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, Pressable, } from 'react-native';
 import { Colors, Styles } from '../constants';
 import { useDarkTheme } from '../hooks';
 export function Link(props) {
@@ -12,9 +12,9 @@ export function Link(props) {
             props.onPress();
         }
     };
-    return (<TouchableOpacity activeOpacity={Styles.activeOpacity} onPress={onPress} style={props.containerStyle}>
+    return (<Pressable onPress={onPress} style={props.containerStyle}>
             <Text style={[styles.text, colorStyle]}>{props.title}</Text>
-        </TouchableOpacity>);
+        </Pressable>);
 }
 const styles = StyleSheet.create({
     text: {

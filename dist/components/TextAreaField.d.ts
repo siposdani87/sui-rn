@@ -1,18 +1,12 @@
 import React from 'react';
 import { TextFieldValueType } from './TextField';
-import { StyleProp, ViewStyle, TextStyle } from 'react-native';
-import { ErrorValueType } from './ErrorField';
+import { StyleProp, TextStyle } from 'react-native';
+import { BaseFieldProps } from './BaseFieldProps';
 export type TextAreaFieldValueType = TextFieldValueType;
-export declare function TextAreaField(props: {
+export declare function TextAreaField(props: Omit<BaseFieldProps, 'style'> & {
     value: TextAreaFieldValueType;
     onValueChange: (value: TextAreaFieldValueType) => void;
     numberOfLines?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=TextAreaField.d.ts.map

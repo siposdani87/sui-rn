@@ -1,17 +1,11 @@
 import React from 'react';
-import { ErrorValueType } from './ErrorField';
-import { StyleProp, ViewStyle, TextStyle } from 'react-native';
+import { StyleProp, TextStyle } from 'react-native';
+import { BaseFieldProps } from './BaseFieldProps';
 export type RichTextAreaFieldValueType = string | null | undefined;
-export declare function RichTextAreaField(props: {
+export declare function RichTextAreaField(props: Omit<BaseFieldProps, 'style'> & {
     value: RichTextAreaFieldValueType;
     onValueChange: (value: RichTextAreaFieldValueType) => void;
     numberOfLines?: number;
-    label?: string;
-    error?: ErrorValueType;
-    required?: boolean;
-    disabled?: boolean;
-    desc?: string;
-    onPressDesc?: () => void;
-    containerStyle?: StyleProp<ViewStyle>;
     style?: StyleProp<TextStyle>;
 }): React.JSX.Element;
+//# sourceMappingURL=RichTextAreaField.d.ts.map
