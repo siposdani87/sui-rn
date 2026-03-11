@@ -3,7 +3,7 @@ import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, Pressable } from 'react-native';
 import { Colors, Tokens } from '../constants';
-import { useErrorField, useInputStyle } from '../hooks';
+import { useErrorField, useInputStyle, usePressableStyle } from '../hooks';
 import ColorPicker from 'react-native-wheel-color-picker';
 import { Dialog } from './Dialog';
 import { Button } from './Button';
@@ -22,6 +22,7 @@ export function ColorField(
     const [currentColor, setCurrentColor] = useState<string>(defaultColor);
     const [error, onErrorChange] = useErrorField(props.error);
     const [visible, setVisible] = useState<boolean>(false);
+    const pressable = usePressableStyle(styles.colorDotContainer);
     const inputStyle = useInputStyle(
         value,
         error,
@@ -85,7 +86,8 @@ export function ColorField(
             </Dialog>
             <Pressable
                 onPress={showColorPicker}
-                style={styles.colorDotContainer}
+                style={pressable.style}
+                android_ripple={pressable.android_ripple}
             >
                 <View
                     style={[

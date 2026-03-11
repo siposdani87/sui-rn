@@ -14,6 +14,7 @@ import {
     ColorValue,
 } from 'react-native';
 import { Colors, Styles, Tokens } from '../constants';
+import { usePressableStyle } from '../hooks';
 
 export function Button(props: {
     onPress: () => void;
@@ -64,6 +65,11 @@ export function Button(props: {
         );
     };
 
+    const pressable = usePressableStyle([
+        styles.container,
+        props.containerStyle,
+    ]);
+
     const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
@@ -72,7 +78,8 @@ export function Button(props: {
 
     return (
         <Pressable
-            style={[styles.container, props.containerStyle]}
+            style={pressable.style}
+            android_ripple={pressable.android_ripple}
             onPress={onPress}
         >
             <View

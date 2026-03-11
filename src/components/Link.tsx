@@ -8,7 +8,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles, Tokens } from '../constants';
-import { useDarkTheme } from '../hooks';
+import { useDarkTheme, usePressableStyle } from '../hooks';
 
 export function Link(props: {
     title: string;
@@ -22,6 +22,8 @@ export function Link(props: {
     const color = props.color ?? defaultColor;
     const colorStyle = { color, textDecorationColor: color };
 
+    const pressable = usePressableStyle(props.containerStyle);
+
     const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
@@ -29,7 +31,11 @@ export function Link(props: {
     };
 
     return (
-        <Pressable onPress={onPress} style={props.containerStyle}>
+        <Pressable
+            onPress={onPress}
+            style={pressable.style}
+            android_ripple={pressable.android_ripple}
+        >
             <Text style={[styles.text, colorStyle]}>{props.title}</Text>
         </Pressable>
     );

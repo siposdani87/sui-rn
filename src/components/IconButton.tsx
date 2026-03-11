@@ -12,7 +12,7 @@ import {
     ColorValue,
 } from 'react-native';
 import { Colors, Styles, Tokens } from '../constants';
-import { useDarkTheme } from '../hooks';
+import { useDarkTheme, usePressableStyle } from '../hooks';
 
 export function IconButton(props: {
     onPress: () => void;
@@ -34,6 +34,11 @@ export function IconButton(props: {
     const iconColor = props.iconColor ?? defaultColor;
     const iconSize = props.iconSize ?? Tokens.iconSizeDefault;
 
+    const pressable = usePressableStyle([
+        styles.container,
+        props.containerStyle,
+    ]);
+
     const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
@@ -42,7 +47,8 @@ export function IconButton(props: {
 
     return (
         <Pressable
-            style={[styles.container, props.containerStyle]}
+            style={pressable.style}
+            android_ripple={pressable.android_ripple}
             onPress={onPress}
         >
             <View

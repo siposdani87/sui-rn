@@ -9,7 +9,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles, Tokens } from '../constants';
-import { useDarkTheme } from '../hooks';
+import { useDarkTheme, usePressableStyle } from '../hooks';
 
 export function TextButton(props: {
     onPress: () => void;
@@ -34,6 +34,11 @@ export function TextButton(props: {
         return props.keepFormat ? props.title : props.title.toUpperCase();
     };
 
+    const pressable = usePressableStyle([
+        styles.container,
+        props.containerStyle,
+    ]);
+
     const onPress = (): void => {
         if (!props.disabled && props.onPress) {
             props.onPress();
@@ -42,7 +47,8 @@ export function TextButton(props: {
 
     return (
         <Pressable
-            style={[styles.container, props.containerStyle]}
+            style={pressable.style}
+            android_ripple={pressable.android_ripple}
             onPress={onPress}
         >
             <View

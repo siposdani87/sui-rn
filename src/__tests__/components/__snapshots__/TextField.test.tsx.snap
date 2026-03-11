@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TextField renders with error 1`] = `
 <View
@@ -50,6 +50,12 @@ exports[`TextField renders with error 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      style={
+        [
+          undefined,
+          null,
+        ]
+      }
     >
       <Text
         style={
@@ -191,6 +197,12 @@ exports[`TextField renders with label 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      style={
+        [
+          undefined,
+          null,
+        ]
+      }
     >
       <Text
         style={
@@ -330,6 +342,12 @@ exports[`TextField renders with placeholder 1`] = `
       onResponderTerminate={[Function]}
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
+      style={
+        [
+          undefined,
+          null,
+        ]
+      }
     >
       <Text
         style={

@@ -8,7 +8,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { Colors, Styles, Tokens } from '../constants';
-import { useDarkTheme } from '../hooks';
+import { useDarkTheme, usePressableStyle } from '../hooks';
 import { IconButton } from './IconButton';
 import { Text } from './Text';
 import { Dialog } from './Dialog';
@@ -28,6 +28,7 @@ export function Label(props: {
     children?: ReactNode;
 }) {
     const isDarkTheme = useDarkTheme();
+    const pressable = usePressableStyle();
     const [visible, setVisible] = useState<boolean>(false);
 
     const getTextStyle = (): StyleProp<TextStyle> => {
@@ -56,7 +57,13 @@ export function Label(props: {
     return (
         <View style={[styles.container, props.containerStyle]}>
             {props.children}
-            <Pressable onPress={props.onPress}>
+            <Pressable
+                onPress={props.onPress}
+                style={pressable.style}
+                android_ripple={
+                    props.onPress ? pressable.android_ripple : undefined
+                }
+            >
                 <Text style={[styles.text, props.style, getTextStyle()]}>
                     {props.text ? capitalize(props.text) : ''}{' '}
                     {props.required ? '*' : ''}

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Label renders required indicator 1`] = `
 <View
@@ -42,6 +42,12 @@ exports[`Label renders required indicator 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        undefined,
+        null,
+      ]
+    }
   >
     <Text
       style={
@@ -118,6 +124,12 @@ exports[`Label renders with description 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        undefined,
+        null,
+      ]
+    }
   >
     <Text
       style={
@@ -180,15 +192,18 @@ exports[`Label renders with description 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       [
-        {
-          "margin": 5,
-        },
-        {
-          "margin": 0,
-          "position": "absolute",
-          "right": -5,
-          "top": -5,
-        },
+        [
+          {
+            "margin": 5,
+          },
+          {
+            "margin": 0,
+            "position": "absolute",
+            "right": -5,
+            "top": -5,
+          },
+        ],
+        null,
       ]
     }
   >
@@ -274,6 +289,12 @@ exports[`Label renders with text 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    style={
+      [
+        undefined,
+        null,
+      ]
+    }
   >
     <Text
       style={
