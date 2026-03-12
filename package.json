@@ -26,7 +26,8 @@
   },
   "sideEffects": [
     "./dist/constants/Colors.js",
-    "./dist/constants/Styles.js"
+    "./dist/constants/Styles.js",
+    "./dist/constants/Tokens.js"
   ],
   "keywords": [
     "sui-rn"
@@ -57,9 +58,8 @@
     "watch": "npm run build -- --watch",
     "type-check": "npx tsc --noEmit",
     "prepare": "husky",
-    "release": "standard-version",
-    "release:minor": "standard-version --release-as minor",
-    "release:major": "standard-version --release-as major",
+    "changelog": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s",
+    "changelog:first": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0",
     "upgrade:packages": "npm install --legacy-peer-deps && cd example && npm install --legacy-peer-deps"
   },
   "peerDependencies": {
@@ -96,6 +96,7 @@
     "@types/react": "~19.1.10",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
+    "conventional-changelog-cli": "^5.0.0",
     "date-fns": "*",
     "eslint": "^9.39.2",
     "expo": "~54.0.33",
@@ -114,7 +115,6 @@
     "react-native-svg": "15.12.1",
     "react-native-wheel-color-picker": "*",
     "react-test-renderer": "^19.1.0",
-    "standard-version": "^9.5.0",
     "typescript": "^5.9.3"
   },
   "lint-staged": {
