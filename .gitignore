@@ -6,6 +6,7 @@ node_modules
 dist/
 
 .claude
+.vscode
 
 # Example app build files
 example/ios/
