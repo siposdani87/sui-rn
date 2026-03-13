@@ -11,13 +11,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 # Library (root)
 npm install --legacy-peer-deps    # Install deps (legacy-peer-deps required)
-npm run build                     # Full build (runs clean → format → lint → tsc)
+npm run build                     # Full build (runs clean → format → type-check → lint → tsc)
 npm run watch                     # TypeScript watch mode for development
 npm run type-check                # Type-check without emitting
 npm run lint                      # ESLint check
 npm run lint:fix                  # ESLint auto-fix
 npm run format                    # Prettier format src/
 npm run format:check              # Prettier check
+npm test                          # Run Jest tests
 
 # Example app
 cd example
@@ -34,14 +35,14 @@ Both projects can be installed together: `npm run upgrade:packages`
 
 ### Library Structure (`src/`)
 
-- **`components/`** — 30+ React Native form/UI components (TextField, Button, Dialog, SelectField, etc.). Each component is a single `.tsx` file with a barrel `index.ts`.
-- **`constants/`** — Design tokens: `Colors.ts` (Material Design palette, light/dark themes via `setThemeColors()`), `Styles.tsx` (fonts, shadows via `setThemeStyles()`), `Layout.ts`, `Environment.ts`.
-- **`hooks/`** — `useInputStyle`, `useErrorField`, `useDarkTheme`, `useActionColor`, `useModalState`.
+- **`components/`** — 29 React Native form/UI components (TextField, Button, Dialog, SelectField, etc.). Each component is a single `.tsx` file with a barrel `index.ts`.
+- **`constants/`** — Design tokens and theming: `Colors.ts` (Material Design palette, light/dark themes via `setThemeColors()`), `Styles.tsx` (fonts, shadows via `setThemeStyles()`), `Tokens.ts` (35+ overridable design tokens via `setThemeTokens()`), `Layout.ts`, `Environment.ts`.
+- **`hooks/`** — `useInputStyle`, `useErrorField`, `useDarkTheme`, `useActionColor`, `useModalState`, `usePressableStyle`.
 - **`index.ts`** — Root barrel re-exporting all components, constants, and hooks.
 
 ### Theming Pattern
 
-Consuming apps customize the library by calling `setThemeColors()` and `setThemeStyles()` at startup (see `example/App.tsx`). Components read from the shared `Colors` and `Styles` objects.
+Consuming apps customize the library by calling `setThemeColors()`, `setThemeStyles()`, and `setThemeTokens()` at startup (see `example/App.tsx`). Components read from the shared `Colors`, `Styles`, and `Tokens` objects. The current pattern uses mutable singletons; a future migration to React Context/Provider is possible.
 
 ### Component Pattern
 
@@ -55,17 +56,29 @@ Expo app using React Navigation to demonstrate all library components across scr
 
 - **Prettier:** 4-space tabs, single quotes, trailing commas, semicolons (`.prettierrc.json`)
 - **ESLint:** Flat config (`eslint.config.js`) with TypeScript, React, React Hooks, and React Native plugins
-- **TypeScript:** Strict mode with all strict checks enabled. Target/module: ESNext, JSX: react-native
+- **TypeScript:** Strict mode with all strict checks enabled. Target/module: ESNext, moduleResolution: Bundler, JSX: react-native
 - **Unused variables:** Prefix with `_` (ESLint configured to allow this)
+- **Commits:** Conventional commits enforced via `commitlint` (`feat:`, `fix:`, `chore:`, etc.)
+
+## Testing
+
+Jest with `jest-expo` preset. Tests live in `src/__tests__/` with unit tests for hooks and snapshot tests for key components.
 
 ## Build Output
 
-TypeScript compiles `src/` → `dist/` with declaration files and source maps. Only `dist/` and `src/` are published to npm.
+TypeScript compiles `src/` → `dist/` with declaration files, declaration maps, and source maps. Only `dist/` and `src/` are published to npm.
 
 ## CI/CD
 
-GitHub Actions (`.github/workflows/npm-publish.yml`) auto-publishes to npm on push to `master`. Requires `NPM_TOKEN` secret.
+- **`.github/workflows/npm-publish.yml`** — auto-publishes to npm on push to `master`. Requires `NPM_TOKEN` secret.
+- **`.github/workflows/ci.yml`** — runs type-check, lint, tests, and build on PRs.
+
+## Developer Experience
+
+- **Husky** — git hooks for pre-commit (lint-staged) and commit-msg (commitlint)
+- **lint-staged** — runs Prettier and ESLint on staged `src/**/*.{ts,tsx}` files
+- **conventional-changelog-cli** — generates `CHANGELOG.md` from conventional commits (`npm run changelog`)
 
 ## Peer Dependencies
 
-The library expects consuming apps to provide: `react`, `react-native`, `@expo/vector-icons`, `@react-native-community/datetimepicker`, `@react-native-community/slider`, `date-fns`, `expo-document-picker`, `expo-file-system`, `expo-image-picker`, `react-native-maps`, `react-native-safe-area-context`, `react-native-svg`, `react-native-wheel-color-picker`, and two author packages (`@siposdani87/expo-maps-polygon-editor`, `@siposdani87/expo-rich-text-editor`).
+The library expects consuming apps to provide: `react`, `react-native`, `@expo/vector-icons`, `@react-native-community/datetimepicker`, `@react-native-community/slider`, `date-fns`, `expo-document-picker`, `expo-file-system`, `expo-image-picker`, `react-native-maps`, `react-native-svg`, `react-native-wheel-color-picker`, and `@siposdani87/expo-rich-text-editor`.
