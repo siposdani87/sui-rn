@@ -2,9 +2,9 @@ import React, { ComponentProps, useState, useEffect, ReactNode } from 'react';
 import { ErrorField } from './ErrorField';
 import { Label } from './Label';
 import { View, StyleSheet, Pressable } from 'react-native';
-import { Colors } from '../constants';
+import { Colors, Tokens } from '../constants';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useErrorField, useDarkTheme } from '../hooks';
+import { useErrorField, useDarkTheme, usePressableStyle } from '../hooks';
 import { BaseFieldProps } from './BaseFieldProps';
 
 export type IconToggleFieldValueType =
@@ -31,6 +31,7 @@ export function IconToggleField(
     const [value, setValue] = useState<IconToggleFieldValueType>(props.value);
     const [error, onErrorChange] = useErrorField(props.error);
     const isDarkTheme = useDarkTheme();
+    const pressable = usePressableStyle([styles.iconToggle, props.style]);
 
     const onValueChange = (v: IconToggleFieldValueType): void => {
         onErrorChange();
@@ -76,7 +77,8 @@ export function IconToggleField(
         <View style={[styles.container, props.containerStyle]}>
             <Pressable
                 onPress={toggle}
-                style={[styles.iconToggle, props.style]}
+                style={pressable.style}
+                android_ripple={pressable.android_ripple}
             >
                 <MaterialIcons
                     name={
@@ -84,7 +86,7 @@ export function IconToggleField(
                             typeof MaterialIcons
                         >['name']
                     }
-                    size={26}
+                    size={Tokens.iconSizeDefault}
                     color={getColor()}
                 />
             </Pressable>

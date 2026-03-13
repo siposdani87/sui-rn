@@ -11,7 +11,6 @@ export type StylesType = {
     shadow: StyleProp<ViewStyle>;
     lightShadow: StyleProp<ViewStyle>;
     noShadow: StyleProp<ViewStyle>;
-    activeOpacity: number;
     floatingButtonContainer: StyleProp<ViewStyle>;
     navigationIconButton: StyleProp<ViewStyle>;
     fieldIconButton: StyleProp<ViewStyle>;
@@ -68,7 +67,6 @@ const styles: StylesType = {
             },
         }),
     },
-    activeOpacity: 0.6,
     floatingButtonContainer: {
         position: 'absolute',
         bottom: 15,

@@ -93,7 +93,7 @@ export function SwitchField(
                 desc={props.desc}
                 onPressDesc={props.onPressDesc}
             />
-            <ErrorField error={error} />
+            <ErrorField error={error} disabled={props.disabled} />
         </View>
     );
 }

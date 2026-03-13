@@ -1,6 +1,13 @@
 import React, { useEffect, useState, ReactNode, Fragment } from 'react';
-import { Modal, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { Colors, Layout, Styles } from '../constants';
+import {
+    Modal,
+    StyleProp,
+    StyleSheet,
+    View,
+    ViewStyle,
+    useWindowDimensions,
+} from 'react-native';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 import { DialogHeader } from './DialogHeader';
 
@@ -14,6 +21,7 @@ export function Dialog(props: {
 }) {
     const [visible, setVisible] = useState<boolean>(false);
     const isDarkTheme = useDarkTheme();
+    const { width: windowWidth } = useWindowDimensions();
 
     const onClose = (): void => {
         setVisible(false);
@@ -53,10 +61,23 @@ export function Dialog(props: {
             visible={visible}
             onRequestClose={onClose}
         >
-            <View style={styles.dropContainer}>
+            <View
+                style={[
+                    styles.dropContainer,
+                    isDarkTheme
+                        ? styles.dropContainerDark
+                        : styles.dropContainerLight,
+                ]}
+            >
                 <View
                     style={[
                         styles.dialogContainer,
+                        {
+                            minWidth: Math.min(
+                                windowWidth - Tokens.dialogMargin * 2,
+                                360,
+                            ),
+                        },
                         Styles.shadow,
                         props.type ? getStyle(props.type) : null,
                         isDarkTheme
@@ -83,36 +104,40 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    },
+    dropContainerLight: {
+        backgroundColor: `rgba(0, 0, 0, ${Tokens.dialogScrimOpacity})`,
+    },
+    dropContainerDark: {
+        backgroundColor: `rgba(0, 0, 0, ${Math.min(Tokens.dialogScrimOpacity + 0.15, 1)})`,
     },
     dialogContainer: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'stretch',
-        borderRadius: 3,
-        margin: 10,
-        maxWidth: 520,
-        minWidth: Math.min(Layout.window.width - 20, 360),
+        borderRadius: Tokens.dialogBorderRadius,
+        margin: Tokens.dialogMargin,
+        maxWidth: Tokens.dialogMaxWidth,
     },
     success: {
-        borderTopWidth: 5,
+        borderTopWidth: Tokens.dialogStatusBorderWidth,
         borderTopColor: Colors.success,
     },
     info: {
-        borderTopWidth: 5,
+        borderTopWidth: Tokens.dialogStatusBorderWidth,
         borderTopColor: Colors.info,
     },
     warning: {
-        borderTopWidth: 5,
+        borderTopWidth: Tokens.dialogStatusBorderWidth,
         borderTopColor: Colors.warning,
     },
     error: {
-        borderTopWidth: 5,
+        borderTopWidth: Tokens.dialogStatusBorderWidth,
         borderTopColor: Colors.error,
     },
     choice: {
-        borderTopWidth: 5,
+        borderTopWidth: Tokens.dialogStatusBorderWidth,
         borderTopColor: Colors.deepGreyBright,
     },
     dialogLightContainer: {
@@ -122,14 +147,14 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.black,
     },
     bodyContainer: {
-        padding: 15,
+        padding: Tokens.dialogBodyPadding,
     },
     footerContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         flexWrap: 'wrap',
         alignItems: 'center',
-        paddingBottom: 10,
-        paddingHorizontal: 10,
+        paddingBottom: Tokens.dialogMargin,
+        paddingHorizontal: Tokens.dialogMargin,
     },
 });

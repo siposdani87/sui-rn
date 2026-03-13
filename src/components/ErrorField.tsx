@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextStyle, StyleProp } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 const capitalize = (str: string): string =>
@@ -42,13 +42,13 @@ export function ErrorField(props: {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 3,
-        height: 17,
+        marginTop: Tokens.spacingXs,
+        height: Tokens.errorFieldHeight,
     },
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 12,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeError,
     },
     errorDefaultLightText: {
         color: Colors.errorDefaultLight,

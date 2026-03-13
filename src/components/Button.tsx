@@ -13,7 +13,8 @@ import {
     ImageSourcePropType,
     ColorValue,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
+import { usePressableStyle } from '../hooks';
 
 export function Button(props: {
     onPress: () => void;
@@ -37,8 +38,8 @@ export function Button(props: {
     const borderColor = props.borderColor ?? backgroundColor;
     const textColor = props.textColor ?? Colors.primaryText;
     const iconColor = props.iconColor ?? textColor;
-    const textSize = props.textSize ?? 16;
-    const iconSize = props.iconSize ?? 26;
+    const textSize = props.textSize ?? Tokens.fontSizeBody;
+    const iconSize = props.iconSize ?? Tokens.iconSizeDefault;
     const layout = props.layout ?? 'left';
 
     const hasIcon = (): boolean => {
@@ -51,9 +52,11 @@ export function Button(props: {
 
     const getSpacing = (): StyleProp<ImageStyle> => {
         if (layout === 'left') {
-            return { marginRight: hasTitle() ? 5 : undefined };
+            return {
+                marginRight: hasTitle() ? Tokens.buttonMargin : undefined,
+            };
         }
-        return { marginLeft: hasTitle() ? 5 : undefined };
+        return { marginLeft: hasTitle() ? Tokens.buttonMargin : undefined };
     };
 
     const getTitle = (): string => {
@@ -61,6 +64,11 @@ export function Button(props: {
             (props.keepFormat ? props.title : props.title?.toUpperCase()) ?? ''
         );
     };
+
+    const pressable = usePressableStyle([
+        styles.container,
+        props.containerStyle,
+    ]);
 
     const onPress = useCallback((): void => {
         if (!props.disabled && props.onPress) {
@@ -70,7 +78,8 @@ export function Button(props: {
 
     return (
         <Pressable
-            style={[styles.container, props.containerStyle]}
+            style={pressable.style}
+            android_ripple={pressable.android_ripple}
             onPress={onPress}
         >
             <View
@@ -160,30 +169,30 @@ export function Button(props: {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 5,
+        margin: Tokens.buttonMargin,
     },
     button: {
-        borderRadius: 20,
+        borderRadius: Tokens.borderRadiusButton,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
-        padding: 5,
+        borderWidth: Tokens.buttonBorderWidth,
+        padding: Tokens.buttonPadding,
     },
     text: {
         fontFamily: Styles.fontFamilyBodyMedium,
-        fontWeight: '500',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightMedium,
+        fontSize: Tokens.fontSizeBody,
         flexShrink: 1,
-        paddingHorizontal: 10,
-        paddingVertical: 3,
+        paddingHorizontal: Tokens.buttonPaddingHorizontal,
+        paddingVertical: Tokens.buttonPaddingVertical,
     },
     image: {
-        width: 22,
-        height: 22,
+        width: Tokens.imageSizeSmall,
+        height: Tokens.imageSizeSmall,
         resizeMode: 'contain',
     },
     icon: {
-        fontSize: 26,
+        fontSize: Tokens.iconSizeDefault,
     },
 });

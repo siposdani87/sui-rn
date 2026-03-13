@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button renders disabled state 1`] = `
 <View
@@ -33,10 +33,13 @@ exports[`Button renders disabled state 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     [
-      {
-        "margin": 5,
-      },
-      undefined,
+      [
+        {
+          "margin": 5,
+        },
+        undefined,
+      ],
+      null,
     ]
   }
 >
@@ -128,10 +131,13 @@ exports[`Button renders with icon 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     [
-      {
-        "margin": 5,
-      },
-      undefined,
+      [
+        {
+          "margin": 5,
+        },
+        undefined,
+      ],
+      null,
     ]
   }
 >
@@ -218,10 +224,13 @@ exports[`Button renders with title 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     [
-      {
-        "margin": 5,
-      },
-      undefined,
+      [
+        {
+          "margin": 5,
+        },
+        undefined,
+      ],
+      null,
     ]
   }
 >

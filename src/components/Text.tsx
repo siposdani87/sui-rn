@@ -6,7 +6,7 @@ import {
     StyleProp,
     TextStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme } from '../hooks';
 
 export function Text(
@@ -16,7 +16,7 @@ export function Text(
 
     const getTextStyle = (): StyleProp<TextStyle> => {
         if (props.muted) {
-            return styles.mutedText;
+            return isDarkTheme ? styles.mutedDarkText : styles.mutedLightText;
         }
         return isDarkTheme ? styles.darkText : styles.lightText;
     };
@@ -31,8 +31,8 @@ export function Text(
 const styles = StyleSheet.create({
     text: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
     },
     lightText: {
         color: Colors.black,
@@ -40,7 +40,10 @@ const styles = StyleSheet.create({
     darkText: {
         color: Colors.white,
     },
-    mutedText: {
+    mutedLightText: {
         color: Colors.deepGreyBright,
+    },
+    mutedDarkText: {
+        color: Colors.lightGreyDark,
     },
 });

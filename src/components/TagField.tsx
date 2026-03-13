@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useDarkTheme, useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 import { ErrorField } from './ErrorField';
@@ -142,7 +142,7 @@ export function TagField(
                                 style={styles.actionButton}
                                 iconName="close"
                                 iconColor={getTextColor()}
-                                iconSize={20}
+                                iconSize={Tokens.iconSizeSmall}
                                 onPress={removeTag(value)}
                             />
                         )}
@@ -161,34 +161,34 @@ export function TagField(
 const styles = StyleSheet.create({
     container: {},
     textInput: {
-        minHeight: 36,
-        borderRadius: 3,
-        borderWidth: 1,
-        paddingHorizontal: 3,
-        paddingTop: 3,
+        minHeight: Tokens.inputHeight,
+        borderRadius: Tokens.borderRadiusInput,
+        borderWidth: Tokens.inputBorderWidth,
+        paddingHorizontal: Tokens.spacingXs,
+        paddingTop: Tokens.spacingXs,
         paddingBottom: 0,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     tagContainer: {
-        borderRadius: 3,
-        minHeight: 20,
-        paddingHorizontal: 10,
+        borderRadius: Tokens.borderRadiusInput,
+        minHeight: Tokens.iconSizeSmall,
+        paddingHorizontal: Tokens.inputPaddingHorizontal,
         paddingVertical: 4,
         flexDirection: 'row',
-        marginRight: 3,
-        marginBottom: 3,
+        marginRight: Tokens.spacingXs,
+        marginBottom: Tokens.spacingXs,
     },
     tagText: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
     },
     actionButtonContainer: {
         margin: 0,
         position: 'absolute',
         right: 0,
-        top: 3,
+        top: Tokens.spacingXs,
         zIndex: 1,
     },
     actionButton: {

@@ -10,7 +10,7 @@ import {
     ViewStyle,
     TextStyle,
 } from 'react-native';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { useErrorField, useInputStyle } from '../hooks';
 import ActionButtons from './ActionButtons';
 import { BaseFieldProps } from './BaseFieldProps';
@@ -50,7 +50,8 @@ export function TextField(
 
     const getActionButtonsStyle = (): StyleProp<ViewStyle> => {
         return {
-            paddingRight: (props.actionButtons?.length ?? 0) * 38,
+            paddingRight:
+                (props.actionButtons?.length ?? 0) * Tokens.actionButtonWidth,
         };
     };
 
@@ -102,11 +103,11 @@ const styles = StyleSheet.create({
     container: {},
     textInput: {
         fontFamily: Styles.fontFamilyBodyRegular,
-        fontWeight: '400',
-        fontSize: 16,
-        height: 36,
-        borderRadius: 3,
-        borderWidth: 1,
-        paddingHorizontal: 10,
+        fontWeight: Tokens.fontWeightRegular,
+        fontSize: Tokens.fontSizeBody,
+        height: Tokens.inputHeight,
+        borderRadius: Tokens.borderRadiusInput,
+        borderWidth: Tokens.inputBorderWidth,
+        paddingHorizontal: Tokens.inputPaddingHorizontal,
     },
 });

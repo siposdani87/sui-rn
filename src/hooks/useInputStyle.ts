@@ -1,6 +1,6 @@
 import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { ErrorValueType } from '../components';
-import { Colors } from '../constants';
+import { Colors, Tokens } from '../constants';
 import { useDarkTheme } from './useDarkTheme';
 
 export function useInputStyle<T>(
@@ -46,7 +46,7 @@ export function useInputStyle<T>(
             const bottomColor = hasError ? errorColor : primaryColor;
 
             return {
-                borderBottomWidth: 3,
+                borderBottomWidth: Tokens.inputFocusBorderWidth,
                 borderBottomColor: bottomColor,
             };
         }

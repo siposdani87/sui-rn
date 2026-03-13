@@ -7,7 +7,7 @@ import {
     LayoutRectangle,
 } from 'react-native';
 import { TextField } from './TextField';
-import { Colors, Styles } from '../constants';
+import { Colors, Styles, Tokens } from '../constants';
 import { IconButton } from './IconButton';
 import MapView, {
     Marker,
@@ -198,7 +198,10 @@ export function LocationField(
             {visibleCoords && (
                 <View style={styles.coordsContainer}>
                     <NumberField
-                        containerStyle={{ flex: 1, marginRight: 5 }}
+                        containerStyle={{
+                            flex: 1,
+                            marginRight: Tokens.spacingSm,
+                        }}
                         label={props.latitudeText}
                         value={value?.latitude}
                         onValueChange={onLatitudeChange}
@@ -206,7 +209,10 @@ export function LocationField(
                         disabled={props.disabled}
                     />
                     <NumberField
-                        containerStyle={{ flex: 1, marginLeft: 5 }}
+                        containerStyle={{
+                            flex: 1,
+                            marginLeft: Tokens.spacingSm,
+                        }}
                         label={props.longitudeText}
                         value={value?.longitude}
                         onValueChange={onLongitudeChange}
@@ -250,6 +256,6 @@ const styles = StyleSheet.create({
         paddingRight: 60,
     },
     mapContainer: {
-        borderRadius: 3,
+        borderRadius: Tokens.borderRadiusInput,
     },
 });

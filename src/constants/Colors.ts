@@ -184,9 +184,56 @@ export interface ThemeColorsOptions {
     accent: string;
     accentDark: string;
     accentText: string;
+
+    // Optional semantic color overrides
+    successBright?: string;
+    success?: string;
+    successDark?: string;
+    successText?: string;
+
+    infoBright?: string;
+    info?: string;
+    infoDark?: string;
+    infoText?: string;
+
+    warningBright?: string;
+    warning?: string;
+    warningDark?: string;
+    warningText?: string;
+
+    errorBright?: string;
+    error?: string;
+    errorDark?: string;
+    errorText?: string;
+
+    labelDefaultLight?: string;
+    labelDisabledLight?: string;
+    labelDefaultDark?: string;
+    labelDisabledDark?: string;
+
+    inputDefaultLight?: string;
+    inputDisabledLight?: string;
+    inputDefaultDark?: string;
+    inputDisabledDark?: string;
+
+    contentDefaultLight?: string;
+    contentDisabledLight?: string;
+    contentDefaultDark?: string;
+    contentDisabledDark?: string;
+
+    checkboxDefaultLight?: string;
+    checkboxDisabledLight?: string;
+    checkboxDefaultDark?: string;
+    checkboxDisabledDark?: string;
+
+    errorDefaultLight?: string;
+    errorDisabledLight?: string;
+    errorDefaultDark?: string;
+    errorDisabledDark?: string;
 }
 
 export function setThemeColors(options: ThemeColorsOptions): ColorsType {
+    // Required primary & accent
     colors.primaryBright = options.primaryBright;
     colors.primary = options.primary;
     colors.primaryDark = options.primaryDark;
@@ -197,10 +244,58 @@ export function setThemeColors(options: ThemeColorsOptions): ColorsType {
     colors.accentDark = options.accentDark;
     colors.accentText = options.accentText;
 
+    // Derived defaults (can be overridden below)
     colors.primaryDefaultLight = options.primary;
     colors.primaryDefaultDark = options.primaryBright;
     colors.accentDefaultLight = options.accent;
     colors.accentDefaultDark = options.accentBright;
+
+    // Optional semantic overrides
+    const optionalKeys: (keyof typeof themeColors)[] = [
+        'successBright',
+        'success',
+        'successDark',
+        'successText',
+        'infoBright',
+        'info',
+        'infoDark',
+        'infoText',
+        'warningBright',
+        'warning',
+        'warningDark',
+        'warningText',
+        'errorBright',
+        'error',
+        'errorDark',
+        'errorText',
+        'labelDefaultLight',
+        'labelDisabledLight',
+        'labelDefaultDark',
+        'labelDisabledDark',
+        'inputDefaultLight',
+        'inputDisabledLight',
+        'inputDefaultDark',
+        'inputDisabledDark',
+        'contentDefaultLight',
+        'contentDisabledLight',
+        'contentDefaultDark',
+        'contentDisabledDark',
+        'checkboxDefaultLight',
+        'checkboxDisabledLight',
+        'checkboxDefaultDark',
+        'checkboxDisabledDark',
+        'errorDefaultLight',
+        'errorDisabledLight',
+        'errorDefaultDark',
+        'errorDisabledDark',
+    ];
+
+    for (const key of optionalKeys) {
+        const value = options[key as keyof ThemeColorsOptions];
+        if (value !== undefined) {
+            colors[key] = value;
+        }
+    }
 
     return colors;
 }
